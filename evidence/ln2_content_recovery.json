@@ -2,7 +2,8 @@
   "full_gameplay_parity": false,
   "levels": [
     {
-      "action_records": 126,
+      "action_records": 187,
+      "complete_gameplay_verified": false,
       "enemies": 7,
       "hazard_types": [
         1,
@@ -34,14 +35,15 @@
       ],
       "item_interaction_records": 15,
       "level": 1,
-      "native_gameplay_connected": false,
+      "native_gameplay_connected": true,
       "perimeter_reachable": 16,
       "rooms": 17,
       "source_sha256": "3f5b5991bbdd11bd0161ad8bb4455fa9031b3db1a9581a152f7a8e9317c2c4ba",
       "title": "Central Park"
     },
     {
-      "action_records": 126,
+      "action_records": 200,
+      "complete_gameplay_verified": false,
       "enemies": 8,
       "hazard_types": [
         1,
@@ -59,14 +61,15 @@
       ],
       "item_interaction_records": 15,
       "level": 2,
-      "native_gameplay_connected": false,
+      "native_gameplay_connected": true,
       "perimeter_reachable": 16,
       "rooms": 16,
       "source_sha256": "e46713d8b023a7fc0024aef37e47e14314b7c9db9c06bc448dd5a25eb25e9257",
       "title": "Street"
     },
     {
-      "action_records": 126,
+      "action_records": 215,
+      "complete_gameplay_verified": false,
       "enemies": 9,
       "hazard_types": [
         2,
@@ -89,14 +92,15 @@
       ],
       "item_interaction_records": 8,
       "level": 3,
-      "native_gameplay_connected": false,
+      "native_gameplay_connected": true,
       "perimeter_reachable": 15,
       "rooms": 15,
       "source_sha256": "27d7e82bde47b309cc4c796f034de79ef23144caf882aa37c7fa7301d68b0111",
       "title": "Sewers"
     },
     {
-      "action_records": 126,
+      "action_records": 204,
+      "complete_gameplay_verified": false,
       "enemies": 10,
       "hazard_types": [
         0,
@@ -119,14 +123,15 @@
       ],
       "item_interaction_records": 16,
       "level": 4,
-      "native_gameplay_connected": false,
+      "native_gameplay_connected": true,
       "perimeter_reachable": 15,
       "rooms": 15,
       "source_sha256": "989f4f1ab6262304a55e51cf0ff66e3118d9011a7dd99d7c41221b8df9e479ed",
       "title": "Basement"
     },
     {
-      "action_records": 126,
+      "action_records": 328,
+      "complete_gameplay_verified": false,
       "enemies": 11,
       "hazard_types": [
         1,
@@ -150,14 +155,15 @@
       ],
       "item_interaction_records": 5,
       "level": 5,
-      "native_gameplay_connected": false,
+      "native_gameplay_connected": true,
       "perimeter_reachable": 15,
       "rooms": 15,
       "source_sha256": "92c6d9146a2a801bd9f390903b268fb0825dc9041e7f22f83b59f0f2f719face",
       "title": "Office"
     },
     {
-      "action_records": 146,
+      "action_records": 246,
+      "complete_gameplay_verified": false,
       "enemies": 7,
       "hazard_types": [
         1,
@@ -184,14 +190,15 @@
       ],
       "item_interaction_records": 6,
       "level": 6,
-      "native_gameplay_connected": false,
+      "native_gameplay_connected": true,
       "perimeter_reachable": 12,
       "rooms": 13,
       "source_sha256": "6c5dc42fd959b54e380d98debd3c54aa0af68abf3d10ee982a4f42ac1ff8c881",
       "title": "Mansion"
     },
     {
-      "action_records": 126,
+      "action_records": 222,
+      "complete_gameplay_verified": false,
       "enemies": 1,
       "hazard_types": [],
       "item_handlers": [
@@ -202,7 +209,7 @@
       ],
       "item_interaction_records": 5,
       "level": 7,
-      "native_gameplay_connected": false,
+      "native_gameplay_connected": true,
       "perimeter_reachable": 2,
       "rooms": 2,
       "source_sha256": "9ea998a916d9e2964ee90b1d590dee903a14813e69ea1fcd95a3a8c1662e1342",

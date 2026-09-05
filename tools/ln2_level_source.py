@@ -15,11 +15,12 @@ def level_memory(level):
 
 def locate(ram,address,length=24):
     original=level_memory(1);pattern=list(original[address:address+length])
-    dis=Disassembler(MPU(memory=list(original)));pc=address;immediates=[]
+    dis=Disassembler(MPU(memory=list(original)));pc=address;immediates=[];branches=[]
     while pc<address+length:
         size,instruction=dis.instruction_at(pc)
         if '#$' in instruction and pc+1<address+length:immediates.append(pc+1-address)
-        if size==3 and word(original,pc+1)>=0x800:
+        if original[pc] in (0x10,0x30,0x50,0x70,0x90,0xb0,0xd0,0xf0) and pc+1<address+length:branches.append(pc+1-address)
+        if size==3 and word(original,pc+1)>=0x100:
             for i in (1,2):
                 if pc+i<address+length:pattern[pc+i-address]=None
         pc+=size
@@ -29,6 +30,10 @@ def locate(ram,address,length=24):
         # Some pointers are passed as immediate low/high bytes, and level
         # constants also vary. Still require an unambiguous instruction shape.
         for i in immediates:pattern[i]=None
+        candidates=[i for i in range(0x600,0xd000-length) if ram[i]==pattern[0]
+                    and all(v is None or ram[i+j]==v for j,v in enumerate(pattern))]
+    if not candidates:
+        for i in branches:pattern[i]=None
         candidates=[i for i in range(0x600,0xd000-length) if ram[i]==pattern[0]
                     and all(v is None or ram[i+j]==v for j,v in enumerate(pattern))]
     if len(candidates)!=1:raise ValueError(f'LN2 ${address:04x} relocated ambiguously: {candidates}')
@@ -46,6 +51,7 @@ def layout(ram):
         'actor_draw':(0xbacc,43),'sprite_unpack':(0xbe15,53),
         'actor_player':(0xbab7,21),'actor_enemy':(0xbaac,11),
         'mask':(0x95ec,34),'player_begin':(0xa4d9,32),
+        'random':(0xb416,32),'enemy_recover':(0xafc0,46),'enemy_regen':(0xb2cc,28),
     }
     # Level-specific scene-choice code is reached by the same main-loop slot;
     # avoid treating short or modified room-condition prefixes as signatures.

@@ -1,4 +1,5 @@
 function LN1Play(_level = 1) constructor {
+    game_number = 1;
     level = _level;
     title = ["Wastelands","Wilderness","Palace Gardens","Dungeons","Palace","Inner Sanctum"][_level-1];
     var _folder = _level == 1 ? "play/ln1/" : "play/ln1/level" + string(_level) + "/";

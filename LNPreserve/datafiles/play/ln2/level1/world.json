@@ -1,0 +1,5465 @@
+{
+  "actor_frames": [
+    64,
+    65,
+    66,
+    67,
+    68,
+    69,
+    70,
+    71,
+    72,
+    73,
+    74,
+    75,
+    76,
+    78,
+    83,
+    99,
+    100,
+    101,
+    102,
+    103,
+    104,
+    105
+  ],
+  "enemy_banks": {
+    "0_2": "spr_ln2_level1_enemy_0_2_body",
+    "0_4": "spr_ln2_level1_enemy_0_4_body",
+    "1_4": "spr_ln2_level1_enemy_1_4_body",
+    "2_4": "spr_ln2_level1_enemy_2_4_body"
+  },
+  "enemy_extra_banks": {
+    "0_2": "spr_ln2_level1_player_0_0_effects",
+    "0_4": "spr_ln2_level1_player_0_0_effects",
+    "1_4": "spr_ln2_level1_player_1_0_effects",
+    "2_4": "spr_ln2_level1_player_2_0_effects"
+  },
+  "entry_modes": {
+    "2": {
+      "limit": 15,
+      "mode": 1
+    }
+  },
+  "game": 2,
+  "initial_entry": 0,
+  "initial_inventory": [
+    255,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "initial_lives": 5,
+  "items": [
+    {
+      "action": 4,
+      "facing": 1,
+      "handler": 0,
+      "id": 18,
+      "present_panel": 49447,
+      "removed_panel": 49441,
+      "room": 2,
+      "source_address": 49110,
+      "x_max": 165,
+      "x_min": 158,
+      "y_max": 88,
+      "y_min": 85
+    },
+    {
+      "action": 2,
+      "facing": 5,
+      "handler": 0,
+      "id": 7,
+      "present_panel": 49384,
+      "removed_panel": 49388,
+      "room": 3,
+      "source_address": 49124,
+      "x_max": 43,
+      "x_min": 32,
+      "y_max": 132,
+      "y_min": 122
+    },
+    {
+      "action": 2,
+      "facing": 7,
+      "handler": 0,
+      "id": 7,
+      "present_panel": 49384,
+      "removed_panel": 49388,
+      "room": 3,
+      "source_address": 49138,
+      "x_max": 43,
+      "x_min": 32,
+      "y_max": 132,
+      "y_min": 126
+    },
+    {
+      "action": 2,
+      "facing": 3,
+      "handler": 0,
+      "id": 7,
+      "present_panel": 49384,
+      "removed_panel": 49388,
+      "room": 3,
+      "source_address": 49152,
+      "x_max": 19,
+      "x_min": 10,
+      "y_max": 132,
+      "y_min": 124
+    },
+    {
+      "action": 0,
+      "facing": 0,
+      "handler": 49334,
+      "id": 5,
+      "present_panel": 0,
+      "removed_panel": 0,
+      "room": 5,
+      "source_address": 49166,
+      "x_max": 255,
+      "x_min": 200,
+      "y_max": 76,
+      "y_min": 0
+    },
+    {
+      "action": 0,
+      "facing": 0,
+      "handler": 49355,
+      "id": 6,
+      "present_panel": 0,
+      "removed_panel": 0,
+      "room": 7,
+      "source_address": 49180,
+      "x_max": 255,
+      "x_min": 208,
+      "y_max": 76,
+      "y_min": 0
+    },
+    {
+      "action": 0,
+      "facing": 1,
+      "handler": 0,
+      "id": 8,
+      "present_panel": 49394,
+      "removed_panel": 49398,
+      "room": 8,
+      "source_address": 49194,
+      "x_max": 206,
+      "x_min": 196,
+      "y_max": 69,
+      "y_min": 66
+    },
+    {
+      "action": 0,
+      "facing": 7,
+      "handler": 0,
+      "id": 8,
+      "present_panel": 49394,
+      "removed_panel": 49398,
+      "room": 8,
+      "source_address": 49208,
+      "x_max": 228,
+      "x_min": 216,
+      "y_max": 69,
+      "y_min": 66
+    },
+    {
+      "action": 1,
+      "facing": 5,
+      "handler": 0,
+      "id": 8,
+      "present_panel": 49394,
+      "removed_panel": 49398,
+      "room": 8,
+      "source_address": 49222,
+      "x_max": 230,
+      "x_min": 215,
+      "y_max": 62,
+      "y_min": 53
+    },
+    {
+      "action": 1,
+      "facing": 1,
+      "handler": 0,
+      "id": 4,
+      "present_panel": 0,
+      "removed_panel": 0,
+      "room": 9,
+      "source_address": 49236,
+      "x_max": 111,
+      "x_min": 91,
+      "y_max": 58,
+      "y_min": 50
+    },
+    {
+      "action": 2,
+      "facing": 7,
+      "handler": 0,
+      "id": 9,
+      "present_panel": 49414,
+      "removed_panel": 49428,
+      "room": 11,
+      "source_address": 49250,
+      "x_max": 220,
+      "x_min": 208,
+      "y_max": 119,
+      "y_min": 110
+    },
+    {
+      "action": 2,
+      "facing": 1,
+      "handler": 0,
+      "id": 9,
+      "present_panel": 49414,
+      "removed_panel": 49428,
+      "room": 11,
+      "source_address": 49264,
+      "x_max": 192,
+      "x_min": 182,
+      "y_max": 119,
+      "y_min": 112
+    },
+    {
+      "action": 2,
+      "facing": 0,
+      "handler": 0,
+      "id": 2,
+      "present_panel": 49402,
+      "removed_panel": 49408,
+      "room": 12,
+      "source_address": 49278,
+      "x_max": 82,
+      "x_min": 58,
+      "y_max": 96,
+      "y_min": 73
+    },
+    {
+      "action": 2,
+      "facing": 7,
+      "handler": 49321,
+      "id": 17,
+      "present_panel": 0,
+      "removed_panel": 49437,
+      "room": 13,
+      "source_address": 49292,
+      "x_max": 169,
+      "x_min": 158,
+      "y_max": 93,
+      "y_min": 83
+    },
+    {
+      "action": 6,
+      "facing": 7,
+      "handler": 49362,
+      "id": 19,
+      "present_panel": 0,
+      "removed_panel": 0,
+      "room": 16,
+      "source_address": 49306,
+      "x_max": 120,
+      "x_min": 76,
+      "y_max": 108,
+      "y_min": 0
+    }
+  ],
+  "level": 1,
+  "player_banks": [
+    "spr_ln2_level1_player_0_0_body",
+    "spr_ln2_level1_player_1_0_body",
+    "spr_ln2_level1_player_2_0_body",
+    "spr_ln2_level1_player_3_0_body",
+    "spr_ln2_level1_player_0_0_body"
+  ],
+  "player_extra_banks": [
+    "spr_ln2_level1_player_0_0_effects",
+    "spr_ln2_level1_player_1_0_effects",
+    "spr_ln2_level1_player_2_0_effects",
+    "spr_ln2_level1_player_3_0_effects",
+    "spr_ln2_level1_player_0_0_effects"
+  ],
+  "rooms": [
+    {
+      "boundaries": [
+        [
+          0,
+          84,
+          90,
+          106,
+          4,
+          0
+        ],
+        [
+          90,
+          106,
+          204,
+          78,
+          68,
+          0
+        ],
+        [
+          92,
+          50,
+          204,
+          78,
+          4,
+          0
+        ],
+        [
+          58,
+          58,
+          92,
+          50,
+          68,
+          0
+        ],
+        [
+          54,
+          54,
+          58,
+          58,
+          16,
+          0
+        ],
+        [
+          54,
+          54,
+          78,
+          48,
+          68,
+          0
+        ],
+        [
+          62,
+          44,
+          78,
+          48,
+          5,
+          2
+        ],
+        [
+          10,
+          63,
+          62,
+          44,
+          70,
+          0
+        ],
+        [
+          0,
+          100,
+          10,
+          63,
+          124,
+          0
+        ],
+        [
+          64,
+          57,
+          254,
+          57,
+          64,
+          0
+        ],
+        [
+          18,
+          70,
+          30,
+          74,
+          6,
+          0
+        ],
+        [
+          30,
+          74,
+          42,
+          70,
+          70,
+          0
+        ],
+        [
+          30,
+          66,
+          42,
+          70,
+          6,
+          0
+        ],
+        [
+          18,
+          70,
+          30,
+          66,
+          70,
+          0
+        ],
+        [
+          136,
+          79,
+          172,
+          88,
+          5,
+          5
+        ],
+        [
+          136,
+          79,
+          152,
+          75,
+          69,
+          5
+        ],
+        [
+          152,
+          75,
+          188,
+          84,
+          5,
+          5
+        ],
+        [
+          72,
+          78,
+          128,
+          78,
+          0,
+          0
+        ],
+        [
+          128,
+          78,
+          152,
+          72,
+          68,
+          0
+        ],
+        [
+          144,
+          68,
+          152,
+          72,
+          8,
+          0
+        ],
+        [
+          80,
+          68,
+          144,
+          68,
+          64,
+          0
+        ],
+        [
+          76,
+          78,
+          80,
+          68,
+          104,
+          0
+        ]
+      ],
+      "depth_sprite": "spr_ln2_level1_depth_01",
+      "enemy": {
+        "action": 0,
+        "action_mirror": 0,
+        "action_state": 0,
+        "action_tick": 192,
+        "active": 0,
+        "actor_blocked": 0,
+        "attack_count": 0,
+        "boundary_history1": 255,
+        "boundary_history2": 255,
+        "boundary_hit": 255,
+        "combat_state": 0,
+        "costume": 0,
+        "countdown": 0,
+        "decision_tick": 0,
+        "depth_y": 0,
+        "duration": 0,
+        "edge_blocked": 0,
+        "facing": 1,
+        "flags": 16,
+        "fraction_x": 0,
+        "fraction_y": 0,
+        "frame": 0,
+        "heading": 0,
+        "health": 44,
+        "hit_side": 0,
+        "knockouts": 0,
+        "last_boundary": 255,
+        "last_side": 0,
+        "mode": 1,
+        "origin_x": 88,
+        "origin_y": 90,
+        "patrol_x": 0,
+        "previous_combat": 0,
+        "projectile_active": 0,
+        "react_random": 0,
+        "react_tick": 0,
+        "recovery_time": 20733,
+        "retreat_trait": 0,
+        "separation_y": 6,
+        "speed": 0,
+        "target_x": 0,
+        "target_y": 0,
+        "traits": 0,
+        "turn_tick": 0,
+        "wait_duration": 255,
+        "wait_tick": 0,
+        "weapon": 0,
+        "x": 0,
+        "y": 0
+      },
+      "entries": [
+        2,
+        3
+      ],
+      "id": 1,
+      "masks": [
+        {
+          "baseline": 255,
+          "part": 1,
+          "x": 56,
+          "y": 80
+        },
+        {
+          "baseline": 255,
+          "part": 1,
+          "x": 24,
+          "y": 72
+        },
+        {
+          "baseline": 255,
+          "part": 1,
+          "x": -8,
+          "y": 64
+        },
+        {
+          "baseline": 255,
+          "part": 0,
+          "x": 88,
+          "y": 80
+        },
+        {
+          "baseline": 255,
+          "part": 0,
+          "x": 184,
+          "y": 56
+        },
+        {
+          "baseline": 255,
+          "part": 49,
+          "x": 112,
+          "y": 72
+        },
+        {
+          "baseline": 255,
+          "part": 49,
+          "x": 144,
+          "y": 64
+        },
+        {
+          "baseline": 255,
+          "part": 49,
+          "x": 176,
+          "y": 56
+        },
+        {
+          "baseline": 255,
+          "part": 49,
+          "x": 112,
+          "y": 104
+        },
+        {
+          "baseline": 255,
+          "part": 49,
+          "x": 144,
+          "y": 96
+        },
+        {
+          "baseline": 255,
+          "part": 49,
+          "x": 176,
+          "y": 88
+        },
+        {
+          "baseline": 77,
+          "part": 26,
+          "x": 72,
+          "y": 32
+        },
+        {
+          "baseline": 77,
+          "part": 27,
+          "x": 112,
+          "y": 48
+        },
+        {
+          "baseline": 69,
+          "part": 24,
+          "x": 16,
+          "y": 48
+        },
+        {
+          "baseline": 77,
+          "part": 39,
+          "x": 128,
+          "y": 40
+        },
+        {
+          "baseline": 55,
+          "part": 49,
+          "x": 56,
+          "y": 16
+        },
+        {
+          "baseline": 55,
+          "part": 49,
+          "x": 56,
+          "y": -16
+        },
+        {
+          "baseline": 55,
+          "part": 49,
+          "x": 88,
+          "y": -8
+        }
+      ],
+      "reachable_by_perimeter_exits": true,
+      "routes": [
+        {
+          "direction": 0,
+          "entry": 2,
+          "x": 247,
+          "y": 61
+        },
+        {
+          "direction": 0,
+          "entry": 3,
+          "x": 128,
+          "y": 189
+        }
+      ],
+      "spawn_entry": 0,
+      "sprite": "spr_ln2_level1_room_01",
+      "variant_flags": [
+        18
+      ],
+      "variants": [
+        "spr_ln2_level1_room_01",
+        "spr_ln2_level1_room_01_state1"
+      ]
+    },
+    {
+      "boundaries": [
+        [
+          0,
+          170,
+          200,
+          120,
+          68,
+          0
+        ],
+        [
+          196,
+          119,
+          200,
+          120,
+          4,
+          0
+        ],
+        [
+          196,
+          119,
+          220,
+          113,
+          68,
+          0
+        ],
+        [
+          202,
+          109,
+          220,
+          113,
+          4,
+          0
+        ],
+        [
+          202,
+          109,
+          228,
+          103,
+          68,
+          0
+        ],
+        [
+          152,
+          84,
+          228,
+          103,
+          4,
+          0
+        ],
+        [
+          130,
+          89,
+          152,
+          84,
+          68,
+          0
+        ],
+        [
+          98,
+          81,
+          130,
+          89,
+          4,
+          0
+        ],
+        [
+          82,
+          85,
+          98,
+          81,
+          68,
+          0
+        ],
+        [
+          82,
+          85,
+          122,
+          95,
+          4,
+          0
+        ],
+        [
+          94,
+          102,
+          122,
+          95,
+          68,
+          0
+        ],
+        [
+          94,
+          102,
+          110,
+          106,
+          4,
+          0
+        ],
+        [
+          82,
+          113,
+          110,
+          106,
+          68,
+          0
+        ],
+        [
+          56,
+          107,
+          82,
+          113,
+          4,
+          0
+        ],
+        [
+          28,
+          114,
+          56,
+          107,
+          68,
+          0
+        ],
+        [
+          28,
+          114,
+          48,
+          119,
+          4,
+          0
+        ],
+        [
+          8,
+          129,
+          48,
+          119,
+          68,
+          0
+        ],
+        [
+          8,
+          129,
+          38,
+          144,
+          8,
+          0
+        ],
+        [
+          4,
+          152,
+          38,
+          144,
+          68,
+          0
+        ],
+        [
+          27,
+          143,
+          55,
+          143,
+          0,
+          0
+        ],
+        [
+          108,
+          104,
+          136,
+          104,
+          0,
+          0
+        ]
+      ],
+      "depth_sprite": "spr_ln2_level1_depth_02",
+      "enemy": {
+        "action": 0,
+        "action_mirror": 0,
+        "action_state": 0,
+        "action_tick": 192,
+        "active": 128,
+        "actor_blocked": 0,
+        "attack_count": 0,
+        "boundary_history1": 255,
+        "boundary_history2": 255,
+        "boundary_hit": 255,
+        "combat_state": 0,
+        "costume": 4,
+        "countdown": 0,
+        "decision_tick": 0,
+        "depth_y": 114,
+        "duration": 0,
+        "edge_blocked": 0,
+        "facing": 5,
+        "flags": 16,
+        "fraction_x": 0,
+        "fraction_y": 0,
+        "frame": 17,
+        "heading": 0,
+        "health": 44,
+        "hit_side": 0,
+        "knockouts": 0,
+        "last_boundary": 255,
+        "last_side": 0,
+        "mode": 1,
+        "origin_x": 88,
+        "origin_y": 90,
+        "patrol_x": 0,
+        "previous_combat": 0,
+        "projectile_active": 0,
+        "react_random": 0,
+        "react_tick": 0,
+        "recovery_time": 1416,
+        "retreat_trait": 1,
+        "separation_y": 6,
+        "speed": 1,
+        "target_x": 0,
+        "target_y": 0,
+        "traits": 65,
+        "turn_tick": 0,
+        "wait_duration": 255,
+        "wait_tick": 0,
+        "weapon": 0,
+        "x": 163,
+        "y": 114
+      },
+      "entries": [
+        4
+      ],
+      "id": 2,
+      "masks": [
+        {
+          "baseline": 142,
+          "part": 39,
+          "x": 32,
+          "y": 112
+        },
+        {
+          "baseline": 142,
+          "part": 38,
+          "x": 32,
+          "y": 104
+        },
+        {
+          "baseline": 103,
+          "part": 39,
+          "x": 112,
+          "y": 72
+        },
+        {
+          "baseline": 103,
+          "part": 37,
+          "x": 112,
+          "y": 64
+        },
+        {
+          "baseline": 142,
+          "part": 49,
+          "x": -8,
+          "y": 104
+        },
+        {
+          "baseline": 142,
+          "part": 49,
+          "x": -8,
+          "y": 72
+        },
+        {
+          "baseline": 142,
+          "part": 49,
+          "x": -8,
+          "y": 40
+        },
+        {
+          "baseline": 118,
+          "part": 27,
+          "x": 24,
+          "y": 96
+        },
+        {
+          "baseline": 105,
+          "part": 25,
+          "x": 64,
+          "y": 88
+        },
+        {
+          "baseline": 95,
+          "part": 21,
+          "x": 72,
+          "y": 64
+        },
+        {
+          "baseline": 95,
+          "part": 21,
+          "x": 72,
+          "y": 80
+        },
+        {
+          "baseline": 95,
+          "part": 20,
+          "x": 40,
+          "y": 64
+        },
+        {
+          "baseline": 121,
+          "part": 47,
+          "x": 192,
+          "y": 80
+        },
+        {
+          "baseline": 255,
+          "part": 45,
+          "x": 208,
+          "y": 80
+        },
+        {
+          "baseline": 255,
+          "part": 45,
+          "x": 208,
+          "y": 104
+        },
+        {
+          "baseline": 108,
+          "part": 45,
+          "x": 208,
+          "y": 72
+        },
+        {
+          "baseline": 108,
+          "part": 45,
+          "x": 208,
+          "y": 48
+        },
+        {
+          "baseline": 108,
+          "part": 45,
+          "x": 208,
+          "y": 24
+        }
+      ],
+      "reachable_by_perimeter_exits": true,
+      "routes": [
+        {
+          "direction": 2,
+          "entry": 4,
+          "x": 0,
+          "y": 133
+        }
+      ],
+      "spawn_entry": 3,
+      "sprite": "spr_ln2_level1_room_02",
+      "variant_flags": [
+        18
+      ],
+      "variants": [
+        "spr_ln2_level1_room_02",
+        "spr_ln2_level1_room_02"
+      ]
+    },
+    {
+      "boundaries": [
+        [
+          120,
+          113,
+          140,
+          118,
+          5,
+          6
+        ],
+        [
+          140,
+          118,
+          160,
+          113,
+          69,
+          6
+        ],
+        [
+          140,
+          108,
+          160,
+          113,
+          5,
+          6
+        ],
+        [
+          120,
+          113,
+          140,
+          108,
+          69,
+          6
+        ],
+        [
+          45,
+          130,
+          141,
+          154,
+          4,
+          0
+        ],
+        [
+          21,
+          136,
+          45,
+          130,
+          68,
+          0
+        ],
+        [
+          7,
+          122,
+          21,
+          136,
+          16,
+          0
+        ],
+        [
+          7,
+          122,
+          55,
+          110,
+          68,
+          0
+        ],
+        [
+          33,
+          99,
+          55,
+          110,
+          8,
+          0
+        ],
+        [
+          33,
+          99,
+          61,
+          92,
+          68,
+          0
+        ],
+        [
+          61,
+          92,
+          91,
+          99,
+          4,
+          0
+        ],
+        [
+          91,
+          99,
+          115,
+          93,
+          68,
+          0
+        ],
+        [
+          85,
+          86,
+          115,
+          93,
+          4,
+          0
+        ],
+        [
+          85,
+          86,
+          109,
+          80,
+          68,
+          0
+        ],
+        [
+          85,
+          74,
+          109,
+          80,
+          4,
+          0
+        ],
+        [
+          85,
+          74,
+          101,
+          70,
+          69,
+          1
+        ],
+        [
+          101,
+          70,
+          117,
+          74,
+          4,
+          0
+        ],
+        [
+          117,
+          74,
+          125,
+          72,
+          68,
+          0
+        ],
+        [
+          125,
+          72,
+          165,
+          72,
+          0,
+          0
+        ],
+        [
+          165,
+          72,
+          179,
+          75,
+          4,
+          0
+        ],
+        [
+          163,
+          79,
+          179,
+          75,
+          68,
+          0
+        ],
+        [
+          163,
+          79,
+          199,
+          88,
+          4,
+          0
+        ],
+        [
+          151,
+          100,
+          199,
+          88,
+          68,
+          0
+        ],
+        [
+          151,
+          100,
+          175,
+          106,
+          4,
+          0
+        ],
+        [
+          163,
+          109,
+          175,
+          106,
+          68,
+          0
+        ],
+        [
+          163,
+          109,
+          223,
+          124,
+          4,
+          0
+        ],
+        [
+          173,
+          136,
+          223,
+          124,
+          68,
+          0
+        ],
+        [
+          173,
+          136,
+          193,
+          141,
+          4,
+          0
+        ],
+        [
+          129,
+          157,
+          193,
+          141,
+          68,
+          0
+        ]
+      ],
+      "depth_sprite": "spr_ln2_level1_depth_03",
+      "enemy": {
+        "action": 0,
+        "action_mirror": 0,
+        "action_state": 0,
+        "action_tick": 192,
+        "active": 0,
+        "actor_blocked": 0,
+        "attack_count": 0,
+        "boundary_history1": 255,
+        "boundary_history2": 255,
+        "boundary_hit": 255,
+        "combat_state": 0,
+        "costume": 0,
+        "countdown": 0,
+        "decision_tick": 0,
+        "depth_y": 0,
+        "duration": 0,
+        "edge_blocked": 0,
+        "facing": 1,
+        "flags": 16,
+        "fraction_x": 0,
+        "fraction_y": 0,
+        "frame": 0,
+        "heading": 0,
+        "health": 44,
+        "hit_side": 0,
+        "knockouts": 0,
+        "last_boundary": 255,
+        "last_side": 0,
+        "mode": 1,
+        "origin_x": 88,
+        "origin_y": 90,
+        "patrol_x": 0,
+        "previous_combat": 0,
+        "projectile_active": 0,
+        "react_random": 0,
+        "react_tick": 0,
+        "recovery_time": 54224,
+        "retreat_trait": 0,
+        "separation_y": 6,
+        "speed": 0,
+        "target_x": 0,
+        "target_y": 0,
+        "traits": 0,
+        "turn_tick": 0,
+        "wait_duration": 255,
+        "wait_tick": 0,
+        "weapon": 0,
+        "x": 0,
+        "y": 0
+      },
+      "entries": [
+        5,
+        6
+      ],
+      "id": 3,
+      "masks": [
+        {
+          "baseline": 110,
+          "part": 9,
+          "x": 32,
+          "y": 80
+        },
+        {
+          "baseline": 110,
+          "part": 24,
+          "x": 16,
+          "y": 88
+        },
+        {
+          "baseline": 78,
+          "part": 50,
+          "x": 168,
+          "y": 24
+        },
+        {
+          "baseline": 78,
+          "part": 51,
+          "x": 168,
+          "y": 0
+        },
+        {
+          "baseline": 97,
+          "part": 42,
+          "x": 176,
+          "y": 56
+        },
+        {
+          "baseline": 97,
+          "part": 42,
+          "x": 176,
+          "y": 64
+        },
+        {
+          "baseline": 97,
+          "part": 42,
+          "x": 176,
+          "y": 72
+        },
+        {
+          "baseline": 97,
+          "part": 51,
+          "x": 200,
+          "y": 56
+        },
+        {
+          "baseline": 97,
+          "part": 51,
+          "x": 200,
+          "y": 24
+        },
+        {
+          "baseline": 97,
+          "part": 51,
+          "x": 232,
+          "y": 48
+        },
+        {
+          "baseline": 80,
+          "part": 49,
+          "x": 64,
+          "y": 40
+        },
+        {
+          "baseline": 80,
+          "part": 49,
+          "x": 64,
+          "y": 8
+        },
+        {
+          "baseline": 80,
+          "part": 49,
+          "x": 32,
+          "y": 32
+        },
+        {
+          "baseline": 255,
+          "part": 96,
+          "x": 40,
+          "y": 120
+        },
+        {
+          "baseline": 255,
+          "part": 25,
+          "x": 160,
+          "y": 128
+        },
+        {
+          "baseline": 134,
+          "part": 94,
+          "x": 176,
+          "y": 104
+        },
+        {
+          "baseline": 134,
+          "part": 10,
+          "x": 216,
+          "y": 104
+        },
+        {
+          "baseline": 108,
+          "part": 95,
+          "x": 168,
+          "y": 88
+        },
+        {
+          "baseline": 100,
+          "part": 42,
+          "x": 160,
+          "y": 80
+        },
+        {
+          "baseline": 92,
+          "part": 42,
+          "x": 72,
+          "y": 72
+        },
+        {
+          "baseline": 139,
+          "part": 26,
+          "x": 24,
+          "y": 104
+        }
+      ],
+      "reachable_by_perimeter_exits": true,
+      "routes": [
+        {
+          "direction": 3,
+          "entry": 5,
+          "x": 0,
+          "y": 8
+        },
+        {
+          "direction": 2,
+          "entry": 6,
+          "x": 0,
+          "y": 133
+        }
+      ],
+      "spawn_entry": 2,
+      "sprite": "spr_ln2_level1_room_03",
+      "variant_flags": [
+        7
+      ],
+      "variants": [
+        "spr_ln2_level1_room_03",
+        "spr_ln2_level1_room_03_state1"
+      ]
+    },
+    {
+      "boundaries": [
+        [
+          0,
+          108,
+          196,
+          59,
+          68,
+          0
+        ],
+        [
+          0,
+          10,
+          196,
+          59,
+          4,
+          0
+        ],
+        [
+          0,
+          140,
+          82,
+          120,
+          68,
+          0
+        ],
+        [
+          82,
+          120,
+          254,
+          163,
+          4,
+          0
+        ],
+        [
+          136,
+          105,
+          254,
+          134,
+          4,
+          0
+        ],
+        [
+          136,
+          105,
+          240,
+          79,
+          68,
+          0
+        ],
+        [
+          240,
+          79,
+          246,
+          56,
+          126,
+          0
+        ],
+        [
+          242,
+          41,
+          246,
+          56,
+          62,
+          0
+        ],
+        [
+          114,
+          9,
+          242,
+          41,
+          4,
+          0
+        ]
+      ],
+      "depth_sprite": "spr_ln2_level1_depth_04",
+      "enemy": {
+        "action": 0,
+        "action_mirror": 0,
+        "action_state": 0,
+        "action_tick": 192,
+        "active": 128,
+        "actor_blocked": 0,
+        "attack_count": 0,
+        "boundary_history1": 255,
+        "boundary_history2": 255,
+        "boundary_hit": 255,
+        "combat_state": 0,
+        "costume": 2,
+        "countdown": 0,
+        "decision_tick": 0,
+        "depth_y": 94,
+        "duration": 0,
+        "edge_blocked": 0,
+        "facing": 5,
+        "flags": 16,
+        "fraction_x": 0,
+        "fraction_y": 0,
+        "frame": 17,
+        "heading": 0,
+        "health": 44,
+        "hit_side": 0,
+        "knockouts": 0,
+        "last_boundary": 255,
+        "last_side": 0,
+        "mode": 1,
+        "origin_x": 88,
+        "origin_y": 90,
+        "patrol_x": 0,
+        "previous_combat": 0,
+        "projectile_active": 0,
+        "react_random": 0,
+        "react_tick": 0,
+        "recovery_time": 238,
+        "retreat_trait": 2,
+        "separation_y": 6,
+        "speed": 1,
+        "target_x": 0,
+        "target_y": 0,
+        "traits": 65,
+        "turn_tick": 0,
+        "wait_duration": 255,
+        "wait_tick": 0,
+        "weapon": 0,
+        "x": 128,
+        "y": 94
+      },
+      "entries": [
+        7,
+        8,
+        9
+      ],
+      "id": 4,
+      "masks": [
+        {
+          "baseline": 45,
+          "part": 92,
+          "x": 40,
+          "y": 8
+        },
+        {
+          "baseline": 45,
+          "part": 21,
+          "x": 0,
+          "y": 0
+        },
+        {
+          "baseline": 255,
+          "part": 46,
+          "x": 64,
+          "y": 96
+        },
+        {
+          "baseline": 255,
+          "part": 46,
+          "x": 32,
+          "y": 104
+        },
+        {
+          "baseline": 255,
+          "part": 46,
+          "x": 0,
+          "y": 112
+        },
+        {
+          "baseline": 255,
+          "part": 4,
+          "x": 0,
+          "y": 104
+        },
+        {
+          "baseline": 255,
+          "part": 4,
+          "x": 32,
+          "y": 96
+        },
+        {
+          "baseline": 255,
+          "part": 4,
+          "x": 64,
+          "y": 88
+        },
+        {
+          "baseline": 110,
+          "part": 46,
+          "x": 192,
+          "y": 64
+        },
+        {
+          "baseline": 110,
+          "part": 46,
+          "x": 224,
+          "y": 56
+        },
+        {
+          "baseline": 56,
+          "part": 65,
+          "x": 96,
+          "y": 8
+        },
+        {
+          "baseline": 255,
+          "part": 17,
+          "x": 96,
+          "y": 88
+        },
+        {
+          "baseline": 255,
+          "part": 8,
+          "x": 96,
+          "y": 96
+        },
+        {
+          "baseline": 255,
+          "part": 8,
+          "x": 96,
+          "y": 112
+        },
+        {
+          "baseline": 138,
+          "part": 58,
+          "x": 80,
+          "y": 104
+        },
+        {
+          "baseline": 107,
+          "part": 49,
+          "x": 168,
+          "y": 72
+        },
+        {
+          "baseline": 107,
+          "part": 17,
+          "x": 168,
+          "y": 72
+        },
+        {
+          "baseline": 107,
+          "part": 4,
+          "x": 176,
+          "y": 64
+        }
+      ],
+      "reachable_by_perimeter_exits": true,
+      "routes": [
+        {
+          "direction": 3,
+          "entry": 7,
+          "x": 0,
+          "y": 8
+        },
+        {
+          "direction": 1,
+          "entry": 8,
+          "x": 247,
+          "y": 153
+        },
+        {
+          "direction": 2,
+          "entry": 9,
+          "x": 0,
+          "y": 133
+        }
+      ],
+      "spawn_entry": 10,
+      "sprite": "spr_ln2_level1_room_04",
+      "variant_flags": [],
+      "variants": [
+        "spr_ln2_level1_room_04"
+      ]
+    },
+    {
+      "boundaries": [
+        [
+          0,
+          67,
+          204,
+          118,
+          4,
+          0
+        ],
+        [
+          204,
+          118,
+          232,
+          111,
+          68,
+          0
+        ],
+        [
+          232,
+          111,
+          236,
+          96,
+          126,
+          0
+        ],
+        [
+          204,
+          88,
+          236,
+          96,
+          4,
+          0
+        ],
+        [
+          202,
+          81,
+          204,
+          88,
+          62,
+          0
+        ],
+        [
+          190,
+          78,
+          202,
+          81,
+          4,
+          0
+        ],
+        [
+          190,
+          78,
+          230,
+          68,
+          68,
+          0
+        ],
+        [
+          226,
+          67,
+          230,
+          68,
+          4,
+          0
+        ],
+        [
+          186,
+          77,
+          226,
+          67,
+          68,
+          0
+        ],
+        [
+          156,
+          70,
+          186,
+          77,
+          4,
+          0
+        ],
+        [
+          156,
+          70,
+          196,
+          60,
+          68,
+          0
+        ],
+        [
+          192,
+          59,
+          196,
+          60,
+          4,
+          0
+        ],
+        [
+          152,
+          69,
+          192,
+          59,
+          68,
+          0
+        ],
+        [
+          128,
+          69,
+          152,
+          69,
+          64,
+          0
+        ],
+        [
+          2,
+          38,
+          128,
+          69,
+          4,
+          0
+        ]
+      ],
+      "depth_sprite": "spr_ln2_level1_depth_05",
+      "enemy": {
+        "action": 0,
+        "action_mirror": 255,
+        "action_state": 0,
+        "action_tick": 192,
+        "active": 129,
+        "actor_blocked": 0,
+        "attack_count": 0,
+        "boundary_history1": 255,
+        "boundary_history2": 255,
+        "boundary_hit": 255,
+        "combat_state": 0,
+        "costume": 4,
+        "countdown": 0,
+        "decision_tick": 0,
+        "depth_y": 94,
+        "duration": 0,
+        "edge_blocked": 0,
+        "facing": 7,
+        "flags": 16,
+        "fraction_x": 0,
+        "fraction_y": 0,
+        "frame": 16,
+        "heading": 0,
+        "health": 44,
+        "hit_side": 0,
+        "knockouts": 0,
+        "last_boundary": 255,
+        "last_side": 0,
+        "mode": 1,
+        "origin_x": 88,
+        "origin_y": 90,
+        "patrol_x": 0,
+        "previous_combat": 0,
+        "projectile_active": 0,
+        "react_random": 0,
+        "react_tick": 0,
+        "recovery_time": 20678,
+        "retreat_trait": 2,
+        "separation_y": 6,
+        "speed": 1,
+        "target_x": 0,
+        "target_y": 0,
+        "traits": 65,
+        "turn_tick": 0,
+        "wait_duration": 255,
+        "wait_tick": 0,
+        "weapon": 1,
+        "x": 186,
+        "y": 94
+      },
+      "entries": [
+        10
+      ],
+      "id": 5,
+      "masks": [
+        {
+          "baseline": 255,
+          "part": 29,
+          "x": 16,
+          "y": 56
+        },
+        {
+          "baseline": 255,
+          "part": 29,
+          "x": 136,
+          "y": 88
+        },
+        {
+          "baseline": 255,
+          "part": 18,
+          "x": 200,
+          "y": 88
+        },
+        {
+          "baseline": 255,
+          "part": 18,
+          "x": 200,
+          "y": 96
+        },
+        {
+          "baseline": 255,
+          "part": 18,
+          "x": 232,
+          "y": 80
+        },
+        {
+          "baseline": 255,
+          "part": 18,
+          "x": 232,
+          "y": 88
+        },
+        {
+          "baseline": 255,
+          "part": 65,
+          "x": 176,
+          "y": 96
+        },
+        {
+          "baseline": 255,
+          "part": 92,
+          "x": 168,
+          "y": 96
+        },
+        {
+          "baseline": 77,
+          "part": 47,
+          "x": 192,
+          "y": 32
+        },
+        {
+          "baseline": 77,
+          "part": 47,
+          "x": 192,
+          "y": 0
+        },
+        {
+          "baseline": 77,
+          "part": 21,
+          "x": 168,
+          "y": 8
+        },
+        {
+          "baseline": 77,
+          "part": 21,
+          "x": 168,
+          "y": -8
+        },
+        {
+          "baseline": 77,
+          "part": 50,
+          "x": 208,
+          "y": 24
+        },
+        {
+          "baseline": 77,
+          "part": 50,
+          "x": 208,
+          "y": -24
+        },
+        {
+          "baseline": 69,
+          "part": 47,
+          "x": 160,
+          "y": 24
+        },
+        {
+          "baseline": 69,
+          "part": 47,
+          "x": 160,
+          "y": -8
+        },
+        {
+          "baseline": 69,
+          "part": 21,
+          "x": 136,
+          "y": 0
+        },
+        {
+          "baseline": 69,
+          "part": 21,
+          "x": 136,
+          "y": -16
+        },
+        {
+          "baseline": 69,
+          "part": 50,
+          "x": 176,
+          "y": 16
+        },
+        {
+          "baseline": 69,
+          "part": 50,
+          "x": 176,
+          "y": -24
+        }
+      ],
+      "reachable_by_perimeter_exits": true,
+      "routes": [
+        {
+          "direction": 3,
+          "entry": 10,
+          "x": 0,
+          "y": 57
+        }
+      ],
+      "spawn_entry": 8,
+      "sprite": "spr_ln2_level1_room_05",
+      "variant_flags": [
+        5
+      ],
+      "variants": [
+        "spr_ln2_level1_room_05",
+        "spr_ln2_level1_room_05"
+      ]
+    },
+    {
+      "boundaries": [],
+      "depth_sprite": "spr_ln1_wastelands_room_01_depth",
+      "enemy": {
+        "action": 0,
+        "action_mirror": 0,
+        "action_state": 0,
+        "action_tick": 192,
+        "active": 0,
+        "actor_blocked": 0,
+        "attack_count": 0,
+        "boundary_history1": 255,
+        "boundary_history2": 255,
+        "boundary_hit": 255,
+        "combat_state": 0,
+        "costume": 0,
+        "countdown": 0,
+        "decision_tick": 0,
+        "depth_y": 0,
+        "duration": 0,
+        "edge_blocked": 0,
+        "facing": 1,
+        "flags": 16,
+        "fraction_x": 0,
+        "fraction_y": 0,
+        "frame": 0,
+        "heading": 0,
+        "health": 44,
+        "hit_side": 0,
+        "knockouts": 0,
+        "last_boundary": 255,
+        "last_side": 0,
+        "mode": 1,
+        "origin_x": 88,
+        "origin_y": 90,
+        "patrol_x": 0,
+        "previous_combat": 0,
+        "projectile_active": 0,
+        "react_random": 0,
+        "react_tick": 0,
+        "recovery_time": 1025,
+        "retreat_trait": 0,
+        "separation_y": 6,
+        "speed": 0,
+        "target_x": 0,
+        "target_y": 0,
+        "traits": 0,
+        "turn_tick": 0,
+        "wait_duration": 255,
+        "wait_tick": 0,
+        "weapon": 0,
+        "x": 0,
+        "y": 0
+      },
+      "entries": [
+        11
+      ],
+      "id": 6,
+      "masks": [],
+      "reachable_by_perimeter_exits": false,
+      "routes": [
+        {
+          "direction": 2,
+          "entry": 11,
+          "x": 0,
+          "y": 133
+        }
+      ],
+      "spawn_entry": 11,
+      "sprite": "spr_ln2_game_level1_location_06",
+      "variant_flags": [],
+      "variants": [
+        "spr_ln2_game_level1_location_06"
+      ]
+    },
+    {
+      "boundaries": [
+        [
+          0,
+          72,
+          16,
+          68,
+          68,
+          0
+        ],
+        [
+          16,
+          68,
+          98,
+          88,
+          4,
+          0
+        ],
+        [
+          30,
+          105,
+          98,
+          88,
+          68,
+          0
+        ],
+        [
+          30,
+          105,
+          74,
+          116,
+          4,
+          0
+        ],
+        [
+          74,
+          116,
+          94,
+          121,
+          4,
+          0
+        ],
+        [
+          94,
+          121,
+          222,
+          89,
+          68,
+          0
+        ],
+        [
+          200,
+          84,
+          222,
+          89,
+          4,
+          0
+        ],
+        [
+          200,
+          84,
+          210,
+          82,
+          68,
+          0
+        ],
+        [
+          196,
+          79,
+          210,
+          82,
+          4,
+          0
+        ],
+        [
+          196,
+          79,
+          228,
+          71,
+          68,
+          0
+        ],
+        [
+          224,
+          70,
+          228,
+          71,
+          4,
+          0
+        ],
+        [
+          194,
+          77,
+          224,
+          70,
+          68,
+          0
+        ],
+        [
+          186,
+          75,
+          194,
+          77,
+          4,
+          0
+        ],
+        [
+          178,
+          77,
+          186,
+          75,
+          68,
+          0
+        ],
+        [
+          140,
+          68,
+          178,
+          77,
+          4,
+          0
+        ],
+        [
+          140,
+          68,
+          148,
+          66,
+          68,
+          0
+        ],
+        [
+          132,
+          62,
+          148,
+          66,
+          4,
+          0
+        ],
+        [
+          132,
+          62,
+          164,
+          54,
+          68,
+          0
+        ],
+        [
+          160,
+          53,
+          164,
+          54,
+          4,
+          0
+        ],
+        [
+          128,
+          61,
+          160,
+          53,
+          68,
+          0
+        ],
+        [
+          120,
+          59,
+          128,
+          61,
+          4,
+          0
+        ],
+        [
+          112,
+          61,
+          120,
+          59,
+          68,
+          0
+        ],
+        [
+          20,
+          38,
+          112,
+          61,
+          4,
+          0
+        ],
+        [
+          0,
+          43,
+          20,
+          38,
+          68,
+          0
+        ]
+      ],
+      "depth_sprite": "spr_ln2_level1_depth_07",
+      "enemy": {
+        "action": 0,
+        "action_mirror": 255,
+        "action_state": 0,
+        "action_tick": 192,
+        "active": 130,
+        "actor_blocked": 0,
+        "attack_count": 0,
+        "boundary_history1": 255,
+        "boundary_history2": 255,
+        "boundary_hit": 255,
+        "combat_state": 0,
+        "costume": 4,
+        "countdown": 0,
+        "decision_tick": 0,
+        "depth_y": 86,
+        "duration": 0,
+        "edge_blocked": 0,
+        "facing": 7,
+        "flags": 16,
+        "fraction_x": 0,
+        "fraction_y": 0,
+        "frame": 16,
+        "heading": 0,
+        "health": 44,
+        "hit_side": 0,
+        "knockouts": 0,
+        "last_boundary": 255,
+        "last_side": 0,
+        "mode": 1,
+        "origin_x": 88,
+        "origin_y": 90,
+        "patrol_x": 0,
+        "previous_combat": 0,
+        "projectile_active": 0,
+        "react_random": 0,
+        "react_tick": 0,
+        "recovery_time": 54104,
+        "retreat_trait": 2,
+        "separation_y": 6,
+        "speed": 1,
+        "target_x": 0,
+        "target_y": 0,
+        "traits": 65,
+        "turn_tick": 0,
+        "wait_duration": 255,
+        "wait_tick": 0,
+        "weapon": 2,
+        "x": 148,
+        "y": 86
+      },
+      "entries": [
+        12
+      ],
+      "id": 7,
+      "masks": [
+        {
+          "baseline": 255,
+          "part": 19,
+          "x": 16,
+          "y": 88
+        },
+        {
+          "baseline": 255,
+          "part": 19,
+          "x": 48,
+          "y": 96
+        },
+        {
+          "baseline": 255,
+          "part": 19,
+          "x": 80,
+          "y": 104
+        },
+        {
+          "baseline": 83,
+          "part": 65,
+          "x": -8,
+          "y": 40
+        },
+        {
+          "baseline": 255,
+          "part": 65,
+          "x": 184,
+          "y": 72
+        },
+        {
+          "baseline": 255,
+          "part": 61,
+          "x": 88,
+          "y": 96
+        },
+        {
+          "baseline": 255,
+          "part": 69,
+          "x": 128,
+          "y": 88
+        },
+        {
+          "baseline": 255,
+          "part": 69,
+          "x": 144,
+          "y": 88
+        },
+        {
+          "baseline": 78,
+          "part": 47,
+          "x": 200,
+          "y": 32
+        },
+        {
+          "baseline": 78,
+          "part": 47,
+          "x": 200,
+          "y": 0
+        },
+        {
+          "baseline": 78,
+          "part": 21,
+          "x": 176,
+          "y": 8
+        },
+        {
+          "baseline": 78,
+          "part": 21,
+          "x": 176,
+          "y": -8
+        },
+        {
+          "baseline": 78,
+          "part": 50,
+          "x": 216,
+          "y": 24
+        },
+        {
+          "baseline": 78,
+          "part": 50,
+          "x": 216,
+          "y": -24
+        },
+        {
+          "baseline": 61,
+          "part": 47,
+          "x": 136,
+          "y": 16
+        },
+        {
+          "baseline": 61,
+          "part": 47,
+          "x": 136,
+          "y": -16
+        },
+        {
+          "baseline": 61,
+          "part": 21,
+          "x": 112,
+          "y": -8
+        },
+        {
+          "baseline": 61,
+          "part": 50,
+          "x": 152,
+          "y": 8
+        },
+        {
+          "baseline": 61,
+          "part": 51,
+          "x": 152,
+          "y": -8
+        }
+      ],
+      "reachable_by_perimeter_exits": true,
+      "routes": [
+        {
+          "direction": 2,
+          "entry": 12,
+          "x": 0,
+          "y": 133
+        }
+      ],
+      "spawn_entry": 13,
+      "sprite": "spr_ln2_level1_room_07",
+      "variant_flags": [
+        6
+      ],
+      "variants": [
+        "spr_ln2_level1_room_07",
+        "spr_ln2_level1_room_07"
+      ]
+    },
+    {
+      "boundaries": [
+        [
+          0,
+          120,
+          64,
+          104,
+          68,
+          0
+        ],
+        [
+          64,
+          104,
+          254,
+          151,
+          4,
+          0
+        ],
+        [
+          0,
+          92,
+          72,
+          74,
+          68,
+          0
+        ],
+        [
+          72,
+          74,
+          100,
+          81,
+          4,
+          0
+        ],
+        [
+          100,
+          81,
+          158,
+          67,
+          68,
+          0
+        ],
+        [
+          158,
+          67,
+          206,
+          67,
+          0,
+          0
+        ],
+        [
+          206,
+          67,
+          230,
+          67,
+          0,
+          0
+        ],
+        [
+          218,
+          55,
+          230,
+          67,
+          16,
+          0
+        ],
+        [
+          218,
+          55,
+          252,
+          55,
+          0,
+          0
+        ],
+        [
+          160,
+          95,
+          254,
+          72,
+          68,
+          0
+        ],
+        [
+          160,
+          95,
+          254,
+          118,
+          4,
+          0
+        ]
+      ],
+      "depth_sprite": "spr_ln2_level1_depth_08",
+      "enemy": {
+        "action": 0,
+        "action_mirror": 255,
+        "action_state": 0,
+        "action_tick": 192,
+        "active": 128,
+        "actor_blocked": 0,
+        "attack_count": 0,
+        "boundary_history1": 255,
+        "boundary_history2": 255,
+        "boundary_hit": 255,
+        "combat_state": 0,
+        "costume": 2,
+        "countdown": 0,
+        "decision_tick": 0,
+        "depth_y": 88,
+        "duration": 0,
+        "edge_blocked": 0,
+        "facing": 3,
+        "flags": 16,
+        "fraction_x": 0,
+        "fraction_y": 0,
+        "frame": 17,
+        "heading": 0,
+        "health": 44,
+        "hit_side": 0,
+        "knockouts": 0,
+        "last_boundary": 255,
+        "last_side": 0,
+        "mode": 1,
+        "origin_x": 88,
+        "origin_y": 90,
+        "patrol_x": 0,
+        "previous_combat": 0,
+        "projectile_active": 0,
+        "react_random": 0,
+        "react_tick": 0,
+        "recovery_time": 4265,
+        "retreat_trait": 2,
+        "separation_y": 6,
+        "speed": 1,
+        "target_x": 0,
+        "target_y": 0,
+        "traits": 65,
+        "turn_tick": 0,
+        "wait_duration": 255,
+        "wait_tick": 0,
+        "weapon": 0,
+        "x": 122,
+        "y": 88
+      },
+      "entries": [
+        13,
+        14,
+        15
+      ],
+      "id": 8,
+      "masks": [
+        {
+          "baseline": 124,
+          "part": 21,
+          "x": 0,
+          "y": 96
+        },
+        {
+          "baseline": 124,
+          "part": 29,
+          "x": 64,
+          "y": 88
+        },
+        {
+          "baseline": 255,
+          "part": 29,
+          "x": 160,
+          "y": 112
+        },
+        {
+          "baseline": 255,
+          "part": 61,
+          "x": 200,
+          "y": 120
+        },
+        {
+          "baseline": 255,
+          "part": 69,
+          "x": 208,
+          "y": 112
+        },
+        {
+          "baseline": 255,
+          "part": 69,
+          "x": 200,
+          "y": 112
+        },
+        {
+          "baseline": 94,
+          "part": 1,
+          "x": 176,
+          "y": 64
+        },
+        {
+          "baseline": 94,
+          "part": 1,
+          "x": 208,
+          "y": 72
+        },
+        {
+          "baseline": 94,
+          "part": 8,
+          "x": 168,
+          "y": 64
+        },
+        {
+          "baseline": 94,
+          "part": 8,
+          "x": 168,
+          "y": 80
+        },
+        {
+          "baseline": 94,
+          "part": 17,
+          "x": 168,
+          "y": 56
+        },
+        {
+          "baseline": 94,
+          "part": 1,
+          "x": 168,
+          "y": 72
+        },
+        {
+          "baseline": 64,
+          "part": 104,
+          "x": 184,
+          "y": 24
+        },
+        {
+          "baseline": 64,
+          "part": 103,
+          "x": 176,
+          "y": 8
+        }
+      ],
+      "reachable_by_perimeter_exits": true,
+      "routes": [
+        {
+          "direction": 0,
+          "entry": 13,
+          "x": 247,
+          "y": 61
+        },
+        {
+          "direction": 1,
+          "entry": 14,
+          "x": 247,
+          "y": 153
+        },
+        {
+          "direction": 2,
+          "entry": 15,
+          "x": 0,
+          "y": 133
+        }
+      ],
+      "spawn_entry": 7,
+      "sprite": "spr_ln2_level1_room_08",
+      "variant_flags": [
+        8
+      ],
+      "variants": [
+        "spr_ln2_level1_room_08",
+        "spr_ln2_level1_room_08_state1"
+      ]
+    },
+    {
+      "boundaries": [
+        [
+          0,
+          28,
+          52,
+          41,
+          4,
+          0
+        ],
+        [
+          44,
+          43,
+          52,
+          41,
+          68,
+          0
+        ],
+        [
+          44,
+          43,
+          76,
+          51,
+          4,
+          0
+        ],
+        [
+          76,
+          51,
+          84,
+          49,
+          68,
+          0
+        ],
+        [
+          84,
+          49,
+          220,
+          83,
+          4,
+          0
+        ],
+        [
+          220,
+          83,
+          254,
+          75,
+          68,
+          0
+        ],
+        [
+          0,
+          56,
+          96,
+          80,
+          4,
+          0
+        ],
+        [
+          0,
+          104,
+          96,
+          80,
+          68,
+          0
+        ],
+        [
+          0,
+          134,
+          152,
+          96,
+          68,
+          0
+        ],
+        [
+          152,
+          96,
+          216,
+          112,
+          4,
+          0
+        ],
+        [
+          216,
+          112,
+          254,
+          103,
+          68,
+          0
+        ]
+      ],
+      "depth_sprite": "spr_ln2_level1_depth_09",
+      "enemy": {
+        "action": 0,
+        "action_mirror": 0,
+        "action_state": 0,
+        "action_tick": 192,
+        "active": 128,
+        "actor_blocked": 0,
+        "attack_count": 0,
+        "boundary_history1": 255,
+        "boundary_history2": 255,
+        "boundary_hit": 255,
+        "combat_state": 0,
+        "costume": 2,
+        "countdown": 0,
+        "decision_tick": 0,
+        "depth_y": 56,
+        "duration": 0,
+        "edge_blocked": 0,
+        "facing": 5,
+        "flags": 16,
+        "fraction_x": 0,
+        "fraction_y": 0,
+        "frame": 17,
+        "heading": 0,
+        "health": 44,
+        "hit_side": 0,
+        "knockouts": 0,
+        "last_boundary": 255,
+        "last_side": 0,
+        "mode": 1,
+        "origin_x": 88,
+        "origin_y": 90,
+        "patrol_x": 0,
+        "previous_combat": 0,
+        "projectile_active": 0,
+        "react_random": 0,
+        "react_tick": 0,
+        "recovery_time": 7707,
+        "retreat_trait": 2,
+        "separation_y": 6,
+        "speed": 1,
+        "target_x": 0,
+        "target_y": 0,
+        "traits": 65,
+        "turn_tick": 0,
+        "wait_duration": 255,
+        "wait_tick": 0,
+        "weapon": 0,
+        "x": 95,
+        "y": 56
+      },
+      "entries": [
+        16,
+        17,
+        18
+      ],
+      "id": 9,
+      "masks": [
+        {
+          "baseline": 255,
+          "part": 61,
+          "x": 80,
+          "y": 88
+        },
+        {
+          "baseline": 80,
+          "part": 45,
+          "x": 24,
+          "y": 48
+        },
+        {
+          "baseline": 80,
+          "part": 45,
+          "x": -8,
+          "y": 40
+        },
+        {
+          "baseline": 80,
+          "part": 5,
+          "x": 24,
+          "y": 40
+        },
+        {
+          "baseline": 80,
+          "part": 5,
+          "x": -8,
+          "y": 32
+        },
+        {
+          "baseline": 83,
+          "part": 10,
+          "x": 48,
+          "y": 48
+        },
+        {
+          "baseline": 83,
+          "part": 10,
+          "x": 48,
+          "y": 56
+        },
+        {
+          "baseline": 83,
+          "part": 10,
+          "x": 48,
+          "y": 64
+        },
+        {
+          "baseline": 255,
+          "part": 30,
+          "x": 16,
+          "y": 104
+        },
+        {
+          "baseline": 255,
+          "part": 65,
+          "x": 0,
+          "y": 104
+        },
+        {
+          "baseline": 255,
+          "part": 45,
+          "x": 120,
+          "y": 72
+        },
+        {
+          "baseline": 255,
+          "part": 45,
+          "x": 152,
+          "y": 80
+        },
+        {
+          "baseline": 255,
+          "part": 45,
+          "x": 184,
+          "y": 88
+        },
+        {
+          "baseline": 255,
+          "part": 5,
+          "x": 120,
+          "y": 64
+        },
+        {
+          "baseline": 255,
+          "part": 5,
+          "x": 152,
+          "y": 72
+        },
+        {
+          "baseline": 255,
+          "part": 5,
+          "x": 184,
+          "y": 80
+        },
+        {
+          "baseline": 255,
+          "part": 10,
+          "x": 120,
+          "y": 64
+        },
+        {
+          "baseline": 255,
+          "part": 4,
+          "x": 216,
+          "y": 80
+        },
+        {
+          "baseline": 255,
+          "part": 46,
+          "x": 216,
+          "y": 88
+        }
+      ],
+      "reachable_by_perimeter_exits": true,
+      "routes": [
+        {
+          "direction": 0,
+          "entry": 16,
+          "x": 247,
+          "y": 61
+        },
+        {
+          "direction": 2,
+          "entry": 17,
+          "x": 0,
+          "y": 133
+        },
+        {
+          "direction": 3,
+          "entry": 18,
+          "x": 0,
+          "y": 57
+        }
+      ],
+      "spawn_entry": 9,
+      "sprite": "spr_ln2_level1_room_09",
+      "variant_flags": [
+        4
+      ],
+      "variants": [
+        "spr_ln2_level1_room_09",
+        "spr_ln2_level1_room_09"
+      ]
+    },
+    {
+      "boundaries": [
+        [
+          113,
+          56,
+          241,
+          88,
+          5,
+          92
+        ],
+        [
+          113,
+          56,
+          209,
+          104,
+          9,
+          96
+        ],
+        [
+          113,
+          56,
+          161,
+          104,
+          17,
+          97
+        ],
+        [
+          49,
+          120,
+          113,
+          56,
+          81,
+          98
+        ],
+        [
+          0,
+          93,
+          144,
+          57,
+          68,
+          0
+        ],
+        [
+          144,
+          57,
+          212,
+          74,
+          4,
+          0
+        ],
+        [
+          212,
+          74,
+          254,
+          64,
+          68,
+          0
+        ],
+        [
+          0,
+          125,
+          148,
+          88,
+          68,
+          0
+        ],
+        [
+          148,
+          88,
+          210,
+          103,
+          4,
+          0
+        ],
+        [
+          210,
+          103,
+          254,
+          92,
+          68,
+          0
+        ]
+      ],
+      "depth_sprite": "spr_ln2_level1_depth_10",
+      "enemy": {
+        "action": 0,
+        "action_mirror": 0,
+        "action_state": 0,
+        "action_tick": 192,
+        "active": 0,
+        "actor_blocked": 0,
+        "attack_count": 0,
+        "boundary_history1": 255,
+        "boundary_history2": 255,
+        "boundary_hit": 255,
+        "combat_state": 0,
+        "costume": 0,
+        "countdown": 0,
+        "decision_tick": 0,
+        "depth_y": 0,
+        "duration": 0,
+        "edge_blocked": 0,
+        "facing": 1,
+        "flags": 16,
+        "fraction_x": 0,
+        "fraction_y": 0,
+        "frame": 0,
+        "heading": 0,
+        "health": 44,
+        "hit_side": 0,
+        "knockouts": 0,
+        "last_boundary": 255,
+        "last_side": 0,
+        "mode": 1,
+        "origin_x": 88,
+        "origin_y": 90,
+        "patrol_x": 0,
+        "previous_combat": 0,
+        "projectile_active": 0,
+        "react_random": 0,
+        "react_tick": 0,
+        "recovery_time": 54157,
+        "retreat_trait": 0,
+        "separation_y": 6,
+        "speed": 0,
+        "target_x": 0,
+        "target_y": 0,
+        "traits": 0,
+        "turn_tick": 0,
+        "wait_duration": 255,
+        "wait_tick": 0,
+        "weapon": 0,
+        "x": 0,
+        "y": 0
+      },
+      "entries": [
+        19,
+        20
+      ],
+      "id": 10,
+      "masks": [
+        {
+          "baseline": 255,
+          "part": 61,
+          "x": 0,
+          "y": 96
+        },
+        {
+          "baseline": 255,
+          "part": 69,
+          "x": 0,
+          "y": 88
+        },
+        {
+          "baseline": 255,
+          "part": 69,
+          "x": 168,
+          "y": 80
+        }
+      ],
+      "reachable_by_perimeter_exits": true,
+      "routes": [
+        {
+          "direction": 0,
+          "entry": 19,
+          "x": 247,
+          "y": 61
+        },
+        {
+          "direction": 2,
+          "entry": 20,
+          "x": 0,
+          "y": 133
+        }
+      ],
+      "spawn_entry": 17,
+      "sprite": "spr_ln2_level1_room_10",
+      "variant_flags": [],
+      "variants": [
+        "spr_ln2_level1_room_10"
+      ]
+    },
+    {
+      "boundaries": [
+        [
+          166,
+          122,
+          254,
+          100,
+          68,
+          0
+        ],
+        [
+          126,
+          112,
+          166,
+          122,
+          4,
+          0
+        ],
+        [
+          122,
+          113,
+          126,
+          112,
+          68,
+          0
+        ],
+        [
+          102,
+          118,
+          122,
+          113,
+          69,
+          138
+        ],
+        [
+          76,
+          124,
+          102,
+          118,
+          68,
+          0
+        ],
+        [
+          76,
+          124,
+          114,
+          133,
+          4,
+          0
+        ],
+        [
+          70,
+          144,
+          114,
+          133,
+          68,
+          0
+        ],
+        [
+          70,
+          144,
+          98,
+          151,
+          4,
+          0
+        ],
+        [
+          98,
+          151,
+          158,
+          136,
+          68,
+          0
+        ],
+        [
+          158,
+          136,
+          190,
+          144,
+          4,
+          0
+        ],
+        [
+          190,
+          144,
+          246,
+          130,
+          68,
+          0
+        ],
+        [
+          0,
+          98,
+          100,
+          73,
+          69,
+          7
+        ],
+        [
+          64,
+          64,
+          100,
+          73,
+          5,
+          8
+        ],
+        [
+          64,
+          64,
+          92,
+          57,
+          69,
+          8
+        ],
+        [
+          92,
+          57,
+          120,
+          50,
+          69,
+          9
+        ],
+        [
+          120,
+          50,
+          128,
+          48,
+          69,
+          7
+        ],
+        [
+          128,
+          48,
+          136,
+          50,
+          5,
+          7
+        ],
+        [
+          136,
+          50,
+          236,
+          25,
+          69,
+          7
+        ],
+        [
+          204,
+          17,
+          236,
+          25,
+          5,
+          8
+        ],
+        [
+          76,
+          49,
+          204,
+          17,
+          68,
+          0
+        ],
+        [
+          72,
+          47,
+          76,
+          49,
+          8,
+          0
+        ],
+        [
+          24,
+          59,
+          72,
+          47,
+          68,
+          0
+        ]
+      ],
+      "depth_sprite": "spr_ln2_level1_depth_11",
+      "enemy": {
+        "action": 0,
+        "action_mirror": 0,
+        "action_state": 0,
+        "action_tick": 192,
+        "active": 0,
+        "actor_blocked": 0,
+        "attack_count": 0,
+        "boundary_history1": 255,
+        "boundary_history2": 255,
+        "boundary_hit": 255,
+        "combat_state": 0,
+        "costume": 4,
+        "countdown": 0,
+        "decision_tick": 0,
+        "depth_y": 0,
+        "duration": 0,
+        "edge_blocked": 0,
+        "facing": 1,
+        "flags": 16,
+        "fraction_x": 0,
+        "fraction_y": 0,
+        "frame": 0,
+        "heading": 0,
+        "health": 44,
+        "hit_side": 0,
+        "knockouts": 0,
+        "last_boundary": 255,
+        "last_side": 0,
+        "mode": 1,
+        "origin_x": 88,
+        "origin_y": 90,
+        "patrol_x": 0,
+        "previous_combat": 0,
+        "projectile_active": 0,
+        "react_random": 0,
+        "react_tick": 0,
+        "recovery_time": 20497,
+        "retreat_trait": 0,
+        "separation_y": 6,
+        "speed": 0,
+        "target_x": 0,
+        "target_y": 0,
+        "traits": 0,
+        "turn_tick": 0,
+        "wait_duration": 255,
+        "wait_tick": 0,
+        "weapon": 3,
+        "x": 176,
+        "y": 0
+      },
+      "entries": [
+        21,
+        22
+      ],
+      "id": 11,
+      "masks": [
+        {
+          "baseline": 133,
+          "part": 45,
+          "x": 64,
+          "y": 56
+        },
+        {
+          "baseline": 133,
+          "part": 45,
+          "x": 64,
+          "y": 80
+        },
+        {
+          "baseline": 133,
+          "part": 45,
+          "x": 64,
+          "y": 104
+        },
+        {
+          "baseline": 133,
+          "part": 45,
+          "x": 32,
+          "y": 48
+        },
+        {
+          "baseline": 133,
+          "part": 45,
+          "x": 32,
+          "y": 72
+        },
+        {
+          "baseline": 133,
+          "part": 45,
+          "x": 32,
+          "y": 96
+        },
+        {
+          "baseline": 255,
+          "part": 96,
+          "x": 88,
+          "y": 120
+        },
+        {
+          "baseline": 255,
+          "part": 30,
+          "x": 208,
+          "y": 112
+        },
+        {
+          "baseline": 255,
+          "part": 69,
+          "x": 184,
+          "y": 128
+        },
+        {
+          "baseline": 96,
+          "part": 45,
+          "x": 200,
+          "y": 8
+        },
+        {
+          "baseline": 96,
+          "part": 45,
+          "x": 200,
+          "y": 32
+        },
+        {
+          "baseline": 96,
+          "part": 45,
+          "x": 200,
+          "y": 56
+        },
+        {
+          "baseline": 96,
+          "part": 45,
+          "x": 168,
+          "y": 0
+        },
+        {
+          "baseline": 96,
+          "part": 45,
+          "x": 168,
+          "y": 24
+        },
+        {
+          "baseline": 96,
+          "part": 45,
+          "x": 168,
+          "y": 48
+        }
+      ],
+      "reachable_by_perimeter_exits": true,
+      "routes": [
+        {
+          "direction": 0,
+          "entry": 21,
+          "x": 247,
+          "y": 61
+        },
+        {
+          "direction": 2,
+          "entry": 22,
+          "x": 0,
+          "y": 133
+        }
+      ],
+      "spawn_entry": 20,
+      "sprite": "spr_ln2_level1_room_11",
+      "variant_flags": [
+        9
+      ],
+      "variants": [
+        "spr_ln2_level1_room_11",
+        "spr_ln2_level1_room_11_state1"
+      ]
+    },
+    {
+      "boundaries": [
+        [
+          150,
+          57,
+          254,
+          31,
+          68,
+          0
+        ],
+        [
+          138,
+          54,
+          150,
+          57,
+          4,
+          0
+        ],
+        [
+          30,
+          81,
+          138,
+          54,
+          68,
+          0
+        ],
+        [
+          30,
+          81,
+          66,
+          90,
+          5,
+          14
+        ],
+        [
+          66,
+          90,
+          102,
+          81,
+          69,
+          14
+        ],
+        [
+          66,
+          72,
+          102,
+          81,
+          5,
+          20
+        ],
+        [
+          114,
+          54,
+          130,
+          74,
+          21,
+          20
+        ],
+        [
+          130,
+          74,
+          164,
+          66,
+          69,
+          14
+        ],
+        [
+          152,
+          60,
+          164,
+          66,
+          9,
+          15
+        ],
+        [
+          152,
+          60,
+          156,
+          45,
+          127,
+          15
+        ],
+        [
+          200,
+          61,
+          254,
+          48,
+          69,
+          14
+        ],
+        [
+          168,
+          45,
+          200,
+          61,
+          9,
+          15
+        ]
+      ],
+      "depth_sprite": "spr_ln2_level1_depth_12",
+      "enemy": {
+        "action": 0,
+        "action_mirror": 0,
+        "action_state": 0,
+        "action_tick": 192,
+        "active": 0,
+        "actor_blocked": 0,
+        "attack_count": 0,
+        "boundary_history1": 255,
+        "boundary_history2": 255,
+        "boundary_hit": 255,
+        "combat_state": 0,
+        "costume": 0,
+        "countdown": 0,
+        "decision_tick": 0,
+        "depth_y": 0,
+        "duration": 0,
+        "edge_blocked": 0,
+        "facing": 1,
+        "flags": 16,
+        "fraction_x": 0,
+        "fraction_y": 0,
+        "frame": 0,
+        "heading": 0,
+        "health": 44,
+        "hit_side": 0,
+        "knockouts": 0,
+        "last_boundary": 255,
+        "last_side": 0,
+        "mode": 1,
+        "origin_x": 88,
+        "origin_y": 90,
+        "patrol_x": 0,
+        "previous_combat": 0,
+        "projectile_active": 0,
+        "react_random": 0,
+        "react_tick": 0,
+        "recovery_time": 1744,
+        "retreat_trait": 0,
+        "separation_y": 6,
+        "speed": 0,
+        "target_x": 0,
+        "target_y": 0,
+        "traits": 0,
+        "turn_tick": 0,
+        "wait_duration": 255,
+        "wait_tick": 0,
+        "weapon": 0,
+        "x": 0,
+        "y": 0
+      },
+      "entries": [
+        23
+      ],
+      "id": 12,
+      "masks": [
+        {
+          "baseline": 16,
+          "part": 51,
+          "x": 64,
+          "y": 64
+        },
+        {
+          "baseline": 16,
+          "part": 51,
+          "x": 64,
+          "y": 96
+        },
+        {
+          "baseline": 16,
+          "part": 51,
+          "x": 32,
+          "y": 56
+        },
+        {
+          "baseline": 16,
+          "part": 51,
+          "x": 32,
+          "y": 88
+        },
+        {
+          "baseline": 8,
+          "part": 51,
+          "x": 128,
+          "y": 48
+        },
+        {
+          "baseline": 8,
+          "part": 51,
+          "x": 128,
+          "y": 80
+        },
+        {
+          "baseline": 255,
+          "part": 61,
+          "x": 136,
+          "y": 112
+        },
+        {
+          "baseline": 255,
+          "part": 62,
+          "x": 120,
+          "y": 120
+        }
+      ],
+      "reachable_by_perimeter_exits": true,
+      "routes": [
+        {
+          "direction": 0,
+          "entry": 23,
+          "x": 247,
+          "y": 61
+        }
+      ],
+      "spawn_entry": 22,
+      "sprite": "spr_ln2_level1_room_12",
+      "variant_flags": [
+        2
+      ],
+      "variants": [
+        "spr_ln2_level1_room_12",
+        "spr_ln2_level1_room_12_state1"
+      ]
+    },
+    {
+      "boundaries": [
+        [
+          154,
+          88,
+          190,
+          79,
+          68,
+          0
+        ],
+        [
+          0,
+          34,
+          184,
+          80,
+          4,
+          0
+        ],
+        [
+          184,
+          80,
+          254,
+          63,
+          68,
+          0
+        ],
+        [
+          0,
+          66,
+          122,
+          96,
+          4,
+          0
+        ],
+        [
+          10,
+          124,
+          122,
+          96,
+          68,
+          0
+        ],
+        [
+          4,
+          147,
+          10,
+          124,
+          126,
+          0
+        ],
+        [
+          4,
+          147,
+          196,
+          195,
+          4,
+          0
+        ],
+        [
+          156,
+          118,
+          254,
+          142,
+          4,
+          0
+        ],
+        [
+          72,
+          139,
+          156,
+          118,
+          68,
+          0
+        ],
+        [
+          72,
+          139,
+          254,
+          184,
+          4,
+          0
+        ],
+        [
+          190,
+          110,
+          254,
+          126,
+          4,
+          0
+        ],
+        [
+          190,
+          110,
+          254,
+          94,
+          68,
+          0
+        ],
+        [
+          118,
+          97,
+          154,
+          88,
+          68,
+          0
+        ],
+        [
+          74,
+          88,
+          154,
+          88,
+          64,
+          0
+        ]
+      ],
+      "depth_sprite": "spr_ln2_level1_depth_13",
+      "enemy": {
+        "action": 0,
+        "action_mirror": 255,
+        "action_state": 0,
+        "action_tick": 192,
+        "active": 128,
+        "actor_blocked": 0,
+        "attack_count": 0,
+        "boundary_history1": 255,
+        "boundary_history2": 255,
+        "boundary_hit": 255,
+        "combat_state": 0,
+        "costume": 2,
+        "countdown": 0,
+        "decision_tick": 0,
+        "depth_y": 139,
+        "duration": 0,
+        "edge_blocked": 0,
+        "facing": 3,
+        "flags": 16,
+        "fraction_x": 0,
+        "fraction_y": 0,
+        "frame": 17,
+        "heading": 0,
+        "health": 44,
+        "hit_side": 0,
+        "knockouts": 0,
+        "last_boundary": 255,
+        "last_side": 0,
+        "mode": 1,
+        "origin_x": 88,
+        "origin_y": 90,
+        "patrol_x": 0,
+        "previous_combat": 0,
+        "projectile_active": 0,
+        "react_random": 0,
+        "react_tick": 0,
+        "recovery_time": 54092,
+        "retreat_trait": 2,
+        "separation_y": 6,
+        "speed": 1,
+        "target_x": 0,
+        "target_y": 0,
+        "traits": 65,
+        "turn_tick": 0,
+        "wait_duration": 255,
+        "wait_tick": 0,
+        "weapon": 0,
+        "x": 32,
+        "y": 139
+      },
+      "entries": [
+        24,
+        25,
+        26,
+        27
+      ],
+      "id": 13,
+      "masks": [
+        {
+          "baseline": 137,
+          "part": 30,
+          "x": 104,
+          "y": 104
+        },
+        {
+          "baseline": 109,
+          "part": 30,
+          "x": 200,
+          "y": 80
+        },
+        {
+          "baseline": 156,
+          "part": 1,
+          "x": 216,
+          "y": 96
+        },
+        {
+          "baseline": 156,
+          "part": 1,
+          "x": 216,
+          "y": 112
+        },
+        {
+          "baseline": 156,
+          "part": 22,
+          "x": 216,
+          "y": 88
+        },
+        {
+          "baseline": 255,
+          "part": 45,
+          "x": -24,
+          "y": 120
+        },
+        {
+          "baseline": 255,
+          "part": 45,
+          "x": 8,
+          "y": 128
+        },
+        {
+          "baseline": 255,
+          "part": 45,
+          "x": 40,
+          "y": 136
+        },
+        {
+          "baseline": 94,
+          "part": 46,
+          "x": 80,
+          "y": 64
+        },
+        {
+          "baseline": 94,
+          "part": 46,
+          "x": 48,
+          "y": 72
+        },
+        {
+          "baseline": 94,
+          "part": 4,
+          "x": 80,
+          "y": 56
+        },
+        {
+          "baseline": 94,
+          "part": 4,
+          "x": 48,
+          "y": 64
+        },
+        {
+          "baseline": 87,
+          "part": 18,
+          "x": 112,
+          "y": 48
+        },
+        {
+          "baseline": 87,
+          "part": 18,
+          "x": 112,
+          "y": 56
+        },
+        {
+          "baseline": 87,
+          "part": 18,
+          "x": 112,
+          "y": 64
+        },
+        {
+          "baseline": 87,
+          "part": 18,
+          "x": 112,
+          "y": 72
+        },
+        {
+          "baseline": 87,
+          "part": 9,
+          "x": 104,
+          "y": 40
+        },
+        {
+          "baseline": 87,
+          "part": 9,
+          "x": 104,
+          "y": 48
+        },
+        {
+          "baseline": 87,
+          "part": 8,
+          "x": 104,
+          "y": 56
+        },
+        {
+          "baseline": 81,
+          "part": 69,
+          "x": 8,
+          "y": 56
+        },
+        {
+          "baseline": 81,
+          "part": 69,
+          "x": -8,
+          "y": 40
+        }
+      ],
+      "reachable_by_perimeter_exits": true,
+      "routes": [
+        {
+          "direction": 0,
+          "entry": 24,
+          "x": 247,
+          "y": 61
+        },
+        {
+          "direction": 1,
+          "entry": 25,
+          "x": 247,
+          "y": 153
+        },
+        {
+          "direction": 1,
+          "entry": 26,
+          "x": 247,
+          "y": 165
+        },
+        {
+          "direction": 3,
+          "entry": 27,
+          "x": 0,
+          "y": 57
+        }
+      ],
+      "spawn_entry": 5,
+      "sprite": "spr_ln2_level1_room_13",
+      "variant_flags": [
+        17
+      ],
+      "variants": [
+        "spr_ln2_level1_room_13",
+        "spr_ln2_level1_room_13_state1"
+      ]
+    },
+    {
+      "boundaries": [
+        [
+          0,
+          148,
+          136,
+          114,
+          68,
+          0
+        ],
+        [
+          0,
+          80,
+          136,
+          114,
+          4,
+          0
+        ],
+        [
+          0,
+          178,
+          190,
+          131,
+          68,
+          0
+        ],
+        [
+          190,
+          131,
+          254,
+          147,
+          4,
+          0
+        ],
+        [
+          0,
+          86,
+          252,
+          149,
+          5,
+          30
+        ],
+        [
+          218,
+          79,
+          254,
+          88,
+          4,
+          0
+        ],
+        [
+          166,
+          92,
+          218,
+          79,
+          68,
+          0
+        ],
+        [
+          166,
+          92,
+          254,
+          114,
+          4,
+          0
+        ],
+        [
+          202,
+          42,
+          254,
+          42,
+          64,
+          0
+        ],
+        [
+          182,
+          47,
+          202,
+          42,
+          68,
+          0
+        ],
+        [
+          178,
+          62,
+          182,
+          47,
+          126,
+          0
+        ],
+        [
+          146,
+          70,
+          178,
+          62,
+          68,
+          0
+        ],
+        [
+          126,
+          70,
+          146,
+          70,
+          64,
+          0
+        ],
+        [
+          98,
+          77,
+          126,
+          70,
+          68,
+          0
+        ],
+        [
+          34,
+          61,
+          98,
+          77,
+          4,
+          0
+        ],
+        [
+          2,
+          49,
+          254,
+          112,
+          5,
+          31
+        ],
+        [
+          214,
+          232,
+          246,
+          108,
+          126,
+          0
+        ]
+      ],
+      "depth_sprite": "spr_ln2_level1_depth_14",
+      "enemy": {
+        "action": 0,
+        "action_mirror": 0,
+        "action_state": 0,
+        "action_tick": 192,
+        "active": 0,
+        "actor_blocked": 0,
+        "attack_count": 0,
+        "boundary_history1": 255,
+        "boundary_history2": 255,
+        "boundary_hit": 255,
+        "combat_state": 0,
+        "costume": 0,
+        "countdown": 0,
+        "decision_tick": 0,
+        "depth_y": 0,
+        "duration": 0,
+        "edge_blocked": 0,
+        "facing": 1,
+        "flags": 16,
+        "fraction_x": 0,
+        "fraction_y": 0,
+        "frame": 0,
+        "heading": 0,
+        "health": 44,
+        "hit_side": 0,
+        "knockouts": 0,
+        "last_boundary": 255,
+        "last_side": 0,
+        "mode": 1,
+        "origin_x": 88,
+        "origin_y": 90,
+        "patrol_x": 0,
+        "previous_combat": 0,
+        "projectile_active": 0,
+        "react_random": 0,
+        "react_tick": 0,
+        "recovery_time": 0,
+        "retreat_trait": 0,
+        "separation_y": 6,
+        "speed": 0,
+        "target_x": 0,
+        "target_y": 0,
+        "traits": 0,
+        "turn_tick": 0,
+        "wait_duration": 255,
+        "wait_tick": 0,
+        "weapon": 0,
+        "x": 0,
+        "y": 0
+      },
+      "entries": [
+        28,
+        29
+      ],
+      "id": 14,
+      "masks": [
+        {
+          "baseline": 255,
+          "part": 52,
+          "x": 224,
+          "y": 40
+        },
+        {
+          "baseline": 90,
+          "part": 69,
+          "x": 192,
+          "y": 64
+        },
+        {
+          "baseline": 255,
+          "part": 51,
+          "x": 224,
+          "y": 96
+        },
+        {
+          "baseline": 255,
+          "part": 51,
+          "x": 224,
+          "y": 64
+        },
+        {
+          "baseline": 128,
+          "part": 69,
+          "x": -8,
+          "y": 64
+        }
+      ],
+      "reachable_by_perimeter_exits": true,
+      "routes": [
+        {
+          "direction": 1,
+          "entry": 28,
+          "x": 247,
+          "y": 153
+        },
+        {
+          "direction": 2,
+          "entry": 29,
+          "x": 0,
+          "y": 133
+        }
+      ],
+      "spawn_entry": 27,
+      "sprite": "spr_ln2_level1_room_14",
+      "variant_flags": [],
+      "variants": [
+        "spr_ln2_level1_room_14"
+      ]
+    },
+    {
+      "boundaries": [
+        [
+          0,
+          107,
+          144,
+          143,
+          4,
+          0
+        ],
+        [
+          144,
+          143,
+          254,
+          116,
+          68,
+          0
+        ],
+        [
+          0,
+          76,
+          50,
+          88,
+          4,
+          0
+        ],
+        [
+          50,
+          88,
+          148,
+          64,
+          68,
+          0
+        ],
+        [
+          16,
+          31,
+          148,
+          64,
+          4,
+          0
+        ],
+        [
+          16,
+          31,
+          80,
+          15,
+          68,
+          0
+        ],
+        [
+          80,
+          15,
+          116,
+          24,
+          5,
+          11
+        ],
+        [
+          84,
+          32,
+          116,
+          24,
+          68,
+          0
+        ],
+        [
+          84,
+          32,
+          214,
+          64,
+          4,
+          0
+        ],
+        [
+          84,
+          96,
+          214,
+          64,
+          68,
+          0
+        ],
+        [
+          84,
+          96,
+          144,
+          111,
+          4,
+          0
+        ],
+        [
+          144,
+          111,
+          248,
+          85,
+          68,
+          0
+        ]
+      ],
+      "depth_sprite": "spr_ln2_level1_depth_15",
+      "enemy": {
+        "action": 0,
+        "action_mirror": 0,
+        "action_state": 0,
+        "action_tick": 192,
+        "active": 0,
+        "actor_blocked": 0,
+        "attack_count": 0,
+        "boundary_history1": 255,
+        "boundary_history2": 255,
+        "boundary_hit": 255,
+        "combat_state": 0,
+        "costume": 0,
+        "countdown": 0,
+        "decision_tick": 0,
+        "depth_y": 0,
+        "duration": 0,
+        "edge_blocked": 0,
+        "facing": 1,
+        "flags": 16,
+        "fraction_x": 0,
+        "fraction_y": 0,
+        "frame": 0,
+        "heading": 0,
+        "health": 44,
+        "hit_side": 0,
+        "knockouts": 0,
+        "last_boundary": 255,
+        "last_side": 0,
+        "mode": 1,
+        "origin_x": 88,
+        "origin_y": 90,
+        "patrol_x": 0,
+        "previous_combat": 0,
+        "projectile_active": 0,
+        "react_random": 0,
+        "react_tick": 0,
+        "recovery_time": 20492,
+        "retreat_trait": 0,
+        "separation_y": 6,
+        "speed": 0,
+        "target_x": 0,
+        "target_y": 0,
+        "traits": 0,
+        "turn_tick": 0,
+        "wait_duration": 255,
+        "wait_tick": 0,
+        "weapon": 0,
+        "x": 0,
+        "y": 0
+      },
+      "entries": [
+        30,
+        31,
+        32
+      ],
+      "id": 15,
+      "masks": [
+        {
+          "baseline": 255,
+          "part": 29,
+          "x": 56,
+          "y": 104
+        },
+        {
+          "baseline": 99,
+          "part": 9,
+          "x": 128,
+          "y": 64
+        },
+        {
+          "baseline": 65,
+          "part": 69,
+          "x": 88,
+          "y": 40
+        },
+        {
+          "baseline": 255,
+          "part": 61,
+          "x": -8,
+          "y": 88
+        },
+        {
+          "baseline": 255,
+          "part": 58,
+          "x": 208,
+          "y": 104
+        },
+        {
+          "baseline": 47,
+          "part": 58,
+          "x": -8,
+          "y": 8
+        },
+        {
+          "baseline": 255,
+          "part": 69,
+          "x": 128,
+          "y": 128
+        },
+        {
+          "baseline": 29,
+          "part": 69,
+          "x": 112,
+          "y": -8
+        },
+        {
+          "baseline": 255,
+          "part": 69,
+          "x": 208,
+          "y": 104
+        },
+        {
+          "baseline": 65,
+          "part": 65,
+          "x": 56,
+          "y": 16
+        },
+        {
+          "baseline": 65,
+          "part": 69,
+          "x": 48,
+          "y": 24
+        }
+      ],
+      "reachable_by_perimeter_exits": true,
+      "routes": [
+        {
+          "direction": 0,
+          "entry": 30,
+          "x": 247,
+          "y": 49
+        },
+        {
+          "direction": 0,
+          "entry": 31,
+          "x": 247,
+          "y": 61
+        },
+        {
+          "direction": 3,
+          "entry": 32,
+          "x": 0,
+          "y": 57
+        }
+      ],
+      "spawn_entry": 29,
+      "sprite": "spr_ln2_level1_room_15",
+      "variant_flags": [],
+      "variants": [
+        "spr_ln2_level1_room_15"
+      ]
+    },
+    {
+      "boundaries": [
+        [
+          122,
+          145,
+          184,
+          130,
+          69,
+          16
+        ],
+        [
+          184,
+          130,
+          188,
+          115,
+          127,
+          43
+        ],
+        [
+          184,
+          100,
+          188,
+          115,
+          63,
+          11
+        ],
+        [
+          122,
+          85,
+          184,
+          100,
+          5,
+          11
+        ],
+        [
+          60,
+          100,
+          122,
+          85,
+          69,
+          11
+        ],
+        [
+          56,
+          115,
+          60,
+          100,
+          127,
+          11
+        ],
+        [
+          56,
+          115,
+          60,
+          130,
+          63,
+          11
+        ],
+        [
+          60,
+          130,
+          122,
+          145,
+          5,
+          16
+        ],
+        [
+          0,
+          150,
+          252,
+          150,
+          1,
+          1
+        ],
+        [
+          64,
+          103,
+          120,
+          103,
+          0,
+          0
+        ],
+        [
+          120,
+          103,
+          184,
+          71,
+          72,
+          0
+        ],
+        [
+          53,
+          114,
+          77,
+          120,
+          4,
+          0
+        ],
+        [
+          77,
+          120,
+          101,
+          120,
+          0,
+          0
+        ],
+        [
+          101,
+          120,
+          109,
+          116,
+          72,
+          0
+        ],
+        [
+          77,
+          84,
+          109,
+          116,
+          16,
+          0
+        ],
+        [
+          140,
+          129,
+          176,
+          129,
+          64,
+          0
+        ],
+        [
+          132,
+          125,
+          140,
+          129,
+          8,
+          0
+        ],
+        [
+          132,
+          125,
+          144,
+          119,
+          72,
+          0
+        ],
+        [
+          144,
+          119,
+          182,
+          119,
+          0,
+          0
+        ]
+      ],
+      "depth_sprite": "spr_ln2_level1_depth_16",
+      "enemy": {
+        "action": 0,
+        "action_mirror": 0,
+        "action_state": 0,
+        "action_tick": 192,
+        "active": 0,
+        "actor_blocked": 0,
+        "attack_count": 0,
+        "boundary_history1": 255,
+        "boundary_history2": 255,
+        "boundary_hit": 255,
+        "combat_state": 0,
+        "costume": 0,
+        "countdown": 0,
+        "decision_tick": 0,
+        "depth_y": 0,
+        "duration": 0,
+        "edge_blocked": 0,
+        "facing": 1,
+        "flags": 16,
+        "fraction_x": 0,
+        "fraction_y": 0,
+        "frame": 0,
+        "heading": 0,
+        "health": 44,
+        "hit_side": 0,
+        "knockouts": 0,
+        "last_boundary": 255,
+        "last_side": 0,
+        "mode": 1,
+        "origin_x": 88,
+        "origin_y": 90,
+        "patrol_x": 0,
+        "previous_combat": 0,
+        "projectile_active": 0,
+        "react_random": 0,
+        "react_tick": 0,
+        "recovery_time": 20496,
+        "retreat_trait": 0,
+        "separation_y": 6,
+        "speed": 0,
+        "target_x": 0,
+        "target_y": 0,
+        "traits": 0,
+        "turn_tick": 0,
+        "wait_duration": 255,
+        "wait_tick": 0,
+        "weapon": 0,
+        "x": 0,
+        "y": 0
+      },
+      "entries": [
+        33
+      ],
+      "id": 16,
+      "masks": [
+        {
+          "baseline": 101,
+          "part": 69,
+          "x": 72,
+          "y": 72
+        },
+        {
+          "baseline": 110,
+          "part": 92,
+          "x": 48,
+          "y": 80
+        },
+        {
+          "baseline": 116,
+          "part": 92,
+          "x": 64,
+          "y": 88
+        },
+        {
+          "baseline": 124,
+          "part": 92,
+          "x": 136,
+          "y": 96
+        }
+      ],
+      "reachable_by_perimeter_exits": true,
+      "routes": [
+        {
+          "direction": 2,
+          "entry": 33,
+          "x": 0,
+          "y": 133
+        }
+      ],
+      "spawn_entry": 30,
+      "sprite": "spr_ln2_level1_room_16",
+      "variant_flags": [
+        19
+      ],
+      "variants": [
+        "spr_ln2_level1_room_16",
+        "spr_ln2_level1_room_16"
+      ]
+    },
+    {
+      "boundaries": [
+        [
+          0,
+          52,
+          76,
+          71,
+          4,
+          0
+        ],
+        [
+          0,
+          90,
+          76,
+          71,
+          68,
+          0
+        ],
+        [
+          62,
+          2,
+          98,
+          11,
+          4,
+          0
+        ],
+        [
+          30,
+          28,
+          98,
+          11,
+          68,
+          0
+        ],
+        [
+          30,
+          28,
+          126,
+          52,
+          4,
+          0
+        ],
+        [
+          126,
+          52,
+          254,
+          20,
+          68,
+          0
+        ],
+        [
+          0,
+          84,
+          252,
+          21,
+          69,
+          31
+        ],
+        [
+          206,
+          124,
+          254,
+          136,
+          4,
+          0
+        ],
+        [
+          206,
+          124,
+          214,
+          122,
+          68,
+          0
+        ],
+        [
+          210,
+          114,
+          214,
+          122,
+          32,
+          0
+        ],
+        [
+          166,
+          103,
+          210,
+          114,
+          5,
+          30
+        ],
+        [
+          166,
+          103,
+          194,
+          96,
+          69,
+          30
+        ],
+        [
+          126,
+          79,
+          194,
+          96,
+          5,
+          30
+        ],
+        [
+          126,
+          79,
+          182,
+          65,
+          69,
+          30
+        ],
+        [
+          182,
+          65,
+          246,
+          81,
+          4,
+          0
+        ],
+        [
+          2,
+          78,
+          18,
+          140,
+          62,
+          0
+        ]
+      ],
+      "depth_sprite": "spr_ln2_level1_depth_17",
+      "enemy": {
+        "action": 0,
+        "action_mirror": 0,
+        "action_state": 0,
+        "action_tick": 192,
+        "active": 0,
+        "actor_blocked": 0,
+        "attack_count": 0,
+        "boundary_history1": 255,
+        "boundary_history2": 255,
+        "boundary_hit": 255,
+        "combat_state": 0,
+        "costume": 0,
+        "countdown": 0,
+        "decision_tick": 0,
+        "depth_y": 0,
+        "duration": 0,
+        "edge_blocked": 0,
+        "facing": 1,
+        "flags": 16,
+        "fraction_x": 0,
+        "fraction_y": 0,
+        "frame": 0,
+        "heading": 0,
+        "health": 44,
+        "hit_side": 0,
+        "knockouts": 0,
+        "last_boundary": 255,
+        "last_side": 0,
+        "mode": 1,
+        "origin_x": 88,
+        "origin_y": 90,
+        "patrol_x": 0,
+        "previous_combat": 0,
+        "projectile_active": 0,
+        "react_random": 0,
+        "react_tick": 0,
+        "recovery_time": 20510,
+        "retreat_trait": 0,
+        "separation_y": 6,
+        "speed": 0,
+        "target_x": 0,
+        "target_y": 0,
+        "traits": 0,
+        "turn_tick": 0,
+        "wait_duration": 255,
+        "wait_tick": 0,
+        "weapon": 0,
+        "x": 0,
+        "y": 0
+      },
+      "entries": [
+        34,
+        35,
+        36
+      ],
+      "id": 17,
+      "masks": [
+        {
+          "baseline": 255,
+          "part": 92,
+          "x": 112,
+          "y": 112
+        },
+        {
+          "baseline": 255,
+          "part": 92,
+          "x": 96,
+          "y": 112
+        },
+        {
+          "baseline": 255,
+          "part": 92,
+          "x": 80,
+          "y": 120
+        },
+        {
+          "baseline": 59,
+          "part": 46,
+          "x": -16,
+          "y": 24
+        },
+        {
+          "baseline": 59,
+          "part": 46,
+          "x": -16,
+          "y": 0
+        },
+        {
+          "baseline": 59,
+          "part": 46,
+          "x": -16,
+          "y": -24
+        },
+        {
+          "baseline": 30,
+          "part": 48,
+          "x": 64,
+          "y": -8
+        },
+        {
+          "baseline": 30,
+          "part": 48,
+          "x": 64,
+          "y": 0
+        },
+        {
+          "baseline": 64,
+          "part": 19,
+          "x": 184,
+          "y": 48
+        }
+      ],
+      "reachable_by_perimeter_exits": true,
+      "routes": [
+        {
+          "direction": 3,
+          "entry": 34,
+          "x": 0,
+          "y": 57
+        },
+        {
+          "direction": 1,
+          "entry": 35,
+          "x": 247,
+          "y": 153
+        },
+        {
+          "direction": 3,
+          "entry": 36,
+          "x": 0,
+          "y": 57
+        }
+      ],
+      "spawn_entry": 32,
+      "sprite": "spr_ln2_level1_room_17",
+      "variant_flags": [],
+      "variants": [
+        "spr_ln2_level1_room_17"
+      ]
+    }
+  ],
+  "schema": 1,
+  "shared_sprite_colours": [
+    11,
+    2
+  ],
+  "source_layout": {
+    "action_events": 43291,
+    "actor_draw": 47820,
+    "actor_enemy": 47788,
+    "actor_player": 47799,
+    "boundary": 47527,
+    "boundary_enter": 47175,
+    "boundary_table": 65299,
+    "enemy_action": 42694,
+    "enemy_decide": 44215,
+    "enemy_enter": 46270,
+    "enemy_move": 42536,
+    "enemy_recover": 44992,
+    "enemy_regen": 45772,
+    "enemy_select": 45628,
+    "entrance": 37122,
+    "entry_heading": 37348,
+    "entry_x": 37274,
+    "entry_y": 37311,
+    "exit": 37006,
+    "exit_count": 37,
+    "exit_destinations": 37237,
+    "exit_thresholds": 37200,
+    "frame_table": 50198,
+    "item_enter": 49453,
+    "item_interact": 48827,
+    "item_table": 49110,
+    "main_loop": 36309,
+    "mask": 38380,
+    "move": 42974,
+    "player_action": 42715,
+    "player_begin": 42201,
+    "player_input": 41930,
+    "player_move": 42463,
+    "player_update": 41724,
+    "random": 46102,
+    "scene_choose": 38311,
+    "scene_data": 19570,
+    "scene_draw": 35042,
+    "sprite_unpack": 48661
+  },
+  "source_sha256": "3f5b5991bbdd11bd0161ad8bb4455fa9031b3db1a9581a152f7a8e9317c2c4ba",
+  "tables": {
+    "entry_heading": [
+      3,
+      1,
+      17,
+      1,
+      5,
+      7,
+      21,
+      7,
+      3,
+      5,
+      7,
+      1,
+      5,
+      1,
+      3,
+      5,
+      1,
+      5,
+      7,
+      1,
+      5,
+      1,
+      5,
+      1,
+      1,
+      3,
+      3,
+      7,
+      3,
+      5,
+      1,
+      1,
+      7,
+      5,
+      255,
+      3,
+      255
+    ],
+    "entry_x": [
+      88,
+      100,
+      136,
+      10,
+      56,
+      223,
+      154,
+      240,
+      10,
+      240,
+      240,
+      100,
+      240,
+      7,
+      100,
+      240,
+      10,
+      240,
+      179,
+      10,
+      240,
+      10,
+      240,
+      10,
+      10,
+      104,
+      10,
+      240,
+      10,
+      240,
+      112,
+      10,
+      240,
+      89,
+      255,
+      10,
+      255
+    ],
+    "entry_y": [
+      90,
+      100,
+      10,
+      157,
+      52,
+      128,
+      82,
+      131,
+      55,
+      90,
+      145,
+      100,
+      64,
+      56,
+      19,
+      79,
+      120,
+      81,
+      176,
+      116,
+      117,
+      106,
+      42,
+      83,
+      104,
+      76,
+      43,
+      66,
+      52,
+      104,
+      137,
+      158,
+      94,
+      22,
+      255,
+      94,
+      255
+    ],
+    "exit_destinations": [
+      1,
+      0,
+      3,
+      2,
+      1,
+      13,
+      1,
+      8,
+      5,
+      9,
+      4,
+      6,
+      8,
+      7,
+      4,
+      13,
+      4,
+      10,
+      13,
+      9,
+      11,
+      10,
+      12,
+      11,
+      8,
+      3,
+      9,
+      14,
+      13,
+      15,
+      16,
+      14,
+      17,
+      15,
+      255,
+      15,
+      255
+    ],
+    "exit_thresholds": [
+      255,
+      255,
+      135,
+      255,
+      255,
+      135,
+      255,
+      84,
+      135,
+      255,
+      255,
+      255,
+      255,
+      81,
+      135,
+      255,
+      135,
+      193,
+      255,
+      135,
+      255,
+      135,
+      255,
+      255,
+      84,
+      100,
+      191,
+      255,
+      135,
+      255,
+      72,
+      135,
+      255,
+      255,
+      64,
+      135,
+      255
+    ]
+  },
+  "title": "Central Park"
+}

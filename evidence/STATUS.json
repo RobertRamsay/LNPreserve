@@ -17,6 +17,11 @@
     "ln1_native_room_layouts": 134,
     "ln1_shared_human_actor_poses": 1024,
     "ln1_item_and_mechanism_placements": 23,
+    "ln2_native_levels": 7,
+    "ln2_native_selectable_scenes": 92,
+    "ln2_scene_records": 93,
+    "ln2_enemy_placements": 53,
+    "ln2_item_and_mechanism_records": 70,
     "silent_sound_assets": 41
   },
   "provenance": {
@@ -91,14 +96,44 @@
     {
       "name": "LN1 projectile movement and lifetime",
       "verification": "4032 original one-tick states across all six level banks; collision dispatch and display timing excluded"
+    },
+    {
+      "name": "LN2 player movement/animation",
+      "verification": "34664 original updates across seven banks; world dispatch, vehicles and system timing excluded"
+    },
+    {
+      "name": "LN2 enemy decisions/animation",
+      "verification": "50432 original updates with shared random returns; combat dispatch and hardware random phase excluded"
+    },
+    {
+      "name": "LN2 melee ranges",
+      "verification": "21000 original attack-window comparisons; complete combat replay excluded"
+    },
+    {
+      "name": "LN2 entrance hooks",
+      "verification": "784 original actor/vehicle/inventory-gate states; drawing side effects excluded"
+    },
+    {
+      "name": "LN2 automatic entrance motion",
+      "verification": "11136 original states and requested poses across seven banks"
+    },
+    {
+      "name": "LN2 moving-world handlers",
+      "verification": "3520 original state comparisons; rendering requests intercepted"
+    },
+    {
+      "name": "LN2 Mansion helicopter",
+      "verification": "256 original attachment/drop states and poses; world event dispatch excluded"
     }
   ],
-  "current_gameplay": "Six connected native LN1 level prototypes; no verified complete game",
+  "current_gameplay": "Six connected LN1 and seven connected LN2 native level prototypes; no verified complete game",
   "pending": [
     "Complete and verify LN1 puzzle sequences, special enemies, projectile combat, palette effects, death presentation and ending",
-    "Translate and connect LN2/LN3 native gameplay and all objective handlers",
+    "Complete LN2 boundary hazards, projectile combat, remaining object handlers, final boss/objectives and ending",
+    "Translate and connect all LN3 native gameplay and objective handlers",
     "LN3 levels 2-5 source-disk verification; LN3 level 1 payload and opening background are verified",
-    "Finish LN2/LN3 character and animation recovery; remaining LN1 composition validation",
+    "Finish LN3 character/animation recovery; validate LN1/LN2 composition, palette changes and missing special effects",
+    "LN2 original dashboard, item flashing, pickup continuation and complete death presentation",
     "Validate recovered LN1 composition, room masks, dynamic dashboard and palette semantics against original display captures",
     "Whole-game cycle-stamped reference traces and native comparisons",
     "Real music and sound effects; silent named placeholders are supplied"
@@ -110,31 +145,39 @@
       "left": "SW",
       "up": "NW"
     },
-    "playable_rooms": 134,
-    "playable_scope": "All six LN1 levels, native prototypes",
+    "playable_rooms": 226,
+    "playable_scope": "All six LN1 and seven LN2 levels, native prototypes",
     "level_datasets_in_picker": 18,
-    "remaining_levels": "LN2/LN3 scenery previews; native gameplay and directional exits unavailable",
-    "original_exit_routine_vectors": 303,
+    "remaining_levels": "LN3 scenery previews; native gameplay and directional exits unavailable",
+    "original_exit_routine_vectors": 494,
     "whole_game_test_coverage": false
   },
   "runtime_checks": {
     "command": "GameMaker VM --selftest",
-    "original_gameplay_parity": "not_tested",
     "exit_code": 0,
-    "native_checks_pass": true,
-    "runtime_pass": true,
-    "mask_gpu_pass": true,
-    "sprite_decoder_pass": true,
-    "ln1_control_vectors_pass": true,
-    "ln1_player_vectors_pass": true,
-    "ln1_enemy_vectors_pass": true,
     "ln1_combat_vectors_pass": true,
-    "ln1_world_smoke_pass": true,
+    "ln1_control_vectors_pass": true,
+    "ln1_enemy_vectors_pass": true,
     "ln1_feedback_pass": true,
-    "ln1_water_vectors_pass": true,
-    "scene_navigation_pass": true,
     "ln1_levels_pass": true,
-    "ln1_projectiles_pass": true
+    "ln1_player_vectors_pass": true,
+    "ln1_projectiles_pass": true,
+    "ln1_water_vectors_pass": true,
+    "ln1_world_smoke_pass": true,
+    "ln2_combat_vectors_pass": true,
+    "ln2_effects_pass": true,
+    "ln2_enemy_vectors_pass": true,
+    "ln2_entrances_pass": true,
+    "ln2_helicopter_pass": true,
+    "ln2_player_vectors_pass": true,
+    "ln2_vehicles_pass": true,
+    "ln2_world_pass": true,
+    "mask_gpu_pass": true,
+    "native_checks_pass": true,
+    "original_gameplay_parity": "not_tested",
+    "runtime_pass": true,
+    "scene_navigation_pass": true,
+    "sprite_decoder_pass": true
   },
   "structural_checks": {
     "tests_run": 8,
@@ -416,7 +459,8 @@
     "full_gameplay_parity": false,
     "levels": [
       {
-        "action_records": 126,
+        "action_records": 187,
+        "complete_gameplay_verified": false,
         "enemies": 7,
         "hazard_types": [
           1,
@@ -448,14 +492,15 @@
         ],
         "item_interaction_records": 15,
         "level": 1,
-        "native_gameplay_connected": false,
+        "native_gameplay_connected": true,
         "perimeter_reachable": 16,
         "rooms": 17,
         "source_sha256": "3f5b5991bbdd11bd0161ad8bb4455fa9031b3db1a9581a152f7a8e9317c2c4ba",
         "title": "Central Park"
       },
       {
-        "action_records": 126,
+        "action_records": 200,
+        "complete_gameplay_verified": false,
         "enemies": 8,
         "hazard_types": [
           1,
@@ -473,14 +518,15 @@
         ],
         "item_interaction_records": 15,
         "level": 2,
-        "native_gameplay_connected": false,
+        "native_gameplay_connected": true,
         "perimeter_reachable": 16,
         "rooms": 16,
         "source_sha256": "e46713d8b023a7fc0024aef37e47e14314b7c9db9c06bc448dd5a25eb25e9257",
         "title": "Street"
       },
       {
-        "action_records": 126,
+        "action_records": 215,
+        "complete_gameplay_verified": false,
         "enemies": 9,
         "hazard_types": [
           2,
@@ -503,14 +549,15 @@
         ],
         "item_interaction_records": 8,
         "level": 3,
-        "native_gameplay_connected": false,
+        "native_gameplay_connected": true,
         "perimeter_reachable": 15,
         "rooms": 15,
         "source_sha256": "27d7e82bde47b309cc4c796f034de79ef23144caf882aa37c7fa7301d68b0111",
         "title": "Sewers"
       },
       {
-        "action_records": 126,
+        "action_records": 204,
+        "complete_gameplay_verified": false,
         "enemies": 10,
         "hazard_types": [
           0,
@@ -533,14 +580,15 @@
         ],
         "item_interaction_records": 16,
         "level": 4,
-        "native_gameplay_connected": false,
+        "native_gameplay_connected": true,
         "perimeter_reachable": 15,
         "rooms": 15,
         "source_sha256": "989f4f1ab6262304a55e51cf0ff66e3118d9011a7dd99d7c41221b8df9e479ed",
         "title": "Basement"
       },
       {
-        "action_records": 126,
+        "action_records": 328,
+        "complete_gameplay_verified": false,
         "enemies": 11,
         "hazard_types": [
           1,
@@ -564,14 +612,15 @@
         ],
         "item_interaction_records": 5,
         "level": 5,
-        "native_gameplay_connected": false,
+        "native_gameplay_connected": true,
         "perimeter_reachable": 15,
         "rooms": 15,
         "source_sha256": "92c6d9146a2a801bd9f390903b268fb0825dc9041e7f22f83b59f0f2f719face",
         "title": "Office"
       },
       {
-        "action_records": 146,
+        "action_records": 246,
+        "complete_gameplay_verified": false,
         "enemies": 7,
         "hazard_types": [
           1,
@@ -598,14 +647,15 @@
         ],
         "item_interaction_records": 6,
         "level": 6,
-        "native_gameplay_connected": false,
+        "native_gameplay_connected": true,
         "perimeter_reachable": 12,
         "rooms": 13,
         "source_sha256": "6c5dc42fd959b54e380d98debd3c54aa0af68abf3d10ee982a4f42ac1ff8c881",
         "title": "Mansion"
       },
       {
-        "action_records": 126,
+        "action_records": 222,
+        "complete_gameplay_verified": false,
         "enemies": 1,
         "hazard_types": [],
         "item_handlers": [
@@ -616,7 +666,7 @@
         ],
         "item_interaction_records": 5,
         "level": 7,
-        "native_gameplay_connected": false,
+        "native_gameplay_connected": true,
         "perimeter_reachable": 2,
         "rooms": 2,
         "source_sha256": "9ea998a916d9e2964ee90b1d590dee903a14813e69ea1fcd95a3a8c1662e1342",

@@ -14,6 +14,7 @@ from decode_graphics import PALETTE,decode_object
 from extract_ln1_actors import sprite_image
 
 NAMES=['Central Park','Street','Sewers','Basement','Office','Mansion','Final Battle']
+ENTRY_FLAGS={1:[17,19],2:[17,19],3:[20],4:[18],5:[17,20,21],6:[19,21],7:[16,17,18]}
 FIELDS={
     'fraction_x':0x50,'fraction_y':0x51,'x':0x54,'y':0x55,'countdown':0x58,'duration':0x59,
     'flags':0x5c,'action_mirror':0x5d,'action_state':0x64,'frame':0x65,'heading':0x68,'facing':0x69,
@@ -23,6 +24,8 @@ FIELDS={
     'enemy_active':0xcb,'collision':0xcd,'height_fixed':0xef,'separation_y':0x236,
     'last_tick':0x26c,'turn_lock':0x2b8,'boundary_mode':0x80,'boundary_crossings':0x81,
     'control_rotation':0x3f3,'tick':0xe2,
+    'room_id':0xa2,'gate_open':0x3ea,'gate_mode':0x3ec,
+    'vehicle':0x293,'vehicle_limit':0x294,
 }
 
 def actions(ram,entries):
@@ -40,6 +43,20 @@ def actions(ram,entries):
         pending.append(following)
         assert len(records)<2048,'Unexpected animation graph'
     return records
+
+def entrance_actions(ram,s,level,destinations,rooms):
+    """Recover conditional action pointers by running every entrance hook."""
+    result=set();valid={r['id'] for r in rooms};hook=word(ram,s['main_loop']-12)
+    for entry,room in enumerate(destinations):
+        if room not in valid:continue
+        for bits in range(1<<len(ENTRY_FLAGS[level])):
+            mem=list(ram);mem[s['actor_draw']]=0x60;mem[s['mask']]=0x60
+            call(mem,s['entrance'],x=entry);call(mem,s['boundary_enter']);call(mem,s['enemy_enter'])
+            mem[0xef]=mem[0xf8]=mem[0xb1]=mem[0x234]=0
+            for i,flag in enumerate(ENTRY_FLAGS[level]):mem[0x3d8+flag]=255 if bits&(1<<i) else 0
+            call(mem,hook);address=word(mem,0x62)
+            if 256<=address<0xd000:result.add(address)
+    return sorted(result)
 
 def bitmap(mem):
     image=Image.new('RGBA',(240,144));pixels=[]
@@ -73,7 +90,7 @@ def composition(ram,source,frame,mirror,weapon=0,costume=0,enemy=False,shared=(1
         image.alpha_composite(part,(48+x-120-24,64+y-120-50))
     return image
 
-def main():
+def main(metadata_only=False):
     root=ROOT/'source/local/recovered/ln2';root.mkdir(parents=True,exist_ok=True);reports=[]
     for level in range(1,8):
         ram=level_memory(level);s=layout(ram);out=root/f'level{level}';out.mkdir(exist_ok=True)
@@ -107,7 +124,7 @@ def main():
                 'mode':0xcf,'traits':0xd0,'speed':0xd3,'retreat_trait':0xd6,
                 'frame':0x67,'mirror':0x5f,'flags':0x5e,'duration':0x5b,'depth_y':0x76}.items()}
             enemy['action']=word(mem,0x62)
-            render_room(ram,s,room).save(out/f'room-{room:02}.png')
+            if not metadata_only:render_room(ram,s,room).save(out/f'room-{room:02}.png')
             masks=[];mask=Image.new('RGBA',(240,144));table=word(ram,s['mask']+11);p=word(ram,table+room*2)
             while ram[p]!=255:
                 part,baseline,cx,cy=ram[p:p+4];p+=4
@@ -122,7 +139,7 @@ def main():
                         dx=cx*8-24+x;dy=cy*8-24+y
                         if code and 0<=dx<240 and 0<=dy<144:
                             mask.putpixel((dx,dy),(255,255,255,max(baseline,mask.getpixel((dx,dy))[3])))
-            mask.save(out/f'room-{room:02}-depth.png')
+            if not metadata_only:mask.save(out/f'room-{room:02}-depth.png')
             rooms.append(dict(id=room,entries=entries,boundaries=boundaries,enemy=enemy,masks=masks,
                               reachable_by_perimeter_exits=room in reachable))
         items=[];p=s['item_table']
@@ -138,42 +155,103 @@ def main():
         enemy_entries=[word(ram,p) for p in range(enemy_table,enemy_table+52,2)]
         special=[];begin=locate(ram,0xa4f8,24)
         for p in range(0x600,0xd000-7):
-            if ram[p]==0xa2 and ram[p+2]==0xa9 and ram[p+4]==0x20 and word(ram,p+5)==begin:
+            if ram[p]==0xa2 and ram[p+2]==0xa9 and ram[p+4] in (0x20,0x4c) and word(ram,p+5)==begin:
                 special.append(ram[p+1]+256*ram[p+3])
-        graph=actions(ram,action_entries+enemy_entries+special)
+        recovery=s['enemy_recover'];regen=s['enemy_regen']
+        range_table=word(ram,locate(ram,0xae17,24)+10)
+        steer_table=word(ram,locate(ram,0xaf10,24)+21)
+        path=locate(ram,0xb122,30);path_facing=word(ram,path+39);path_heading=word(ram,path+116)
+        recovery_tail=ram.index(bytes.fromhex('a9 07 85 cf a5 6b 29 04 d0'),recovery,recovery+100)
+        enemy_recovery=[ram[recovery_tail+11]+256*ram[recovery_tail+13],ram[recovery_tail+17]+256*ram[recovery_tail+19]]
+        hurt=locate(ram,0xaac0,32);hit=locate(ram,0xab70,32)
+        enemy_begin=locate(ram,0xac31,11)
+        for p in range(0x600,0xd000-9):
+            if ram[p]==0xa9 and ram[p+2:p+5]==bytes.fromhex('85 62 a9') and ram[p+6] in (0x20,0x4c) and word(ram,p+7)==enemy_begin+2:
+                special.append(ram[p+1]+256*ram[p+5])
+            if ram[p]==0xa2 and ram[p+2]==0xa9 and ram[p+4] in (0x20,0x4c) and word(ram,p+5) in (enemy_begin,enemy_begin-6):
+                special.append(ram[p+1]+256*ram[p+3])
+        reactions_table=word(ram,hurt+56)
+        reactions=[word(ram,reactions_table+i*2) for i in range(32)]
+        knockout_tail=ram.index(bytes.fromhex('a5 6b 29 04 d0'),hurt+65,hurt+180)
+        enemy_falls=[ram[knockout_tail+7]+256*ram[knockout_tail+9],ram[knockout_tail+13]+256*ram[knockout_tail+15]]
+        entrance_entries=entrance_actions(ram,s,level,tables['exit_destinations'],rooms)
+        graph=actions(ram,action_entries+enemy_entries+special+enemy_recovery+reactions+enemy_falls+entrance_entries)
         move=s['move'];movement={key:list(ram[move+offset:move+offset+4]) for key,offset in
             [('left',0x109),('right',0x10d),('up',0x111),('down',0x115),('triple_y',0x119),
              ('no_y',0x11d),('forward',0x121),('mirror',0x125)]}
         movement['speed_x']=[ram[move-20+i]+256*ram[move-10+i] for i in range(5)]
         movement['speed_y']=[ram[move-15+i]+256*ram[move-5+i] for i in range(5)]
         frames=sorted(set(range(18))|{a['frame'] for a in graph.values() if a['frame']!=255}|{r['enemy']['frame'] for r in rooms})
+        if level==4:frames=sorted(set(frames)|{99})
+        # Mansion $9c1c draws the helicopter passenger directly, outside the
+        # command graph: LDY #$53 / STY $65 / LDA #$40 / JSR actor_player.
+        if level==6:frames=sorted(set(frames)|{83})
+        vehicle=word(ram,s['player_update']+21)
+        vehicle_base=vehicle
+        if level==6:vehicle+=16
+        vehicle_actions={key:ram[vehicle+offset+1]+256*ram[vehicle+offset+3] for key,offset in
+            [('descend',0x25),('descend_end',0x2c),('ascend',0x3f),('ascend_end',0x46),
+             ('step_end_left',0x68),('step_end_right',0x6f)]}
+        step=word(ram,vehicle+0x5a)
+        vehicle_actions.update(step_left=ram[step+10]+256*ram[step+12],step_right=ram[step+17]+256*ram[step+19])
+        if level==6:vehicle_actions['release']=ram[vehicle_base+24]+256*ram[vehicle_base+26]
+        graph.update(actions(ram,vehicle_actions.values()))
+        frames=sorted(set(frames)|{a['frame'] for a in graph.values() if a['frame']!=255})
         # Record all objective/hazard dispatch targets for the native translation
         # audit, rather than silently treating unimplemented effects as pickups.
         hazards=sorted({b[5]&63 for room in rooms for b in room['boundaries'] if b[4]&1})
         world=dict(schema=1,game=2,level=level,title=NAMES[level-1],tables=tables,rooms=rooms,items=items,
                    initial_entry=0,initial_inventory=list(ram[0x3d8:0x3f2]),initial_lives=ram[0x3f2],
                    source_layout=s,source_sha256=hashlib.sha256(ram).hexdigest())
-        gameplay=dict(initial=initial,directions=list(ram[s['player_input']+0x1ab:s['player_input']+0x1bb]),
+        hook=word(ram,s['main_loop']-12);p=word(ram,hook+3);entry_modes={}
+        while ram[p]!=255:
+            entry_modes[str(ram[p])]=dict(mode=ram[p+1],limit=ram[p+2]);p+=3
+        world['entry_modes']=entry_modes
+        gameplay=dict(level=level,timer_period_cycles=word(ram,0x28c)+1,initial=initial,directions=list(ram[s['player_input']+0x1ab:s['player_input']+0x1bb]),
                       action_entries=action_entries,action_classes=list(ram[s['player_begin']+0xf4:s['player_begin']+0x106]),
                       attack_delays=list(ram[s['player_input']+0x1a3:s['player_input']+0x1ab]),
                       fire_headings=list(ram[s['player_input']+0x147:s['player_input']+0x14f]),
-                      actions=graph,enemy_entries=enemy_entries,frames=frames,**movement)
+                      actions=graph,enemy_entries=enemy_entries,frames=frames,vehicle_actions=vehicle_actions,entrance_actions=entrance_entries,
+                      basement_hazard_y_min=list(ram[0x9936:0x994a]) if level==4 else [],
+                      basement_hazard_y_max=list(ram[0x994a:0x995e]) if level==4 else [],
+                      sewer_actor_reset=list(ram[0xb3c8:0xb3ca]) if level==3 else [],
+                      enemy_durations=list(ram[selector+44:selector+48]),enemy_decision_period=ram[s['player_input']-4],
+                      enemy_range=list(ram[range_table:range_table+7]),enemy_steer=list(ram[steer_table:steer_table+8]),
+                      path_heading=list(ram[path_heading:path_heading+16]),path_facing=list(ram[path_facing:path_facing+64]),
+                      enemy_recovery=enemy_recovery,knockout_table=word(ram,recovery+3),
+                      reactions=reactions,enemy_falls=enemy_falls,
+                      hit_x_min=list(ram[word(ram,hit+81):word(ram,hit+81)+16]),
+                      hit_x_max=list(ram[word(ram,hit+86):word(ram,hit+86)+16]),
+                      hit_y_min=list(ram[word(ram,hit+145):word(ram,hit+145)+16]),
+                      hit_y_max=list(ram[word(ram,hit+150):word(ram,hit+150)+16]),
+                      enemy_damage=list(ram[hurt-36:hurt-16]),player_damage=list(ram[hurt-16:hurt]),
+                      enemy_recovery_shift=1+ram[regen:ram.index(bytes.fromhex('a4 1f'),regen,regen+70)].count(bytes.fromhex('46 1f')),
+                      recovery_low_table=word(ram,regen+6),recovery_high_table=word(ram,regen+13),
+                      random_limit=ram[s['random']+3],random_base=ram[s['random']+13],
+                      random_data=list(ram[:ram[s['random']+3]*256]),
+                      random_pointer=word(ram,0xf9),random_value=ram[0xfb],**movement)
         write_json(out/'world.json',world);write_json(out/'gameplay.json',gameplay)
         # A small contact sheet checks source body assembly before bulk import.
         sheet=Image.new('RGB',(8*96,4*96),(172,172,172))
         shared=tuple(v&15 for v in (ROOT/f'source/local/captures/ln2-level{level}-vic.bin').read_bytes()[0x25:0x27])
         world['shared_sprite_colours']=list(shared);write_json(out/'world.json',world)
-        for i in range(32):
-            image=composition(ram,s,frames[i%len(frames)],i//16,shared=shared)
-            sheet.paste(image,(i%8*96,i//8*96),image)
-        sheet.save(out/'actor-contact.png')
+        if not metadata_only:
+            for i in range(32):
+                image=composition(ram,s,frames[i%len(frames)],i//16,shared=shared)
+                sheet.paste(image,(i%8*96,i//8*96),image)
+            sheet.save(out/'actor-contact.png')
         record=dict(level=level,title=NAMES[level-1],rooms=len(rooms),perimeter_reachable=len(reachable),
                     enemies=sum(r['enemy']['active']>=128 for r in rooms),item_interaction_records=len(items),
                     action_records=len(graph),hazard_types=hazards,
                     item_handlers=sorted({i['handler'] for i in items if i['handler']}),
-                    source_sha256=world['source_sha256'],native_gameplay_connected=False)
+                    source_sha256=world['source_sha256'],
+                    native_gameplay_connected=(ROOT/f'LNPreserve/datafiles/play/ln2/level{level}/world.json').exists(),
+                    complete_gameplay_verified=False)
         reports.append(record);print(record,flush=True)
     write_json(ROOT/'evidence/ln2_content_recovery.json',dict(levels=reports,full_gameplay_parity=False,
         source='Seven original-game loader captures from the supplied disks',offline_only=True))
 
-if __name__=='__main__':main()
+if __name__=='__main__':
+    import argparse
+    parser=argparse.ArgumentParser();parser.add_argument('--metadata-only',action='store_true')
+    main(parser.parse_args().metadata_only)

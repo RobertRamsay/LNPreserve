@@ -4,7 +4,7 @@ One editable GameMaker project for The Last Ninja, Last Ninja 2 and Last Ninja 3
 
 The single shared project is [RobertRamsay/LNPreserve](https://github.com/RobertRamsay/LNPreserve), on `main`. Future updates go into this repository and the same `LNPreserve/LNPreserve.yyp`; separately named project downloads are not the current development copy.
 
-**Current build: six connected native level prototypes for the first game. The complete trilogy is not playable, and 1:1 system timing has not been verified.**
+**Current build: six connected native LN1 level prototypes and seven connected native LN2 level prototypes. The complete trilogy is not playable, and 1:1 system timing has not been verified.**
 
 Open [LNPreserve/LNPreserve.yyp](LNPreserve/LNPreserve.yyp) in GameMaker LTS 2026 and run it. The project now starts in the game view. No C64 emulator runs inside GameMaker.
 
@@ -24,7 +24,11 @@ Open [LNPreserve/LNPreserve.yyp](LNPreserve/LNPreserve.yyp) in GameMaker LTS 202
 - River deaths use the original player graphics sinking behind a waterline mask, and respawn without resuming a death frame. The invented ripple has been removed.
 - Per-pixel scenery masks that activate at the original room-specific depth thresholds.
 
-This is **not a verified complete first game**. The level-specific puzzle, special-enemy, projectile-combat and ending handlers need further original-game comparison. Some palette effects, death presentation and dashboard rendering remain incomplete. The dashboard combines a captured original frame with live original status labels, icons and enemy wounds; player power/lives still use temporary text. Original recoverable enemy knockouts still need distinguishing from permanent deaths. Enemy random sampling reproduces the original algorithm but its hardware-read phase is not verified. LN2/LN3 gameplay is not connected.
+This is **not a verified complete first game**. The level-specific puzzle, special-enemy, projectile-combat and ending handlers need further original-game comparison. Some palette effects, death presentation and dashboard rendering remain incomplete. The dashboard combines a captured original frame with live original status labels, icons and enemy wounds; player power/lives still use temporary text. Original recoverable enemy knockouts still need distinguishing from permanent deaths. Enemy random sampling reproduces the original algorithm but its hardware-read phase is not verified.
+
+LN2 now supports native testing in Central Park, Street, Sewers, Basement, Office, Mansion and Final Battle: 92 selectable scenes, original entrances and collision boundaries, assembled player/enemy animation, melee and per-scene wounds. Its source item records, partial interaction handlers, inventory scene variants, automatic entrance motion, moving scenery actors and Mansion helicopter attachment/drop are connected. The original room/actor packages were recovered from all seven supplied-game loader captures; identical images and normal actor banks share resources.
+
+LN2 is also **incomplete**: boundary hazard sequences, projectile behavior, final objectives/boss, several object interactions, item flashes, original dashboard, palette changes and complete death/ending presentation still require work. Its HUD currently uses temporary text, and its isolated original-routine comparisons do not establish complete combat or playthrough parity. LN3 remains scenery-only.
 
 ## Controls
 
@@ -43,9 +47,9 @@ This is **not a verified complete first game**. The level-specific puzzle, speci
 
 Music assets are still named silent placeholders. Replace the corresponding WAV in GameMaker to supply music. Sound effects are not recovered.
 
-The arrow shortcuts follow all six LN1 levels' real room links and use each destination's original entrance position and facing, including the one-way Dungeons entrance. When two exits face the same direction, the nearer exit is used. One press performs one jump. Missing directions leave the current room unchanged. Inventory, living-player health and saved enemy wounds survive; entry flashes restart. Test jumps cancel an unfinished action, prayer or death, and restore a dead player so testing can continue. They are development controls, not original gameplay behavior.
+The arrow shortcuts follow LN1/LN2 levels' real room links and use each destination's original entrance position and facing, including the one-way Dungeons entrance. When two exits face the same direction, the nearer exit is used. One press performs one jump. Missing directions leave the current room unchanged. Inventory, living-player health and saved enemy wounds survive; LN1 entry flashes restart. Test jumps cancel an unfinished action, prayer or death, and restore a dead player so testing can continue. Original entrance-specific sequences still run. These are development controls, not original gameplay behavior.
 
-F11's scene picker exposes all 18 level datasets across the three games. All six LN1 levels support native prototype testing. LN2/LN3 open clearly marked scenery previews; Page Up/Down browses those previews and Escape returns to gameplay. Their movement, collision, objects, combat and directional exits remain unconnected. Gameplay pauses while the picker, a preview or the workbench is open.
+F11's scene picker exposes all 18 level datasets across the three games. All six LN1 levels and seven LN2 levels support native prototype testing. LN3 opens clearly marked scenery previews; Page Up/Down browses those previews and Escape returns to gameplay. Its movement, collision, objects, combat and directional exits remain unconnected. Gameplay pauses while the picker, a preview or the workbench is open. The alternate Mansion room-10 drawing shares that room's state and is not offered as a separate entrance.
 
 ## Verification
 
@@ -60,12 +64,15 @@ Actual compiled GML passes comparisons against offline execution of original mac
 - 249 further original exit-routine cases for LN1 levels 2–6, plus native traversal proving all 134 rooms can be reached through arrow shortcuts.
 - 4,480 original enemy-action selections in the later levels, including skeleton and boss selectors; 10,900 integration ticks across their 109 rooms.
 - 4,032 original one-tick projectile movement/lifetime cases across all six LN1 level banks.
+- LN2: 34,664 player updates, 50,432 enemy updates and 21,000 melee range comparisons across all seven original banks.
+- LN2: 784 entrance state comparisons, 11,136 automatic entrance-motion states/poses, 3,520 moving-world state comparisons and 256 Mansion helicopter attachment/drop states/poses. Display calls are intercepted; the helicopter check excludes world-event dispatch.
+- LN2: 191 original ordinary exits and 9,200 integration ticks across 92 selectable native scenes, plus per-scene health persistence.
 
 A further 660-update integration check crosses the first original exit and runs an enemy encounter. Feedback regressions check pickup expiry across clock wrap, scene-entry flash state, enemy damage/death persistence, armed/unarmed prayer, sinking and stale death frames after respawn. GPU tests check scenery masking, transparent holes and the waterline cutoff. These checks **do not certify full gameplay, complete combat dispatch, sprite composition, hardware random timing or cycle accuracy**. See [evidence/STATUS.json](evidence/STATUS.json) and [docs/ACCURACY.md](docs/ACCURACY.md).
 
 ## Assets and rebuilding
 
-The earlier scenery resources and workbench remain available. All six LN1 scenery datasets match supplied disk payloads or captured original memory. LN2/LN3 reference scenery still needs matching to the supplied disk versions. Edit sprites and native GML directly in GameMaker.
+The earlier scenery resources and workbench remain available. All six LN1 scenery datasets match supplied disk payloads or captured original memory. LN2's new gameplay scenery is rendered offline by the supplied game's recovered drawing code; its older workbench previews retain their earlier provenance. Most LN3 reference scenery still needs matching to the supplied disk versions. Edit sprites and native GML directly in GameMaker.
 
 LN3 level 1's opening scene now matches all 34,560 background pixels of the supplied C64 game, using the project's chosen palette. Its 1,392 corrected pixels include the grey rock faces and overlapping scenery edges. Only this scene was updated; the wider colour corrections remain unapplied, as requested. The complete level-1 scenery payload also matches the supplied game's loaded memory. See [the colour comparison](evidence/scenery_colour_comparison.png) and [audit scope](evidence/scenery_colour_audit.json); the comparison includes proposed changes to other scenes that are not in the project.
 
@@ -75,8 +82,8 @@ The supplied LN1 Wastelands river was inspected through full submersion in VICE.
 
 This was also checked through walking and a failed jump from the river entrance, followed by complete sinking. Both retained the original pose during masking. The three white flapping frames are used by birds in the Buddha scenes. [River-entry captures](evidence/ln1_river_entry_comparison.png) document the check; no new LN1 splash artwork was added.
 
-Build with `tools/compile.ps1`; run native checks with `tools/run_checks.py --runner <installed GameMaker Runner.exe>`. `tools/validate_project.py` checks source identities and project resources. Native code is under `LNPreserve/scripts/ln1_*`; decoded gameplay tables are under `LNPreserve/datafiles/play/ln1`.
+Build with `tools/compile.ps1`; run native checks with `tools/run_checks.py --runner <installed GameMaker Runner.exe>`. `tools/validate_project.py` checks source identities and project resources. Native code is under `LNPreserve/scripts/ln1_*` and `ln2_*`; decoded gameplay tables are under `LNPreserve/datafiles/play/ln1` and `ln2`.
 
 Extraction tools use original RAM only offline. They do not become part of the game runtime. `export_ln1_world.py` and `export_ln1_play.py` preserve existing sprite edits unless explicitly invoked with `--refresh`. Original disks, emulator tools and captures remain local under ignored directories.
 
-`capture_ln1_levels.py`, `ln1_level_source.py` and `export_ln1_levels.py` recover the later LN1 level packages. Identical new assets share existing sprite resources; 83 duplicate resources are avoided. The fountain animation also uses the original sprite's scrolling rows. LN2's seven original levels have now been captured and their room, enemy, item-interaction and animation records are being recovered by `capture_ln2_levels.py` and `export_ln2_content.py`; this offline recovery has not yet become native LN2 gameplay.
+`capture_ln1_levels.py`, `ln1_level_source.py` and `export_ln1_levels.py` recover the later LN1 level packages. Identical new assets share existing sprite resources; 83 duplicate resources are avoided. The fountain animation also uses the original sprite's scrolling rows. `capture_ln2_levels.py`, `export_ln2_content.py` and `export_ln2_assets.py` recover LN2's seven original room/actor packages. The LN2 tools recover conditional animation entries by exercising the original entrance hooks as well as decoding direct references.

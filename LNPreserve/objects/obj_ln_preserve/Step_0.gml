@@ -6,13 +6,21 @@ if (keyboard_check_pressed(vk_f12)) { workbench = !workbench; scene_test.menu = 
 if (keyboard_check_pressed(vk_f11)) {
     workbench = false; scene_test.menu = !scene_test.menu;
     if (scene_test.menu && !scene_test.preview) {
-        scene_test.game = 1; scene_test.level_index = play.level - 1; scene_test.scene_index = play.room_id - 1;
+        scene_test.game = play.game_number;
+        for (var _i=0;_i<array_length(scene_test.levels);_i++) {
+            var _level=scene_test.levels[_i];
+            if (_level.game!=play.game_number || _level.number!=play.level) continue;
+            scene_test.level_index=_i;
+            for (var _j=0;_j<array_length(_level.scenes);_j++) if (_level.scenes[_j].id==play.room_id) scene_test.scene_index=_j;
+            break;
+        }
     }
 }
 if (keyboard_check_pressed(vk_home)) {
     var _transport = play.timer;
     if (surface_exists(play.stage_surface)) surface_free(play.stage_surface);
-    play = new LN1Play(); play.timer = _transport;
+    play = play.game_number==1?new LN1Play():new LN2Play(); play.timer = _transport;
+    play.timer.cycles_per_frame=play.data.timer_period_cycles;
     var _control_buffer = buffer_load("actors/ln1/initial_control_state.json");
     control_state_ln1 = json_parse(buffer_read(_control_buffer,buffer_text)); buffer_delete(_control_buffer);
     play.controls = control_state_ln1;

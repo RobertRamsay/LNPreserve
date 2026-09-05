@@ -68,7 +68,7 @@ function ln_scene_test_checks() {
         if (_level.game==3 && _level.number==1) _ln3=_i;
         ln_check(array_length(_level.scenes)>0,"each selectable level has exported scenes");
     }
-    ln_check(_counts[0]==6 && _counts[1]==7 && _counts[2]==5 && _playable==6,"picker exposes six native LN1 levels and the remaining scenery datasets");
+    ln_check(_counts[0]==6 && _counts[1]==7 && _counts[2]==5 && _playable==13,"picker exposes native LN1/LN2 prototypes and LN3 scenery datasets");
     var _room_before=_g.room_id,_tick_before=_g.player.tick;
     _t.level_index=_ln3;ln_scene_test_open(_t,_g,0);
     ln_check(_t.preview && _g.room_id==_room_before && _g.player.tick==_tick_before,"LN3 preview does not replace or simulate the LN1 game");

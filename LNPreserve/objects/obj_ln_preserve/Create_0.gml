@@ -20,6 +20,16 @@ selftest = false;
 host_frames = 0;
 for (var _i = 1; _i <= parameter_count(); _i++) {
     if (parameter_string(_i) == "--selftest") selftest = true;
+    if (parameter_string(_i) == "--ln2-sequences-only") {
+        try { ln2_sequence_checks(); }
+        catch (_failure) { show_debug_message("LN2_SEQUENCE_FAILURE: "+string(_failure)); }
+        game_end();exit;
+    }
+    if (parameter_string(_i) == "--ln2-world-only") {
+        try { ln2_world_checks(); }
+        catch (_failure) { show_debug_message("LN2_WORLD_FAILURE: "+string(_failure)); }
+        game_end();exit;
+    }
 }
 if (selftest) {
     try { ln_run_checks(); }
@@ -51,6 +61,12 @@ tick_native = function(_from, _to, _frame) {
         // Browsing pauses gameplay and consumes selection edges, so closing the
         // picker cannot replay keys that were pressed while a preview was open.
         control_state_ln1.previous = [_rows[0]&16,_rows[0]&32,_rows[0]&64,_rows[0]&8,_rows[1]&16];
+        if (play.game_number==2) play.control_previous=control_state_ln1.previous;
+        return;
+    }
+    if (play.game_number==2) {
+        ln2_controls_update(play,_rows[0],_rows[1]);
+        if (!play.paused) ln2_play_tick(play,input_state.joystick()^255);
         return;
     }
     var _music_before = control_state_ln1.music;

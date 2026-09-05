@@ -1,0 +1,634 @@
+{
+  "vectors": [
+    {
+      "expected": {
+        "crossings": 1,
+        "entry": 2,
+        "facing": 1,
+        "frame": 16,
+        "heading": 1,
+        "level_end": false,
+        "room": 3,
+        "x": 136,
+        "y": 10
+      },
+      "point": [
+        247,
+        61
+      ],
+      "room": 1
+    },
+    {
+      "expected": {
+        "crossings": 0,
+        "entry": 3,
+        "facing": 1,
+        "frame": 16,
+        "heading": 1,
+        "level_end": false,
+        "room": 2,
+        "x": 10,
+        "y": 157
+      },
+      "point": [
+        128,
+        189
+      ],
+      "room": 1
+    },
+    {
+      "expected": {
+        "crossings": 0,
+        "entry": 4,
+        "facing": 5,
+        "frame": 17,
+        "heading": 5,
+        "level_end": false,
+        "room": 1,
+        "x": 56,
+        "y": 52
+      },
+      "point": [
+        0,
+        133
+      ],
+      "room": 2
+    },
+    {
+      "expected": {
+        "crossings": 0,
+        "entry": 5,
+        "facing": 7,
+        "frame": 16,
+        "heading": 7,
+        "level_end": false,
+        "room": 13,
+        "x": 223,
+        "y": 128
+      },
+      "point": [
+        0,
+        8
+      ],
+      "room": 3
+    },
+    {
+      "expected": {
+        "crossings": 1,
+        "entry": 6,
+        "facing": 5,
+        "frame": 17,
+        "heading": 5,
+        "level_end": false,
+        "room": 1,
+        "x": 154,
+        "y": 82
+      },
+      "point": [
+        0,
+        133
+      ],
+      "room": 3
+    },
+    {
+      "expected": {
+        "crossings": 0,
+        "entry": 7,
+        "facing": 7,
+        "frame": 16,
+        "heading": 7,
+        "level_end": false,
+        "room": 8,
+        "x": 240,
+        "y": 131
+      },
+      "point": [
+        0,
+        8
+      ],
+      "room": 4
+    },
+    {
+      "expected": {
+        "crossings": 0,
+        "entry": 8,
+        "facing": 3,
+        "frame": 17,
+        "heading": 3,
+        "level_end": false,
+        "room": 5,
+        "x": 10,
+        "y": 55
+      },
+      "point": [
+        247,
+        153
+      ],
+      "room": 4
+    },
+    {
+      "expected": {
+        "crossings": 0,
+        "entry": 9,
+        "facing": 5,
+        "frame": 17,
+        "heading": 5,
+        "level_end": false,
+        "room": 9,
+        "x": 240,
+        "y": 90
+      },
+      "point": [
+        0,
+        133
+      ],
+      "room": 4
+    },
+    {
+      "expected": {
+        "crossings": 0,
+        "entry": 10,
+        "facing": 7,
+        "frame": 16,
+        "heading": 7,
+        "level_end": false,
+        "room": 4,
+        "x": 240,
+        "y": 145
+      },
+      "point": [
+        0,
+        57
+      ],
+      "room": 5
+    },
+    {
+      "expected": {
+        "crossings": 0,
+        "entry": 11,
+        "facing": 1,
+        "frame": 16,
+        "heading": 1,
+        "level_end": false,
+        "room": 6,
+        "x": 100,
+        "y": 100
+      },
+      "point": [
+        0,
+        133
+      ],
+      "room": 6
+    },
+    {
+      "expected": {
+        "crossings": 0,
+        "entry": 12,
+        "facing": 5,
+        "frame": 17,
+        "heading": 5,
+        "level_end": false,
+        "room": 8,
+        "x": 240,
+        "y": 64
+      },
+      "point": [
+        0,
+        133
+      ],
+      "room": 7
+    },
+    {
+      "expected": {
+        "crossings": 0,
+        "entry": 13,
+        "facing": 1,
+        "frame": 16,
+        "heading": 1,
+        "level_end": false,
+        "room": 7,
+        "x": 7,
+        "y": 56
+      },
+      "point": [
+        247,
+        61
+      ],
+      "room": 8
+    },
+    {
+      "expected": {
+        "crossings": 0,
+        "entry": 14,
+        "facing": 3,
+        "frame": 17,
+        "heading": 3,
+        "level_end": false,
+        "room": 4,
+        "x": 100,
+        "y": 19
+      },
+      "point": [
+        247,
+        153
+      ],
+      "room": 8
+    },
+    {
+      "expected": {
+        "crossings": 0,
+        "entry": 15,
+        "facing": 5,
+        "frame": 17,
+        "heading": 5,
+        "level_end": false,
+        "room": 13,
+        "x": 240,
+        "y": 79
+      },
+      "point": [
+        0,
+        133
+      ],
+      "room": 8
+    },
+    {
+      "expected": {
+        "crossings": 0,
+        "entry": 16,
+        "facing": 1,
+        "frame": 16,
+        "heading": 1,
+        "level_end": false,
+        "room": 4,
+        "x": 10,
+        "y": 120
+      },
+      "point": [
+        247,
+        61
+      ],
+      "room": 9
+    },
+    {
+      "expected": {
+        "crossings": 0,
+        "entry": 17,
+        "facing": 5,
+        "frame": 17,
+        "heading": 5,
+        "level_end": false,
+        "room": 10,
+        "x": 240,
+        "y": 81
+      },
+      "point": [
+        0,
+        133
+      ],
+      "room": 9
+    },
+    {
+      "expected": {
+        "crossings": 0,
+        "entry": 18,
+        "facing": 7,
+        "frame": 16,
+        "heading": 7,
+        "level_end": false,
+        "room": 13,
+        "x": 179,
+        "y": 176
+      },
+      "point": [
+        0,
+        57
+      ],
+      "room": 9
+    },
+    {
+      "expected": {
+        "crossings": 0,
+        "entry": 19,
+        "facing": 1,
+        "frame": 16,
+        "heading": 1,
+        "level_end": false,
+        "room": 9,
+        "x": 10,
+        "y": 116
+      },
+      "point": [
+        247,
+        61
+      ],
+      "room": 10
+    },
+    {
+      "expected": {
+        "crossings": 0,
+        "entry": 20,
+        "facing": 5,
+        "frame": 17,
+        "heading": 5,
+        "level_end": false,
+        "room": 11,
+        "x": 240,
+        "y": 117
+      },
+      "point": [
+        0,
+        133
+      ],
+      "room": 10
+    },
+    {
+      "expected": {
+        "crossings": 0,
+        "entry": 21,
+        "facing": 1,
+        "frame": 16,
+        "heading": 1,
+        "level_end": false,
+        "room": 10,
+        "x": 10,
+        "y": 106
+      },
+      "point": [
+        247,
+        61
+      ],
+      "room": 11
+    },
+    {
+      "expected": {
+        "crossings": 0,
+        "entry": 22,
+        "facing": 5,
+        "frame": 17,
+        "heading": 5,
+        "level_end": false,
+        "room": 12,
+        "x": 240,
+        "y": 42
+      },
+      "point": [
+        0,
+        133
+      ],
+      "room": 11
+    },
+    {
+      "expected": {
+        "crossings": 0,
+        "entry": 23,
+        "facing": 1,
+        "frame": 16,
+        "heading": 1,
+        "level_end": false,
+        "room": 11,
+        "x": 10,
+        "y": 83
+      },
+      "point": [
+        247,
+        61
+      ],
+      "room": 12
+    },
+    {
+      "expected": {
+        "crossings": 0,
+        "entry": 24,
+        "facing": 1,
+        "frame": 16,
+        "heading": 1,
+        "level_end": false,
+        "room": 8,
+        "x": 10,
+        "y": 104
+      },
+      "point": [
+        247,
+        61
+      ],
+      "room": 13
+    },
+    {
+      "expected": {
+        "crossings": 0,
+        "entry": 25,
+        "facing": 3,
+        "frame": 17,
+        "heading": 3,
+        "level_end": false,
+        "room": 3,
+        "x": 104,
+        "y": 76
+      },
+      "point": [
+        247,
+        153
+      ],
+      "room": 13
+    },
+    {
+      "expected": {
+        "crossings": 0,
+        "entry": 26,
+        "facing": 3,
+        "frame": 17,
+        "heading": 3,
+        "level_end": false,
+        "room": 9,
+        "x": 10,
+        "y": 43
+      },
+      "point": [
+        247,
+        165
+      ],
+      "room": 13
+    },
+    {
+      "expected": {
+        "crossings": 0,
+        "entry": 27,
+        "facing": 7,
+        "frame": 16,
+        "heading": 7,
+        "level_end": false,
+        "room": 14,
+        "x": 240,
+        "y": 66
+      },
+      "point": [
+        0,
+        57
+      ],
+      "room": 13
+    },
+    {
+      "expected": {
+        "crossings": 0,
+        "entry": 28,
+        "facing": 3,
+        "frame": 17,
+        "heading": 3,
+        "level_end": false,
+        "room": 13,
+        "x": 10,
+        "y": 52
+      },
+      "point": [
+        247,
+        153
+      ],
+      "room": 14
+    },
+    {
+      "expected": {
+        "crossings": 0,
+        "entry": 29,
+        "facing": 5,
+        "frame": 17,
+        "heading": 5,
+        "level_end": false,
+        "room": 15,
+        "x": 240,
+        "y": 104
+      },
+      "point": [
+        0,
+        133
+      ],
+      "room": 14
+    },
+    {
+      "expected": {
+        "crossings": 0,
+        "entry": 30,
+        "facing": 1,
+        "frame": 16,
+        "heading": 1,
+        "level_end": false,
+        "room": 16,
+        "x": 112,
+        "y": 137
+      },
+      "point": [
+        247,
+        49
+      ],
+      "room": 15
+    },
+    {
+      "expected": {
+        "crossings": 0,
+        "entry": 31,
+        "facing": 1,
+        "frame": 16,
+        "heading": 1,
+        "level_end": false,
+        "room": 14,
+        "x": 10,
+        "y": 158
+      },
+      "point": [
+        247,
+        61
+      ],
+      "room": 15
+    },
+    {
+      "expected": {
+        "crossings": 0,
+        "entry": 32,
+        "facing": 7,
+        "frame": 16,
+        "heading": 7,
+        "level_end": false,
+        "room": 17,
+        "x": 240,
+        "y": 94
+      },
+      "point": [
+        0,
+        57
+      ],
+      "room": 15
+    },
+    {
+      "expected": {
+        "crossings": 0,
+        "entry": 33,
+        "facing": 5,
+        "frame": 17,
+        "heading": 5,
+        "level_end": false,
+        "room": 15,
+        "x": 89,
+        "y": 22
+      },
+      "point": [
+        0,
+        133
+      ],
+      "room": 16
+    },
+    {
+      "expected": {
+        "crossings": 0,
+        "entry": 0,
+        "facing": 3,
+        "frame": 17,
+        "heading": 3,
+        "level_end": true,
+        "room": 17,
+        "x": 0,
+        "y": 57
+      },
+      "point": [
+        0,
+        57
+      ],
+      "room": 17
+    },
+    {
+      "expected": {
+        "crossings": 0,
+        "entry": 35,
+        "facing": 3,
+        "frame": 17,
+        "heading": 3,
+        "level_end": false,
+        "room": 15,
+        "x": 10,
+        "y": 94
+      },
+      "point": [
+        247,
+        153
+      ],
+      "room": 17
+    },
+    {
+      "expected": {
+        "crossings": 0,
+        "entry": 0,
+        "facing": 3,
+        "frame": 17,
+        "heading": 3,
+        "level_end": true,
+        "room": 17,
+        "x": 0,
+        "y": 57
+      },
+      "point": [
+        0,
+        57
+      ],
+      "room": 17
+    }
+  ]
+}

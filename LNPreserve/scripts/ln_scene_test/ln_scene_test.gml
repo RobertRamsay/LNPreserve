@@ -66,16 +66,19 @@ function LNSceneTest(_catalog) constructor {
                         array_push(_scenes, {id:_loc.source_ids[_k], sprite:asset_get_index(_loc.sprite_name)});
                 }
                 array_sort(_scenes, function(_a,_b) { return _a.id - _b.id; });
-                if (_game == 1) {
-                    var _folder = _level == 1 ? "play/ln1/" : "play/ln1/level"+string(_level)+"/";
+                if (_game <= 2) {
+                    var _folder = _game==2 ? "play/ln2/level"+string(_level)+"/" :
+                        (_level == 1 ? "play/ln1/" : "play/ln1/level"+string(_level)+"/");
                     var _buffer=buffer_load(_folder+"world.json");
                     var _world=json_parse(buffer_read(_buffer,buffer_text));buffer_delete(_buffer);
                     _scenes=[];
-                    for (var _j=0;_j<array_length(_world.rooms);_j++)
+                    for (var _j=0;_j<array_length(_world.rooms);_j++) {
+                        if (_game==2 && _world.rooms[_j].spawn_entry<0) continue;
                         array_push(_scenes,{id:_world.rooms[_j].id,sprite:asset_get_index(_world.rooms[_j].sprite)});
+                    }
                 }
                 array_push(levels, {game:_game, number:_level, title:_names[_game-1][_level-1],
-                    playable:_game == 1, scenes:_scenes});
+                    playable:_game <= 2, scenes:_scenes});
             }
         }
     }
@@ -88,8 +91,13 @@ function ln_scene_test_open(_t, _g, _scene_index) {
     if (_scene_index < 0 || _scene_index >= array_length(_level.scenes)) return false;
     _t.scene_index = _scene_index; _t.menu = false; _t.preview = !_level.playable;
     if (_level.playable) {
-        if (_g.level != _level.number) ln1_level_load(_g,_level.number);
+        ln_game_select(_g,_level.game,_level.number);
         var _room = _level.scenes[_scene_index].id;
+        if (_level.game==2) {
+            for (var _i=0;_i<array_length(_g.world.rooms);_i++)
+                if (_g.world.rooms[_i].id==_room) return ln2_test_enter(_g,_g.world.rooms[_i].spawn_entry);
+            return false;
+        }
         return ln1_test_enter(_g, _g.navigation.rooms[_room-1].spawn_entry);
     }
     return true;
@@ -142,7 +150,8 @@ function ln_scene_test_step(_t, _g) {
             _t.scene_index = (_t.scene_index + _next + _count) mod _count;
         }
     } else if (_direction >= 0) {
-        var _result = ln1_test_exit(_g,_direction), _labels = ["NE","SE","SW","NW"], _label = _labels[_direction];
+        var _result = _g.game_number==1?ln1_test_exit(_g,_direction):ln2_test_exit(_g,_direction);
+        var _labels = ["NE","SE","SW","NW"], _label = _labels[_direction];
         ln_scene_test_message(_t,_result == 1 ? _label + " to scene " + string(_g.room_id) :
             (_result == 0 ? "No " + _label + " exit in this scene." : "End of The Last Ninja."));
     }
@@ -173,7 +182,7 @@ function ln_scene_test_draw(_t) {
         draw_text(480,224,_level.playable ? "Playable prototype — movement, objects and combat" : "Scenery preview — gameplay is not converted yet");
         for (var _i = 0; _i < array_length(_level.scenes); _i++)
             ln_scene_test_button(480+(_i mod 7)*88,266+(_i div 7)*64,76,48,string(_i+1),_t.scene_index==_i);
-        ln_scene_test_button(160,674,282,48,"Return to LN1 gameplay",false);
+        ln_scene_test_button(160,674,282,48,"Return to gameplay",false);
         draw_set_colour(make_colour_rgb(165,173,184));
         draw_text(480,674,"Arrow exits: Right NE / Down SE / Left SW / Up NW");
         draw_text(480,700,"Scene testing preserves collected items and enemy wounds.");

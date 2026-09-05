@@ -1,0 +1,58 @@
+{
+  "vectors": [
+    {
+      "expected": {
+        "crossings": 0,
+        "entry": 1,
+        "facing": 1,
+        "frame": 16,
+        "heading": 1,
+        "level_end": false,
+        "room": 1,
+        "x": 49,
+        "y": 176
+      },
+      "point": [
+        247,
+        61
+      ],
+      "room": 0
+    },
+    {
+      "expected": {
+        "crossings": 0,
+        "entry": 0,
+        "facing": 1,
+        "frame": 16,
+        "heading": 1,
+        "level_end": true,
+        "room": 1,
+        "x": 0,
+        "y": 8
+      },
+      "point": [
+        0,
+        8
+      ],
+      "room": 1
+    },
+    {
+      "expected": {
+        "crossings": 0,
+        "entry": 3,
+        "facing": 5,
+        "frame": 17,
+        "heading": 5,
+        "level_end": false,
+        "room": 0,
+        "x": 214,
+        "y": 92
+      },
+      "point": [
+        0,
+        133
+      ],
+      "room": 1
+    }
+  ]
+}
