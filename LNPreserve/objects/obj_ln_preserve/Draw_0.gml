@@ -1,3 +1,17 @@
+try {
+if (!workbench) {
+    ln1_play_draw(play, control_state_ln1.pause != 0);
+    if (selftest && host_frames == 2) {
+        ln_run_mask_checks(); ln1_feedback_capture();
+        ln1_play_draw(play, control_state_ln1.pause != 0);
+    }
+    if (selftest && host_frames == 3) {
+        screen_save("lnpreserve-player.png");
+        show_debug_message("LN_CAPTURE_DIRECTORY:" + game_save_id);
+    }
+    if (selftest && host_frames == 6) screen_save("lnpreserve-encounter.png");
+    exit;
+}
 draw_clear(make_colour_rgb(20,23,28));
 draw_set_colour(make_colour_rgb(125,210,171));
 draw_text(32,24,"LN PRESERVE");
@@ -62,4 +76,11 @@ draw_set_colour(c_white);
 if (selftest && host_frames == 3) {
     surface_save(application_surface,"lnpreserve-workbench.png");
     show_debug_message("LN_CAPTURE_DIRECTORY:" + game_save_id);
+}
+
+} catch (_runtime_failure) {
+    if (!selftest) throw _runtime_failure;
+    shader_reset();
+    show_debug_message("LN_RUNTIME_FAILURE: " + string(_runtime_failure));
+    game_end();
 }

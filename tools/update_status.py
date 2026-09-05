@@ -11,6 +11,7 @@ def main():
         counts=dict(scenery_png_objects=sum(len(d['objects']) for d in graphics['datasets']),
                     diagnostic_scene_previews=sum(len(d['locations']) for d in graphics['datasets']),
                     scenery_datasets=len(graphics['datasets']),ln1_character_parts=192,
+                    ln1_native_room_layouts=25,ln1_assembled_actor_poses=1152,ln1_pickup_placements=7,
                     silent_sound_assets=sum(s['status']=='silent_placeholder' for s in music['sounds'])),
         provenance={s:[d['id'] for d in graphics['datasets'] if d['provenance']['status']==s]
                     for s in sorted({d['provenance']['status'] for d in graphics['datasets']})},
@@ -18,13 +19,18 @@ def main():
             verification='192 byte payloads and original instruction-cycle counts; no VIC/CIA/interrupt timing'),
             dict(name='LN1 F1/F3/F5/F7 and Space selection',address='$6eac-$6f6c',
             verification='1024 key-chord transitions; state and external request order; display callees intercepted; timing not tested')],
-        pending=['Native movement, collision, jumps and animation scheduling for all games',
-            'Enemy AI, combat/hit resolution, puzzles, inventory use, room transitions, deaths and completion',
+        current_gameplay='Partial native Wastelands prototype; no completed game',
+        pending=['Complete LN1 projectile, puzzle, special-enemy, item-use, death-presentation and level-completion logic',
+            'Connect LN1 levels 2–6 and translate LN2/LN3 gameplay',
             'LN2/LN3 binary unpacking and source-disk verification of reference scenery datasets',
             'LN2/LN3 character and animation recovery; remaining LN1 graphical assets and composition validation',
-            'Original per-room occlusion rules, LN1 masks and exact bitmap overlap/palette semantics',
+            'Validate recovered LN1 composition, room masks, dynamic dashboard and palette semantics against original display captures',
             'Whole-game cycle-stamped reference traces and native comparisons',
             'Real music and sound effects; silent named placeholders are supplied'])
+    status['native_original_routines'].extend([
+        dict(name='LN1 player movement and animation',address='$5727/$5a12/$5b69/$7540',verification='2856 source-code updates, including 128 prayer animation samples; rendering intercepted; world and system timing excluded'),
+        dict(name='LN1 enemy decisions and animation',address='$6a48/$5b54',verification='7680 source-code updates with shared random returns; dispatch and hardware read timing excluded'),
+        dict(name='LN1 melee hit testing',address='$7ecc',verification='6843 valid-attack samples; damage dispatch and whole combat replay excluded')])
     for name in ('runtime_checks','structural_checks','ln1_actor_decoder_checks'):
         path=ROOT/'evidence'/f'{name}.json'
         if path.exists():status[name]=read(path)

@@ -6,5 +6,10 @@
   "runtime_pass": true,
   "mask_gpu_pass": true,
   "sprite_decoder_pass": true,
-  "ln1_control_vectors_pass": true
+  "ln1_control_vectors_pass": true,
+  "ln1_player_vectors_pass": true,
+  "ln1_enemy_vectors_pass": true,
+  "ln1_combat_vectors_pass": true,
+  "ln1_world_smoke_pass": true,
+  "ln1_feedback_pass": true
 }

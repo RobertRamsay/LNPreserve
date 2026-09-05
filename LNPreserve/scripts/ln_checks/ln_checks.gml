@@ -1,5 +1,5 @@
 function ln_check(_condition, _message) {
-    if (!_condition) show_error("LNPreserve self-test failed: " + _message, true);
+    if (!_condition) throw "LNPreserve self-test failed: " + _message;
 }
 
 function ln_run_checks() {
@@ -63,7 +63,89 @@ function ln_run_checks() {
         }
     }
     show_debug_message("LN_CONTROLS_PASS: all 1024 previous/current key chords match original selection state and external request order. Timing not tested.");
-    show_debug_message("LN_SELFTEST_PASS: clock, input, depth. Original gameplay parity is NOT tested.");
+    ln1_player_checks();
+    ln1_enemy_checks();
+    ln1_combat_checks();
+    ln1_world_checks();
+    ln1_feedback_checks();
+    show_debug_message("LN_SELFTEST_PASS: clock, input, depth and isolated player routines. Full gameplay parity is NOT established.");
+}
+
+function ln1_world_checks() {
+    var _g = new LN1Play();
+    for (var _i = 0; _i < 160; _i++) { _g.timer.cycle += 18433; ln1_play_tick(_g, 9); }
+    ln_check(_g.room_id == 2, "Wastelands walk from the starting room reaches room 2");
+    ln_check(_g.enemy.active >= 128, "room 2 original enemy spawn becomes active");
+    for (var _i = 0; _i < 500; _i++) {
+        _g.timer.cycle += 18433;
+        ln1_play_tick(_g, _i < 100 ? 9 : ((_i mod 96) < 4 ? 0 : 17));
+    }
+    ln_check(_g.player_health >= 0 && _g.player_health <= 32, "encounter retains original health range");
+    ln_check(_g.lives_left >= 0 && _g.lives_left <= 3, "encounter retains original life range");
+    show_debug_message("LN_WORLD_PASS: 660 native game updates traverse the original first exit and exercise an enemy encounter without a runtime exception. Full-game replay parity remains open.");
+}
+
+function ln1_combat_checks() {
+    var _buffer = buffer_load("verification/ln1_combat_vectors.json");
+    var _tests = json_parse(buffer_read(_buffer,buffer_text)); buffer_delete(_buffer);
+    var _g = new LN1Play();
+    for (var _i = 0; _i < array_length(_tests.vectors); _i++) {
+        var _v = _tests.vectors[_i];
+        _g.player = _v.player; _g.enemy = _v.enemy;
+        _g.enemy.active = _v.active; _g.enemy.attack_count = _v.attack_count;
+        var _hit = ln1_combat_hit(_g, _v.enemy_attacks);
+        ln_check(_hit == _v.expected, "melee hit " + string(_i) + ": " + string(_hit) + " expected " + string(_v.expected));
+    }
+    show_debug_message("LN_COMBAT_PASS: " + string(array_length(_tests.vectors)) + " original melee hit tests match. Damage dispatch and full combat replay require separate validation.");
+}
+
+function ln1_enemy_checks() {
+    var _buf = buffer_load("verification/ln1_enemy_vectors.json");
+    var _tests = json_parse(buffer_read(_buf, buffer_text)); buffer_delete(_buf);
+    var _g = new LN1Play(), _fields = variable_struct_get_names(_tests.fields), _count = 0;
+    for (var _i = 0; _i < array_length(_tests.vectors); _i++) {
+        var _case = _tests.vectors[_i];
+        _g.enemy = _case.initial; _g.player = _case.player;
+        _g.enemy.mirror = false; _g.enemy.display_frame = _g.enemy.frame;
+        for (var _j = 0; _j < array_length(_case.frames); _j++) {
+            var _v = _case.frames[_j]; _g.player.tick = _v.tick;
+            _g.random_queue = _v.randoms; _g.random_head = 0;
+            ln1_enemy_decide(_g); ln1_enemy_action(_g);
+            ln_check(_g.random_head == array_length(_v.randoms), _case.name + " random consumption " + string(_j));
+            for (var _k = 0; _k < array_length(_fields); _k++) {
+                var _field = _fields[_k], _actual = variable_struct_get(_g.enemy, _field), _expected = variable_struct_get(_v.expected, _field);
+                ln_check(_actual == _expected, _case.name + " tick " + string(_j) + " " + _field + ": " + string(_actual) + " expected " + string(_expected));
+            }
+            ln_check(_g.enemy.action == _v.expected.action, _case.name + " action pointer " + string(_j) + ": " + string(_g.enemy.action) + " expected " + string(_v.expected.action));
+            ln_check(_g.enemy.display_frame == _v.display.frame && _g.enemy.mirror == _v.display.mirror, _case.name + " enemy pose " + string(_j));
+            _count++;
+        }
+    }
+    show_debug_message("LN_ENEMY_PASS: " + string(_count) + " original-code enemy updates match with shared random bytes; full system timing excluded.");
+}
+
+function ln1_player_checks() {
+    var _buf = buffer_load("verification/ln1_player_vectors.json");
+    var _tests = json_parse(buffer_read(_buf, buffer_text)); buffer_delete(_buf);
+    _buf = buffer_load("play/ln1/gameplay.json");
+    var _data = json_parse(buffer_read(_buf, buffer_text)); buffer_delete(_buf);
+    var _fields = variable_struct_get_names(_tests.fields), _count = 0;
+    for (var _i = 0; _i < array_length(_tests.vectors); _i++) {
+        var _case = _tests.vectors[_i], _s = _case.initial;
+        _s.mirror = false; _s.display_frame = _s.frame;
+        for (var _j = 0; _j < array_length(_case.frames); _j++) {
+            var _v = _case.frames[_j];
+            ln1_player_update(_s, _data, _v.joy, _v.tick);
+            for (var _k = 0; _k < array_length(_fields); _k++) {
+                var _field = _fields[_k], _actual = variable_struct_get(_s, _field), _expected = variable_struct_get(_v.expected, _field);
+                ln_check(_actual == _expected, _case.name + " tick " + string(_j) + " " + _field + ": " + string(_actual) + " expected " + string(_expected));
+            }
+            ln_check(_s.action == _v.expected.action, _case.name + " action pointer " + string(_j));
+            ln_check(_s.display_frame == _v.display.frame && _s.mirror == _v.display.mirror, _case.name + " rendered pose " + string(_j));
+            _count++;
+        }
+    }
+    show_debug_message("LN_PLAYER_PASS: " + string(_count) + " original-code player updates match native state and pose requests; system timing and world logic excluded.");
 }
 
 function ln_run_mask_checks() {
@@ -78,6 +160,12 @@ function ln_run_mask_checks() {
     ln_check(surface_getpixel(_surface,123,65) == _yellow, "unmasked sprite pixel survives");
     ln_check(surface_getpixel(_surface,130,65) == c_black, "foreground masks part of sprite");
     ln_check(surface_getpixel(_surface,130,79) == _yellow, "hole in mask remains transparent");
+    surface_set_target(_surface);
+    draw_clear_alpha(c_black,1);
+    ln_draw_masked_actor(spr_depth_probe,0,120,60,1,1,spr_depth_fixture,0,0,256,160,0.5,70);
+    surface_reset_target();
+    ln_check(surface_getpixel(_surface,123,65) == _yellow, "sprite above waterline survives");
+    ln_check(surface_getpixel(_surface,123,75) == c_black, "waterline clips otherwise visible sprite pixels");
     surface_save(_surface,"lnpreserve-mask-test.png");
     surface_free(_surface);
     show_debug_message("LN_MASK_PASS: real GPU pixel readback, partial coverage and transparent hole.");

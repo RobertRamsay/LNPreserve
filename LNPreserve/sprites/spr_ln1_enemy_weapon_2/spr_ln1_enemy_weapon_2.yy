@@ -1,0 +1,3830 @@
+{
+  "$GMSprite": "v2",
+  "%Name": "spr_ln1_enemy_weapon_2",
+  "DynamicTexturePage": false,
+  "For3D": false,
+  "HTile": false,
+  "VTile": false,
+  "bboxMode": 0,
+  "bbox_bottom": 95,
+  "bbox_left": 0,
+  "bbox_right": 95,
+  "bbox_top": 0,
+  "collisionKind": 1,
+  "collisionTolerance": 0,
+  "edgeFiltering": false,
+  "frames": [
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "92b60114-75a1-5a8e-85a8-1df1f02887bc",
+      "name": "92b60114-75a1-5a8e-85a8-1df1f02887bc",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "c4418924-2ec3-571f-a2bb-df5be17a8beb",
+      "name": "c4418924-2ec3-571f-a2bb-df5be17a8beb",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "567aa554-12a6-519d-9de6-7c7d8fc123ab",
+      "name": "567aa554-12a6-519d-9de6-7c7d8fc123ab",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "7dd58d4a-4699-5d5b-9296-3a50cf33db35",
+      "name": "7dd58d4a-4699-5d5b-9296-3a50cf33db35",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "4252b986-da74-53e4-aef2-c0af4e56270e",
+      "name": "4252b986-da74-53e4-aef2-c0af4e56270e",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "f5cb269f-6d80-5dd7-bfdb-a2b6650c3358",
+      "name": "f5cb269f-6d80-5dd7-bfdb-a2b6650c3358",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "229911f9-b5fa-55fc-b8aa-0099cb0a12e2",
+      "name": "229911f9-b5fa-55fc-b8aa-0099cb0a12e2",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "5d6086c3-3d8c-5f32-9c4c-126432dbfa22",
+      "name": "5d6086c3-3d8c-5f32-9c4c-126432dbfa22",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "1446916b-b6b8-52c1-8f5a-edd9876ff4e1",
+      "name": "1446916b-b6b8-52c1-8f5a-edd9876ff4e1",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "2907320d-40a8-5fb4-a1e8-045128314044",
+      "name": "2907320d-40a8-5fb4-a1e8-045128314044",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "3d56a388-070b-5f4f-8e35-e1682f01fa8c",
+      "name": "3d56a388-070b-5f4f-8e35-e1682f01fa8c",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "e6973337-024f-5e17-8611-be2818c0423b",
+      "name": "e6973337-024f-5e17-8611-be2818c0423b",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "4366fb9a-10ee-531f-b391-5d2149367513",
+      "name": "4366fb9a-10ee-531f-b391-5d2149367513",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "519c642a-a459-581e-9e41-35ca5f692c6a",
+      "name": "519c642a-a459-581e-9e41-35ca5f692c6a",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "5075658e-2ab7-5c5a-a541-4d9100a1207e",
+      "name": "5075658e-2ab7-5c5a-a541-4d9100a1207e",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "3df3f89d-cbc4-5003-8b70-8a7dd7d97896",
+      "name": "3df3f89d-cbc4-5003-8b70-8a7dd7d97896",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "d321aa10-ef17-5319-9721-c4155cb910f6",
+      "name": "d321aa10-ef17-5319-9721-c4155cb910f6",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "e9394b7e-3400-5913-979f-62f49440398d",
+      "name": "e9394b7e-3400-5913-979f-62f49440398d",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "c8a0ce3d-1349-50a2-93b6-6d53da9c7c8b",
+      "name": "c8a0ce3d-1349-50a2-93b6-6d53da9c7c8b",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "5a7e907a-e2b4-5245-9a92-a95d4a7a412e",
+      "name": "5a7e907a-e2b4-5245-9a92-a95d4a7a412e",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "75244e0b-ca71-5285-835c-d239b920106c",
+      "name": "75244e0b-ca71-5285-835c-d239b920106c",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "fabfa483-78d9-5a74-9284-1a45551ea934",
+      "name": "fabfa483-78d9-5a74-9284-1a45551ea934",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "73fff10b-3a4d-504e-9aef-e822b4a23572",
+      "name": "73fff10b-3a4d-504e-9aef-e822b4a23572",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "a5db7b0f-a033-5641-a8f2-15cbfca86383",
+      "name": "a5db7b0f-a033-5641-a8f2-15cbfca86383",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "b8b8ef96-f9e7-5b0d-9cf2-f01e16d2dbf9",
+      "name": "b8b8ef96-f9e7-5b0d-9cf2-f01e16d2dbf9",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "581e0eda-f1bf-52ec-bcd0-3c37517bd0d7",
+      "name": "581e0eda-f1bf-52ec-bcd0-3c37517bd0d7",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "feb5360f-4ec2-577a-a80b-de5b291b4abb",
+      "name": "feb5360f-4ec2-577a-a80b-de5b291b4abb",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "9c3beb97-3ea7-5f6a-a127-422ac520df7a",
+      "name": "9c3beb97-3ea7-5f6a-a127-422ac520df7a",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "b00daf6c-d29b-5c3d-a250-e952349ae8a4",
+      "name": "b00daf6c-d29b-5c3d-a250-e952349ae8a4",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "b5f87e71-0a0e-54e9-9ae2-f790c609b445",
+      "name": "b5f87e71-0a0e-54e9-9ae2-f790c609b445",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "5aff9c70-f996-5b60-ad58-58e15ad08210",
+      "name": "5aff9c70-f996-5b60-ad58-58e15ad08210",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "92a98a10-f297-5d52-b42d-03076b9eba0b",
+      "name": "92a98a10-f297-5d52-b42d-03076b9eba0b",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "b1faabc0-ca71-5b64-84f5-5d68707b6ab0",
+      "name": "b1faabc0-ca71-5b64-84f5-5d68707b6ab0",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "783b05a1-ff6a-524f-99ce-f3e51fd48165",
+      "name": "783b05a1-ff6a-524f-99ce-f3e51fd48165",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "3dbedef5-723e-5aff-91a8-f015dbb0e0a7",
+      "name": "3dbedef5-723e-5aff-91a8-f015dbb0e0a7",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "437be9c9-736f-5bb2-a854-5df9a770c971",
+      "name": "437be9c9-736f-5bb2-a854-5df9a770c971",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "6e9a23df-a38e-5455-8a76-8971f7ff6660",
+      "name": "6e9a23df-a38e-5455-8a76-8971f7ff6660",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "2c83f60e-2dde-5ec9-8541-9dab8cd2a11f",
+      "name": "2c83f60e-2dde-5ec9-8541-9dab8cd2a11f",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "64344419-9eba-52a7-97dc-c8b1e1bb0bf7",
+      "name": "64344419-9eba-52a7-97dc-c8b1e1bb0bf7",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "7b36a512-913f-5ee5-b13f-6793bb993cae",
+      "name": "7b36a512-913f-5ee5-b13f-6793bb993cae",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "6cf1e4e2-1cfc-52da-b8d3-9081adb498b3",
+      "name": "6cf1e4e2-1cfc-52da-b8d3-9081adb498b3",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "3cbf9bd9-9bce-5d4d-af3e-641cab9692e5",
+      "name": "3cbf9bd9-9bce-5d4d-af3e-641cab9692e5",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "320d8520-6ade-5286-b12e-cd8dca5fb13b",
+      "name": "320d8520-6ade-5286-b12e-cd8dca5fb13b",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "a661d0e4-5981-5563-ae14-b884fc816031",
+      "name": "a661d0e4-5981-5563-ae14-b884fc816031",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "8f937422-fbf8-5ea6-a7d1-97f5b0c6478a",
+      "name": "8f937422-fbf8-5ea6-a7d1-97f5b0c6478a",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "e2347d7d-f0ab-524e-a96d-062fa3008952",
+      "name": "e2347d7d-f0ab-524e-a96d-062fa3008952",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "b226fb56-3d09-5bcb-9777-efe4624d2cd3",
+      "name": "b226fb56-3d09-5bcb-9777-efe4624d2cd3",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "5d3ed5cd-5dd5-5269-a9b0-b6f4e3ba39b9",
+      "name": "5d3ed5cd-5dd5-5269-a9b0-b6f4e3ba39b9",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "e362967f-4253-5c7f-867f-a79af818f798",
+      "name": "e362967f-4253-5c7f-867f-a79af818f798",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "98befac9-20a9-528a-8d9e-04fa7166d79b",
+      "name": "98befac9-20a9-528a-8d9e-04fa7166d79b",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "0828975c-39fc-5439-8e27-f8875bd0bb12",
+      "name": "0828975c-39fc-5439-8e27-f8875bd0bb12",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "6ebf4a53-7c12-5ec1-86c9-90a56382a847",
+      "name": "6ebf4a53-7c12-5ec1-86c9-90a56382a847",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "b5bed6d7-c407-5d8c-abe8-ee5420609b70",
+      "name": "b5bed6d7-c407-5d8c-abe8-ee5420609b70",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "28d6ea4c-a7de-5d4a-ad9d-53a58a6207bd",
+      "name": "28d6ea4c-a7de-5d4a-ad9d-53a58a6207bd",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "ba0e8814-ad54-5e42-858e-12128c1e7f83",
+      "name": "ba0e8814-ad54-5e42-858e-12128c1e7f83",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "84c08b88-8242-5907-aa94-59689d9d63e3",
+      "name": "84c08b88-8242-5907-aa94-59689d9d63e3",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "df68f056-4c30-56a3-944b-b27db054c011",
+      "name": "df68f056-4c30-56a3-944b-b27db054c011",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "73d7fa0f-cbf8-5b0c-b609-ce0c511548e2",
+      "name": "73d7fa0f-cbf8-5b0c-b609-ce0c511548e2",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "46ca7f70-68f1-5dd3-ac52-8181f0cda005",
+      "name": "46ca7f70-68f1-5dd3-ac52-8181f0cda005",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "8d8c6def-1e83-535b-acd7-183400f661a5",
+      "name": "8d8c6def-1e83-535b-acd7-183400f661a5",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "cdc20010-feb2-5ab6-af77-f5406594915e",
+      "name": "cdc20010-feb2-5ab6-af77-f5406594915e",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "b491fdcf-55a9-59f6-9d24-2776f11bc771",
+      "name": "b491fdcf-55a9-59f6-9d24-2776f11bc771",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "c1ee4ded-64fa-5a1a-9be9-ac6fb1513ff1",
+      "name": "c1ee4ded-64fa-5a1a-9be9-ac6fb1513ff1",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "f213f139-175e-5e51-94db-0d321d1a8dee",
+      "name": "f213f139-175e-5e51-94db-0d321d1a8dee",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "9a04226c-57e1-53f9-b03b-6d95431d0826",
+      "name": "9a04226c-57e1-53f9-b03b-6d95431d0826",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "0f1a9caa-17e2-51ca-8fe5-c0833dc25a60",
+      "name": "0f1a9caa-17e2-51ca-8fe5-c0833dc25a60",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "e96cf45b-d85e-5e12-aabe-9ce97818f045",
+      "name": "e96cf45b-d85e-5e12-aabe-9ce97818f045",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "e01d591b-48e3-55f0-83be-267023c468ed",
+      "name": "e01d591b-48e3-55f0-83be-267023c468ed",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "5fb40a51-4920-5b99-9104-402ab92a9096",
+      "name": "5fb40a51-4920-5b99-9104-402ab92a9096",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "b76cf69d-6c44-5c63-ae6d-2ca715cd1199",
+      "name": "b76cf69d-6c44-5c63-ae6d-2ca715cd1199",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "2f141f7b-1231-57ea-a663-fcc162d0e3cc",
+      "name": "2f141f7b-1231-57ea-a663-fcc162d0e3cc",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "c69876c4-3940-5dbe-b56e-7dd4793dd74d",
+      "name": "c69876c4-3940-5dbe-b56e-7dd4793dd74d",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "218db4a9-5eba-54fb-a295-80c0b5514e04",
+      "name": "218db4a9-5eba-54fb-a295-80c0b5514e04",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "0523a2d8-e093-5b45-8825-17d854a09c7f",
+      "name": "0523a2d8-e093-5b45-8825-17d854a09c7f",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "0b945ba1-af6a-5800-ba55-4b7119bd4b5b",
+      "name": "0b945ba1-af6a-5800-ba55-4b7119bd4b5b",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "3214c7be-e994-5b0a-9635-af82a5e5c042",
+      "name": "3214c7be-e994-5b0a-9635-af82a5e5c042",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "277c7ae1-a9c6-5b4b-b783-2e7890ad3218",
+      "name": "277c7ae1-a9c6-5b4b-b783-2e7890ad3218",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "c9c56da0-9314-5d11-84b9-38b5bfb66bbc",
+      "name": "c9c56da0-9314-5d11-84b9-38b5bfb66bbc",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "af97aacb-8a0f-573b-a300-53e9c2aa5565",
+      "name": "af97aacb-8a0f-573b-a300-53e9c2aa5565",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "9e7b9236-3dee-5a7f-8304-7e3294b90c1e",
+      "name": "9e7b9236-3dee-5a7f-8304-7e3294b90c1e",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "b60673c5-b2b3-5550-a456-3b5c26cb409e",
+      "name": "b60673c5-b2b3-5550-a456-3b5c26cb409e",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "efeadbaf-9f88-554c-8b20-b2f8f476b050",
+      "name": "efeadbaf-9f88-554c-8b20-b2f8f476b050",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "eaf7f79a-99d0-50fc-b069-c109f64bd55f",
+      "name": "eaf7f79a-99d0-50fc-b069-c109f64bd55f",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "1041dea5-99ae-5c94-bac1-68e050fcbca6",
+      "name": "1041dea5-99ae-5c94-bac1-68e050fcbca6",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "f83b9ab2-d05e-5c36-a898-981997833241",
+      "name": "f83b9ab2-d05e-5c36-a898-981997833241",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "b149e949-fc8a-5346-b6af-f1fc371838c6",
+      "name": "b149e949-fc8a-5346-b6af-f1fc371838c6",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "f434f4d5-7c10-5f8e-8b96-681db8682daf",
+      "name": "f434f4d5-7c10-5f8e-8b96-681db8682daf",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "7f974651-34b4-5fbc-9021-4d16785cf278",
+      "name": "7f974651-34b4-5fbc-9021-4d16785cf278",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "5bfbb161-fcee-5684-9c80-c29d033a3127",
+      "name": "5bfbb161-fcee-5684-9c80-c29d033a3127",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "7a1d4a19-39f1-5b82-96c8-fc98e0743fe6",
+      "name": "7a1d4a19-39f1-5b82-96c8-fc98e0743fe6",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "c708f0f0-60fc-59a0-975f-cf0aaa52270f",
+      "name": "c708f0f0-60fc-59a0-975f-cf0aaa52270f",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "d49d4665-03c5-5d11-a4c5-15aa8bc60cdb",
+      "name": "d49d4665-03c5-5d11-a4c5-15aa8bc60cdb",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "b6211507-9de6-5a3d-8204-88f1f2d56203",
+      "name": "b6211507-9de6-5a3d-8204-88f1f2d56203",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "5904f1f4-f7d4-5aa4-a2bd-31a30f0ae6ae",
+      "name": "5904f1f4-f7d4-5aa4-a2bd-31a30f0ae6ae",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "8490a91b-e2af-5ddf-88d5-1c04887efad7",
+      "name": "8490a91b-e2af-5ddf-88d5-1c04887efad7",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "1512f7bf-194c-5764-9096-134354156942",
+      "name": "1512f7bf-194c-5764-9096-134354156942",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "f2450503-fe10-5364-a401-98176de6a5ba",
+      "name": "f2450503-fe10-5364-a401-98176de6a5ba",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "ae5e851a-d696-5f84-8bf3-8eeddb0ddc85",
+      "name": "ae5e851a-d696-5f84-8bf3-8eeddb0ddc85",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "491360ee-947d-588b-8d9e-984de9eb7060",
+      "name": "491360ee-947d-588b-8d9e-984de9eb7060",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "85a3dd52-7eaf-505d-ab97-2c1ea0aa649d",
+      "name": "85a3dd52-7eaf-505d-ab97-2c1ea0aa649d",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "e19f7aec-a21a-5f8f-bba6-fe9475467021",
+      "name": "e19f7aec-a21a-5f8f-bba6-fe9475467021",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "4eac4377-ef96-5373-b46c-da1440b9609c",
+      "name": "4eac4377-ef96-5373-b46c-da1440b9609c",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "e4c7d234-14ba-5860-8cb6-a45be61f4460",
+      "name": "e4c7d234-14ba-5860-8cb6-a45be61f4460",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "aacfba49-87b0-5468-9e90-e7df70879173",
+      "name": "aacfba49-87b0-5468-9e90-e7df70879173",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "f63997bf-0fd3-5279-a627-6a2df6b33548",
+      "name": "f63997bf-0fd3-5279-a627-6a2df6b33548",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "8a87bf19-0774-5f25-9491-71ed7cb78278",
+      "name": "8a87bf19-0774-5f25-9491-71ed7cb78278",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "05268be7-ffe4-5e72-bd6b-496cf4a37184",
+      "name": "05268be7-ffe4-5e72-bd6b-496cf4a37184",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "2fce6c4e-0046-5d50-b4fd-2b079d37181e",
+      "name": "2fce6c4e-0046-5d50-b4fd-2b079d37181e",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "c5e2ef2e-a22b-5062-9c86-800e319da867",
+      "name": "c5e2ef2e-a22b-5062-9c86-800e319da867",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "d9d18b57-4737-50ef-bf5a-0f3c4afc274b",
+      "name": "d9d18b57-4737-50ef-bf5a-0f3c4afc274b",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "2a1f7179-29e5-5505-9820-fd9a87c84ee5",
+      "name": "2a1f7179-29e5-5505-9820-fd9a87c84ee5",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "a9ac3908-4a0a-5f99-937b-4bd667d6b283",
+      "name": "a9ac3908-4a0a-5f99-937b-4bd667d6b283",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "18d00c59-ab9c-5aa9-a44c-980559040661",
+      "name": "18d00c59-ab9c-5aa9-a44c-980559040661",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "7fb24b9f-c974-5337-ae16-5b4fbbd873ea",
+      "name": "7fb24b9f-c974-5337-ae16-5b4fbbd873ea",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "9464b4b5-9b3b-571f-ab27-b412e6c06c30",
+      "name": "9464b4b5-9b3b-571f-ab27-b412e6c06c30",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "513d6343-5f2f-546c-893d-e432a3b74048",
+      "name": "513d6343-5f2f-546c-893d-e432a3b74048",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "2c9de49d-047a-57ea-8125-b9220da7dea5",
+      "name": "2c9de49d-047a-57ea-8125-b9220da7dea5",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "e336f2b2-c940-5ce9-b55e-c0fd2332af40",
+      "name": "e336f2b2-c940-5ce9-b55e-c0fd2332af40",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "1b9e3eca-06da-5646-b9dc-bf53882117b3",
+      "name": "1b9e3eca-06da-5646-b9dc-bf53882117b3",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "60cf1a78-6520-53d8-bad7-c42ea629119f",
+      "name": "60cf1a78-6520-53d8-bad7-c42ea629119f",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "502b861b-5a30-53cb-b670-f8fd328cf936",
+      "name": "502b861b-5a30-53cb-b670-f8fd328cf936",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "4e02daa6-db98-5155-9661-f3e5ab9c7ecc",
+      "name": "4e02daa6-db98-5155-9661-f3e5ab9c7ecc",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "aa4ba144-687c-57e0-8aed-553a7656cd25",
+      "name": "aa4ba144-687c-57e0-8aed-553a7656cd25",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "3b3ac6aa-dfc4-51af-8266-2a6e4d4128d5",
+      "name": "3b3ac6aa-dfc4-51af-8266-2a6e4d4128d5",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "f5aca80b-8d31-5eb6-aff7-7042b38daa13",
+      "name": "f5aca80b-8d31-5eb6-aff7-7042b38daa13",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "40e47d8e-22d5-58d7-925d-517a6fd28e18",
+      "name": "40e47d8e-22d5-58d7-925d-517a6fd28e18",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "04b8fb6a-e724-5fb5-a95a-047f128f09cb",
+      "name": "04b8fb6a-e724-5fb5-a95a-047f128f09cb",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "801db8f3-b8e0-53ec-a780-344f2147e748",
+      "name": "801db8f3-b8e0-53ec-a780-344f2147e748",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    }
+  ],
+  "gridX": 8,
+  "gridY": 8,
+  "height": 96,
+  "layers": [
+    {
+      "$GMImageLayer": "",
+      "%Name": "38f9bae1-cf8d-5244-aa7e-c2896e4e7607",
+      "blendMode": 0,
+      "displayName": "Original pixels",
+      "isLocked": false,
+      "name": "38f9bae1-cf8d-5244-aa7e-c2896e4e7607",
+      "opacity": 100.0,
+      "resourceType": "GMImageLayer",
+      "resourceVersion": "2.0",
+      "visible": true
+    }
+  ],
+  "name": "spr_ln1_enemy_weapon_2",
+  "nineSlice": null,
+  "origin": 9,
+  "parent": {
+    "name": "ln1_character_parts",
+    "path": "folders/Graphics/ln1_character_parts.yy"
+  },
+  "preMultiplyAlpha": false,
+  "resourceType": "GMSprite",
+  "resourceVersion": "2.0",
+  "sequence": {
+    "$GMSequence": "v1",
+    "%Name": "spr_ln1_enemy_weapon_2",
+    "autoRecord": true,
+    "backdropHeight": 768,
+    "backdropImageOpacity": 0.5,
+    "backdropImagePath": "",
+    "backdropWidth": 1366,
+    "backdropXOffset": 0,
+    "backdropYOffset": 0,
+    "eventStubScript": null,
+    "eventToFunction": {},
+    "events": {
+      "$KeyframeStore<MessageEventKeyframe>": "",
+      "Keyframes": [],
+      "resourceType": "KeyframeStore<MessageEventKeyframe>",
+      "resourceVersion": "2.0"
+    },
+    "length": 128.0,
+    "lockOrigin": false,
+    "moments": {
+      "$KeyframeStore<MomentsEventKeyframe>": "",
+      "Keyframes": [],
+      "resourceType": "KeyframeStore<MomentsEventKeyframe>",
+      "resourceVersion": "2.0"
+    },
+    "name": "spr_ln1_enemy_weapon_2",
+    "playback": 1,
+    "playbackSpeed": 0.0,
+    "playbackSpeedType": 0,
+    "resourceType": "GMSequence",
+    "resourceVersion": "2.0",
+    "showBackdrop": true,
+    "showBackdropImage": false,
+    "timeUnits": 1,
+    "tracks": [
+      {
+        "$GMSpriteFramesTrack": "",
+        "builtinName": 0,
+        "events": [],
+        "inheritsTrackColour": true,
+        "interpolation": 1,
+        "isCreationTrack": false,
+        "keyframes": {
+          "$KeyframeStore<SpriteFrameKeyframe>": "",
+          "Keyframes": [
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "92b60114-75a1-5a8e-85a8-1df1f02887bc",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 0.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "6020fa2f-1c8b-5ca9-92ef-0183309594c5",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "c4418924-2ec3-571f-a2bb-df5be17a8beb",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 1.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "0516825b-31dd-51c1-8c6e-21802e9e3cf8",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "567aa554-12a6-519d-9de6-7c7d8fc123ab",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 2.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "54c6cbcb-23e7-563e-be89-b3da17ee5067",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "7dd58d4a-4699-5d5b-9296-3a50cf33db35",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 3.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "8c1e06d2-d789-5086-8278-50e149d9e2f6",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "4252b986-da74-53e4-aef2-c0af4e56270e",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 4.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "2f4fb5de-50c1-5353-83ce-e160cdbdcf58",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "f5cb269f-6d80-5dd7-bfdb-a2b6650c3358",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 5.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "510e125c-dddd-52ba-bd8b-2a19d3192d58",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "229911f9-b5fa-55fc-b8aa-0099cb0a12e2",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 6.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "6c5ef078-c916-5c23-858d-cb3d9c996e02",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "5d6086c3-3d8c-5f32-9c4c-126432dbfa22",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 7.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "c9bfbf2a-8913-5848-b13d-aa73ffe81b17",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "1446916b-b6b8-52c1-8f5a-edd9876ff4e1",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 8.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "a38315ef-0034-55e7-86df-26a8f90d8d29",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "2907320d-40a8-5fb4-a1e8-045128314044",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 9.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "f0b116eb-c996-5bbc-b58c-6a9de8f0531b",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "3d56a388-070b-5f4f-8e35-e1682f01fa8c",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 10.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "f0efeb19-86c5-53a9-ac25-3c219e132de5",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "e6973337-024f-5e17-8611-be2818c0423b",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 11.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "4bbb76af-e5fa-56b7-8369-36895461bf11",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "4366fb9a-10ee-531f-b391-5d2149367513",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 12.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "ceefd477-1a10-5061-b6b3-9a6b4c7248cd",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "519c642a-a459-581e-9e41-35ca5f692c6a",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 13.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "2e9da51a-da07-54a6-a2ed-967084719deb",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "5075658e-2ab7-5c5a-a541-4d9100a1207e",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 14.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "d1202e6f-8318-5701-a91c-4debf127b328",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "3df3f89d-cbc4-5003-8b70-8a7dd7d97896",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 15.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "15adf6db-c706-5910-8324-98803a20db16",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "d321aa10-ef17-5319-9721-c4155cb910f6",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 16.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "b671a60e-2098-5e4b-9e7e-3d85950db196",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "e9394b7e-3400-5913-979f-62f49440398d",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 17.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "7ffd4e2a-41fb-5743-995a-4dc6a1c41bca",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "c8a0ce3d-1349-50a2-93b6-6d53da9c7c8b",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 18.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "12a04655-487d-558f-9221-bb48df36e248",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "5a7e907a-e2b4-5245-9a92-a95d4a7a412e",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 19.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "84e3620e-0700-5208-a406-4aa8a4dbd20e",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "75244e0b-ca71-5285-835c-d239b920106c",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 20.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "e481253c-3c60-5645-863d-3f3b197cffa0",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "fabfa483-78d9-5a74-9284-1a45551ea934",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 21.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "41a0452d-cc39-5302-9fb5-5d32ec6489f2",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "73fff10b-3a4d-504e-9aef-e822b4a23572",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 22.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "9ab6954e-8dff-5b88-b2c0-0625dc4d08e9",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "a5db7b0f-a033-5641-a8f2-15cbfca86383",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 23.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "e84a4567-dfee-51f4-a53b-fbc2c0d67ae7",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "b8b8ef96-f9e7-5b0d-9cf2-f01e16d2dbf9",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 24.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "b6bc9fe6-88e7-56b7-8ce6-e616183d544b",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "581e0eda-f1bf-52ec-bcd0-3c37517bd0d7",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 25.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "0546a5dd-3947-590a-aa9e-95db3da23e9f",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "feb5360f-4ec2-577a-a80b-de5b291b4abb",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 26.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "2d79986d-056f-5299-8a3f-f3ccf4c8117c",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "9c3beb97-3ea7-5f6a-a127-422ac520df7a",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 27.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "cdb6a28f-d76f-5754-b8b6-12988c5efae1",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "b00daf6c-d29b-5c3d-a250-e952349ae8a4",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 28.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "9d9aafb2-9e03-5380-b1fb-531cfaca242c",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "b5f87e71-0a0e-54e9-9ae2-f790c609b445",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 29.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "ffae3d10-dd68-5d1b-9be4-a24ff7213431",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "5aff9c70-f996-5b60-ad58-58e15ad08210",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 30.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "042f807e-7dc0-58e1-9ef1-7956339cf16b",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "92a98a10-f297-5d52-b42d-03076b9eba0b",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 31.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "6f9f38e6-5e16-53f9-bf30-8b8e237fb4e7",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "b1faabc0-ca71-5b64-84f5-5d68707b6ab0",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 32.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "9576aede-6e7a-5cba-8749-9a803779ec9f",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "783b05a1-ff6a-524f-99ce-f3e51fd48165",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 33.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "2fd453b8-588c-5dfc-9aff-13e07de9974b",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "3dbedef5-723e-5aff-91a8-f015dbb0e0a7",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 34.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "3b462735-33d7-521e-a9fd-ce68dea7c170",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "437be9c9-736f-5bb2-a854-5df9a770c971",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 35.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "3d3f3b2b-e595-538e-8bdf-b135c8facfe4",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "6e9a23df-a38e-5455-8a76-8971f7ff6660",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 36.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "384cc1ca-6864-5228-b485-3a4e4d239a6b",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "2c83f60e-2dde-5ec9-8541-9dab8cd2a11f",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 37.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "4acb17fe-14e0-5bbd-96a8-efb8a792873d",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "64344419-9eba-52a7-97dc-c8b1e1bb0bf7",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 38.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "ddec65b8-a82a-58eb-9041-a3ccc5476935",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "7b36a512-913f-5ee5-b13f-6793bb993cae",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 39.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "03dcef07-661a-5527-91ba-214c84d38399",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "6cf1e4e2-1cfc-52da-b8d3-9081adb498b3",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 40.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "8d8bf603-a4a8-59d2-b380-0488e1980c0e",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "3cbf9bd9-9bce-5d4d-af3e-641cab9692e5",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 41.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "b0e0eb9a-17fe-5c05-9603-568bf938b794",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "320d8520-6ade-5286-b12e-cd8dca5fb13b",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 42.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "444abbf1-3a54-58bc-b48b-14601d1f6a75",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "a661d0e4-5981-5563-ae14-b884fc816031",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 43.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "6e00f44e-4581-511a-89d2-e750b2e176db",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "8f937422-fbf8-5ea6-a7d1-97f5b0c6478a",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 44.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "865dd1ae-8438-5988-8849-76d747318e54",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "e2347d7d-f0ab-524e-a96d-062fa3008952",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 45.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "1ab0934f-3871-5a0a-9d56-b937a5188cfd",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "b226fb56-3d09-5bcb-9777-efe4624d2cd3",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 46.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "15a888fc-b66c-57ab-b770-d15247063729",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "5d3ed5cd-5dd5-5269-a9b0-b6f4e3ba39b9",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 47.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "e03bca16-3bb4-516d-b552-2c7de29008c8",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "e362967f-4253-5c7f-867f-a79af818f798",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 48.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "36725480-3c05-5b4d-81f3-ebbe734d5794",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "98befac9-20a9-528a-8d9e-04fa7166d79b",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 49.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "ae868478-5f15-536c-b229-58aa94c2c35e",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "0828975c-39fc-5439-8e27-f8875bd0bb12",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 50.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "fcc6566f-41de-568d-b873-1e314aba3ed9",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "6ebf4a53-7c12-5ec1-86c9-90a56382a847",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 51.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "6e5d94a0-20bb-5241-8fcc-5f6a910cb729",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "b5bed6d7-c407-5d8c-abe8-ee5420609b70",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 52.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "566e29ec-f5cb-5b25-af8f-2431c76111f6",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "28d6ea4c-a7de-5d4a-ad9d-53a58a6207bd",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 53.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "10b7f3ee-a44b-597e-8fb1-193f225975d5",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "ba0e8814-ad54-5e42-858e-12128c1e7f83",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 54.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "50f22ac7-c18a-509a-b482-e34d640693fb",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "84c08b88-8242-5907-aa94-59689d9d63e3",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 55.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "e0a5b4df-c3a4-5e41-a313-dc55a812f57e",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "df68f056-4c30-56a3-944b-b27db054c011",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 56.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "a067af9a-61e3-5648-9bab-f89c2bd54bf9",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "73d7fa0f-cbf8-5b0c-b609-ce0c511548e2",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 57.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "0c8e1a00-bd6d-5928-a896-59b17f2cac13",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "46ca7f70-68f1-5dd3-ac52-8181f0cda005",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 58.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "dc855672-4f2e-5aa4-a0fa-547861d8e200",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "8d8c6def-1e83-535b-acd7-183400f661a5",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 59.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "54ed1bed-8f87-5f28-8a3b-41acb428d82a",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "cdc20010-feb2-5ab6-af77-f5406594915e",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 60.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "0a2d1ddb-93b1-5c5a-ba44-60b2df9ff5da",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "b491fdcf-55a9-59f6-9d24-2776f11bc771",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 61.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "c7e623be-9ca9-5a71-b8d5-6f5fecc59d5f",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "c1ee4ded-64fa-5a1a-9be9-ac6fb1513ff1",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 62.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "c89286fc-0e19-5242-9c4e-89801d49c406",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "f213f139-175e-5e51-94db-0d321d1a8dee",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 63.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "16bd5479-1a42-5110-a045-6ca96bb04405",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "9a04226c-57e1-53f9-b03b-6d95431d0826",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 64.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "11a85892-d326-5e47-8b94-caf1ee84f2e1",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "0f1a9caa-17e2-51ca-8fe5-c0833dc25a60",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 65.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "cb5ebe9a-5e67-5a35-b5ca-5139ab7d5942",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "e96cf45b-d85e-5e12-aabe-9ce97818f045",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 66.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "b61b25ca-2a05-5f11-91e5-7d2a2b74fa36",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "e01d591b-48e3-55f0-83be-267023c468ed",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 67.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "c94de5aa-2fed-5dcf-a43a-5ebcaef3308e",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "5fb40a51-4920-5b99-9104-402ab92a9096",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 68.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "12106691-957d-59db-ac40-e40c7f256391",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "b76cf69d-6c44-5c63-ae6d-2ca715cd1199",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 69.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "f9b2f162-d069-5d0d-9004-7a410d136480",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "2f141f7b-1231-57ea-a663-fcc162d0e3cc",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 70.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "319a5bdd-c1c1-524f-bf28-c25f8fd59c09",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "c69876c4-3940-5dbe-b56e-7dd4793dd74d",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 71.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "8808393f-10e8-5bfb-bb11-e1dbed8e8a4c",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "218db4a9-5eba-54fb-a295-80c0b5514e04",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 72.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "6fabb969-db48-50b0-b854-a914c64a5ef6",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "0523a2d8-e093-5b45-8825-17d854a09c7f",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 73.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "880d76f3-9a60-5209-b60c-6ea0b12c95eb",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "0b945ba1-af6a-5800-ba55-4b7119bd4b5b",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 74.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "8feaf3e8-cb01-5a3b-ba99-b55c935794d6",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "3214c7be-e994-5b0a-9635-af82a5e5c042",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 75.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "fce75bef-e6b5-5c59-b3c7-9183dc05c996",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "277c7ae1-a9c6-5b4b-b783-2e7890ad3218",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 76.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "2eca7561-c712-5462-abf9-98491bdcd0b9",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "c9c56da0-9314-5d11-84b9-38b5bfb66bbc",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 77.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "6b7a0944-b5b2-59af-a6f4-bed93e84f7c8",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "af97aacb-8a0f-573b-a300-53e9c2aa5565",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 78.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "236d0ca4-2416-561a-83ea-50e872686c6e",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "9e7b9236-3dee-5a7f-8304-7e3294b90c1e",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 79.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "504e9f53-70c2-5799-9456-11815a494d9c",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "b60673c5-b2b3-5550-a456-3b5c26cb409e",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 80.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "d4bfb447-0b29-580a-86fd-6a316e87e93f",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "efeadbaf-9f88-554c-8b20-b2f8f476b050",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 81.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "306b1bb1-0e1a-5a58-b44b-e7ecd9ce9dfe",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "eaf7f79a-99d0-50fc-b069-c109f64bd55f",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 82.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "f4e65470-7848-5aee-ac59-191ae33e9933",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "1041dea5-99ae-5c94-bac1-68e050fcbca6",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 83.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "778497ea-134b-5c04-b33d-5bd03821ec25",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "f83b9ab2-d05e-5c36-a898-981997833241",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 84.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "e75a8ec2-aa7b-57d6-8b8e-148b8727a1c8",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "b149e949-fc8a-5346-b6af-f1fc371838c6",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 85.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "ab2375ad-6b2a-5460-b558-006c2fd73ef8",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "f434f4d5-7c10-5f8e-8b96-681db8682daf",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 86.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "0f7592cc-5f08-5584-a7c2-2f370a2e4098",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "7f974651-34b4-5fbc-9021-4d16785cf278",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 87.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "c59ca082-4ec6-5bbf-bf1d-532d02f30d49",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "5bfbb161-fcee-5684-9c80-c29d033a3127",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 88.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "bf7ae74d-193c-5679-8153-5e65917ad925",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "7a1d4a19-39f1-5b82-96c8-fc98e0743fe6",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 89.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "219f9ed3-4491-5276-9920-1e82040e0397",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "c708f0f0-60fc-59a0-975f-cf0aaa52270f",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 90.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "a351e3fb-6467-553c-b67f-3a086ee11b88",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "d49d4665-03c5-5d11-a4c5-15aa8bc60cdb",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 91.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "5cc0f3dd-a086-5f6f-b058-90de2151831f",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "b6211507-9de6-5a3d-8204-88f1f2d56203",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 92.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "183299db-a6a2-5e70-8304-b334bc6ec6c7",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "5904f1f4-f7d4-5aa4-a2bd-31a30f0ae6ae",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 93.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "32734288-d73a-5775-acc2-4b5949c5d162",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "8490a91b-e2af-5ddf-88d5-1c04887efad7",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 94.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "b8738cae-baaa-540d-9486-4d5db72643f3",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "1512f7bf-194c-5764-9096-134354156942",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 95.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "7d089098-0257-59c3-a4f6-0d0042de3641",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "f2450503-fe10-5364-a401-98176de6a5ba",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 96.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "6bc4531b-92ca-5fde-916e-f5dbe0863f3b",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "ae5e851a-d696-5f84-8bf3-8eeddb0ddc85",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 97.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "71c23e29-a565-56fe-b2c0-07d7e1d0e0d5",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "491360ee-947d-588b-8d9e-984de9eb7060",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 98.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "6b52de10-9bd4-5a50-a1e7-4b787828a994",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "85a3dd52-7eaf-505d-ab97-2c1ea0aa649d",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 99.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "f8778fb1-e25f-5205-8cbb-3d0e2e877c5b",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "e19f7aec-a21a-5f8f-bba6-fe9475467021",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 100.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "e00bc3a4-5359-52ff-acf3-eab15866c16f",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "4eac4377-ef96-5373-b46c-da1440b9609c",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 101.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "ba6337bb-e94a-5b91-b6ac-433feb4a123c",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "e4c7d234-14ba-5860-8cb6-a45be61f4460",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 102.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "812dcd46-ddcf-51a5-8396-a1d361b5777b",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "aacfba49-87b0-5468-9e90-e7df70879173",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 103.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "59488f51-e3c8-5cb0-a6f9-458f7d658a39",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "f63997bf-0fd3-5279-a627-6a2df6b33548",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 104.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "3c713291-4984-582f-8247-4226bc9c6e13",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "8a87bf19-0774-5f25-9491-71ed7cb78278",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 105.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "701c8612-4568-5514-914c-b0053530fa78",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "05268be7-ffe4-5e72-bd6b-496cf4a37184",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 106.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "4a9adb09-f57d-594d-9f48-72581f405e47",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "2fce6c4e-0046-5d50-b4fd-2b079d37181e",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 107.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "5c621cd0-7bc2-57c4-b2eb-27766c1ed81b",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "c5e2ef2e-a22b-5062-9c86-800e319da867",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 108.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "6a9c6cee-c4c3-50aa-976a-e6dfe5706c50",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "d9d18b57-4737-50ef-bf5a-0f3c4afc274b",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 109.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "d70db6cb-b1b7-550e-b195-3c2939a08d61",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "2a1f7179-29e5-5505-9820-fd9a87c84ee5",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 110.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "db08ccba-9f1c-5a85-bb73-451e3fbab406",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "a9ac3908-4a0a-5f99-937b-4bd667d6b283",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 111.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "bb51c335-3012-5ea8-a3f0-20ed6f77ec29",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "18d00c59-ab9c-5aa9-a44c-980559040661",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 112.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "27b3ca32-1d4e-5cda-9906-51ac28b8fcbc",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "7fb24b9f-c974-5337-ae16-5b4fbbd873ea",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 113.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "cadcefd9-2572-5feb-9b00-34a16fbb381b",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "9464b4b5-9b3b-571f-ab27-b412e6c06c30",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 114.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "5512ecd2-e1bc-5ea8-97ad-0b20f4834618",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "513d6343-5f2f-546c-893d-e432a3b74048",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 115.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "81c9b604-2c72-5e7b-a068-003865031125",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "2c9de49d-047a-57ea-8125-b9220da7dea5",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 116.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "b12e8748-7ea1-540a-a285-c1ae6596fcb8",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "e336f2b2-c940-5ce9-b55e-c0fd2332af40",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 117.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "296b172a-3aa7-52ca-93f4-f1a207c85758",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "1b9e3eca-06da-5646-b9dc-bf53882117b3",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 118.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "ad9e7017-1a68-507d-9bbc-44b826d76337",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "60cf1a78-6520-53d8-bad7-c42ea629119f",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 119.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "23e5a7b7-d1da-52a9-88fa-84d871f72681",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "502b861b-5a30-53cb-b670-f8fd328cf936",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 120.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "800ab50f-c163-5ae6-bf42-5a16a0608b5c",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "4e02daa6-db98-5155-9661-f3e5ab9c7ecc",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 121.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "d43edf7f-d8c1-5a88-9223-29cbcd256424",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "aa4ba144-687c-57e0-8aed-553a7656cd25",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 122.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "0f6326d5-11a2-5ee3-8b2c-541602fd2a48",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "3b3ac6aa-dfc4-51af-8266-2a6e4d4128d5",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 123.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "a749a9a2-d018-5f71-9863-ed6bf9c839e9",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "f5aca80b-8d31-5eb6-aff7-7042b38daa13",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 124.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "666a0155-c811-5edd-991d-ad1ed6a42a66",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "40e47d8e-22d5-58d7-925d-517a6fd28e18",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 125.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "88a74a53-1fc5-567c-bd3c-577ad43fc998",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "04b8fb6a-e724-5fb5-a95a-047f128f09cb",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 126.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "5432b145-b6df-5bc0-85f7-0c73876f9ec4",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "801db8f3-b8e0-53ec-a780-344f2147e748",
+                    "path": "sprites/spr_ln1_enemy_weapon_2/spr_ln1_enemy_weapon_2.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 127.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "9141a4f4-bcf6-5bee-b209-e9210f61e395",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            }
+          ],
+          "resourceType": "KeyframeStore<SpriteFrameKeyframe>",
+          "resourceVersion": "2.0"
+        },
+        "modifiers": [],
+        "name": "frames",
+        "resourceType": "GMSpriteFramesTrack",
+        "resourceVersion": "2.0",
+        "spriteId": null,
+        "trackColour": 0,
+        "tracks": [],
+        "traits": 0
+      }
+    ],
+    "visibleRange": null,
+    "volume": 1.0,
+    "xorigin": 48,
+    "yorigin": 64
+  },
+  "swatchColours": null,
+  "swfPrecision": 2.525,
+  "textureGroupId": {
+    "name": "Default",
+    "path": "texturegroups/Default"
+  },
+  "type": 0,
+  "width": 96
+}

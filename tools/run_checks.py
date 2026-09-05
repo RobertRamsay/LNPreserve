@@ -16,11 +16,15 @@ if __name__=='__main__':
         (out/'runner-console.log').write_text(log)
         report.update(exit_code=r.returncode,native_checks_pass='LN_SELFTEST_PASS' in log,
                       runtime_pass='LN_RUNTIME_PASS' in log,mask_gpu_pass='LN_MASK_PASS' in log,
-                      sprite_decoder_pass='LN_SPRITE_PASS' in log,ln1_control_vectors_pass='LN_CONTROLS_PASS' in log)
+                      sprite_decoder_pass='LN_SPRITE_PASS' in log,ln1_control_vectors_pass='LN_CONTROLS_PASS' in log,
+                      ln1_player_vectors_pass='LN_PLAYER_PASS' in log,ln1_enemy_vectors_pass='LN_ENEMY_PASS' in log,
+                      ln1_combat_vectors_pass='LN_COMBAT_PASS' in log,ln1_world_smoke_pass='LN_WORLD_PASS' in log,
+                      ln1_feedback_pass='LN_FEEDBACK_PASS' in log)
         match=re.search(r'LN_CAPTURE_DIRECTORY:([^\r\n]+)',log)
         if match:
             capture_dir=Path(match.group(1).strip())
-            for name in ('lnpreserve-mask-test.png','lnpreserve-workbench.png'):
+            for name in ('lnpreserve-mask-test.png','lnpreserve-workbench.png','lnpreserve-player.png','lnpreserve-encounter.png',
+                         'lnpreserve-found.png','lnpreserve-wounded.png','lnpreserve-prayer.png','lnpreserve-water.png'):
                 if (capture_dir/name).is_file():shutil.copy2(capture_dir/name,ROOT/'evidence'/name)
     except subprocess.TimeoutExpired as exc:
         report.update(native_checks_pass=False,runtime_pass=False,error='runner_timeout')
@@ -30,4 +34,4 @@ if __name__=='__main__':
         (out/'runner-console.log').write_text(log)
     (ROOT/'evidence/runtime_checks.json').write_text(json.dumps(report,indent=2)+'\n')
     print(json.dumps(report,indent=2))
-    sys.exit(0 if report.get('exit_code')==0 and all(report.get(key) for key in ('native_checks_pass','runtime_pass','mask_gpu_pass','sprite_decoder_pass','ln1_control_vectors_pass')) else 1)
+    sys.exit(0 if report.get('exit_code')==0 and all(report.get(key) for key in ('native_checks_pass','runtime_pass','mask_gpu_pass','sprite_decoder_pass','ln1_control_vectors_pass','ln1_player_vectors_pass','ln1_enemy_vectors_pass','ln1_combat_vectors_pass','ln1_world_smoke_pass','ln1_feedback_pass')) else 1)

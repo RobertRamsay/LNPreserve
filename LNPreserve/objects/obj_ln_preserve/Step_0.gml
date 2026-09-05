@@ -1,7 +1,18 @@
+try {
 elapsed_us += int64(delta_time);
 // Input is stamped at observation time, not retroactively applied to host-stall debt.
 input_state.sample((elapsed_us div 1000000) * clock.hz + ((elapsed_us mod 1000000) * clock.hz) div 1000000);
-clock.advance(delta_time, tick_native);
+play.timer.advance(delta_time, tick_native);
+if (keyboard_check_pressed(vk_f12)) workbench = !workbench;
+if (keyboard_check_pressed(vk_home)) {
+    var _transport = play.timer;
+    if (surface_exists(play.stage_surface)) surface_free(play.stage_surface);
+    play = new LN1Play(); play.timer = _transport;
+    var _control_buffer = buffer_load("actors/ln1/initial_control_state.json");
+    control_state_ln1 = json_parse(buffer_read(_control_buffer,buffer_text)); buffer_delete(_control_buffer);
+    play.controls = control_state_ln1;
+}
+if (workbench) {
 var _datasets = array_length(catalog.datasets);
 if (keyboard_check_pressed(ord("Q"))) { dataset_index = (dataset_index + _datasets - 1) mod _datasets; asset_index = 0; }
 if (keyboard_check_pressed(ord("E"))) { dataset_index = (dataset_index + 1) mod _datasets; asset_index = 0; }
@@ -16,8 +27,18 @@ if (_count > 0) {
     if (keyboard_check_pressed(vk_left)) asset_index = (asset_index + _count - 1) mod _count;
     if (keyboard_check_pressed(vk_right)) asset_index = (asset_index + 1) mod _count;
 }
+}
 host_frames++;
-if (selftest && host_frames >= 5) {
-    show_debug_message("LN_RUNTIME_PASS: project initialized and rendered five host frames.");
+if (selftest && host_frames == 4) {
+    for (var _i = 0; _i < 160; _i++) { play.timer.cycle += 18433; ln1_play_tick(play, 9); }
+}
+if (selftest && host_frames >= 8) {
+    show_debug_message("LN_RUNTIME_PASS: project initialized and rendered eight host frames, including the second room and its enemy.");
+    game_end();
+}
+
+} catch (_runtime_failure) {
+    if (!selftest) throw _runtime_failure;
+    show_debug_message("LN_RUNTIME_FAILURE: " + string(_runtime_failure));
     game_end();
 }

@@ -5,7 +5,7 @@ function ln_actor_depth(_foot_y, _layer_bias = 0) {
 }
 
 function ln_draw_masked_actor(_sprite, _frame, _x, _y, _xscale, _yscale,
-                              _mask_sprite, _scene_x, _scene_y, _scene_width, _scene_height) {
+                              _mask_sprite, _scene_x, _scene_y, _scene_width, _scene_height, _threshold = 0.5, _clip_bottom = 1000000) {
     if (_mask_sprite < 0 || !shader_is_compiled(sh_ln_occlusion)) {
         draw_sprite_ext(_sprite, _frame, _x, _y, _xscale, _yscale, 0, c_white, 1);
         return;
@@ -15,6 +15,8 @@ function ln_draw_masked_actor(_sprite, _frame, _x, _y, _xscale, _yscale,
     texture_set_stage(shader_get_sampler_index(sh_ln_occlusion, "u_mask"), sprite_get_texture(_mask_sprite, 0));
     shader_set_uniform_f(shader_get_uniform(sh_ln_occlusion, "u_mask_uv"), _uv[0], _uv[1], _uv[2], _uv[3]);
     shader_set_uniform_f(shader_get_uniform(sh_ln_occlusion, "u_scene"), _scene_x, _scene_y, _scene_width, _scene_height);
+    shader_set_uniform_f(shader_get_uniform(sh_ln_occlusion, "u_mask_threshold"), _threshold);
+    shader_set_uniform_f(shader_get_uniform(sh_ln_occlusion, "u_clip_bottom"), _clip_bottom);
     draw_sprite_ext(_sprite, _frame, _x, _y, _xscale, _yscale, 0, c_white, 1);
     shader_reset();
 }
