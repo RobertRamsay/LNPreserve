@@ -47,9 +47,6 @@
   ],
   "ForcedPrefabProjectReferences":[],
   "IncludedFiles":[
-    {"$GMIncludedFile":"","%Name":"navigation.json","name":"navigation.json","resourceType":"GMIncludedFile","resourceVersion":"2.0","CopyToMask":-1,"filePath":"datafiles/play/ln1"},
-    {"$GMIncludedFile":"","%Name":"ln1_navigation_vectors.json","name":"ln1_navigation_vectors.json","resourceType":"GMIncludedFile","resourceVersion":"2.0","CopyToMask":-1,"filePath":"datafiles/verification"},
-
     {"$GMIncludedFile":"","%Name":"initial_control_state.json","CopyToMask":-1,"filePath":"datafiles/actors/ln1","name":"initial_control_state.json","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
     {"$GMIncludedFile":"","%Name":"ln1_actor_part_000.png","CopyToMask":-1,"filePath":"datafiles/actors/ln1","name":"ln1_actor_part_000.png","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
     {"$GMIncludedFile":"","%Name":"ln1_actor_part_001.png","CopyToMask":-1,"filePath":"datafiles/actors/ln1","name":"ln1_actor_part_001.png","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
@@ -1977,6 +1974,7 @@
     {"$GMIncludedFile":"","%Name":"music_manifest.json","CopyToMask":-1,"filePath":"datafiles","name":"music_manifest.json","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
     {"$GMIncludedFile":"","%Name":"dashboard.png","CopyToMask":-1,"filePath":"datafiles/play/ln1","name":"dashboard.png","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
     {"$GMIncludedFile":"","%Name":"gameplay.json","CopyToMask":-1,"filePath":"datafiles/play/ln1","name":"gameplay.json","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
+    {"$GMIncludedFile":"","%Name":"navigation.json","CopyToMask":-1,"filePath":"datafiles/play/ln1","name":"navigation.json","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
     {"$GMIncludedFile":"","%Name":"spr_ln1_actor_extra.png","CopyToMask":-1,"filePath":"datafiles/play/ln1","name":"spr_ln1_actor_extra.png","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
     {"$GMIncludedFile":"","%Name":"spr_ln1_enemy_weapon_0.png","CopyToMask":-1,"filePath":"datafiles/play/ln1","name":"spr_ln1_enemy_weapon_0.png","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
     {"$GMIncludedFile":"","%Name":"spr_ln1_enemy_weapon_1.png","CopyToMask":-1,"filePath":"datafiles/play/ln1","name":"spr_ln1_enemy_weapon_1.png","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
@@ -2101,6 +2099,7 @@
     {"$GMIncludedFile":"","%Name":"ln1_combat_vectors.json","CopyToMask":-1,"filePath":"datafiles/verification","name":"ln1_combat_vectors.json","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
     {"$GMIncludedFile":"","%Name":"ln1_control_vectors.json","CopyToMask":-1,"filePath":"datafiles/verification","name":"ln1_control_vectors.json","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
     {"$GMIncludedFile":"","%Name":"ln1_enemy_vectors.json","CopyToMask":-1,"filePath":"datafiles/verification","name":"ln1_enemy_vectors.json","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
+    {"$GMIncludedFile":"","%Name":"ln1_navigation_vectors.json","CopyToMask":-1,"filePath":"datafiles/verification","name":"ln1_navigation_vectors.json","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
     {"$GMIncludedFile":"","%Name":"ln1_player_vectors.json","CopyToMask":-1,"filePath":"datafiles/verification","name":"ln1_player_vectors.json","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
     {"$GMIncludedFile":"","%Name":"ln1_water_vectors.json","CopyToMask":-1,"filePath":"datafiles/verification","name":"ln1_water_vectors.json","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
   ],
@@ -2111,9 +2110,6 @@
   },
   "name":"LNPreserve",
   "resources":[
-    {"id":{"name":"ln_scene_test","path":"scripts/ln_scene_test/ln_scene_test.yy"}},
-    {"id":{"name":"ln_scene_test_checks","path":"scripts/ln_scene_test_checks/ln_scene_test_checks.yy"}},
-
     {"id":{"name":"obj_ln_preserve","path":"objects/obj_ln_preserve/obj_ln_preserve.yy",},},
     {"id":{"name":"Room1","path":"rooms/Room1/Room1.yy",},},
     {"id":{"name":"ln_checks","path":"scripts/ln_checks/ln_checks.yy",},},
@@ -2121,6 +2117,8 @@
     {"id":{"name":"ln_depth","path":"scripts/ln_depth/ln_depth.yy",},},
     {"id":{"name":"ln_input","path":"scripts/ln_input/ln_input.yy",},},
     {"id":{"name":"ln_music","path":"scripts/ln_music/ln_music.yy",},},
+    {"id":{"name":"ln_scene_test_checks","path":"scripts/ln_scene_test_checks/ln_scene_test_checks.yy",},},
+    {"id":{"name":"ln_scene_test","path":"scripts/ln_scene_test/ln_scene_test.yy",},},
     {"id":{"name":"ln1_combat","path":"scripts/ln1_combat/ln1_combat.yy",},},
     {"id":{"name":"ln1_controls","path":"scripts/ln1_controls/ln1_controls.yy",},},
     {"id":{"name":"ln1_enemy","path":"scripts/ln1_enemy/ln1_enemy.yy",},},
