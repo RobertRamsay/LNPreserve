@@ -1,0 +1,10 @@
+{
+  "command": "GameMaker VM --selftest",
+  "original_gameplay_parity": "not_tested",
+  "exit_code": 0,
+  "native_checks_pass": true,
+  "runtime_pass": true,
+  "mask_gpu_pass": true,
+  "sprite_decoder_pass": true,
+  "ln1_control_vectors_pass": true
+}

@@ -1,0 +1,10 @@
+# Local inputs and emulator captures are kept out of version control.
+source/local/
+tools/vendor/
+build/
+.build/
+__pycache__/
+*.pyc
+*.resource_order
+dist/
+evidence/*_probe.png

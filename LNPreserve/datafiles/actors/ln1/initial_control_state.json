@@ -1,0 +1,36 @@
+{
+  "music": 255,
+  "pause": 0,
+  "item": 10,
+  "weapon": 0,
+  "weapon_locked": 0,
+  "action_reset": 0,
+  "previous": [
+    16,
+    32,
+    64,
+    8,
+    16
+  ],
+  "inventory": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    255
+  ],
+  "weapons": [
+    255,
+    0,
+    0,
+    0,
+    0,
+    0
+  ]
+}

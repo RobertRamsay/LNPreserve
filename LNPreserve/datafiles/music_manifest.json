@@ -1,0 +1,374 @@
+{
+  "schema": 1,
+  "sounds": [
+    {
+      "asset": "snd_ln1_wastelands_game",
+      "game": 1,
+      "level": "wastelands",
+      "path": "sounds/snd_ln1_wastelands_game/snd_ln1_wastelands_game.wav",
+      "role": "game",
+      "status": "silent_placeholder",
+      "subtune": 6
+    },
+    {
+      "asset": "snd_ln1_wastelands_loader",
+      "game": 1,
+      "level": "wastelands",
+      "path": "sounds/snd_ln1_wastelands_loader/snd_ln1_wastelands_loader.wav",
+      "role": "loader",
+      "status": "silent_placeholder",
+      "subtune": 3
+    },
+    {
+      "asset": "snd_ln1_wilderness_game",
+      "game": 1,
+      "level": "wilderness",
+      "path": "sounds/snd_ln1_wilderness_game/snd_ln1_wilderness_game.wav",
+      "role": "game",
+      "status": "silent_placeholder",
+      "subtune": 7
+    },
+    {
+      "asset": "snd_ln1_wilderness_loader",
+      "game": 1,
+      "level": "wilderness",
+      "path": "sounds/snd_ln1_wilderness_loader/snd_ln1_wilderness_loader.wav",
+      "role": "loader",
+      "status": "silent_placeholder",
+      "subtune": 1
+    },
+    {
+      "asset": "snd_ln1_palace_gardens_game",
+      "game": 1,
+      "level": "palace_gardens",
+      "path": "sounds/snd_ln1_palace_gardens_game/snd_ln1_palace_gardens_game.wav",
+      "role": "game",
+      "status": "silent_placeholder",
+      "subtune": 8
+    },
+    {
+      "asset": "snd_ln1_palace_gardens_loader",
+      "game": 1,
+      "level": "palace_gardens",
+      "path": "sounds/snd_ln1_palace_gardens_loader/snd_ln1_palace_gardens_loader.wav",
+      "role": "loader",
+      "status": "silent_placeholder",
+      "subtune": 2
+    },
+    {
+      "asset": "snd_ln1_dungeons_game",
+      "game": 1,
+      "level": "dungeons",
+      "path": "sounds/snd_ln1_dungeons_game/snd_ln1_dungeons_game.wav",
+      "role": "game",
+      "status": "silent_placeholder",
+      "subtune": 9
+    },
+    {
+      "asset": "snd_ln1_dungeons_loader",
+      "game": 1,
+      "level": "dungeons",
+      "path": "sounds/snd_ln1_dungeons_loader/snd_ln1_dungeons_loader.wav",
+      "role": "loader",
+      "status": "silent_placeholder",
+      "subtune": 11
+    },
+    {
+      "asset": "snd_ln1_palace_game",
+      "game": 1,
+      "level": "palace",
+      "path": "sounds/snd_ln1_palace_game/snd_ln1_palace_game.wav",
+      "role": "game",
+      "status": "silent_placeholder",
+      "subtune": 10
+    },
+    {
+      "asset": "snd_ln1_palace_loader",
+      "game": 1,
+      "level": "palace",
+      "path": "sounds/snd_ln1_palace_loader/snd_ln1_palace_loader.wav",
+      "role": "loader",
+      "status": "silent_placeholder",
+      "subtune": 4
+    },
+    {
+      "asset": "snd_ln1_inner_sanctum_game",
+      "game": 1,
+      "level": "inner_sanctum",
+      "path": "sounds/snd_ln1_inner_sanctum_game/snd_ln1_inner_sanctum_game.wav",
+      "role": "game",
+      "status": "silent_placeholder",
+      "subtune": 11
+    },
+    {
+      "asset": "snd_ln1_inner_sanctum_loader",
+      "game": 1,
+      "level": "inner_sanctum",
+      "path": "sounds/snd_ln1_inner_sanctum_loader/snd_ln1_inner_sanctum_loader.wav",
+      "role": "loader",
+      "status": "silent_placeholder",
+      "subtune": 5
+    },
+    {
+      "asset": "snd_ln2_central_park_game",
+      "game": 2,
+      "level": "central_park",
+      "path": "sounds/snd_ln2_central_park_game/snd_ln2_central_park_game.wav",
+      "role": "game",
+      "status": "silent_placeholder",
+      "subtune": 2
+    },
+    {
+      "asset": "snd_ln2_central_park_loader",
+      "game": 2,
+      "level": "central_park",
+      "path": "sounds/snd_ln2_central_park_loader/snd_ln2_central_park_loader.wav",
+      "role": "loader",
+      "status": "silent_placeholder",
+      "subtune": 1
+    },
+    {
+      "asset": "snd_ln2_street_game",
+      "game": 2,
+      "level": "street",
+      "path": "sounds/snd_ln2_street_game/snd_ln2_street_game.wav",
+      "role": "game",
+      "status": "silent_placeholder",
+      "subtune": 4
+    },
+    {
+      "asset": "snd_ln2_street_loader",
+      "game": 2,
+      "level": "street",
+      "path": "sounds/snd_ln2_street_loader/snd_ln2_street_loader.wav",
+      "role": "loader",
+      "status": "silent_placeholder",
+      "subtune": 3
+    },
+    {
+      "asset": "snd_ln2_sewers_game",
+      "game": 2,
+      "level": "sewers",
+      "path": "sounds/snd_ln2_sewers_game/snd_ln2_sewers_game.wav",
+      "role": "game",
+      "status": "silent_placeholder",
+      "subtune": 6
+    },
+    {
+      "asset": "snd_ln2_sewers_loader",
+      "game": 2,
+      "level": "sewers",
+      "path": "sounds/snd_ln2_sewers_loader/snd_ln2_sewers_loader.wav",
+      "role": "loader",
+      "status": "silent_placeholder",
+      "subtune": 5
+    },
+    {
+      "asset": "snd_ln2_basement_game",
+      "game": 2,
+      "level": "basement",
+      "path": "sounds/snd_ln2_basement_game/snd_ln2_basement_game.wav",
+      "role": "game",
+      "status": "silent_placeholder",
+      "subtune": 8
+    },
+    {
+      "asset": "snd_ln2_basement_loader",
+      "game": 2,
+      "level": "basement",
+      "path": "sounds/snd_ln2_basement_loader/snd_ln2_basement_loader.wav",
+      "role": "loader",
+      "status": "silent_placeholder",
+      "subtune": 7
+    },
+    {
+      "asset": "snd_ln2_office_game",
+      "game": 2,
+      "level": "office",
+      "path": "sounds/snd_ln2_office_game/snd_ln2_office_game.wav",
+      "role": "game",
+      "status": "silent_placeholder",
+      "subtune": 10
+    },
+    {
+      "asset": "snd_ln2_office_loader",
+      "game": 2,
+      "level": "office",
+      "path": "sounds/snd_ln2_office_loader/snd_ln2_office_loader.wav",
+      "role": "loader",
+      "status": "silent_placeholder",
+      "subtune": 9
+    },
+    {
+      "asset": "snd_ln2_mansion_game",
+      "game": 2,
+      "level": "mansion",
+      "path": "sounds/snd_ln2_mansion_game/snd_ln2_mansion_game.wav",
+      "role": "game",
+      "status": "silent_placeholder",
+      "subtune": 12
+    },
+    {
+      "asset": "snd_ln2_mansion_loader",
+      "game": 2,
+      "level": "mansion",
+      "path": "sounds/snd_ln2_mansion_loader/snd_ln2_mansion_loader.wav",
+      "role": "loader",
+      "status": "silent_placeholder",
+      "subtune": 11
+    },
+    {
+      "asset": "snd_ln2_final_battle_game",
+      "game": 2,
+      "level": "final_battle",
+      "path": "sounds/snd_ln2_final_battle_game/snd_ln2_final_battle_game.wav",
+      "role": "game",
+      "status": "silent_placeholder",
+      "subtune": 12
+    },
+    {
+      "asset": "snd_ln2_final_battle_loader",
+      "game": 2,
+      "level": "final_battle",
+      "path": "sounds/snd_ln2_final_battle_loader/snd_ln2_final_battle_loader.wav",
+      "role": "loader",
+      "status": "silent_placeholder",
+      "subtune": 13
+    },
+    {
+      "asset": "snd_ln3_earth_game",
+      "game": 3,
+      "level": "earth",
+      "path": "sounds/snd_ln3_earth_game/snd_ln3_earth_game.wav",
+      "role": "game",
+      "status": "silent_placeholder",
+      "subtune": 4
+    },
+    {
+      "asset": "snd_ln3_earth_loader",
+      "game": 3,
+      "level": "earth",
+      "path": "sounds/snd_ln3_earth_loader/snd_ln3_earth_loader.wav",
+      "role": "loader",
+      "status": "silent_placeholder",
+      "subtune": null
+    },
+    {
+      "asset": "snd_ln3_wind_game",
+      "game": 3,
+      "level": "wind",
+      "path": "sounds/snd_ln3_wind_game/snd_ln3_wind_game.wav",
+      "role": "game",
+      "status": "silent_placeholder",
+      "subtune": 5
+    },
+    {
+      "asset": "snd_ln3_wind_loader",
+      "game": 3,
+      "level": "wind",
+      "path": "sounds/snd_ln3_wind_loader/snd_ln3_wind_loader.wav",
+      "role": "loader",
+      "status": "silent_placeholder",
+      "subtune": null
+    },
+    {
+      "asset": "snd_ln3_water_game",
+      "game": 3,
+      "level": "water",
+      "path": "sounds/snd_ln3_water_game/snd_ln3_water_game.wav",
+      "role": "game",
+      "status": "silent_placeholder",
+      "subtune": 6
+    },
+    {
+      "asset": "snd_ln3_water_loader",
+      "game": 3,
+      "level": "water",
+      "path": "sounds/snd_ln3_water_loader/snd_ln3_water_loader.wav",
+      "role": "loader",
+      "status": "silent_placeholder",
+      "subtune": null
+    },
+    {
+      "asset": "snd_ln3_fire_game",
+      "game": 3,
+      "level": "fire",
+      "path": "sounds/snd_ln3_fire_game/snd_ln3_fire_game.wav",
+      "role": "game",
+      "status": "silent_placeholder",
+      "subtune": 7
+    },
+    {
+      "asset": "snd_ln3_fire_loader",
+      "game": 3,
+      "level": "fire",
+      "path": "sounds/snd_ln3_fire_loader/snd_ln3_fire_loader.wav",
+      "role": "loader",
+      "status": "silent_placeholder",
+      "subtune": null
+    },
+    {
+      "asset": "snd_ln3_void_game",
+      "game": 3,
+      "level": "void",
+      "path": "sounds/snd_ln3_void_game/snd_ln3_void_game.wav",
+      "role": "game",
+      "status": "silent_placeholder",
+      "subtune": 8
+    },
+    {
+      "asset": "snd_ln3_void_loader",
+      "game": 3,
+      "level": "void",
+      "path": "sounds/snd_ln3_void_loader/snd_ln3_void_loader.wav",
+      "role": "loader",
+      "status": "silent_placeholder",
+      "subtune": null
+    },
+    {
+      "asset": "snd_ln3_intro_cue",
+      "game": 3,
+      "level": "intro",
+      "path": "sounds/snd_ln3_intro_cue/snd_ln3_intro_cue.wav",
+      "role": "cue",
+      "status": "silent_placeholder",
+      "subtune": 3
+    },
+    {
+      "asset": "snd_ln3_game_over_cue",
+      "game": 3,
+      "level": "game_over",
+      "path": "sounds/snd_ln3_game_over_cue/snd_ln3_game_over_cue.wav",
+      "role": "cue",
+      "status": "silent_placeholder",
+      "subtune": 9
+    },
+    {
+      "asset": "snd_ln3_outro_cue",
+      "game": 3,
+      "level": "outro",
+      "path": "sounds/snd_ln3_outro_cue/snd_ln3_outro_cue.wav",
+      "role": "cue",
+      "status": "silent_placeholder",
+      "subtune": 10
+    },
+    {
+      "asset": "snd_ln3_subtune_01_unmapped_cue",
+      "game": 3,
+      "level": "subtune_01_unmapped",
+      "path": "sounds/snd_ln3_subtune_01_unmapped_cue/snd_ln3_subtune_01_unmapped_cue.wav",
+      "role": "cue",
+      "status": "silent_placeholder",
+      "subtune": 1
+    },
+    {
+      "asset": "snd_ln3_subtune_02_unmapped_cue",
+      "game": 3,
+      "level": "subtune_02_unmapped",
+      "path": "sounds/snd_ln3_subtune_02_unmapped_cue/snd_ln3_subtune_02_unmapped_cue.wav",
+      "role": "cue",
+      "status": "silent_placeholder",
+      "subtune": 2
+    }
+  ]
+}

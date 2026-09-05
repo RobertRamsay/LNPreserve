@@ -1,0 +1,7 @@
+{
+  "parts_checked": 192,
+  "pixel_payload_matches": true,
+  "oracle": "py65 executing supplied-game bytes at $7e36",
+  "c64_system_cycle_parity": "not_tested",
+  "source_ram_sha256": "d30626608f888132d2bad044092f667df2e8f4693dc82b95f1218c65da848b7d"
+}
