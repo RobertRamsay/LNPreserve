@@ -2,7 +2,7 @@
 
 The 6502 runs offline only. The runtime receives PNGs and decoded room tables.
 """
-import json,sys
+import json,sys,shutil
 from pathlib import Path
 from PIL import Image
 from export_ln1_play import ROOT
@@ -111,7 +111,7 @@ def main():
         safe_areas.append(rectangles)
     hint=[];cursor=0x53c8+ram[0x53c2]
     while ram[cursor]<128:hint.append(ram[cursor]);cursor+=1
-    world=dict(rooms=rooms,items=items,safe_areas=safe_areas,prayer_hint_items=hint,initial_entry=ram[0x278],initial_lives=ram[0x9b],initial_inventory=list(ram[0x3ec:0x3fd]),entry_index=list(ram[0xff3c:0xffb8]),entry_x=list(ram[0xffb8:0xffd8]),
+    world=dict(rooms=rooms,items=items,safe_areas=safe_areas,prayer_hint_items=hint,initial_water_clock=ram[0x26f],initial_entry=ram[0x278],initial_lives=ram[0x9b],initial_inventory=list(ram[0x3ec:0x3fd]),entry_index=list(ram[0xff3c:0xffb8]),entry_x=list(ram[0xffb8:0xffd8]),
         entry_y=list(ram[0xffd8:0xfff8]),entry_heading=list(ram[0xafe0:0xb000]))
     builder.write_json(folder/'world.json',world)
     project['resources']=list(resources.values());builder.write_json(project_path,project)
@@ -135,17 +135,17 @@ def main():
             frames.append(bitmap(mem,320,200).crop(box))
         source=folder/(name+'.png');frames[0].save(source)
         resources[name]=builder.sprite_resource(name,source,'Graphics/ln1_game_level1',frames)
-    # Editable presentation approximation; no separate splash sequence has been
-    # identified in the original $bef2 sinking routine. Keep provenance explicit.
-    from PIL import ImageDraw
-    frames=[]
-    for width,rise in [(8,3),(14,5),(20,3),(24,1)]:
-        frame=Image.new('RGBA',(28,12));draw=ImageDraw.Draw(frame)
-        draw.ellipse((14-width//2,6,14+width//2,10),outline=(*PALETTE[3],255))
-        for dx in (-width//3,width//3):draw.line((14+dx,6-rise,14+dx,7-rise),fill=(*PALETTE[1],255))
-        frames.append(frame)
-    name='spr_ln1_water_ripple';source=folder/(name+'.png');frames[0].save(source)
-    resources[name]=builder.sprite_resource(name,source,'Graphics/ln1_game_level1',frames)
+    # River drowning uses the existing source player parts and source scenery
+    # mask. Do not add replacement artwork: $bef2 renders through $5a8d/$7b27.
+    obsolete='spr_ln1_water_ripple'
+    resources.pop(obsolete,None)
+    sprite_root=(ROOT/'LNPreserve/sprites').resolve()
+    obsolete_dir=(sprite_root/obsolete).resolve()
+    if obsolete_dir.parent!=sprite_root:raise ValueError('Obsolete sprite cleanup escaped sprites folder')
+    if obsolete_dir.exists():shutil.rmtree(obsolete_dir)
+    obsolete_png=(folder/(obsolete+'.png')).resolve()
+    if obsolete_png.parent!=folder.resolve():raise ValueError('Obsolete PNG cleanup escaped play folder')
+    obsolete_png.unlink(missing_ok=True)
     project['resources']=list(resources.values());builder.write_json(project_path,project)
 
 if __name__=='__main__':

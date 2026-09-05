@@ -7,8 +7,10 @@
   "cycle_accurate_gameplay_verified": false,
   "runtime_contains_c64_emulator": false,
   "counts": {
-    "scenery_png_objects": 1597,
-    "diagnostic_scene_previews": 436,
+    "scenery_source_object_records": 1597,
+    "diagnostic_scene_source_records": 436,
+    "unique_scenery_pngs": 1702,
+    "scenery_image_aliases": 331,
     "scenery_datasets": 26,
     "ln1_character_parts": 192,
     "ln1_native_room_layouts": 25,
@@ -75,6 +77,11 @@
       "name": "LN1 melee hit testing",
       "address": "$7ecc",
       "verification": "6843 valid-attack samples; damage dispatch and whole combat replay excluded"
+    },
+    {
+      "name": "LN1 river sinking timer",
+      "address": "$bee3/$56f7",
+      "verification": "1536 tick/clock states including wrap; rendering and interrupt timing excluded"
     }
   ],
   "current_gameplay": "Partial native Wastelands prototype; no completed game",
@@ -100,10 +107,11 @@
     "ln1_enemy_vectors_pass": true,
     "ln1_combat_vectors_pass": true,
     "ln1_world_smoke_pass": true,
-    "ln1_feedback_pass": true
+    "ln1_feedback_pass": true,
+    "ln1_water_vectors_pass": true
   },
   "structural_checks": {
-    "tests_run": 4,
+    "tests_run": 7,
     "failures": 0,
     "errors": 0,
     "skipped": 0,
@@ -116,5 +124,21 @@
     "oracle": "py65 executing supplied-game bytes at $7e36",
     "c64_system_cycle_parity": "not_tested",
     "source_ram_sha256": "d30626608f888132d2bad044092f667df2e8f4693dc82b95f1218c65da848b7d"
+  },
+  "asset_cleanup": {
+    "canonical_scenery_images": {
+      "alias_records": 331,
+      "empty_masks_removed": 436,
+      "source_image_records": 2033,
+      "unique_images": 1702
+    },
+    "game_maker_frame_and_layer_files_preserved": true,
+    "removed_count": 781,
+    "source_aliases_preserved": true
+  },
+  "asset_rebuild_check": {
+    "files_checked": 10566,
+    "unchanged_after_rebuild": true,
+    "changed_paths": []
   }
 }

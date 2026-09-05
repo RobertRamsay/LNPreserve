@@ -64,9 +64,19 @@ def decode_dataset(raw,game):
         else:
             entries=[]; pos=address
             for _ in range(1024):
-                if pos+7>=base+len(payload):
+                # The terminator is one byte, and a panel entry needs only its
+                # actual header plus optional colour bytes. Requiring eight
+                # remaining bytes dropped the final objects of loader pictures.
+                limit=base+len(payload)
+                if pos>=limit:
                     issues.append(dict(record=i,issue='unterminated_panel'));break
                 if game>1 and memory[pos]==255:break
+                header=4 if game==1 else 3
+                if pos+header>limit:
+                    issues.append(dict(record=i,issue='truncated_panel_entry'));break
+                n=(memory[pos+header-1]>>5)&3
+                if pos+header+n>limit:
+                    issues.append(dict(record=i,issue='truncated_colour_override'));break
                 if game==1:
                     r=list(memory[pos:pos+4]); n=(r[3]>>5)&3
                     entry=dict(object=r[0]>>1,x=(r[2]&31)*8,y=(r[3]&31)*8,mask=False,
@@ -74,7 +84,9 @@ def decode_dataset(raw,game):
                     end=bool(r[2]&64);pos+=4+n
                 else:
                     r=list(memory[pos:pos+3]);n=(r[2]>>5)&3
-                    entry=dict(object=r[0],x=(r[1]&63)*8-112,y=(r[2]&31)*8-112,mask=bool(r[1]&128),
+                    # LN2/LN3 X bit 7 reverses bitmap pixels horizontally. It
+                    # does not remove the object or make it an occlusion mask.
+                    entry=dict(object=r[0],x=(r[1]&63)*8-112,y=(r[2]&31)*8-112,mask=False,flip_x=bool(r[1]&128),
                                recolour=list(memory[pos+3:pos+3+n]),raw=r,address=pos)
                     end=False;pos+=3+n
                 entries.append(entry)
@@ -88,7 +100,7 @@ def render_panel(dataset,panel_id,background,width=240,height=144):
     occlusion=Image.new('RGBA',(width,height),(255,255,255,0))
     warnings=set()
     attributes={}
-    def place(pid,ox,oy,overrides,mask,trail):
+    def place(pid,ox,oy,overrides,mask,trail,flip=False):
         if pid in trail:
             warnings.add('recursive_panel');return
         obj=dataset['objects'].get(str(pid))
@@ -100,8 +112,9 @@ def render_panel(dataset,panel_id,background,width=240,height=144):
                 for x in range(w):
                     dx=ox+x
                     if dx<0 or dx>=width:continue
-                    cell=y//8*cw+x//8
-                    code=(obj['bitmap'][cell*8+y%8]>>(6-2*((x%8)//2)))&3
+                    sx=w-1-x if flip else x
+                    cell=y//8*cw+sx//8
+                    code=(obj['bitmap'][cell*8+y%8]>>(6-2*((sx%8)//2)))&3
                     if mask:
                         if code:occlusion.putpixel((dx,dy),(255,255,255,255))
                         continue
@@ -122,12 +135,13 @@ def render_panel(dataset,panel_id,background,width=240,height=144):
         if panel is None:
             warnings.add(f'unresolved_record_{pid}');return
         for item in panel['entries']:
-            place(item['object'],ox+item['x'],oy+item['y'],item['recolour'] or overrides,mask or item['mask'],trail+(pid,))
+            place(item['object'],ox+item['x'],oy+item['y'],item['recolour'] or overrides,mask or item['mask'],trail+(pid,),item.get('flip_x',False))
     place(panel_id,0,0,[],False,())
     return image,occlusion,sorted(warnings)
 
 def export_all():
     dest=PROJECT/'datafiles/graphics';dest.mkdir(parents=True,exist_ok=True)
+    previous=json.loads((dest/'manifest.json').read_text()) if (dest/'manifest.json').exists() else {'datasets':[]}
     inventory=[]; thumbnails=[]
     disk_report=json.loads((ROOT/'evidence/disk_inventory.json').read_text())
     payloads=[]
@@ -177,7 +191,36 @@ def export_all():
             inventory.append(dict(id=slug,game=game,kind=kind,provenance=provenance,objects=records,locations=previews,
                                   issues=dataset['issues'],scene_data=(folder/'scene_data.json').relative_to(PROJECT).as_posix()))
             print(slug,len(records),'objects',len(previews),'locations',provenance['status'],flush=True)
-    report={'schema':1,'palette':PALETTE,'datasets':inventory,'scene_validation':'not_yet_compared_to_original_game'}
+    # Identical images have one editable resource. Source record/room identities
+    # stay in the manifest and decoded tables as aliases of that image.
+    known={};removed=[];before=0
+    for dataset in inventory:
+        for role in ('objects','locations'):
+            for record in dataset[role]:
+                before+=1;path=PROJECT/record['path'];img=Image.open(path).convert('RGBA')
+                key=(role,img.size,sha(img.tobytes()))
+                first=known.setdefault(key,(record['name'],record['path'],dataset['id']))
+                record['canonical_name'],record['path'],record['canonical_folder']=first
+                if path!=PROJECT/first[1]:removed.append(path)
+                if role=='locations':
+                    mask=PROJECT/record['mask_path']
+                    if Image.open(mask).getchannel('A').getbbox() is None:
+                        removed.append(mask);record['mask_path']=None
+    keep={PROJECT/r['path'] for d in inventory for role in ('objects','locations') for r in d[role]}
+    keep.update(PROJECT/r['mask_path'] for d in inventory for r in d['locations'] if r['mask_path'])
+    for d in previous['datasets']:
+        for role in ('objects','locations'):
+            for r in d[role]:
+                removed.append(PROJECT/r['path'])
+                if r.get('mask_path'):removed.append(PROJECT/r['mask_path'])
+    root=dest.resolve()
+    for path in set(removed)-keep:
+        if path.exists():
+            if not path.resolve().is_relative_to(root):raise ValueError('Generated PNG cleanup escaped graphics folder')
+            path.unlink()
+    report={'schema':2,'palette':PALETTE,'datasets':inventory,'scene_validation':'not_yet_compared_to_original_game',
+            'image_deduplication':dict(source_image_records=before,unique_images=len(known),alias_records=before-len(known),
+                empty_masks_removed=sum(r['mask_path'] is None for d in inventory for r in d['locations']))}
     (dest/'manifest.json').write_text(json.dumps(report,indent=2)+'\n')
     sheet=Image.new('RGB',(960,((len(thumbnails)+11)//12)*88),(32,34,40));draw=ImageDraw.Draw(sheet)
     for i,(name,img) in enumerate(thumbnails):

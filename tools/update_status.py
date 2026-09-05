@@ -8,8 +8,10 @@ def main():
     status=dict(schema=1,project='LNPreserve',stage='native_conversion_in_progress',
         playable_trilogy=False,complete_asset_conversion=False,cycle_accurate_gameplay_verified=False,
         runtime_contains_c64_emulator=False,
-        counts=dict(scenery_png_objects=sum(len(d['objects']) for d in graphics['datasets']),
-                    diagnostic_scene_previews=sum(len(d['locations']) for d in graphics['datasets']),
+        counts=dict(scenery_source_object_records=sum(len(d['objects']) for d in graphics['datasets']),
+                    diagnostic_scene_source_records=sum(len(d['locations']) for d in graphics['datasets']),
+                    unique_scenery_pngs=graphics['image_deduplication']['unique_images'],
+                    scenery_image_aliases=graphics['image_deduplication']['alias_records'],
                     scenery_datasets=len(graphics['datasets']),ln1_character_parts=192,
                     ln1_native_room_layouts=25,ln1_assembled_actor_poses=1152,ln1_pickup_placements=7,
                     silent_sound_assets=sum(s['status']=='silent_placeholder' for s in music['sounds'])),
@@ -30,10 +32,13 @@ def main():
     status['native_original_routines'].extend([
         dict(name='LN1 player movement and animation',address='$5727/$5a12/$5b69/$7540',verification='2856 source-code updates, including 128 prayer animation samples; rendering intercepted; world and system timing excluded'),
         dict(name='LN1 enemy decisions and animation',address='$6a48/$5b54',verification='7680 source-code updates with shared random returns; dispatch and hardware read timing excluded'),
-        dict(name='LN1 melee hit testing',address='$7ecc',verification='6843 valid-attack samples; damage dispatch and whole combat replay excluded')])
-    for name in ('runtime_checks','structural_checks','ln1_actor_decoder_checks'):
+        dict(name='LN1 melee hit testing',address='$7ecc',verification='6843 valid-attack samples; damage dispatch and whole combat replay excluded'),
+        dict(name='LN1 river sinking timer',address='$bee3/$56f7',verification='1536 tick/clock states including wrap; rendering and interrupt timing excluded')])
+    for name in ('runtime_checks','structural_checks','ln1_actor_decoder_checks','asset_cleanup','asset_rebuild_check'):
         path=ROOT/'evidence'/f'{name}.json'
-        if path.exists():status[name]=read(path)
+        if path.exists():
+            status[name]=read(path)
+            if name=='asset_cleanup':status[name].pop('removed_sprite_resources',None)
     (ROOT/'evidence/STATUS.json').write_text(json.dumps(status,indent=2)+'\n')
     print(json.dumps(status['counts'],indent=2))
 if __name__=='__main__':main()

@@ -1,5 +1,17 @@
 /// Integration regressions for feedback, room state, prayer and water transitions.
 function ln1_feedback_checks() {
+    // Expected state comes from executing the supplied game's $bee3 offline.
+    var _buffer = buffer_load("verification/ln1_water_vectors.json");
+    var _oracle = json_parse(buffer_read(_buffer, buffer_text)); buffer_delete(_buffer);
+    var _water = new LN1Play();
+    for (var _i = 0; _i < array_length(_oracle.vectors); _i++) {
+        var _v = _oracle.vectors[_i];
+        _water.player.y = _v.y; _water.player.tick = _v.tick; _water.water_clock = _v.clock;
+        ln1_water_advance(_water);
+        ln_check(_water.player.y == _v.expected_y && _water.water_clock == _v.expected_clock,
+            "original river timer state " + string(_i));
+    }
+    show_debug_message("LN_WATER_PASS: 1536 original water timer vectors; rendering and interrupts excluded.");
     var _g = new LN1Play(), _p = _g.player;
     _g.last_entry = 8 * 4; ln1_play_enter(_g, 8);
     var _item = _g.world.items[2]; // Original nunchakus placement.
@@ -53,6 +65,7 @@ function ln1_feedback_checks() {
     _g.last_entry = 15 * 4; ln1_play_enter(_g, 15);
     ln_check(_p.boundary_crossings == 1, "water room restores source entrance crossing state");
     _p.x = 0; _p.y = 100; _p.action = 0; _p.facing = 1; _p.heading = 1;
+    _g.water_clock = _p.tick;
     ln1_play_hazards(_g);
     ln_check(_g.water_active && _g.water_cutoff == 124 && _g.player_health == 0, "unsafe water starts sinking at original cutoff");
     ln1_play_tick(_g, 0); ln_check(_p.y == 100, "sinking waits for its two-tick cadence");
@@ -83,8 +96,8 @@ function ln1_feedback_capture() {
     ln1_play_draw(_g, false); surface_save(application_surface, "lnpreserve-prayer.png");
     surface_free(_g.stage_surface);
     _g = new LN1Play(); _p = _g.player;
-    _g.last_entry = 60; ln1_play_enter(_g, 15);
-    _p.x = 176; _p.y = 72; _p.action = 0; _p.facing = 1; _p.heading = 1;
+    _g.last_entry = 44; ln1_play_enter(_g, 11);
+    _p.x = 112; _p.y = 120; _p.action = 0; _p.facing = 1; _p.heading = 1; _p.boundary_crossings = 1;
     ln1_play_hazards(_g); repeat (16) ln1_play_tick(_g, 0);
     ln1_play_draw(_g, false); surface_save(application_surface, "lnpreserve-water.png");
     surface_free(_g.stage_surface);

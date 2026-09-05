@@ -1,6 +1,6 @@
 """Register converted PNGs and native GML in the user's existing GameMaker project."""
 from pathlib import Path
-import argparse,copy,json,re,uuid,wave
+import argparse,copy,json,re,uuid,wave,shutil
 from PIL import Image,ImageDraw
 ROOT=Path(__file__).resolve().parents[1]; PROJECT=ROOT/'LNPreserve'
 REFRESH_GRAPHICS=False
@@ -8,6 +8,8 @@ REFRESH_GRAPHICS=False
 def read_json(path):return json.loads(re.sub(r',\s*([}\]])',r'\1',path.read_text(encoding='utf-8-sig')))
 def write_json(path,data):
     path.parent.mkdir(parents=True,exist_ok=True)
+    # Keep GameMaker's formatting when the resource has not actually changed.
+    if path.exists() and read_json(path)==data:return
     path.write_text(json.dumps(data,indent=2,sort_keys=True)+'\n',encoding='utf-8')
 def uid(name):return str(uuid.uuid5(uuid.NAMESPACE_URL,'LNPreserve/'+name))
 def res(kind,name,version=''):
@@ -62,6 +64,10 @@ def main():
     yyp=PROJECT/'LNPreserve.yyp';project=read_json(yyp)
     # Preserve all user resources; generated resources use stable names and identities.
     resources={r['id']['name']:r for r in project['resources']}
+    old_catalog=read_json(PROJECT/'datafiles/catalog.json') if (PROJECT/'datafiles/catalog.json').exists() else {'datasets':[]}
+    old_generated={r[k] for d in old_catalog['datasets'] for role in ('objects','locations') for r in d[role]
+                   for k in ('sprite_name','mask_name') if r.get(k)}
+    generated=set()
     folders={f['folderPath']:f for f in project['Folders']}
     def folder(name):
         f=res('GMFolder',name.split('/')[-1]);f['folderPath']=f'folders/{name}.yy';folders[f['folderPath']]=f
@@ -74,23 +80,53 @@ def main():
         item={'id':dataset['id'],'game':dataset['game'],'provenance':dataset['provenance']['status'],
               'objects':[],'locations':[]}
         for obj in dataset['objects']:
-            name='spr_'+obj['name'];r=sprite_resource(name,PROJECT/obj['path'],f);resources[name]=r
-            item['objects'].append({'name':obj['name'],'sprite_name':name,'id':obj['source_id']})
+            name='spr_'+obj.get('canonical_name',obj['name']);generated.add(name)
+            cf='Graphics/'+obj.get('canonical_folder',dataset['id']);folder(cf)
+            resources[name]=sprite_resource(name,PROJECT/obj['path'],cf)
+            existing=next((v for v in item['objects'] if v['sprite_name']==name),None)
+            if existing:existing['source_ids'].append(obj['source_id'])
+            else:item['objects'].append({'name':obj['name'],'sprite_name':name,'id':obj['source_id'],'source_ids':[obj['source_id']]})
         for loc in dataset['locations']:
-            name='spr_'+loc['name'];maskname=name+'_mask'
-            resources[name]=sprite_resource(name,PROJECT/loc['path'],f)
-            resources[maskname]=sprite_resource(maskname,PROJECT/loc['mask_path'],f)
-            item['locations'].append({'name':loc['name'],'sprite_name':name,'mask_name':maskname,'id':loc['id'],
-                                     'warnings':loc['warnings']})
+            name='spr_'+loc.get('canonical_name',loc['name']);generated.add(name);maskname=''
+            cf='Graphics/'+loc.get('canonical_folder',dataset['id']);folder(cf)
+            resources[name]=sprite_resource(name,PROJECT/loc['path'],cf)
+            if loc.get('mask_path'):
+                maskname=name+'_mask';generated.add(maskname)
+                resources[maskname]=sprite_resource(maskname,PROJECT/loc['mask_path'],cf)
+            existing=next((v for v in item['locations'] if v['sprite_name']==name),None)
+            if existing:existing['source_ids'].append(loc['id'])
+            else:item['locations'].append({'name':loc['name'],'sprite_name':name,'mask_name':maskname,'id':loc['id'],
+                                     'warnings':loc['warnings'],'source_ids':[loc['id']]})
         catalog.append(item)
     actor_manifest=PROJECT/'datafiles/actors/ln1/manifest.json'
     if actor_manifest.exists():
         actors=read_json(actor_manifest);f='Graphics/ln1_character_parts';folder(f)
         item={'id':'ln1_character_parts','game':1,'provenance':'original_6502_decoder_verified','objects':[],'locations':[]}
+        seen_parts={}
         for obj in actors['parts']:
-            name='spr_'+obj['name'];resources[name]=sprite_resource(name,PROJECT/obj['path'],f)
-            item['objects'].append({'name':obj['name'],'sprite_name':name,'id':obj['id']})
+            key=tuple(obj['decoded']);name=seen_parts.setdefault(key,'spr_'+obj['name']);generated.add(name)
+            resources[name]=sprite_resource(name,PROJECT/obj['path'],f)
+            existing=next((v for v in item['objects'] if v['sprite_name']==name),None)
+            if existing:existing['source_ids'].append(obj['id'])
+            else:item['objects'].append({'name':obj['name'],'sprite_name':name,'id':obj['id'],'source_ids':[obj['id']]})
         catalog.append(item)
+    # Prune only resources that the preceding generated catalog owned. GameMaker's
+    # frame/layer files belong to their sprite and must never be deduplicated alone.
+    gml='\n'.join(p.read_text(encoding='utf-8-sig') for p in PROJECT.rglob('*.gml'))
+    sprite_root=(PROJECT/'sprites').resolve();pruned=[]
+    for name in sorted(old_generated-generated):
+        if re.search(r'\b'+re.escape(name)+r'\b',gml):continue
+        path=(sprite_root/name).resolve()
+        if path.parent!=sprite_root:raise ValueError('Generated sprite cleanup escaped sprite folder')
+        resources.pop(name,None)
+        if path.exists():shutil.rmtree(path)
+        pruned.append(name)
+    cleanup_path=ROOT/'evidence/asset_cleanup.json'
+    prior=read_json(cleanup_path).get('removed_sprite_resources',[]) if cleanup_path.exists() else []
+    removed=sorted((set(prior)|set(pruned))-set(resources))
+    write_json(cleanup_path,dict(removed_sprite_resources=removed,removed_count=len(removed),
+        canonical_scenery_images=manifest.get('image_deduplication',{}),
+        source_aliases_preserved=True,game_maker_frame_and_layer_files_preserved=True))
     # Deliberately synthetic test graphics; never counted as recovered assets.
     fixtures=ROOT/'evidence/fixtures';fixtures.mkdir(parents=True,exist_ok=True)
     actor=Image.new('RGBA',(20,40));d=ImageDraw.Draw(actor);d.rectangle((2,2,17,37),fill=(255,200,60,255))
@@ -161,6 +197,11 @@ def main():
         option_windows_executable_name='LNPreserve.exe',option_windows_product_info='LNPreserve',option_windows_company_info='',
         option_windows_description_info='Last Ninja preservation conversion workbench',option_windows_resize_window=True)
     write_json(PROJECT/'options/windows/options_windows.yy',options)
+    # Remove empty generated dataset folders, including loaders that now alias
+    # one canonical picture. Keep every folder that contains a live resource.
+    used_parents={read_json(PROJECT/r['id']['path']).get('parent',{}).get('path') for r in resources.values()}
+    generated_folders={'folders/Graphics/'+d['id']+'.yy' for d in manifest['datasets']}
+    for path in generated_folders-set(used_parents):folders.pop(path,None)
     project['resources']=list(resources.values());project['Folders']=list(folders.values());project['IncludedFiles']=[]
     # Images are editable sprite resources, not duplicated as runtime included files.
     for path in sorted((PROJECT/'datafiles').rglob('*.json')):

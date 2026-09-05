@@ -248,6 +248,7 @@
     0
   ],
   "initial_lives": 3,
+  "initial_water_clock": 0,
   "items": [
     {
       "flash_sprite": "spr_ln1_pickup_2_flash",

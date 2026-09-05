@@ -15,7 +15,7 @@ function LN1Play() constructor {
     inventory = world.initial_inventory; controls = undefined;
     notice_item = -1; notice_tick = 0; notice_duration = 0; notice_label = 0;
     room_age = 0; prayer_phase = 0;
-    water_active = false; water_ticks = 0; water_cutoff = 173; water_x = 0;
+    water_active = false; water_ticks = 0; water_cutoff = 173; water_clock = world.initial_water_clock;
     random_pointer = 0; random_value = 0;
     stage_surface = -1;
     timer = new LNClock();
@@ -139,8 +139,9 @@ function ln1_play_hazards(_g) {
     }
     _g.player_health = 0; _p.input_lock = 255;
     _g.water_active = true; _g.water_ticks = 0;
-    _g.water_cutoff = min(_p.y + 24, 173); _g.water_x = _p.x;
+    _g.water_cutoff = min(_p.y + 24, 173);
     _p.action = 0; _p.action_state = 0; _p.flags = 0;
+    ln1_water_advance(_g);
 }
 
 function ln1_notice_update(_g) {
@@ -183,7 +184,15 @@ function ln1_prayer_tick(_g, _joy) {
 function ln1_water_tick(_g) {
     var _p = _g.player;
     _p.tick = (_p.tick + 1) & 255; _p.last_tick = _p.tick; _g.water_ticks++;
-    if ((_g.water_ticks & 1) != 0) return;
+    ln1_water_advance(_g);
+}
+
+function ln1_water_advance(_g) {
+    var _p = _g.player;
+    // $56f7 uses a persistent wrapping clock; the first descent can happen
+    // immediately when the river is entered, rather than after a new delay.
+    if (((_p.tick - _g.water_clock) & 255) < 2) return;
+    _g.water_clock = _p.tick;
     _p.y += 2;
     ln1_player_render(_p, _g.data.mirror[_p.facing >> 1] & (1 << _p.heading));
     if (_p.y - 21 >= _g.water_cutoff) {
@@ -220,8 +229,6 @@ function ln1_play_draw(_game, _paused) {
     }
     if (_s.y < _game.enemy.y) { ln1_play_actor(_game, _s, false); ln1_play_actor(_game, _game.enemy, true); }
     else { ln1_play_actor(_game, _game.enemy, true); ln1_play_actor(_game, _s, false); }
-    if (_game.water_active && _game.water_ticks < 24)
-        draw_sprite(spr_ln1_water_ripple, _game.water_ticks div 6, _game.water_x - 14, _game.water_cutoff - 37);
     surface_reset_target();
     draw_surface_ext(_game.stage_surface, _x, _y, _scale, _scale, 0, c_white, 1);
     draw_sprite_ext(spr_ln1_dashboard, 0, _x, _y, _scale, _scale, 0, c_white, 1);
