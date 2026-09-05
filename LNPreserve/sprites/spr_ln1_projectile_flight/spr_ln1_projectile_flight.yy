@@ -1,0 +1,321 @@
+{
+  "$GMSprite": "v2",
+  "%Name": "spr_ln1_projectile_flight",
+  "DynamicTexturePage": false,
+  "For3D": false,
+  "HTile": false,
+  "VTile": false,
+  "bboxMode": 0,
+  "bbox_bottom": 20,
+  "bbox_left": 0,
+  "bbox_right": 23,
+  "bbox_top": 0,
+  "collisionKind": 1,
+  "collisionTolerance": 0,
+  "edgeFiltering": false,
+  "frames": [
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "6c9ae386-94bf-5f6e-94da-b03633846190",
+      "name": "6c9ae386-94bf-5f6e-94da-b03633846190",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "a4a5181b-dd0b-5758-8b97-f5d213fa6dda",
+      "name": "a4a5181b-dd0b-5758-8b97-f5d213fa6dda",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "d446148c-7707-59ec-9962-257fcd515e5e",
+      "name": "d446148c-7707-59ec-9962-257fcd515e5e",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "5efd6ce1-1823-5a64-8da7-e01da6107f4b",
+      "name": "5efd6ce1-1823-5a64-8da7-e01da6107f4b",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "b769907c-a516-5f85-aeb4-cced97122bab",
+      "name": "b769907c-a516-5f85-aeb4-cced97122bab",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "63ee6575-87ad-569f-b34c-f16566f22ee6",
+      "name": "63ee6575-87ad-569f-b34c-f16566f22ee6",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "58f22d29-587b-5359-be46-72d8233330a0",
+      "name": "58f22d29-587b-5359-be46-72d8233330a0",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    }
+  ],
+  "gridX": 8,
+  "gridY": 8,
+  "height": 21,
+  "layers": [
+    {
+      "$GMImageLayer": "",
+      "%Name": "b7ad45ae-cd13-5c50-b5e2-cef3a4aa5762",
+      "blendMode": 0,
+      "displayName": "Original pixels",
+      "isLocked": false,
+      "name": "b7ad45ae-cd13-5c50-b5e2-cef3a4aa5762",
+      "opacity": 100.0,
+      "resourceType": "GMImageLayer",
+      "resourceVersion": "2.0",
+      "visible": true
+    }
+  ],
+  "name": "spr_ln1_projectile_flight",
+  "nineSlice": null,
+  "origin": 0,
+  "parent": {
+    "name": "ln1_game_level1",
+    "path": "folders/Graphics/ln1_game_level1.yy"
+  },
+  "preMultiplyAlpha": false,
+  "resourceType": "GMSprite",
+  "resourceVersion": "2.0",
+  "sequence": {
+    "$GMSequence": "v1",
+    "%Name": "spr_ln1_projectile_flight",
+    "autoRecord": true,
+    "backdropHeight": 768,
+    "backdropImageOpacity": 0.5,
+    "backdropImagePath": "",
+    "backdropWidth": 1366,
+    "backdropXOffset": 0,
+    "backdropYOffset": 0,
+    "eventStubScript": null,
+    "eventToFunction": {},
+    "events": {
+      "$KeyframeStore<MessageEventKeyframe>": "",
+      "Keyframes": [],
+      "resourceType": "KeyframeStore<MessageEventKeyframe>",
+      "resourceVersion": "2.0"
+    },
+    "length": 7.0,
+    "lockOrigin": false,
+    "moments": {
+      "$KeyframeStore<MomentsEventKeyframe>": "",
+      "Keyframes": [],
+      "resourceType": "KeyframeStore<MomentsEventKeyframe>",
+      "resourceVersion": "2.0"
+    },
+    "name": "spr_ln1_projectile_flight",
+    "playback": 1,
+    "playbackSpeed": 0.0,
+    "playbackSpeedType": 0,
+    "resourceType": "GMSequence",
+    "resourceVersion": "2.0",
+    "showBackdrop": true,
+    "showBackdropImage": false,
+    "timeUnits": 1,
+    "tracks": [
+      {
+        "$GMSpriteFramesTrack": "",
+        "builtinName": 0,
+        "events": [],
+        "inheritsTrackColour": true,
+        "interpolation": 1,
+        "isCreationTrack": false,
+        "keyframes": {
+          "$KeyframeStore<SpriteFrameKeyframe>": "",
+          "Keyframes": [
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "6c9ae386-94bf-5f6e-94da-b03633846190",
+                    "path": "sprites/spr_ln1_projectile_flight/spr_ln1_projectile_flight.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 0.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "e474abfb-93ce-57fb-bf66-549c167e37f9",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "a4a5181b-dd0b-5758-8b97-f5d213fa6dda",
+                    "path": "sprites/spr_ln1_projectile_flight/spr_ln1_projectile_flight.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 1.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "e2f672d2-fa0f-5153-961b-2229c999179c",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "d446148c-7707-59ec-9962-257fcd515e5e",
+                    "path": "sprites/spr_ln1_projectile_flight/spr_ln1_projectile_flight.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 2.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "2716d011-a573-573b-adc5-7823855262b5",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "5efd6ce1-1823-5a64-8da7-e01da6107f4b",
+                    "path": "sprites/spr_ln1_projectile_flight/spr_ln1_projectile_flight.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 3.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "f09c9ee5-6fc7-5fd9-baa4-1b8ecf2f1116",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "b769907c-a516-5f85-aeb4-cced97122bab",
+                    "path": "sprites/spr_ln1_projectile_flight/spr_ln1_projectile_flight.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 4.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "96b9f391-a91e-5aae-8047-03987b17f8f8",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "63ee6575-87ad-569f-b34c-f16566f22ee6",
+                    "path": "sprites/spr_ln1_projectile_flight/spr_ln1_projectile_flight.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 5.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "c97ad1f8-11db-52ba-994d-357fcb23c33d",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "58f22d29-587b-5359-be46-72d8233330a0",
+                    "path": "sprites/spr_ln1_projectile_flight/spr_ln1_projectile_flight.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 6.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "ffe87011-1c06-553f-89d6-d5f6da24a05e",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            }
+          ],
+          "resourceType": "KeyframeStore<SpriteFrameKeyframe>",
+          "resourceVersion": "2.0"
+        },
+        "modifiers": [],
+        "name": "frames",
+        "resourceType": "GMSpriteFramesTrack",
+        "resourceVersion": "2.0",
+        "spriteId": null,
+        "trackColour": 0,
+        "tracks": [],
+        "traits": 0
+      }
+    ],
+    "visibleRange": null,
+    "volume": 1.0,
+    "xorigin": 0,
+    "yorigin": 0
+  },
+  "swatchColours": null,
+  "swfPrecision": 2.525,
+  "textureGroupId": {
+    "name": "Default",
+    "path": "texturegroups/Default"
+  },
+  "type": 0,
+  "width": 24
+}

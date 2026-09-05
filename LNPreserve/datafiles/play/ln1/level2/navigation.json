@@ -1,0 +1,677 @@
+{
+  "directions": [
+    "NE",
+    "SE",
+    "SW",
+    "NW"
+  ],
+  "rooms": [
+    {
+      "entries": [
+        -1,
+        9,
+        -1,
+        4
+      ],
+      "id": 1,
+      "routes": [
+        {
+          "direction": 1,
+          "entry": 9,
+          "x": 236,
+          "y": 130
+        },
+        {
+          "direction": 3,
+          "entry": 4,
+          "x": 0,
+          "y": 57
+        }
+      ],
+      "spawn_entry": 4
+    },
+    {
+      "entries": [
+        13,
+        -1,
+        -1,
+        4
+      ],
+      "id": 2,
+      "routes": [
+        {
+          "direction": 0,
+          "entry": 13,
+          "x": 236,
+          "y": 114
+        },
+        {
+          "direction": 3,
+          "entry": 4,
+          "x": 12,
+          "y": 108
+        }
+      ],
+      "spawn_entry": 8
+    },
+    {
+      "entries": [
+        17,
+        -1,
+        8,
+        -1
+      ],
+      "id": 3,
+      "routes": [
+        {
+          "direction": 0,
+          "entry": 17,
+          "x": 236,
+          "y": 72
+        },
+        {
+          "direction": 2,
+          "entry": 8,
+          "x": 12,
+          "y": 128
+        }
+      ],
+      "spawn_entry": 12
+    },
+    {
+      "entries": [
+        21,
+        -1,
+        12,
+        -1
+      ],
+      "id": 4,
+      "routes": [
+        {
+          "direction": 0,
+          "entry": 21,
+          "x": 236,
+          "y": 48
+        },
+        {
+          "direction": 2,
+          "entry": 12,
+          "x": 12,
+          "y": 146
+        }
+      ],
+      "spawn_entry": 16
+    },
+    {
+      "entries": [
+        -1,
+        25,
+        -1,
+        16
+      ],
+      "id": 5,
+      "routes": [
+        {
+          "direction": 1,
+          "entry": 25,
+          "x": 236,
+          "y": 120
+        },
+        {
+          "direction": 3,
+          "entry": 16,
+          "x": 12,
+          "y": 70
+        }
+      ],
+      "spawn_entry": 20
+    },
+    {
+      "entries": [
+        -1,
+        28,
+        -1,
+        20
+      ],
+      "id": 6,
+      "routes": [
+        {
+          "direction": 1,
+          "entry": 28,
+          "x": 236,
+          "y": 98
+        },
+        {
+          "direction": 3,
+          "entry": 20,
+          "x": 12,
+          "y": 70
+        }
+      ],
+      "spawn_entry": 24
+    },
+    {
+      "entries": [
+        -1,
+        33,
+        -1,
+        24
+      ],
+      "id": 7,
+      "routes": [
+        {
+          "direction": 1,
+          "entry": 33,
+          "x": 236,
+          "y": 120
+        },
+        {
+          "direction": 3,
+          "entry": 24,
+          "x": 12,
+          "y": 70
+        }
+      ],
+      "spawn_entry": 29
+    },
+    {
+      "entries": [
+        -1,
+        38,
+        -1,
+        29
+      ],
+      "id": 8,
+      "routes": [
+        {
+          "direction": 1,
+          "entry": 38,
+          "x": 232,
+          "y": 152
+        },
+        {
+          "direction": 3,
+          "entry": 29,
+          "x": 12,
+          "y": 96
+        }
+      ],
+      "spawn_entry": 32
+    },
+    {
+      "entries": [
+        41,
+        -1,
+        100,
+        32
+      ],
+      "id": 9,
+      "routes": [
+        {
+          "direction": 0,
+          "entry": 41,
+          "x": 236,
+          "y": 132
+        },
+        {
+          "direction": 2,
+          "entry": 100,
+          "x": 182,
+          "y": 152
+        },
+        {
+          "direction": 3,
+          "entry": 32,
+          "x": 12,
+          "y": 24
+        }
+      ],
+      "spawn_entry": 36
+    },
+    {
+      "entries": [
+        45,
+        -1,
+        36,
+        72
+      ],
+      "id": 10,
+      "routes": [
+        {
+          "direction": 0,
+          "entry": 45,
+          "x": 236,
+          "y": 82
+        },
+        {
+          "direction": 2,
+          "entry": 36,
+          "x": 12,
+          "y": 139
+        },
+        {
+          "direction": 3,
+          "entry": 72,
+          "x": 12,
+          "y": 24
+        }
+      ],
+      "spawn_entry": 40
+    },
+    {
+      "entries": [
+        50,
+        -1,
+        40,
+        -1
+      ],
+      "id": 11,
+      "routes": [
+        {
+          "direction": 0,
+          "entry": 50,
+          "x": 236,
+          "y": 82
+        },
+        {
+          "direction": 2,
+          "entry": 40,
+          "x": 12,
+          "y": 152
+        }
+      ],
+      "spawn_entry": 44
+    },
+    {
+      "entries": [
+        52,
+        69,
+        44,
+        -1
+      ],
+      "id": 12,
+      "routes": [
+        {
+          "direction": 0,
+          "entry": 52,
+          "x": 236,
+          "y": 32
+        },
+        {
+          "direction": 1,
+          "entry": 69,
+          "x": 236,
+          "y": 98
+        },
+        {
+          "direction": 2,
+          "entry": 44,
+          "x": 12,
+          "y": 94
+        }
+      ],
+      "spawn_entry": 48
+    },
+    {
+      "entries": [
+        -1,
+        58,
+        48,
+        -1
+      ],
+      "id": 13,
+      "routes": [
+        {
+          "direction": 1,
+          "entry": 58,
+          "x": 236,
+          "y": 98
+        },
+        {
+          "direction": 2,
+          "entry": 48,
+          "x": 12,
+          "y": 94
+        }
+      ],
+      "spawn_entry": 53
+    },
+    {
+      "entries": [
+        104,
+        -1,
+        -1,
+        53
+      ],
+      "id": 14,
+      "routes": [
+        {
+          "direction": 0,
+          "entry": 104,
+          "x": 64,
+          "y": 24
+        },
+        {
+          "direction": 0,
+          "entry": 61,
+          "x": 236,
+          "y": 102
+        },
+        {
+          "direction": 3,
+          "entry": 53,
+          "x": 12,
+          "y": 112
+        }
+      ],
+      "spawn_entry": 56
+    },
+    {
+      "entries": [
+        65,
+        -1,
+        57,
+        -1
+      ],
+      "id": 15,
+      "routes": [
+        {
+          "direction": 0,
+          "entry": 65,
+          "x": 236,
+          "y": 72
+        },
+        {
+          "direction": 2,
+          "entry": 57,
+          "x": 12,
+          "y": 128
+        }
+      ],
+      "spawn_entry": 60
+    },
+    {
+      "entries": [
+        68,
+        -1,
+        60,
+        -1
+      ],
+      "id": 16,
+      "routes": [
+        {
+          "direction": 0,
+          "entry": 68,
+          "x": 236,
+          "y": 60
+        },
+        {
+          "direction": 2,
+          "entry": 60,
+          "x": 12,
+          "y": 118
+        }
+      ],
+      "spawn_entry": 64
+    },
+    {
+      "entries": [
+        -1,
+        -1,
+        64,
+        49
+      ],
+      "id": 17,
+      "routes": [
+        {
+          "direction": 2,
+          "entry": 64,
+          "x": 12,
+          "y": 152
+        },
+        {
+          "direction": 3,
+          "entry": 49,
+          "x": 12,
+          "y": 60
+        }
+      ],
+      "spawn_entry": 68
+    },
+    {
+      "entries": [
+        77,
+        42,
+        -1,
+        -1
+      ],
+      "id": 18,
+      "routes": [
+        {
+          "direction": 0,
+          "entry": 77,
+          "x": 234,
+          "y": 26
+        },
+        {
+          "direction": 1,
+          "entry": 42,
+          "x": 236,
+          "y": 128
+        }
+      ],
+      "spawn_entry": 73
+    },
+    {
+      "entries": [
+        -1,
+        82,
+        73,
+        -1
+      ],
+      "id": 19,
+      "routes": [
+        {
+          "direction": 1,
+          "entry": 82,
+          "x": 236,
+          "y": 98
+        },
+        {
+          "direction": 2,
+          "entry": 73,
+          "x": 13,
+          "y": 119
+        }
+      ],
+      "spawn_entry": 76
+    },
+    {
+      "entries": [
+        85,
+        108,
+        -1,
+        76
+      ],
+      "id": 20,
+      "routes": [
+        {
+          "direction": 0,
+          "entry": 85,
+          "x": 236,
+          "y": 72
+        },
+        {
+          "direction": 1,
+          "entry": 108,
+          "x": 236,
+          "y": 133
+        },
+        {
+          "direction": 3,
+          "entry": 76,
+          "x": 12,
+          "y": 108
+        }
+      ],
+      "spawn_entry": 80
+    },
+    {
+      "entries": [
+        -1,
+        88,
+        80,
+        -1
+      ],
+      "id": 21,
+      "routes": [
+        {
+          "direction": 1,
+          "entry": 88,
+          "x": 236,
+          "y": 98
+        },
+        {
+          "direction": 2,
+          "entry": 80,
+          "x": 12,
+          "y": 94
+        }
+      ],
+      "spawn_entry": 84
+    },
+    {
+      "entries": [
+        93,
+        -1,
+        -1,
+        84
+      ],
+      "id": 22,
+      "routes": [
+        {
+          "direction": 0,
+          "entry": 93,
+          "x": 236,
+          "y": 72
+        },
+        {
+          "direction": 3,
+          "entry": 84,
+          "x": 12,
+          "y": 96
+        }
+      ],
+      "spawn_entry": 89
+    },
+    {
+      "entries": [
+        -1,
+        97,
+        89,
+        -1
+      ],
+      "id": 23,
+      "routes": [
+        {
+          "direction": 1,
+          "entry": 97,
+          "x": 232,
+          "y": 141
+        },
+        {
+          "direction": 2,
+          "entry": 89,
+          "x": 12,
+          "y": 128
+        }
+      ],
+      "spawn_entry": 92
+    },
+    {
+      "entries": [
+        0,
+        0,
+        92,
+        -1
+      ],
+      "id": 24,
+      "routes": [
+        {
+          "direction": 2,
+          "entry": 92,
+          "x": 12,
+          "y": 134
+        },
+        {
+          "direction": 0,
+          "entry": 0,
+          "x": 247,
+          "y": 60
+        },
+        {
+          "direction": 1,
+          "entry": 0,
+          "x": 247,
+          "y": 152
+        }
+      ],
+      "spawn_entry": 97
+    },
+    {
+      "entries": [
+        -1,
+        -1,
+        -1,
+        37
+      ],
+      "id": 25,
+      "routes": [
+        {
+          "direction": 3,
+          "entry": 37,
+          "x": 12,
+          "y": 96
+        }
+      ],
+      "spawn_entry": 100
+    },
+    {
+      "entries": [
+        -1,
+        -1,
+        -1,
+        56
+      ],
+      "id": 26,
+      "routes": [
+        {
+          "direction": 3,
+          "entry": 56,
+          "x": 12,
+          "y": 96
+        }
+      ],
+      "spawn_entry": 104
+    },
+    {
+      "entries": [
+        -1,
+        -1,
+        -1,
+        81
+      ],
+      "id": 27,
+      "routes": [
+        {
+          "direction": 3,
+          "entry": 81,
+          "x": 12,
+          "y": 96
+        }
+      ],
+      "spawn_entry": 108
+    }
+  ],
+  "schema": 1
+}

@@ -1,7 +1,7 @@
 /// Native LN1 enemy decisions ($6a48), animation ($5b54), movement ($5ae9).
 function LN1Enemy() constructor {
     x = 0; y = 0; fraction_x = 0; fraction_y = 0;
-    facing = 1; heading = 1; frame = 255; display_frame = 255; mirror = false;
+    facing = 1; heading = 1; frame = 255; display_frame = 255; mirror = false; display_spin_phase = 0;
     action = 0; action_state = 0; flags = 0; action_mirror = 0;
     countdown = 0; duration = 0; weapon = 0;
     active = 0; mode = 0; combat_state = 0; previous_combat = 0;
@@ -21,9 +21,14 @@ function ln1_enemy_face(_e, _x, _y) {
 function ln1_enemy_combat(_e, _base) { _e.combat_state = _base + (_e.facing >> 1); }
 
 function ln1_enemy_begin(_e, _d, _entry) {
-    if (_e.facing == 1 || _e.facing == 7) _entry += 2;
-    _e.action_mirror = _e.facing & 2;
-    if (_entry == 8 || _entry == 10) _entry += _e.speed_traits;
+    if (variable_struct_exists(_d,"special_enemy") && _e.active == _d.special_enemy.type) {
+        if (_entry < 56) _entry = _d.special_enemy.action_map[_entry >> 2];
+        _e.action_mirror = (_e.facing & 4) ^ _d.special_enemy.mirror_xor;
+    } else {
+        if (_e.facing == 1 || _e.facing == 7) _entry += 2;
+        _e.action_mirror = _e.facing & 2;
+        if (_entry == 8 || _entry == 10) _entry += _e.speed_traits;
+    }
     _e.action = _d.enemy_entries[_entry >> 1];
     _e.flags = variable_struct_get(_d.actions, string(_e.action)).flags;
     _e.countdown = 0;
@@ -209,6 +214,7 @@ function ln1_enemy_action(_g) {
     _e.action = _record.next;
     if (_e.action >= 256 && (_e.flags & 4)) ln1_enemy_move(_g, _ticks);
     _e.display_frame = _e.frame; _e.mirror = ((_e.flags & 16) ? _e.action_mirror : (_e.flags & 64)) != 0;
+    if (variable_struct_exists(_g,"world_state")) _e.display_spin_phase = _g.world_state.spin_phase;
 }
 
 /// Original random-byte algorithm. CIA read phase still needs system-trace parity.

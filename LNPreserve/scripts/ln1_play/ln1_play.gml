@@ -1,20 +1,31 @@
-function LN1Play() constructor {
-    var _buffer = buffer_load("play/ln1/gameplay.json");
+function LN1Play(_level = 1) constructor {
+    level = _level;
+    title = ["Wastelands","Wilderness","Palace Gardens","Dungeons","Palace","Inner Sanctum"][_level-1];
+    var _folder = _level == 1 ? "play/ln1/" : "play/ln1/level" + string(_level) + "/";
+    var _buffer = buffer_load(_folder + "gameplay.json");
     data = json_parse(buffer_read(_buffer, buffer_text)); buffer_delete(_buffer);
-    _buffer = buffer_load("play/ln1/world.json");
+    _buffer = buffer_load(_folder + "world.json");
     world = json_parse(buffer_read(_buffer, buffer_text)); buffer_delete(_buffer);
-    _buffer = buffer_load("play/ln1/navigation.json");
+    _buffer = buffer_load(_folder + "navigation.json");
     navigation = json_parse(buffer_read(_buffer, buffer_text)); buffer_delete(_buffer);
+    _buffer = buffer_load("play/ln1/projectiles.json");
+    projectile_data = json_parse(buffer_read(_buffer, buffer_text));buffer_delete(_buffer);
+    projectiles = [new LN1Projectile(),new LN1Projectile()];
     player = data.initial;
     player.display_frame = player.frame;
     player.requests = [];
     player.previous_combat = 0;
     player.world_game = self;
     enemy = new LN1Enemy();
-    player_health = 32; room_wounds = array_create(26, 0); room_id = 1;
+    player_health = 32; room_wounds = array_create(array_length(world.rooms)+1, 0); room_id = 1;
+    level_states = array_create(6, undefined);
+    level_complete = false; sequence_kind = 0; sequence_phase = 0; sequence_wait = 0;
+    fall_kind = 0; water_travel = false;
+    world_state = {mode:0, protection:0, protection_tick:0, flag_a:0, flag_b:0, statue_open:false, spin_phase:0};
     lives_left = world.initial_lives; last_entry = world.initial_entry; death_wait = 0; game_over = false;
     pending_events = []; random_queue = []; random_head = 0;
     inventory = world.initial_inventory; controls = undefined;
+    while (array_length(inventory) < 20) array_push(inventory, 0);
     notice_item = -1; notice_tick = 0; notice_duration = 0; notice_label = 0;
     room_age = 0; prayer_phase = 0;
     water_active = false; water_ticks = 0; water_cutoff = 173; water_clock = world.initial_water_clock;
@@ -25,7 +36,7 @@ function LN1Play() constructor {
     timer.cycles_per_frame = data.timer_period_cycles;
     sprites = [spr_ln1_player_weapon_0, spr_ln1_player_weapon_1, spr_ln1_player_weapon_2, spr_ln1_player_weapon_3];
     enemy_sprites = [spr_ln1_enemy_weapon_0, spr_ln1_enemy_weapon_1, spr_ln1_enemy_weapon_2, spr_ln1_enemy_weapon_3];
-    ln1_play_enter(self, 1);
+    ln1_play_enter(self, last_entry >> 2);
 }
 
 function ln1_play_enter(_g, _room_id) {
@@ -44,6 +55,7 @@ function ln1_play_enter(_g, _room_id) {
     _g.enemy.wounds = _g.room_wounds[_room_id];
     if (_g.enemy.wounds >= 32) _g.enemy.action = 0;
     _g.player.enemy_active = 0;
+    _g.projectiles = [new LN1Projectile(),new LN1Projectile()];
 }
 
 /// Source $7478: perimeter position selects one of up to four room exits.
@@ -63,7 +75,7 @@ function ln1_play_exit(_g) {
 /// Shared destination/entrance handling for an ordinary exit and scene testing.
 function ln1_play_travel(_g, _entry) {
     var _p = _g.player, _room_id = _entry >> 2;
-    if (_room_id == 0) { array_push(_g.pending_events, "level_complete"); return; }
+    if (_room_id == 0) { ln1_level_load(_g, _g.level + 1, true); return; }
     _g.last_entry = _entry;
     var _spawn = _g.world.entry_index[_entry];
     _p.x = _g.world.entry_x[_spawn]; _p.y = _g.world.entry_y[_spawn];
@@ -75,8 +87,10 @@ function ln1_play_travel(_g, _entry) {
 
 function ln1_play_tick(_g, _joy) {
     var _p = _g.player, _e = _g.enemy;
-    if (_g.game_over) return;
+    if (_g.game_over || _g.level_complete) return;
     _g.room_age = min(62, _g.room_age + 1);
+    ln1_level_effect_tick(_g);
+    if (_g.sequence_kind != 0) { ln1_level_sequence_tick(_g, _joy); return; }
     if (_g.prayer_phase > 0) { ln1_prayer_tick(_g, _joy); return; }
     if (_g.water_active) { ln1_water_tick(_g); ln1_notice_update(_g); return; }
     if (_g.death_wait > 0) {
@@ -100,6 +114,7 @@ function ln1_play_tick(_g, _joy) {
             _p.saved_heading = _p.heading; _p.action_mirror = _p.facing & 2;
             _p.fraction_x = 0; _p.fraction_y = 0; _p.walk_clock = 0;
             _p.fire_previous = 0; _p.attack_direction = 255; _p.attack_previous = 255;
+            _g.world_state.protection = 0;
             _p.collision = 0; _p.requests = []; _g.water_cutoff = 173; _g.water_ticks = 0;
             ln1_play_enter(_g, _g.last_entry >> 2);
             ln1_player_render(_p, _g.data.mirror[_p.facing >> 1] & (1 << _p.heading));
@@ -113,7 +128,11 @@ function ln1_play_tick(_g, _joy) {
     ln1_enemy_action(_g);
     ln1_combat_event(_g, _p.action_state, false); _p.action_state = 0;
     ln1_combat_event(_g, _e.action_state, true); _e.action_state = 0;
+    ln1_level_events(_g);
+    ln1_projectile_tick(_g);
+    var _level_before = _g.level;
     ln1_play_exit(_g);
+    if (_g.level != _level_before || _g.level_complete) return;
     ln1_play_hazards(_g);
     ln1_notice_update(_g);
     if (_g.player_health == 0 && _p.action < 256 && _g.death_wait == 0 && !_g.water_active) {
@@ -130,11 +149,12 @@ function ln1_play_hazards(_g) {
     if (_p.boundary_crossings == 0 || (!(_p.boundary_mode & 64) && _p.action >= 256)) return;
     if (_p.boundary_mode & 32) _p.boundary_crossings = 0;
     var _kind = _p.boundary_mode & 31;
+    if (ln1_level_hazard(_g, _kind)) return;
     if (_kind == 1) {
         if ((_p.selected_weapon | _p.weapon) == 0 && _p.facing == 7) {
             _g.prayer_phase = 1; _p.input_lock = 255; _p.stopped = 255;
             if (is_struct(_g.controls)) _g.controls.weapon_locked = 255;
-            ln1_special_action(_g, $ada5);
+            ln1_special_action(_g, _g.level == 1 ? $ada5 : _g.world.pray_kneel);
         }
         return;
     }
@@ -184,7 +204,7 @@ function ln1_prayer_tick(_g, _joy) {
         }
         _g.notice_label = 2; _g.notice_duration = 50; _g.notice_tick = _p.tick;
     }
-    if ((_joy & 15) == 10) { _g.prayer_phase = 3; ln1_special_action(_g, $adbd); }
+    if ((_joy & 15) == 10) { _g.prayer_phase = 3; ln1_special_action(_g, _g.level == 1 ? $adbd : _g.world.pray_stand); }
 }
 
 /// $bef2/$bee3: sink two hardware pixels every two timer ticks, clipping at $9e.
@@ -203,18 +223,32 @@ function ln1_water_advance(_g) {
     _p.y += 2;
     ln1_player_render(_p, _g.data.mirror[_p.facing >> 1] & (1 << _p.heading));
     if (_p.y - 21 >= _g.water_cutoff) {
-        _p.display_frame = 255; _g.water_active = false; _g.death_wait = 20;
+        _p.display_frame = 255; _g.water_active = false;
+        if (_g.water_travel) {
+            _g.water_travel = false; _g.world_state.flag_a = 0; _g.world_state.flag_b = 0;
+            _p.x = 255; ln1_play_exit(_g);
+        } else _g.death_wait = 20;
     }
 }
 
 function ln1_play_actor(_g, _actor, _enemy) {
+    if (!_enemy && _g.sequence_kind == 23) return;
     if (_actor.display_frame == 255) return;
     var _frame = _actor.display_frame;
     var _sprites = _enemy ? _g.enemy_sprites : _g.sprites;
     var _sprite = _sprites[_actor.weapon < 4 ? _actor.weapon : 0];
-    if (_frame >= 64 && _frame < 128) { _sprite = spr_ln1_actor_extra; _frame -= 64; }
-    if (_frame >= 128) return; // Remaining level-specific actors require their composition bank.
-    ln_draw_masked_actor(_sprite, _frame + (_actor.mirror ? 64 : 0), _actor.x, _actor.y,
+    var _mirror_offset = 64;
+    if (_frame >= 64 && variable_struct_exists(_g.world, "actor_frames") &&
+        variable_struct_exists(_g.world.actor_frames, string(_frame))) {
+        var _part = variable_struct_get(_g.world.actor_frames, string(_frame));
+        _sprite = asset_get_index(_part.sprite); _frame = _part.index; _mirror_offset = _part.mirror_offset;
+        if (_enemy && variable_struct_exists(_part,"spin_sprite")) {
+            _sprite = asset_get_index(_part.spin_sprite);
+            _frame = _actor.display_spin_phase; _mirror_offset = 21;
+        }
+    } else if (_frame >= 64 && _frame < 128) { _sprite = spr_ln1_actor_extra; _frame -= 64; }
+    else if (_frame >= 128) return;
+    ln_draw_masked_actor(_sprite, _frame + (_actor.mirror ? _mirror_offset : 0), _actor.x, _actor.y,
         1, 1, _g.mask, 0, 0, 240, 144, max(0.001, (_actor.y - 0.25) / 255),
         _enemy ? 144 : _g.water_cutoff - 29);
 }
@@ -228,7 +262,7 @@ function ln1_play_draw(_game, _paused) {
     draw_clear(c_black); draw_sprite(_game.scene, 0, 0, 0);
     for (var _i = 0; _i < array_length(_game.world.items); _i++) {
         var _item = _game.world.items[_i];
-        if (_item.room == _game.room_id && _game.inventory[_item.id] == 0) {
+        if (_item.sprite != "" && _item.room == _game.room_id && _game.inventory[_item.id] == 0) {
             var _flash = _game.room_age < 31 * _item.flashes;
             draw_sprite(asset_get_index(_flash ? _item.flash_sprite : _item.sprite),
                 _flash ? (_game.room_age mod 31) : 0, _item.x, _item.y);
@@ -236,6 +270,7 @@ function ln1_play_draw(_game, _paused) {
     }
     if (_s.y < _game.enemy.y) { ln1_play_actor(_game, _s, false); ln1_play_actor(_game, _game.enemy, true); }
     else { ln1_play_actor(_game, _game.enemy, true); ln1_play_actor(_game, _s, false); }
+    ln1_projectile_draw(_game);
     surface_reset_target();
     draw_surface_ext(_game.stage_surface, _x, _y, _scale, _scale, 0, c_white, 1);
     draw_sprite_ext(spr_ln1_dashboard, 0, _x, _y, _scale, _scale, 0, c_white, 1);
@@ -246,8 +281,12 @@ function ln1_play_draw(_game, _paused) {
     if (is_struct(_game.controls))
         draw_sprite_ext(spr_ln1_status_icon, _game.controls.item, _x+248*_scale, _y+120*_scale, _scale, _scale, 0, c_white, 1);
     draw_set_colour(make_colour_rgb(180,180,180));
-    draw_text(160, 36, "THE LAST NINJA — THE WASTELANDS");
+    draw_text(160, 36, "THE LAST NINJA — " + string_upper(_game.title));
     draw_text(930, 36, "Room " + string(_game.room_id));
+    if (_game.level_complete) {
+        draw_set_colour(c_white);draw_text(400,560,"THE QUEST — COMPLETE");
+        draw_text(400,592,"F11: choose a scene    Home: restart");
+    }
     draw_text(160, 700, "WASD  Move    J + direction  Action    Space  Weapon    1 2 3 4  Function keys");
     draw_text(160, 728, "Arrows: Right NE / Down SE / Left SW / Up NW    F11 Scenes    Home Restart");
     draw_text(160, 760, "Health " + string(_game.player_health) + "    Lives " + string(_game.lives_left));

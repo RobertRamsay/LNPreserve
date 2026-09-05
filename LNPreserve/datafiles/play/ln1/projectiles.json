@@ -1,0 +1,50 @@
+{
+  "animation_periods": [
+    2,
+    2
+  ],
+  "cloud_sprite": "spr_ln1_projectile_cloud",
+  "draw_x": [
+    6,
+    6,
+    9,
+    9
+  ],
+  "draw_y": [
+    9,
+    6,
+    8,
+    8
+  ],
+  "flight_sprite": "spr_ln1_projectile_flight",
+  "launch": [
+    8,
+    18,
+    250,
+    18,
+    1,
+    239,
+    1,
+    238,
+    250
+  ],
+  "step": [
+    250,
+    4,
+    255,
+    4,
+    1,
+    252,
+    1,
+    252,
+    255,
+    4,
+    0,
+    4,
+    2,
+    252,
+    2,
+    252,
+    0
+  ]
+}

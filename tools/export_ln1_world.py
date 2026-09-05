@@ -11,9 +11,9 @@ import build_project as builder
 sys.path.insert(0,str(ROOT/'tools/vendor/pydeps'))
 from py65.devices.mpu6502 import MPU
 
-def call(mem,address,a=0,x=0):
+def call(mem,address,a=0,x=0,y=0):
     cpu=MPU(memory=mem,pc=address);cpu.sp=0xfd;mem[0x1fe:0x200]=[0xfe,1]
-    cpu.a=a;cpu.x=x
+    cpu.a=a;cpu.x=x;cpu.y=y
     for _ in range(2000000):
         if cpu.pc==0x1ff:return
         cpu.step()

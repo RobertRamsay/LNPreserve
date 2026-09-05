@@ -1,0 +1,2065 @@
+{
+  "actor_frames": {
+    "128": {
+      "index": 9,
+      "mirror_offset": 39,
+      "sprite": "spr_ln1_level6_actors"
+    },
+    "129": {
+      "index": 10,
+      "mirror_offset": 39,
+      "sprite": "spr_ln1_level6_actors"
+    },
+    "130": {
+      "index": 11,
+      "mirror_offset": 39,
+      "sprite": "spr_ln1_level6_actors"
+    },
+    "131": {
+      "index": 12,
+      "mirror_offset": 39,
+      "sprite": "spr_ln1_level6_actors"
+    },
+    "132": {
+      "index": 13,
+      "mirror_offset": 39,
+      "sprite": "spr_ln1_level6_actors"
+    },
+    "133": {
+      "index": 14,
+      "mirror_offset": 39,
+      "sprite": "spr_ln1_level6_actors"
+    },
+    "134": {
+      "index": 15,
+      "mirror_offset": 39,
+      "sprite": "spr_ln1_level6_actors"
+    },
+    "135": {
+      "index": 16,
+      "mirror_offset": 39,
+      "sprite": "spr_ln1_level6_actors"
+    },
+    "136": {
+      "index": 17,
+      "mirror_offset": 39,
+      "sprite": "spr_ln1_level6_actors"
+    },
+    "137": {
+      "index": 18,
+      "mirror_offset": 39,
+      "sprite": "spr_ln1_level6_actors"
+    },
+    "138": {
+      "index": 19,
+      "mirror_offset": 39,
+      "sprite": "spr_ln1_level6_actors"
+    },
+    "139": {
+      "index": 20,
+      "mirror_offset": 39,
+      "sprite": "spr_ln1_level6_actors"
+    },
+    "140": {
+      "index": 21,
+      "mirror_offset": 39,
+      "sprite": "spr_ln1_level6_actors"
+    },
+    "141": {
+      "index": 22,
+      "mirror_offset": 39,
+      "sprite": "spr_ln1_level6_actors"
+    },
+    "142": {
+      "index": 23,
+      "mirror_offset": 39,
+      "sprite": "spr_ln1_level6_actors"
+    },
+    "143": {
+      "index": 24,
+      "mirror_offset": 39,
+      "sprite": "spr_ln1_level6_actors"
+    },
+    "144": {
+      "index": 25,
+      "mirror_offset": 39,
+      "sprite": "spr_ln1_level6_actors"
+    },
+    "145": {
+      "index": 26,
+      "mirror_offset": 39,
+      "sprite": "spr_ln1_level6_actors"
+    },
+    "146": {
+      "index": 27,
+      "mirror_offset": 39,
+      "sprite": "spr_ln1_level6_actors"
+    },
+    "150": {
+      "index": 28,
+      "mirror_offset": 39,
+      "sprite": "spr_ln1_level6_actors"
+    },
+    "151": {
+      "index": 29,
+      "mirror_offset": 39,
+      "sprite": "spr_ln1_level6_actors"
+    },
+    "152": {
+      "index": 30,
+      "mirror_offset": 39,
+      "sprite": "spr_ln1_level6_actors"
+    },
+    "153": {
+      "index": 31,
+      "mirror_offset": 39,
+      "sprite": "spr_ln1_level6_actors"
+    },
+    "154": {
+      "index": 32,
+      "mirror_offset": 39,
+      "sprite": "spr_ln1_level6_actors"
+    },
+    "155": {
+      "index": 33,
+      "mirror_offset": 39,
+      "sprite": "spr_ln1_level6_actors"
+    },
+    "156": {
+      "index": 34,
+      "mirror_offset": 39,
+      "sprite": "spr_ln1_level6_actors"
+    },
+    "157": {
+      "index": 35,
+      "mirror_offset": 39,
+      "sprite": "spr_ln1_level6_actors"
+    },
+    "158": {
+      "index": 36,
+      "mirror_offset": 39,
+      "sprite": "spr_ln1_level6_actors"
+    },
+    "159": {
+      "index": 37,
+      "mirror_offset": 39,
+      "sprite": "spr_ln1_level6_actors"
+    },
+    "160": {
+      "index": 38,
+      "mirror_offset": 39,
+      "sprite": "spr_ln1_level6_actors"
+    },
+    "64": {
+      "index": 0,
+      "mirror_offset": 39,
+      "sprite": "spr_ln1_level6_actors"
+    },
+    "65": {
+      "index": 1,
+      "mirror_offset": 39,
+      "sprite": "spr_ln1_level6_actors"
+    },
+    "66": {
+      "index": 2,
+      "mirror_offset": 39,
+      "sprite": "spr_ln1_level6_actors"
+    },
+    "70": {
+      "index": 3,
+      "mirror_offset": 39,
+      "sprite": "spr_ln1_level6_actors"
+    },
+    "71": {
+      "index": 4,
+      "mirror_offset": 39,
+      "sprite": "spr_ln1_level6_actors"
+    },
+    "72": {
+      "index": 5,
+      "mirror_offset": 39,
+      "sprite": "spr_ln1_level6_actors"
+    },
+    "73": {
+      "index": 6,
+      "mirror_offset": 39,
+      "sprite": "spr_ln1_level6_actors"
+    },
+    "74": {
+      "index": 7,
+      "mirror_offset": 39,
+      "sprite": "spr_ln1_level6_actors"
+    },
+    "75": {
+      "index": 8,
+      "mirror_offset": 39,
+      "sprite": "spr_ln1_level6_actors"
+    }
+  },
+  "entry_heading": [
+    7,
+    3,
+    5,
+    7,
+    3,
+    1,
+    1,
+    7,
+    3,
+    255,
+    255,
+    255,
+    255,
+    255,
+    255,
+    255,
+    255,
+    255,
+    255,
+    255,
+    255,
+    255,
+    255,
+    255,
+    255,
+    255,
+    255,
+    255,
+    255,
+    255,
+    255,
+    255
+  ],
+  "entry_index": [
+    89,
+    169,
+    165,
+    87,
+    0,
+    1,
+    8,
+    0,
+    2,
+    3,
+    4,
+    0,
+    5,
+    0,
+    0,
+    0,
+    2,
+    3,
+    4,
+    0,
+    5,
+    0,
+    0,
+    0,
+    2,
+    3,
+    4,
+    0,
+    2,
+    5,
+    0,
+    0,
+    2,
+    3,
+    4,
+    0,
+    5,
+    0,
+    0,
+    0,
+    2,
+    5,
+    0,
+    0,
+    2,
+    5,
+    0,
+    0,
+    2,
+    1,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    7,
+    6,
+    0,
+    0,
+    5,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "entry_x": [
+    236,
+    12,
+    236,
+    230,
+    12,
+    12,
+    12,
+    149,
+    144,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "entry_y": [
+    138,
+    79,
+    85,
+    159,
+    97,
+    141,
+    112,
+    165,
+    128,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "initial_entry": 6,
+  "initial_inventory": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    255,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "initial_lives": 3,
+  "initial_water_clock": 0,
+  "items": [
+    {
+      "flash_sprite": "spr_ln1_level6_pickup_3_flash",
+      "flashes": 2,
+      "id": 3,
+      "room": 9,
+      "source_address": 21386,
+      "sprite": "spr_ln1_level6_pickup_3",
+      "x": 148,
+      "x_max": 150,
+      "x_min": 142,
+      "y": 48,
+      "y_max": 98,
+      "y_min": 90
+    },
+    {
+      "flash_sprite": "",
+      "flashes": 0,
+      "id": 19,
+      "room": 12,
+      "source_address": 21396,
+      "sprite": "",
+      "x": -24,
+      "x_max": 24,
+      "x_min": 16,
+      "y": -50,
+      "y_max": 92,
+      "y_min": 82
+    },
+    {
+      "flash_sprite": "spr_ln1_level6_pickup_9_flash",
+      "flashes": 0,
+      "id": 9,
+      "room": 15,
+      "source_address": 21406,
+      "sprite": "spr_ln1_level6_pickup_9",
+      "x": 153,
+      "x_max": 150,
+      "x_min": 145,
+      "y": 64,
+      "y_max": 111,
+      "y_min": 107
+    }
+  ],
+  "level": 6,
+  "pray_kneel": -1,
+  "pray_stand": -1,
+  "prayer_hint_items": [],
+  "rooms": [
+    {
+      "boundaries": [
+        [
+          0,
+          57,
+          102,
+          82,
+          4
+        ],
+        [
+          86,
+          86,
+          102,
+          82,
+          68
+        ],
+        [
+          86,
+          86,
+          132,
+          97,
+          4
+        ],
+        [
+          132,
+          97,
+          150,
+          93,
+          68
+        ],
+        [
+          150,
+          93,
+          254,
+          119,
+          4
+        ],
+        [
+          0,
+          122,
+          254,
+          185,
+          4
+        ]
+      ],
+      "boundary_mode": 0,
+      "depth_sprite": "spr_ln1_level6_room_01_depth",
+      "enemy_script": 0,
+      "entrance_crossings": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "exit_thresholds": [
+        136,
+        254,
+        255,
+        255
+      ],
+      "exits": [
+        10,
+        33,
+        4,
+        4
+      ],
+      "id": 1,
+      "occluders": [],
+      "sprite": "spr_ln1_game_level6_location_01"
+    },
+    {
+      "boundaries": [
+        [
+          0,
+          73,
+          96,
+          97,
+          4
+        ],
+        [
+          96,
+          97,
+          192,
+          73,
+          68
+        ],
+        [
+          192,
+          73,
+          216,
+          79,
+          4
+        ],
+        [
+          216,
+          79,
+          254,
+          70,
+          68
+        ],
+        [
+          0,
+          139,
+          254,
+          202,
+          4
+        ],
+        [
+          194,
+          119,
+          254,
+          104,
+          68
+        ],
+        [
+          194,
+          119,
+          254,
+          134,
+          4
+        ]
+      ],
+      "boundary_mode": 0,
+      "depth_sprite": "spr_ln1_level6_room_02_depth",
+      "enemy_script": 20074,
+      "entrance_crossings": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "exit_thresholds": [
+        90,
+        136,
+        189,
+        255
+      ],
+      "exits": [
+        12,
+        18,
+        4,
+        4
+      ],
+      "id": 2,
+      "occluders": [],
+      "sprite": "spr_ln1_game_level6_location_02"
+    },
+    {
+      "boundaries": [
+        [
+          0,
+          115,
+          96,
+          91,
+          68
+        ],
+        [
+          96,
+          91,
+          132,
+          100,
+          4
+        ],
+        [
+          132,
+          100,
+          148,
+          96,
+          69
+        ],
+        [
+          148,
+          96,
+          164,
+          100,
+          4
+        ],
+        [
+          164,
+          100,
+          182,
+          96,
+          68
+        ],
+        [
+          182,
+          96,
+          196,
+          99,
+          4
+        ],
+        [
+          144,
+          112,
+          196,
+          99,
+          68
+        ],
+        [
+          144,
+          112,
+          200,
+          126,
+          4
+        ],
+        [
+          160,
+          136,
+          200,
+          126,
+          68
+        ],
+        [
+          128,
+          128,
+          160,
+          136,
+          4
+        ],
+        [
+          0,
+          160,
+          128,
+          128,
+          68
+        ]
+      ],
+      "boundary_mode": 183,
+      "depth_sprite": "spr_ln1_wastelands_room_01_depth",
+      "enemy_script": 0,
+      "entrance_crossings": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "exit_thresholds": [
+        189,
+        255,
+        255,
+        255
+      ],
+      "exits": [
+        8,
+        4,
+        4,
+        4
+      ],
+      "id": 3,
+      "occluders": [],
+      "sprite": "spr_ln1_level6_room_03"
+    },
+    {
+      "boundaries": [
+        [
+          0,
+          77,
+          80,
+          97,
+          4
+        ],
+        [
+          80,
+          97,
+          90,
+          95,
+          68
+        ],
+        [
+          90,
+          95,
+          104,
+          98,
+          4
+        ],
+        [
+          104,
+          98,
+          168,
+          82,
+          68
+        ],
+        [
+          168,
+          82,
+          200,
+          90,
+          4
+        ],
+        [
+          200,
+          90,
+          248,
+          78,
+          68
+        ],
+        [
+          0,
+          139,
+          254,
+          202,
+          4
+        ],
+        [
+          194,
+          121,
+          254,
+          106,
+          68
+        ],
+        [
+          194,
+          121,
+          254,
+          136,
+          4
+        ]
+      ],
+      "boundary_mode": 0,
+      "depth_sprite": "spr_ln1_level6_room_02_depth",
+      "enemy_script": 20082,
+      "entrance_crossings": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "exit_thresholds": [
+        90,
+        136,
+        254,
+        255
+      ],
+      "exits": [
+        20,
+        26,
+        9,
+        4
+      ],
+      "id": 4,
+      "occluders": [],
+      "sprite": "spr_ln1_level6_room_04"
+    },
+    {
+      "boundaries": [
+        [
+          0,
+          106,
+          32,
+          114,
+          4
+        ],
+        [
+          32,
+          114,
+          68,
+          105,
+          68
+        ],
+        [
+          36,
+          97,
+          68,
+          105,
+          4
+        ],
+        [
+          36,
+          97,
+          92,
+          83,
+          68
+        ],
+        [
+          92,
+          83,
+          110,
+          87,
+          5
+        ],
+        [
+          110,
+          87,
+          136,
+          81,
+          68
+        ],
+        [
+          136,
+          81,
+          160,
+          87,
+          4
+        ],
+        [
+          128,
+          95,
+          160,
+          87,
+          68
+        ],
+        [
+          128,
+          95,
+          192,
+          111,
+          4
+        ],
+        [
+          192,
+          111,
+          224,
+          103,
+          68
+        ],
+        [
+          224,
+          103,
+          244,
+          108,
+          4
+        ],
+        [
+          158,
+          129,
+          244,
+          108,
+          68
+        ],
+        [
+          126,
+          121,
+          158,
+          129,
+          4
+        ],
+        [
+          0,
+          152,
+          126,
+          121,
+          68
+        ]
+      ],
+      "boundary_mode": 148,
+      "depth_sprite": "spr_ln1_level6_room_05_depth",
+      "enemy_script": 20090,
+      "entrance_crossings": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "exit_thresholds": [
+        254,
+        255,
+        255,
+        255
+      ],
+      "exits": [
+        16,
+        4,
+        4,
+        4
+      ],
+      "id": 5,
+      "occluders": [],
+      "sprite": "spr_ln1_level6_room_05"
+    },
+    {
+      "boundaries": [
+        [
+          0,
+          80,
+          34,
+          88,
+          4
+        ],
+        [
+          34,
+          88,
+          56,
+          83,
+          68
+        ],
+        [
+          56,
+          83,
+          72,
+          87,
+          4
+        ],
+        [
+          44,
+          94,
+          72,
+          87,
+          68
+        ],
+        [
+          44,
+          94,
+          82,
+          103,
+          4
+        ],
+        [
+          82,
+          103,
+          110,
+          96,
+          68
+        ],
+        [
+          110,
+          96,
+          128,
+          100,
+          4
+        ],
+        [
+          128,
+          100,
+          160,
+          92,
+          68
+        ],
+        [
+          144,
+          88,
+          160,
+          92,
+          4
+        ],
+        [
+          144,
+          88,
+          170,
+          82,
+          68
+        ],
+        [
+          170,
+          82,
+          178,
+          84,
+          4
+        ],
+        [
+          178,
+          84,
+          210,
+          76,
+          68
+        ],
+        [
+          210,
+          76,
+          218,
+          78,
+          4
+        ],
+        [
+          218,
+          78,
+          246,
+          71,
+          68
+        ],
+        [
+          0,
+          139,
+          254,
+          202,
+          4
+        ],
+        [
+          188,
+          118,
+          254,
+          102,
+          68
+        ],
+        [
+          188,
+          118,
+          254,
+          134,
+          4
+        ]
+      ],
+      "boundary_mode": 0,
+      "depth_sprite": "spr_ln1_level6_room_06_depth",
+      "enemy_script": 20098,
+      "entrance_crossings": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "exit_thresholds": [
+        88,
+        136,
+        254,
+        255
+      ],
+      "exits": [
+        29,
+        34,
+        17,
+        4
+      ],
+      "id": 6,
+      "occluders": [],
+      "sprite": "spr_ln1_level6_room_06"
+    },
+    {
+      "boundaries": [
+        [
+          0,
+          116,
+          64,
+          100,
+          68
+        ],
+        [
+          64,
+          100,
+          84,
+          105,
+          4
+        ],
+        [
+          84,
+          105,
+          116,
+          97,
+          68
+        ],
+        [
+          84,
+          89,
+          116,
+          97,
+          4
+        ],
+        [
+          84,
+          89,
+          110,
+          83,
+          68
+        ],
+        [
+          110,
+          83,
+          142,
+          91,
+          4
+        ],
+        [
+          142,
+          91,
+          168,
+          85,
+          68
+        ],
+        [
+          134,
+          77,
+          168,
+          85,
+          4
+        ],
+        [
+          134,
+          77,
+          160,
+          71,
+          68
+        ],
+        [
+          160,
+          71,
+          208,
+          83,
+          4
+        ],
+        [
+          208,
+          83,
+          240,
+          75,
+          68
+        ],
+        [
+          0,
+          152,
+          96,
+          128,
+          68
+        ],
+        [
+          96,
+          128,
+          152,
+          142,
+          4
+        ],
+        [
+          152,
+          142,
+          236,
+          121,
+          68
+        ],
+        [
+          182,
+          108,
+          236,
+          121,
+          4
+        ],
+        [
+          182,
+          108,
+          240,
+          94,
+          68
+        ]
+      ],
+      "boundary_mode": 0,
+      "depth_sprite": "spr_ln1_level6_room_07_depth",
+      "enemy_script": 20106,
+      "entrance_crossings": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "exit_thresholds": [
+        90,
+        189,
+        255,
+        255
+      ],
+      "exits": [
+        41,
+        24,
+        4,
+        4
+      ],
+      "id": 7,
+      "occluders": [],
+      "sprite": "spr_ln1_level6_room_07"
+    },
+    {
+      "boundaries": [
+        [
+          0,
+          75,
+          96,
+          99,
+          4
+        ],
+        [
+          96,
+          99,
+          148,
+          86,
+          68
+        ],
+        [
+          148,
+          86,
+          166,
+          90,
+          4
+        ],
+        [
+          166,
+          90,
+          214,
+          78,
+          68
+        ],
+        [
+          214,
+          78,
+          230,
+          82,
+          4
+        ],
+        [
+          230,
+          82,
+          254,
+          76,
+          68
+        ],
+        [
+          0,
+          139,
+          254,
+          202,
+          4
+        ],
+        [
+          188,
+          118,
+          254,
+          102,
+          68
+        ],
+        [
+          188,
+          118,
+          254,
+          134,
+          4
+        ]
+      ],
+      "boundary_mode": 0,
+      "depth_sprite": "spr_ln1_level6_room_08_depth",
+      "enemy_script": 20114,
+      "entrance_crossings": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "exit_thresholds": [
+        90,
+        136,
+        254,
+        255
+      ],
+      "exits": [
+        36,
+        5,
+        25,
+        4
+      ],
+      "id": 8,
+      "occluders": [],
+      "sprite": "spr_ln1_level6_room_08"
+    },
+    {
+      "boundaries": [
+        [
+          0,
+          112,
+          96,
+          88,
+          68
+        ],
+        [
+          96,
+          88,
+          122,
+          94,
+          4
+        ],
+        [
+          122,
+          94,
+          152,
+          87,
+          68
+        ],
+        [
+          152,
+          87,
+          226,
+          105,
+          4
+        ],
+        [
+          200,
+          111,
+          226,
+          105,
+          68
+        ],
+        [
+          200,
+          111,
+          238,
+          120,
+          4
+        ],
+        [
+          142,
+          144,
+          238,
+          120,
+          68
+        ],
+        [
+          102,
+          134,
+          142,
+          144,
+          4
+        ],
+        [
+          16,
+          155,
+          102,
+          134,
+          68
+        ],
+        [
+          0,
+          112,
+          96,
+          88,
+          68
+        ]
+      ],
+      "boundary_mode": 0,
+      "depth_sprite": "spr_ln1_level6_room_09_depth",
+      "enemy_script": 0,
+      "entrance_crossings": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "exit_thresholds": [
+        189,
+        255,
+        255,
+        255
+      ],
+      "exits": [
+        32,
+        4,
+        4,
+        4
+      ],
+      "id": 9,
+      "occluders": [],
+      "sprite": "spr_ln1_level6_room_09"
+    },
+    {
+      "boundaries": [
+        [
+          190,
+          64,
+          254,
+          96,
+          8
+        ],
+        [
+          0,
+          152,
+          254,
+          89,
+          68
+        ],
+        [
+          0,
+          114,
+          160,
+          74,
+          68
+        ],
+        [
+          160,
+          74,
+          176,
+          78,
+          5
+        ],
+        [
+          176,
+          78,
+          192,
+          74,
+          68
+        ],
+        [
+          192,
+          74,
+          212,
+          79,
+          4
+        ],
+        [
+          212,
+          79,
+          252,
+          69,
+          68
+        ]
+      ],
+      "boundary_mode": 172,
+      "depth_sprite": "spr_ln1_wastelands_room_01_depth",
+      "enemy_script": 20041,
+      "entrance_crossings": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "exit_thresholds": [
+        83,
+        189,
+        255,
+        255
+      ],
+      "exits": [
+        45,
+        28,
+        4,
+        4
+      ],
+      "id": 10,
+      "occluders": [],
+      "sprite": "spr_ln1_level6_room_10"
+    },
+    {
+      "boundaries": [
+        [
+          16,
+          96,
+          64,
+          145,
+          17
+        ],
+        [
+          0,
+          152,
+          254,
+          89,
+          68
+        ],
+        [
+          0,
+          106,
+          162,
+          66,
+          68
+        ],
+        [
+          162,
+          66,
+          214,
+          79,
+          4
+        ],
+        [
+          214,
+          79,
+          254,
+          69,
+          68
+        ]
+      ],
+      "boundary_mode": 13,
+      "depth_sprite": "spr_ln1_wastelands_room_01_depth",
+      "enemy_script": 19968,
+      "entrance_crossings": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "exit_thresholds": [
+        106,
+        189,
+        255,
+        255
+      ],
+      "exits": [
+        49,
+        40,
+        4,
+        4
+      ],
+      "id": 11,
+      "occluders": [],
+      "sprite": "spr_ln1_level6_room_11"
+    },
+    {
+      "boundaries": [
+        [
+          0,
+          96,
+          80,
+          76,
+          69
+        ],
+        [
+          0,
+          104,
+          128,
+          136,
+          4
+        ],
+        [
+          128,
+          136,
+          254,
+          105,
+          68
+        ],
+        [
+          0,
+          57,
+          128,
+          89,
+          4
+        ],
+        [
+          128,
+          89,
+          152,
+          83,
+          68
+        ],
+        [
+          152,
+          83,
+          196,
+          83,
+          0
+        ],
+        [
+          194,
+          76,
+          196,
+          83,
+          62
+        ],
+        [
+          194,
+          76,
+          250,
+          62,
+          68
+        ]
+      ],
+      "boundary_mode": 110,
+      "depth_sprite": "spr_ln1_level6_room_12_depth",
+      "enemy_script": 20024,
+      "entrance_crossings": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "exit_thresholds": [
+        103,
+        254,
+        255,
+        255
+      ],
+      "exits": [
+        52,
+        44,
+        4,
+        4
+      ],
+      "id": 12,
+      "occluders": [],
+      "sprite": "spr_ln1_level6_room_12"
+    },
+    {
+      "boundaries": [
+        [
+          0,
+          105,
+          254,
+          168,
+          4
+        ],
+        [
+          0,
+          54,
+          70,
+          71,
+          4
+        ],
+        [
+          42,
+          78,
+          70,
+          71,
+          68
+        ],
+        [
+          42,
+          78,
+          74,
+          86,
+          4
+        ],
+        [
+          74,
+          86,
+          90,
+          82,
+          68
+        ],
+        [
+          90,
+          82,
+          226,
+          116,
+          4
+        ],
+        [
+          206,
+          121,
+          226,
+          116,
+          68
+        ],
+        [
+          206,
+          121,
+          242,
+          130,
+          4
+        ]
+      ],
+      "boundary_mode": 0,
+      "depth_sprite": "spr_ln1_level6_room_13_depth",
+      "enemy_script": 20122,
+      "entrance_crossings": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "exit_thresholds": [
+        136,
+        254,
+        255,
+        255
+      ],
+      "exits": [
+        48,
+        56,
+        4,
+        4
+      ],
+      "id": 13,
+      "occluders": [],
+      "sprite": "spr_ln1_level6_room_13"
+    },
+    {
+      "boundaries": [
+        [
+          176,
+          157,
+          254,
+          176,
+          4
+        ],
+        [
+          176,
+          157,
+          246,
+          140,
+          68
+        ],
+        [
+          238,
+          109,
+          246,
+          140,
+          62
+        ],
+        [
+          190,
+          97,
+          238,
+          109,
+          4
+        ],
+        [
+          188,
+          90,
+          190,
+          97,
+          62
+        ],
+        [
+          62,
+          59,
+          188,
+          90,
+          4
+        ],
+        [
+          6,
+          73,
+          62,
+          59,
+          68
+        ],
+        [
+          2,
+          88,
+          6,
+          73,
+          126
+        ],
+        [
+          2,
+          88,
+          6,
+          103,
+          62
+        ],
+        [
+          2,
+          118,
+          6,
+          103,
+          126
+        ],
+        [
+          2,
+          118,
+          6,
+          133,
+          62
+        ],
+        [
+          2,
+          134,
+          6,
+          133,
+          68
+        ],
+        [
+          2,
+          134,
+          242,
+          194,
+          4
+        ]
+      ],
+      "boundary_mode": 0,
+      "depth_sprite": "spr_ln1_level6_room_14_depth",
+      "enemy_script": 20130,
+      "entrance_crossings": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "exit_thresholds": [
+        167,
+        254,
+        255,
+        255
+      ],
+      "exits": [
+        53,
+        60,
+        4,
+        4
+      ],
+      "id": 14,
+      "occluders": [],
+      "sprite": "spr_ln1_level6_room_14"
+    },
+    {
+      "boundaries": [
+        [
+          0,
+          121,
+          94,
+          98,
+          68
+        ],
+        [
+          94,
+          98,
+          240,
+          134,
+          4
+        ],
+        [
+          238,
+          138,
+          240,
+          134,
+          96
+        ],
+        [
+          70,
+          180,
+          238,
+          138,
+          68
+        ],
+        [
+          2,
+          163,
+          70,
+          180,
+          4
+        ],
+        [
+          2,
+          163,
+          6,
+          148,
+          126
+        ],
+        [
+          2,
+          133,
+          6,
+          148,
+          62
+        ],
+        [
+          2,
+          133,
+          6,
+          118,
+          126
+        ],
+        [
+          60,
+          119,
+          160,
+          94,
+          69
+        ],
+        [
+          60,
+          119,
+          122,
+          134,
+          5
+        ],
+        [
+          122,
+          134,
+          234,
+          106,
+          69
+        ],
+        [
+          86,
+          119,
+          180,
+          96,
+          69
+        ],
+        [
+          86,
+          119,
+          128,
+          129,
+          5
+        ],
+        [
+          128,
+          129,
+          208,
+          109,
+          69
+        ]
+      ],
+      "boundary_mode": 21,
+      "depth_sprite": "spr_ln1_wastelands_room_01_depth",
+      "enemy_script": 0,
+      "entrance_crossings": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "exit_thresholds": [
+        106,
+        189,
+        255,
+        255
+      ],
+      "exits": [
+        0,
+        57,
+        4,
+        4
+      ],
+      "id": 15,
+      "occluders": [],
+      "sprite": "spr_ln1_game_level6_location_15"
+    }
+  ],
+  "safe_areas": [
+    [],
+    [],
+    [],
+    []
+  ],
+  "schema": 2,
+  "source_banks": [
+    {
+      "block": 2,
+      "destination": 57088,
+      "path": "source/local/last_ninja_the_side_b_ccs/011_2F.bin",
+      "payload_bytes": 440,
+      "sha256": "123dcee8bb71e50b9a6e8996a55750bf64eaad20e0f6d78b9b779713f6d17af0"
+    },
+    {
+      "block": 3,
+      "destination": 55296,
+      "path": "source/local/last_ninja_the_side_b_ccs/012_3F.bin",
+      "payload_bytes": 1152,
+      "sha256": "bf3f47704baa4e143cf4519b8157942d2422b959dfbc5bbe7edb102798165d91"
+    },
+    {
+      "block": 4,
+      "destination": 52224,
+      "path": "source/local/last_ninja_the_side_b_ccs/013_4F.bin",
+      "payload_bytes": 640,
+      "sha256": "876398c88aee9c745f9283de529333bd64a1660a42a076b4aab7a916370d48b2"
+    },
+    {
+      "block": 5,
+      "destination": 40448,
+      "path": "source/local/last_ninja_the_side_b_ccs/014_5F.bin",
+      "payload_bytes": 4608,
+      "sha256": "8b9425b60e74a9b5082719e08d0ca55317cc51a989af320835b577c614feb29c"
+    },
+    {
+      "block": 6,
+      "destination": 1536,
+      "path": "source/local/last_ninja_the_side_b_ccs/015_6F.bin",
+      "payload_bytes": 19968,
+      "sha256": "581f4c4cfa3cb328a9470088b9e076fc9c15c8d47c162a73355894432ce7bb8f"
+    },
+    {
+      "block": 7,
+      "destination": 45056,
+      "path": "source/local/last_ninja_the_side_b_ccs/016_7F.bin",
+      "payload_bytes": 4096,
+      "sha256": "b8fe763d85bde598863cf461b93a42f5f628d3010b61346ce4bfecedbb2fee56"
+    }
+  ],
+  "source_layout": {
+    "boundary_enter": 48485,
+    "dispatcher": 18944,
+    "enemy_begin": 20178,
+    "enemy_entries": 20254,
+    "enemy_spawn": 19838,
+    "item_enter": 21197,
+    "item_offsets": 21380,
+    "item_table": 21386,
+    "reactions": 20731
+  },
+  "title": "Inner Sanctum",
+  "vision_enemy": 20138,
+  "vision_sprite": "spr_ln1_level6_vision"
+}

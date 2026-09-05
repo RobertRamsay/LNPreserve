@@ -1,4 +1,141 @@
 {
+  "actor_frames": {
+    "128": {
+      "index": 0,
+      "mirror_offset": 27,
+      "sprite": "spr_ln1_world_actors"
+    },
+    "129": {
+      "index": 1,
+      "mirror_offset": 27,
+      "sprite": "spr_ln1_world_actors"
+    },
+    "130": {
+      "index": 2,
+      "mirror_offset": 27,
+      "sprite": "spr_ln1_world_actors"
+    },
+    "131": {
+      "index": 3,
+      "mirror_offset": 27,
+      "sprite": "spr_ln1_world_actors"
+    },
+    "132": {
+      "index": 4,
+      "mirror_offset": 27,
+      "sprite": "spr_ln1_world_actors"
+    },
+    "133": {
+      "index": 5,
+      "mirror_offset": 27,
+      "sprite": "spr_ln1_world_actors"
+    },
+    "134": {
+      "index": 6,
+      "mirror_offset": 27,
+      "sprite": "spr_ln1_world_actors"
+    },
+    "135": {
+      "index": 7,
+      "mirror_offset": 27,
+      "sprite": "spr_ln1_world_actors"
+    },
+    "136": {
+      "index": 8,
+      "mirror_offset": 27,
+      "sprite": "spr_ln1_world_actors"
+    },
+    "137": {
+      "index": 9,
+      "mirror_offset": 27,
+      "sprite": "spr_ln1_world_actors"
+    },
+    "138": {
+      "index": 10,
+      "mirror_offset": 27,
+      "sprite": "spr_ln1_world_actors"
+    },
+    "139": {
+      "index": 11,
+      "mirror_offset": 27,
+      "sprite": "spr_ln1_world_actors"
+    },
+    "140": {
+      "index": 12,
+      "mirror_offset": 27,
+      "sprite": "spr_ln1_world_actors"
+    },
+    "141": {
+      "index": 13,
+      "mirror_offset": 27,
+      "sprite": "spr_ln1_world_actors"
+    },
+    "142": {
+      "index": 14,
+      "mirror_offset": 27,
+      "sprite": "spr_ln1_world_actors"
+    },
+    "143": {
+      "index": 15,
+      "mirror_offset": 27,
+      "sprite": "spr_ln1_world_actors"
+    },
+    "144": {
+      "index": 16,
+      "mirror_offset": 27,
+      "sprite": "spr_ln1_world_actors"
+    },
+    "145": {
+      "index": 17,
+      "mirror_offset": 27,
+      "sprite": "spr_ln1_world_actors"
+    },
+    "146": {
+      "index": 18,
+      "mirror_offset": 27,
+      "sprite": "spr_ln1_world_actors"
+    },
+    "147": {
+      "index": 19,
+      "mirror_offset": 27,
+      "sprite": "spr_ln1_world_actors"
+    },
+    "148": {
+      "index": 20,
+      "mirror_offset": 27,
+      "sprite": "spr_ln1_world_actors"
+    },
+    "150": {
+      "index": 21,
+      "mirror_offset": 27,
+      "sprite": "spr_ln1_world_actors"
+    },
+    "151": {
+      "index": 22,
+      "mirror_offset": 27,
+      "sprite": "spr_ln1_world_actors"
+    },
+    "152": {
+      "index": 23,
+      "mirror_offset": 27,
+      "sprite": "spr_ln1_world_actors"
+    },
+    "163": {
+      "index": 24,
+      "mirror_offset": 27,
+      "sprite": "spr_ln1_world_actors"
+    },
+    "164": {
+      "index": 25,
+      "mirror_offset": 27,
+      "sprite": "spr_ln1_world_actors"
+    },
+    "165": {
+      "index": 26,
+      "mirror_offset": 27,
+      "sprite": "spr_ln1_world_actors"
+    }
+  },
   "entry_heading": [
     5,
     7,

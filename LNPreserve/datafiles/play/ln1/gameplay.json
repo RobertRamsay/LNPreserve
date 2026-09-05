@@ -61,6 +61,116 @@
     23674
   ],
   "actions": {
+    "20240": {
+      "combat_data": -1,
+      "duration": 4,
+      "dx": 0,
+      "dy": 0,
+      "flags": 10,
+      "frame": 138,
+      "next": 20243,
+      "state": -1
+    },
+    "20243": {
+      "combat_data": -1,
+      "duration": -1,
+      "dx": 0,
+      "dy": 0,
+      "flags": 8,
+      "frame": 139,
+      "next": 20245,
+      "state": -1
+    },
+    "20245": {
+      "combat_data": -1,
+      "duration": -1,
+      "dx": 0,
+      "dy": 0,
+      "flags": 8,
+      "frame": 140,
+      "next": 20247,
+      "state": -1
+    },
+    "20247": {
+      "combat_data": -1,
+      "duration": -1,
+      "dx": 0,
+      "dy": 0,
+      "flags": 8,
+      "frame": 141,
+      "next": 20249,
+      "state": -1
+    },
+    "20249": {
+      "combat_data": -1,
+      "duration": -1,
+      "dx": 0,
+      "dy": 0,
+      "flags": 8,
+      "frame": 142,
+      "next": 20251,
+      "state": -1
+    },
+    "20251": {
+      "combat_data": -1,
+      "duration": 8,
+      "dx": 0,
+      "dy": 0,
+      "flags": 10,
+      "frame": 143,
+      "next": 20254,
+      "state": -1
+    },
+    "20254": {
+      "combat_data": -1,
+      "duration": -1,
+      "dx": 0,
+      "dy": 0,
+      "flags": 8,
+      "frame": 144,
+      "next": 20256,
+      "state": -1
+    },
+    "20256": {
+      "combat_data": -1,
+      "duration": -1,
+      "dx": 0,
+      "dy": 0,
+      "flags": 8,
+      "frame": 145,
+      "next": 20258,
+      "state": -1
+    },
+    "20258": {
+      "combat_data": -1,
+      "duration": -1,
+      "dx": 0,
+      "dy": 0,
+      "flags": 8,
+      "frame": 146,
+      "next": 20260,
+      "state": -1
+    },
+    "20260": {
+      "combat_data": -1,
+      "duration": -1,
+      "dx": 0,
+      "dy": 0,
+      "flags": 8,
+      "frame": 147,
+      "next": 20262,
+      "state": -1
+    },
+    "20262": {
+      "combat_data": -1,
+      "duration": -1,
+      "dx": 0,
+      "dy": 0,
+      "flags": 41,
+      "frame": 148,
+      "next": 0,
+      "state": 3
+    },
     "20267": {
       "combat_data": 255,
       "duration": 8,
@@ -187,6 +297,136 @@
       "dx": 4,
       "dy": 1,
       "flags": 160,
+      "frame": 128,
+      "next": 0,
+      "state": -1
+    },
+    "20326": {
+      "combat_data": -1,
+      "duration": 16,
+      "dx": 0,
+      "dy": 0,
+      "flags": 2,
+      "frame": 163,
+      "next": 20329,
+      "state": -1
+    },
+    "20329": {
+      "combat_data": -1,
+      "duration": -1,
+      "dx": 0,
+      "dy": 0,
+      "flags": 0,
+      "frame": 164,
+      "next": 20331,
+      "state": -1
+    },
+    "20331": {
+      "combat_data": -1,
+      "duration": -1,
+      "dx": 0,
+      "dy": 0,
+      "flags": 32,
+      "frame": 165,
+      "next": 0,
+      "state": -1
+    },
+    "20342": {
+      "combat_data": -1,
+      "duration": 6,
+      "dx": 0,
+      "dy": 0,
+      "flags": 2,
+      "frame": 131,
+      "next": 20345,
+      "state": -1
+    },
+    "20345": {
+      "combat_data": -1,
+      "duration": -1,
+      "dx": 0,
+      "dy": 0,
+      "flags": 0,
+      "frame": 132,
+      "next": 20347,
+      "state": -1
+    },
+    "20347": {
+      "combat_data": -1,
+      "duration": -1,
+      "dx": 0,
+      "dy": 0,
+      "flags": 1,
+      "frame": 133,
+      "next": 20350,
+      "state": 2
+    },
+    "20350": {
+      "combat_data": -1,
+      "duration": -1,
+      "dx": 0,
+      "dy": 0,
+      "flags": 0,
+      "frame": 134,
+      "next": 20352,
+      "state": -1
+    },
+    "20352": {
+      "combat_data": -1,
+      "duration": -1,
+      "dx": 0,
+      "dy": 0,
+      "flags": 1,
+      "frame": 135,
+      "next": 20355,
+      "state": 2
+    },
+    "20355": {
+      "combat_data": -1,
+      "duration": -1,
+      "dx": 0,
+      "dy": 0,
+      "flags": 0,
+      "frame": 133,
+      "next": 20357,
+      "state": -1
+    },
+    "20357": {
+      "combat_data": -1,
+      "duration": -1,
+      "dx": 0,
+      "dy": 0,
+      "flags": 1,
+      "frame": 134,
+      "next": 20360,
+      "state": 2
+    },
+    "20360": {
+      "combat_data": -1,
+      "duration": -1,
+      "dx": 0,
+      "dy": 0,
+      "flags": 0,
+      "frame": 136,
+      "next": 20362,
+      "state": -1
+    },
+    "20362": {
+      "combat_data": -1,
+      "duration": -1,
+      "dx": 0,
+      "dy": 0,
+      "flags": 0,
+      "frame": 137,
+      "next": 20364,
+      "state": -1
+    },
+    "20364": {
+      "combat_data": -1,
+      "duration": -1,
+      "dx": 0,
+      "dy": 0,
+      "flags": 32,
       "frame": 128,
       "next": 0,
       "state": -1
@@ -2564,6 +2804,7 @@
     112,
     28
   ],
+  "dragon_smoke_action": 20326,
   "enemy_damage": [
     4,
     2,

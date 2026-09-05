@@ -4,7 +4,7 @@ One editable GameMaker project for The Last Ninja, Last Ninja 2 and Last Ninja 3
 
 The single shared project is [RobertRamsay/LNPreserve](https://github.com/RobertRamsay/LNPreserve), on `main`. Future updates go into this repository and the same `LNPreserve/LNPreserve.yyp`; separately named project downloads are not the current development copy.
 
-**Current build: a native Wastelands gameplay prototype for the first game. The complete trilogy is not playable, and 1:1 system timing has not been verified.**
+**Current build: six connected native level prototypes for the first game. The complete trilogy is not playable, and 1:1 system timing has not been verified.**
 
 Open [LNPreserve/LNPreserve.yyp](LNPreserve/LNPreserve.yyp) in GameMaker LTS 2026 and run it. The project now starts in the game view. No C64 emulator runs inside GameMaker.
 
@@ -14,15 +14,17 @@ Open [LNPreserve/LNPreserve.yyp](LNPreserve/LNPreserve.yyp) in GameMaker LTS 202
 
 - Original assembled player and enemy poses, including walking, jumping and fighting sequences.
 - Native player movement, fractional coordinates, room boundaries, enemy decisions and melee hit ranges.
-- The Wastelands' 25 decoded rooms, original exit tables and scenery rendered offline by the original drawing routine.
-- Seven original collectible placements, pickup checks and weapon selection. Uncollected items flash twice on scene entry using the original colour ramp, including nunchakus.
+- All six LN1 levels, with 134 rooms, original collision boundaries, entrances and enemy placements. Ordinary level exits load the next level and carry inventory and lives.
+- Twenty-three original item/mechanism placements across LN1, pickup checks and weapon selection. Uncollected items flash twice on scene entry using the original colour ramp, including nunchakus.
+- Original throwing-star and smoke projectile graphics, ammunition and movement tables; level-specific actors include skeletons and the final enemy.
+- Native handlers for climbing, secret passages, item protection, statue interaction and the final scroll sequence. These still need complete original-game playthrough comparison.
 - The original FOUND label and item icon appear for 150 game ticks after a pickup, then return to USING. Inventory selection updates HOLDING.
 - Enemy wounds update the original bar and survive scene changes. Defeated guards remain defeated for the current run.
 - Approach either Wastelands Buddha empty handed, facing northwest, to kneel and see the original missing-item hint. S + D finishes prayer with the original stand-up animation.
 - River deaths use the original player graphics sinking behind a waterline mask, and respawn without resuming a death frame. The invented ripple has been removed.
 - Per-pixel scenery masks that activate at the original room-specific depth thresholds.
 
-This is **not a completed first level**. Projectile behavior, special enemies, some puzzle and interaction events, level completion, remaining dashboard rendering, visual details and precise timing still need work. Some event handlers record unsupported actions rather than inventing their effects. The dashboard combines a captured original frame with live original status labels, icons and enemy wounds; player power/lives still use temporary text. Original recoverable enemy knockouts still need distinguishing from permanent deaths. Enemy random sampling reproduces the original algorithm but its hardware-read phase is not verified. LN1 levels 2–6 and gameplay for LN2/LN3 are not connected.
+This is **not a verified complete first game**. The level-specific puzzle, special-enemy, projectile-combat and ending handlers need further original-game comparison. Some palette effects, death presentation and dashboard rendering remain incomplete. The dashboard combines a captured original frame with live original status labels, icons and enemy wounds; player power/lives still use temporary text. Original recoverable enemy knockouts still need distinguishing from permanent deaths. Enemy random sampling reproduces the original algorithm but its hardware-read phase is not verified. LN2/LN3 gameplay is not connected.
 
 ## Controls
 
@@ -41,9 +43,9 @@ This is **not a completed first level**. Projectile behavior, special enemies, s
 
 Music assets are still named silent placeholders. Replace the corresponding WAV in GameMaker to supply music. Sound effects are not recovered.
 
-The arrow shortcuts follow the Wastelands' real room links and use each destination's original entrance position and facing. One press performs one jump. Missing directions leave the current room unchanged. Inventory, living-player health and saved enemy wounds survive; entry flashes restart. Test jumps cancel an unfinished action, prayer or death, and restore a dead player so testing can continue. They are development controls, not original gameplay behavior.
+The arrow shortcuts follow all six LN1 levels' real room links and use each destination's original entrance position and facing, including the one-way Dungeons entrance. When two exits face the same direction, the nearer exit is used. One press performs one jump. Missing directions leave the current room unchanged. Inventory, living-player health and saved enemy wounds survive; entry flashes restart. Test jumps cancel an unfinished action, prayer or death, and restore a dead player so testing can continue. They are development controls, not original gameplay behavior.
 
-F11's scene picker exposes the available scenes in all 18 level datasets across the three games. Only LN1 Wastelands currently supports gameplay testing. Other levels open clearly marked scenery previews; Page Up/Down browses those previews and Escape returns to gameplay. Movement, collision, objects, combat and directional exits for those levels remain unconnected. Gameplay pauses while the picker, a preview or the workbench is open.
+F11's scene picker exposes all 18 level datasets across the three games. All six LN1 levels support native prototype testing. LN2/LN3 open clearly marked scenery previews; Page Up/Down browses those previews and Escape returns to gameplay. Their movement, collision, objects, combat and directional exits remain unconnected. Gameplay pauses while the picker, a preview or the workbench is open.
 
 ## Verification
 
@@ -55,6 +57,9 @@ Actual compiled GML passes comparisons against offline execution of original mac
 - 1,024 selection-key transitions and 192 sprite decompressions.
 - 1,536 river sinking timer states, including timer wrap and immediate first descent.
 - 54 original exit-routine cases for test navigation, including original spawn position/facing; all 25 Wastelands rooms are reachable through directional shortcuts.
+- 249 further original exit-routine cases for LN1 levels 2–6, plus native traversal proving all 134 rooms can be reached through arrow shortcuts.
+- 4,480 original enemy-action selections in the later levels, including skeleton and boss selectors; 10,900 integration ticks across their 109 rooms.
+- 4,032 original one-tick projectile movement/lifetime cases across all six LN1 level banks.
 
 A further 660-update integration check crosses the first original exit and runs an enemy encounter. Feedback regressions check pickup expiry across clock wrap, scene-entry flash state, enemy damage/death persistence, armed/unarmed prayer, sinking and stale death frames after respawn. GPU tests check scenery masking, transparent holes and the waterline cutoff. These checks **do not certify full gameplay, complete combat dispatch, sprite composition, hardware random timing or cycle accuracy**. See [evidence/STATUS.json](evidence/STATUS.json) and [docs/ACCURACY.md](docs/ACCURACY.md).
 
@@ -73,3 +78,5 @@ This was also checked through walking and a failed jump from the river entrance,
 Build with `tools/compile.ps1`; run native checks with `tools/run_checks.py --runner <installed GameMaker Runner.exe>`. `tools/validate_project.py` checks source identities and project resources. Native code is under `LNPreserve/scripts/ln1_*`; decoded gameplay tables are under `LNPreserve/datafiles/play/ln1`.
 
 Extraction tools use original RAM only offline. They do not become part of the game runtime. `export_ln1_world.py` and `export_ln1_play.py` preserve existing sprite edits unless explicitly invoked with `--refresh`. Original disks, emulator tools and captures remain local under ignored directories.
+
+`capture_ln1_levels.py`, `ln1_level_source.py` and `export_ln1_levels.py` recover the later LN1 level packages. Identical new assets share existing sprite resources; 83 duplicate resources are avoided. The fountain animation also uses the original sprite's scrolling rows. LN2's seven original levels have now been captured and their room, enemy, item-interaction and animation records are being recovered by `capture_ln2_levels.py` and `export_ln2_content.py`; this offline recovery has not yet become native LN2 gameplay.

@@ -1,0 +1,904 @@
+{
+  "vectors": [
+    {
+      "boundary_point": [
+        247,
+        80
+      ],
+      "direction": 0,
+      "expected": {
+        "entry": 9,
+        "facing": 1,
+        "frame": 0,
+        "heading": 1,
+        "room": 2,
+        "turn_lock": 255,
+        "x": 12,
+        "y": 128
+      },
+      "room": 1
+    },
+    {
+      "boundary_point": [
+        247,
+        156
+      ],
+      "direction": 1,
+      "expected": {
+        "entry": 13,
+        "facing": 3,
+        "frame": 8,
+        "heading": 3,
+        "room": 3,
+        "turn_lock": 255,
+        "x": 12,
+        "y": 120
+      },
+      "room": 2
+    },
+    {
+      "boundary_point": [
+        0,
+        128
+      ],
+      "direction": 2,
+      "expected": {
+        "entry": 4,
+        "facing": 5,
+        "frame": 8,
+        "heading": 5,
+        "room": 1,
+        "turn_lock": 255,
+        "x": 228,
+        "y": 80
+      },
+      "room": 2
+    },
+    {
+      "boundary_point": [
+        0,
+        48
+      ],
+      "direction": 3,
+      "expected": {
+        "entry": 45,
+        "facing": 7,
+        "frame": 0,
+        "heading": 7,
+        "room": 11,
+        "turn_lock": 255,
+        "x": 160,
+        "y": 164
+      },
+      "room": 2
+    },
+    {
+      "boundary_point": [
+        247,
+        76
+      ],
+      "direction": 0,
+      "expected": {
+        "entry": 17,
+        "facing": 1,
+        "frame": 0,
+        "heading": 1,
+        "room": 4,
+        "turn_lock": 255,
+        "x": 12,
+        "y": 136
+      },
+      "room": 3
+    },
+    {
+      "boundary_point": [
+        0,
+        120
+      ],
+      "direction": 3,
+      "expected": {
+        "entry": 8,
+        "facing": 7,
+        "frame": 0,
+        "heading": 7,
+        "room": 2,
+        "turn_lock": 255,
+        "x": 236,
+        "y": 156
+      },
+      "room": 3
+    },
+    {
+      "boundary_point": [
+        247,
+        68
+      ],
+      "direction": 1,
+      "expected": {
+        "entry": 21,
+        "facing": 3,
+        "frame": 8,
+        "heading": 3,
+        "room": 5,
+        "turn_lock": 255,
+        "x": 12,
+        "y": 128
+      },
+      "room": 4
+    },
+    {
+      "boundary_point": [
+        0,
+        136
+      ],
+      "direction": 2,
+      "expected": {
+        "entry": 12,
+        "facing": 5,
+        "frame": 8,
+        "heading": 5,
+        "room": 3,
+        "turn_lock": 255,
+        "x": 236,
+        "y": 76
+      },
+      "room": 4
+    },
+    {
+      "boundary_point": [
+        247,
+        84
+      ],
+      "direction": 0,
+      "expected": {
+        "entry": 25,
+        "facing": 1,
+        "frame": 0,
+        "heading": 1,
+        "room": 6,
+        "turn_lock": 255,
+        "x": 12,
+        "y": 142
+      },
+      "room": 5
+    },
+    {
+      "boundary_point": [
+        0,
+        128
+      ],
+      "direction": 3,
+      "expected": {
+        "entry": 16,
+        "facing": 7,
+        "frame": 0,
+        "heading": 7,
+        "room": 4,
+        "turn_lock": 255,
+        "x": 236,
+        "y": 68
+      },
+      "room": 5
+    },
+    {
+      "boundary_point": [
+        247,
+        64
+      ],
+      "direction": 0,
+      "expected": {
+        "entry": 29,
+        "facing": 1,
+        "frame": 0,
+        "heading": 1,
+        "room": 7,
+        "turn_lock": 255,
+        "x": 16,
+        "y": 140
+      },
+      "room": 6
+    },
+    {
+      "boundary_point": [
+        0,
+        142
+      ],
+      "direction": 2,
+      "expected": {
+        "entry": 20,
+        "facing": 5,
+        "frame": 8,
+        "heading": 5,
+        "room": 5,
+        "turn_lock": 255,
+        "x": 236,
+        "y": 84
+      },
+      "room": 6
+    },
+    {
+      "boundary_point": [
+        247,
+        96
+      ],
+      "direction": 0,
+      "expected": {
+        "entry": 33,
+        "facing": 1,
+        "frame": 0,
+        "heading": 1,
+        "room": 8,
+        "turn_lock": 255,
+        "x": 12,
+        "y": 128
+      },
+      "room": 7
+    },
+    {
+      "boundary_point": [
+        0,
+        140
+      ],
+      "direction": 2,
+      "expected": {
+        "entry": 24,
+        "facing": 5,
+        "frame": 8,
+        "heading": 5,
+        "room": 6,
+        "turn_lock": 255,
+        "x": 232,
+        "y": 64
+      },
+      "room": 7
+    },
+    {
+      "boundary_point": [
+        247,
+        108
+      ],
+      "direction": 1,
+      "expected": {
+        "entry": 37,
+        "facing": 3,
+        "frame": 8,
+        "heading": 3,
+        "room": 9,
+        "turn_lock": 255,
+        "x": 12,
+        "y": 120
+      },
+      "room": 8
+    },
+    {
+      "boundary_point": [
+        0,
+        128
+      ],
+      "direction": 2,
+      "expected": {
+        "entry": 28,
+        "facing": 5,
+        "frame": 8,
+        "heading": 5,
+        "room": 7,
+        "turn_lock": 255,
+        "x": 236,
+        "y": 96
+      },
+      "room": 8
+    },
+    {
+      "boundary_point": [
+        247,
+        76
+      ],
+      "direction": 0,
+      "expected": {
+        "entry": 40,
+        "facing": 1,
+        "frame": 0,
+        "heading": 1,
+        "room": 10,
+        "turn_lock": 255,
+        "x": 12,
+        "y": 144
+      },
+      "room": 9
+    },
+    {
+      "boundary_point": [
+        0,
+        120
+      ],
+      "direction": 3,
+      "expected": {
+        "entry": 32,
+        "facing": 7,
+        "frame": 0,
+        "heading": 7,
+        "room": 8,
+        "turn_lock": 255,
+        "x": 236,
+        "y": 108
+      },
+      "room": 9
+    },
+    {
+      "boundary_point": [
+        0,
+        144
+      ],
+      "direction": 2,
+      "expected": {
+        "entry": 36,
+        "facing": 5,
+        "frame": 8,
+        "heading": 5,
+        "room": 9,
+        "turn_lock": 255,
+        "x": 236,
+        "y": 76
+      },
+      "room": 10
+    },
+    {
+      "boundary_point": [
+        247,
+        92
+      ],
+      "direction": 0,
+      "expected": {
+        "entry": 49,
+        "facing": 1,
+        "frame": 0,
+        "heading": 1,
+        "room": 12,
+        "turn_lock": 255,
+        "x": 12,
+        "y": 136
+      },
+      "room": 11
+    },
+    {
+      "boundary_point": [
+        160,
+        189
+      ],
+      "direction": 1,
+      "expected": {
+        "entry": 10,
+        "facing": 3,
+        "frame": 8,
+        "heading": 3,
+        "room": 2,
+        "turn_lock": 255,
+        "x": 12,
+        "y": 48
+      },
+      "room": 11
+    },
+    {
+      "boundary_point": [
+        247,
+        116
+      ],
+      "direction": 1,
+      "expected": {
+        "entry": 53,
+        "facing": 3,
+        "frame": 8,
+        "heading": 3,
+        "room": 13,
+        "turn_lock": 255,
+        "x": 12,
+        "y": 120
+      },
+      "room": 12
+    },
+    {
+      "boundary_point": [
+        0,
+        136
+      ],
+      "direction": 2,
+      "expected": {
+        "entry": 44,
+        "facing": 5,
+        "frame": 8,
+        "heading": 5,
+        "room": 11,
+        "turn_lock": 255,
+        "x": 236,
+        "y": 92
+      },
+      "room": 12
+    },
+    {
+      "boundary_point": [
+        247,
+        76
+      ],
+      "direction": 0,
+      "expected": {
+        "entry": 57,
+        "facing": 3,
+        "frame": 8,
+        "heading": 3,
+        "room": 14,
+        "turn_lock": 255,
+        "x": 12,
+        "y": 120
+      },
+      "room": 13
+    },
+    {
+      "boundary_point": [
+        0,
+        120
+      ],
+      "direction": 3,
+      "expected": {
+        "entry": 48,
+        "facing": 7,
+        "frame": 0,
+        "heading": 7,
+        "room": 12,
+        "turn_lock": 255,
+        "x": 236,
+        "y": 116
+      },
+      "room": 13
+    },
+    {
+      "boundary_point": [
+        247,
+        92
+      ],
+      "direction": 0,
+      "expected": {
+        "entry": 61,
+        "facing": 1,
+        "frame": 0,
+        "heading": 1,
+        "room": 15,
+        "turn_lock": 255,
+        "x": 12,
+        "y": 116
+      },
+      "room": 14
+    },
+    {
+      "boundary_point": [
+        0,
+        120
+      ],
+      "direction": 3,
+      "expected": {
+        "entry": 52,
+        "facing": 5,
+        "frame": 8,
+        "heading": 5,
+        "room": 13,
+        "turn_lock": 255,
+        "x": 236,
+        "y": 76
+      },
+      "room": 14
+    },
+    {
+      "boundary_point": [
+        247,
+        60
+      ],
+      "direction": 0,
+      "expected": {
+        "entry": 65,
+        "facing": 3,
+        "frame": 8,
+        "heading": 3,
+        "room": 16,
+        "turn_lock": 255,
+        "x": 12,
+        "y": 96
+      },
+      "room": 15
+    },
+    {
+      "boundary_point": [
+        0,
+        116
+      ],
+      "direction": 2,
+      "expected": {
+        "entry": 56,
+        "facing": 5,
+        "frame": 8,
+        "heading": 5,
+        "room": 14,
+        "turn_lock": 255,
+        "x": 236,
+        "y": 92
+      },
+      "room": 15
+    },
+    {
+      "boundary_point": [
+        247,
+        92
+      ],
+      "direction": 1,
+      "expected": {
+        "entry": 70,
+        "facing": 3,
+        "frame": 8,
+        "heading": 3,
+        "room": 17,
+        "turn_lock": 255,
+        "x": 12,
+        "y": 128
+      },
+      "room": 16
+    },
+    {
+      "boundary_point": [
+        0,
+        96
+      ],
+      "direction": 3,
+      "expected": {
+        "entry": 60,
+        "facing": 5,
+        "frame": 8,
+        "heading": 5,
+        "room": 15,
+        "turn_lock": 255,
+        "x": 236,
+        "y": 60
+      },
+      "room": 16
+    },
+    {
+      "boundary_point": [
+        247,
+        80
+      ],
+      "direction": 0,
+      "expected": {
+        "entry": 72,
+        "facing": 1,
+        "frame": 0,
+        "heading": 1,
+        "room": 18,
+        "turn_lock": 255,
+        "x": 12,
+        "y": 128
+      },
+      "room": 17
+    },
+    {
+      "boundary_point": [
+        247,
+        140
+      ],
+      "direction": 1,
+      "expected": {
+        "entry": 100,
+        "facing": 3,
+        "frame": 8,
+        "heading": 3,
+        "room": 25,
+        "turn_lock": 255,
+        "x": 12,
+        "y": 34
+      },
+      "room": 17
+    },
+    {
+      "boundary_point": [
+        0,
+        128
+      ],
+      "direction": 3,
+      "expected": {
+        "entry": 64,
+        "facing": 7,
+        "frame": 0,
+        "heading": 7,
+        "room": 16,
+        "turn_lock": 255,
+        "x": 236,
+        "y": 92
+      },
+      "room": 17
+    },
+    {
+      "boundary_point": [
+        0,
+        128
+      ],
+      "direction": 2,
+      "expected": {
+        "entry": 68,
+        "facing": 5,
+        "frame": 8,
+        "heading": 5,
+        "room": 17,
+        "turn_lock": 255,
+        "x": 236,
+        "y": 80
+      },
+      "room": 18
+    },
+    {
+      "boundary_point": [
+        0,
+        34
+      ],
+      "direction": 3,
+      "expected": {
+        "entry": 77,
+        "facing": 7,
+        "frame": 0,
+        "heading": 7,
+        "room": 19,
+        "turn_lock": 255,
+        "x": 160,
+        "y": 164
+      },
+      "room": 18
+    },
+    {
+      "boundary_point": [
+        247,
+        96
+      ],
+      "direction": 0,
+      "expected": {
+        "entry": 81,
+        "facing": 1,
+        "frame": 0,
+        "heading": 1,
+        "room": 20,
+        "turn_lock": 255,
+        "x": 12,
+        "y": 116
+      },
+      "room": 19
+    },
+    {
+      "boundary_point": [
+        160,
+        189
+      ],
+      "direction": 1,
+      "expected": {
+        "entry": 73,
+        "facing": 3,
+        "frame": 8,
+        "heading": 3,
+        "room": 18,
+        "turn_lock": 255,
+        "x": 12,
+        "y": 34
+      },
+      "room": 19
+    },
+    {
+      "boundary_point": [
+        247,
+        60
+      ],
+      "direction": 0,
+      "expected": {
+        "entry": 85,
+        "facing": 1,
+        "frame": 0,
+        "heading": 1,
+        "room": 21,
+        "turn_lock": 255,
+        "x": 16,
+        "y": 140
+      },
+      "room": 20
+    },
+    {
+      "boundary_point": [
+        0,
+        116
+      ],
+      "direction": 2,
+      "expected": {
+        "entry": 76,
+        "facing": 5,
+        "frame": 8,
+        "heading": 5,
+        "room": 19,
+        "turn_lock": 255,
+        "x": 236,
+        "y": 96
+      },
+      "room": 20
+    },
+    {
+      "boundary_point": [
+        247,
+        96
+      ],
+      "direction": 0,
+      "expected": {
+        "entry": 89,
+        "facing": 1,
+        "frame": 0,
+        "heading": 1,
+        "room": 22,
+        "turn_lock": 255,
+        "x": 12,
+        "y": 128
+      },
+      "room": 21
+    },
+    {
+      "boundary_point": [
+        0,
+        140
+      ],
+      "direction": 2,
+      "expected": {
+        "entry": 80,
+        "facing": 5,
+        "frame": 8,
+        "heading": 5,
+        "room": 20,
+        "turn_lock": 255,
+        "x": 236,
+        "y": 60
+      },
+      "room": 21
+    },
+    {
+      "boundary_point": [
+        247,
+        90
+      ],
+      "direction": 1,
+      "expected": {
+        "entry": 93,
+        "facing": 3,
+        "frame": 8,
+        "heading": 3,
+        "room": 23,
+        "turn_lock": 255,
+        "x": 12,
+        "y": 120
+      },
+      "room": 22
+    },
+    {
+      "boundary_point": [
+        0,
+        128
+      ],
+      "direction": 2,
+      "expected": {
+        "entry": 84,
+        "facing": 5,
+        "frame": 8,
+        "heading": 5,
+        "room": 21,
+        "turn_lock": 255,
+        "x": 236,
+        "y": 96
+      },
+      "room": 22
+    },
+    {
+      "boundary_point": [
+        247,
+        76
+      ],
+      "direction": 0,
+      "expected": {
+        "entry": 97,
+        "facing": 1,
+        "frame": 0,
+        "heading": 1,
+        "room": 24,
+        "turn_lock": 255,
+        "x": 12,
+        "y": 142
+      },
+      "room": 23
+    },
+    {
+      "boundary_point": [
+        0,
+        120
+      ],
+      "direction": 3,
+      "expected": {
+        "entry": 88,
+        "facing": 7,
+        "frame": 0,
+        "heading": 7,
+        "room": 22,
+        "turn_lock": 255,
+        "x": 236,
+        "y": 90
+      },
+      "room": 23
+    },
+    {
+      "boundary_point": [
+        0,
+        142
+      ],
+      "direction": 2,
+      "expected": {
+        "entry": 92,
+        "facing": 5,
+        "frame": 8,
+        "heading": 5,
+        "room": 23,
+        "turn_lock": 255,
+        "x": 236,
+        "y": 76
+      },
+      "room": 24
+    },
+    {
+      "boundary_point": [
+        247,
+        60
+      ],
+      "direction": 0,
+      "expected": {
+        "entry": 0,
+        "facing": 1,
+        "frame": 0,
+        "heading": 1,
+        "room": 0,
+        "turn_lock": 255,
+        "x": 247,
+        "y": 60
+      },
+      "room": 24
+    },
+    {
+      "boundary_point": [
+        247,
+        152
+      ],
+      "direction": 1,
+      "expected": {
+        "entry": 0,
+        "facing": 1,
+        "frame": 0,
+        "heading": 1,
+        "room": 0,
+        "turn_lock": 255,
+        "x": 247,
+        "y": 152
+      },
+      "room": 24
+    },
+    {
+      "boundary_point": [
+        0,
+        34
+      ],
+      "direction": 3,
+      "expected": {
+        "entry": 69,
+        "facing": 7,
+        "frame": 0,
+        "heading": 7,
+        "room": 17,
+        "turn_lock": 255,
+        "x": 236,
+        "y": 140
+      },
+      "room": 25
+    }
+  ]
+}

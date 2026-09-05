@@ -6,7 +6,7 @@ if (keyboard_check_pressed(vk_f12)) { workbench = !workbench; scene_test.menu = 
 if (keyboard_check_pressed(vk_f11)) {
     workbench = false; scene_test.menu = !scene_test.menu;
     if (scene_test.menu && !scene_test.preview) {
-        scene_test.game = 1; scene_test.level_index = 0; scene_test.scene_index = play.room_id - 1;
+        scene_test.game = 1; scene_test.level_index = play.level - 1; scene_test.scene_index = play.room_id - 1;
     }
 }
 if (keyboard_check_pressed(vk_home)) {

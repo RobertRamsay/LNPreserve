@@ -57,18 +57,45 @@ function ln1_combat_event(_g, _event, _enemy_event) {
     var _p = _g.player, _e = _g.enemy;
     if (_event == 0) return;
     if (_event == 1) { _p.weapon = _p.selected_weapon; return; }
+    if (_event == 2) {
+        if (_g.world_state.mode==3) return;
+        var _hit = _g.level==1 ? (_p.y>=72 && _p.y<86 && _p.x>=138) :
+            (_g.level==2 && _p.y>=100 && _p.y<114 && _p.x>=130 && (_g.world_state.flag_a|_g.world_state.flag_b)==0);
+        if (_hit) {
+            _g.player_health=0;_g.world_state.mode=3;
+            ln1_special_action(_g,_g.level==1?$4f10:$ab88);
+        }
+        return;
+    }
     if (_event == 3) { _g.death_wait = 20; return; }
+    if (_event == 4 && _g.level == 5) {
+        if (_p.y >= 102) { _p.input_lock = 255; _g.player_health = 0; }
+        return;
+    }
+    if (_event == 5) { _g.world_state.mode=2; return; }
+    if (_event == 6 && _g.level == 3) { _g.world_state.spin_phase=(_g.world_state.spin_phase+1) mod 21; return; }
+    if (_event == 7 && _g.level == 3) { if (_e.x >= 62) ln1_level_enemy_action(_g,$5173); return; }
+    if (_event == 8) { if (_e.y>=90) _e.action=0; return; }
     if (_event >= 16 && _event < 32) {
         _e.active = 128 | (_event - 16);
         if (_e.wounds >= 32) {
             _e.active = 0; _e.action = 0; _e.display_frame = 255; return;
         }
         _e.facing = ln1_enemy_face(_e, _p.x, _p.y); _e.heading = _e.facing;
+        if (_g.level==6 && _e.active==134) {
+            if (_e.facing==1) _e.active=0;
+            else { _g.world_state.mode=7;ln1_level_enemy_action(_g,$4e08); }
+            return;
+        }
         if ((_e.facing == 7 || _e.facing == 1) && _e.active >= 132 && _e.active != 133) { _e.active = 0; return; }
         _e.origin_x = _p.x; _e.origin_y = _p.y;
         if (_e.active < 132) {
             _e.mode = _e.active == 128 ? 1 : 0;
             ln1_enemy_begin(_e, _g.data, _e.active == 128 ? 4 : 0);
+        } else if ((_g.level==4 && _e.active==133) || (_g.level==6 && _e.active==136)) {
+            _g.world_state.protection=0;_e.weapon=_g.level==4?0:6;
+            _e.speed=2;_e.speed_traits=8;_e.mode=_g.level==4?16:1;
+            ln1_enemy_begin(_e,_g.data,_g.level==4?((_e.traits&32)?72:76):4);
         }
         return;
     }
@@ -77,7 +104,8 @@ function ln1_combat_event(_g, _event, _enemy_event) {
     if (_event == 11) {
         var _hit = ln1_combat_hit(_g, true);
         if (_hit >= 0) {
-            _g.player_health = max(0, _g.player_health - _g.data.player_damage[_hit]);
+            var _damage=(_g.level==4 && _e.active==133)?16:_g.data.player_damage[_hit];
+            _g.player_health = max(0, _g.player_health - _damage);
             if (_g.player_health == 0) { _p.combat_state = 36 + (_p.facing >> 1); _p.input_lock = 255; }
             ln1_combat_hurt(_g, false);
         }
@@ -85,15 +113,19 @@ function ln1_combat_event(_g, _event, _enemy_event) {
     }
     if (_event == 12) { ln1_enemy_react(_g); return; }
     if (_event == 13 || _event == 14) {
+        if (_event == 13) ln1_projectile_player_request(_g);
         var _hit = ln1_combat_hit(_g, false);
-        if (_hit >= 0 && (_e.combat_state & 252) != 36 && _e.active != 137) {
-            _e.wounds = min(32, _e.wounds + _g.data.enemy_damage[_hit]);
+        if (_hit>=0 && (_e.combat_state&252)!=36 && _g.level==4 && _e.active==133) {
+            _e.combat_state=36;ln1_enemy_begin(_e,_g.data,80);_e.mode=7;_e.separation_y=4;return;
+        }
+        var _immune=(_g.level==4?_e.active==135:(_g.level==6?_e.active==134:_e.active==137));
+        if (_hit >= 0 && (_e.combat_state & 252) != 36 && !_immune) {
+            var _damage=(_g.level==6 && _e.active==136)?_g.data.boss_damage[_hit]:_g.data.enemy_damage[_hit];
+            _e.wounds = min(32, _e.wounds + _damage);
             _g.room_wounds[_g.room_id] = _e.wounds;
             if (_e.wounds == 32) ln1_enemy_combat(_e, 36);
             ln1_combat_hurt(_g, true);
         }
-        // Projectile requests (event 13) are separate from the melee hit test.
-        if (_event == 13 && _p.weapon >= 4) array_push(_g.pending_events, _event);
         return;
     }
     if (_event == 32) {
@@ -113,6 +145,25 @@ function ln1_combat_event(_g, _event, _enemy_event) {
         // Original recoverable knockouts will need a separate state when ported.
         if (_g.room_wounds[_g.room_id] >= 32) {
             _e.active = 0; _e.action = 0; _e.display_frame = 255;
+        }
+        return;
+    }
+    if (_event == 35) {
+        if (ln1_enemy_random(_g)<64) _g.world_state.mode=2;
+        else { _e.action=0;_e.display_frame=255; }
+        return;
+    }
+    if (_event == 34) { ln1_projectile_launch(_g,true,1,255);return; }
+    if (_event == 37) { _g.world_state.mode=4; return; }
+    if (_g.level==6 && _event>=39 && _event<=45) {
+        switch (_event) {
+            case 39:_g.world_state.flag_a=136;break;
+            case 40:_p.y=128;_p.x=1;break;
+            case 41:_g.world_state.protection=11;break;
+            case 42:_g.world_state.protection=12;break;
+            case 43:_g.world_state.protection=15;break;
+            case 44:_g.world_state.protection=1;break;
+            case 45:_g.level_complete=true;break;
         }
         return;
     }

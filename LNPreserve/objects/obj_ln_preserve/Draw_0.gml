@@ -6,7 +6,7 @@ if (!workbench) {
         draw_set_colour(make_colour_rgb(125,210,171)); draw_text(160,12,scene_test.message); draw_set_colour(c_white);
     }
     if (selftest && host_frames == 2) {
-        ln_run_mask_checks(); ln1_feedback_capture(); ln_scene_test_capture(catalog);
+        ln_run_mask_checks(); ln1_feedback_capture(); ln_scene_test_capture(catalog); ln1_level_capture();
         ln1_play_draw(play, control_state_ln1.pause != 0);
     }
     if (selftest && host_frames == 3) {

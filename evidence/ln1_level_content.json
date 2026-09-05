@@ -1,0 +1,156 @@
+{
+  "dungeons_entrance_scenery": "Level 4 room 2 matches the original program: an outdoor entrance before the underground passage.",
+  "full_gameplay_parity": false,
+  "levels": [
+    {
+      "actions": 252,
+      "all_rooms_arrow_reachable": true,
+      "encounters": 13,
+      "items": 5,
+      "layout": {
+        "boundary_enter": 48485,
+        "dispatcher": 42816,
+        "enemy_begin": 43972,
+        "enemy_entries": 44022,
+        "enemy_spawn": 43636,
+        "item_enter": 1582,
+        "item_offsets": 1765,
+        "item_table": 1771,
+        "reactions": 44364
+      },
+      "level": 2,
+      "navigation_vectors": 57,
+      "rooms": 27,
+      "selector_vectors": 896,
+      "source_sha256": "f7c2e7f65adfa8d347b95224f82ebc10a031251b6c9b0dc049a71ae1a0aab7bd",
+      "special_boundary_types": [
+        2,
+        3,
+        4,
+        16,
+        17,
+        18
+      ],
+      "title": "Wilderness"
+    },
+    {
+      "actions": 242,
+      "all_rooms_arrow_reachable": true,
+      "encounters": 16,
+      "items": 4,
+      "layout": {
+        "boundary_enter": 48485,
+        "dispatcher": 19968,
+        "enemy_begin": 20999,
+        "enemy_entries": 21049,
+        "enemy_spawn": 20713,
+        "item_enter": 44383,
+        "item_offsets": 44566,
+        "item_table": 44572,
+        "reactions": 44032
+      },
+      "level": 3,
+      "navigation_vectors": 50,
+      "rooms": 25,
+      "selector_vectors": 896,
+      "source_sha256": "b06bf307b81a6929d0a8bdff2866662c39bb8c6ef79cd834a78935976bcaf452",
+      "special_boundary_types": [
+        1,
+        5,
+        6,
+        7,
+        16,
+        17,
+        18
+      ],
+      "title": "Palace Gardens"
+    },
+    {
+      "actions": 309,
+      "all_rooms_arrow_reachable": true,
+      "encounters": 24,
+      "items": 2,
+      "layout": {
+        "boundary_enter": 48485,
+        "dispatcher": 19840,
+        "enemy_begin": 21107,
+        "enemy_entries": 21185,
+        "enemy_spawn": 20584,
+        "item_enter": 1549,
+        "item_offsets": 1732,
+        "item_table": 1738,
+        "reactions": 44421
+      },
+      "level": 4,
+      "navigation_vectors": 69,
+      "rooms": 27,
+      "selector_vectors": 896,
+      "source_sha256": "4313ac82f10a7cee93fcf747cb61adef637762ae35ab50ad2d4272339e398f94",
+      "special_boundary_types": [
+        8,
+        9
+      ],
+      "title": "Dungeons"
+    },
+    {
+      "actions": 219,
+      "all_rooms_arrow_reachable": true,
+      "encounters": 11,
+      "items": 2,
+      "layout": {
+        "boundary_enter": 48485,
+        "dispatcher": 20032,
+        "enemy_begin": 20927,
+        "enemy_entries": 20977,
+        "enemy_spawn": 20707,
+        "item_enter": 44295,
+        "item_offsets": 44478,
+        "item_table": 44484,
+        "reactions": 21319
+      },
+      "level": 5,
+      "navigation_vectors": 35,
+      "rooms": 15,
+      "selector_vectors": 896,
+      "source_sha256": "11049f765eaab032e729839ebb9f861ecfcc008fccf03f1606b5cf81dd6c10a8",
+      "special_boundary_types": [
+        10,
+        11,
+        22
+      ],
+      "title": "Palace"
+    },
+    {
+      "actions": 291,
+      "all_rooms_arrow_reachable": true,
+      "encounters": 11,
+      "items": 3,
+      "layout": {
+        "boundary_enter": 48485,
+        "dispatcher": 18944,
+        "enemy_begin": 20178,
+        "enemy_entries": 20254,
+        "enemy_spawn": 19838,
+        "item_enter": 21197,
+        "item_offsets": 21380,
+        "item_table": 21386,
+        "reactions": 20731
+      },
+      "level": 6,
+      "navigation_vectors": 38,
+      "rooms": 15,
+      "selector_vectors": 896,
+      "source_sha256": "5f69cc33242c88682e963219ad8149b858622e04e086b374fc850b1cae8927af",
+      "special_boundary_types": [
+        12,
+        13,
+        14,
+        20,
+        21,
+        23
+      ],
+      "title": "Inner Sanctum"
+    }
+  ],
+  "method": "Original disk banks and offline original drawing/room routines"
+}

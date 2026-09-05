@@ -1,0 +1,8964 @@
+{
+  "vectors": [
+    {
+      "action": 21280,
+      "active": 128,
+      "countdown": 0,
+      "entry": 0,
+      "facing": 1,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 21318,
+      "active": 128,
+      "countdown": 0,
+      "entry": 4,
+      "facing": 1,
+      "flags": 48,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 21362,
+      "active": 128,
+      "countdown": 0,
+      "entry": 8,
+      "facing": 1,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 21377,
+      "active": 128,
+      "countdown": 0,
+      "entry": 12,
+      "facing": 1,
+      "flags": 22,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 21367,
+      "active": 128,
+      "countdown": 0,
+      "entry": 16,
+      "facing": 1,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 21372,
+      "active": 128,
+      "countdown": 0,
+      "entry": 20,
+      "facing": 1,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 21362,
+      "active": 128,
+      "countdown": 0,
+      "entry": 24,
+      "facing": 1,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 44160,
+      "active": 128,
+      "countdown": 0,
+      "entry": 28,
+      "facing": 1,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 44186,
+      "active": 128,
+      "countdown": 0,
+      "entry": 32,
+      "facing": 1,
+      "flags": 27,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 44232,
+      "active": 128,
+      "countdown": 0,
+      "entry": 36,
+      "facing": 1,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 44204,
+      "active": 128,
+      "countdown": 0,
+      "entry": 40,
+      "facing": 1,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 21280,
+      "active": 128,
+      "countdown": 0,
+      "entry": 44,
+      "facing": 1,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 21280,
+      "active": 128,
+      "countdown": 0,
+      "entry": 48,
+      "facing": 1,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 44262,
+      "active": 128,
+      "countdown": 0,
+      "entry": 52,
+      "facing": 1,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 21280,
+      "active": 128,
+      "countdown": 0,
+      "entry": 0,
+      "facing": 1,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 21318,
+      "active": 128,
+      "countdown": 0,
+      "entry": 4,
+      "facing": 1,
+      "flags": 48,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 21377,
+      "active": 128,
+      "countdown": 0,
+      "entry": 8,
+      "facing": 1,
+      "flags": 22,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 21377,
+      "active": 128,
+      "countdown": 0,
+      "entry": 12,
+      "facing": 1,
+      "flags": 22,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 21367,
+      "active": 128,
+      "countdown": 0,
+      "entry": 16,
+      "facing": 1,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 21372,
+      "active": 128,
+      "countdown": 0,
+      "entry": 20,
+      "facing": 1,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 21362,
+      "active": 128,
+      "countdown": 0,
+      "entry": 24,
+      "facing": 1,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 44160,
+      "active": 128,
+      "countdown": 0,
+      "entry": 28,
+      "facing": 1,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 44186,
+      "active": 128,
+      "countdown": 0,
+      "entry": 32,
+      "facing": 1,
+      "flags": 27,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 44232,
+      "active": 128,
+      "countdown": 0,
+      "entry": 36,
+      "facing": 1,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 44204,
+      "active": 128,
+      "countdown": 0,
+      "entry": 40,
+      "facing": 1,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 21280,
+      "active": 128,
+      "countdown": 0,
+      "entry": 44,
+      "facing": 1,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 21280,
+      "active": 128,
+      "countdown": 0,
+      "entry": 48,
+      "facing": 1,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 44262,
+      "active": 128,
+      "countdown": 0,
+      "entry": 52,
+      "facing": 1,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 21280,
+      "active": 128,
+      "countdown": 0,
+      "entry": 0,
+      "facing": 1,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 21318,
+      "active": 128,
+      "countdown": 0,
+      "entry": 4,
+      "facing": 1,
+      "flags": 48,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 21367,
+      "active": 128,
+      "countdown": 0,
+      "entry": 8,
+      "facing": 1,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 21377,
+      "active": 128,
+      "countdown": 0,
+      "entry": 12,
+      "facing": 1,
+      "flags": 22,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 21367,
+      "active": 128,
+      "countdown": 0,
+      "entry": 16,
+      "facing": 1,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 21372,
+      "active": 128,
+      "countdown": 0,
+      "entry": 20,
+      "facing": 1,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 21362,
+      "active": 128,
+      "countdown": 0,
+      "entry": 24,
+      "facing": 1,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 44160,
+      "active": 128,
+      "countdown": 0,
+      "entry": 28,
+      "facing": 1,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 44186,
+      "active": 128,
+      "countdown": 0,
+      "entry": 32,
+      "facing": 1,
+      "flags": 27,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 44232,
+      "active": 128,
+      "countdown": 0,
+      "entry": 36,
+      "facing": 1,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 44204,
+      "active": 128,
+      "countdown": 0,
+      "entry": 40,
+      "facing": 1,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 21280,
+      "active": 128,
+      "countdown": 0,
+      "entry": 44,
+      "facing": 1,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 21280,
+      "active": 128,
+      "countdown": 0,
+      "entry": 48,
+      "facing": 1,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 44262,
+      "active": 128,
+      "countdown": 0,
+      "entry": 52,
+      "facing": 1,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 21280,
+      "active": 128,
+      "countdown": 0,
+      "entry": 0,
+      "facing": 1,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 21318,
+      "active": 128,
+      "countdown": 0,
+      "entry": 4,
+      "facing": 1,
+      "flags": 48,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 21372,
+      "active": 128,
+      "countdown": 0,
+      "entry": 8,
+      "facing": 1,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 21377,
+      "active": 128,
+      "countdown": 0,
+      "entry": 12,
+      "facing": 1,
+      "flags": 22,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 21367,
+      "active": 128,
+      "countdown": 0,
+      "entry": 16,
+      "facing": 1,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 21372,
+      "active": 128,
+      "countdown": 0,
+      "entry": 20,
+      "facing": 1,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 21362,
+      "active": 128,
+      "countdown": 0,
+      "entry": 24,
+      "facing": 1,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 44160,
+      "active": 128,
+      "countdown": 0,
+      "entry": 28,
+      "facing": 1,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 44186,
+      "active": 128,
+      "countdown": 0,
+      "entry": 32,
+      "facing": 1,
+      "flags": 27,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 44232,
+      "active": 128,
+      "countdown": 0,
+      "entry": 36,
+      "facing": 1,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 44204,
+      "active": 128,
+      "countdown": 0,
+      "entry": 40,
+      "facing": 1,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 21280,
+      "active": 128,
+      "countdown": 0,
+      "entry": 44,
+      "facing": 1,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 21280,
+      "active": 128,
+      "countdown": 0,
+      "entry": 48,
+      "facing": 1,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 44262,
+      "active": 128,
+      "countdown": 0,
+      "entry": 52,
+      "facing": 1,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 21299,
+      "active": 128,
+      "countdown": 0,
+      "entry": 0,
+      "facing": 3,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 0
+    },
+    {
+      "action": 21322,
+      "active": 128,
+      "countdown": 0,
+      "entry": 4,
+      "facing": 3,
+      "flags": 48,
+      "mirror": 2,
+      "speed_traits": 0
+    },
+    {
+      "action": 21326,
+      "active": 128,
+      "countdown": 0,
+      "entry": 8,
+      "facing": 3,
+      "flags": 54,
+      "mirror": 2,
+      "speed_traits": 0
+    },
+    {
+      "action": 21341,
+      "active": 128,
+      "countdown": 0,
+      "entry": 12,
+      "facing": 3,
+      "flags": 22,
+      "mirror": 2,
+      "speed_traits": 0
+    },
+    {
+      "action": 21331,
+      "active": 128,
+      "countdown": 0,
+      "entry": 16,
+      "facing": 3,
+      "flags": 54,
+      "mirror": 2,
+      "speed_traits": 0
+    },
+    {
+      "action": 21336,
+      "active": 128,
+      "countdown": 0,
+      "entry": 20,
+      "facing": 3,
+      "flags": 54,
+      "mirror": 2,
+      "speed_traits": 0
+    },
+    {
+      "action": 21326,
+      "active": 128,
+      "countdown": 0,
+      "entry": 24,
+      "facing": 3,
+      "flags": 54,
+      "mirror": 2,
+      "speed_traits": 0
+    },
+    {
+      "action": 44173,
+      "active": 128,
+      "countdown": 0,
+      "entry": 28,
+      "facing": 3,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 0
+    },
+    {
+      "action": 44195,
+      "active": 128,
+      "countdown": 0,
+      "entry": 32,
+      "facing": 3,
+      "flags": 27,
+      "mirror": 2,
+      "speed_traits": 0
+    },
+    {
+      "action": 44247,
+      "active": 128,
+      "countdown": 0,
+      "entry": 36,
+      "facing": 3,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 0
+    },
+    {
+      "action": 44218,
+      "active": 128,
+      "countdown": 0,
+      "entry": 40,
+      "facing": 3,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 0
+    },
+    {
+      "action": 21280,
+      "active": 128,
+      "countdown": 0,
+      "entry": 44,
+      "facing": 3,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 0
+    },
+    {
+      "action": 21280,
+      "active": 128,
+      "countdown": 0,
+      "entry": 48,
+      "facing": 3,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 0
+    },
+    {
+      "action": 44273,
+      "active": 128,
+      "countdown": 0,
+      "entry": 52,
+      "facing": 3,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 0
+    },
+    {
+      "action": 21299,
+      "active": 128,
+      "countdown": 0,
+      "entry": 0,
+      "facing": 3,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 4
+    },
+    {
+      "action": 21322,
+      "active": 128,
+      "countdown": 0,
+      "entry": 4,
+      "facing": 3,
+      "flags": 48,
+      "mirror": 2,
+      "speed_traits": 4
+    },
+    {
+      "action": 21341,
+      "active": 128,
+      "countdown": 0,
+      "entry": 8,
+      "facing": 3,
+      "flags": 22,
+      "mirror": 2,
+      "speed_traits": 4
+    },
+    {
+      "action": 21341,
+      "active": 128,
+      "countdown": 0,
+      "entry": 12,
+      "facing": 3,
+      "flags": 22,
+      "mirror": 2,
+      "speed_traits": 4
+    },
+    {
+      "action": 21331,
+      "active": 128,
+      "countdown": 0,
+      "entry": 16,
+      "facing": 3,
+      "flags": 54,
+      "mirror": 2,
+      "speed_traits": 4
+    },
+    {
+      "action": 21336,
+      "active": 128,
+      "countdown": 0,
+      "entry": 20,
+      "facing": 3,
+      "flags": 54,
+      "mirror": 2,
+      "speed_traits": 4
+    },
+    {
+      "action": 21326,
+      "active": 128,
+      "countdown": 0,
+      "entry": 24,
+      "facing": 3,
+      "flags": 54,
+      "mirror": 2,
+      "speed_traits": 4
+    },
+    {
+      "action": 44173,
+      "active": 128,
+      "countdown": 0,
+      "entry": 28,
+      "facing": 3,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 4
+    },
+    {
+      "action": 44195,
+      "active": 128,
+      "countdown": 0,
+      "entry": 32,
+      "facing": 3,
+      "flags": 27,
+      "mirror": 2,
+      "speed_traits": 4
+    },
+    {
+      "action": 44247,
+      "active": 128,
+      "countdown": 0,
+      "entry": 36,
+      "facing": 3,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 4
+    },
+    {
+      "action": 44218,
+      "active": 128,
+      "countdown": 0,
+      "entry": 40,
+      "facing": 3,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 4
+    },
+    {
+      "action": 21280,
+      "active": 128,
+      "countdown": 0,
+      "entry": 44,
+      "facing": 3,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 4
+    },
+    {
+      "action": 21280,
+      "active": 128,
+      "countdown": 0,
+      "entry": 48,
+      "facing": 3,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 4
+    },
+    {
+      "action": 44273,
+      "active": 128,
+      "countdown": 0,
+      "entry": 52,
+      "facing": 3,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 4
+    },
+    {
+      "action": 21299,
+      "active": 128,
+      "countdown": 0,
+      "entry": 0,
+      "facing": 3,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 8
+    },
+    {
+      "action": 21322,
+      "active": 128,
+      "countdown": 0,
+      "entry": 4,
+      "facing": 3,
+      "flags": 48,
+      "mirror": 2,
+      "speed_traits": 8
+    },
+    {
+      "action": 21331,
+      "active": 128,
+      "countdown": 0,
+      "entry": 8,
+      "facing": 3,
+      "flags": 54,
+      "mirror": 2,
+      "speed_traits": 8
+    },
+    {
+      "action": 21341,
+      "active": 128,
+      "countdown": 0,
+      "entry": 12,
+      "facing": 3,
+      "flags": 22,
+      "mirror": 2,
+      "speed_traits": 8
+    },
+    {
+      "action": 21331,
+      "active": 128,
+      "countdown": 0,
+      "entry": 16,
+      "facing": 3,
+      "flags": 54,
+      "mirror": 2,
+      "speed_traits": 8
+    },
+    {
+      "action": 21336,
+      "active": 128,
+      "countdown": 0,
+      "entry": 20,
+      "facing": 3,
+      "flags": 54,
+      "mirror": 2,
+      "speed_traits": 8
+    },
+    {
+      "action": 21326,
+      "active": 128,
+      "countdown": 0,
+      "entry": 24,
+      "facing": 3,
+      "flags": 54,
+      "mirror": 2,
+      "speed_traits": 8
+    },
+    {
+      "action": 44173,
+      "active": 128,
+      "countdown": 0,
+      "entry": 28,
+      "facing": 3,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 8
+    },
+    {
+      "action": 44195,
+      "active": 128,
+      "countdown": 0,
+      "entry": 32,
+      "facing": 3,
+      "flags": 27,
+      "mirror": 2,
+      "speed_traits": 8
+    },
+    {
+      "action": 44247,
+      "active": 128,
+      "countdown": 0,
+      "entry": 36,
+      "facing": 3,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 8
+    },
+    {
+      "action": 44218,
+      "active": 128,
+      "countdown": 0,
+      "entry": 40,
+      "facing": 3,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 8
+    },
+    {
+      "action": 21280,
+      "active": 128,
+      "countdown": 0,
+      "entry": 44,
+      "facing": 3,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 8
+    },
+    {
+      "action": 21280,
+      "active": 128,
+      "countdown": 0,
+      "entry": 48,
+      "facing": 3,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 8
+    },
+    {
+      "action": 44273,
+      "active": 128,
+      "countdown": 0,
+      "entry": 52,
+      "facing": 3,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 8
+    },
+    {
+      "action": 21299,
+      "active": 128,
+      "countdown": 0,
+      "entry": 0,
+      "facing": 3,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 12
+    },
+    {
+      "action": 21322,
+      "active": 128,
+      "countdown": 0,
+      "entry": 4,
+      "facing": 3,
+      "flags": 48,
+      "mirror": 2,
+      "speed_traits": 12
+    },
+    {
+      "action": 21336,
+      "active": 128,
+      "countdown": 0,
+      "entry": 8,
+      "facing": 3,
+      "flags": 54,
+      "mirror": 2,
+      "speed_traits": 12
+    },
+    {
+      "action": 21341,
+      "active": 128,
+      "countdown": 0,
+      "entry": 12,
+      "facing": 3,
+      "flags": 22,
+      "mirror": 2,
+      "speed_traits": 12
+    },
+    {
+      "action": 21331,
+      "active": 128,
+      "countdown": 0,
+      "entry": 16,
+      "facing": 3,
+      "flags": 54,
+      "mirror": 2,
+      "speed_traits": 12
+    },
+    {
+      "action": 21336,
+      "active": 128,
+      "countdown": 0,
+      "entry": 20,
+      "facing": 3,
+      "flags": 54,
+      "mirror": 2,
+      "speed_traits": 12
+    },
+    {
+      "action": 21326,
+      "active": 128,
+      "countdown": 0,
+      "entry": 24,
+      "facing": 3,
+      "flags": 54,
+      "mirror": 2,
+      "speed_traits": 12
+    },
+    {
+      "action": 44173,
+      "active": 128,
+      "countdown": 0,
+      "entry": 28,
+      "facing": 3,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 12
+    },
+    {
+      "action": 44195,
+      "active": 128,
+      "countdown": 0,
+      "entry": 32,
+      "facing": 3,
+      "flags": 27,
+      "mirror": 2,
+      "speed_traits": 12
+    },
+    {
+      "action": 44247,
+      "active": 128,
+      "countdown": 0,
+      "entry": 36,
+      "facing": 3,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 12
+    },
+    {
+      "action": 44218,
+      "active": 128,
+      "countdown": 0,
+      "entry": 40,
+      "facing": 3,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 12
+    },
+    {
+      "action": 21280,
+      "active": 128,
+      "countdown": 0,
+      "entry": 44,
+      "facing": 3,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 12
+    },
+    {
+      "action": 21280,
+      "active": 128,
+      "countdown": 0,
+      "entry": 48,
+      "facing": 3,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 12
+    },
+    {
+      "action": 44273,
+      "active": 128,
+      "countdown": 0,
+      "entry": 52,
+      "facing": 3,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 12
+    },
+    {
+      "action": 21299,
+      "active": 128,
+      "countdown": 0,
+      "entry": 0,
+      "facing": 5,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 21322,
+      "active": 128,
+      "countdown": 0,
+      "entry": 4,
+      "facing": 5,
+      "flags": 48,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 21326,
+      "active": 128,
+      "countdown": 0,
+      "entry": 8,
+      "facing": 5,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 21341,
+      "active": 128,
+      "countdown": 0,
+      "entry": 12,
+      "facing": 5,
+      "flags": 22,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 21331,
+      "active": 128,
+      "countdown": 0,
+      "entry": 16,
+      "facing": 5,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 21336,
+      "active": 128,
+      "countdown": 0,
+      "entry": 20,
+      "facing": 5,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 21326,
+      "active": 128,
+      "countdown": 0,
+      "entry": 24,
+      "facing": 5,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 44173,
+      "active": 128,
+      "countdown": 0,
+      "entry": 28,
+      "facing": 5,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 44195,
+      "active": 128,
+      "countdown": 0,
+      "entry": 32,
+      "facing": 5,
+      "flags": 27,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 44247,
+      "active": 128,
+      "countdown": 0,
+      "entry": 36,
+      "facing": 5,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 44218,
+      "active": 128,
+      "countdown": 0,
+      "entry": 40,
+      "facing": 5,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 21280,
+      "active": 128,
+      "countdown": 0,
+      "entry": 44,
+      "facing": 5,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 21280,
+      "active": 128,
+      "countdown": 0,
+      "entry": 48,
+      "facing": 5,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 44273,
+      "active": 128,
+      "countdown": 0,
+      "entry": 52,
+      "facing": 5,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 21299,
+      "active": 128,
+      "countdown": 0,
+      "entry": 0,
+      "facing": 5,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 21322,
+      "active": 128,
+      "countdown": 0,
+      "entry": 4,
+      "facing": 5,
+      "flags": 48,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 21341,
+      "active": 128,
+      "countdown": 0,
+      "entry": 8,
+      "facing": 5,
+      "flags": 22,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 21341,
+      "active": 128,
+      "countdown": 0,
+      "entry": 12,
+      "facing": 5,
+      "flags": 22,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 21331,
+      "active": 128,
+      "countdown": 0,
+      "entry": 16,
+      "facing": 5,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 21336,
+      "active": 128,
+      "countdown": 0,
+      "entry": 20,
+      "facing": 5,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 21326,
+      "active": 128,
+      "countdown": 0,
+      "entry": 24,
+      "facing": 5,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 44173,
+      "active": 128,
+      "countdown": 0,
+      "entry": 28,
+      "facing": 5,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 44195,
+      "active": 128,
+      "countdown": 0,
+      "entry": 32,
+      "facing": 5,
+      "flags": 27,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 44247,
+      "active": 128,
+      "countdown": 0,
+      "entry": 36,
+      "facing": 5,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 44218,
+      "active": 128,
+      "countdown": 0,
+      "entry": 40,
+      "facing": 5,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 21280,
+      "active": 128,
+      "countdown": 0,
+      "entry": 44,
+      "facing": 5,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 21280,
+      "active": 128,
+      "countdown": 0,
+      "entry": 48,
+      "facing": 5,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 44273,
+      "active": 128,
+      "countdown": 0,
+      "entry": 52,
+      "facing": 5,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 21299,
+      "active": 128,
+      "countdown": 0,
+      "entry": 0,
+      "facing": 5,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 21322,
+      "active": 128,
+      "countdown": 0,
+      "entry": 4,
+      "facing": 5,
+      "flags": 48,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 21331,
+      "active": 128,
+      "countdown": 0,
+      "entry": 8,
+      "facing": 5,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 21341,
+      "active": 128,
+      "countdown": 0,
+      "entry": 12,
+      "facing": 5,
+      "flags": 22,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 21331,
+      "active": 128,
+      "countdown": 0,
+      "entry": 16,
+      "facing": 5,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 21336,
+      "active": 128,
+      "countdown": 0,
+      "entry": 20,
+      "facing": 5,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 21326,
+      "active": 128,
+      "countdown": 0,
+      "entry": 24,
+      "facing": 5,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 44173,
+      "active": 128,
+      "countdown": 0,
+      "entry": 28,
+      "facing": 5,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 44195,
+      "active": 128,
+      "countdown": 0,
+      "entry": 32,
+      "facing": 5,
+      "flags": 27,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 44247,
+      "active": 128,
+      "countdown": 0,
+      "entry": 36,
+      "facing": 5,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 44218,
+      "active": 128,
+      "countdown": 0,
+      "entry": 40,
+      "facing": 5,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 21280,
+      "active": 128,
+      "countdown": 0,
+      "entry": 44,
+      "facing": 5,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 21280,
+      "active": 128,
+      "countdown": 0,
+      "entry": 48,
+      "facing": 5,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 44273,
+      "active": 128,
+      "countdown": 0,
+      "entry": 52,
+      "facing": 5,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 21299,
+      "active": 128,
+      "countdown": 0,
+      "entry": 0,
+      "facing": 5,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 21322,
+      "active": 128,
+      "countdown": 0,
+      "entry": 4,
+      "facing": 5,
+      "flags": 48,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 21336,
+      "active": 128,
+      "countdown": 0,
+      "entry": 8,
+      "facing": 5,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 21341,
+      "active": 128,
+      "countdown": 0,
+      "entry": 12,
+      "facing": 5,
+      "flags": 22,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 21331,
+      "active": 128,
+      "countdown": 0,
+      "entry": 16,
+      "facing": 5,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 21336,
+      "active": 128,
+      "countdown": 0,
+      "entry": 20,
+      "facing": 5,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 21326,
+      "active": 128,
+      "countdown": 0,
+      "entry": 24,
+      "facing": 5,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 44173,
+      "active": 128,
+      "countdown": 0,
+      "entry": 28,
+      "facing": 5,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 44195,
+      "active": 128,
+      "countdown": 0,
+      "entry": 32,
+      "facing": 5,
+      "flags": 27,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 44247,
+      "active": 128,
+      "countdown": 0,
+      "entry": 36,
+      "facing": 5,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 44218,
+      "active": 128,
+      "countdown": 0,
+      "entry": 40,
+      "facing": 5,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 21280,
+      "active": 128,
+      "countdown": 0,
+      "entry": 44,
+      "facing": 5,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 21280,
+      "active": 128,
+      "countdown": 0,
+      "entry": 48,
+      "facing": 5,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 44273,
+      "active": 128,
+      "countdown": 0,
+      "entry": 52,
+      "facing": 5,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 21280,
+      "active": 128,
+      "countdown": 0,
+      "entry": 0,
+      "facing": 7,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 0
+    },
+    {
+      "action": 21318,
+      "active": 128,
+      "countdown": 0,
+      "entry": 4,
+      "facing": 7,
+      "flags": 48,
+      "mirror": 2,
+      "speed_traits": 0
+    },
+    {
+      "action": 21362,
+      "active": 128,
+      "countdown": 0,
+      "entry": 8,
+      "facing": 7,
+      "flags": 54,
+      "mirror": 2,
+      "speed_traits": 0
+    },
+    {
+      "action": 21377,
+      "active": 128,
+      "countdown": 0,
+      "entry": 12,
+      "facing": 7,
+      "flags": 22,
+      "mirror": 2,
+      "speed_traits": 0
+    },
+    {
+      "action": 21367,
+      "active": 128,
+      "countdown": 0,
+      "entry": 16,
+      "facing": 7,
+      "flags": 54,
+      "mirror": 2,
+      "speed_traits": 0
+    },
+    {
+      "action": 21372,
+      "active": 128,
+      "countdown": 0,
+      "entry": 20,
+      "facing": 7,
+      "flags": 54,
+      "mirror": 2,
+      "speed_traits": 0
+    },
+    {
+      "action": 21362,
+      "active": 128,
+      "countdown": 0,
+      "entry": 24,
+      "facing": 7,
+      "flags": 54,
+      "mirror": 2,
+      "speed_traits": 0
+    },
+    {
+      "action": 44160,
+      "active": 128,
+      "countdown": 0,
+      "entry": 28,
+      "facing": 7,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 0
+    },
+    {
+      "action": 44186,
+      "active": 128,
+      "countdown": 0,
+      "entry": 32,
+      "facing": 7,
+      "flags": 27,
+      "mirror": 2,
+      "speed_traits": 0
+    },
+    {
+      "action": 44232,
+      "active": 128,
+      "countdown": 0,
+      "entry": 36,
+      "facing": 7,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 0
+    },
+    {
+      "action": 44204,
+      "active": 128,
+      "countdown": 0,
+      "entry": 40,
+      "facing": 7,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 0
+    },
+    {
+      "action": 21280,
+      "active": 128,
+      "countdown": 0,
+      "entry": 44,
+      "facing": 7,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 0
+    },
+    {
+      "action": 21280,
+      "active": 128,
+      "countdown": 0,
+      "entry": 48,
+      "facing": 7,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 0
+    },
+    {
+      "action": 44262,
+      "active": 128,
+      "countdown": 0,
+      "entry": 52,
+      "facing": 7,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 0
+    },
+    {
+      "action": 21280,
+      "active": 128,
+      "countdown": 0,
+      "entry": 0,
+      "facing": 7,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 4
+    },
+    {
+      "action": 21318,
+      "active": 128,
+      "countdown": 0,
+      "entry": 4,
+      "facing": 7,
+      "flags": 48,
+      "mirror": 2,
+      "speed_traits": 4
+    },
+    {
+      "action": 21377,
+      "active": 128,
+      "countdown": 0,
+      "entry": 8,
+      "facing": 7,
+      "flags": 22,
+      "mirror": 2,
+      "speed_traits": 4
+    },
+    {
+      "action": 21377,
+      "active": 128,
+      "countdown": 0,
+      "entry": 12,
+      "facing": 7,
+      "flags": 22,
+      "mirror": 2,
+      "speed_traits": 4
+    },
+    {
+      "action": 21367,
+      "active": 128,
+      "countdown": 0,
+      "entry": 16,
+      "facing": 7,
+      "flags": 54,
+      "mirror": 2,
+      "speed_traits": 4
+    },
+    {
+      "action": 21372,
+      "active": 128,
+      "countdown": 0,
+      "entry": 20,
+      "facing": 7,
+      "flags": 54,
+      "mirror": 2,
+      "speed_traits": 4
+    },
+    {
+      "action": 21362,
+      "active": 128,
+      "countdown": 0,
+      "entry": 24,
+      "facing": 7,
+      "flags": 54,
+      "mirror": 2,
+      "speed_traits": 4
+    },
+    {
+      "action": 44160,
+      "active": 128,
+      "countdown": 0,
+      "entry": 28,
+      "facing": 7,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 4
+    },
+    {
+      "action": 44186,
+      "active": 128,
+      "countdown": 0,
+      "entry": 32,
+      "facing": 7,
+      "flags": 27,
+      "mirror": 2,
+      "speed_traits": 4
+    },
+    {
+      "action": 44232,
+      "active": 128,
+      "countdown": 0,
+      "entry": 36,
+      "facing": 7,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 4
+    },
+    {
+      "action": 44204,
+      "active": 128,
+      "countdown": 0,
+      "entry": 40,
+      "facing": 7,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 4
+    },
+    {
+      "action": 21280,
+      "active": 128,
+      "countdown": 0,
+      "entry": 44,
+      "facing": 7,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 4
+    },
+    {
+      "action": 21280,
+      "active": 128,
+      "countdown": 0,
+      "entry": 48,
+      "facing": 7,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 4
+    },
+    {
+      "action": 44262,
+      "active": 128,
+      "countdown": 0,
+      "entry": 52,
+      "facing": 7,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 4
+    },
+    {
+      "action": 21280,
+      "active": 128,
+      "countdown": 0,
+      "entry": 0,
+      "facing": 7,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 8
+    },
+    {
+      "action": 21318,
+      "active": 128,
+      "countdown": 0,
+      "entry": 4,
+      "facing": 7,
+      "flags": 48,
+      "mirror": 2,
+      "speed_traits": 8
+    },
+    {
+      "action": 21367,
+      "active": 128,
+      "countdown": 0,
+      "entry": 8,
+      "facing": 7,
+      "flags": 54,
+      "mirror": 2,
+      "speed_traits": 8
+    },
+    {
+      "action": 21377,
+      "active": 128,
+      "countdown": 0,
+      "entry": 12,
+      "facing": 7,
+      "flags": 22,
+      "mirror": 2,
+      "speed_traits": 8
+    },
+    {
+      "action": 21367,
+      "active": 128,
+      "countdown": 0,
+      "entry": 16,
+      "facing": 7,
+      "flags": 54,
+      "mirror": 2,
+      "speed_traits": 8
+    },
+    {
+      "action": 21372,
+      "active": 128,
+      "countdown": 0,
+      "entry": 20,
+      "facing": 7,
+      "flags": 54,
+      "mirror": 2,
+      "speed_traits": 8
+    },
+    {
+      "action": 21362,
+      "active": 128,
+      "countdown": 0,
+      "entry": 24,
+      "facing": 7,
+      "flags": 54,
+      "mirror": 2,
+      "speed_traits": 8
+    },
+    {
+      "action": 44160,
+      "active": 128,
+      "countdown": 0,
+      "entry": 28,
+      "facing": 7,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 8
+    },
+    {
+      "action": 44186,
+      "active": 128,
+      "countdown": 0,
+      "entry": 32,
+      "facing": 7,
+      "flags": 27,
+      "mirror": 2,
+      "speed_traits": 8
+    },
+    {
+      "action": 44232,
+      "active": 128,
+      "countdown": 0,
+      "entry": 36,
+      "facing": 7,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 8
+    },
+    {
+      "action": 44204,
+      "active": 128,
+      "countdown": 0,
+      "entry": 40,
+      "facing": 7,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 8
+    },
+    {
+      "action": 21280,
+      "active": 128,
+      "countdown": 0,
+      "entry": 44,
+      "facing": 7,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 8
+    },
+    {
+      "action": 21280,
+      "active": 128,
+      "countdown": 0,
+      "entry": 48,
+      "facing": 7,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 8
+    },
+    {
+      "action": 44262,
+      "active": 128,
+      "countdown": 0,
+      "entry": 52,
+      "facing": 7,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 8
+    },
+    {
+      "action": 21280,
+      "active": 128,
+      "countdown": 0,
+      "entry": 0,
+      "facing": 7,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 12
+    },
+    {
+      "action": 21318,
+      "active": 128,
+      "countdown": 0,
+      "entry": 4,
+      "facing": 7,
+      "flags": 48,
+      "mirror": 2,
+      "speed_traits": 12
+    },
+    {
+      "action": 21372,
+      "active": 128,
+      "countdown": 0,
+      "entry": 8,
+      "facing": 7,
+      "flags": 54,
+      "mirror": 2,
+      "speed_traits": 12
+    },
+    {
+      "action": 21377,
+      "active": 128,
+      "countdown": 0,
+      "entry": 12,
+      "facing": 7,
+      "flags": 22,
+      "mirror": 2,
+      "speed_traits": 12
+    },
+    {
+      "action": 21367,
+      "active": 128,
+      "countdown": 0,
+      "entry": 16,
+      "facing": 7,
+      "flags": 54,
+      "mirror": 2,
+      "speed_traits": 12
+    },
+    {
+      "action": 21372,
+      "active": 128,
+      "countdown": 0,
+      "entry": 20,
+      "facing": 7,
+      "flags": 54,
+      "mirror": 2,
+      "speed_traits": 12
+    },
+    {
+      "action": 21362,
+      "active": 128,
+      "countdown": 0,
+      "entry": 24,
+      "facing": 7,
+      "flags": 54,
+      "mirror": 2,
+      "speed_traits": 12
+    },
+    {
+      "action": 44160,
+      "active": 128,
+      "countdown": 0,
+      "entry": 28,
+      "facing": 7,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 12
+    },
+    {
+      "action": 44186,
+      "active": 128,
+      "countdown": 0,
+      "entry": 32,
+      "facing": 7,
+      "flags": 27,
+      "mirror": 2,
+      "speed_traits": 12
+    },
+    {
+      "action": 44232,
+      "active": 128,
+      "countdown": 0,
+      "entry": 36,
+      "facing": 7,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 12
+    },
+    {
+      "action": 44204,
+      "active": 128,
+      "countdown": 0,
+      "entry": 40,
+      "facing": 7,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 12
+    },
+    {
+      "action": 21280,
+      "active": 128,
+      "countdown": 0,
+      "entry": 44,
+      "facing": 7,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 12
+    },
+    {
+      "action": 21280,
+      "active": 128,
+      "countdown": 0,
+      "entry": 48,
+      "facing": 7,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 12
+    },
+    {
+      "action": 44262,
+      "active": 128,
+      "countdown": 0,
+      "entry": 52,
+      "facing": 7,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 12
+    },
+    {
+      "action": 21280,
+      "active": 129,
+      "countdown": 0,
+      "entry": 0,
+      "facing": 1,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 21318,
+      "active": 129,
+      "countdown": 0,
+      "entry": 4,
+      "facing": 1,
+      "flags": 48,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 21362,
+      "active": 129,
+      "countdown": 0,
+      "entry": 8,
+      "facing": 1,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 21377,
+      "active": 129,
+      "countdown": 0,
+      "entry": 12,
+      "facing": 1,
+      "flags": 22,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 21367,
+      "active": 129,
+      "countdown": 0,
+      "entry": 16,
+      "facing": 1,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 21372,
+      "active": 129,
+      "countdown": 0,
+      "entry": 20,
+      "facing": 1,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 21362,
+      "active": 129,
+      "countdown": 0,
+      "entry": 24,
+      "facing": 1,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 44160,
+      "active": 129,
+      "countdown": 0,
+      "entry": 28,
+      "facing": 1,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 44186,
+      "active": 129,
+      "countdown": 0,
+      "entry": 32,
+      "facing": 1,
+      "flags": 27,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 44232,
+      "active": 129,
+      "countdown": 0,
+      "entry": 36,
+      "facing": 1,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 44204,
+      "active": 129,
+      "countdown": 0,
+      "entry": 40,
+      "facing": 1,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 21280,
+      "active": 129,
+      "countdown": 0,
+      "entry": 44,
+      "facing": 1,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 21280,
+      "active": 129,
+      "countdown": 0,
+      "entry": 48,
+      "facing": 1,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 44262,
+      "active": 129,
+      "countdown": 0,
+      "entry": 52,
+      "facing": 1,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 21280,
+      "active": 129,
+      "countdown": 0,
+      "entry": 0,
+      "facing": 1,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 21318,
+      "active": 129,
+      "countdown": 0,
+      "entry": 4,
+      "facing": 1,
+      "flags": 48,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 21377,
+      "active": 129,
+      "countdown": 0,
+      "entry": 8,
+      "facing": 1,
+      "flags": 22,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 21377,
+      "active": 129,
+      "countdown": 0,
+      "entry": 12,
+      "facing": 1,
+      "flags": 22,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 21367,
+      "active": 129,
+      "countdown": 0,
+      "entry": 16,
+      "facing": 1,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 21372,
+      "active": 129,
+      "countdown": 0,
+      "entry": 20,
+      "facing": 1,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 21362,
+      "active": 129,
+      "countdown": 0,
+      "entry": 24,
+      "facing": 1,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 44160,
+      "active": 129,
+      "countdown": 0,
+      "entry": 28,
+      "facing": 1,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 44186,
+      "active": 129,
+      "countdown": 0,
+      "entry": 32,
+      "facing": 1,
+      "flags": 27,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 44232,
+      "active": 129,
+      "countdown": 0,
+      "entry": 36,
+      "facing": 1,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 44204,
+      "active": 129,
+      "countdown": 0,
+      "entry": 40,
+      "facing": 1,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 21280,
+      "active": 129,
+      "countdown": 0,
+      "entry": 44,
+      "facing": 1,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 21280,
+      "active": 129,
+      "countdown": 0,
+      "entry": 48,
+      "facing": 1,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 44262,
+      "active": 129,
+      "countdown": 0,
+      "entry": 52,
+      "facing": 1,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 21280,
+      "active": 129,
+      "countdown": 0,
+      "entry": 0,
+      "facing": 1,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 21318,
+      "active": 129,
+      "countdown": 0,
+      "entry": 4,
+      "facing": 1,
+      "flags": 48,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 21367,
+      "active": 129,
+      "countdown": 0,
+      "entry": 8,
+      "facing": 1,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 21377,
+      "active": 129,
+      "countdown": 0,
+      "entry": 12,
+      "facing": 1,
+      "flags": 22,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 21367,
+      "active": 129,
+      "countdown": 0,
+      "entry": 16,
+      "facing": 1,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 21372,
+      "active": 129,
+      "countdown": 0,
+      "entry": 20,
+      "facing": 1,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 21362,
+      "active": 129,
+      "countdown": 0,
+      "entry": 24,
+      "facing": 1,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 44160,
+      "active": 129,
+      "countdown": 0,
+      "entry": 28,
+      "facing": 1,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 44186,
+      "active": 129,
+      "countdown": 0,
+      "entry": 32,
+      "facing": 1,
+      "flags": 27,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 44232,
+      "active": 129,
+      "countdown": 0,
+      "entry": 36,
+      "facing": 1,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 44204,
+      "active": 129,
+      "countdown": 0,
+      "entry": 40,
+      "facing": 1,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 21280,
+      "active": 129,
+      "countdown": 0,
+      "entry": 44,
+      "facing": 1,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 21280,
+      "active": 129,
+      "countdown": 0,
+      "entry": 48,
+      "facing": 1,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 44262,
+      "active": 129,
+      "countdown": 0,
+      "entry": 52,
+      "facing": 1,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 21280,
+      "active": 129,
+      "countdown": 0,
+      "entry": 0,
+      "facing": 1,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 21318,
+      "active": 129,
+      "countdown": 0,
+      "entry": 4,
+      "facing": 1,
+      "flags": 48,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 21372,
+      "active": 129,
+      "countdown": 0,
+      "entry": 8,
+      "facing": 1,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 21377,
+      "active": 129,
+      "countdown": 0,
+      "entry": 12,
+      "facing": 1,
+      "flags": 22,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 21367,
+      "active": 129,
+      "countdown": 0,
+      "entry": 16,
+      "facing": 1,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 21372,
+      "active": 129,
+      "countdown": 0,
+      "entry": 20,
+      "facing": 1,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 21362,
+      "active": 129,
+      "countdown": 0,
+      "entry": 24,
+      "facing": 1,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 44160,
+      "active": 129,
+      "countdown": 0,
+      "entry": 28,
+      "facing": 1,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 44186,
+      "active": 129,
+      "countdown": 0,
+      "entry": 32,
+      "facing": 1,
+      "flags": 27,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 44232,
+      "active": 129,
+      "countdown": 0,
+      "entry": 36,
+      "facing": 1,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 44204,
+      "active": 129,
+      "countdown": 0,
+      "entry": 40,
+      "facing": 1,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 21280,
+      "active": 129,
+      "countdown": 0,
+      "entry": 44,
+      "facing": 1,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 21280,
+      "active": 129,
+      "countdown": 0,
+      "entry": 48,
+      "facing": 1,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 44262,
+      "active": 129,
+      "countdown": 0,
+      "entry": 52,
+      "facing": 1,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 21299,
+      "active": 129,
+      "countdown": 0,
+      "entry": 0,
+      "facing": 3,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 0
+    },
+    {
+      "action": 21322,
+      "active": 129,
+      "countdown": 0,
+      "entry": 4,
+      "facing": 3,
+      "flags": 48,
+      "mirror": 2,
+      "speed_traits": 0
+    },
+    {
+      "action": 21326,
+      "active": 129,
+      "countdown": 0,
+      "entry": 8,
+      "facing": 3,
+      "flags": 54,
+      "mirror": 2,
+      "speed_traits": 0
+    },
+    {
+      "action": 21341,
+      "active": 129,
+      "countdown": 0,
+      "entry": 12,
+      "facing": 3,
+      "flags": 22,
+      "mirror": 2,
+      "speed_traits": 0
+    },
+    {
+      "action": 21331,
+      "active": 129,
+      "countdown": 0,
+      "entry": 16,
+      "facing": 3,
+      "flags": 54,
+      "mirror": 2,
+      "speed_traits": 0
+    },
+    {
+      "action": 21336,
+      "active": 129,
+      "countdown": 0,
+      "entry": 20,
+      "facing": 3,
+      "flags": 54,
+      "mirror": 2,
+      "speed_traits": 0
+    },
+    {
+      "action": 21326,
+      "active": 129,
+      "countdown": 0,
+      "entry": 24,
+      "facing": 3,
+      "flags": 54,
+      "mirror": 2,
+      "speed_traits": 0
+    },
+    {
+      "action": 44173,
+      "active": 129,
+      "countdown": 0,
+      "entry": 28,
+      "facing": 3,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 0
+    },
+    {
+      "action": 44195,
+      "active": 129,
+      "countdown": 0,
+      "entry": 32,
+      "facing": 3,
+      "flags": 27,
+      "mirror": 2,
+      "speed_traits": 0
+    },
+    {
+      "action": 44247,
+      "active": 129,
+      "countdown": 0,
+      "entry": 36,
+      "facing": 3,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 0
+    },
+    {
+      "action": 44218,
+      "active": 129,
+      "countdown": 0,
+      "entry": 40,
+      "facing": 3,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 0
+    },
+    {
+      "action": 21280,
+      "active": 129,
+      "countdown": 0,
+      "entry": 44,
+      "facing": 3,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 0
+    },
+    {
+      "action": 21280,
+      "active": 129,
+      "countdown": 0,
+      "entry": 48,
+      "facing": 3,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 0
+    },
+    {
+      "action": 44273,
+      "active": 129,
+      "countdown": 0,
+      "entry": 52,
+      "facing": 3,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 0
+    },
+    {
+      "action": 21299,
+      "active": 129,
+      "countdown": 0,
+      "entry": 0,
+      "facing": 3,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 4
+    },
+    {
+      "action": 21322,
+      "active": 129,
+      "countdown": 0,
+      "entry": 4,
+      "facing": 3,
+      "flags": 48,
+      "mirror": 2,
+      "speed_traits": 4
+    },
+    {
+      "action": 21341,
+      "active": 129,
+      "countdown": 0,
+      "entry": 8,
+      "facing": 3,
+      "flags": 22,
+      "mirror": 2,
+      "speed_traits": 4
+    },
+    {
+      "action": 21341,
+      "active": 129,
+      "countdown": 0,
+      "entry": 12,
+      "facing": 3,
+      "flags": 22,
+      "mirror": 2,
+      "speed_traits": 4
+    },
+    {
+      "action": 21331,
+      "active": 129,
+      "countdown": 0,
+      "entry": 16,
+      "facing": 3,
+      "flags": 54,
+      "mirror": 2,
+      "speed_traits": 4
+    },
+    {
+      "action": 21336,
+      "active": 129,
+      "countdown": 0,
+      "entry": 20,
+      "facing": 3,
+      "flags": 54,
+      "mirror": 2,
+      "speed_traits": 4
+    },
+    {
+      "action": 21326,
+      "active": 129,
+      "countdown": 0,
+      "entry": 24,
+      "facing": 3,
+      "flags": 54,
+      "mirror": 2,
+      "speed_traits": 4
+    },
+    {
+      "action": 44173,
+      "active": 129,
+      "countdown": 0,
+      "entry": 28,
+      "facing": 3,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 4
+    },
+    {
+      "action": 44195,
+      "active": 129,
+      "countdown": 0,
+      "entry": 32,
+      "facing": 3,
+      "flags": 27,
+      "mirror": 2,
+      "speed_traits": 4
+    },
+    {
+      "action": 44247,
+      "active": 129,
+      "countdown": 0,
+      "entry": 36,
+      "facing": 3,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 4
+    },
+    {
+      "action": 44218,
+      "active": 129,
+      "countdown": 0,
+      "entry": 40,
+      "facing": 3,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 4
+    },
+    {
+      "action": 21280,
+      "active": 129,
+      "countdown": 0,
+      "entry": 44,
+      "facing": 3,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 4
+    },
+    {
+      "action": 21280,
+      "active": 129,
+      "countdown": 0,
+      "entry": 48,
+      "facing": 3,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 4
+    },
+    {
+      "action": 44273,
+      "active": 129,
+      "countdown": 0,
+      "entry": 52,
+      "facing": 3,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 4
+    },
+    {
+      "action": 21299,
+      "active": 129,
+      "countdown": 0,
+      "entry": 0,
+      "facing": 3,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 8
+    },
+    {
+      "action": 21322,
+      "active": 129,
+      "countdown": 0,
+      "entry": 4,
+      "facing": 3,
+      "flags": 48,
+      "mirror": 2,
+      "speed_traits": 8
+    },
+    {
+      "action": 21331,
+      "active": 129,
+      "countdown": 0,
+      "entry": 8,
+      "facing": 3,
+      "flags": 54,
+      "mirror": 2,
+      "speed_traits": 8
+    },
+    {
+      "action": 21341,
+      "active": 129,
+      "countdown": 0,
+      "entry": 12,
+      "facing": 3,
+      "flags": 22,
+      "mirror": 2,
+      "speed_traits": 8
+    },
+    {
+      "action": 21331,
+      "active": 129,
+      "countdown": 0,
+      "entry": 16,
+      "facing": 3,
+      "flags": 54,
+      "mirror": 2,
+      "speed_traits": 8
+    },
+    {
+      "action": 21336,
+      "active": 129,
+      "countdown": 0,
+      "entry": 20,
+      "facing": 3,
+      "flags": 54,
+      "mirror": 2,
+      "speed_traits": 8
+    },
+    {
+      "action": 21326,
+      "active": 129,
+      "countdown": 0,
+      "entry": 24,
+      "facing": 3,
+      "flags": 54,
+      "mirror": 2,
+      "speed_traits": 8
+    },
+    {
+      "action": 44173,
+      "active": 129,
+      "countdown": 0,
+      "entry": 28,
+      "facing": 3,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 8
+    },
+    {
+      "action": 44195,
+      "active": 129,
+      "countdown": 0,
+      "entry": 32,
+      "facing": 3,
+      "flags": 27,
+      "mirror": 2,
+      "speed_traits": 8
+    },
+    {
+      "action": 44247,
+      "active": 129,
+      "countdown": 0,
+      "entry": 36,
+      "facing": 3,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 8
+    },
+    {
+      "action": 44218,
+      "active": 129,
+      "countdown": 0,
+      "entry": 40,
+      "facing": 3,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 8
+    },
+    {
+      "action": 21280,
+      "active": 129,
+      "countdown": 0,
+      "entry": 44,
+      "facing": 3,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 8
+    },
+    {
+      "action": 21280,
+      "active": 129,
+      "countdown": 0,
+      "entry": 48,
+      "facing": 3,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 8
+    },
+    {
+      "action": 44273,
+      "active": 129,
+      "countdown": 0,
+      "entry": 52,
+      "facing": 3,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 8
+    },
+    {
+      "action": 21299,
+      "active": 129,
+      "countdown": 0,
+      "entry": 0,
+      "facing": 3,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 12
+    },
+    {
+      "action": 21322,
+      "active": 129,
+      "countdown": 0,
+      "entry": 4,
+      "facing": 3,
+      "flags": 48,
+      "mirror": 2,
+      "speed_traits": 12
+    },
+    {
+      "action": 21336,
+      "active": 129,
+      "countdown": 0,
+      "entry": 8,
+      "facing": 3,
+      "flags": 54,
+      "mirror": 2,
+      "speed_traits": 12
+    },
+    {
+      "action": 21341,
+      "active": 129,
+      "countdown": 0,
+      "entry": 12,
+      "facing": 3,
+      "flags": 22,
+      "mirror": 2,
+      "speed_traits": 12
+    },
+    {
+      "action": 21331,
+      "active": 129,
+      "countdown": 0,
+      "entry": 16,
+      "facing": 3,
+      "flags": 54,
+      "mirror": 2,
+      "speed_traits": 12
+    },
+    {
+      "action": 21336,
+      "active": 129,
+      "countdown": 0,
+      "entry": 20,
+      "facing": 3,
+      "flags": 54,
+      "mirror": 2,
+      "speed_traits": 12
+    },
+    {
+      "action": 21326,
+      "active": 129,
+      "countdown": 0,
+      "entry": 24,
+      "facing": 3,
+      "flags": 54,
+      "mirror": 2,
+      "speed_traits": 12
+    },
+    {
+      "action": 44173,
+      "active": 129,
+      "countdown": 0,
+      "entry": 28,
+      "facing": 3,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 12
+    },
+    {
+      "action": 44195,
+      "active": 129,
+      "countdown": 0,
+      "entry": 32,
+      "facing": 3,
+      "flags": 27,
+      "mirror": 2,
+      "speed_traits": 12
+    },
+    {
+      "action": 44247,
+      "active": 129,
+      "countdown": 0,
+      "entry": 36,
+      "facing": 3,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 12
+    },
+    {
+      "action": 44218,
+      "active": 129,
+      "countdown": 0,
+      "entry": 40,
+      "facing": 3,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 12
+    },
+    {
+      "action": 21280,
+      "active": 129,
+      "countdown": 0,
+      "entry": 44,
+      "facing": 3,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 12
+    },
+    {
+      "action": 21280,
+      "active": 129,
+      "countdown": 0,
+      "entry": 48,
+      "facing": 3,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 12
+    },
+    {
+      "action": 44273,
+      "active": 129,
+      "countdown": 0,
+      "entry": 52,
+      "facing": 3,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 12
+    },
+    {
+      "action": 21299,
+      "active": 129,
+      "countdown": 0,
+      "entry": 0,
+      "facing": 5,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 21322,
+      "active": 129,
+      "countdown": 0,
+      "entry": 4,
+      "facing": 5,
+      "flags": 48,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 21326,
+      "active": 129,
+      "countdown": 0,
+      "entry": 8,
+      "facing": 5,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 21341,
+      "active": 129,
+      "countdown": 0,
+      "entry": 12,
+      "facing": 5,
+      "flags": 22,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 21331,
+      "active": 129,
+      "countdown": 0,
+      "entry": 16,
+      "facing": 5,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 21336,
+      "active": 129,
+      "countdown": 0,
+      "entry": 20,
+      "facing": 5,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 21326,
+      "active": 129,
+      "countdown": 0,
+      "entry": 24,
+      "facing": 5,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 44173,
+      "active": 129,
+      "countdown": 0,
+      "entry": 28,
+      "facing": 5,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 44195,
+      "active": 129,
+      "countdown": 0,
+      "entry": 32,
+      "facing": 5,
+      "flags": 27,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 44247,
+      "active": 129,
+      "countdown": 0,
+      "entry": 36,
+      "facing": 5,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 44218,
+      "active": 129,
+      "countdown": 0,
+      "entry": 40,
+      "facing": 5,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 21280,
+      "active": 129,
+      "countdown": 0,
+      "entry": 44,
+      "facing": 5,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 21280,
+      "active": 129,
+      "countdown": 0,
+      "entry": 48,
+      "facing": 5,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 44273,
+      "active": 129,
+      "countdown": 0,
+      "entry": 52,
+      "facing": 5,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 21299,
+      "active": 129,
+      "countdown": 0,
+      "entry": 0,
+      "facing": 5,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 21322,
+      "active": 129,
+      "countdown": 0,
+      "entry": 4,
+      "facing": 5,
+      "flags": 48,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 21341,
+      "active": 129,
+      "countdown": 0,
+      "entry": 8,
+      "facing": 5,
+      "flags": 22,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 21341,
+      "active": 129,
+      "countdown": 0,
+      "entry": 12,
+      "facing": 5,
+      "flags": 22,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 21331,
+      "active": 129,
+      "countdown": 0,
+      "entry": 16,
+      "facing": 5,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 21336,
+      "active": 129,
+      "countdown": 0,
+      "entry": 20,
+      "facing": 5,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 21326,
+      "active": 129,
+      "countdown": 0,
+      "entry": 24,
+      "facing": 5,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 44173,
+      "active": 129,
+      "countdown": 0,
+      "entry": 28,
+      "facing": 5,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 44195,
+      "active": 129,
+      "countdown": 0,
+      "entry": 32,
+      "facing": 5,
+      "flags": 27,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 44247,
+      "active": 129,
+      "countdown": 0,
+      "entry": 36,
+      "facing": 5,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 44218,
+      "active": 129,
+      "countdown": 0,
+      "entry": 40,
+      "facing": 5,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 21280,
+      "active": 129,
+      "countdown": 0,
+      "entry": 44,
+      "facing": 5,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 21280,
+      "active": 129,
+      "countdown": 0,
+      "entry": 48,
+      "facing": 5,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 44273,
+      "active": 129,
+      "countdown": 0,
+      "entry": 52,
+      "facing": 5,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 21299,
+      "active": 129,
+      "countdown": 0,
+      "entry": 0,
+      "facing": 5,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 21322,
+      "active": 129,
+      "countdown": 0,
+      "entry": 4,
+      "facing": 5,
+      "flags": 48,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 21331,
+      "active": 129,
+      "countdown": 0,
+      "entry": 8,
+      "facing": 5,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 21341,
+      "active": 129,
+      "countdown": 0,
+      "entry": 12,
+      "facing": 5,
+      "flags": 22,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 21331,
+      "active": 129,
+      "countdown": 0,
+      "entry": 16,
+      "facing": 5,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 21336,
+      "active": 129,
+      "countdown": 0,
+      "entry": 20,
+      "facing": 5,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 21326,
+      "active": 129,
+      "countdown": 0,
+      "entry": 24,
+      "facing": 5,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 44173,
+      "active": 129,
+      "countdown": 0,
+      "entry": 28,
+      "facing": 5,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 44195,
+      "active": 129,
+      "countdown": 0,
+      "entry": 32,
+      "facing": 5,
+      "flags": 27,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 44247,
+      "active": 129,
+      "countdown": 0,
+      "entry": 36,
+      "facing": 5,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 44218,
+      "active": 129,
+      "countdown": 0,
+      "entry": 40,
+      "facing": 5,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 21280,
+      "active": 129,
+      "countdown": 0,
+      "entry": 44,
+      "facing": 5,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 21280,
+      "active": 129,
+      "countdown": 0,
+      "entry": 48,
+      "facing": 5,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 44273,
+      "active": 129,
+      "countdown": 0,
+      "entry": 52,
+      "facing": 5,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 21299,
+      "active": 129,
+      "countdown": 0,
+      "entry": 0,
+      "facing": 5,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 21322,
+      "active": 129,
+      "countdown": 0,
+      "entry": 4,
+      "facing": 5,
+      "flags": 48,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 21336,
+      "active": 129,
+      "countdown": 0,
+      "entry": 8,
+      "facing": 5,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 21341,
+      "active": 129,
+      "countdown": 0,
+      "entry": 12,
+      "facing": 5,
+      "flags": 22,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 21331,
+      "active": 129,
+      "countdown": 0,
+      "entry": 16,
+      "facing": 5,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 21336,
+      "active": 129,
+      "countdown": 0,
+      "entry": 20,
+      "facing": 5,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 21326,
+      "active": 129,
+      "countdown": 0,
+      "entry": 24,
+      "facing": 5,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 44173,
+      "active": 129,
+      "countdown": 0,
+      "entry": 28,
+      "facing": 5,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 44195,
+      "active": 129,
+      "countdown": 0,
+      "entry": 32,
+      "facing": 5,
+      "flags": 27,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 44247,
+      "active": 129,
+      "countdown": 0,
+      "entry": 36,
+      "facing": 5,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 44218,
+      "active": 129,
+      "countdown": 0,
+      "entry": 40,
+      "facing": 5,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 21280,
+      "active": 129,
+      "countdown": 0,
+      "entry": 44,
+      "facing": 5,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 21280,
+      "active": 129,
+      "countdown": 0,
+      "entry": 48,
+      "facing": 5,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 44273,
+      "active": 129,
+      "countdown": 0,
+      "entry": 52,
+      "facing": 5,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 21280,
+      "active": 129,
+      "countdown": 0,
+      "entry": 0,
+      "facing": 7,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 0
+    },
+    {
+      "action": 21318,
+      "active": 129,
+      "countdown": 0,
+      "entry": 4,
+      "facing": 7,
+      "flags": 48,
+      "mirror": 2,
+      "speed_traits": 0
+    },
+    {
+      "action": 21362,
+      "active": 129,
+      "countdown": 0,
+      "entry": 8,
+      "facing": 7,
+      "flags": 54,
+      "mirror": 2,
+      "speed_traits": 0
+    },
+    {
+      "action": 21377,
+      "active": 129,
+      "countdown": 0,
+      "entry": 12,
+      "facing": 7,
+      "flags": 22,
+      "mirror": 2,
+      "speed_traits": 0
+    },
+    {
+      "action": 21367,
+      "active": 129,
+      "countdown": 0,
+      "entry": 16,
+      "facing": 7,
+      "flags": 54,
+      "mirror": 2,
+      "speed_traits": 0
+    },
+    {
+      "action": 21372,
+      "active": 129,
+      "countdown": 0,
+      "entry": 20,
+      "facing": 7,
+      "flags": 54,
+      "mirror": 2,
+      "speed_traits": 0
+    },
+    {
+      "action": 21362,
+      "active": 129,
+      "countdown": 0,
+      "entry": 24,
+      "facing": 7,
+      "flags": 54,
+      "mirror": 2,
+      "speed_traits": 0
+    },
+    {
+      "action": 44160,
+      "active": 129,
+      "countdown": 0,
+      "entry": 28,
+      "facing": 7,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 0
+    },
+    {
+      "action": 44186,
+      "active": 129,
+      "countdown": 0,
+      "entry": 32,
+      "facing": 7,
+      "flags": 27,
+      "mirror": 2,
+      "speed_traits": 0
+    },
+    {
+      "action": 44232,
+      "active": 129,
+      "countdown": 0,
+      "entry": 36,
+      "facing": 7,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 0
+    },
+    {
+      "action": 44204,
+      "active": 129,
+      "countdown": 0,
+      "entry": 40,
+      "facing": 7,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 0
+    },
+    {
+      "action": 21280,
+      "active": 129,
+      "countdown": 0,
+      "entry": 44,
+      "facing": 7,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 0
+    },
+    {
+      "action": 21280,
+      "active": 129,
+      "countdown": 0,
+      "entry": 48,
+      "facing": 7,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 0
+    },
+    {
+      "action": 44262,
+      "active": 129,
+      "countdown": 0,
+      "entry": 52,
+      "facing": 7,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 0
+    },
+    {
+      "action": 21280,
+      "active": 129,
+      "countdown": 0,
+      "entry": 0,
+      "facing": 7,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 4
+    },
+    {
+      "action": 21318,
+      "active": 129,
+      "countdown": 0,
+      "entry": 4,
+      "facing": 7,
+      "flags": 48,
+      "mirror": 2,
+      "speed_traits": 4
+    },
+    {
+      "action": 21377,
+      "active": 129,
+      "countdown": 0,
+      "entry": 8,
+      "facing": 7,
+      "flags": 22,
+      "mirror": 2,
+      "speed_traits": 4
+    },
+    {
+      "action": 21377,
+      "active": 129,
+      "countdown": 0,
+      "entry": 12,
+      "facing": 7,
+      "flags": 22,
+      "mirror": 2,
+      "speed_traits": 4
+    },
+    {
+      "action": 21367,
+      "active": 129,
+      "countdown": 0,
+      "entry": 16,
+      "facing": 7,
+      "flags": 54,
+      "mirror": 2,
+      "speed_traits": 4
+    },
+    {
+      "action": 21372,
+      "active": 129,
+      "countdown": 0,
+      "entry": 20,
+      "facing": 7,
+      "flags": 54,
+      "mirror": 2,
+      "speed_traits": 4
+    },
+    {
+      "action": 21362,
+      "active": 129,
+      "countdown": 0,
+      "entry": 24,
+      "facing": 7,
+      "flags": 54,
+      "mirror": 2,
+      "speed_traits": 4
+    },
+    {
+      "action": 44160,
+      "active": 129,
+      "countdown": 0,
+      "entry": 28,
+      "facing": 7,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 4
+    },
+    {
+      "action": 44186,
+      "active": 129,
+      "countdown": 0,
+      "entry": 32,
+      "facing": 7,
+      "flags": 27,
+      "mirror": 2,
+      "speed_traits": 4
+    },
+    {
+      "action": 44232,
+      "active": 129,
+      "countdown": 0,
+      "entry": 36,
+      "facing": 7,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 4
+    },
+    {
+      "action": 44204,
+      "active": 129,
+      "countdown": 0,
+      "entry": 40,
+      "facing": 7,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 4
+    },
+    {
+      "action": 21280,
+      "active": 129,
+      "countdown": 0,
+      "entry": 44,
+      "facing": 7,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 4
+    },
+    {
+      "action": 21280,
+      "active": 129,
+      "countdown": 0,
+      "entry": 48,
+      "facing": 7,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 4
+    },
+    {
+      "action": 44262,
+      "active": 129,
+      "countdown": 0,
+      "entry": 52,
+      "facing": 7,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 4
+    },
+    {
+      "action": 21280,
+      "active": 129,
+      "countdown": 0,
+      "entry": 0,
+      "facing": 7,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 8
+    },
+    {
+      "action": 21318,
+      "active": 129,
+      "countdown": 0,
+      "entry": 4,
+      "facing": 7,
+      "flags": 48,
+      "mirror": 2,
+      "speed_traits": 8
+    },
+    {
+      "action": 21367,
+      "active": 129,
+      "countdown": 0,
+      "entry": 8,
+      "facing": 7,
+      "flags": 54,
+      "mirror": 2,
+      "speed_traits": 8
+    },
+    {
+      "action": 21377,
+      "active": 129,
+      "countdown": 0,
+      "entry": 12,
+      "facing": 7,
+      "flags": 22,
+      "mirror": 2,
+      "speed_traits": 8
+    },
+    {
+      "action": 21367,
+      "active": 129,
+      "countdown": 0,
+      "entry": 16,
+      "facing": 7,
+      "flags": 54,
+      "mirror": 2,
+      "speed_traits": 8
+    },
+    {
+      "action": 21372,
+      "active": 129,
+      "countdown": 0,
+      "entry": 20,
+      "facing": 7,
+      "flags": 54,
+      "mirror": 2,
+      "speed_traits": 8
+    },
+    {
+      "action": 21362,
+      "active": 129,
+      "countdown": 0,
+      "entry": 24,
+      "facing": 7,
+      "flags": 54,
+      "mirror": 2,
+      "speed_traits": 8
+    },
+    {
+      "action": 44160,
+      "active": 129,
+      "countdown": 0,
+      "entry": 28,
+      "facing": 7,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 8
+    },
+    {
+      "action": 44186,
+      "active": 129,
+      "countdown": 0,
+      "entry": 32,
+      "facing": 7,
+      "flags": 27,
+      "mirror": 2,
+      "speed_traits": 8
+    },
+    {
+      "action": 44232,
+      "active": 129,
+      "countdown": 0,
+      "entry": 36,
+      "facing": 7,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 8
+    },
+    {
+      "action": 44204,
+      "active": 129,
+      "countdown": 0,
+      "entry": 40,
+      "facing": 7,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 8
+    },
+    {
+      "action": 21280,
+      "active": 129,
+      "countdown": 0,
+      "entry": 44,
+      "facing": 7,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 8
+    },
+    {
+      "action": 21280,
+      "active": 129,
+      "countdown": 0,
+      "entry": 48,
+      "facing": 7,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 8
+    },
+    {
+      "action": 44262,
+      "active": 129,
+      "countdown": 0,
+      "entry": 52,
+      "facing": 7,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 8
+    },
+    {
+      "action": 21280,
+      "active": 129,
+      "countdown": 0,
+      "entry": 0,
+      "facing": 7,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 12
+    },
+    {
+      "action": 21318,
+      "active": 129,
+      "countdown": 0,
+      "entry": 4,
+      "facing": 7,
+      "flags": 48,
+      "mirror": 2,
+      "speed_traits": 12
+    },
+    {
+      "action": 21372,
+      "active": 129,
+      "countdown": 0,
+      "entry": 8,
+      "facing": 7,
+      "flags": 54,
+      "mirror": 2,
+      "speed_traits": 12
+    },
+    {
+      "action": 21377,
+      "active": 129,
+      "countdown": 0,
+      "entry": 12,
+      "facing": 7,
+      "flags": 22,
+      "mirror": 2,
+      "speed_traits": 12
+    },
+    {
+      "action": 21367,
+      "active": 129,
+      "countdown": 0,
+      "entry": 16,
+      "facing": 7,
+      "flags": 54,
+      "mirror": 2,
+      "speed_traits": 12
+    },
+    {
+      "action": 21372,
+      "active": 129,
+      "countdown": 0,
+      "entry": 20,
+      "facing": 7,
+      "flags": 54,
+      "mirror": 2,
+      "speed_traits": 12
+    },
+    {
+      "action": 21362,
+      "active": 129,
+      "countdown": 0,
+      "entry": 24,
+      "facing": 7,
+      "flags": 54,
+      "mirror": 2,
+      "speed_traits": 12
+    },
+    {
+      "action": 44160,
+      "active": 129,
+      "countdown": 0,
+      "entry": 28,
+      "facing": 7,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 12
+    },
+    {
+      "action": 44186,
+      "active": 129,
+      "countdown": 0,
+      "entry": 32,
+      "facing": 7,
+      "flags": 27,
+      "mirror": 2,
+      "speed_traits": 12
+    },
+    {
+      "action": 44232,
+      "active": 129,
+      "countdown": 0,
+      "entry": 36,
+      "facing": 7,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 12
+    },
+    {
+      "action": 44204,
+      "active": 129,
+      "countdown": 0,
+      "entry": 40,
+      "facing": 7,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 12
+    },
+    {
+      "action": 21280,
+      "active": 129,
+      "countdown": 0,
+      "entry": 44,
+      "facing": 7,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 12
+    },
+    {
+      "action": 21280,
+      "active": 129,
+      "countdown": 0,
+      "entry": 48,
+      "facing": 7,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 12
+    },
+    {
+      "action": 44262,
+      "active": 129,
+      "countdown": 0,
+      "entry": 52,
+      "facing": 7,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 12
+    },
+    {
+      "action": 21299,
+      "active": 133,
+      "countdown": 0,
+      "entry": 0,
+      "facing": 1,
+      "flags": 26,
+      "mirror": 4,
+      "speed_traits": 0
+    },
+    {
+      "action": 44328,
+      "active": 133,
+      "countdown": 0,
+      "entry": 4,
+      "facing": 1,
+      "flags": 56,
+      "mirror": 4,
+      "speed_traits": 0
+    },
+    {
+      "action": 44284,
+      "active": 133,
+      "countdown": 0,
+      "entry": 8,
+      "facing": 1,
+      "flags": 22,
+      "mirror": 4,
+      "speed_traits": 0
+    },
+    {
+      "action": 44284,
+      "active": 133,
+      "countdown": 0,
+      "entry": 12,
+      "facing": 1,
+      "flags": 22,
+      "mirror": 4,
+      "speed_traits": 0
+    },
+    {
+      "action": 44284,
+      "active": 133,
+      "countdown": 0,
+      "entry": 16,
+      "facing": 1,
+      "flags": 22,
+      "mirror": 4,
+      "speed_traits": 0
+    },
+    {
+      "action": 44284,
+      "active": 133,
+      "countdown": 0,
+      "entry": 20,
+      "facing": 1,
+      "flags": 22,
+      "mirror": 4,
+      "speed_traits": 0
+    },
+    {
+      "action": 44284,
+      "active": 133,
+      "countdown": 0,
+      "entry": 24,
+      "facing": 1,
+      "flags": 22,
+      "mirror": 4,
+      "speed_traits": 0
+    },
+    {
+      "action": 44343,
+      "active": 133,
+      "countdown": 0,
+      "entry": 28,
+      "facing": 1,
+      "flags": 26,
+      "mirror": 4,
+      "speed_traits": 0
+    },
+    {
+      "action": 44356,
+      "active": 133,
+      "countdown": 0,
+      "entry": 32,
+      "facing": 1,
+      "flags": 26,
+      "mirror": 4,
+      "speed_traits": 0
+    },
+    {
+      "action": 44343,
+      "active": 133,
+      "countdown": 0,
+      "entry": 36,
+      "facing": 1,
+      "flags": 26,
+      "mirror": 4,
+      "speed_traits": 0
+    },
+    {
+      "action": 44356,
+      "active": 133,
+      "countdown": 0,
+      "entry": 40,
+      "facing": 1,
+      "flags": 26,
+      "mirror": 4,
+      "speed_traits": 0
+    },
+    {
+      "action": 21362,
+      "active": 133,
+      "countdown": 0,
+      "entry": 44,
+      "facing": 1,
+      "flags": 54,
+      "mirror": 4,
+      "speed_traits": 0
+    },
+    {
+      "action": 21326,
+      "active": 133,
+      "countdown": 0,
+      "entry": 48,
+      "facing": 1,
+      "flags": 54,
+      "mirror": 4,
+      "speed_traits": 0
+    },
+    {
+      "action": 21331,
+      "active": 133,
+      "countdown": 0,
+      "entry": 52,
+      "facing": 1,
+      "flags": 54,
+      "mirror": 4,
+      "speed_traits": 0
+    },
+    {
+      "action": 21299,
+      "active": 133,
+      "countdown": 0,
+      "entry": 0,
+      "facing": 1,
+      "flags": 26,
+      "mirror": 4,
+      "speed_traits": 4
+    },
+    {
+      "action": 44328,
+      "active": 133,
+      "countdown": 0,
+      "entry": 4,
+      "facing": 1,
+      "flags": 56,
+      "mirror": 4,
+      "speed_traits": 4
+    },
+    {
+      "action": 44284,
+      "active": 133,
+      "countdown": 0,
+      "entry": 8,
+      "facing": 1,
+      "flags": 22,
+      "mirror": 4,
+      "speed_traits": 4
+    },
+    {
+      "action": 44284,
+      "active": 133,
+      "countdown": 0,
+      "entry": 12,
+      "facing": 1,
+      "flags": 22,
+      "mirror": 4,
+      "speed_traits": 4
+    },
+    {
+      "action": 44284,
+      "active": 133,
+      "countdown": 0,
+      "entry": 16,
+      "facing": 1,
+      "flags": 22,
+      "mirror": 4,
+      "speed_traits": 4
+    },
+    {
+      "action": 44284,
+      "active": 133,
+      "countdown": 0,
+      "entry": 20,
+      "facing": 1,
+      "flags": 22,
+      "mirror": 4,
+      "speed_traits": 4
+    },
+    {
+      "action": 44284,
+      "active": 133,
+      "countdown": 0,
+      "entry": 24,
+      "facing": 1,
+      "flags": 22,
+      "mirror": 4,
+      "speed_traits": 4
+    },
+    {
+      "action": 44343,
+      "active": 133,
+      "countdown": 0,
+      "entry": 28,
+      "facing": 1,
+      "flags": 26,
+      "mirror": 4,
+      "speed_traits": 4
+    },
+    {
+      "action": 44356,
+      "active": 133,
+      "countdown": 0,
+      "entry": 32,
+      "facing": 1,
+      "flags": 26,
+      "mirror": 4,
+      "speed_traits": 4
+    },
+    {
+      "action": 44343,
+      "active": 133,
+      "countdown": 0,
+      "entry": 36,
+      "facing": 1,
+      "flags": 26,
+      "mirror": 4,
+      "speed_traits": 4
+    },
+    {
+      "action": 44356,
+      "active": 133,
+      "countdown": 0,
+      "entry": 40,
+      "facing": 1,
+      "flags": 26,
+      "mirror": 4,
+      "speed_traits": 4
+    },
+    {
+      "action": 21362,
+      "active": 133,
+      "countdown": 0,
+      "entry": 44,
+      "facing": 1,
+      "flags": 54,
+      "mirror": 4,
+      "speed_traits": 4
+    },
+    {
+      "action": 21326,
+      "active": 133,
+      "countdown": 0,
+      "entry": 48,
+      "facing": 1,
+      "flags": 54,
+      "mirror": 4,
+      "speed_traits": 4
+    },
+    {
+      "action": 21331,
+      "active": 133,
+      "countdown": 0,
+      "entry": 52,
+      "facing": 1,
+      "flags": 54,
+      "mirror": 4,
+      "speed_traits": 4
+    },
+    {
+      "action": 21299,
+      "active": 133,
+      "countdown": 0,
+      "entry": 0,
+      "facing": 1,
+      "flags": 26,
+      "mirror": 4,
+      "speed_traits": 8
+    },
+    {
+      "action": 44328,
+      "active": 133,
+      "countdown": 0,
+      "entry": 4,
+      "facing": 1,
+      "flags": 56,
+      "mirror": 4,
+      "speed_traits": 8
+    },
+    {
+      "action": 44284,
+      "active": 133,
+      "countdown": 0,
+      "entry": 8,
+      "facing": 1,
+      "flags": 22,
+      "mirror": 4,
+      "speed_traits": 8
+    },
+    {
+      "action": 44284,
+      "active": 133,
+      "countdown": 0,
+      "entry": 12,
+      "facing": 1,
+      "flags": 22,
+      "mirror": 4,
+      "speed_traits": 8
+    },
+    {
+      "action": 44284,
+      "active": 133,
+      "countdown": 0,
+      "entry": 16,
+      "facing": 1,
+      "flags": 22,
+      "mirror": 4,
+      "speed_traits": 8
+    },
+    {
+      "action": 44284,
+      "active": 133,
+      "countdown": 0,
+      "entry": 20,
+      "facing": 1,
+      "flags": 22,
+      "mirror": 4,
+      "speed_traits": 8
+    },
+    {
+      "action": 44284,
+      "active": 133,
+      "countdown": 0,
+      "entry": 24,
+      "facing": 1,
+      "flags": 22,
+      "mirror": 4,
+      "speed_traits": 8
+    },
+    {
+      "action": 44343,
+      "active": 133,
+      "countdown": 0,
+      "entry": 28,
+      "facing": 1,
+      "flags": 26,
+      "mirror": 4,
+      "speed_traits": 8
+    },
+    {
+      "action": 44356,
+      "active": 133,
+      "countdown": 0,
+      "entry": 32,
+      "facing": 1,
+      "flags": 26,
+      "mirror": 4,
+      "speed_traits": 8
+    },
+    {
+      "action": 44343,
+      "active": 133,
+      "countdown": 0,
+      "entry": 36,
+      "facing": 1,
+      "flags": 26,
+      "mirror": 4,
+      "speed_traits": 8
+    },
+    {
+      "action": 44356,
+      "active": 133,
+      "countdown": 0,
+      "entry": 40,
+      "facing": 1,
+      "flags": 26,
+      "mirror": 4,
+      "speed_traits": 8
+    },
+    {
+      "action": 21362,
+      "active": 133,
+      "countdown": 0,
+      "entry": 44,
+      "facing": 1,
+      "flags": 54,
+      "mirror": 4,
+      "speed_traits": 8
+    },
+    {
+      "action": 21326,
+      "active": 133,
+      "countdown": 0,
+      "entry": 48,
+      "facing": 1,
+      "flags": 54,
+      "mirror": 4,
+      "speed_traits": 8
+    },
+    {
+      "action": 21331,
+      "active": 133,
+      "countdown": 0,
+      "entry": 52,
+      "facing": 1,
+      "flags": 54,
+      "mirror": 4,
+      "speed_traits": 8
+    },
+    {
+      "action": 21299,
+      "active": 133,
+      "countdown": 0,
+      "entry": 0,
+      "facing": 1,
+      "flags": 26,
+      "mirror": 4,
+      "speed_traits": 12
+    },
+    {
+      "action": 44328,
+      "active": 133,
+      "countdown": 0,
+      "entry": 4,
+      "facing": 1,
+      "flags": 56,
+      "mirror": 4,
+      "speed_traits": 12
+    },
+    {
+      "action": 44284,
+      "active": 133,
+      "countdown": 0,
+      "entry": 8,
+      "facing": 1,
+      "flags": 22,
+      "mirror": 4,
+      "speed_traits": 12
+    },
+    {
+      "action": 44284,
+      "active": 133,
+      "countdown": 0,
+      "entry": 12,
+      "facing": 1,
+      "flags": 22,
+      "mirror": 4,
+      "speed_traits": 12
+    },
+    {
+      "action": 44284,
+      "active": 133,
+      "countdown": 0,
+      "entry": 16,
+      "facing": 1,
+      "flags": 22,
+      "mirror": 4,
+      "speed_traits": 12
+    },
+    {
+      "action": 44284,
+      "active": 133,
+      "countdown": 0,
+      "entry": 20,
+      "facing": 1,
+      "flags": 22,
+      "mirror": 4,
+      "speed_traits": 12
+    },
+    {
+      "action": 44284,
+      "active": 133,
+      "countdown": 0,
+      "entry": 24,
+      "facing": 1,
+      "flags": 22,
+      "mirror": 4,
+      "speed_traits": 12
+    },
+    {
+      "action": 44343,
+      "active": 133,
+      "countdown": 0,
+      "entry": 28,
+      "facing": 1,
+      "flags": 26,
+      "mirror": 4,
+      "speed_traits": 12
+    },
+    {
+      "action": 44356,
+      "active": 133,
+      "countdown": 0,
+      "entry": 32,
+      "facing": 1,
+      "flags": 26,
+      "mirror": 4,
+      "speed_traits": 12
+    },
+    {
+      "action": 44343,
+      "active": 133,
+      "countdown": 0,
+      "entry": 36,
+      "facing": 1,
+      "flags": 26,
+      "mirror": 4,
+      "speed_traits": 12
+    },
+    {
+      "action": 44356,
+      "active": 133,
+      "countdown": 0,
+      "entry": 40,
+      "facing": 1,
+      "flags": 26,
+      "mirror": 4,
+      "speed_traits": 12
+    },
+    {
+      "action": 21362,
+      "active": 133,
+      "countdown": 0,
+      "entry": 44,
+      "facing": 1,
+      "flags": 54,
+      "mirror": 4,
+      "speed_traits": 12
+    },
+    {
+      "action": 21326,
+      "active": 133,
+      "countdown": 0,
+      "entry": 48,
+      "facing": 1,
+      "flags": 54,
+      "mirror": 4,
+      "speed_traits": 12
+    },
+    {
+      "action": 21331,
+      "active": 133,
+      "countdown": 0,
+      "entry": 52,
+      "facing": 1,
+      "flags": 54,
+      "mirror": 4,
+      "speed_traits": 12
+    },
+    {
+      "action": 21299,
+      "active": 133,
+      "countdown": 0,
+      "entry": 0,
+      "facing": 3,
+      "flags": 26,
+      "mirror": 4,
+      "speed_traits": 0
+    },
+    {
+      "action": 44328,
+      "active": 133,
+      "countdown": 0,
+      "entry": 4,
+      "facing": 3,
+      "flags": 56,
+      "mirror": 4,
+      "speed_traits": 0
+    },
+    {
+      "action": 44284,
+      "active": 133,
+      "countdown": 0,
+      "entry": 8,
+      "facing": 3,
+      "flags": 22,
+      "mirror": 4,
+      "speed_traits": 0
+    },
+    {
+      "action": 44284,
+      "active": 133,
+      "countdown": 0,
+      "entry": 12,
+      "facing": 3,
+      "flags": 22,
+      "mirror": 4,
+      "speed_traits": 0
+    },
+    {
+      "action": 44284,
+      "active": 133,
+      "countdown": 0,
+      "entry": 16,
+      "facing": 3,
+      "flags": 22,
+      "mirror": 4,
+      "speed_traits": 0
+    },
+    {
+      "action": 44284,
+      "active": 133,
+      "countdown": 0,
+      "entry": 20,
+      "facing": 3,
+      "flags": 22,
+      "mirror": 4,
+      "speed_traits": 0
+    },
+    {
+      "action": 44284,
+      "active": 133,
+      "countdown": 0,
+      "entry": 24,
+      "facing": 3,
+      "flags": 22,
+      "mirror": 4,
+      "speed_traits": 0
+    },
+    {
+      "action": 44343,
+      "active": 133,
+      "countdown": 0,
+      "entry": 28,
+      "facing": 3,
+      "flags": 26,
+      "mirror": 4,
+      "speed_traits": 0
+    },
+    {
+      "action": 44356,
+      "active": 133,
+      "countdown": 0,
+      "entry": 32,
+      "facing": 3,
+      "flags": 26,
+      "mirror": 4,
+      "speed_traits": 0
+    },
+    {
+      "action": 44343,
+      "active": 133,
+      "countdown": 0,
+      "entry": 36,
+      "facing": 3,
+      "flags": 26,
+      "mirror": 4,
+      "speed_traits": 0
+    },
+    {
+      "action": 44356,
+      "active": 133,
+      "countdown": 0,
+      "entry": 40,
+      "facing": 3,
+      "flags": 26,
+      "mirror": 4,
+      "speed_traits": 0
+    },
+    {
+      "action": 21362,
+      "active": 133,
+      "countdown": 0,
+      "entry": 44,
+      "facing": 3,
+      "flags": 54,
+      "mirror": 4,
+      "speed_traits": 0
+    },
+    {
+      "action": 21326,
+      "active": 133,
+      "countdown": 0,
+      "entry": 48,
+      "facing": 3,
+      "flags": 54,
+      "mirror": 4,
+      "speed_traits": 0
+    },
+    {
+      "action": 21331,
+      "active": 133,
+      "countdown": 0,
+      "entry": 52,
+      "facing": 3,
+      "flags": 54,
+      "mirror": 4,
+      "speed_traits": 0
+    },
+    {
+      "action": 21299,
+      "active": 133,
+      "countdown": 0,
+      "entry": 0,
+      "facing": 3,
+      "flags": 26,
+      "mirror": 4,
+      "speed_traits": 4
+    },
+    {
+      "action": 44328,
+      "active": 133,
+      "countdown": 0,
+      "entry": 4,
+      "facing": 3,
+      "flags": 56,
+      "mirror": 4,
+      "speed_traits": 4
+    },
+    {
+      "action": 44284,
+      "active": 133,
+      "countdown": 0,
+      "entry": 8,
+      "facing": 3,
+      "flags": 22,
+      "mirror": 4,
+      "speed_traits": 4
+    },
+    {
+      "action": 44284,
+      "active": 133,
+      "countdown": 0,
+      "entry": 12,
+      "facing": 3,
+      "flags": 22,
+      "mirror": 4,
+      "speed_traits": 4
+    },
+    {
+      "action": 44284,
+      "active": 133,
+      "countdown": 0,
+      "entry": 16,
+      "facing": 3,
+      "flags": 22,
+      "mirror": 4,
+      "speed_traits": 4
+    },
+    {
+      "action": 44284,
+      "active": 133,
+      "countdown": 0,
+      "entry": 20,
+      "facing": 3,
+      "flags": 22,
+      "mirror": 4,
+      "speed_traits": 4
+    },
+    {
+      "action": 44284,
+      "active": 133,
+      "countdown": 0,
+      "entry": 24,
+      "facing": 3,
+      "flags": 22,
+      "mirror": 4,
+      "speed_traits": 4
+    },
+    {
+      "action": 44343,
+      "active": 133,
+      "countdown": 0,
+      "entry": 28,
+      "facing": 3,
+      "flags": 26,
+      "mirror": 4,
+      "speed_traits": 4
+    },
+    {
+      "action": 44356,
+      "active": 133,
+      "countdown": 0,
+      "entry": 32,
+      "facing": 3,
+      "flags": 26,
+      "mirror": 4,
+      "speed_traits": 4
+    },
+    {
+      "action": 44343,
+      "active": 133,
+      "countdown": 0,
+      "entry": 36,
+      "facing": 3,
+      "flags": 26,
+      "mirror": 4,
+      "speed_traits": 4
+    },
+    {
+      "action": 44356,
+      "active": 133,
+      "countdown": 0,
+      "entry": 40,
+      "facing": 3,
+      "flags": 26,
+      "mirror": 4,
+      "speed_traits": 4
+    },
+    {
+      "action": 21362,
+      "active": 133,
+      "countdown": 0,
+      "entry": 44,
+      "facing": 3,
+      "flags": 54,
+      "mirror": 4,
+      "speed_traits": 4
+    },
+    {
+      "action": 21326,
+      "active": 133,
+      "countdown": 0,
+      "entry": 48,
+      "facing": 3,
+      "flags": 54,
+      "mirror": 4,
+      "speed_traits": 4
+    },
+    {
+      "action": 21331,
+      "active": 133,
+      "countdown": 0,
+      "entry": 52,
+      "facing": 3,
+      "flags": 54,
+      "mirror": 4,
+      "speed_traits": 4
+    },
+    {
+      "action": 21299,
+      "active": 133,
+      "countdown": 0,
+      "entry": 0,
+      "facing": 3,
+      "flags": 26,
+      "mirror": 4,
+      "speed_traits": 8
+    },
+    {
+      "action": 44328,
+      "active": 133,
+      "countdown": 0,
+      "entry": 4,
+      "facing": 3,
+      "flags": 56,
+      "mirror": 4,
+      "speed_traits": 8
+    },
+    {
+      "action": 44284,
+      "active": 133,
+      "countdown": 0,
+      "entry": 8,
+      "facing": 3,
+      "flags": 22,
+      "mirror": 4,
+      "speed_traits": 8
+    },
+    {
+      "action": 44284,
+      "active": 133,
+      "countdown": 0,
+      "entry": 12,
+      "facing": 3,
+      "flags": 22,
+      "mirror": 4,
+      "speed_traits": 8
+    },
+    {
+      "action": 44284,
+      "active": 133,
+      "countdown": 0,
+      "entry": 16,
+      "facing": 3,
+      "flags": 22,
+      "mirror": 4,
+      "speed_traits": 8
+    },
+    {
+      "action": 44284,
+      "active": 133,
+      "countdown": 0,
+      "entry": 20,
+      "facing": 3,
+      "flags": 22,
+      "mirror": 4,
+      "speed_traits": 8
+    },
+    {
+      "action": 44284,
+      "active": 133,
+      "countdown": 0,
+      "entry": 24,
+      "facing": 3,
+      "flags": 22,
+      "mirror": 4,
+      "speed_traits": 8
+    },
+    {
+      "action": 44343,
+      "active": 133,
+      "countdown": 0,
+      "entry": 28,
+      "facing": 3,
+      "flags": 26,
+      "mirror": 4,
+      "speed_traits": 8
+    },
+    {
+      "action": 44356,
+      "active": 133,
+      "countdown": 0,
+      "entry": 32,
+      "facing": 3,
+      "flags": 26,
+      "mirror": 4,
+      "speed_traits": 8
+    },
+    {
+      "action": 44343,
+      "active": 133,
+      "countdown": 0,
+      "entry": 36,
+      "facing": 3,
+      "flags": 26,
+      "mirror": 4,
+      "speed_traits": 8
+    },
+    {
+      "action": 44356,
+      "active": 133,
+      "countdown": 0,
+      "entry": 40,
+      "facing": 3,
+      "flags": 26,
+      "mirror": 4,
+      "speed_traits": 8
+    },
+    {
+      "action": 21362,
+      "active": 133,
+      "countdown": 0,
+      "entry": 44,
+      "facing": 3,
+      "flags": 54,
+      "mirror": 4,
+      "speed_traits": 8
+    },
+    {
+      "action": 21326,
+      "active": 133,
+      "countdown": 0,
+      "entry": 48,
+      "facing": 3,
+      "flags": 54,
+      "mirror": 4,
+      "speed_traits": 8
+    },
+    {
+      "action": 21331,
+      "active": 133,
+      "countdown": 0,
+      "entry": 52,
+      "facing": 3,
+      "flags": 54,
+      "mirror": 4,
+      "speed_traits": 8
+    },
+    {
+      "action": 21299,
+      "active": 133,
+      "countdown": 0,
+      "entry": 0,
+      "facing": 3,
+      "flags": 26,
+      "mirror": 4,
+      "speed_traits": 12
+    },
+    {
+      "action": 44328,
+      "active": 133,
+      "countdown": 0,
+      "entry": 4,
+      "facing": 3,
+      "flags": 56,
+      "mirror": 4,
+      "speed_traits": 12
+    },
+    {
+      "action": 44284,
+      "active": 133,
+      "countdown": 0,
+      "entry": 8,
+      "facing": 3,
+      "flags": 22,
+      "mirror": 4,
+      "speed_traits": 12
+    },
+    {
+      "action": 44284,
+      "active": 133,
+      "countdown": 0,
+      "entry": 12,
+      "facing": 3,
+      "flags": 22,
+      "mirror": 4,
+      "speed_traits": 12
+    },
+    {
+      "action": 44284,
+      "active": 133,
+      "countdown": 0,
+      "entry": 16,
+      "facing": 3,
+      "flags": 22,
+      "mirror": 4,
+      "speed_traits": 12
+    },
+    {
+      "action": 44284,
+      "active": 133,
+      "countdown": 0,
+      "entry": 20,
+      "facing": 3,
+      "flags": 22,
+      "mirror": 4,
+      "speed_traits": 12
+    },
+    {
+      "action": 44284,
+      "active": 133,
+      "countdown": 0,
+      "entry": 24,
+      "facing": 3,
+      "flags": 22,
+      "mirror": 4,
+      "speed_traits": 12
+    },
+    {
+      "action": 44343,
+      "active": 133,
+      "countdown": 0,
+      "entry": 28,
+      "facing": 3,
+      "flags": 26,
+      "mirror": 4,
+      "speed_traits": 12
+    },
+    {
+      "action": 44356,
+      "active": 133,
+      "countdown": 0,
+      "entry": 32,
+      "facing": 3,
+      "flags": 26,
+      "mirror": 4,
+      "speed_traits": 12
+    },
+    {
+      "action": 44343,
+      "active": 133,
+      "countdown": 0,
+      "entry": 36,
+      "facing": 3,
+      "flags": 26,
+      "mirror": 4,
+      "speed_traits": 12
+    },
+    {
+      "action": 44356,
+      "active": 133,
+      "countdown": 0,
+      "entry": 40,
+      "facing": 3,
+      "flags": 26,
+      "mirror": 4,
+      "speed_traits": 12
+    },
+    {
+      "action": 21362,
+      "active": 133,
+      "countdown": 0,
+      "entry": 44,
+      "facing": 3,
+      "flags": 54,
+      "mirror": 4,
+      "speed_traits": 12
+    },
+    {
+      "action": 21326,
+      "active": 133,
+      "countdown": 0,
+      "entry": 48,
+      "facing": 3,
+      "flags": 54,
+      "mirror": 4,
+      "speed_traits": 12
+    },
+    {
+      "action": 21331,
+      "active": 133,
+      "countdown": 0,
+      "entry": 52,
+      "facing": 3,
+      "flags": 54,
+      "mirror": 4,
+      "speed_traits": 12
+    },
+    {
+      "action": 21299,
+      "active": 133,
+      "countdown": 0,
+      "entry": 0,
+      "facing": 5,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 44328,
+      "active": 133,
+      "countdown": 0,
+      "entry": 4,
+      "facing": 5,
+      "flags": 56,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 44284,
+      "active": 133,
+      "countdown": 0,
+      "entry": 8,
+      "facing": 5,
+      "flags": 22,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 44284,
+      "active": 133,
+      "countdown": 0,
+      "entry": 12,
+      "facing": 5,
+      "flags": 22,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 44284,
+      "active": 133,
+      "countdown": 0,
+      "entry": 16,
+      "facing": 5,
+      "flags": 22,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 44284,
+      "active": 133,
+      "countdown": 0,
+      "entry": 20,
+      "facing": 5,
+      "flags": 22,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 44284,
+      "active": 133,
+      "countdown": 0,
+      "entry": 24,
+      "facing": 5,
+      "flags": 22,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 44343,
+      "active": 133,
+      "countdown": 0,
+      "entry": 28,
+      "facing": 5,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 44356,
+      "active": 133,
+      "countdown": 0,
+      "entry": 32,
+      "facing": 5,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 44343,
+      "active": 133,
+      "countdown": 0,
+      "entry": 36,
+      "facing": 5,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 44356,
+      "active": 133,
+      "countdown": 0,
+      "entry": 40,
+      "facing": 5,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 21362,
+      "active": 133,
+      "countdown": 0,
+      "entry": 44,
+      "facing": 5,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 21326,
+      "active": 133,
+      "countdown": 0,
+      "entry": 48,
+      "facing": 5,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 21331,
+      "active": 133,
+      "countdown": 0,
+      "entry": 52,
+      "facing": 5,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 21299,
+      "active": 133,
+      "countdown": 0,
+      "entry": 0,
+      "facing": 5,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 44328,
+      "active": 133,
+      "countdown": 0,
+      "entry": 4,
+      "facing": 5,
+      "flags": 56,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 44284,
+      "active": 133,
+      "countdown": 0,
+      "entry": 8,
+      "facing": 5,
+      "flags": 22,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 44284,
+      "active": 133,
+      "countdown": 0,
+      "entry": 12,
+      "facing": 5,
+      "flags": 22,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 44284,
+      "active": 133,
+      "countdown": 0,
+      "entry": 16,
+      "facing": 5,
+      "flags": 22,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 44284,
+      "active": 133,
+      "countdown": 0,
+      "entry": 20,
+      "facing": 5,
+      "flags": 22,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 44284,
+      "active": 133,
+      "countdown": 0,
+      "entry": 24,
+      "facing": 5,
+      "flags": 22,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 44343,
+      "active": 133,
+      "countdown": 0,
+      "entry": 28,
+      "facing": 5,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 44356,
+      "active": 133,
+      "countdown": 0,
+      "entry": 32,
+      "facing": 5,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 44343,
+      "active": 133,
+      "countdown": 0,
+      "entry": 36,
+      "facing": 5,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 44356,
+      "active": 133,
+      "countdown": 0,
+      "entry": 40,
+      "facing": 5,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 21362,
+      "active": 133,
+      "countdown": 0,
+      "entry": 44,
+      "facing": 5,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 21326,
+      "active": 133,
+      "countdown": 0,
+      "entry": 48,
+      "facing": 5,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 21331,
+      "active": 133,
+      "countdown": 0,
+      "entry": 52,
+      "facing": 5,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 21299,
+      "active": 133,
+      "countdown": 0,
+      "entry": 0,
+      "facing": 5,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 44328,
+      "active": 133,
+      "countdown": 0,
+      "entry": 4,
+      "facing": 5,
+      "flags": 56,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 44284,
+      "active": 133,
+      "countdown": 0,
+      "entry": 8,
+      "facing": 5,
+      "flags": 22,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 44284,
+      "active": 133,
+      "countdown": 0,
+      "entry": 12,
+      "facing": 5,
+      "flags": 22,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 44284,
+      "active": 133,
+      "countdown": 0,
+      "entry": 16,
+      "facing": 5,
+      "flags": 22,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 44284,
+      "active": 133,
+      "countdown": 0,
+      "entry": 20,
+      "facing": 5,
+      "flags": 22,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 44284,
+      "active": 133,
+      "countdown": 0,
+      "entry": 24,
+      "facing": 5,
+      "flags": 22,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 44343,
+      "active": 133,
+      "countdown": 0,
+      "entry": 28,
+      "facing": 5,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 44356,
+      "active": 133,
+      "countdown": 0,
+      "entry": 32,
+      "facing": 5,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 44343,
+      "active": 133,
+      "countdown": 0,
+      "entry": 36,
+      "facing": 5,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 44356,
+      "active": 133,
+      "countdown": 0,
+      "entry": 40,
+      "facing": 5,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 21362,
+      "active": 133,
+      "countdown": 0,
+      "entry": 44,
+      "facing": 5,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 21326,
+      "active": 133,
+      "countdown": 0,
+      "entry": 48,
+      "facing": 5,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 21331,
+      "active": 133,
+      "countdown": 0,
+      "entry": 52,
+      "facing": 5,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 21299,
+      "active": 133,
+      "countdown": 0,
+      "entry": 0,
+      "facing": 5,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 44328,
+      "active": 133,
+      "countdown": 0,
+      "entry": 4,
+      "facing": 5,
+      "flags": 56,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 44284,
+      "active": 133,
+      "countdown": 0,
+      "entry": 8,
+      "facing": 5,
+      "flags": 22,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 44284,
+      "active": 133,
+      "countdown": 0,
+      "entry": 12,
+      "facing": 5,
+      "flags": 22,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 44284,
+      "active": 133,
+      "countdown": 0,
+      "entry": 16,
+      "facing": 5,
+      "flags": 22,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 44284,
+      "active": 133,
+      "countdown": 0,
+      "entry": 20,
+      "facing": 5,
+      "flags": 22,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 44284,
+      "active": 133,
+      "countdown": 0,
+      "entry": 24,
+      "facing": 5,
+      "flags": 22,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 44343,
+      "active": 133,
+      "countdown": 0,
+      "entry": 28,
+      "facing": 5,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 44356,
+      "active": 133,
+      "countdown": 0,
+      "entry": 32,
+      "facing": 5,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 44343,
+      "active": 133,
+      "countdown": 0,
+      "entry": 36,
+      "facing": 5,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 44356,
+      "active": 133,
+      "countdown": 0,
+      "entry": 40,
+      "facing": 5,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 21362,
+      "active": 133,
+      "countdown": 0,
+      "entry": 44,
+      "facing": 5,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 21326,
+      "active": 133,
+      "countdown": 0,
+      "entry": 48,
+      "facing": 5,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 21331,
+      "active": 133,
+      "countdown": 0,
+      "entry": 52,
+      "facing": 5,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 21299,
+      "active": 133,
+      "countdown": 0,
+      "entry": 0,
+      "facing": 7,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 44328,
+      "active": 133,
+      "countdown": 0,
+      "entry": 4,
+      "facing": 7,
+      "flags": 56,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 44284,
+      "active": 133,
+      "countdown": 0,
+      "entry": 8,
+      "facing": 7,
+      "flags": 22,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 44284,
+      "active": 133,
+      "countdown": 0,
+      "entry": 12,
+      "facing": 7,
+      "flags": 22,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 44284,
+      "active": 133,
+      "countdown": 0,
+      "entry": 16,
+      "facing": 7,
+      "flags": 22,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 44284,
+      "active": 133,
+      "countdown": 0,
+      "entry": 20,
+      "facing": 7,
+      "flags": 22,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 44284,
+      "active": 133,
+      "countdown": 0,
+      "entry": 24,
+      "facing": 7,
+      "flags": 22,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 44343,
+      "active": 133,
+      "countdown": 0,
+      "entry": 28,
+      "facing": 7,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 44356,
+      "active": 133,
+      "countdown": 0,
+      "entry": 32,
+      "facing": 7,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 44343,
+      "active": 133,
+      "countdown": 0,
+      "entry": 36,
+      "facing": 7,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 44356,
+      "active": 133,
+      "countdown": 0,
+      "entry": 40,
+      "facing": 7,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 21362,
+      "active": 133,
+      "countdown": 0,
+      "entry": 44,
+      "facing": 7,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 21326,
+      "active": 133,
+      "countdown": 0,
+      "entry": 48,
+      "facing": 7,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 21331,
+      "active": 133,
+      "countdown": 0,
+      "entry": 52,
+      "facing": 7,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 21299,
+      "active": 133,
+      "countdown": 0,
+      "entry": 0,
+      "facing": 7,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 44328,
+      "active": 133,
+      "countdown": 0,
+      "entry": 4,
+      "facing": 7,
+      "flags": 56,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 44284,
+      "active": 133,
+      "countdown": 0,
+      "entry": 8,
+      "facing": 7,
+      "flags": 22,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 44284,
+      "active": 133,
+      "countdown": 0,
+      "entry": 12,
+      "facing": 7,
+      "flags": 22,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 44284,
+      "active": 133,
+      "countdown": 0,
+      "entry": 16,
+      "facing": 7,
+      "flags": 22,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 44284,
+      "active": 133,
+      "countdown": 0,
+      "entry": 20,
+      "facing": 7,
+      "flags": 22,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 44284,
+      "active": 133,
+      "countdown": 0,
+      "entry": 24,
+      "facing": 7,
+      "flags": 22,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 44343,
+      "active": 133,
+      "countdown": 0,
+      "entry": 28,
+      "facing": 7,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 44356,
+      "active": 133,
+      "countdown": 0,
+      "entry": 32,
+      "facing": 7,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 44343,
+      "active": 133,
+      "countdown": 0,
+      "entry": 36,
+      "facing": 7,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 44356,
+      "active": 133,
+      "countdown": 0,
+      "entry": 40,
+      "facing": 7,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 21362,
+      "active": 133,
+      "countdown": 0,
+      "entry": 44,
+      "facing": 7,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 21326,
+      "active": 133,
+      "countdown": 0,
+      "entry": 48,
+      "facing": 7,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 21331,
+      "active": 133,
+      "countdown": 0,
+      "entry": 52,
+      "facing": 7,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 21299,
+      "active": 133,
+      "countdown": 0,
+      "entry": 0,
+      "facing": 7,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 44328,
+      "active": 133,
+      "countdown": 0,
+      "entry": 4,
+      "facing": 7,
+      "flags": 56,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 44284,
+      "active": 133,
+      "countdown": 0,
+      "entry": 8,
+      "facing": 7,
+      "flags": 22,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 44284,
+      "active": 133,
+      "countdown": 0,
+      "entry": 12,
+      "facing": 7,
+      "flags": 22,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 44284,
+      "active": 133,
+      "countdown": 0,
+      "entry": 16,
+      "facing": 7,
+      "flags": 22,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 44284,
+      "active": 133,
+      "countdown": 0,
+      "entry": 20,
+      "facing": 7,
+      "flags": 22,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 44284,
+      "active": 133,
+      "countdown": 0,
+      "entry": 24,
+      "facing": 7,
+      "flags": 22,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 44343,
+      "active": 133,
+      "countdown": 0,
+      "entry": 28,
+      "facing": 7,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 44356,
+      "active": 133,
+      "countdown": 0,
+      "entry": 32,
+      "facing": 7,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 44343,
+      "active": 133,
+      "countdown": 0,
+      "entry": 36,
+      "facing": 7,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 44356,
+      "active": 133,
+      "countdown": 0,
+      "entry": 40,
+      "facing": 7,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 21362,
+      "active": 133,
+      "countdown": 0,
+      "entry": 44,
+      "facing": 7,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 21326,
+      "active": 133,
+      "countdown": 0,
+      "entry": 48,
+      "facing": 7,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 21331,
+      "active": 133,
+      "countdown": 0,
+      "entry": 52,
+      "facing": 7,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 21299,
+      "active": 133,
+      "countdown": 0,
+      "entry": 0,
+      "facing": 7,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 44328,
+      "active": 133,
+      "countdown": 0,
+      "entry": 4,
+      "facing": 7,
+      "flags": 56,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 44284,
+      "active": 133,
+      "countdown": 0,
+      "entry": 8,
+      "facing": 7,
+      "flags": 22,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 44284,
+      "active": 133,
+      "countdown": 0,
+      "entry": 12,
+      "facing": 7,
+      "flags": 22,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 44284,
+      "active": 133,
+      "countdown": 0,
+      "entry": 16,
+      "facing": 7,
+      "flags": 22,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 44284,
+      "active": 133,
+      "countdown": 0,
+      "entry": 20,
+      "facing": 7,
+      "flags": 22,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 44284,
+      "active": 133,
+      "countdown": 0,
+      "entry": 24,
+      "facing": 7,
+      "flags": 22,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 44343,
+      "active": 133,
+      "countdown": 0,
+      "entry": 28,
+      "facing": 7,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 44356,
+      "active": 133,
+      "countdown": 0,
+      "entry": 32,
+      "facing": 7,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 44343,
+      "active": 133,
+      "countdown": 0,
+      "entry": 36,
+      "facing": 7,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 44356,
+      "active": 133,
+      "countdown": 0,
+      "entry": 40,
+      "facing": 7,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 21362,
+      "active": 133,
+      "countdown": 0,
+      "entry": 44,
+      "facing": 7,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 21326,
+      "active": 133,
+      "countdown": 0,
+      "entry": 48,
+      "facing": 7,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 21331,
+      "active": 133,
+      "countdown": 0,
+      "entry": 52,
+      "facing": 7,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 21280,
+      "active": 136,
+      "countdown": 0,
+      "entry": 0,
+      "facing": 1,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 21318,
+      "active": 136,
+      "countdown": 0,
+      "entry": 4,
+      "facing": 1,
+      "flags": 48,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 21362,
+      "active": 136,
+      "countdown": 0,
+      "entry": 8,
+      "facing": 1,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 21377,
+      "active": 136,
+      "countdown": 0,
+      "entry": 12,
+      "facing": 1,
+      "flags": 22,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 21367,
+      "active": 136,
+      "countdown": 0,
+      "entry": 16,
+      "facing": 1,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 21372,
+      "active": 136,
+      "countdown": 0,
+      "entry": 20,
+      "facing": 1,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 21362,
+      "active": 136,
+      "countdown": 0,
+      "entry": 24,
+      "facing": 1,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 44160,
+      "active": 136,
+      "countdown": 0,
+      "entry": 28,
+      "facing": 1,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 44186,
+      "active": 136,
+      "countdown": 0,
+      "entry": 32,
+      "facing": 1,
+      "flags": 27,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 44232,
+      "active": 136,
+      "countdown": 0,
+      "entry": 36,
+      "facing": 1,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 44204,
+      "active": 136,
+      "countdown": 0,
+      "entry": 40,
+      "facing": 1,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 21280,
+      "active": 136,
+      "countdown": 0,
+      "entry": 44,
+      "facing": 1,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 21280,
+      "active": 136,
+      "countdown": 0,
+      "entry": 48,
+      "facing": 1,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 44262,
+      "active": 136,
+      "countdown": 0,
+      "entry": 52,
+      "facing": 1,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 21280,
+      "active": 136,
+      "countdown": 0,
+      "entry": 0,
+      "facing": 1,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 21318,
+      "active": 136,
+      "countdown": 0,
+      "entry": 4,
+      "facing": 1,
+      "flags": 48,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 21377,
+      "active": 136,
+      "countdown": 0,
+      "entry": 8,
+      "facing": 1,
+      "flags": 22,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 21377,
+      "active": 136,
+      "countdown": 0,
+      "entry": 12,
+      "facing": 1,
+      "flags": 22,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 21367,
+      "active": 136,
+      "countdown": 0,
+      "entry": 16,
+      "facing": 1,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 21372,
+      "active": 136,
+      "countdown": 0,
+      "entry": 20,
+      "facing": 1,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 21362,
+      "active": 136,
+      "countdown": 0,
+      "entry": 24,
+      "facing": 1,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 44160,
+      "active": 136,
+      "countdown": 0,
+      "entry": 28,
+      "facing": 1,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 44186,
+      "active": 136,
+      "countdown": 0,
+      "entry": 32,
+      "facing": 1,
+      "flags": 27,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 44232,
+      "active": 136,
+      "countdown": 0,
+      "entry": 36,
+      "facing": 1,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 44204,
+      "active": 136,
+      "countdown": 0,
+      "entry": 40,
+      "facing": 1,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 21280,
+      "active": 136,
+      "countdown": 0,
+      "entry": 44,
+      "facing": 1,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 21280,
+      "active": 136,
+      "countdown": 0,
+      "entry": 48,
+      "facing": 1,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 44262,
+      "active": 136,
+      "countdown": 0,
+      "entry": 52,
+      "facing": 1,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 21280,
+      "active": 136,
+      "countdown": 0,
+      "entry": 0,
+      "facing": 1,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 21318,
+      "active": 136,
+      "countdown": 0,
+      "entry": 4,
+      "facing": 1,
+      "flags": 48,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 21367,
+      "active": 136,
+      "countdown": 0,
+      "entry": 8,
+      "facing": 1,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 21377,
+      "active": 136,
+      "countdown": 0,
+      "entry": 12,
+      "facing": 1,
+      "flags": 22,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 21367,
+      "active": 136,
+      "countdown": 0,
+      "entry": 16,
+      "facing": 1,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 21372,
+      "active": 136,
+      "countdown": 0,
+      "entry": 20,
+      "facing": 1,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 21362,
+      "active": 136,
+      "countdown": 0,
+      "entry": 24,
+      "facing": 1,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 44160,
+      "active": 136,
+      "countdown": 0,
+      "entry": 28,
+      "facing": 1,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 44186,
+      "active": 136,
+      "countdown": 0,
+      "entry": 32,
+      "facing": 1,
+      "flags": 27,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 44232,
+      "active": 136,
+      "countdown": 0,
+      "entry": 36,
+      "facing": 1,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 44204,
+      "active": 136,
+      "countdown": 0,
+      "entry": 40,
+      "facing": 1,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 21280,
+      "active": 136,
+      "countdown": 0,
+      "entry": 44,
+      "facing": 1,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 21280,
+      "active": 136,
+      "countdown": 0,
+      "entry": 48,
+      "facing": 1,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 44262,
+      "active": 136,
+      "countdown": 0,
+      "entry": 52,
+      "facing": 1,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 21280,
+      "active": 136,
+      "countdown": 0,
+      "entry": 0,
+      "facing": 1,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 21318,
+      "active": 136,
+      "countdown": 0,
+      "entry": 4,
+      "facing": 1,
+      "flags": 48,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 21372,
+      "active": 136,
+      "countdown": 0,
+      "entry": 8,
+      "facing": 1,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 21377,
+      "active": 136,
+      "countdown": 0,
+      "entry": 12,
+      "facing": 1,
+      "flags": 22,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 21367,
+      "active": 136,
+      "countdown": 0,
+      "entry": 16,
+      "facing": 1,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 21372,
+      "active": 136,
+      "countdown": 0,
+      "entry": 20,
+      "facing": 1,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 21362,
+      "active": 136,
+      "countdown": 0,
+      "entry": 24,
+      "facing": 1,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 44160,
+      "active": 136,
+      "countdown": 0,
+      "entry": 28,
+      "facing": 1,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 44186,
+      "active": 136,
+      "countdown": 0,
+      "entry": 32,
+      "facing": 1,
+      "flags": 27,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 44232,
+      "active": 136,
+      "countdown": 0,
+      "entry": 36,
+      "facing": 1,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 44204,
+      "active": 136,
+      "countdown": 0,
+      "entry": 40,
+      "facing": 1,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 21280,
+      "active": 136,
+      "countdown": 0,
+      "entry": 44,
+      "facing": 1,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 21280,
+      "active": 136,
+      "countdown": 0,
+      "entry": 48,
+      "facing": 1,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 44262,
+      "active": 136,
+      "countdown": 0,
+      "entry": 52,
+      "facing": 1,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 21299,
+      "active": 136,
+      "countdown": 0,
+      "entry": 0,
+      "facing": 3,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 0
+    },
+    {
+      "action": 21322,
+      "active": 136,
+      "countdown": 0,
+      "entry": 4,
+      "facing": 3,
+      "flags": 48,
+      "mirror": 2,
+      "speed_traits": 0
+    },
+    {
+      "action": 21326,
+      "active": 136,
+      "countdown": 0,
+      "entry": 8,
+      "facing": 3,
+      "flags": 54,
+      "mirror": 2,
+      "speed_traits": 0
+    },
+    {
+      "action": 21341,
+      "active": 136,
+      "countdown": 0,
+      "entry": 12,
+      "facing": 3,
+      "flags": 22,
+      "mirror": 2,
+      "speed_traits": 0
+    },
+    {
+      "action": 21331,
+      "active": 136,
+      "countdown": 0,
+      "entry": 16,
+      "facing": 3,
+      "flags": 54,
+      "mirror": 2,
+      "speed_traits": 0
+    },
+    {
+      "action": 21336,
+      "active": 136,
+      "countdown": 0,
+      "entry": 20,
+      "facing": 3,
+      "flags": 54,
+      "mirror": 2,
+      "speed_traits": 0
+    },
+    {
+      "action": 21326,
+      "active": 136,
+      "countdown": 0,
+      "entry": 24,
+      "facing": 3,
+      "flags": 54,
+      "mirror": 2,
+      "speed_traits": 0
+    },
+    {
+      "action": 44173,
+      "active": 136,
+      "countdown": 0,
+      "entry": 28,
+      "facing": 3,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 0
+    },
+    {
+      "action": 44195,
+      "active": 136,
+      "countdown": 0,
+      "entry": 32,
+      "facing": 3,
+      "flags": 27,
+      "mirror": 2,
+      "speed_traits": 0
+    },
+    {
+      "action": 44247,
+      "active": 136,
+      "countdown": 0,
+      "entry": 36,
+      "facing": 3,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 0
+    },
+    {
+      "action": 44218,
+      "active": 136,
+      "countdown": 0,
+      "entry": 40,
+      "facing": 3,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 0
+    },
+    {
+      "action": 21280,
+      "active": 136,
+      "countdown": 0,
+      "entry": 44,
+      "facing": 3,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 0
+    },
+    {
+      "action": 21280,
+      "active": 136,
+      "countdown": 0,
+      "entry": 48,
+      "facing": 3,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 0
+    },
+    {
+      "action": 44273,
+      "active": 136,
+      "countdown": 0,
+      "entry": 52,
+      "facing": 3,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 0
+    },
+    {
+      "action": 21299,
+      "active": 136,
+      "countdown": 0,
+      "entry": 0,
+      "facing": 3,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 4
+    },
+    {
+      "action": 21322,
+      "active": 136,
+      "countdown": 0,
+      "entry": 4,
+      "facing": 3,
+      "flags": 48,
+      "mirror": 2,
+      "speed_traits": 4
+    },
+    {
+      "action": 21341,
+      "active": 136,
+      "countdown": 0,
+      "entry": 8,
+      "facing": 3,
+      "flags": 22,
+      "mirror": 2,
+      "speed_traits": 4
+    },
+    {
+      "action": 21341,
+      "active": 136,
+      "countdown": 0,
+      "entry": 12,
+      "facing": 3,
+      "flags": 22,
+      "mirror": 2,
+      "speed_traits": 4
+    },
+    {
+      "action": 21331,
+      "active": 136,
+      "countdown": 0,
+      "entry": 16,
+      "facing": 3,
+      "flags": 54,
+      "mirror": 2,
+      "speed_traits": 4
+    },
+    {
+      "action": 21336,
+      "active": 136,
+      "countdown": 0,
+      "entry": 20,
+      "facing": 3,
+      "flags": 54,
+      "mirror": 2,
+      "speed_traits": 4
+    },
+    {
+      "action": 21326,
+      "active": 136,
+      "countdown": 0,
+      "entry": 24,
+      "facing": 3,
+      "flags": 54,
+      "mirror": 2,
+      "speed_traits": 4
+    },
+    {
+      "action": 44173,
+      "active": 136,
+      "countdown": 0,
+      "entry": 28,
+      "facing": 3,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 4
+    },
+    {
+      "action": 44195,
+      "active": 136,
+      "countdown": 0,
+      "entry": 32,
+      "facing": 3,
+      "flags": 27,
+      "mirror": 2,
+      "speed_traits": 4
+    },
+    {
+      "action": 44247,
+      "active": 136,
+      "countdown": 0,
+      "entry": 36,
+      "facing": 3,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 4
+    },
+    {
+      "action": 44218,
+      "active": 136,
+      "countdown": 0,
+      "entry": 40,
+      "facing": 3,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 4
+    },
+    {
+      "action": 21280,
+      "active": 136,
+      "countdown": 0,
+      "entry": 44,
+      "facing": 3,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 4
+    },
+    {
+      "action": 21280,
+      "active": 136,
+      "countdown": 0,
+      "entry": 48,
+      "facing": 3,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 4
+    },
+    {
+      "action": 44273,
+      "active": 136,
+      "countdown": 0,
+      "entry": 52,
+      "facing": 3,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 4
+    },
+    {
+      "action": 21299,
+      "active": 136,
+      "countdown": 0,
+      "entry": 0,
+      "facing": 3,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 8
+    },
+    {
+      "action": 21322,
+      "active": 136,
+      "countdown": 0,
+      "entry": 4,
+      "facing": 3,
+      "flags": 48,
+      "mirror": 2,
+      "speed_traits": 8
+    },
+    {
+      "action": 21331,
+      "active": 136,
+      "countdown": 0,
+      "entry": 8,
+      "facing": 3,
+      "flags": 54,
+      "mirror": 2,
+      "speed_traits": 8
+    },
+    {
+      "action": 21341,
+      "active": 136,
+      "countdown": 0,
+      "entry": 12,
+      "facing": 3,
+      "flags": 22,
+      "mirror": 2,
+      "speed_traits": 8
+    },
+    {
+      "action": 21331,
+      "active": 136,
+      "countdown": 0,
+      "entry": 16,
+      "facing": 3,
+      "flags": 54,
+      "mirror": 2,
+      "speed_traits": 8
+    },
+    {
+      "action": 21336,
+      "active": 136,
+      "countdown": 0,
+      "entry": 20,
+      "facing": 3,
+      "flags": 54,
+      "mirror": 2,
+      "speed_traits": 8
+    },
+    {
+      "action": 21326,
+      "active": 136,
+      "countdown": 0,
+      "entry": 24,
+      "facing": 3,
+      "flags": 54,
+      "mirror": 2,
+      "speed_traits": 8
+    },
+    {
+      "action": 44173,
+      "active": 136,
+      "countdown": 0,
+      "entry": 28,
+      "facing": 3,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 8
+    },
+    {
+      "action": 44195,
+      "active": 136,
+      "countdown": 0,
+      "entry": 32,
+      "facing": 3,
+      "flags": 27,
+      "mirror": 2,
+      "speed_traits": 8
+    },
+    {
+      "action": 44247,
+      "active": 136,
+      "countdown": 0,
+      "entry": 36,
+      "facing": 3,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 8
+    },
+    {
+      "action": 44218,
+      "active": 136,
+      "countdown": 0,
+      "entry": 40,
+      "facing": 3,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 8
+    },
+    {
+      "action": 21280,
+      "active": 136,
+      "countdown": 0,
+      "entry": 44,
+      "facing": 3,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 8
+    },
+    {
+      "action": 21280,
+      "active": 136,
+      "countdown": 0,
+      "entry": 48,
+      "facing": 3,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 8
+    },
+    {
+      "action": 44273,
+      "active": 136,
+      "countdown": 0,
+      "entry": 52,
+      "facing": 3,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 8
+    },
+    {
+      "action": 21299,
+      "active": 136,
+      "countdown": 0,
+      "entry": 0,
+      "facing": 3,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 12
+    },
+    {
+      "action": 21322,
+      "active": 136,
+      "countdown": 0,
+      "entry": 4,
+      "facing": 3,
+      "flags": 48,
+      "mirror": 2,
+      "speed_traits": 12
+    },
+    {
+      "action": 21336,
+      "active": 136,
+      "countdown": 0,
+      "entry": 8,
+      "facing": 3,
+      "flags": 54,
+      "mirror": 2,
+      "speed_traits": 12
+    },
+    {
+      "action": 21341,
+      "active": 136,
+      "countdown": 0,
+      "entry": 12,
+      "facing": 3,
+      "flags": 22,
+      "mirror": 2,
+      "speed_traits": 12
+    },
+    {
+      "action": 21331,
+      "active": 136,
+      "countdown": 0,
+      "entry": 16,
+      "facing": 3,
+      "flags": 54,
+      "mirror": 2,
+      "speed_traits": 12
+    },
+    {
+      "action": 21336,
+      "active": 136,
+      "countdown": 0,
+      "entry": 20,
+      "facing": 3,
+      "flags": 54,
+      "mirror": 2,
+      "speed_traits": 12
+    },
+    {
+      "action": 21326,
+      "active": 136,
+      "countdown": 0,
+      "entry": 24,
+      "facing": 3,
+      "flags": 54,
+      "mirror": 2,
+      "speed_traits": 12
+    },
+    {
+      "action": 44173,
+      "active": 136,
+      "countdown": 0,
+      "entry": 28,
+      "facing": 3,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 12
+    },
+    {
+      "action": 44195,
+      "active": 136,
+      "countdown": 0,
+      "entry": 32,
+      "facing": 3,
+      "flags": 27,
+      "mirror": 2,
+      "speed_traits": 12
+    },
+    {
+      "action": 44247,
+      "active": 136,
+      "countdown": 0,
+      "entry": 36,
+      "facing": 3,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 12
+    },
+    {
+      "action": 44218,
+      "active": 136,
+      "countdown": 0,
+      "entry": 40,
+      "facing": 3,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 12
+    },
+    {
+      "action": 21280,
+      "active": 136,
+      "countdown": 0,
+      "entry": 44,
+      "facing": 3,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 12
+    },
+    {
+      "action": 21280,
+      "active": 136,
+      "countdown": 0,
+      "entry": 48,
+      "facing": 3,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 12
+    },
+    {
+      "action": 44273,
+      "active": 136,
+      "countdown": 0,
+      "entry": 52,
+      "facing": 3,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 12
+    },
+    {
+      "action": 21299,
+      "active": 136,
+      "countdown": 0,
+      "entry": 0,
+      "facing": 5,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 21322,
+      "active": 136,
+      "countdown": 0,
+      "entry": 4,
+      "facing": 5,
+      "flags": 48,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 21326,
+      "active": 136,
+      "countdown": 0,
+      "entry": 8,
+      "facing": 5,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 21341,
+      "active": 136,
+      "countdown": 0,
+      "entry": 12,
+      "facing": 5,
+      "flags": 22,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 21331,
+      "active": 136,
+      "countdown": 0,
+      "entry": 16,
+      "facing": 5,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 21336,
+      "active": 136,
+      "countdown": 0,
+      "entry": 20,
+      "facing": 5,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 21326,
+      "active": 136,
+      "countdown": 0,
+      "entry": 24,
+      "facing": 5,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 44173,
+      "active": 136,
+      "countdown": 0,
+      "entry": 28,
+      "facing": 5,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 44195,
+      "active": 136,
+      "countdown": 0,
+      "entry": 32,
+      "facing": 5,
+      "flags": 27,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 44247,
+      "active": 136,
+      "countdown": 0,
+      "entry": 36,
+      "facing": 5,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 44218,
+      "active": 136,
+      "countdown": 0,
+      "entry": 40,
+      "facing": 5,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 21280,
+      "active": 136,
+      "countdown": 0,
+      "entry": 44,
+      "facing": 5,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 21280,
+      "active": 136,
+      "countdown": 0,
+      "entry": 48,
+      "facing": 5,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 44273,
+      "active": 136,
+      "countdown": 0,
+      "entry": 52,
+      "facing": 5,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 0
+    },
+    {
+      "action": 21299,
+      "active": 136,
+      "countdown": 0,
+      "entry": 0,
+      "facing": 5,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 21322,
+      "active": 136,
+      "countdown": 0,
+      "entry": 4,
+      "facing": 5,
+      "flags": 48,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 21341,
+      "active": 136,
+      "countdown": 0,
+      "entry": 8,
+      "facing": 5,
+      "flags": 22,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 21341,
+      "active": 136,
+      "countdown": 0,
+      "entry": 12,
+      "facing": 5,
+      "flags": 22,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 21331,
+      "active": 136,
+      "countdown": 0,
+      "entry": 16,
+      "facing": 5,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 21336,
+      "active": 136,
+      "countdown": 0,
+      "entry": 20,
+      "facing": 5,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 21326,
+      "active": 136,
+      "countdown": 0,
+      "entry": 24,
+      "facing": 5,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 44173,
+      "active": 136,
+      "countdown": 0,
+      "entry": 28,
+      "facing": 5,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 44195,
+      "active": 136,
+      "countdown": 0,
+      "entry": 32,
+      "facing": 5,
+      "flags": 27,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 44247,
+      "active": 136,
+      "countdown": 0,
+      "entry": 36,
+      "facing": 5,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 44218,
+      "active": 136,
+      "countdown": 0,
+      "entry": 40,
+      "facing": 5,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 21280,
+      "active": 136,
+      "countdown": 0,
+      "entry": 44,
+      "facing": 5,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 21280,
+      "active": 136,
+      "countdown": 0,
+      "entry": 48,
+      "facing": 5,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 44273,
+      "active": 136,
+      "countdown": 0,
+      "entry": 52,
+      "facing": 5,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 4
+    },
+    {
+      "action": 21299,
+      "active": 136,
+      "countdown": 0,
+      "entry": 0,
+      "facing": 5,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 21322,
+      "active": 136,
+      "countdown": 0,
+      "entry": 4,
+      "facing": 5,
+      "flags": 48,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 21331,
+      "active": 136,
+      "countdown": 0,
+      "entry": 8,
+      "facing": 5,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 21341,
+      "active": 136,
+      "countdown": 0,
+      "entry": 12,
+      "facing": 5,
+      "flags": 22,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 21331,
+      "active": 136,
+      "countdown": 0,
+      "entry": 16,
+      "facing": 5,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 21336,
+      "active": 136,
+      "countdown": 0,
+      "entry": 20,
+      "facing": 5,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 21326,
+      "active": 136,
+      "countdown": 0,
+      "entry": 24,
+      "facing": 5,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 44173,
+      "active": 136,
+      "countdown": 0,
+      "entry": 28,
+      "facing": 5,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 44195,
+      "active": 136,
+      "countdown": 0,
+      "entry": 32,
+      "facing": 5,
+      "flags": 27,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 44247,
+      "active": 136,
+      "countdown": 0,
+      "entry": 36,
+      "facing": 5,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 44218,
+      "active": 136,
+      "countdown": 0,
+      "entry": 40,
+      "facing": 5,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 21280,
+      "active": 136,
+      "countdown": 0,
+      "entry": 44,
+      "facing": 5,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 21280,
+      "active": 136,
+      "countdown": 0,
+      "entry": 48,
+      "facing": 5,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 44273,
+      "active": 136,
+      "countdown": 0,
+      "entry": 52,
+      "facing": 5,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 8
+    },
+    {
+      "action": 21299,
+      "active": 136,
+      "countdown": 0,
+      "entry": 0,
+      "facing": 5,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 21322,
+      "active": 136,
+      "countdown": 0,
+      "entry": 4,
+      "facing": 5,
+      "flags": 48,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 21336,
+      "active": 136,
+      "countdown": 0,
+      "entry": 8,
+      "facing": 5,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 21341,
+      "active": 136,
+      "countdown": 0,
+      "entry": 12,
+      "facing": 5,
+      "flags": 22,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 21331,
+      "active": 136,
+      "countdown": 0,
+      "entry": 16,
+      "facing": 5,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 21336,
+      "active": 136,
+      "countdown": 0,
+      "entry": 20,
+      "facing": 5,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 21326,
+      "active": 136,
+      "countdown": 0,
+      "entry": 24,
+      "facing": 5,
+      "flags": 54,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 44173,
+      "active": 136,
+      "countdown": 0,
+      "entry": 28,
+      "facing": 5,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 44195,
+      "active": 136,
+      "countdown": 0,
+      "entry": 32,
+      "facing": 5,
+      "flags": 27,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 44247,
+      "active": 136,
+      "countdown": 0,
+      "entry": 36,
+      "facing": 5,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 44218,
+      "active": 136,
+      "countdown": 0,
+      "entry": 40,
+      "facing": 5,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 21280,
+      "active": 136,
+      "countdown": 0,
+      "entry": 44,
+      "facing": 5,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 21280,
+      "active": 136,
+      "countdown": 0,
+      "entry": 48,
+      "facing": 5,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 44273,
+      "active": 136,
+      "countdown": 0,
+      "entry": 52,
+      "facing": 5,
+      "flags": 26,
+      "mirror": 0,
+      "speed_traits": 12
+    },
+    {
+      "action": 21280,
+      "active": 136,
+      "countdown": 0,
+      "entry": 0,
+      "facing": 7,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 0
+    },
+    {
+      "action": 21318,
+      "active": 136,
+      "countdown": 0,
+      "entry": 4,
+      "facing": 7,
+      "flags": 48,
+      "mirror": 2,
+      "speed_traits": 0
+    },
+    {
+      "action": 21362,
+      "active": 136,
+      "countdown": 0,
+      "entry": 8,
+      "facing": 7,
+      "flags": 54,
+      "mirror": 2,
+      "speed_traits": 0
+    },
+    {
+      "action": 21377,
+      "active": 136,
+      "countdown": 0,
+      "entry": 12,
+      "facing": 7,
+      "flags": 22,
+      "mirror": 2,
+      "speed_traits": 0
+    },
+    {
+      "action": 21367,
+      "active": 136,
+      "countdown": 0,
+      "entry": 16,
+      "facing": 7,
+      "flags": 54,
+      "mirror": 2,
+      "speed_traits": 0
+    },
+    {
+      "action": 21372,
+      "active": 136,
+      "countdown": 0,
+      "entry": 20,
+      "facing": 7,
+      "flags": 54,
+      "mirror": 2,
+      "speed_traits": 0
+    },
+    {
+      "action": 21362,
+      "active": 136,
+      "countdown": 0,
+      "entry": 24,
+      "facing": 7,
+      "flags": 54,
+      "mirror": 2,
+      "speed_traits": 0
+    },
+    {
+      "action": 44160,
+      "active": 136,
+      "countdown": 0,
+      "entry": 28,
+      "facing": 7,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 0
+    },
+    {
+      "action": 44186,
+      "active": 136,
+      "countdown": 0,
+      "entry": 32,
+      "facing": 7,
+      "flags": 27,
+      "mirror": 2,
+      "speed_traits": 0
+    },
+    {
+      "action": 44232,
+      "active": 136,
+      "countdown": 0,
+      "entry": 36,
+      "facing": 7,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 0
+    },
+    {
+      "action": 44204,
+      "active": 136,
+      "countdown": 0,
+      "entry": 40,
+      "facing": 7,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 0
+    },
+    {
+      "action": 21280,
+      "active": 136,
+      "countdown": 0,
+      "entry": 44,
+      "facing": 7,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 0
+    },
+    {
+      "action": 21280,
+      "active": 136,
+      "countdown": 0,
+      "entry": 48,
+      "facing": 7,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 0
+    },
+    {
+      "action": 44262,
+      "active": 136,
+      "countdown": 0,
+      "entry": 52,
+      "facing": 7,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 0
+    },
+    {
+      "action": 21280,
+      "active": 136,
+      "countdown": 0,
+      "entry": 0,
+      "facing": 7,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 4
+    },
+    {
+      "action": 21318,
+      "active": 136,
+      "countdown": 0,
+      "entry": 4,
+      "facing": 7,
+      "flags": 48,
+      "mirror": 2,
+      "speed_traits": 4
+    },
+    {
+      "action": 21377,
+      "active": 136,
+      "countdown": 0,
+      "entry": 8,
+      "facing": 7,
+      "flags": 22,
+      "mirror": 2,
+      "speed_traits": 4
+    },
+    {
+      "action": 21377,
+      "active": 136,
+      "countdown": 0,
+      "entry": 12,
+      "facing": 7,
+      "flags": 22,
+      "mirror": 2,
+      "speed_traits": 4
+    },
+    {
+      "action": 21367,
+      "active": 136,
+      "countdown": 0,
+      "entry": 16,
+      "facing": 7,
+      "flags": 54,
+      "mirror": 2,
+      "speed_traits": 4
+    },
+    {
+      "action": 21372,
+      "active": 136,
+      "countdown": 0,
+      "entry": 20,
+      "facing": 7,
+      "flags": 54,
+      "mirror": 2,
+      "speed_traits": 4
+    },
+    {
+      "action": 21362,
+      "active": 136,
+      "countdown": 0,
+      "entry": 24,
+      "facing": 7,
+      "flags": 54,
+      "mirror": 2,
+      "speed_traits": 4
+    },
+    {
+      "action": 44160,
+      "active": 136,
+      "countdown": 0,
+      "entry": 28,
+      "facing": 7,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 4
+    },
+    {
+      "action": 44186,
+      "active": 136,
+      "countdown": 0,
+      "entry": 32,
+      "facing": 7,
+      "flags": 27,
+      "mirror": 2,
+      "speed_traits": 4
+    },
+    {
+      "action": 44232,
+      "active": 136,
+      "countdown": 0,
+      "entry": 36,
+      "facing": 7,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 4
+    },
+    {
+      "action": 44204,
+      "active": 136,
+      "countdown": 0,
+      "entry": 40,
+      "facing": 7,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 4
+    },
+    {
+      "action": 21280,
+      "active": 136,
+      "countdown": 0,
+      "entry": 44,
+      "facing": 7,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 4
+    },
+    {
+      "action": 21280,
+      "active": 136,
+      "countdown": 0,
+      "entry": 48,
+      "facing": 7,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 4
+    },
+    {
+      "action": 44262,
+      "active": 136,
+      "countdown": 0,
+      "entry": 52,
+      "facing": 7,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 4
+    },
+    {
+      "action": 21280,
+      "active": 136,
+      "countdown": 0,
+      "entry": 0,
+      "facing": 7,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 8
+    },
+    {
+      "action": 21318,
+      "active": 136,
+      "countdown": 0,
+      "entry": 4,
+      "facing": 7,
+      "flags": 48,
+      "mirror": 2,
+      "speed_traits": 8
+    },
+    {
+      "action": 21367,
+      "active": 136,
+      "countdown": 0,
+      "entry": 8,
+      "facing": 7,
+      "flags": 54,
+      "mirror": 2,
+      "speed_traits": 8
+    },
+    {
+      "action": 21377,
+      "active": 136,
+      "countdown": 0,
+      "entry": 12,
+      "facing": 7,
+      "flags": 22,
+      "mirror": 2,
+      "speed_traits": 8
+    },
+    {
+      "action": 21367,
+      "active": 136,
+      "countdown": 0,
+      "entry": 16,
+      "facing": 7,
+      "flags": 54,
+      "mirror": 2,
+      "speed_traits": 8
+    },
+    {
+      "action": 21372,
+      "active": 136,
+      "countdown": 0,
+      "entry": 20,
+      "facing": 7,
+      "flags": 54,
+      "mirror": 2,
+      "speed_traits": 8
+    },
+    {
+      "action": 21362,
+      "active": 136,
+      "countdown": 0,
+      "entry": 24,
+      "facing": 7,
+      "flags": 54,
+      "mirror": 2,
+      "speed_traits": 8
+    },
+    {
+      "action": 44160,
+      "active": 136,
+      "countdown": 0,
+      "entry": 28,
+      "facing": 7,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 8
+    },
+    {
+      "action": 44186,
+      "active": 136,
+      "countdown": 0,
+      "entry": 32,
+      "facing": 7,
+      "flags": 27,
+      "mirror": 2,
+      "speed_traits": 8
+    },
+    {
+      "action": 44232,
+      "active": 136,
+      "countdown": 0,
+      "entry": 36,
+      "facing": 7,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 8
+    },
+    {
+      "action": 44204,
+      "active": 136,
+      "countdown": 0,
+      "entry": 40,
+      "facing": 7,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 8
+    },
+    {
+      "action": 21280,
+      "active": 136,
+      "countdown": 0,
+      "entry": 44,
+      "facing": 7,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 8
+    },
+    {
+      "action": 21280,
+      "active": 136,
+      "countdown": 0,
+      "entry": 48,
+      "facing": 7,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 8
+    },
+    {
+      "action": 44262,
+      "active": 136,
+      "countdown": 0,
+      "entry": 52,
+      "facing": 7,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 8
+    },
+    {
+      "action": 21280,
+      "active": 136,
+      "countdown": 0,
+      "entry": 0,
+      "facing": 7,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 12
+    },
+    {
+      "action": 21318,
+      "active": 136,
+      "countdown": 0,
+      "entry": 4,
+      "facing": 7,
+      "flags": 48,
+      "mirror": 2,
+      "speed_traits": 12
+    },
+    {
+      "action": 21372,
+      "active": 136,
+      "countdown": 0,
+      "entry": 8,
+      "facing": 7,
+      "flags": 54,
+      "mirror": 2,
+      "speed_traits": 12
+    },
+    {
+      "action": 21377,
+      "active": 136,
+      "countdown": 0,
+      "entry": 12,
+      "facing": 7,
+      "flags": 22,
+      "mirror": 2,
+      "speed_traits": 12
+    },
+    {
+      "action": 21367,
+      "active": 136,
+      "countdown": 0,
+      "entry": 16,
+      "facing": 7,
+      "flags": 54,
+      "mirror": 2,
+      "speed_traits": 12
+    },
+    {
+      "action": 21372,
+      "active": 136,
+      "countdown": 0,
+      "entry": 20,
+      "facing": 7,
+      "flags": 54,
+      "mirror": 2,
+      "speed_traits": 12
+    },
+    {
+      "action": 21362,
+      "active": 136,
+      "countdown": 0,
+      "entry": 24,
+      "facing": 7,
+      "flags": 54,
+      "mirror": 2,
+      "speed_traits": 12
+    },
+    {
+      "action": 44160,
+      "active": 136,
+      "countdown": 0,
+      "entry": 28,
+      "facing": 7,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 12
+    },
+    {
+      "action": 44186,
+      "active": 136,
+      "countdown": 0,
+      "entry": 32,
+      "facing": 7,
+      "flags": 27,
+      "mirror": 2,
+      "speed_traits": 12
+    },
+    {
+      "action": 44232,
+      "active": 136,
+      "countdown": 0,
+      "entry": 36,
+      "facing": 7,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 12
+    },
+    {
+      "action": 44204,
+      "active": 136,
+      "countdown": 0,
+      "entry": 40,
+      "facing": 7,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 12
+    },
+    {
+      "action": 21280,
+      "active": 136,
+      "countdown": 0,
+      "entry": 44,
+      "facing": 7,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 12
+    },
+    {
+      "action": 21280,
+      "active": 136,
+      "countdown": 0,
+      "entry": 48,
+      "facing": 7,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 12
+    },
+    {
+      "action": 44262,
+      "active": 136,
+      "countdown": 0,
+      "entry": 52,
+      "facing": 7,
+      "flags": 26,
+      "mirror": 2,
+      "speed_traits": 12
+    }
+  ]
+}
