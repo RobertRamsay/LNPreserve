@@ -3,6 +3,8 @@ function LN1Play() constructor {
     data = json_parse(buffer_read(_buffer, buffer_text)); buffer_delete(_buffer);
     _buffer = buffer_load("play/ln1/world.json");
     world = json_parse(buffer_read(_buffer, buffer_text)); buffer_delete(_buffer);
+    _buffer = buffer_load("play/ln1/navigation.json");
+    navigation = json_parse(buffer_read(_buffer, buffer_text)); buffer_delete(_buffer);
     player = data.initial;
     player.display_frame = player.frame;
     player.requests = [];
@@ -55,7 +57,12 @@ function ln1_play_exit(_g) {
     var _room = _g.world.rooms[_g.room_id - 1], _exit = 0;
     while (_exit < 4 && _perimeter >= _room.exit_thresholds[_exit]) _exit++;
     if (_exit == 4) _exit = 0;
-    var _entry = _room.exits[_exit], _room_id = _entry >> 2;
+    ln1_play_travel(_g, _room.exits[_exit]);
+}
+
+/// Shared destination/entrance handling for an ordinary exit and scene testing.
+function ln1_play_travel(_g, _entry) {
+    var _p = _g.player, _room_id = _entry >> 2;
     if (_room_id == 0) { array_push(_g.pending_events, "level_complete"); return; }
     _g.last_entry = _entry;
     var _spawn = _g.world.entry_index[_entry];
@@ -242,7 +249,7 @@ function ln1_play_draw(_game, _paused) {
     draw_text(160, 36, "THE LAST NINJA — THE WASTELANDS");
     draw_text(930, 36, "Room " + string(_game.room_id));
     draw_text(160, 700, "WASD  Move    J + direction  Action    Space  Weapon    1 2 3 4  Function keys");
-    draw_text(160, 732, "Wastelands gameplay in progress. Home restarts. Trilogy conversion is incomplete.");
+    draw_text(160, 728, "Arrows: Right NE / Down SE / Left SW / Up NW    F11 Scenes    Home Restart");
     draw_text(160, 760, "Health " + string(_game.player_health) + "    Lives " + string(_game.lives_left));
     if (_game.prayer_phase > 0) draw_text(710, 760, "S + D  Finish prayer");
     if (_game.game_over) { draw_set_colour(c_white); draw_text(510, 54, "GAME OVER — HOME TO RESTART"); }

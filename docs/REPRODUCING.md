@@ -37,6 +37,7 @@ The preparation substitutes the crack-title space input and declines all six tra
 python tools/decode_graphics.py
 python tools/extract_ln1_actors.py
 python tools/make_ln1_control_vectors.py
+python tools/export_ln1_navigation.py
 python tools/build_project.py
 python tools/validate_project.py
 ./tools/compile.ps1

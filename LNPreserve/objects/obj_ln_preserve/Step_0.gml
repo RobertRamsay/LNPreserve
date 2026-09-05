@@ -2,8 +2,13 @@ try {
 elapsed_us += int64(delta_time);
 // Input is stamped at observation time, not retroactively applied to host-stall debt.
 input_state.sample((elapsed_us div 1000000) * clock.hz + ((elapsed_us mod 1000000) * clock.hz) div 1000000);
-play.timer.advance(delta_time, tick_native);
-if (keyboard_check_pressed(vk_f12)) workbench = !workbench;
+if (keyboard_check_pressed(vk_f12)) { workbench = !workbench; scene_test.menu = false; }
+if (keyboard_check_pressed(vk_f11)) {
+    workbench = false; scene_test.menu = !scene_test.menu;
+    if (scene_test.menu && !scene_test.preview) {
+        scene_test.game = 1; scene_test.level_index = 0; scene_test.scene_index = play.room_id - 1;
+    }
+}
 if (keyboard_check_pressed(vk_home)) {
     var _transport = play.timer;
     if (surface_exists(play.stage_surface)) surface_free(play.stage_surface);
@@ -11,7 +16,10 @@ if (keyboard_check_pressed(vk_home)) {
     var _control_buffer = buffer_load("actors/ln1/initial_control_state.json");
     control_state_ln1 = json_parse(buffer_read(_control_buffer,buffer_text)); buffer_delete(_control_buffer);
     play.controls = control_state_ln1;
+    scene_test.menu = false; scene_test.preview = false; scene_test.message_us = 0;
 }
+play.timer.advance(delta_time, tick_native);
+if (!workbench) ln_scene_test_step(scene_test, play);
 if (workbench) {
 var _datasets = array_length(catalog.datasets);
 if (keyboard_check_pressed(ord("Q"))) { dataset_index = (dataset_index + _datasets - 1) mod _datasets; asset_index = 0; }

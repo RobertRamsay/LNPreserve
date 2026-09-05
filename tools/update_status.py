@@ -34,6 +34,10 @@ def main():
         dict(name='LN1 enemy decisions and animation',address='$6a48/$5b54',verification='7680 source-code updates with shared random returns; dispatch and hardware read timing excluded'),
         dict(name='LN1 melee hit testing',address='$7ecc',verification='6843 valid-attack samples; damage dispatch and whole combat replay excluded'),
         dict(name='LN1 river sinking timer',address='$bee3/$56f7',verification='1536 tick/clock states including wrap; rendering and interrupt timing excluded')])
+    status['scene_testing']=dict(arrow_mapping=dict(right='NE',down='SE',left='SW',up='NW'),
+        playable_rooms=25,playable_scope='LN1 Wastelands only',level_datasets_in_picker=18,
+        remaining_levels='Scenery previews; gameplay and directional exits unavailable',
+        original_exit_routine_vectors=54,whole_game_test_coverage=False)
     for name in ('runtime_checks','structural_checks','ln1_actor_decoder_checks','asset_cleanup','asset_rebuild_check'):
         path=ROOT/'evidence'/f'{name}.json'
         if path.exists():

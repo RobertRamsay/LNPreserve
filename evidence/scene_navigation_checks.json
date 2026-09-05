@@ -1,0 +1,18 @@
+{
+  "direction_keys": {
+    "right": "NE",
+    "down": "SE",
+    "left": "SW",
+    "up": "NW"
+  },
+  "playable_scope": "LN1 Wastelands only",
+  "rooms": 25,
+  "room_to_room_routes": 52,
+  "original_exit_cases": 54,
+  "original_exit_routine": "$7478",
+  "source_ram_sha256": "d30626608f888132d2bad044092f667df2e8f4693dc82b95f1218c65da848b7d",
+  "native_navigation_checks_passed": true,
+  "picker_level_datasets": 18,
+  "other_levels": "Scenery previews only; movement, collision, objects, combat and directional exits are not connected",
+  "original_gameplay_parity": false
+}

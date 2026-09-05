@@ -29,6 +29,7 @@ if (selftest) {
     }
 }
 workbench = false;
+scene_test = new LNSceneTest(catalog);
 play = new LN1Play();
 var _control_buffer = buffer_load("actors/ln1/initial_control_state.json");
 control_state_ln1 = json_parse(buffer_read(_control_buffer,buffer_text));
@@ -38,6 +39,20 @@ ln_music_play(1, "wastelands", false);
 tick_native = function(_from, _to, _frame) {
     input_state.consume(_to);
     var _rows = ln1_control_rows(input_state);
+    // Keep the existing workbench probe responsive while gameplay is paused.
+    probe_x = clamp(probe_x + 2 * (input_state.held[LNKey.Right] - input_state.held[LNKey.Left]), 0, 236);
+    probe_y = clamp(probe_y + (input_state.held[LNKey.Down] - input_state.held[LNKey.Up]), 40, 160);
+    probe_jump = input_state.held[LNKey.Fire] ? 16 : 0;
+    if (input_state.pressed[LNKey.Weapon]) weapon_presses++;
+    for (var _i = 0; _i < 4; _i++) {
+        if (input_state.pressed[LNKey.F1 + _i]) function_presses[_i]++;
+    }
+    if (workbench || scene_test.menu || scene_test.preview) {
+        // Browsing pauses gameplay and consumes selection edges, so closing the
+        // picker cannot replay keys that were pressed while a preview was open.
+        control_state_ln1.previous = [_rows[0]&16,_rows[0]&32,_rows[0]&64,_rows[0]&8,_rows[1]&16];
+        return;
+    }
     var _music_before = control_state_ln1.music;
     ln1_control_effects = ln1_controls_update(control_state_ln1,_rows[0],_rows[1]);
     for (var _i = 0; _i < array_length(ln1_control_effects); _i++) {
@@ -52,12 +67,4 @@ tick_native = function(_from, _to, _frame) {
     play.player.selected_weapon = control_state_ln1.weapon;
     if (control_state_ln1.pause == 0)
         ln1_play_tick(play, input_state.joystick() ^ 255);
-    // This movable rectangle is a mask probe, not reconstructed Armakuni logic.
-    probe_x = clamp(probe_x + 2 * (input_state.held[LNKey.Right] - input_state.held[LNKey.Left]), 0, 236);
-    probe_y = clamp(probe_y + (input_state.held[LNKey.Down] - input_state.held[LNKey.Up]), 40, 160);
-    if (input_state.pressed[LNKey.Weapon]) weapon_presses++;
-    for (var _i = 0; _i < 4; _i++) {
-        if (input_state.pressed[LNKey.F1 + _i]) function_presses[_i]++;
-    }
-    probe_jump = input_state.held[LNKey.Fire] ? 16 : 0;
 };

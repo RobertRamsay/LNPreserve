@@ -12,5 +12,6 @@
   "ln1_combat_vectors_pass": true,
   "ln1_world_smoke_pass": true,
   "ln1_feedback_pass": true,
-  "ln1_water_vectors_pass": true
+  "ln1_water_vectors_pass": true,
+  "scene_navigation_pass": true
 }

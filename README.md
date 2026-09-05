@@ -35,9 +35,15 @@ This is **not a completed first level**. Projectile behavior, special enemies, s
 | 2 / 3 | Next / previous available inventory item |
 | 4 | Pause |
 | Home | Restart this prototype |
+| Right / Down / Left / Up arrows | Test exits: NE / SE / SW / NW |
+| F11 | Choose a game, level and scene |
 | F12 | Optional conversion workbench |
 
 Music assets are still named silent placeholders. Replace the corresponding WAV in GameMaker to supply music. Sound effects are not recovered.
+
+The arrow shortcuts follow the Wastelands' real room links and use each destination's original entrance position and facing. One press performs one jump. Missing directions leave the current room unchanged. Inventory, living-player health and saved enemy wounds survive; entry flashes restart. Test jumps cancel an unfinished action, prayer or death, and restore a dead player so testing can continue. They are development controls, not original gameplay behavior.
+
+F11's scene picker exposes the available scenes in all 18 level datasets across the three games. Only LN1 Wastelands currently supports gameplay testing. Other levels open clearly marked scenery previews; Page Up/Down browses those previews and Escape returns to gameplay. Movement, collision, objects, combat and directional exits for those levels remain unconnected. Gameplay pauses while the picker, a preview or the workbench is open.
 
 ## Verification
 
@@ -48,6 +54,7 @@ Actual compiled GML passes comparisons against offline execution of original mac
 - 6,843 melee hit tests: directional ranges and defensive states.
 - 1,024 selection-key transitions and 192 sprite decompressions.
 - 1,536 river sinking timer states, including timer wrap and immediate first descent.
+- 54 original exit-routine cases for test navigation, including original spawn position/facing; all 25 Wastelands rooms are reachable through directional shortcuts.
 
 A further 660-update integration check crosses the first original exit and runs an enemy encounter. Feedback regressions check pickup expiry across clock wrap, scene-entry flash state, enemy damage/death persistence, armed/unarmed prayer, sinking and stale death frames after respawn. GPU tests check scenery masking, transparent holes and the waterline cutoff. These checks **do not certify full gameplay, complete combat dispatch, sprite composition, hardware random timing or cycle accuracy**. See [evidence/STATUS.json](evidence/STATUS.json) and [docs/ACCURACY.md](docs/ACCURACY.md).
 

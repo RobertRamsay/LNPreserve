@@ -28,6 +28,10 @@ Input observations enter a queue with integer cycle timestamps. Catch-up updates
 
 Host keyboard polling cannot recover key transitions that occur entirely between two host observations. A reference acceptance replay must inject its recorded transitions directly into the queue; it must not depend on interactive wall-clock input.
 
+Directional testing uses separate host key edges: Right=NE, Down=SE, Left=SW, Up=NW. Those keys never enter the original joystick. Wastelands directions are derived from reciprocal entrance positions/facings, excluding padded exit-table defaults that do not represent connected doors. Each selected boundary point runs the original $7478 routine offline; 54 cases check destination, entrance, position and facing against compiled GML. Both ordinary exits and test jumps share `ln1_play_travel`. Test jumps additionally cancel transient actions and recover dead players, deliberately differing from gameplay. A graph check establishes that all 25 Wastelands rooms are reachable; persistence checks retain items and enemy wounds. These tests do not certify LN2/LN3 gameplay or cycle timing.
+
+The F11 picker lists each decoded scene identity, including aliases of shared artwork, across the 18 level datasets. Only Wastelands is marked playable. Remaining levels display scenery with gameplay and directional navigation explicitly unavailable. The native game stops updating during picker/preview/workbench use, while input edges are consumed to prevent queued menu inputs from affecting it on return.
+
 ## Depth and masking
 
 Use two independent actor coordinates: its ground-contact position and its displayed height. Sort ordinary props and actors by the ground position; jumping changes displayed height without changing which side of a prop the actor occupies.

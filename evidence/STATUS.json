@@ -94,6 +94,20 @@
     "Whole-game cycle-stamped reference traces and native comparisons",
     "Real music and sound effects; silent named placeholders are supplied"
   ],
+  "scene_testing": {
+    "arrow_mapping": {
+      "right": "NE",
+      "down": "SE",
+      "left": "SW",
+      "up": "NW"
+    },
+    "playable_rooms": 25,
+    "playable_scope": "LN1 Wastelands only",
+    "level_datasets_in_picker": 18,
+    "remaining_levels": "Scenery previews; gameplay and directional exits unavailable",
+    "original_exit_routine_vectors": 54,
+    "whole_game_test_coverage": false
+  },
   "runtime_checks": {
     "command": "GameMaker VM --selftest",
     "original_gameplay_parity": "not_tested",
@@ -108,7 +122,8 @@
     "ln1_combat_vectors_pass": true,
     "ln1_world_smoke_pass": true,
     "ln1_feedback_pass": true,
-    "ln1_water_vectors_pass": true
+    "ln1_water_vectors_pass": true,
+    "scene_navigation_pass": true
   },
   "structural_checks": {
     "tests_run": 8,

@@ -1,0 +1,263 @@
+{
+  "schema": 1,
+  "directions": [
+    "NE",
+    "SE",
+    "SW",
+    "NW"
+  ],
+  "rooms": [
+    {
+      "id": 1,
+      "entries": [
+        9,
+        57,
+        -1,
+        -1
+      ],
+      "spawn_entry": 4
+    },
+    {
+      "id": 2,
+      "entries": [
+        13,
+        -1,
+        4,
+        -1
+      ],
+      "spawn_entry": 8
+    },
+    {
+      "id": 3,
+      "entries": [
+        16,
+        -1,
+        8,
+        61
+      ],
+      "spawn_entry": 12
+    },
+    {
+      "id": 4,
+      "entries": [
+        -1,
+        -1,
+        12,
+        21
+      ],
+      "spawn_entry": 16
+    },
+    {
+      "id": 5,
+      "entries": [
+        24,
+        -1,
+        17,
+        -1
+      ],
+      "spawn_entry": 20
+    },
+    {
+      "id": 6,
+      "entries": [
+        29,
+        -1,
+        20,
+        -1
+      ],
+      "spawn_entry": 25
+    },
+    {
+      "id": 7,
+      "entries": [
+        32,
+        -1,
+        25,
+        -1
+      ],
+      "spawn_entry": 28
+    },
+    {
+      "id": 8,
+      "entries": [
+        -1,
+        -1,
+        28,
+        37
+      ],
+      "spawn_entry": 32
+    },
+    {
+      "id": 9,
+      "entries": [
+        41,
+        33,
+        -1,
+        -1
+      ],
+      "spawn_entry": 36
+    },
+    {
+      "id": 10,
+      "entries": [
+        45,
+        -1,
+        36,
+        -1
+      ],
+      "spawn_entry": 40
+    },
+    {
+      "id": 11,
+      "entries": [
+        48,
+        -1,
+        40,
+        -1
+      ],
+      "spawn_entry": 44
+    },
+    {
+      "id": 12,
+      "entries": [
+        -1,
+        -1,
+        44,
+        53
+      ],
+      "spawn_entry": 48
+    },
+    {
+      "id": 13,
+      "entries": [
+        56,
+        49,
+        -1,
+        -1
+      ],
+      "spawn_entry": 52
+    },
+    {
+      "id": 14,
+      "entries": [
+        -1,
+        -1,
+        52,
+        5
+      ],
+      "spawn_entry": 56
+    },
+    {
+      "id": 15,
+      "entries": [
+        65,
+        14,
+        -1,
+        -1
+      ],
+      "spawn_entry": 60
+    },
+    {
+      "id": 16,
+      "entries": [
+        -1,
+        69,
+        60,
+        -1
+      ],
+      "spawn_entry": 64
+    },
+    {
+      "id": 17,
+      "entries": [
+        74,
+        -1,
+        64,
+        -1
+      ],
+      "spawn_entry": 68
+    },
+    {
+      "id": 18,
+      "entries": [
+        77,
+        85,
+        68,
+        -1
+      ],
+      "spawn_entry": 72
+    },
+    {
+      "id": 19,
+      "entries": [
+        81,
+        -1,
+        72,
+        96
+      ],
+      "spawn_entry": 76
+    },
+    {
+      "id": 20,
+      "entries": [
+        101,
+        -1,
+        76,
+        -1
+      ],
+      "spawn_entry": 80
+    },
+    {
+      "id": 21,
+      "entries": [
+        89,
+        -1,
+        -1,
+        73
+      ],
+      "spawn_entry": 84
+    },
+    {
+      "id": 22,
+      "entries": [
+        93,
+        -1,
+        84,
+        -1
+      ],
+      "spawn_entry": 88
+    },
+    {
+      "id": 23,
+      "entries": [
+        97,
+        -1,
+        88,
+        -1
+      ],
+      "spawn_entry": 92
+    },
+    {
+      "id": 24,
+      "entries": [
+        -1,
+        78,
+        92,
+        -1
+      ],
+      "spawn_entry": 96
+    },
+    {
+      "id": 25,
+      "entries": [
+        0,
+        0,
+        -1,
+        80
+      ],
+      "spawn_entry": 101
+    }
+  ],
+  "source_ram_sha256": "d30626608f888132d2bad044092f667df2e8f4693dc82b95f1218c65da848b7d",
+  "scope": "Directional test navigation only; entry tables checked with original exit routine, not gameplay timing"
+}
