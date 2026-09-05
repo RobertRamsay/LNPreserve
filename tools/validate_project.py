@@ -8,6 +8,14 @@ from build_project import read_json
 ROOT=Path(__file__).resolve().parents[1];PROJECT=ROOT/'LNPreserve'
 
 class ConversionChecks(unittest.TestCase):
+    def test_ln3_opening_scene_matches_captured_original_bitmap(self):
+        manifest=read_json(PROJECT/'datafiles/graphics/manifest.json')
+        dataset=next(d for d in manifest['datasets'] if d['id']=='ln3_game_level1')
+        scene=next(s for s in dataset['locations'] if s['id']==0)
+        with Image.open(PROJECT/scene['path']) as im:
+            self.assertEqual(hashlib.sha256(im.convert('RGBA').tobytes()).hexdigest(),
+                '653095de7697c7aa09afb69b4601fcfea917af92f19bf2f7dbc73cdcfd704f2a')
+
     def test_panel_final_record_and_horizontal_reversal(self):
         # Two-record PRG: asymmetric bitmap, then a mirrored panel placement.
         # The final placement + terminator occupy just four bytes at EOF.

@@ -1,0 +1,2113 @@
+{
+  "scope": "Original approach, failed jump and complete sinking from injected river entrance; no native pixel or timing certification",
+  "snapshot_sha256": "e8a4867c47cb4f40dd040f91ff25a68e7b9a9bfcf3aa340e6cba22ad514392bc",
+  "observation": "Both traced entries retain the player pose during sprite-row masking; no independent splash animation was observed",
+  "white_animation_frames": {
+    "logical_frames": [
+      150,
+      151,
+      152
+    ],
+    "raw_parts": [
+      17,
+      18,
+      19
+    ],
+    "source_bank": 40448,
+    "composition_addresses": [
+      55648,
+      55664,
+      55680
+    ],
+    "source_uses": [
+      {
+        "room": 6,
+        "script": 44674
+      },
+      {
+        "room": 17,
+        "script": 44714
+      }
+    ],
+    "observation": "Flapping white bird animation travelling horizontally in the Buddha scenes, not referenced by the traced river death"
+  },
+  "cases": [
+    {
+      "case": "walk",
+      "room": 11,
+      "entrance": 44,
+      "position": [
+        236,
+        79
+      ],
+      "heading": 5,
+      "input_poll_boundary": 48422,
+      "input_address": 181,
+      "sinking_entry": 48882,
+      "updates": [
+        {
+          "update": 0,
+          "joy": 6,
+          "x": 236,
+          "y": 79,
+          "frame": 0,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 1,
+          "joy": 6,
+          "x": 235,
+          "y": 79,
+          "frame": 8,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 2,
+          "joy": 6,
+          "x": 234,
+          "y": 79,
+          "frame": 8,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 3,
+          "joy": 6,
+          "x": 233,
+          "y": 79,
+          "frame": 8,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 4,
+          "joy": 6,
+          "x": 232,
+          "y": 80,
+          "frame": 9,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 5,
+          "joy": 6,
+          "x": 231,
+          "y": 80,
+          "frame": 9,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 6,
+          "joy": 6,
+          "x": 230,
+          "y": 80,
+          "frame": 9,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 7,
+          "joy": 6,
+          "x": 229,
+          "y": 80,
+          "frame": 9,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 8,
+          "joy": 6,
+          "x": 228,
+          "y": 81,
+          "frame": 10,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 9,
+          "joy": 6,
+          "x": 227,
+          "y": 81,
+          "frame": 10,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 10,
+          "joy": 6,
+          "x": 226,
+          "y": 81,
+          "frame": 10,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 11,
+          "joy": 6,
+          "x": 225,
+          "y": 81,
+          "frame": 10,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 12,
+          "joy": 6,
+          "x": 224,
+          "y": 82,
+          "frame": 11,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 13,
+          "joy": 6,
+          "x": 223,
+          "y": 82,
+          "frame": 11,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 14,
+          "joy": 6,
+          "x": 222,
+          "y": 82,
+          "frame": 11,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 15,
+          "joy": 6,
+          "x": 221,
+          "y": 82,
+          "frame": 11,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 16,
+          "joy": 6,
+          "x": 220,
+          "y": 83,
+          "frame": 12,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 17,
+          "joy": 6,
+          "x": 219,
+          "y": 83,
+          "frame": 12,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 18,
+          "joy": 6,
+          "x": 218,
+          "y": 83,
+          "frame": 12,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 19,
+          "joy": 6,
+          "x": 217,
+          "y": 83,
+          "frame": 12,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 20,
+          "joy": 6,
+          "x": 216,
+          "y": 84,
+          "frame": 13,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 21,
+          "joy": 6,
+          "x": 215,
+          "y": 84,
+          "frame": 13,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 22,
+          "joy": 6,
+          "x": 214,
+          "y": 84,
+          "frame": 13,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 23,
+          "joy": 6,
+          "x": 213,
+          "y": 84,
+          "frame": 13,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 24,
+          "joy": 6,
+          "x": 212,
+          "y": 85,
+          "frame": 14,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 25,
+          "joy": 6,
+          "x": 211,
+          "y": 85,
+          "frame": 14,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 26,
+          "joy": 6,
+          "x": 210,
+          "y": 85,
+          "frame": 14,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 27,
+          "joy": 6,
+          "x": 209,
+          "y": 85,
+          "frame": 14,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 28,
+          "joy": 6,
+          "x": 208,
+          "y": 86,
+          "frame": 15,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 29,
+          "joy": 6,
+          "x": 207,
+          "y": 86,
+          "frame": 15,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 30,
+          "joy": 6,
+          "x": 206,
+          "y": 86,
+          "frame": 15,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 31,
+          "joy": 6,
+          "x": 205,
+          "y": 86,
+          "frame": 15,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 32,
+          "joy": 6,
+          "x": 204,
+          "y": 87,
+          "frame": 8,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 33,
+          "joy": 6,
+          "x": 203,
+          "y": 87,
+          "frame": 8,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 34,
+          "joy": 6,
+          "x": 202,
+          "y": 87,
+          "frame": 8,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 35,
+          "joy": 6,
+          "x": 201,
+          "y": 87,
+          "frame": 8,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 36,
+          "joy": 6,
+          "x": 200,
+          "y": 88,
+          "frame": 9,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 37,
+          "joy": 6,
+          "x": 199,
+          "y": 88,
+          "frame": 9,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 38,
+          "joy": 6,
+          "x": 198,
+          "y": 88,
+          "frame": 9,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 39,
+          "joy": 6,
+          "x": 197,
+          "y": 88,
+          "frame": 9,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 40,
+          "joy": 6,
+          "x": 196,
+          "y": 89,
+          "frame": 10,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 41,
+          "joy": 6,
+          "x": 195,
+          "y": 89,
+          "frame": 10,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 42,
+          "joy": 6,
+          "x": 194,
+          "y": 89,
+          "frame": 10,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 43,
+          "joy": 6,
+          "x": 193,
+          "y": 89,
+          "frame": 10,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 44,
+          "joy": 6,
+          "x": 192,
+          "y": 90,
+          "frame": 11,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 45,
+          "joy": 6,
+          "x": 191,
+          "y": 90,
+          "frame": 11,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 46,
+          "joy": 6,
+          "x": 190,
+          "y": 90,
+          "frame": 11,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 47,
+          "joy": 6,
+          "x": 189,
+          "y": 90,
+          "frame": 11,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 48,
+          "joy": 6,
+          "x": 188,
+          "y": 91,
+          "frame": 12,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 49,
+          "joy": 6,
+          "x": 187,
+          "y": 91,
+          "frame": 12,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 50,
+          "joy": 6,
+          "x": 186,
+          "y": 91,
+          "frame": 12,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 51,
+          "joy": 6,
+          "x": 185,
+          "y": 91,
+          "frame": 12,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 52,
+          "joy": 6,
+          "x": 184,
+          "y": 92,
+          "frame": 13,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 53,
+          "joy": 6,
+          "x": 183,
+          "y": 92,
+          "frame": 13,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 54,
+          "joy": 6,
+          "x": 182,
+          "y": 92,
+          "frame": 13,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 55,
+          "joy": 6,
+          "x": 181,
+          "y": 92,
+          "frame": 13,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 56,
+          "joy": 6,
+          "x": 180,
+          "y": 93,
+          "frame": 14,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 57,
+          "joy": 6,
+          "x": 179,
+          "y": 93,
+          "frame": 14,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 58,
+          "joy": 6,
+          "x": 178,
+          "y": 93,
+          "frame": 14,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 59,
+          "joy": 6,
+          "x": 177,
+          "y": 93,
+          "frame": 14,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 60,
+          "joy": 6,
+          "x": 176,
+          "y": 94,
+          "frame": 15,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 61,
+          "joy": 6,
+          "x": 175,
+          "y": 94,
+          "frame": 15,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 62,
+          "joy": 6,
+          "x": 174,
+          "y": 94,
+          "frame": 15,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 63,
+          "joy": 6,
+          "x": 173,
+          "y": 94,
+          "frame": 15,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 64,
+          "joy": 6,
+          "x": 172,
+          "y": 95,
+          "frame": 8,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 65,
+          "joy": 6,
+          "x": 171,
+          "y": 95,
+          "frame": 8,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 66,
+          "joy": 6,
+          "x": 170,
+          "y": 95,
+          "frame": 8,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 67,
+          "joy": 6,
+          "x": 169,
+          "y": 95,
+          "frame": 8,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 68,
+          "joy": 6,
+          "x": 168,
+          "y": 96,
+          "frame": 9,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 69,
+          "joy": 6,
+          "x": 167,
+          "y": 96,
+          "frame": 9,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 70,
+          "joy": 6,
+          "x": 166,
+          "y": 96,
+          "frame": 9,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 71,
+          "joy": 6,
+          "x": 165,
+          "y": 96,
+          "frame": 9,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 72,
+          "joy": 6,
+          "x": 164,
+          "y": 97,
+          "frame": 10,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 73,
+          "joy": 6,
+          "x": 163,
+          "y": 97,
+          "frame": 10,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 74,
+          "joy": 6,
+          "x": 162,
+          "y": 97,
+          "frame": 10,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 75,
+          "joy": 6,
+          "x": 161,
+          "y": 97,
+          "frame": 10,
+          "action": 0,
+          "boundary_crossings": 0
+        }
+      ],
+      "entry_state_54_to_65": [
+        160,
+        98,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        11
+      ],
+      "sinking": [
+        {
+          "y": 100,
+          "frame": 11,
+          "cutoff": 122
+        },
+        {
+          "y": 102,
+          "frame": 11,
+          "cutoff": 122
+        },
+        {
+          "y": 104,
+          "frame": 11,
+          "cutoff": 122
+        },
+        {
+          "y": 106,
+          "frame": 11,
+          "cutoff": 122
+        },
+        {
+          "y": 108,
+          "frame": 11,
+          "cutoff": 122
+        },
+        {
+          "y": 110,
+          "frame": 11,
+          "cutoff": 122
+        },
+        {
+          "y": 112,
+          "frame": 11,
+          "cutoff": 122
+        },
+        {
+          "y": 114,
+          "frame": 11,
+          "cutoff": 122
+        },
+        {
+          "y": 116,
+          "frame": 11,
+          "cutoff": 122
+        },
+        {
+          "y": 118,
+          "frame": 11,
+          "cutoff": 122
+        },
+        {
+          "y": 120,
+          "frame": 11,
+          "cutoff": 122
+        },
+        {
+          "y": 122,
+          "frame": 11,
+          "cutoff": 122
+        },
+        {
+          "y": 124,
+          "frame": 11,
+          "cutoff": 122
+        },
+        {
+          "y": 126,
+          "frame": 11,
+          "cutoff": 122
+        },
+        {
+          "y": 128,
+          "frame": 11,
+          "cutoff": 122
+        },
+        {
+          "y": 130,
+          "frame": 11,
+          "cutoff": 122
+        },
+        {
+          "y": 132,
+          "frame": 11,
+          "cutoff": 122
+        },
+        {
+          "y": 134,
+          "frame": 11,
+          "cutoff": 122
+        },
+        {
+          "y": 136,
+          "frame": 11,
+          "cutoff": 122
+        },
+        {
+          "y": 138,
+          "frame": 11,
+          "cutoff": 122
+        },
+        {
+          "y": 140,
+          "frame": 11,
+          "cutoff": 122
+        },
+        {
+          "y": 142,
+          "frame": 11,
+          "cutoff": 122
+        },
+        {
+          "y": 144,
+          "frame": 11,
+          "cutoff": 122
+        }
+      ]
+    },
+    {
+      "case": "failed_jump",
+      "room": 11,
+      "entrance": 44,
+      "position": [
+        236,
+        79
+      ],
+      "heading": 5,
+      "input_poll_boundary": 48422,
+      "input_address": 181,
+      "sinking_entry": 48882,
+      "updates": [
+        {
+          "update": 0,
+          "joy": 6,
+          "x": 236,
+          "y": 79,
+          "frame": 0,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 1,
+          "joy": 6,
+          "x": 235,
+          "y": 79,
+          "frame": 8,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 2,
+          "joy": 6,
+          "x": 234,
+          "y": 79,
+          "frame": 8,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 3,
+          "joy": 6,
+          "x": 233,
+          "y": 79,
+          "frame": 8,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 4,
+          "joy": 6,
+          "x": 232,
+          "y": 80,
+          "frame": 9,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 5,
+          "joy": 6,
+          "x": 231,
+          "y": 80,
+          "frame": 9,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 6,
+          "joy": 6,
+          "x": 230,
+          "y": 80,
+          "frame": 9,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 7,
+          "joy": 6,
+          "x": 229,
+          "y": 80,
+          "frame": 9,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 8,
+          "joy": 6,
+          "x": 228,
+          "y": 81,
+          "frame": 10,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 9,
+          "joy": 6,
+          "x": 227,
+          "y": 81,
+          "frame": 10,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 10,
+          "joy": 6,
+          "x": 226,
+          "y": 81,
+          "frame": 10,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 11,
+          "joy": 6,
+          "x": 225,
+          "y": 81,
+          "frame": 10,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 12,
+          "joy": 6,
+          "x": 224,
+          "y": 82,
+          "frame": 11,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 13,
+          "joy": 6,
+          "x": 223,
+          "y": 82,
+          "frame": 11,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 14,
+          "joy": 6,
+          "x": 222,
+          "y": 82,
+          "frame": 11,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 15,
+          "joy": 6,
+          "x": 221,
+          "y": 82,
+          "frame": 11,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 16,
+          "joy": 6,
+          "x": 220,
+          "y": 83,
+          "frame": 12,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 17,
+          "joy": 6,
+          "x": 219,
+          "y": 83,
+          "frame": 12,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 18,
+          "joy": 6,
+          "x": 218,
+          "y": 83,
+          "frame": 12,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 19,
+          "joy": 6,
+          "x": 217,
+          "y": 83,
+          "frame": 12,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 20,
+          "joy": 6,
+          "x": 216,
+          "y": 84,
+          "frame": 13,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 21,
+          "joy": 6,
+          "x": 215,
+          "y": 84,
+          "frame": 13,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 22,
+          "joy": 6,
+          "x": 214,
+          "y": 84,
+          "frame": 13,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 23,
+          "joy": 6,
+          "x": 213,
+          "y": 84,
+          "frame": 13,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 24,
+          "joy": 6,
+          "x": 212,
+          "y": 85,
+          "frame": 14,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 25,
+          "joy": 6,
+          "x": 211,
+          "y": 85,
+          "frame": 14,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 26,
+          "joy": 6,
+          "x": 210,
+          "y": 85,
+          "frame": 14,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 27,
+          "joy": 6,
+          "x": 209,
+          "y": 85,
+          "frame": 14,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 28,
+          "joy": 6,
+          "x": 208,
+          "y": 86,
+          "frame": 15,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 29,
+          "joy": 6,
+          "x": 207,
+          "y": 86,
+          "frame": 15,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 30,
+          "joy": 6,
+          "x": 206,
+          "y": 86,
+          "frame": 15,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 31,
+          "joy": 6,
+          "x": 205,
+          "y": 86,
+          "frame": 15,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 32,
+          "joy": 6,
+          "x": 204,
+          "y": 87,
+          "frame": 8,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 33,
+          "joy": 6,
+          "x": 203,
+          "y": 87,
+          "frame": 8,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 34,
+          "joy": 6,
+          "x": 202,
+          "y": 87,
+          "frame": 8,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 35,
+          "joy": 6,
+          "x": 201,
+          "y": 87,
+          "frame": 8,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 36,
+          "joy": 6,
+          "x": 200,
+          "y": 88,
+          "frame": 9,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 37,
+          "joy": 6,
+          "x": 199,
+          "y": 88,
+          "frame": 9,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 38,
+          "joy": 6,
+          "x": 198,
+          "y": 88,
+          "frame": 9,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 39,
+          "joy": 6,
+          "x": 197,
+          "y": 88,
+          "frame": 9,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 40,
+          "joy": 6,
+          "x": 196,
+          "y": 89,
+          "frame": 10,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 41,
+          "joy": 6,
+          "x": 195,
+          "y": 89,
+          "frame": 10,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 42,
+          "joy": 6,
+          "x": 194,
+          "y": 89,
+          "frame": 10,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 43,
+          "joy": 6,
+          "x": 193,
+          "y": 89,
+          "frame": 10,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 44,
+          "joy": 6,
+          "x": 192,
+          "y": 90,
+          "frame": 11,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 45,
+          "joy": 20,
+          "x": 191,
+          "y": 90,
+          "frame": 11,
+          "action": 0,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 46,
+          "joy": 20,
+          "x": 190,
+          "y": 90,
+          "frame": 24,
+          "action": 23702,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 47,
+          "joy": 20,
+          "x": 189,
+          "y": 90,
+          "frame": 24,
+          "action": 23702,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 48,
+          "joy": 20,
+          "x": 188,
+          "y": 91,
+          "frame": 24,
+          "action": 23702,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 49,
+          "joy": 20,
+          "x": 187,
+          "y": 91,
+          "frame": 24,
+          "action": 23702,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 50,
+          "joy": 20,
+          "x": 186,
+          "y": 91,
+          "frame": 24,
+          "action": 23702,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 51,
+          "joy": 20,
+          "x": 185,
+          "y": 91,
+          "frame": 24,
+          "action": 23702,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 52,
+          "joy": 20,
+          "x": 184,
+          "y": 92,
+          "frame": 24,
+          "action": 23702,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 53,
+          "joy": 20,
+          "x": 183,
+          "y": 92,
+          "frame": 25,
+          "action": 23704,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 54,
+          "joy": 20,
+          "x": 182,
+          "y": 92,
+          "frame": 25,
+          "action": 23704,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 55,
+          "joy": 20,
+          "x": 181,
+          "y": 92,
+          "frame": 25,
+          "action": 23704,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 56,
+          "joy": 20,
+          "x": 180,
+          "y": 93,
+          "frame": 25,
+          "action": 23704,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 57,
+          "joy": 20,
+          "x": 179,
+          "y": 93,
+          "frame": 25,
+          "action": 23704,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 58,
+          "joy": 20,
+          "x": 178,
+          "y": 93,
+          "frame": 25,
+          "action": 23704,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 59,
+          "joy": 20,
+          "x": 177,
+          "y": 93,
+          "frame": 25,
+          "action": 23704,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 60,
+          "joy": 20,
+          "x": 176,
+          "y": 94,
+          "frame": 26,
+          "action": 23706,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 61,
+          "joy": 20,
+          "x": 175,
+          "y": 94,
+          "frame": 26,
+          "action": 23706,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 62,
+          "joy": 20,
+          "x": 174,
+          "y": 94,
+          "frame": 26,
+          "action": 23706,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 63,
+          "joy": 20,
+          "x": 173,
+          "y": 94,
+          "frame": 26,
+          "action": 23706,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 64,
+          "joy": 20,
+          "x": 172,
+          "y": 95,
+          "frame": 26,
+          "action": 23706,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 65,
+          "joy": 20,
+          "x": 171,
+          "y": 95,
+          "frame": 26,
+          "action": 23706,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 66,
+          "joy": 20,
+          "x": 170,
+          "y": 95,
+          "frame": 26,
+          "action": 23706,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 67,
+          "joy": 20,
+          "x": 169,
+          "y": 95,
+          "frame": 27,
+          "action": 23708,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 68,
+          "joy": 20,
+          "x": 168,
+          "y": 96,
+          "frame": 27,
+          "action": 23708,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 69,
+          "joy": 20,
+          "x": 167,
+          "y": 96,
+          "frame": 27,
+          "action": 23708,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 70,
+          "joy": 20,
+          "x": 166,
+          "y": 96,
+          "frame": 27,
+          "action": 23708,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 71,
+          "joy": 20,
+          "x": 165,
+          "y": 96,
+          "frame": 27,
+          "action": 23708,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 72,
+          "joy": 20,
+          "x": 164,
+          "y": 97,
+          "frame": 27,
+          "action": 23708,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 73,
+          "joy": 20,
+          "x": 163,
+          "y": 97,
+          "frame": 27,
+          "action": 23708,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 74,
+          "joy": 20,
+          "x": 162,
+          "y": 97,
+          "frame": 19,
+          "action": 23710,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 75,
+          "joy": 20,
+          "x": 161,
+          "y": 97,
+          "frame": 19,
+          "action": 23710,
+          "boundary_crossings": 0
+        },
+        {
+          "update": 76,
+          "joy": 20,
+          "x": 160,
+          "y": 98,
+          "frame": 19,
+          "action": 23710,
+          "boundary_crossings": 1
+        },
+        {
+          "update": 77,
+          "joy": 20,
+          "x": 159,
+          "y": 98,
+          "frame": 19,
+          "action": 23710,
+          "boundary_crossings": 1
+        },
+        {
+          "update": 78,
+          "joy": 20,
+          "x": 158,
+          "y": 98,
+          "frame": 19,
+          "action": 23710,
+          "boundary_crossings": 1
+        },
+        {
+          "update": 79,
+          "joy": 20,
+          "x": 157,
+          "y": 98,
+          "frame": 19,
+          "action": 23710,
+          "boundary_crossings": 1
+        },
+        {
+          "update": 80,
+          "joy": 20,
+          "x": 156,
+          "y": 99,
+          "frame": 19,
+          "action": 23710,
+          "boundary_crossings": 1
+        },
+        {
+          "update": 81,
+          "joy": 20,
+          "x": 156,
+          "y": 99,
+          "frame": 8,
+          "action": 0,
+          "boundary_crossings": 1
+        },
+        {
+          "update": 82,
+          "joy": 20,
+          "x": 156,
+          "y": 99,
+          "frame": 8,
+          "action": 0,
+          "boundary_crossings": 1
+        },
+        {
+          "update": 83,
+          "joy": 20,
+          "x": 156,
+          "y": 99,
+          "frame": 8,
+          "action": 0,
+          "boundary_crossings": 1
+        },
+        {
+          "update": 84,
+          "joy": 20,
+          "x": 156,
+          "y": 99,
+          "frame": 8,
+          "action": 0,
+          "boundary_crossings": 1
+        },
+        {
+          "update": 85,
+          "joy": 20,
+          "x": 156,
+          "y": 99,
+          "frame": 8,
+          "action": 0,
+          "boundary_crossings": 1
+        },
+        {
+          "update": 86,
+          "joy": 20,
+          "x": 155,
+          "y": 99,
+          "frame": 24,
+          "action": 23702,
+          "boundary_crossings": 1
+        },
+        {
+          "update": 87,
+          "joy": 20,
+          "x": 154,
+          "y": 99,
+          "frame": 24,
+          "action": 23702,
+          "boundary_crossings": 1
+        },
+        {
+          "update": 88,
+          "joy": 20,
+          "x": 153,
+          "y": 99,
+          "frame": 24,
+          "action": 23702,
+          "boundary_crossings": 1
+        },
+        {
+          "update": 89,
+          "joy": 20,
+          "x": 152,
+          "y": 99,
+          "frame": 24,
+          "action": 23702,
+          "boundary_crossings": 1
+        },
+        {
+          "update": 90,
+          "joy": 20,
+          "x": 151,
+          "y": 99,
+          "frame": 24,
+          "action": 23702,
+          "boundary_crossings": 1
+        },
+        {
+          "update": 91,
+          "joy": 20,
+          "x": 150,
+          "y": 99,
+          "frame": 24,
+          "action": 23702,
+          "boundary_crossings": 1
+        },
+        {
+          "update": 92,
+          "joy": 20,
+          "x": 149,
+          "y": 99,
+          "frame": 24,
+          "action": 23702,
+          "boundary_crossings": 1
+        },
+        {
+          "update": 93,
+          "joy": 20,
+          "x": 148,
+          "y": 99,
+          "frame": 25,
+          "action": 23704,
+          "boundary_crossings": 1
+        },
+        {
+          "update": 94,
+          "joy": 20,
+          "x": 147,
+          "y": 99,
+          "frame": 25,
+          "action": 23704,
+          "boundary_crossings": 1
+        },
+        {
+          "update": 95,
+          "joy": 20,
+          "x": 146,
+          "y": 99,
+          "frame": 25,
+          "action": 23704,
+          "boundary_crossings": 1
+        },
+        {
+          "update": 96,
+          "joy": 20,
+          "x": 145,
+          "y": 99,
+          "frame": 25,
+          "action": 23704,
+          "boundary_crossings": 1
+        },
+        {
+          "update": 97,
+          "joy": 20,
+          "x": 144,
+          "y": 99,
+          "frame": 25,
+          "action": 23704,
+          "boundary_crossings": 1
+        },
+        {
+          "update": 98,
+          "joy": 20,
+          "x": 143,
+          "y": 99,
+          "frame": 25,
+          "action": 23704,
+          "boundary_crossings": 1
+        },
+        {
+          "update": 99,
+          "joy": 20,
+          "x": 142,
+          "y": 99,
+          "frame": 25,
+          "action": 23704,
+          "boundary_crossings": 1
+        },
+        {
+          "update": 100,
+          "joy": 20,
+          "x": 141,
+          "y": 99,
+          "frame": 26,
+          "action": 23706,
+          "boundary_crossings": 1
+        },
+        {
+          "update": 101,
+          "joy": 20,
+          "x": 140,
+          "y": 99,
+          "frame": 26,
+          "action": 23706,
+          "boundary_crossings": 1
+        },
+        {
+          "update": 102,
+          "joy": 20,
+          "x": 139,
+          "y": 99,
+          "frame": 26,
+          "action": 23706,
+          "boundary_crossings": 1
+        },
+        {
+          "update": 103,
+          "joy": 20,
+          "x": 138,
+          "y": 99,
+          "frame": 26,
+          "action": 23706,
+          "boundary_crossings": 1
+        },
+        {
+          "update": 104,
+          "joy": 20,
+          "x": 137,
+          "y": 99,
+          "frame": 26,
+          "action": 23706,
+          "boundary_crossings": 1
+        },
+        {
+          "update": 105,
+          "joy": 20,
+          "x": 136,
+          "y": 99,
+          "frame": 26,
+          "action": 23706,
+          "boundary_crossings": 1
+        },
+        {
+          "update": 106,
+          "joy": 20,
+          "x": 135,
+          "y": 99,
+          "frame": 26,
+          "action": 23706,
+          "boundary_crossings": 1
+        },
+        {
+          "update": 107,
+          "joy": 20,
+          "x": 134,
+          "y": 99,
+          "frame": 27,
+          "action": 23708,
+          "boundary_crossings": 1
+        },
+        {
+          "update": 108,
+          "joy": 20,
+          "x": 133,
+          "y": 99,
+          "frame": 27,
+          "action": 23708,
+          "boundary_crossings": 1
+        },
+        {
+          "update": 109,
+          "joy": 20,
+          "x": 132,
+          "y": 99,
+          "frame": 27,
+          "action": 23708,
+          "boundary_crossings": 1
+        },
+        {
+          "update": 110,
+          "joy": 20,
+          "x": 131,
+          "y": 99,
+          "frame": 27,
+          "action": 23708,
+          "boundary_crossings": 1
+        },
+        {
+          "update": 111,
+          "joy": 20,
+          "x": 130,
+          "y": 99,
+          "frame": 27,
+          "action": 23708,
+          "boundary_crossings": 1
+        },
+        {
+          "update": 112,
+          "joy": 20,
+          "x": 129,
+          "y": 99,
+          "frame": 27,
+          "action": 23708,
+          "boundary_crossings": 1
+        },
+        {
+          "update": 113,
+          "joy": 20,
+          "x": 128,
+          "y": 99,
+          "frame": 27,
+          "action": 23708,
+          "boundary_crossings": 1
+        },
+        {
+          "update": 114,
+          "joy": 20,
+          "x": 127,
+          "y": 99,
+          "frame": 19,
+          "action": 23710,
+          "boundary_crossings": 1
+        },
+        {
+          "update": 115,
+          "joy": 20,
+          "x": 126,
+          "y": 99,
+          "frame": 19,
+          "action": 23710,
+          "boundary_crossings": 1
+        },
+        {
+          "update": 116,
+          "joy": 20,
+          "x": 125,
+          "y": 99,
+          "frame": 19,
+          "action": 23710,
+          "boundary_crossings": 1
+        },
+        {
+          "update": 117,
+          "joy": 20,
+          "x": 124,
+          "y": 99,
+          "frame": 19,
+          "action": 23710,
+          "boundary_crossings": 1
+        },
+        {
+          "update": 118,
+          "joy": 20,
+          "x": 123,
+          "y": 99,
+          "frame": 19,
+          "action": 23710,
+          "boundary_crossings": 1
+        },
+        {
+          "update": 119,
+          "joy": 20,
+          "x": 122,
+          "y": 99,
+          "frame": 19,
+          "action": 23710,
+          "boundary_crossings": 1
+        },
+        {
+          "update": 120,
+          "joy": 20,
+          "x": 121,
+          "y": 99,
+          "frame": 19,
+          "action": 23710,
+          "boundary_crossings": 1
+        }
+      ],
+      "entry_state_54_to_65": [
+        121,
+        99,
+        0,
+        0,
+        7,
+        7,
+        0,
+        0,
+        60,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        8
+      ],
+      "sinking": [
+        {
+          "y": 101,
+          "frame": 8,
+          "cutoff": 123
+        },
+        {
+          "y": 103,
+          "frame": 8,
+          "cutoff": 123
+        },
+        {
+          "y": 105,
+          "frame": 8,
+          "cutoff": 123
+        },
+        {
+          "y": 107,
+          "frame": 8,
+          "cutoff": 123
+        },
+        {
+          "y": 109,
+          "frame": 8,
+          "cutoff": 123
+        },
+        {
+          "y": 111,
+          "frame": 8,
+          "cutoff": 123
+        },
+        {
+          "y": 113,
+          "frame": 8,
+          "cutoff": 123
+        },
+        {
+          "y": 115,
+          "frame": 8,
+          "cutoff": 123
+        },
+        {
+          "y": 117,
+          "frame": 8,
+          "cutoff": 123
+        },
+        {
+          "y": 119,
+          "frame": 8,
+          "cutoff": 123
+        },
+        {
+          "y": 121,
+          "frame": 8,
+          "cutoff": 123
+        },
+        {
+          "y": 123,
+          "frame": 8,
+          "cutoff": 123
+        },
+        {
+          "y": 125,
+          "frame": 8,
+          "cutoff": 123
+        },
+        {
+          "y": 127,
+          "frame": 8,
+          "cutoff": 123
+        },
+        {
+          "y": 129,
+          "frame": 8,
+          "cutoff": 123
+        },
+        {
+          "y": 131,
+          "frame": 8,
+          "cutoff": 123
+        },
+        {
+          "y": 133,
+          "frame": 8,
+          "cutoff": 123
+        },
+        {
+          "y": 135,
+          "frame": 8,
+          "cutoff": 123
+        },
+        {
+          "y": 137,
+          "frame": 8,
+          "cutoff": 123
+        },
+        {
+          "y": 139,
+          "frame": 8,
+          "cutoff": 123
+        },
+        {
+          "y": 141,
+          "frame": 8,
+          "cutoff": 123
+        },
+        {
+          "y": 143,
+          "frame": 8,
+          "cutoff": 123
+        },
+        {
+          "y": 145,
+          "frame": 8,
+          "cutoff": 123
+        }
+      ]
+    }
+  ]
+}

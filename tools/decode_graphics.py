@@ -1,6 +1,6 @@
 """Decode original Integrator object records into PNGs and editable scene records.
 
-No third-party executable or emulator is used by this converter or the game.
+No third-party executable or emulator is included in the game.
 The Integrator 2012 reference datasets are inputs, with per-file provenance.
 Scene composition remains a diagnostic until checked against emulator captures.
 """
@@ -181,12 +181,25 @@ def export_all():
             for location in dataset['locations']:
                 if str(location['panel']) not in dataset['panels']:continue
                 im,mask,warnings=render_panel(dataset,location['panel'],location['background'])
+                verified_opening=slug=='ln3_game_level1' and location['id']==0
+                if verified_opening:
+                    # Only this scene's correction was approved. Other proposed
+                    # palette fixes remain staged outside the GameMaker project.
+                    from original_scene_renderer import OriginalSceneRenderer
+                    renderer=OriginalSceneRenderer(3,raw)
+                    im=renderer.render(0);warnings=[]
+                    expected='653095de7697c7aa09afb69b4601fcfea917af92f19bf2f7dbc73cdcfd704f2a'
+                    if sha(im.tobytes())!=expected:raise ValueError('LN3 opening differs from the verified original bitmap')
                 name=f'{slug}_location_{location["id"]:02d}'
                 im.save(folder/f'{name}.png');mask.save(folder/f'{name}_mask.png')
                 previews.append(dict(name=name,id=location['id'],panel=location['panel'],background=location['background'],
                                      path=(folder/f'{name}.png').relative_to(PROJECT).as_posix(),
                                      mask_path=(folder/f'{name}_mask.png').relative_to(PROJECT).as_posix(),
-                                     status='diagnostic_unverified',warnings=warnings))
+                                     status='original_bitmap_verified' if verified_opening else 'diagnostic_unverified',warnings=warnings))
+                if verified_opening:
+                    previews[-1]['verification']=dict(pixel_sha256=expected,pixels_compared=34560,differing_pixels=0,
+                        source_ram_sha256=renderer.provenance['source_ram_sha256'],dataset_payload_sha256=sha(raw[2:]),
+                        dataset_matches_supplied_game=True)
             (folder/'scene_data.json').write_text(json.dumps(dataset,separators=(',',':'))+'\n')
             inventory.append(dict(id=slug,game=game,kind=kind,provenance=provenance,objects=records,locations=previews,
                                   issues=dataset['issues'],scene_data=(folder/'scene_data.json').relative_to(PROJECT).as_posix()))

@@ -88,7 +88,7 @@
   "pending": [
     "Complete LN1 projectile, puzzle, special-enemy, item-use, death-presentation and level-completion logic",
     "Connect LN1 levels 2\u20136 and translate LN2/LN3 gameplay",
-    "LN2/LN3 binary unpacking and source-disk verification of reference scenery datasets",
+    "LN2 and LN3 levels 2-5 source-disk verification; LN3 level 1 payload and opening background are verified",
     "LN2/LN3 character and animation recovery; remaining LN1 graphical assets and composition validation",
     "Validate recovered LN1 composition, room masks, dynamic dashboard and palette semantics against original display captures",
     "Whole-game cycle-stamped reference traces and native comparisons",
@@ -111,7 +111,7 @@
     "ln1_water_vectors_pass": true
   },
   "structural_checks": {
-    "tests_run": 7,
+    "tests_run": 8,
     "failures": 0,
     "errors": 0,
     "skipped": 0,
@@ -140,5 +140,24 @@
     "files_checked": 10566,
     "unchanged_after_rebuild": true,
     "changed_paths": []
+  },
+  "scenery_colour_check": {
+    "applied_scenes": [
+      {
+        "changed_pixels": 1392,
+        "dataset": "ln3_game_level1",
+        "scene": 0
+      }
+    ],
+    "original_ln3_level1_scene0": {
+      "colour_ram_sha256": "679aca1723e33e442de87e1ff48b11bcc9fed129f181ca5e6c34af63c2eb859c",
+      "dataset_payload_matches_supplied_game": true,
+      "differing_pixels": 0,
+      "pixel_sha256": "653095de7697c7aa09afb69b4601fcfea917af92f19bf2f7dbc73cdcfd704f2a",
+      "pixels": 34560,
+      "source_ram_sha256": "cff9cbcd78cbe22aa1aae5d8e6fc6d58444dd5f6e1367608c06f7da5b60c585c"
+    },
+    "other_candidates_applied": false,
+    "other_changed_scene_records": 278
   }
 }

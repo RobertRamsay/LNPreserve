@@ -24,7 +24,7 @@ def main():
         current_gameplay='Partial native Wastelands prototype; no completed game',
         pending=['Complete LN1 projectile, puzzle, special-enemy, item-use, death-presentation and level-completion logic',
             'Connect LN1 levels 2–6 and translate LN2/LN3 gameplay',
-            'LN2/LN3 binary unpacking and source-disk verification of reference scenery datasets',
+            'LN2 and LN3 levels 2-5 source-disk verification; LN3 level 1 payload and opening background are verified',
             'LN2/LN3 character and animation recovery; remaining LN1 graphical assets and composition validation',
             'Validate recovered LN1 composition, room masks, dynamic dashboard and palette semantics against original display captures',
             'Whole-game cycle-stamped reference traces and native comparisons',
@@ -39,6 +39,12 @@ def main():
         if path.exists():
             status[name]=read(path)
             if name=='asset_cleanup':status[name].pop('removed_sprite_resources',None)
+    colour=ROOT/'evidence/scenery_colour_audit.json'
+    if colour.exists():
+        audit=read(colour)
+        status['scenery_colour_check']=dict(applied_scenes=audit.get('applied_scenes',[]),
+            original_ln3_level1_scene0=audit['original_ln3_level1_scene0'],
+            other_candidates_applied=False,other_changed_scene_records=audit['changed_scene_records']-1)
     (ROOT/'evidence/STATUS.json').write_text(json.dumps(status,indent=2)+'\n')
     print(json.dumps(status['counts'],indent=2))
 if __name__=='__main__':main()

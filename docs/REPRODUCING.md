@@ -24,6 +24,15 @@ This launches the portable VICE executable externally. It creates an unpacked RA
 
 ## Export and register
 
+The LN3 opening-scene correction additionally needs the supplied LN3 capture:
+
+```powershell
+python tools/prepare_ln3_capture.py
+python tools/apply_ln3_opening_correction.py
+```
+
+The preparation substitutes the crack-title space input and declines all six trainers, then loads the original level. It does not modify gameplay code. The single-scene script verifies the supplied dataset and expected original pixel hash before replacing only the three existing PNG files for that scene. Future full exports retain this approved correction; other colour candidates remain unapplied.
+
 ```powershell
 python tools/decode_graphics.py
 python tools/extract_ln1_actors.py
@@ -38,3 +47,5 @@ python tools/update_status.py
 Use `build_project.py --refresh-graphics` only to deliberately replace already imported sprite edits. Replacement sound files are preserved. Runtime test reports are written only after executing the compiled project; structural tests alone do not stand in for a build or a gameplay comparison.
 
 The current source format research utilities `inspect_reference.py`, `sprite_probe.py` and `unpack_probe.py` are exploratory tools. The first requires optional pefile/capstone packages and downloaded Integrator debug symbols; the latter two are local probes with hard-coded LN1 capture assumptions. They are not part of the export/build chain or the GameMaker runtime.
+
+The optional wider colour audit uses `audit_scenery_colours.py capture`, `stage`, and `verify-staged`. Staging writes only to ignored `build/`; it never updates GameMaker assets. Its LN2 reference-renderer comparison requires pefile, capstone and Unicorn 2.1.4. Only selected renderer functions execute inside an isolated offline CPU sandbox, with model data supplied by Python. This is reference-renderer evidence, not proof of the supplied LN2 disk's pixels. `inspect_ln1_river_entry.py` records the original river approach and sinking evidence without editing project assets.

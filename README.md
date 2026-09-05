@@ -55,9 +55,13 @@ A further 660-update integration check crosses the first original exit and runs 
 
 The earlier scenery resources and workbench remain available. All six LN1 scenery datasets match supplied disk payloads or captured original memory. LN2/LN3 reference scenery still needs matching to the supplied disk versions. Edit sprites and native GML directly in GameMaker.
 
+LN3 level 1's opening scene now matches all 34,560 background pixels of the supplied C64 game, using the project's chosen palette. Its 1,392 corrected pixels include the grey rock faces and overlapping scenery edges. Only this scene was updated; the wider colour corrections remain unapplied, as requested. The complete level-1 scenery payload also matches the supplied game's loaded memory. See [the colour comparison](evidence/scenery_colour_comparison.png) and [audit scope](evidence/scenery_colour_audit.json); the comparison includes proposed changes to other scenes that are not in the project.
+
 The scenery cleanup restores the final pieces of LN2 loader pictures and the mirrored pieces missing from LN3 scenes. The 2,033 scenery image records now share 1,702 unique PNGs; source IDs remain in the manifest and catalog. In total, 345 duplicate sprite resources and 436 empty preview masks were removed. GameMaker's required frame/layer files and native gameplay masks are preserved. See the [before/after images](evidence/asset_cleanup_comparison.png) and [cleanup evidence](evidence/asset_cleanup.json).
 
 The supplied LN1 Wastelands river was inspected through full submersion in VICE. That routine keeps the original player pose and clears sprite rows at the waterline; no separate ripple was observed. The [reference strip](evidence/ln1_original_river.png) and [checkpoint record](evidence/ln1_river_reference.json) use an injected room/position fixture, not a whole-game input replay.
+
+This was also checked through walking and a failed jump from the river entrance, followed by complete sinking. Both retained the original pose during masking. The three white flapping frames are used by birds in the Buddha scenes. [River-entry captures](evidence/ln1_river_entry_comparison.png) document the check; no new LN1 splash artwork was added.
 
 Build with `tools/compile.ps1`; run native checks with `tools/run_checks.py --runner <installed GameMaker Runner.exe>`. `tools/validate_project.py` checks source identities and project resources. Native code is under `LNPreserve/scripts/ln1_*`; decoded gameplay tables are under `LNPreserve/datafiles/play/ln1`.
 

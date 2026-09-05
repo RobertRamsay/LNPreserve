@@ -1,0 +1,3185 @@
+{
+  "applied_scenes": [
+    {
+      "changed_pixels": 1392,
+      "dataset": "ln3_game_level1",
+      "scene": 0
+    }
+  ],
+  "candidates_only": true,
+  "changed_scene_records": 279,
+  "editable_scene_sprites_checked": 1,
+  "limitations": [
+    "LN2 renderer is the independent Integrator reference, not supplied-game display verification",
+    "LN3 levels 2-5 use the recovered original level-1 drawing routine with reference datasets; their supplied-disk identity is unverified",
+    "LN3 scenes beyond the opening scene have no independent VICE display comparison"
+  ],
+  "ln1_native_background_comparisons": [
+    {
+      "differing_pixels": 0,
+      "scene": 1
+    },
+    {
+      "differing_pixels": 0,
+      "scene": 2
+    },
+    {
+      "differing_pixels": 0,
+      "scene": 3
+    },
+    {
+      "differing_pixels": 0,
+      "scene": 4
+    },
+    {
+      "differing_pixels": 0,
+      "scene": 5
+    },
+    {
+      "differing_pixels": 0,
+      "scene": 6
+    },
+    {
+      "differing_pixels": 0,
+      "scene": 7
+    },
+    {
+      "differing_pixels": 0,
+      "scene": 8
+    },
+    {
+      "differing_pixels": 0,
+      "scene": 9
+    },
+    {
+      "differing_pixels": 0,
+      "scene": 10
+    },
+    {
+      "differing_pixels": 0,
+      "scene": 11
+    },
+    {
+      "differing_pixels": 0,
+      "scene": 12
+    },
+    {
+      "differing_pixels": 0,
+      "scene": 13
+    },
+    {
+      "differing_pixels": 0,
+      "scene": 14
+    },
+    {
+      "differing_pixels": 0,
+      "scene": 15
+    },
+    {
+      "differing_pixels": 0,
+      "scene": 16
+    },
+    {
+      "differing_pixels": 0,
+      "scene": 17
+    },
+    {
+      "differing_pixels": 0,
+      "scene": 18
+    },
+    {
+      "differing_pixels": 0,
+      "scene": 19
+    },
+    {
+      "differing_pixels": 0,
+      "scene": 20
+    },
+    {
+      "differing_pixels": 0,
+      "scene": 21
+    },
+    {
+      "differing_pixels": 0,
+      "scene": 22
+    },
+    {
+      "differing_pixels": 0,
+      "scene": 23
+    },
+    {
+      "differing_pixels": 0,
+      "scene": 24
+    },
+    {
+      "differing_pixels": 0,
+      "scene": 25
+    }
+  ],
+  "original_ln3_level1_scene0": {
+    "colour_ram_sha256": "679aca1723e33e442de87e1ff48b11bcc9fed129f181ca5e6c34af63c2eb859c",
+    "dataset_payload_matches_supplied_game": true,
+    "differing_pixels": 0,
+    "pixel_sha256": "653095de7697c7aa09afb69b4601fcfea917af92f19bf2f7dbc73cdcfd704f2a",
+    "pixels": 34560,
+    "source_ram_sha256": "cff9cbcd78cbe22aa1aae5d8e6fc6d58444dd5f6e1367608c06f7da5b60c585c"
+  },
+  "other_candidates_applied": false,
+  "records": [
+    {
+      "after_sha256": "6afb5ada258ebe8b9c49dba9ea92892f1d6fcd966b10ff6c50dd9e0a0e15ec65",
+      "before_sha256": "486f430df8b8b90aad4b9f1a2ac2c4903ad9da1500afb27f5a942ddf887c1cf1",
+      "changed_pixels": 10,
+      "dataset": "ln1_game_level1",
+      "scene": 1
+    },
+    {
+      "after_sha256": "236ef5a1591b9ecfbf85fa54ea08d97deca2e79315a8aacfa10d1a1787699319",
+      "before_sha256": "aaed1080fedd25cca2b92ea53adbc586a5dc3e7debca4f009fc1376be604e416",
+      "changed_pixels": 58,
+      "dataset": "ln1_game_level1",
+      "scene": 2
+    },
+    {
+      "after_sha256": "8742e164274484da1aeb50db009194e83f27a07da01a25b4ee8f4010fb5b6dcc",
+      "before_sha256": "cf7633fb441d9f728f955cc90260267ab64458fa3702a6299b0539c7de99a6ef",
+      "changed_pixels": 100,
+      "dataset": "ln1_game_level1",
+      "scene": 3
+    },
+    {
+      "after_sha256": "51b8400f5c6c96f6ce77b2192430cbb69354823e252e9951e796b5df1421ff7b",
+      "before_sha256": "ac2f1ee8bd30a96d5fb64e519bd33ddd9a12933388beccfecc06cabd7c263a37",
+      "changed_pixels": 154,
+      "dataset": "ln1_game_level1",
+      "scene": 4
+    },
+    {
+      "after_sha256": "98a655a57ab7a9fc011a445d0c5bb6dfaf3604d3895b9018c71286b2fab4db70",
+      "before_sha256": "b5d7b21b6fdc9ffd3d0f30b83d0ff250b3f8528eeccf234e59b0596c8f6fcbf5",
+      "changed_pixels": 272,
+      "dataset": "ln1_game_level1",
+      "scene": 5
+    },
+    {
+      "after_sha256": "bb40762aa34b43d4450e2f1f95719014a501da24f147727652217569886b2e14",
+      "before_sha256": "c6fc8da7457bf59ec5e8dc6ff5a68e1570e130506e389d959ad7e153ec7308b9",
+      "changed_pixels": 322,
+      "dataset": "ln1_game_level1",
+      "scene": 6
+    },
+    {
+      "after_sha256": "a92bd226b91028742353cb847f75139d7c2da4cdf73a8d35914618ea7998ebc5",
+      "before_sha256": "1613491b835eb36d6327614a74a1bdb76b939b98352e92596943e75332cd996c",
+      "changed_pixels": 294,
+      "dataset": "ln1_game_level1",
+      "scene": 7
+    },
+    {
+      "after_sha256": "ce8894c60057da8be766783d64c69249fdb528a6fc7de14d8cfe1b6c361d8807",
+      "before_sha256": "bc216339fa5a6bb31dc4f9570ffad8c9f6403ea23ff57e6a5d25e8613e3ab945",
+      "changed_pixels": 358,
+      "dataset": "ln1_game_level1",
+      "scene": 8
+    },
+    {
+      "after_sha256": "878b592ce19796fb6f38dfe763dd5472ddd3754add3ae86fb9e02af79b96b1a8",
+      "before_sha256": "c4127c8840e4976f36523a2ef05305e53efacc6874ea13f2b84fa72a9144de0d",
+      "changed_pixels": 1288,
+      "dataset": "ln1_game_level1",
+      "scene": 9
+    },
+    {
+      "after_sha256": "0ac23505166524d5a0a3217da10354409da987cc85f4e5fa28740596fb9b4aa6",
+      "before_sha256": "d5b3996bdf56bbb62f62a72cb0b59d6b260d11f6b5355518bc15302531590770",
+      "changed_pixels": 356,
+      "dataset": "ln1_game_level1",
+      "scene": 10
+    },
+    {
+      "after_sha256": "43c088853598d7eced014fb89c17c0d689b4e578b7eea66b36553c0a449e9ad7",
+      "before_sha256": "db58e6b027c937daa50cbaad60edc2f40aa77c14c36a0bf3e0986ac7bbcce443",
+      "changed_pixels": 270,
+      "dataset": "ln1_game_level1",
+      "scene": 11
+    },
+    {
+      "after_sha256": "a771cf5b634c145b297eb542f8090dfc643fd612a5b8bc3b00a76656e8a1dd83",
+      "before_sha256": "c065b178d89f4a7c011246b91b5932312f5128afa1b96db1df767fc58ec6a173",
+      "changed_pixels": 308,
+      "dataset": "ln1_game_level1",
+      "scene": 12
+    },
+    {
+      "after_sha256": "2891324195c22d70075707543ea81a92470052e49cc0c401df8aa2e9b12e4c3c",
+      "before_sha256": "7e8e18579ce1bb291091fb0f18ae94d46269d1cf9aac92f93a417b802b8e950a",
+      "changed_pixels": 258,
+      "dataset": "ln1_game_level1",
+      "scene": 13
+    },
+    {
+      "after_sha256": "ccd31f909de5b61a5fbb388ce875e931ddc9c3d63d53d5ac7a992a3fcf8f9176",
+      "before_sha256": "9b5d99cbcaab51c500765ea549e8da25c2737e0dd474b8a2749d68fdcc5a0294",
+      "changed_pixels": 104,
+      "dataset": "ln1_game_level1",
+      "scene": 14
+    },
+    {
+      "after_sha256": "8133d9dc8a152e47bf8b15c945984dd2bfad116343b78f59343c0cc097bee355",
+      "before_sha256": "8553ac29c86a886490760c239fb250abfb76eef98b675d7eee638506496e6bfe",
+      "changed_pixels": 416,
+      "dataset": "ln1_game_level1",
+      "scene": 15
+    },
+    {
+      "after_sha256": "0a63fb3e379bfaa95d4ae563dc7b4212daabb876cf93776ec2faccab58cd3444",
+      "before_sha256": "5ef83d86902eeccfdf6a295c7bcd121c7bf8fa2c3858382d2b9b736c6c8f8504",
+      "changed_pixels": 328,
+      "dataset": "ln1_game_level1",
+      "scene": 16
+    },
+    {
+      "after_sha256": "bb40762aa34b43d4450e2f1f95719014a501da24f147727652217569886b2e14",
+      "before_sha256": "c6fc8da7457bf59ec5e8dc6ff5a68e1570e130506e389d959ad7e153ec7308b9",
+      "changed_pixels": 322,
+      "dataset": "ln1_game_level1",
+      "scene": 17
+    },
+    {
+      "after_sha256": "f6839d19ae46e9c8f303ddfa2ce0d45f6572317cb7502295ec5b1d05a9df3934",
+      "before_sha256": "6a553d7041944d626367097de797fa52ecf41dd82fb22bb9e8240e930a8c180d",
+      "changed_pixels": 184,
+      "dataset": "ln1_game_level1",
+      "scene": 18
+    },
+    {
+      "after_sha256": "bea1fe32470f96d3ba1644f95e452478be013fe2f434bf50b8cfbbceadb97828",
+      "before_sha256": "f14d737f4297b76d9ab19cdcc2b8c7c3931b3bfac14837a1f65113fbaee54bdc",
+      "changed_pixels": 62,
+      "dataset": "ln1_game_level1",
+      "scene": 19
+    },
+    {
+      "after_sha256": "c068bed4f88aaa61090354fe1a9d10ea30872f500ca0aefcdeec4f3e42d4fe6b",
+      "before_sha256": "ba1c03c43018260afc61b243246ef8ce95828aed0f40f31c28f796bb6b17c799",
+      "changed_pixels": 342,
+      "dataset": "ln1_game_level1",
+      "scene": 20
+    },
+    {
+      "after_sha256": "07d4ec29b547c2e264d96f88e41eef959d75a7049ce8fd68e60e5133ec79a697",
+      "before_sha256": "cd9df36f13428b6c3e0f6cadbd8d219a6b6aee76cf52166820a9a954f1443266",
+      "changed_pixels": 488,
+      "dataset": "ln1_game_level1",
+      "scene": 21
+    },
+    {
+      "after_sha256": "0229e2135bdc4eb4ea17b324c0f7fd8fe725af997ece8f94f655d879b489b84e",
+      "before_sha256": "7f354bffcdcbe6509f2ee934685cd2605cc651da4fb03226cc637d10ad288db7",
+      "changed_pixels": 510,
+      "dataset": "ln1_game_level1",
+      "scene": 22
+    },
+    {
+      "after_sha256": "c459f60f5091f9c6fc9e87d3d8b36aadf6d0496ca609efc494dd30f77f8ca0c7",
+      "before_sha256": "95b495bc4e6e7d03c25ca7e4aef62d2f76630e76105c39bac03f8c9fbf56b95a",
+      "changed_pixels": 642,
+      "dataset": "ln1_game_level1",
+      "scene": 23
+    },
+    {
+      "after_sha256": "6fc3a77bda7b6998bbc5b897595ec521a0d3be65e5d320988f0ae79539c1d229",
+      "before_sha256": "85c80a02315c478d7b823d8bc3bb79a78a5cce36b2889407174ce9f89b6344e8",
+      "changed_pixels": 146,
+      "dataset": "ln1_game_level1",
+      "scene": 24
+    },
+    {
+      "after_sha256": "cf274c513b3405dfae61d3ae5cd26a16bc3d8fcd80193788d4bb31a6eb5e53d1",
+      "before_sha256": "3dbbdc44e522b38afa6bafb5de86909905693c9f27f6fa18ebdecaecdf925251",
+      "changed_pixels": 352,
+      "dataset": "ln1_game_level1",
+      "scene": 25
+    },
+    {
+      "after_sha256": "912260f47d5a3b7bfb26e5861da768b4c457dfe3f01f60df4f82cadcb4acba68",
+      "before_sha256": "00a2d3148d1da42ad75b67102bb8a885390167f22a824a2474f5ff9105d7e7ae",
+      "changed_pixels": 80,
+      "dataset": "ln1_game_level2",
+      "scene": 1
+    },
+    {
+      "after_sha256": "ddd332da97ce9d9c10bf34eba8428b93f3471753e801a11fe1d96b9fea1a0e6d",
+      "before_sha256": "0d9e50fad87d11c6495a1d948b3e982c838326af0762bb65d2f4879786ffebf8",
+      "changed_pixels": 314,
+      "dataset": "ln1_game_level2",
+      "scene": 2
+    },
+    {
+      "after_sha256": "d5124883c7c79a3c4bdcd350476165cb7e62693481450e790d294e928dca9461",
+      "before_sha256": "9997d44fafa3774ee30b8d4805d07c6d4b41af165872877079cd4bf227ee64a9",
+      "changed_pixels": 294,
+      "dataset": "ln1_game_level2",
+      "scene": 3
+    },
+    {
+      "after_sha256": "a47795abfaaabfc5867a5f153f369c3238a6d99387c16057a5465406d41590e3",
+      "before_sha256": "6bc2d86a47e552bdff1148a07f3a452ecf117dfb48be7ae8268e9213d3a9e041",
+      "changed_pixels": 1208,
+      "dataset": "ln1_game_level2",
+      "scene": 4
+    },
+    {
+      "after_sha256": "c5b8491d878a2f5687dcde0529d7fc4dffd44388c103dd3f249e555400c01418",
+      "before_sha256": "b7f06581e0530709c01c4549a3d8e0e54656459c7586309a7a1e24d56602b655",
+      "changed_pixels": 414,
+      "dataset": "ln1_game_level2",
+      "scene": 5
+    },
+    {
+      "after_sha256": "20608d9d15ee9c6c8032756203b460b0ed5e881bfd2e5aa7c35e78a97775c8eb",
+      "before_sha256": "ac760cbce54959206f94bc7a76fcb2f17a34bc778ae1113fdf2d03d3144f4c83",
+      "changed_pixels": 660,
+      "dataset": "ln1_game_level2",
+      "scene": 6
+    },
+    {
+      "after_sha256": "7bd0105e039b73bea1c76585f41dca93667acaa0830c98cc0fc6472bca2ed637",
+      "before_sha256": "43f6cf76f1fdfab5efb73815d518f01810daa7f7b8a3f3781057db496acaf614",
+      "changed_pixels": 728,
+      "dataset": "ln1_game_level2",
+      "scene": 7
+    },
+    {
+      "after_sha256": "ee418a615eedecf67c1da2aa9917f747b6c7b69cf774421fd1a5aec4babeec53",
+      "before_sha256": "0ecaeb2b0c3159e72e02e71a2eb91451ae4dcdaa7f242651ee287517d2b0b2c0",
+      "changed_pixels": 606,
+      "dataset": "ln1_game_level2",
+      "scene": 8
+    },
+    {
+      "after_sha256": "5b0da463d9a7cecbfaaecb3abaf08b687a7ac8a006aea01c7f7781681de4a7a4",
+      "before_sha256": "538cbfac2ac7b2ab34f799d1b284bc6f065910c3627ea01399fc5e9d1316311a",
+      "changed_pixels": 1058,
+      "dataset": "ln1_game_level2",
+      "scene": 9
+    },
+    {
+      "after_sha256": "40bc1cb5393804a6ddefaf81d5a5e7f45a77d345cbf55af9d05fb3a213aedd55",
+      "before_sha256": "fe7e60b287736b87364a3e3e4421a331a2ce5f90822c650a476e74240c364970",
+      "changed_pixels": 78,
+      "dataset": "ln1_game_level2",
+      "scene": 10
+    },
+    {
+      "after_sha256": "2855b124a7f58e213f01b8e6d29d2b65e200707363922fe9f7f8ecec217a5eac",
+      "before_sha256": "032a0f932a45940fa5814d04085256d45e9a565080670aa9b12dcfa789770f89",
+      "changed_pixels": 164,
+      "dataset": "ln1_game_level2",
+      "scene": 11
+    },
+    {
+      "after_sha256": "e3b161795b8f385efe461ad3ee5a544b84aa23c7ca432d01c0d650514568c0d4",
+      "before_sha256": "745b89024e93fa8d3b6036776c99d67176ad7bb6725c77c3d96e38892f951f4d",
+      "changed_pixels": 294,
+      "dataset": "ln1_game_level2",
+      "scene": 12
+    },
+    {
+      "after_sha256": "1d3dce05dd6abac64ef23bd8edc1036e746802a45010b96461c80b34b9b4ac45",
+      "before_sha256": "ec37fe44901d5df7e504de46ac9cd47b1f442beaa477868830400004417aeccf",
+      "changed_pixels": 670,
+      "dataset": "ln1_game_level2",
+      "scene": 13
+    },
+    {
+      "after_sha256": "44625cb53617b92d9f06832f262bae3666e0d793034b29233daf9e32b105aca4",
+      "before_sha256": "c20ecab8eb28ed182444d61856ac53a9d2c83e3162dd76be89aabe60ee65d8ae",
+      "changed_pixels": 536,
+      "dataset": "ln1_game_level2",
+      "scene": 14
+    },
+    {
+      "after_sha256": "c444a7545fea9bcdbdb37283dd8193516cc81cc32cb147e872eabca8ad6a95f5",
+      "before_sha256": "4543ff742ef3b96a7928055b931888af0edfb8e8171396ddd074cb2a03fc0a09",
+      "changed_pixels": 1030,
+      "dataset": "ln1_game_level2",
+      "scene": 15
+    },
+    {
+      "after_sha256": "c39bd038df35d9b51f9ccbfe3757f04189f2ec39461f0b542a96ae1f5ed215a1",
+      "before_sha256": "03295b995593ec196a17868cbf3a452c345741bfcced2165eaf2e408841ae798",
+      "changed_pixels": 100,
+      "dataset": "ln1_game_level2",
+      "scene": 16
+    },
+    {
+      "after_sha256": "b8977db4bd3f6476b5ee31b6539587ff69f23ce2a37ff15f843f23234ca587e5",
+      "before_sha256": "b30af0dba830db74d1aad98f49da87262857a270c5e8cb58dd4d3b3f5c0905bb",
+      "changed_pixels": 692,
+      "dataset": "ln1_game_level2",
+      "scene": 17
+    },
+    {
+      "after_sha256": "9b009d0e2fce78704ca3feb49e0e7fe3b90f03f10e85af536ef880b3be0ed440",
+      "before_sha256": "d54131b569fe239b0744c3c4605fed2408305257801cc8b2e7f7a8b3b648132a",
+      "changed_pixels": 430,
+      "dataset": "ln1_game_level2",
+      "scene": 18
+    },
+    {
+      "after_sha256": "f0026f0a561040303506ef07975ac429c2d9430ec4c93d4bbf7538b1f4f8f134",
+      "before_sha256": "a6a84a1767714b6dd73a0d6301a936947346740722af346c1046ddfb85d022ab",
+      "changed_pixels": 406,
+      "dataset": "ln1_game_level2",
+      "scene": 19
+    },
+    {
+      "after_sha256": "54c6ad61854d81c1a8fd62f41ac0c3b44403ce0aa0b34acf2355e56ab852a266",
+      "before_sha256": "fdae906a428152f72adb3f3a7b4ce626d3dd7b436213c644e3b532b8a43fc58d",
+      "changed_pixels": 318,
+      "dataset": "ln1_game_level2",
+      "scene": 20
+    },
+    {
+      "after_sha256": "f97144f96a9c8d83473b32e1f74d2e07bd21c9ca2f32c01e23316beb59de81d1",
+      "before_sha256": "f2812f0e5a52fadb369a3ec46a04df4c9152f97d4665773c02a91274888d9454",
+      "changed_pixels": 230,
+      "dataset": "ln1_game_level2",
+      "scene": 21
+    },
+    {
+      "after_sha256": "f693a43b4f5641856ba0c03f2c6ae9820829b04d8de2ff485fb059af381f84ec",
+      "before_sha256": "be3f6df34655c12e3d54a82ca19f375e83b349ba52a6a9860eb6087298325dbb",
+      "changed_pixels": 602,
+      "dataset": "ln1_game_level2",
+      "scene": 22
+    },
+    {
+      "after_sha256": "9e68bba6e1ed73a0ab7d88f757dc3f89605ebe2b4c17a3513a56207a5fd9760b",
+      "before_sha256": "858890df30a47796010f134a4038803c53e9dd8d4bc26ba98c3bb868ea011f44",
+      "changed_pixels": 1330,
+      "dataset": "ln1_game_level2",
+      "scene": 23
+    },
+    {
+      "after_sha256": "86fc7728d40da973ac951d21f3f4a34a3ff4919c7e6b1dbb77e0385b6deb84a2",
+      "before_sha256": "aa1ae9db14c573d4ca92ac2eee8a593e6037e1a10d1b1c10bec42fa1828c1568",
+      "changed_pixels": 90,
+      "dataset": "ln1_game_level2",
+      "scene": 24
+    },
+    {
+      "after_sha256": "41c4da25e2708c91937358934478009ada9c652ae1a6a2b4a4bb8fe83d286bd8",
+      "before_sha256": "8588872150b6c36aa132f85108287ef151f3f72f4b793882c1b1a68fd803c926",
+      "changed_pixels": 882,
+      "dataset": "ln1_game_level2",
+      "scene": 25
+    },
+    {
+      "after_sha256": "41c4da25e2708c91937358934478009ada9c652ae1a6a2b4a4bb8fe83d286bd8",
+      "before_sha256": "8588872150b6c36aa132f85108287ef151f3f72f4b793882c1b1a68fd803c926",
+      "changed_pixels": 882,
+      "dataset": "ln1_game_level2",
+      "scene": 26
+    },
+    {
+      "after_sha256": "41c4da25e2708c91937358934478009ada9c652ae1a6a2b4a4bb8fe83d286bd8",
+      "before_sha256": "8588872150b6c36aa132f85108287ef151f3f72f4b793882c1b1a68fd803c926",
+      "changed_pixels": 882,
+      "dataset": "ln1_game_level2",
+      "scene": 27
+    },
+    {
+      "after_sha256": "0a8af8f3a465bba0332cb538c45489c76483a7fc17d23e2d00c75b1bb71dfe51",
+      "before_sha256": "f3de245026afc0b02407f6b85b5ef86935f1720ef444dadd38070eb4c1b96cc0",
+      "changed_pixels": 744,
+      "dataset": "ln1_game_level3",
+      "scene": 1
+    },
+    {
+      "after_sha256": "d8490c6cb564b486cd63bdf04f2085bf4b8f6bef3e2482f53e339609699f6d49",
+      "before_sha256": "ac77cb1ec8202c933a9b54410f5fb14402e64787f950dbbb48e6c8e80fa16a45",
+      "changed_pixels": 760,
+      "dataset": "ln1_game_level3",
+      "scene": 2
+    },
+    {
+      "after_sha256": "9136f52f001a2dccb0490d198910859cc388c947f49413fdd1f6676afdb8ea7d",
+      "before_sha256": "e723b3dbeeac4c56fba2aa6abe479e22e0174be6e6cd45434c662db1ed7d1ecb",
+      "changed_pixels": 372,
+      "dataset": "ln1_game_level3",
+      "scene": 3
+    },
+    {
+      "after_sha256": "98d79e15615615a9bc51b6da5c547828d6f94ad08e6b8bb14d9143957705adeb",
+      "before_sha256": "6b829377718955c9d62fe0af04ad7318e678843162fc031edd0e61707c12f209",
+      "changed_pixels": 896,
+      "dataset": "ln1_game_level3",
+      "scene": 4
+    },
+    {
+      "after_sha256": "eceaf7612123fc7cedb575307a05c3ae08b4e90e7abb8049900ba2246efef3bd",
+      "before_sha256": "87b0b89fbc072b74521dc7cc7a765160460c65f0680008b19fc69ae2257206b5",
+      "changed_pixels": 446,
+      "dataset": "ln1_game_level3",
+      "scene": 5
+    },
+    {
+      "after_sha256": "079913aa53b9e0fd67cd1462d03cfaaf95316124951a8c2e0fb67c8a7e54b59f",
+      "before_sha256": "28da77d74f67caae966637ed5ec824721d6607f438fb5e89900484f1a8c2c841",
+      "changed_pixels": 1004,
+      "dataset": "ln1_game_level3",
+      "scene": 6
+    },
+    {
+      "after_sha256": "cb23052fb1339dd8be0aea5df1abda0818df70d75a48f1b52603f9dfc89722a1",
+      "before_sha256": "19efe2a04f85256a68a12adf81ae42015424b87fefa80db66d4e4a6910c85ee4",
+      "changed_pixels": 296,
+      "dataset": "ln1_game_level3",
+      "scene": 7
+    },
+    {
+      "after_sha256": "e80d0c9ee870c38aae967d2019a2c2a00921c82c172def184db3bcabd513c492",
+      "before_sha256": "b838a5ae7b3084bf1d2feda3e43d2bf231c6a93f3cf6b2defc7e7d422336ef2d",
+      "changed_pixels": 414,
+      "dataset": "ln1_game_level3",
+      "scene": 8
+    },
+    {
+      "after_sha256": "d639a034b53444a4e4d8e462103c1a6bb20714f0e85a60589f5b54eadefb958d",
+      "before_sha256": "99a92a914a8e64dba4ca14c47174e09f412fc3907e550286d225eb630b0c7a55",
+      "changed_pixels": 1282,
+      "dataset": "ln1_game_level3",
+      "scene": 9
+    },
+    {
+      "after_sha256": "4370801190c822785be4c56bab3508d45e43d10a4b89ef531af3e8437584045c",
+      "before_sha256": "2968a28fab66c3381aa922a3daab1e97b61b8c2cfa3b256b266cedf3ada64d7f",
+      "changed_pixels": 956,
+      "dataset": "ln1_game_level3",
+      "scene": 10
+    },
+    {
+      "after_sha256": "97e6504fff9ec5a619b958fa30635a1e33fd80c23a675d5e9b3409f9fe998a7d",
+      "before_sha256": "03ce9aa81e88353b0025bb13bd25812faab813e5d850be62d54aa29953866fd4",
+      "changed_pixels": 384,
+      "dataset": "ln1_game_level3",
+      "scene": 11
+    },
+    {
+      "after_sha256": "3ca5d0dadcc025e36453c46c0c7db0712fb63be51a221246c34d8f3c09be2d15",
+      "before_sha256": "d3f28cc6d924586239e580fb04dc8598b50066731b994fde1e7dbfe8a93f012d",
+      "changed_pixels": 466,
+      "dataset": "ln1_game_level3",
+      "scene": 12
+    },
+    {
+      "after_sha256": "e3fbe36dd17aef09f6ff82ede31b4b18f2788f15f674c8205547a19730b1aa9c",
+      "before_sha256": "f18ae1bcf439d47e63a1f62f8e668d7238778a32b5555cc1d194cacffa11df21",
+      "changed_pixels": 1570,
+      "dataset": "ln1_game_level3",
+      "scene": 13
+    },
+    {
+      "after_sha256": "a3a295745e0c6dbe7263ee575c87d8bd44bc73fdd3e49c33074716f7d1252284",
+      "before_sha256": "d5d3d70a741ae79041daf7b8406ffae00e8876d01c7cc1b40b5162660d555d53",
+      "changed_pixels": 734,
+      "dataset": "ln1_game_level3",
+      "scene": 14
+    },
+    {
+      "after_sha256": "ce89408ca6079dd1e4d352485838a08646589174cc3ce893a6b1790748812261",
+      "before_sha256": "e4574b8fd0a3c04ccdd311fbd6742dcbffe352300f508d7462fcdcca0f4283e5",
+      "changed_pixels": 822,
+      "dataset": "ln1_game_level3",
+      "scene": 15
+    },
+    {
+      "after_sha256": "6bbd6116254893ed69158ad0d546cee76a56807bf41711937be2631a280d9174",
+      "before_sha256": "80b62ee3c0b7fc676a65f15491797f7ee0f9542eb1052111b31727a0bf0d8f88",
+      "changed_pixels": 654,
+      "dataset": "ln1_game_level3",
+      "scene": 16
+    },
+    {
+      "after_sha256": "23fce377eb47747483f5ab9be3583f8353d88cfae9e3214fe4565c89393f3755",
+      "before_sha256": "0e1bcdf4d35b44e8ce078c3b06531a940baf4e17125ad46521bc98818517e58e",
+      "changed_pixels": 670,
+      "dataset": "ln1_game_level3",
+      "scene": 17
+    },
+    {
+      "after_sha256": "c70e85cf50b5d299845f92e5f3e96d1046a074a4aa4e47646a118bcbb828571a",
+      "before_sha256": "daefdd6257246d33d0514e1c12d4091b5ca50fb5daedb75b3c28e727a903c7d9",
+      "changed_pixels": 852,
+      "dataset": "ln1_game_level3",
+      "scene": 18
+    },
+    {
+      "after_sha256": "2042264f7c3bed6283716830fc7df7a444ca315ee8ce5990a0b4ea184843d639",
+      "before_sha256": "acbe015adfff9f75fa73d51739fee0537304a7ded1a8020639d2a1cee6b062b6",
+      "changed_pixels": 1118,
+      "dataset": "ln1_game_level3",
+      "scene": 19
+    },
+    {
+      "after_sha256": "64cc92c2a6bdc4d8a2aa00a071a23fcb85f9dd73a03f1dbd9fa997e28db47dd7",
+      "before_sha256": "b429791a6ed3ec58d7f694dc9f829580b766926542f98fd296f1964a37ca49b4",
+      "changed_pixels": 568,
+      "dataset": "ln1_game_level3",
+      "scene": 20
+    },
+    {
+      "after_sha256": "ab3f3a993da17b17d96ea67aedc7001789e428fa43030133ffaf90142a5ac59f",
+      "before_sha256": "02f892d57bcfe6b42e1f36f26d8e86fe840f06c13fdd0e1084388e705120559e",
+      "changed_pixels": 1122,
+      "dataset": "ln1_game_level3",
+      "scene": 21
+    },
+    {
+      "after_sha256": "f06e110d35735085e358226140d9c6a8613eea62832e95863e2ae6f88fd935f2",
+      "before_sha256": "2c2fea625b6a0299c5ddd6d5b2cfe370cc2b882cac47be1088218c2b735012ee",
+      "changed_pixels": 1076,
+      "dataset": "ln1_game_level3",
+      "scene": 22
+    },
+    {
+      "after_sha256": "458944d2f6e1e8564871146a8ef95ba080d40de0c3caf31cf81b858040ed18af",
+      "before_sha256": "9a31d9bbe95fbc8bd181a9f929f61d47fe2fded33c58e71cd9178566dc03d599",
+      "changed_pixels": 524,
+      "dataset": "ln1_game_level3",
+      "scene": 23
+    },
+    {
+      "after_sha256": "4fe695d700e2324d772e57d0469d894c8dea47739999240c093d1a1a73012246",
+      "before_sha256": "b03aa9e4172e7dadf25ee03533a1c94fa8df786788586dbea9cce933323a66d6",
+      "changed_pixels": 532,
+      "dataset": "ln1_game_level3",
+      "scene": 24
+    },
+    {
+      "after_sha256": "7373b77063d5bfc4194b6be844b624dc64e4a11da8206561dcbb9a084e3bbc2b",
+      "before_sha256": "49e581a00d2ea4b3b2671d05805e88c4ebf02659be07b24f4e963932386e5faa",
+      "changed_pixels": 1236,
+      "dataset": "ln1_game_level3",
+      "scene": 25
+    },
+    {
+      "after_sha256": "f06e110d35735085e358226140d9c6a8613eea62832e95863e2ae6f88fd935f2",
+      "before_sha256": "2c2fea625b6a0299c5ddd6d5b2cfe370cc2b882cac47be1088218c2b735012ee",
+      "changed_pixels": 1076,
+      "dataset": "ln1_game_level3",
+      "scene": 32
+    },
+    {
+      "after_sha256": "2f477170674ea2f8b2a0f9ffc06c63897b6c5492226628dbbfa8736aedeca600",
+      "before_sha256": "7ee195f730d49a82ac0e2a14b086db65f64e2253ad803780e60b76c1331ee740",
+      "changed_pixels": 66,
+      "dataset": "ln1_game_level4",
+      "scene": 1
+    },
+    {
+      "after_sha256": "0582d815d98ff325093f27fbaab8ad7e81ad6a6f720bf33294db30463acab294",
+      "before_sha256": "d84f4de22864ee1159e5fa8003bb3b5ebb26dd37f544600f5de78be7ebc2cbb4",
+      "changed_pixels": 108,
+      "dataset": "ln1_game_level4",
+      "scene": 2
+    },
+    {
+      "after_sha256": "243a8cc9f58124d8f30a6db31b04391d13732b4116eb8edc46b81921cd306a1a",
+      "before_sha256": "daf2a123a192991d7bfc68668a60f6ad82280fadbd7edbe7264f3489b8c44470",
+      "changed_pixels": 6,
+      "dataset": "ln1_game_level4",
+      "scene": 3
+    },
+    {
+      "after_sha256": "13612dcc8ba2332baea3907d7d2e76b3c90ebb01a61cfbf7af6e22a8f9557b0d",
+      "before_sha256": "13612dcc8ba2332baea3907d7d2e76b3c90ebb01a61cfbf7af6e22a8f9557b0d",
+      "changed_pixels": 0,
+      "dataset": "ln1_game_level4",
+      "scene": 4
+    },
+    {
+      "after_sha256": "c103903c10d63877cfea199ac17a3c2d72a554a637b30f90adbacdabdfc51b28",
+      "before_sha256": "c103903c10d63877cfea199ac17a3c2d72a554a637b30f90adbacdabdfc51b28",
+      "changed_pixels": 0,
+      "dataset": "ln1_game_level4",
+      "scene": 5
+    },
+    {
+      "after_sha256": "140c9fe9bae1f66d78494a8d3a6a7a398db394ab24a6b0d2f1d6099e7ca71a33",
+      "before_sha256": "140c9fe9bae1f66d78494a8d3a6a7a398db394ab24a6b0d2f1d6099e7ca71a33",
+      "changed_pixels": 0,
+      "dataset": "ln1_game_level4",
+      "scene": 6
+    },
+    {
+      "after_sha256": "d54d7b75ebb0ebbdf831f7363c5d75b3f83992ef7d2a6282a51598052df413af",
+      "before_sha256": "d54d7b75ebb0ebbdf831f7363c5d75b3f83992ef7d2a6282a51598052df413af",
+      "changed_pixels": 0,
+      "dataset": "ln1_game_level4",
+      "scene": 7
+    },
+    {
+      "after_sha256": "5888abf1bec86982a82927d8e7a0927fae8332001eaa23dfb44b330ff17dda1b",
+      "before_sha256": "5888abf1bec86982a82927d8e7a0927fae8332001eaa23dfb44b330ff17dda1b",
+      "changed_pixels": 0,
+      "dataset": "ln1_game_level4",
+      "scene": 8
+    },
+    {
+      "after_sha256": "370368adad53ed4eb0e53d1f3a61e19b1e10cee388305dde38821c5361309062",
+      "before_sha256": "370368adad53ed4eb0e53d1f3a61e19b1e10cee388305dde38821c5361309062",
+      "changed_pixels": 0,
+      "dataset": "ln1_game_level4",
+      "scene": 9
+    },
+    {
+      "after_sha256": "5fd485f151354355f64eeabe49aca0a1c7bc6f36be3109d212df86d1def3e76a",
+      "before_sha256": "5fd485f151354355f64eeabe49aca0a1c7bc6f36be3109d212df86d1def3e76a",
+      "changed_pixels": 0,
+      "dataset": "ln1_game_level4",
+      "scene": 10
+    },
+    {
+      "after_sha256": "45b6cb7f7e6de61c240575b211014d831bd08b8eca1f5e9648b8d9f99581e739",
+      "before_sha256": "66b2ec9ea5a477fe4b9451e2c101e6706af4e5f38b2e6c29764c2cf5d7c2716c",
+      "changed_pixels": 16,
+      "dataset": "ln1_game_level4",
+      "scene": 11
+    },
+    {
+      "after_sha256": "12708f690037a76d500a5fff80a527bbfb05e199e80cdac1144cfe5cfb788d13",
+      "before_sha256": "719c643925bbeb5f11e39421518a0374620da6b8e2d7277653f85ca0d01957e7",
+      "changed_pixels": 34,
+      "dataset": "ln1_game_level4",
+      "scene": 12
+    },
+    {
+      "after_sha256": "e2ae4eb644f6ceef3f1d93a8181fabfc321102b268e9882752925b9ea767ba61",
+      "before_sha256": "562626d3c37ca5ea7a60ffd4442887dccd2f858a7b92726911e76bdabe61358d",
+      "changed_pixels": 100,
+      "dataset": "ln1_game_level4",
+      "scene": 13
+    },
+    {
+      "after_sha256": "64941dab64f87d98a93a24f31aad5ba44f2e6e32c77906a283406de56f38ee1a",
+      "before_sha256": "64941dab64f87d98a93a24f31aad5ba44f2e6e32c77906a283406de56f38ee1a",
+      "changed_pixels": 0,
+      "dataset": "ln1_game_level4",
+      "scene": 14
+    },
+    {
+      "after_sha256": "6983123280efb98423ed1231b5f869b1a93aeed6171db36eeba1a7b6ffdf0044",
+      "before_sha256": "6983123280efb98423ed1231b5f869b1a93aeed6171db36eeba1a7b6ffdf0044",
+      "changed_pixels": 0,
+      "dataset": "ln1_game_level4",
+      "scene": 15
+    },
+    {
+      "after_sha256": "790ddb4b5e4c828ec01e1890bd62d423b6f68ab822065f8d8b00caaefc5801d8",
+      "before_sha256": "be5e651b8deb22417b11adf7bcd0ed27a230104d547145816c532df4774d8181",
+      "changed_pixels": 16,
+      "dataset": "ln1_game_level4",
+      "scene": 16
+    },
+    {
+      "after_sha256": "e9f7b8169daf4f7d93874a58da8dde8648805bbeff0055f8b2c887da494eb8f0",
+      "before_sha256": "e9f7b8169daf4f7d93874a58da8dde8648805bbeff0055f8b2c887da494eb8f0",
+      "changed_pixels": 0,
+      "dataset": "ln1_game_level4",
+      "scene": 17
+    },
+    {
+      "after_sha256": "cf03bd9228d5077fd1e8d943f7ab46e35a5177710b95417482e12f98fadc0f83",
+      "before_sha256": "cf03bd9228d5077fd1e8d943f7ab46e35a5177710b95417482e12f98fadc0f83",
+      "changed_pixels": 0,
+      "dataset": "ln1_game_level4",
+      "scene": 18
+    },
+    {
+      "after_sha256": "05c0cb01e7d5fe2efc7749ebc35bbab7621715986eadf624c0cf2612e729cd5a",
+      "before_sha256": "3f963453f100e80bb34baaca701f8a94f517dd37f1f42311887322b90404320a",
+      "changed_pixels": 8,
+      "dataset": "ln1_game_level4",
+      "scene": 19
+    },
+    {
+      "after_sha256": "2cb1fce3fefae0178ba7a67ae92e7d41c3c77921af79f89e2d3062a92a7360fc",
+      "before_sha256": "6ba30f0999a5e8d489ac56ec56c00db4d7c9bda4bfbfa8e31869d01606b788cf",
+      "changed_pixels": 46,
+      "dataset": "ln1_game_level4",
+      "scene": 20
+    },
+    {
+      "after_sha256": "3ab8d8c91896c01c9b3e47c8074602f782095a524c408ea0ace818da8b867bbc",
+      "before_sha256": "3683c015e8748d8cb34b06c9f653d472cd16891afa49eb1e9c79ab3ebe24df34",
+      "changed_pixels": 26,
+      "dataset": "ln1_game_level4",
+      "scene": 21
+    },
+    {
+      "after_sha256": "618b34ae2e26ae9a7da8ad1c55df0475eec5ca7e0ec5468b8228b47e98a25ecf",
+      "before_sha256": "618b34ae2e26ae9a7da8ad1c55df0475eec5ca7e0ec5468b8228b47e98a25ecf",
+      "changed_pixels": 0,
+      "dataset": "ln1_game_level4",
+      "scene": 22
+    },
+    {
+      "after_sha256": "a5fb090b29a5a147f9ba57c2e024dd2818758b0b10e59e9b46c29368c55465e8",
+      "before_sha256": "a5fb090b29a5a147f9ba57c2e024dd2818758b0b10e59e9b46c29368c55465e8",
+      "changed_pixels": 0,
+      "dataset": "ln1_game_level4",
+      "scene": 23
+    },
+    {
+      "after_sha256": "317596466b16b2916ad52ab247a0232208662074e9f562a07f8aa7c034a656af",
+      "before_sha256": "bf95b750cf50b7db967a18aa286b56a9069fc96560acc87e89e5309cb711219c",
+      "changed_pixels": 6,
+      "dataset": "ln1_game_level4",
+      "scene": 24
+    },
+    {
+      "after_sha256": "c6ed5d6a81f7aa31e4dcff4c2e5d0ede49f1da97d37e8bbf62b37ce2eafbc8d9",
+      "before_sha256": "ee18bfbeaf60fa945f0e909a6b8f53ca0bc9e5c674f8f705d691fc38d7e55f32",
+      "changed_pixels": 16,
+      "dataset": "ln1_game_level4",
+      "scene": 25
+    },
+    {
+      "after_sha256": "317596466b16b2916ad52ab247a0232208662074e9f562a07f8aa7c034a656af",
+      "before_sha256": "bf95b750cf50b7db967a18aa286b56a9069fc96560acc87e89e5309cb711219c",
+      "changed_pixels": 6,
+      "dataset": "ln1_game_level4",
+      "scene": 26
+    },
+    {
+      "after_sha256": "c6ed5d6a81f7aa31e4dcff4c2e5d0ede49f1da97d37e8bbf62b37ce2eafbc8d9",
+      "before_sha256": "ee18bfbeaf60fa945f0e909a6b8f53ca0bc9e5c674f8f705d691fc38d7e55f32",
+      "changed_pixels": 16,
+      "dataset": "ln1_game_level4",
+      "scene": 27
+    },
+    {
+      "after_sha256": "618b34ae2e26ae9a7da8ad1c55df0475eec5ca7e0ec5468b8228b47e98a25ecf",
+      "before_sha256": "618b34ae2e26ae9a7da8ad1c55df0475eec5ca7e0ec5468b8228b47e98a25ecf",
+      "changed_pixels": 0,
+      "dataset": "ln1_game_level4",
+      "scene": 37
+    },
+    {
+      "after_sha256": "f15523919fe5c7ba56193089391a837c0a6cd117b4cd438821e447fb36b1db11",
+      "before_sha256": "9112bffcf5c8bc0a7e062a4e74c69d5d833a3a1bcabff673d6c18d7129a0acbb",
+      "changed_pixels": 116,
+      "dataset": "ln1_game_level5",
+      "scene": 1
+    },
+    {
+      "after_sha256": "17e9451363ab584fcc1739d837fa93f49332c3373ec24ef781a7c647dd1d4fc0",
+      "before_sha256": "a13366bc0e546dde1440794d76de49af0b9ebe12afbb3fbbd856212707131fbd",
+      "changed_pixels": 220,
+      "dataset": "ln1_game_level5",
+      "scene": 2
+    },
+    {
+      "after_sha256": "9e68e59483ffa4373ae66d622e2068ab041498632d1ed818dc4f488520aadb8f",
+      "before_sha256": "37a9c59d997dda8aa0dc8f6407a422ddb1893d4bfa2b67c62b452e33d0a44700",
+      "changed_pixels": 146,
+      "dataset": "ln1_game_level5",
+      "scene": 3
+    },
+    {
+      "after_sha256": "8d9e2c889de3f05aa974bdf32ad1031e43f25cf8e8205970c3a43a4412f2d8b2",
+      "before_sha256": "ce4e98ce28860446dc08a30ef28c8a6324e5b24ab1d6497b55c4dcfc15e6365b",
+      "changed_pixels": 278,
+      "dataset": "ln1_game_level5",
+      "scene": 4
+    },
+    {
+      "after_sha256": "241fc4cdb28e2ea70693c34e990754f9452eb1127931ec037953a19826c78f50",
+      "before_sha256": "5601dcb2ba1d070fadc3dbb74e00031297d1b536649ddf05c7f69261658da09f",
+      "changed_pixels": 80,
+      "dataset": "ln1_game_level5",
+      "scene": 5
+    },
+    {
+      "after_sha256": "8543460d33d3731a1c98b69f49f9e111973ed5019df9358ac777f8307c871308",
+      "before_sha256": "fa4ded8a89e4879331152611b9607ca887ae9d0eaa192bf62660ec2252b86918",
+      "changed_pixels": 284,
+      "dataset": "ln1_game_level5",
+      "scene": 6
+    },
+    {
+      "after_sha256": "740da0ca8cd86f65fc5b87c98d5ed12fcbbacc0fbf5c7ab67c9fd5b7d6ca6c31",
+      "before_sha256": "b6a543a8eebe6cd9e5c7624db0339d079d7598f126ad7a23f3d9a9cb75922a36",
+      "changed_pixels": 378,
+      "dataset": "ln1_game_level5",
+      "scene": 7
+    },
+    {
+      "after_sha256": "0cf03674b5f6f7813fa4895231e1f66c5a3c6977eb019a482e3f6d489a7269ad",
+      "before_sha256": "00e4c7d1620b2fb64c6ae7f03e21f6eb1f1f0a32e65711434c6f14d958f658b6",
+      "changed_pixels": 10,
+      "dataset": "ln1_game_level5",
+      "scene": 8
+    },
+    {
+      "after_sha256": "47356d5066817ff95fb55632b497e32d7b7d26d31ccdb61aa86f260f778771a7",
+      "before_sha256": "eb5449f5532d9674c2b631750f31fd32623fa92f1b18b70f5ff627ccc6684201",
+      "changed_pixels": 16,
+      "dataset": "ln1_game_level5",
+      "scene": 9
+    },
+    {
+      "after_sha256": "a491c7603bc905640dd71e0c54076d7aa20212202868a361f6ab85890410651b",
+      "before_sha256": "bc65ae7591e0b3c7a4b6f7c5558fa77dcc4b200d51b47b9b0875d10e8e410447",
+      "changed_pixels": 76,
+      "dataset": "ln1_game_level5",
+      "scene": 10
+    },
+    {
+      "after_sha256": "086eefbc58e966403f93dbeb96e5488055a5b4b1592f024645db885fae159f6f",
+      "before_sha256": "6c378257f29594293c61fcb61fa080cb4397f54a69e3ba98501b8a00358c9d71",
+      "changed_pixels": 20,
+      "dataset": "ln1_game_level5",
+      "scene": 11
+    },
+    {
+      "after_sha256": "e41143e6e86883aa03b49cd37e84efaaae3e41d04b2afc960b2bb76700c44308",
+      "before_sha256": "6e98a4c05c37b25cb552088112429e5e65f02d03c7ba23eaec3e79252eb3afc1",
+      "changed_pixels": 36,
+      "dataset": "ln1_game_level5",
+      "scene": 12
+    },
+    {
+      "after_sha256": "fe6a0670854d36105c09acde68434ad6c882868b7f9866d4edea46531f7b6949",
+      "before_sha256": "f867517a07ec0d578d78e7195f1e80ff8f05e70a495615a15cefc2a127e9a464",
+      "changed_pixels": 24,
+      "dataset": "ln1_game_level5",
+      "scene": 13
+    },
+    {
+      "after_sha256": "70a195be209c0743a091fde57f0c44126251937ce6ef2cb54b0799f3c9728fd7",
+      "before_sha256": "34006e0b4e166af4114cedfba358622e6a7f4bfcf054f71ae903379f33e086cd",
+      "changed_pixels": 138,
+      "dataset": "ln1_game_level5",
+      "scene": 14
+    },
+    {
+      "after_sha256": "1328c77176cb9d7ac1ad8bc9999c8f49eba0c5b85d04118e03dff356c92ab463",
+      "before_sha256": "46b59235f0cd9676c93d337fab02c96977e9fb22a621f9c52e96c68504b6b67d",
+      "changed_pixels": 38,
+      "dataset": "ln1_game_level5",
+      "scene": 15
+    },
+    {
+      "after_sha256": "c8ad1bf5ffb3df55e14ff3d661bdba34ba1cbd71e9549df7e1a900ed8bdbbdd6",
+      "before_sha256": "c8ad1bf5ffb3df55e14ff3d661bdba34ba1cbd71e9549df7e1a900ed8bdbbdd6",
+      "changed_pixels": 0,
+      "dataset": "ln1_game_level6",
+      "scene": 1
+    },
+    {
+      "after_sha256": "4b4aaca2809536cf33e28e3b899f5b697a0a0a171b227e1d867437bf12a3a66f",
+      "before_sha256": "4b4aaca2809536cf33e28e3b899f5b697a0a0a171b227e1d867437bf12a3a66f",
+      "changed_pixels": 0,
+      "dataset": "ln1_game_level6",
+      "scene": 2
+    },
+    {
+      "after_sha256": "433f02dd6b1e7de0db6b92875a8ecfda9ae7f8943239489f867dc24e2153689f",
+      "before_sha256": "6d301af34aa5cea3241ac20e4c73262008172b7fa2cfb8ac52938498f5dfb75f",
+      "changed_pixels": 112,
+      "dataset": "ln1_game_level6",
+      "scene": 3
+    },
+    {
+      "after_sha256": "520748da80cfc742ff8177c86212eea9a30afa9b21dd41c8f88a99b0c826f9e0",
+      "before_sha256": "e40fd52df044dd53c0ede1d90b6479591a170f5c1583cc95d00a3a6adcca89a3",
+      "changed_pixels": 2,
+      "dataset": "ln1_game_level6",
+      "scene": 4
+    },
+    {
+      "after_sha256": "ecdb3d8ef5b3463cd52d31f3f53e38cea8c3b3b93858fcf41fa505995af98610",
+      "before_sha256": "3907a7753f0533ad15742947d81e5b1b0b5bc12097446e418dac93c5a8217aa8",
+      "changed_pixels": 132,
+      "dataset": "ln1_game_level6",
+      "scene": 5
+    },
+    {
+      "after_sha256": "ba5fffc02775af27c76847287c174366bdc657880af5e230b2ce4f05c90bef84",
+      "before_sha256": "031f273cfa637dbe2be95e2590271d3dc78bacb0155b1a3bf4603631fddd92e1",
+      "changed_pixels": 60,
+      "dataset": "ln1_game_level6",
+      "scene": 6
+    },
+    {
+      "after_sha256": "37644d31629c3117eea65690c5e21cefb7d9910e7aab15108945ef001b2087e1",
+      "before_sha256": "caedb32674e28a640a8f02462cdc6c5c376c2120a844dfc69119143140314822",
+      "changed_pixels": 122,
+      "dataset": "ln1_game_level6",
+      "scene": 7
+    },
+    {
+      "after_sha256": "568aaec2fb1ccf1d6dffb40250793a2f9bf437987ff881d9e5ec53e8ea79b029",
+      "before_sha256": "542d49f117ca85fd5115801484b75b130cac5e13ac49c035db5d0d84851622bc",
+      "changed_pixels": 124,
+      "dataset": "ln1_game_level6",
+      "scene": 8
+    },
+    {
+      "after_sha256": "3cd68a91b82082a10472759bc227f83db2729a52ec054b3e3fd525756e61b7eb",
+      "before_sha256": "cf1745075f1fb09d8532fa7186500891aa59a0aae52695aca9a53940f71ae8f0",
+      "changed_pixels": 268,
+      "dataset": "ln1_game_level6",
+      "scene": 9
+    },
+    {
+      "after_sha256": "65203644bc1a4a40f5c59016fc0ee32da07aa976ca7e397efbbc0abec77dd515",
+      "before_sha256": "ef41187ec430adf8a9cca1e5a11d1169a10bbcf85c0c79df4595851ae3e5cf71",
+      "changed_pixels": 78,
+      "dataset": "ln1_game_level6",
+      "scene": 10
+    },
+    {
+      "after_sha256": "e3b4e50d4d861833ea000709d4859dd75f7eb64f6314b4376a190f2ce414621a",
+      "before_sha256": "8d7074df13a2b50f33d9ec5be3671772d20831a78d5f8cd94c7244674612e86b",
+      "changed_pixels": 28,
+      "dataset": "ln1_game_level6",
+      "scene": 11
+    },
+    {
+      "after_sha256": "9b6626eb753901e9ffa7758bcb8252ea3b3d0931a90c55f977bd279b434fdad0",
+      "before_sha256": "d4afc80e1706bb67e229373a5f970826dac30fa4037238fda38ad39bbd0613ca",
+      "changed_pixels": 98,
+      "dataset": "ln1_game_level6",
+      "scene": 12
+    },
+    {
+      "after_sha256": "79dc099abdf17331dffb0d030c68448556db0aba2f4aae74dc66b4263091d603",
+      "before_sha256": "156c06fa69dd7fb346431a242a7f49950f0f6c7d9f17357c8bccea13b0f456f3",
+      "changed_pixels": 40,
+      "dataset": "ln1_game_level6",
+      "scene": 13
+    },
+    {
+      "after_sha256": "c2ac4cf064f5feea9cec327b19ca462b5e76579ec9d3e65afbc86ec2f3d4072e",
+      "before_sha256": "a286e2ff6df857d260e2b30a2b30323a7b489abc22fd7ba282afdd1e397ff793",
+      "changed_pixels": 30,
+      "dataset": "ln1_game_level6",
+      "scene": 14
+    },
+    {
+      "after_sha256": "1cb23fd524bdad96fb1d846f747a7e5ede17fbedbc8a6479ef562b38f21e11cd",
+      "before_sha256": "1cb23fd524bdad96fb1d846f747a7e5ede17fbedbc8a6479ef562b38f21e11cd",
+      "changed_pixels": 0,
+      "dataset": "ln1_game_level6",
+      "scene": 15
+    },
+    {
+      "after_sha256": "415167dcbc7b0cd473d5b70a228e747eaca7fb407ca0b0d49204e97771268510",
+      "before_sha256": "bce98e13f162ecd39161fae0e5b686a59211194f211f52fbd214e207a390a324",
+      "changed_pixels": 2,
+      "dataset": "ln1_game_level6",
+      "scene": 16
+    },
+    {
+      "after_sha256": "adf9b48f83381259a3cbe6c97b2f400f05be11babbea0297cea874db3d257c0b",
+      "before_sha256": "f108ffc3e8664cd24143e42da0b4a7dbf61b41bc1ce05806c54bd9885095dbb7",
+      "changed_pixels": 254,
+      "dataset": "ln2_game_level1",
+      "scene": 1
+    },
+    {
+      "after_sha256": "f0e9e8b2e800e4ef25e200e9fee5901d7d75fc2c227bd977e2f678b5f1ba9dab",
+      "before_sha256": "79aed5bea02a30541ea939690e3262e8b8044f64fd51be52ab00ad67fb82da0e",
+      "changed_pixels": 174,
+      "dataset": "ln2_game_level1",
+      "scene": 2
+    },
+    {
+      "after_sha256": "a39caa55e438dd2101da6be81a178b240390951b19229e2c7bd82e43f270b3d7",
+      "before_sha256": "ff63c98ed393b86b007d4baf0e07283cfbd91b681882790fdfd6b16e4fd3532c",
+      "changed_pixels": 198,
+      "dataset": "ln2_game_level1",
+      "scene": 3
+    },
+    {
+      "after_sha256": "10e21882c815d4702002833aec9da4e4e8ba7f69df89b291b157bcae189798e1",
+      "before_sha256": "72cd39210715dac9f700d970138d0bda3324b417b97db9af01d2bd29b749ce7a",
+      "changed_pixels": 446,
+      "dataset": "ln2_game_level1",
+      "scene": 4
+    },
+    {
+      "after_sha256": "36b8e76867eac9187c066a3b26589c4983c3671243a74da4b1d689d4a51dfd66",
+      "before_sha256": "804fa74eb5df8d7df83b61d738d78013a4d6ae5223f0d31ac146825892ba72c1",
+      "changed_pixels": 422,
+      "dataset": "ln2_game_level1",
+      "scene": 5
+    },
+    {
+      "after_sha256": "db3437ec49dc632d8b4e8723bcde6f8bba4f7892e96ce182b90b1b1fa1c1063c",
+      "before_sha256": "db3437ec49dc632d8b4e8723bcde6f8bba4f7892e96ce182b90b1b1fa1c1063c",
+      "changed_pixels": 0,
+      "dataset": "ln2_game_level1",
+      "scene": 6
+    },
+    {
+      "after_sha256": "148089ca7a86439369f19e082cadb017fbff9264609f6df6a0f714c9a750d610",
+      "before_sha256": "de1011cd09ea8ea429e87bd78cf87dfa629a57a4bc989325c50c3339b99ade0a",
+      "changed_pixels": 618,
+      "dataset": "ln2_game_level1",
+      "scene": 7
+    },
+    {
+      "after_sha256": "d1c7a8262439dfc87a8b77cfbd576e77e089805e5da8e3e8522b6dbc5031a984",
+      "before_sha256": "b729322e146508bbb956aa0bc3e14e91ee1ac81d3f782b7b4785f66a31337336",
+      "changed_pixels": 328,
+      "dataset": "ln2_game_level1",
+      "scene": 8
+    },
+    {
+      "after_sha256": "f4206b936648e97727452506755e41e30a9fe542b726675b6149bac1f5759f81",
+      "before_sha256": "4616c9ebdfbd559297c77f6a201bacc3345c5513e1da6dac3e925498d2d811bc",
+      "changed_pixels": 298,
+      "dataset": "ln2_game_level1",
+      "scene": 9
+    },
+    {
+      "after_sha256": "33ab5eaf50169d594ad73be8dad555461f2fb1667ea446ec69a364328e6d84a7",
+      "before_sha256": "77a97745c889efe5e0f53a4deb10557fd2c31dd35ee84c3783e877ada6b88099",
+      "changed_pixels": 420,
+      "dataset": "ln2_game_level1",
+      "scene": 10
+    },
+    {
+      "after_sha256": "b9214431b33e0631cbc8ee1856daa5e986773bdedd61421e4abed319a7a42b80",
+      "before_sha256": "1ea01422478bc15ab39341196b56adb25e1420b7fc8505d841b53a9f152669ac",
+      "changed_pixels": 708,
+      "dataset": "ln2_game_level1",
+      "scene": 11
+    },
+    {
+      "after_sha256": "03b9bad91aec40ee2c3338fd6f040d591f85add5ada4a1910196b6d2767d636e",
+      "before_sha256": "80e29d46824a68be2e577823b0d912599d9e865580e262f0fd0f128cd4a10e7a",
+      "changed_pixels": 378,
+      "dataset": "ln2_game_level1",
+      "scene": 12
+    },
+    {
+      "after_sha256": "ddbd4d902ed230a53201d9fd90cea8c90bec94591380d0984a1f079aab80b0f8",
+      "before_sha256": "0363fb2ad5b84764ef27e2929d4fd45657c64b57d880b324105dc468e8c3c334",
+      "changed_pixels": 2142,
+      "dataset": "ln2_game_level1",
+      "scene": 13
+    },
+    {
+      "after_sha256": "6523580ca04fd16a84dd7176a08e21af6063a4d47d65801ce0448533ddf97400",
+      "before_sha256": "d44974435e97fa56fd75d898fab0e0c31e4b5bd2a96f1e8bb11e96cb62459fb5",
+      "changed_pixels": 522,
+      "dataset": "ln2_game_level1",
+      "scene": 14
+    },
+    {
+      "after_sha256": "7ff9cd9b613dea26e8faee926b51bfc0d1b9e755b6842e7426dda2eece2b9bd9",
+      "before_sha256": "f30d26fd7cce36cc1a321766d34f74b9509ed074fcf8f0f6d3f7c4defc7bbf99",
+      "changed_pixels": 528,
+      "dataset": "ln2_game_level1",
+      "scene": 15
+    },
+    {
+      "after_sha256": "ec93d92c897fc5acd1292c9e7f4b89bb687515f50827edf758bbb31fc6faa836",
+      "before_sha256": "b89e2f8cd7487beac2e521dd0967de444e07cdf48c18f70b87da8fa1a0443b38",
+      "changed_pixels": 388,
+      "dataset": "ln2_game_level1",
+      "scene": 16
+    },
+    {
+      "after_sha256": "9b386ee81888847ba7c0767e657ad074d73e83d90d526ad1f215f3945978fd34",
+      "before_sha256": "ab1c98eb6c724d879ce1372a04d181bdf208c9aaa715736e0ad305e229e6cbcd",
+      "changed_pixels": 182,
+      "dataset": "ln2_game_level1",
+      "scene": 17
+    },
+    {
+      "after_sha256": "08bdc108ea534ce31fabdc2edf61223afdf9e374977de8e6630522d7f88329e5",
+      "before_sha256": "8baf7cdbf9e147630eea05a2d3744246874f21bcdc2dedcde76da9cee1946d9f",
+      "changed_pixels": 254,
+      "dataset": "ln2_game_level1",
+      "scene": 18
+    },
+    {
+      "after_sha256": "fac0b088b42a1a1f8350411f2f54af6008a37aa010fb23fca86f8fccec6ee50a",
+      "before_sha256": "d6bf74ad38526c9922896503532914d5e274f16c8f7cc9395eb88ea5a7f0f62e",
+      "changed_pixels": 228,
+      "dataset": "ln2_game_level1",
+      "scene": 19
+    },
+    {
+      "after_sha256": "73ec45a5f690045a6074ba48941f2613b23656ae56154478ff72334a60949d70",
+      "before_sha256": "f580d6a62809f85c6de18dddae45294f4c25e1191d604205b080175cf50ed034",
+      "changed_pixels": 148,
+      "dataset": "ln2_game_level2",
+      "scene": 0
+    },
+    {
+      "after_sha256": "a244db92283a6c910b7bf7887b00dca5466507799093e3bc35b1862addc5a457",
+      "before_sha256": "dacf0dbb60219b1e633361145987634edc7a256484df4849d1cda2fb9f2d0d64",
+      "changed_pixels": 266,
+      "dataset": "ln2_game_level2",
+      "scene": 1
+    },
+    {
+      "after_sha256": "bc07e2ba68918bfb4173d9ec6e7b15256cb6f50d75ae205e4da46da8c8c3377f",
+      "before_sha256": "27026588dd6a607671f291785bbd5f49c6b86d5f82638f2d7ee2a4bc494dfee7",
+      "changed_pixels": 194,
+      "dataset": "ln2_game_level2",
+      "scene": 2
+    },
+    {
+      "after_sha256": "841e84bde9d5f79fbc589dce573cd946ffd493df54990903dd7f3f453853ba5b",
+      "before_sha256": "6e1ca81b89bc4f145d1e0bd5e7a7314dbb6a6c14390aa9eeceb5e23f196d9a4a",
+      "changed_pixels": 236,
+      "dataset": "ln2_game_level2",
+      "scene": 3
+    },
+    {
+      "after_sha256": "9a102ee1301ee10357799f0c8b1f036f75ac952722e4628b0bbb6439ad74e69b",
+      "before_sha256": "5682fe921e04461defd89ab46636b6b90284304d79ae8eda5660a50038829fea",
+      "changed_pixels": 192,
+      "dataset": "ln2_game_level2",
+      "scene": 4
+    },
+    {
+      "after_sha256": "e6ba9b338fd0d77caaad2ed93b862a6f1ba92fb0741d8a891463764edff1cea2",
+      "before_sha256": "06c392ea26114887b5c904615315edd97fa095a75c0cee83568b91ecb8668d7d",
+      "changed_pixels": 270,
+      "dataset": "ln2_game_level2",
+      "scene": 5
+    },
+    {
+      "after_sha256": "aa6f481e4714821e3f8a56dd706f15d79aa530464e1606adb698429295bea9bf",
+      "before_sha256": "cfc8a8167a759f147d6c45a2aebc1d994cc365d054b63f08a869fc88ade5491b",
+      "changed_pixels": 224,
+      "dataset": "ln2_game_level2",
+      "scene": 6
+    },
+    {
+      "after_sha256": "b759bbe5d9649a8b534db421132955d133f8e8a0c523460cefcba39525551e1d",
+      "before_sha256": "2aa58a80526e4aa079076797c83ff0a01ac812fc08e75657705e86727fa92e11",
+      "changed_pixels": 28,
+      "dataset": "ln2_game_level2",
+      "scene": 7
+    },
+    {
+      "after_sha256": "2e4a5552ee42159612fedb45bfec079d7dbc9461dbc4042f0159fb8cc96b34db",
+      "before_sha256": "6c26546f93b01d372766bfa0035bd0e11fa44df908e9afb226e067bc53b28f81",
+      "changed_pixels": 138,
+      "dataset": "ln2_game_level2",
+      "scene": 8
+    },
+    {
+      "after_sha256": "2e15fa2d555830cf2775455dd19ebcfa289cf9ea73eb6000bb562a42ba220730",
+      "before_sha256": "c3b0d3fc31d3f9dedca429856416c83b97487a11548478d4bd4d9160a7a747fe",
+      "changed_pixels": 312,
+      "dataset": "ln2_game_level2",
+      "scene": 9
+    },
+    {
+      "after_sha256": "5dd6e4559d35e24aa633327786e42ee81d1b5b299eadcdb57541bda8ab913c76",
+      "before_sha256": "8a6ee0802b62af7297d248317418dcae5168904bb08b74f2ec10d2fac9fa8d39",
+      "changed_pixels": 56,
+      "dataset": "ln2_game_level2",
+      "scene": 10
+    },
+    {
+      "after_sha256": "63d35c7a444a38a727d605079de9583619113ad26581ad06e3742bfab8785dbd",
+      "before_sha256": "e70bba298f7d1633c314d1f353c02380a97d2e45a4e4644636ff6d3c6d967a77",
+      "changed_pixels": 68,
+      "dataset": "ln2_game_level2",
+      "scene": 11
+    },
+    {
+      "after_sha256": "40d2e59cbc4eaf9b66f25fcad930cb7e905eecc829f094801c39eaf19e7dfde2",
+      "before_sha256": "eb8da6de9e77c640a67cb9138188adb5ba99b56704f7e8e2565355e721c8d055",
+      "changed_pixels": 612,
+      "dataset": "ln2_game_level2",
+      "scene": 12
+    },
+    {
+      "after_sha256": "12fc49bf9aee55f74c2cd8d355a2bc597305d57ce056fac763b752dd310db7df",
+      "before_sha256": "66488e0d7c42cafb966ecc771dfe9d142131a3ba50c29223c306ae7f1cb385b2",
+      "changed_pixels": 298,
+      "dataset": "ln2_game_level2",
+      "scene": 13
+    },
+    {
+      "after_sha256": "ab96a5b92f153602a2f1b3fced4ac95ad9c3ad30c0d2273b08e4bbd306a8d9f0",
+      "before_sha256": "669f73cf65af0b6e98e626460a6a0b1004d8dfa2956ff22444c6fb029d95ec5d",
+      "changed_pixels": 24,
+      "dataset": "ln2_game_level2",
+      "scene": 14
+    },
+    {
+      "after_sha256": "c288e6fa5a60ff8db4d0f6d180647d519e1f2df351bbb6fec4fafea78b8ef437",
+      "before_sha256": "aae2aca084d22ab72c01f3cfad25ec857b23ecf586ef9b766ea90a2bdbdf1f70",
+      "changed_pixels": 128,
+      "dataset": "ln2_game_level2",
+      "scene": 15
+    },
+    {
+      "after_sha256": "1fb04a28bead71c5d4e0bc3923f45c956534620cd23deb94be55c7e86e3c7c37",
+      "before_sha256": "be40f6c3fac477146ae28fb553ee2315b2f0d29f0d56162c825de922bcec8cd8",
+      "changed_pixels": 174,
+      "dataset": "ln2_game_level3",
+      "scene": 0
+    },
+    {
+      "after_sha256": "0c5ed66fbe60bd8c4b0583df2286be61d3edf4061d9581c747f878a6e559228a",
+      "before_sha256": "e08cca1c151dd63ef43f25922c23053d19e1a868bfddf95ac01ebb5dc65bf267",
+      "changed_pixels": 80,
+      "dataset": "ln2_game_level3",
+      "scene": 1
+    },
+    {
+      "after_sha256": "f4d5c1518466f178f36f361c16152030ed52f373d5673d2c86286795ac68f7ad",
+      "before_sha256": "764ab6f413dd1f34a0c66257b75047f797a55e237288e0d2db3cd0d88210fa9f",
+      "changed_pixels": 30,
+      "dataset": "ln2_game_level3",
+      "scene": 2
+    },
+    {
+      "after_sha256": "8f78c508e6f94f895a488c86acd4b5b1ff9da0e1fc252ea6ada62835c86075cf",
+      "before_sha256": "1388206b83acbbff1e280fea6719362f20ff6e63ff1b96628dbd5cd216774ae5",
+      "changed_pixels": 72,
+      "dataset": "ln2_game_level3",
+      "scene": 3
+    },
+    {
+      "after_sha256": "5d7a1c81209997e9943ef8d2058cd48f6adb7d913c7b4453014e97ec3447d459",
+      "before_sha256": "67bb427c4a1068c40cf2f1c0268b99456b831d747d0f12e049dd6aea6b3988c8",
+      "changed_pixels": 134,
+      "dataset": "ln2_game_level3",
+      "scene": 4
+    },
+    {
+      "after_sha256": "e222a8ca8047d83d37a2e384fd8426b0ca82cdb72829449ec533eb912f486e4d",
+      "before_sha256": "22ed4a3e04d923e91215a344a5b41a06258a889c209fa8bf26b85e8653ed1471",
+      "changed_pixels": 16,
+      "dataset": "ln2_game_level3",
+      "scene": 5
+    },
+    {
+      "after_sha256": "e0fb501d0b91c47cdefa1d86c4afb6f5ed46ee19bceb0bd8f2bd6d8499a9432d",
+      "before_sha256": "0f018776ce035abd70fecb41205d450ec338d14d5cb20f241d5915e05c5eec4b",
+      "changed_pixels": 42,
+      "dataset": "ln2_game_level3",
+      "scene": 6
+    },
+    {
+      "after_sha256": "996ec989b70c8543e2e9713d20a1cd170994001915892be03c28db32bd578edd",
+      "before_sha256": "294a1eef150deefde8d64c5f691e4ea2e48af5bf7f5494ca5f0d25f589f9965c",
+      "changed_pixels": 134,
+      "dataset": "ln2_game_level3",
+      "scene": 7
+    },
+    {
+      "after_sha256": "7d57ce8650efc14dadfe09af8942d6ea502a7652f5f005135a984e81ea01b608",
+      "before_sha256": "071380135fa8d4c6b0ff16c20cac294c05b9bb45ea4b87ae3c379b68458f32d5",
+      "changed_pixels": 342,
+      "dataset": "ln2_game_level3",
+      "scene": 8
+    },
+    {
+      "after_sha256": "050920f729c632aa31856c50528fed9191be154cdc971b177e71a212a78faf82",
+      "before_sha256": "bec33238f05b952ffcd65c9a0b0db5bf48f84625d2cfaaec2425e4000be3fcb6",
+      "changed_pixels": 136,
+      "dataset": "ln2_game_level3",
+      "scene": 9
+    },
+    {
+      "after_sha256": "9cea9454d1ad99c8b3f40d6455b4fcd811ebf9d59a44b80401cd279d30adef5b",
+      "before_sha256": "4018afb6af3d60f427d3a3c41b2e1b46bfe11f3257a26b9af9eb4b26e39790b6",
+      "changed_pixels": 68,
+      "dataset": "ln2_game_level3",
+      "scene": 10
+    },
+    {
+      "after_sha256": "4aac294f1332b60aa1ea86d6b745853eaa08b4445ad160474d998d85e5f08b8d",
+      "before_sha256": "a1895c35d0dba6765ffa6394034a4305a2ca2b52c6e29a4f6064fd40789157fa",
+      "changed_pixels": 20,
+      "dataset": "ln2_game_level3",
+      "scene": 11
+    },
+    {
+      "after_sha256": "fe5406c191eea1e36d85f6531f7858cce1e6978a17bef03168e321d16aa186cf",
+      "before_sha256": "921bd3869d9220bdea9aba7c1e9f2461614d45a75c16538a00cb1ca672589ba7",
+      "changed_pixels": 16,
+      "dataset": "ln2_game_level3",
+      "scene": 12
+    },
+    {
+      "after_sha256": "9bfb1efd5c063639659da49638de3fd0dc329f2ad07a1d4c4a01ac3b8209f9fc",
+      "before_sha256": "b0a2564871accfefdb52ba459f663d8af057d0fd35fa9f5ca18ff07c8cbf88df",
+      "changed_pixels": 22,
+      "dataset": "ln2_game_level3",
+      "scene": 13
+    },
+    {
+      "after_sha256": "2c63110c1ea1a61c474a8f8196d823cbbcbd83d48af0b746cf949f19f9f3fb5c",
+      "before_sha256": "50affe897e198fd267b76c2abd28d48e11cf3e8222ddb9367dff3a5395e67672",
+      "changed_pixels": 46,
+      "dataset": "ln2_game_level3",
+      "scene": 14
+    },
+    {
+      "after_sha256": "79cc087d638bdd36653197ad5a23ca64b24c9bfaf053d34154fbd51dba6622aa",
+      "before_sha256": "6d7debddd5ed4be390489932f6aec2e8ff00f172f74ba792eb1e4175723ff723",
+      "changed_pixels": 58,
+      "dataset": "ln2_game_level4",
+      "scene": 0
+    },
+    {
+      "after_sha256": "4ec0f800dde63da79d54ad5f0ab67d07b41272ddbba82bbfa0ded154221b8f24",
+      "before_sha256": "d4ffa705df8fc50a8f696f85ae92edb10abe3766c599a8196585692d7f8842f4",
+      "changed_pixels": 82,
+      "dataset": "ln2_game_level4",
+      "scene": 1
+    },
+    {
+      "after_sha256": "c0bfc00ddf8f17625d929d92357a57dd803844f245f16d989c411a30d9c8b9bc",
+      "before_sha256": "20fa1682fd1af11627b992521c56cb3b4d47c4502cd76a0408a3be858b005325",
+      "changed_pixels": 16,
+      "dataset": "ln2_game_level4",
+      "scene": 2
+    },
+    {
+      "after_sha256": "0065306e0a1057f6a796df9c012e6cefb2be04dae0f0cd9701fc53219fdf5d8d",
+      "before_sha256": "311427ceb5d2d1c8fb07df662e6b84108538f856bbf06db6262430c8dc2f99e4",
+      "changed_pixels": 44,
+      "dataset": "ln2_game_level4",
+      "scene": 3
+    },
+    {
+      "after_sha256": "01e1529b8d0bace0d1bc02d7b514bdbf60456169b73158a410e4da6845d9a0b2",
+      "before_sha256": "01e730e18189086087964e7859c6e6a599065327430792c1dfeb12683b1dc7e3",
+      "changed_pixels": 306,
+      "dataset": "ln2_game_level4",
+      "scene": 4
+    },
+    {
+      "after_sha256": "37c7945e302e43dda872d831eadd3811920364b5a16e82c7049abc71b002be14",
+      "before_sha256": "722ccb52e14ccd819fc69d80282d68148a6f3fc787a011955720766635478fd8",
+      "changed_pixels": 32,
+      "dataset": "ln2_game_level4",
+      "scene": 5
+    },
+    {
+      "after_sha256": "ac4d34cad443b8c9a70eb5246bac0558b378666a8d32ae4555c8f3631f0c2bd1",
+      "before_sha256": "adfc06d9d822505ff525ed0a24be4632612fea942759406222a27c27d0a88b67",
+      "changed_pixels": 52,
+      "dataset": "ln2_game_level4",
+      "scene": 6
+    },
+    {
+      "after_sha256": "1f292dd8a2db55ecbd0804a425d65720bb0e3020a2f631f9dd0423dee4163541",
+      "before_sha256": "8ce8cd68df2a9bc6142cfd5d37647b602c2d7f92a65e2ec67f52cffad59326d9",
+      "changed_pixels": 40,
+      "dataset": "ln2_game_level4",
+      "scene": 7
+    },
+    {
+      "after_sha256": "aadae216f38e6c982cfc87854b046f4328d5f3fdd250f7a4b859909e299023d5",
+      "before_sha256": "22acdd62d7b0015ae0b8ff3425da636386b45eddf7b369023d41e993627e4e97",
+      "changed_pixels": 58,
+      "dataset": "ln2_game_level4",
+      "scene": 8
+    },
+    {
+      "after_sha256": "c5983acd1acd591c24fe66bf760c77863ac161f8125538aff90443e2a420ae5a",
+      "before_sha256": "795b58598bf9ce155ebfe5e397dcd346dc751c2c252b4e02465615ac418c21f6",
+      "changed_pixels": 6,
+      "dataset": "ln2_game_level4",
+      "scene": 9
+    },
+    {
+      "after_sha256": "f99d60fc478d0650c14a8a627ac0ee53dc0750bdec97d95161230b0dcce90f83",
+      "before_sha256": "f501091bb123f4999c4fde65ebcec32747269eca0b70940efaa9b0d816433e4e",
+      "changed_pixels": 136,
+      "dataset": "ln2_game_level4",
+      "scene": 10
+    },
+    {
+      "after_sha256": "e733587312f7ceb3d4334c2ce1ad76cca7ee7eb7fa2eba5d3943a629a2c06828",
+      "before_sha256": "5f93b0b4d4f9413a9eb1d8878aec246969bf368e69ddd7f75493542c3e42c400",
+      "changed_pixels": 140,
+      "dataset": "ln2_game_level4",
+      "scene": 11
+    },
+    {
+      "after_sha256": "d4f2803d5645427da3924e916726878d3982edb71ffcde44ee6329abcd7db8c5",
+      "before_sha256": "243629a12b0fd884987832ebdaf316640970088bb56ce9c6a320ffcaf220275f",
+      "changed_pixels": 90,
+      "dataset": "ln2_game_level4",
+      "scene": 12
+    },
+    {
+      "after_sha256": "157090c4590db3b8962c0add651b20620c0ebd4f64a1b2eddf20ff59452b2e6d",
+      "before_sha256": "8b05b6005276f2387ba6e0e2016231a2e0277f9e88f7cf1d8637019dd3ac7caf",
+      "changed_pixels": 60,
+      "dataset": "ln2_game_level4",
+      "scene": 13
+    },
+    {
+      "after_sha256": "b657f244813074be0124ae8535403d90f68c3cd30ae93fdb3705a172dce6b6c4",
+      "before_sha256": "209444811f43f1f754b029ebf2da943051c12f16682ec9a58a05629d0976c299",
+      "changed_pixels": 160,
+      "dataset": "ln2_game_level4",
+      "scene": 14
+    },
+    {
+      "after_sha256": "62544c47298cfcedcd8d9b61e9894825d1b775cc809ec8751bcd84b76c3aac34",
+      "before_sha256": "898c37f32b87950b2759b413b67e2434cb8a6c6cbfd7c1359c675b53fad6918f",
+      "changed_pixels": 70,
+      "dataset": "ln2_game_level5",
+      "scene": 0
+    },
+    {
+      "after_sha256": "8b5f189b988b8b583c7d0c6cd85ebb60dc33ac623fd3602f0cab4f64b492c148",
+      "before_sha256": "7832d15149fb7ea86e40300bcbbb4f01f09815107b0d721b4c7fa318982fba10",
+      "changed_pixels": 64,
+      "dataset": "ln2_game_level5",
+      "scene": 1
+    },
+    {
+      "after_sha256": "1748bcfe334720c551dd5c9592d9f1c6c887e1acca3d08f946ae07d3c5e7965f",
+      "before_sha256": "8504036c5ca3a1ab2599e1396ab3534db0a816f7a0e35ce8a725ff316185a2b1",
+      "changed_pixels": 66,
+      "dataset": "ln2_game_level5",
+      "scene": 2
+    },
+    {
+      "after_sha256": "713fd231403a460f42d98c1fae7d3fa7c6ece0e855fcf5ec5c5bcf1906568424",
+      "before_sha256": "4b94c140c076375a129cf70b72dcb59306cab50f60eed984d7896802be78d68d",
+      "changed_pixels": 106,
+      "dataset": "ln2_game_level5",
+      "scene": 3
+    },
+    {
+      "after_sha256": "efd1846609454fbf4af97608d553b63507a3a97b3ce6eef2fe19b1372f48de03",
+      "before_sha256": "087f9befc96bd8f784b93dc359cdbe10a4894bb0d68e2f647d2d32b7b14fe632",
+      "changed_pixels": 184,
+      "dataset": "ln2_game_level5",
+      "scene": 4
+    },
+    {
+      "after_sha256": "d5d2f09857b505aad3593143239ffef1b7b6fad600e1f922337d99637696c219",
+      "before_sha256": "68064cbd312426abfd168d9811dc750f3a6c174a026770ce1dea36299239d4ad",
+      "changed_pixels": 72,
+      "dataset": "ln2_game_level5",
+      "scene": 5
+    },
+    {
+      "after_sha256": "9b84a8e9584f8e2ba6728d8c89051b6130d904a04e143d1d828019b260f2fa87",
+      "before_sha256": "15e3a1c5a85f6f389c1821d7b731f1880f4bea284a5a7f22e152638c5407050d",
+      "changed_pixels": 42,
+      "dataset": "ln2_game_level5",
+      "scene": 6
+    },
+    {
+      "after_sha256": "a786e6f167c1f5b3804f51b4c9c0aa5c00333c07fcc8764348d9b1c614f5790f",
+      "before_sha256": "a786e6f167c1f5b3804f51b4c9c0aa5c00333c07fcc8764348d9b1c614f5790f",
+      "changed_pixels": 0,
+      "dataset": "ln2_game_level5",
+      "scene": 7
+    },
+    {
+      "after_sha256": "ef45725aeda4e2f4c02c2f7e01b2becd9be50cb35ec038636ebab3c4e2374a73",
+      "before_sha256": "0bcd59f89f5dfddabbcd4fe4e1c49a57756c58977cdba0822eb589b72c1637d6",
+      "changed_pixels": 242,
+      "dataset": "ln2_game_level5",
+      "scene": 8
+    },
+    {
+      "after_sha256": "3d6b2fb5961a46a4dd7a57787cc7f98d7ca4a94f4ceab570e6a46963fec03706",
+      "before_sha256": "843b99d0ab9f3acb899c10bc1f331ae2cf7df38f353a8090f9363483939269f9",
+      "changed_pixels": 58,
+      "dataset": "ln2_game_level5",
+      "scene": 9
+    },
+    {
+      "after_sha256": "89e0ea73e13a79436929521bf0f688015f96192304812284f9f14045864ff74a",
+      "before_sha256": "7cba745d0b2a31dd213769e8aaa613312062d59207570400298a4939e72c3257",
+      "changed_pixels": 76,
+      "dataset": "ln2_game_level5",
+      "scene": 10
+    },
+    {
+      "after_sha256": "9e933de4148eeddc05130ef5c6a3782413605554c897acf2822efec5b1af09ea",
+      "before_sha256": "9e933de4148eeddc05130ef5c6a3782413605554c897acf2822efec5b1af09ea",
+      "changed_pixels": 0,
+      "dataset": "ln2_game_level5",
+      "scene": 11
+    },
+    {
+      "after_sha256": "6381e995e4d7ac4b717872966e8d8a8935685f74e32391dcb82d1c347b3cc984",
+      "before_sha256": "dfe193123196a26e48375c0e33447daa17b005a711cc4173bbedcbd682bbfeac",
+      "changed_pixels": 6,
+      "dataset": "ln2_game_level5",
+      "scene": 12
+    },
+    {
+      "after_sha256": "bfa2f6b6da8d5dd5a3cfbe7cea3108bf1997215846168c1c4f06755457f6aaf5",
+      "before_sha256": "5d1c90595c4e2ce0c2d194c9ee4f741cb8ada41fc481084145c5e4fdaa6605ff",
+      "changed_pixels": 60,
+      "dataset": "ln2_game_level5",
+      "scene": 13
+    },
+    {
+      "after_sha256": "2bc65206e5fc99645bbc1adcd5820d66ad2558796146ff340093e2b706b45d39",
+      "before_sha256": "eaff15c8d6284c9b1a84cabe4b8ac68776fc79338f87ff52bac597baac462aa2",
+      "changed_pixels": 102,
+      "dataset": "ln2_game_level5",
+      "scene": 14
+    },
+    {
+      "after_sha256": "cd84f739e57a0d703973bdecefda30b8d29ec644a4915d33bf689365ec80852a",
+      "before_sha256": "7f380331196a41a33dcd3a92de01c6f6481223a0ea83397ca7695d1fe1a4e395",
+      "changed_pixels": 404,
+      "dataset": "ln2_game_level6",
+      "scene": 0
+    },
+    {
+      "after_sha256": "6c95d2b4e5aef1ee17a27341324b021ac5579ba1bdc03bbdb85292720b929a0b",
+      "before_sha256": "8abe674ac28214e60685f9424c113008d6672ab4eb043c0219fae33e1a1b8d69",
+      "changed_pixels": 98,
+      "dataset": "ln2_game_level6",
+      "scene": 1
+    },
+    {
+      "after_sha256": "3a4144826ac8dbffda282a8499464a0cd97cc6afda1e494024fb73f5b36ffd04",
+      "before_sha256": "f23b323e32f4ef4d524ce079464c0d5153cc1f284a5ea17b6adafab59bb14037",
+      "changed_pixels": 122,
+      "dataset": "ln2_game_level6",
+      "scene": 2
+    },
+    {
+      "after_sha256": "67c962e4cf4d64447134d26d6edca297aab122d38ca75b4f509496ea16a7c1e7",
+      "before_sha256": "386695de822404cac19670d89a01908f307204365ff04fdbe158d7d94ec6f8e4",
+      "changed_pixels": 56,
+      "dataset": "ln2_game_level6",
+      "scene": 3
+    },
+    {
+      "after_sha256": "1569d00c1161e07bf37fcdf8d82bcff9616f00b42dfa103858514cbebeae1e7e",
+      "before_sha256": "50770198cc6714ab6d549c7a276753ab00a5aa55bec4c7ddeb4eae0ff805d138",
+      "changed_pixels": 66,
+      "dataset": "ln2_game_level6",
+      "scene": 4
+    },
+    {
+      "after_sha256": "1f58da75415ce0775850d2e9aa843dac89d5c5c34a24d34b9fd174fa7749c996",
+      "before_sha256": "fde28300f6cf378eb52e8cd48325361e49cedca3695cf2ca7a0fe1cd331b4288",
+      "changed_pixels": 56,
+      "dataset": "ln2_game_level6",
+      "scene": 5
+    },
+    {
+      "after_sha256": "03f865866bceb3118189dde6725d61433f88c1bc70a3b4d7438a01ccd21c2e5f",
+      "before_sha256": "03f865866bceb3118189dde6725d61433f88c1bc70a3b4d7438a01ccd21c2e5f",
+      "changed_pixels": 0,
+      "dataset": "ln2_game_level6",
+      "scene": 6
+    },
+    {
+      "after_sha256": "b107fc1788fcf2ac01e684ba88d487f87305c03046cf8e9cdd21543b98f0a4b2",
+      "before_sha256": "323bea8bdd8467df4ad38d630acec86c493969005f18cbd6a3daf0e411f907dc",
+      "changed_pixels": 160,
+      "dataset": "ln2_game_level6",
+      "scene": 7
+    },
+    {
+      "after_sha256": "9993eb653fb80f0bc6f34410b81e3dc6959d3fe3737a63cb86d4fde9aff44b62",
+      "before_sha256": "a78b8603b6c17495b605bcce365319a00707389c6985ef41512015c4c3ddeb98",
+      "changed_pixels": 106,
+      "dataset": "ln2_game_level6",
+      "scene": 8
+    },
+    {
+      "after_sha256": "8160a775c356eb24382a71443d507057086b4d2afc1ac3bebed8b151c307f1b9",
+      "before_sha256": "c79ac7a66b8f6529334dfe9b7c058e31690833b2ee4c1803a12e192488c5fbf4",
+      "changed_pixels": 32,
+      "dataset": "ln2_game_level6",
+      "scene": 9
+    },
+    {
+      "after_sha256": "059ee62e453aafb5430d8371f3128169a9c5bed8733c2f6918d41046a471a0d5",
+      "before_sha256": "61b4e80925de0671ace6e3c0159b1413a552e93adaac23eb81ed17e6a03f4793",
+      "changed_pixels": 82,
+      "dataset": "ln2_game_level6",
+      "scene": 10
+    },
+    {
+      "after_sha256": "5f1dc146f367f894d0c7b4ea13e49440e1784cc9c2f0f6cd995571329584f6db",
+      "before_sha256": "5f1dc146f367f894d0c7b4ea13e49440e1784cc9c2f0f6cd995571329584f6db",
+      "changed_pixels": 0,
+      "dataset": "ln2_game_level6",
+      "scene": 11
+    },
+    {
+      "after_sha256": "0728e94610fd1f575b08f513770f8cc6b9957c78f5b9ede9a137f7eac3c5866c",
+      "before_sha256": "a599fe0c74d61f1fa252e70e793d6128ea4add58842409793c8a84cb7b3c216a",
+      "changed_pixels": 322,
+      "dataset": "ln2_game_level6",
+      "scene": 12
+    },
+    {
+      "after_sha256": "e2a99bebe8fb717944331c9e054a466bafb612ace1ff72023826316ea1dea341",
+      "before_sha256": "e2a99bebe8fb717944331c9e054a466bafb612ace1ff72023826316ea1dea341",
+      "changed_pixels": 0,
+      "dataset": "ln2_game_level6",
+      "scene": 13
+    },
+    {
+      "after_sha256": "e2a99bebe8fb717944331c9e054a466bafb612ace1ff72023826316ea1dea341",
+      "before_sha256": "e2a99bebe8fb717944331c9e054a466bafb612ace1ff72023826316ea1dea341",
+      "changed_pixels": 0,
+      "dataset": "ln2_game_level6",
+      "scene": 14
+    },
+    {
+      "after_sha256": "e2a99bebe8fb717944331c9e054a466bafb612ace1ff72023826316ea1dea341",
+      "before_sha256": "e2a99bebe8fb717944331c9e054a466bafb612ace1ff72023826316ea1dea341",
+      "changed_pixels": 0,
+      "dataset": "ln2_game_level6",
+      "scene": 15
+    },
+    {
+      "after_sha256": "ee33587515f8897f0cc1d2989427f4522e943fce2260b03a6b6cafdb4a7adeca",
+      "before_sha256": "36b80a378231da8915be0f1d7b8b5c234ff9a958b56f195702dd8c8105f73b79",
+      "changed_pixels": 24,
+      "dataset": "ln2_game_level7",
+      "scene": 0
+    },
+    {
+      "after_sha256": "b1de34edf06caf9f312c0bdc72254a8b82dd74e0d9b180df93780255b6001f3b",
+      "before_sha256": "b1de34edf06caf9f312c0bdc72254a8b82dd74e0d9b180df93780255b6001f3b",
+      "changed_pixels": 0,
+      "dataset": "ln2_game_level7",
+      "scene": 1
+    },
+    {
+      "after_sha256": "2053c66ad1916e3ff3bf53eacfa73260826283cc53bf8f26a7ec1dede6b2b289",
+      "before_sha256": "2053c66ad1916e3ff3bf53eacfa73260826283cc53bf8f26a7ec1dede6b2b289",
+      "changed_pixels": 0,
+      "dataset": "ln2_game_objects_and_eyes",
+      "scene": 0
+    },
+    {
+      "after_sha256": "464083085be9798fd8f80892889ac40bc01e23702b186f83d6ce49be8feea9a5",
+      "before_sha256": "464083085be9798fd8f80892889ac40bc01e23702b186f83d6ce49be8feea9a5",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level1",
+      "scene": 0
+    },
+    {
+      "after_sha256": "464083085be9798fd8f80892889ac40bc01e23702b186f83d6ce49be8feea9a5",
+      "before_sha256": "464083085be9798fd8f80892889ac40bc01e23702b186f83d6ce49be8feea9a5",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level1",
+      "scene": 1
+    },
+    {
+      "after_sha256": "464083085be9798fd8f80892889ac40bc01e23702b186f83d6ce49be8feea9a5",
+      "before_sha256": "464083085be9798fd8f80892889ac40bc01e23702b186f83d6ce49be8feea9a5",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level1",
+      "scene": 2
+    },
+    {
+      "after_sha256": "464083085be9798fd8f80892889ac40bc01e23702b186f83d6ce49be8feea9a5",
+      "before_sha256": "464083085be9798fd8f80892889ac40bc01e23702b186f83d6ce49be8feea9a5",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level1",
+      "scene": 3
+    },
+    {
+      "after_sha256": "464083085be9798fd8f80892889ac40bc01e23702b186f83d6ce49be8feea9a5",
+      "before_sha256": "464083085be9798fd8f80892889ac40bc01e23702b186f83d6ce49be8feea9a5",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level1",
+      "scene": 4
+    },
+    {
+      "after_sha256": "464083085be9798fd8f80892889ac40bc01e23702b186f83d6ce49be8feea9a5",
+      "before_sha256": "464083085be9798fd8f80892889ac40bc01e23702b186f83d6ce49be8feea9a5",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level1",
+      "scene": 5
+    },
+    {
+      "after_sha256": "464083085be9798fd8f80892889ac40bc01e23702b186f83d6ce49be8feea9a5",
+      "before_sha256": "464083085be9798fd8f80892889ac40bc01e23702b186f83d6ce49be8feea9a5",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level1",
+      "scene": 6
+    },
+    {
+      "after_sha256": "464083085be9798fd8f80892889ac40bc01e23702b186f83d6ce49be8feea9a5",
+      "before_sha256": "464083085be9798fd8f80892889ac40bc01e23702b186f83d6ce49be8feea9a5",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level1",
+      "scene": 7
+    },
+    {
+      "after_sha256": "464083085be9798fd8f80892889ac40bc01e23702b186f83d6ce49be8feea9a5",
+      "before_sha256": "464083085be9798fd8f80892889ac40bc01e23702b186f83d6ce49be8feea9a5",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level1",
+      "scene": 8
+    },
+    {
+      "after_sha256": "464083085be9798fd8f80892889ac40bc01e23702b186f83d6ce49be8feea9a5",
+      "before_sha256": "464083085be9798fd8f80892889ac40bc01e23702b186f83d6ce49be8feea9a5",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level1",
+      "scene": 9
+    },
+    {
+      "after_sha256": "464083085be9798fd8f80892889ac40bc01e23702b186f83d6ce49be8feea9a5",
+      "before_sha256": "464083085be9798fd8f80892889ac40bc01e23702b186f83d6ce49be8feea9a5",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level1",
+      "scene": 10
+    },
+    {
+      "after_sha256": "464083085be9798fd8f80892889ac40bc01e23702b186f83d6ce49be8feea9a5",
+      "before_sha256": "464083085be9798fd8f80892889ac40bc01e23702b186f83d6ce49be8feea9a5",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level1",
+      "scene": 11
+    },
+    {
+      "after_sha256": "464083085be9798fd8f80892889ac40bc01e23702b186f83d6ce49be8feea9a5",
+      "before_sha256": "464083085be9798fd8f80892889ac40bc01e23702b186f83d6ce49be8feea9a5",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level1",
+      "scene": 12
+    },
+    {
+      "after_sha256": "464083085be9798fd8f80892889ac40bc01e23702b186f83d6ce49be8feea9a5",
+      "before_sha256": "464083085be9798fd8f80892889ac40bc01e23702b186f83d6ce49be8feea9a5",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level1",
+      "scene": 13
+    },
+    {
+      "after_sha256": "464083085be9798fd8f80892889ac40bc01e23702b186f83d6ce49be8feea9a5",
+      "before_sha256": "464083085be9798fd8f80892889ac40bc01e23702b186f83d6ce49be8feea9a5",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level1",
+      "scene": 14
+    },
+    {
+      "after_sha256": "464083085be9798fd8f80892889ac40bc01e23702b186f83d6ce49be8feea9a5",
+      "before_sha256": "464083085be9798fd8f80892889ac40bc01e23702b186f83d6ce49be8feea9a5",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level1",
+      "scene": 15
+    },
+    {
+      "after_sha256": "464083085be9798fd8f80892889ac40bc01e23702b186f83d6ce49be8feea9a5",
+      "before_sha256": "464083085be9798fd8f80892889ac40bc01e23702b186f83d6ce49be8feea9a5",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level1",
+      "scene": 16
+    },
+    {
+      "after_sha256": "464083085be9798fd8f80892889ac40bc01e23702b186f83d6ce49be8feea9a5",
+      "before_sha256": "464083085be9798fd8f80892889ac40bc01e23702b186f83d6ce49be8feea9a5",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level1",
+      "scene": 17
+    },
+    {
+      "after_sha256": "464083085be9798fd8f80892889ac40bc01e23702b186f83d6ce49be8feea9a5",
+      "before_sha256": "464083085be9798fd8f80892889ac40bc01e23702b186f83d6ce49be8feea9a5",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level1",
+      "scene": 18
+    },
+    {
+      "after_sha256": "464083085be9798fd8f80892889ac40bc01e23702b186f83d6ce49be8feea9a5",
+      "before_sha256": "464083085be9798fd8f80892889ac40bc01e23702b186f83d6ce49be8feea9a5",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level1",
+      "scene": 19
+    },
+    {
+      "after_sha256": "464083085be9798fd8f80892889ac40bc01e23702b186f83d6ce49be8feea9a5",
+      "before_sha256": "464083085be9798fd8f80892889ac40bc01e23702b186f83d6ce49be8feea9a5",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level1",
+      "scene": 20
+    },
+    {
+      "after_sha256": "8c1975c0761eedb29855fe91249feed656f56a338d932abdf8b4e382d0172f22",
+      "before_sha256": "8c1975c0761eedb29855fe91249feed656f56a338d932abdf8b4e382d0172f22",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level2",
+      "scene": 0
+    },
+    {
+      "after_sha256": "8c1975c0761eedb29855fe91249feed656f56a338d932abdf8b4e382d0172f22",
+      "before_sha256": "8c1975c0761eedb29855fe91249feed656f56a338d932abdf8b4e382d0172f22",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level2",
+      "scene": 1
+    },
+    {
+      "after_sha256": "8c1975c0761eedb29855fe91249feed656f56a338d932abdf8b4e382d0172f22",
+      "before_sha256": "8c1975c0761eedb29855fe91249feed656f56a338d932abdf8b4e382d0172f22",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level2",
+      "scene": 2
+    },
+    {
+      "after_sha256": "8c1975c0761eedb29855fe91249feed656f56a338d932abdf8b4e382d0172f22",
+      "before_sha256": "8c1975c0761eedb29855fe91249feed656f56a338d932abdf8b4e382d0172f22",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level2",
+      "scene": 3
+    },
+    {
+      "after_sha256": "8c1975c0761eedb29855fe91249feed656f56a338d932abdf8b4e382d0172f22",
+      "before_sha256": "8c1975c0761eedb29855fe91249feed656f56a338d932abdf8b4e382d0172f22",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level2",
+      "scene": 4
+    },
+    {
+      "after_sha256": "8c1975c0761eedb29855fe91249feed656f56a338d932abdf8b4e382d0172f22",
+      "before_sha256": "8c1975c0761eedb29855fe91249feed656f56a338d932abdf8b4e382d0172f22",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level2",
+      "scene": 5
+    },
+    {
+      "after_sha256": "8c1975c0761eedb29855fe91249feed656f56a338d932abdf8b4e382d0172f22",
+      "before_sha256": "8c1975c0761eedb29855fe91249feed656f56a338d932abdf8b4e382d0172f22",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level2",
+      "scene": 6
+    },
+    {
+      "after_sha256": "8c1975c0761eedb29855fe91249feed656f56a338d932abdf8b4e382d0172f22",
+      "before_sha256": "8c1975c0761eedb29855fe91249feed656f56a338d932abdf8b4e382d0172f22",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level2",
+      "scene": 7
+    },
+    {
+      "after_sha256": "8c1975c0761eedb29855fe91249feed656f56a338d932abdf8b4e382d0172f22",
+      "before_sha256": "8c1975c0761eedb29855fe91249feed656f56a338d932abdf8b4e382d0172f22",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level2",
+      "scene": 8
+    },
+    {
+      "after_sha256": "8c1975c0761eedb29855fe91249feed656f56a338d932abdf8b4e382d0172f22",
+      "before_sha256": "8c1975c0761eedb29855fe91249feed656f56a338d932abdf8b4e382d0172f22",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level2",
+      "scene": 9
+    },
+    {
+      "after_sha256": "8c1975c0761eedb29855fe91249feed656f56a338d932abdf8b4e382d0172f22",
+      "before_sha256": "8c1975c0761eedb29855fe91249feed656f56a338d932abdf8b4e382d0172f22",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level2",
+      "scene": 10
+    },
+    {
+      "after_sha256": "8c1975c0761eedb29855fe91249feed656f56a338d932abdf8b4e382d0172f22",
+      "before_sha256": "8c1975c0761eedb29855fe91249feed656f56a338d932abdf8b4e382d0172f22",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level2",
+      "scene": 11
+    },
+    {
+      "after_sha256": "8c1975c0761eedb29855fe91249feed656f56a338d932abdf8b4e382d0172f22",
+      "before_sha256": "8c1975c0761eedb29855fe91249feed656f56a338d932abdf8b4e382d0172f22",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level2",
+      "scene": 12
+    },
+    {
+      "after_sha256": "8c1975c0761eedb29855fe91249feed656f56a338d932abdf8b4e382d0172f22",
+      "before_sha256": "8c1975c0761eedb29855fe91249feed656f56a338d932abdf8b4e382d0172f22",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level2",
+      "scene": 13
+    },
+    {
+      "after_sha256": "8c1975c0761eedb29855fe91249feed656f56a338d932abdf8b4e382d0172f22",
+      "before_sha256": "8c1975c0761eedb29855fe91249feed656f56a338d932abdf8b4e382d0172f22",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level2",
+      "scene": 14
+    },
+    {
+      "after_sha256": "8c1975c0761eedb29855fe91249feed656f56a338d932abdf8b4e382d0172f22",
+      "before_sha256": "8c1975c0761eedb29855fe91249feed656f56a338d932abdf8b4e382d0172f22",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level2",
+      "scene": 15
+    },
+    {
+      "after_sha256": "8c1975c0761eedb29855fe91249feed656f56a338d932abdf8b4e382d0172f22",
+      "before_sha256": "8c1975c0761eedb29855fe91249feed656f56a338d932abdf8b4e382d0172f22",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level2",
+      "scene": 16
+    },
+    {
+      "after_sha256": "8c1975c0761eedb29855fe91249feed656f56a338d932abdf8b4e382d0172f22",
+      "before_sha256": "8c1975c0761eedb29855fe91249feed656f56a338d932abdf8b4e382d0172f22",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level2",
+      "scene": 17
+    },
+    {
+      "after_sha256": "8c1975c0761eedb29855fe91249feed656f56a338d932abdf8b4e382d0172f22",
+      "before_sha256": "8c1975c0761eedb29855fe91249feed656f56a338d932abdf8b4e382d0172f22",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level2",
+      "scene": 18
+    },
+    {
+      "after_sha256": "2f407b51eba52e1a3488120a4a1f8f7025f3108e8c9a396b5876e6a32abe789a",
+      "before_sha256": "2f407b51eba52e1a3488120a4a1f8f7025f3108e8c9a396b5876e6a32abe789a",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level3",
+      "scene": 0
+    },
+    {
+      "after_sha256": "2f407b51eba52e1a3488120a4a1f8f7025f3108e8c9a396b5876e6a32abe789a",
+      "before_sha256": "2f407b51eba52e1a3488120a4a1f8f7025f3108e8c9a396b5876e6a32abe789a",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level3",
+      "scene": 1
+    },
+    {
+      "after_sha256": "2f407b51eba52e1a3488120a4a1f8f7025f3108e8c9a396b5876e6a32abe789a",
+      "before_sha256": "2f407b51eba52e1a3488120a4a1f8f7025f3108e8c9a396b5876e6a32abe789a",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level3",
+      "scene": 2
+    },
+    {
+      "after_sha256": "2f407b51eba52e1a3488120a4a1f8f7025f3108e8c9a396b5876e6a32abe789a",
+      "before_sha256": "2f407b51eba52e1a3488120a4a1f8f7025f3108e8c9a396b5876e6a32abe789a",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level3",
+      "scene": 3
+    },
+    {
+      "after_sha256": "2f407b51eba52e1a3488120a4a1f8f7025f3108e8c9a396b5876e6a32abe789a",
+      "before_sha256": "2f407b51eba52e1a3488120a4a1f8f7025f3108e8c9a396b5876e6a32abe789a",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level3",
+      "scene": 4
+    },
+    {
+      "after_sha256": "2f407b51eba52e1a3488120a4a1f8f7025f3108e8c9a396b5876e6a32abe789a",
+      "before_sha256": "2f407b51eba52e1a3488120a4a1f8f7025f3108e8c9a396b5876e6a32abe789a",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level3",
+      "scene": 5
+    },
+    {
+      "after_sha256": "2f407b51eba52e1a3488120a4a1f8f7025f3108e8c9a396b5876e6a32abe789a",
+      "before_sha256": "2f407b51eba52e1a3488120a4a1f8f7025f3108e8c9a396b5876e6a32abe789a",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level3",
+      "scene": 6
+    },
+    {
+      "after_sha256": "2f407b51eba52e1a3488120a4a1f8f7025f3108e8c9a396b5876e6a32abe789a",
+      "before_sha256": "2f407b51eba52e1a3488120a4a1f8f7025f3108e8c9a396b5876e6a32abe789a",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level3",
+      "scene": 7
+    },
+    {
+      "after_sha256": "2f407b51eba52e1a3488120a4a1f8f7025f3108e8c9a396b5876e6a32abe789a",
+      "before_sha256": "2f407b51eba52e1a3488120a4a1f8f7025f3108e8c9a396b5876e6a32abe789a",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level3",
+      "scene": 8
+    },
+    {
+      "after_sha256": "2f407b51eba52e1a3488120a4a1f8f7025f3108e8c9a396b5876e6a32abe789a",
+      "before_sha256": "2f407b51eba52e1a3488120a4a1f8f7025f3108e8c9a396b5876e6a32abe789a",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level3",
+      "scene": 9
+    },
+    {
+      "after_sha256": "2f407b51eba52e1a3488120a4a1f8f7025f3108e8c9a396b5876e6a32abe789a",
+      "before_sha256": "2f407b51eba52e1a3488120a4a1f8f7025f3108e8c9a396b5876e6a32abe789a",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level3",
+      "scene": 10
+    },
+    {
+      "after_sha256": "2f407b51eba52e1a3488120a4a1f8f7025f3108e8c9a396b5876e6a32abe789a",
+      "before_sha256": "2f407b51eba52e1a3488120a4a1f8f7025f3108e8c9a396b5876e6a32abe789a",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level3",
+      "scene": 11
+    },
+    {
+      "after_sha256": "2f407b51eba52e1a3488120a4a1f8f7025f3108e8c9a396b5876e6a32abe789a",
+      "before_sha256": "2f407b51eba52e1a3488120a4a1f8f7025f3108e8c9a396b5876e6a32abe789a",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level3",
+      "scene": 12
+    },
+    {
+      "after_sha256": "2f407b51eba52e1a3488120a4a1f8f7025f3108e8c9a396b5876e6a32abe789a",
+      "before_sha256": "2f407b51eba52e1a3488120a4a1f8f7025f3108e8c9a396b5876e6a32abe789a",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level3",
+      "scene": 13
+    },
+    {
+      "after_sha256": "2f407b51eba52e1a3488120a4a1f8f7025f3108e8c9a396b5876e6a32abe789a",
+      "before_sha256": "2f407b51eba52e1a3488120a4a1f8f7025f3108e8c9a396b5876e6a32abe789a",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level3",
+      "scene": 14
+    },
+    {
+      "after_sha256": "2f407b51eba52e1a3488120a4a1f8f7025f3108e8c9a396b5876e6a32abe789a",
+      "before_sha256": "2f407b51eba52e1a3488120a4a1f8f7025f3108e8c9a396b5876e6a32abe789a",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level3",
+      "scene": 15
+    },
+    {
+      "after_sha256": "2f407b51eba52e1a3488120a4a1f8f7025f3108e8c9a396b5876e6a32abe789a",
+      "before_sha256": "2f407b51eba52e1a3488120a4a1f8f7025f3108e8c9a396b5876e6a32abe789a",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level3",
+      "scene": 16
+    },
+    {
+      "after_sha256": "2f407b51eba52e1a3488120a4a1f8f7025f3108e8c9a396b5876e6a32abe789a",
+      "before_sha256": "2f407b51eba52e1a3488120a4a1f8f7025f3108e8c9a396b5876e6a32abe789a",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level3",
+      "scene": 17
+    },
+    {
+      "after_sha256": "345e1fd24eb29794fe450f45fa1946a1eea12d38323864ee241cbe9234175339",
+      "before_sha256": "345e1fd24eb29794fe450f45fa1946a1eea12d38323864ee241cbe9234175339",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level4",
+      "scene": 0
+    },
+    {
+      "after_sha256": "345e1fd24eb29794fe450f45fa1946a1eea12d38323864ee241cbe9234175339",
+      "before_sha256": "345e1fd24eb29794fe450f45fa1946a1eea12d38323864ee241cbe9234175339",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level4",
+      "scene": 1
+    },
+    {
+      "after_sha256": "345e1fd24eb29794fe450f45fa1946a1eea12d38323864ee241cbe9234175339",
+      "before_sha256": "345e1fd24eb29794fe450f45fa1946a1eea12d38323864ee241cbe9234175339",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level4",
+      "scene": 2
+    },
+    {
+      "after_sha256": "345e1fd24eb29794fe450f45fa1946a1eea12d38323864ee241cbe9234175339",
+      "before_sha256": "345e1fd24eb29794fe450f45fa1946a1eea12d38323864ee241cbe9234175339",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level4",
+      "scene": 3
+    },
+    {
+      "after_sha256": "345e1fd24eb29794fe450f45fa1946a1eea12d38323864ee241cbe9234175339",
+      "before_sha256": "345e1fd24eb29794fe450f45fa1946a1eea12d38323864ee241cbe9234175339",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level4",
+      "scene": 4
+    },
+    {
+      "after_sha256": "345e1fd24eb29794fe450f45fa1946a1eea12d38323864ee241cbe9234175339",
+      "before_sha256": "345e1fd24eb29794fe450f45fa1946a1eea12d38323864ee241cbe9234175339",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level4",
+      "scene": 5
+    },
+    {
+      "after_sha256": "345e1fd24eb29794fe450f45fa1946a1eea12d38323864ee241cbe9234175339",
+      "before_sha256": "345e1fd24eb29794fe450f45fa1946a1eea12d38323864ee241cbe9234175339",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level4",
+      "scene": 6
+    },
+    {
+      "after_sha256": "345e1fd24eb29794fe450f45fa1946a1eea12d38323864ee241cbe9234175339",
+      "before_sha256": "345e1fd24eb29794fe450f45fa1946a1eea12d38323864ee241cbe9234175339",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level4",
+      "scene": 7
+    },
+    {
+      "after_sha256": "345e1fd24eb29794fe450f45fa1946a1eea12d38323864ee241cbe9234175339",
+      "before_sha256": "345e1fd24eb29794fe450f45fa1946a1eea12d38323864ee241cbe9234175339",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level4",
+      "scene": 8
+    },
+    {
+      "after_sha256": "345e1fd24eb29794fe450f45fa1946a1eea12d38323864ee241cbe9234175339",
+      "before_sha256": "345e1fd24eb29794fe450f45fa1946a1eea12d38323864ee241cbe9234175339",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level4",
+      "scene": 9
+    },
+    {
+      "after_sha256": "345e1fd24eb29794fe450f45fa1946a1eea12d38323864ee241cbe9234175339",
+      "before_sha256": "345e1fd24eb29794fe450f45fa1946a1eea12d38323864ee241cbe9234175339",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level4",
+      "scene": 10
+    },
+    {
+      "after_sha256": "345e1fd24eb29794fe450f45fa1946a1eea12d38323864ee241cbe9234175339",
+      "before_sha256": "345e1fd24eb29794fe450f45fa1946a1eea12d38323864ee241cbe9234175339",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level4",
+      "scene": 11
+    },
+    {
+      "after_sha256": "345e1fd24eb29794fe450f45fa1946a1eea12d38323864ee241cbe9234175339",
+      "before_sha256": "345e1fd24eb29794fe450f45fa1946a1eea12d38323864ee241cbe9234175339",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level4",
+      "scene": 12
+    },
+    {
+      "after_sha256": "345e1fd24eb29794fe450f45fa1946a1eea12d38323864ee241cbe9234175339",
+      "before_sha256": "345e1fd24eb29794fe450f45fa1946a1eea12d38323864ee241cbe9234175339",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level4",
+      "scene": 13
+    },
+    {
+      "after_sha256": "345e1fd24eb29794fe450f45fa1946a1eea12d38323864ee241cbe9234175339",
+      "before_sha256": "345e1fd24eb29794fe450f45fa1946a1eea12d38323864ee241cbe9234175339",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level4",
+      "scene": 14
+    },
+    {
+      "after_sha256": "345e1fd24eb29794fe450f45fa1946a1eea12d38323864ee241cbe9234175339",
+      "before_sha256": "345e1fd24eb29794fe450f45fa1946a1eea12d38323864ee241cbe9234175339",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level4",
+      "scene": 15
+    },
+    {
+      "after_sha256": "345e1fd24eb29794fe450f45fa1946a1eea12d38323864ee241cbe9234175339",
+      "before_sha256": "345e1fd24eb29794fe450f45fa1946a1eea12d38323864ee241cbe9234175339",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level4",
+      "scene": 16
+    },
+    {
+      "after_sha256": "345e1fd24eb29794fe450f45fa1946a1eea12d38323864ee241cbe9234175339",
+      "before_sha256": "345e1fd24eb29794fe450f45fa1946a1eea12d38323864ee241cbe9234175339",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level4",
+      "scene": 17
+    },
+    {
+      "after_sha256": "c3e3416504c080196cd20c5c97a2526430849145d36230be08b6083bc43db68d",
+      "before_sha256": "c3e3416504c080196cd20c5c97a2526430849145d36230be08b6083bc43db68d",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level5",
+      "scene": 0
+    },
+    {
+      "after_sha256": "c3e3416504c080196cd20c5c97a2526430849145d36230be08b6083bc43db68d",
+      "before_sha256": "c3e3416504c080196cd20c5c97a2526430849145d36230be08b6083bc43db68d",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level5",
+      "scene": 1
+    },
+    {
+      "after_sha256": "c3e3416504c080196cd20c5c97a2526430849145d36230be08b6083bc43db68d",
+      "before_sha256": "c3e3416504c080196cd20c5c97a2526430849145d36230be08b6083bc43db68d",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level5",
+      "scene": 2
+    },
+    {
+      "after_sha256": "c3e3416504c080196cd20c5c97a2526430849145d36230be08b6083bc43db68d",
+      "before_sha256": "c3e3416504c080196cd20c5c97a2526430849145d36230be08b6083bc43db68d",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level5",
+      "scene": 3
+    },
+    {
+      "after_sha256": "c3e3416504c080196cd20c5c97a2526430849145d36230be08b6083bc43db68d",
+      "before_sha256": "c3e3416504c080196cd20c5c97a2526430849145d36230be08b6083bc43db68d",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level5",
+      "scene": 4
+    },
+    {
+      "after_sha256": "c3e3416504c080196cd20c5c97a2526430849145d36230be08b6083bc43db68d",
+      "before_sha256": "c3e3416504c080196cd20c5c97a2526430849145d36230be08b6083bc43db68d",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level5",
+      "scene": 5
+    },
+    {
+      "after_sha256": "c3e3416504c080196cd20c5c97a2526430849145d36230be08b6083bc43db68d",
+      "before_sha256": "c3e3416504c080196cd20c5c97a2526430849145d36230be08b6083bc43db68d",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level5",
+      "scene": 6
+    },
+    {
+      "after_sha256": "c3e3416504c080196cd20c5c97a2526430849145d36230be08b6083bc43db68d",
+      "before_sha256": "c3e3416504c080196cd20c5c97a2526430849145d36230be08b6083bc43db68d",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level5",
+      "scene": 7
+    },
+    {
+      "after_sha256": "c3e3416504c080196cd20c5c97a2526430849145d36230be08b6083bc43db68d",
+      "before_sha256": "c3e3416504c080196cd20c5c97a2526430849145d36230be08b6083bc43db68d",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level5",
+      "scene": 8
+    },
+    {
+      "after_sha256": "c3e3416504c080196cd20c5c97a2526430849145d36230be08b6083bc43db68d",
+      "before_sha256": "c3e3416504c080196cd20c5c97a2526430849145d36230be08b6083bc43db68d",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level5",
+      "scene": 9
+    },
+    {
+      "after_sha256": "c3e3416504c080196cd20c5c97a2526430849145d36230be08b6083bc43db68d",
+      "before_sha256": "c3e3416504c080196cd20c5c97a2526430849145d36230be08b6083bc43db68d",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level5",
+      "scene": 10
+    },
+    {
+      "after_sha256": "c3e3416504c080196cd20c5c97a2526430849145d36230be08b6083bc43db68d",
+      "before_sha256": "c3e3416504c080196cd20c5c97a2526430849145d36230be08b6083bc43db68d",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level5",
+      "scene": 11
+    },
+    {
+      "after_sha256": "c3e3416504c080196cd20c5c97a2526430849145d36230be08b6083bc43db68d",
+      "before_sha256": "c3e3416504c080196cd20c5c97a2526430849145d36230be08b6083bc43db68d",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level5",
+      "scene": 12
+    },
+    {
+      "after_sha256": "c3e3416504c080196cd20c5c97a2526430849145d36230be08b6083bc43db68d",
+      "before_sha256": "c3e3416504c080196cd20c5c97a2526430849145d36230be08b6083bc43db68d",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level5",
+      "scene": 13
+    },
+    {
+      "after_sha256": "c3e3416504c080196cd20c5c97a2526430849145d36230be08b6083bc43db68d",
+      "before_sha256": "c3e3416504c080196cd20c5c97a2526430849145d36230be08b6083bc43db68d",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level5",
+      "scene": 14
+    },
+    {
+      "after_sha256": "c3e3416504c080196cd20c5c97a2526430849145d36230be08b6083bc43db68d",
+      "before_sha256": "c3e3416504c080196cd20c5c97a2526430849145d36230be08b6083bc43db68d",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level5",
+      "scene": 15
+    },
+    {
+      "after_sha256": "c3e3416504c080196cd20c5c97a2526430849145d36230be08b6083bc43db68d",
+      "before_sha256": "c3e3416504c080196cd20c5c97a2526430849145d36230be08b6083bc43db68d",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level5",
+      "scene": 16
+    },
+    {
+      "after_sha256": "c3e3416504c080196cd20c5c97a2526430849145d36230be08b6083bc43db68d",
+      "before_sha256": "c3e3416504c080196cd20c5c97a2526430849145d36230be08b6083bc43db68d",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level5",
+      "scene": 17
+    },
+    {
+      "after_sha256": "477f7c6f3e398a1107eaf4b9ca5d88465715368bc5c739d15b2523971874d00c",
+      "before_sha256": "477f7c6f3e398a1107eaf4b9ca5d88465715368bc5c739d15b2523971874d00c",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level6",
+      "scene": 0
+    },
+    {
+      "after_sha256": "477f7c6f3e398a1107eaf4b9ca5d88465715368bc5c739d15b2523971874d00c",
+      "before_sha256": "477f7c6f3e398a1107eaf4b9ca5d88465715368bc5c739d15b2523971874d00c",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level6",
+      "scene": 1
+    },
+    {
+      "after_sha256": "477f7c6f3e398a1107eaf4b9ca5d88465715368bc5c739d15b2523971874d00c",
+      "before_sha256": "477f7c6f3e398a1107eaf4b9ca5d88465715368bc5c739d15b2523971874d00c",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level6",
+      "scene": 2
+    },
+    {
+      "after_sha256": "477f7c6f3e398a1107eaf4b9ca5d88465715368bc5c739d15b2523971874d00c",
+      "before_sha256": "477f7c6f3e398a1107eaf4b9ca5d88465715368bc5c739d15b2523971874d00c",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level6",
+      "scene": 3
+    },
+    {
+      "after_sha256": "477f7c6f3e398a1107eaf4b9ca5d88465715368bc5c739d15b2523971874d00c",
+      "before_sha256": "477f7c6f3e398a1107eaf4b9ca5d88465715368bc5c739d15b2523971874d00c",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level6",
+      "scene": 4
+    },
+    {
+      "after_sha256": "477f7c6f3e398a1107eaf4b9ca5d88465715368bc5c739d15b2523971874d00c",
+      "before_sha256": "477f7c6f3e398a1107eaf4b9ca5d88465715368bc5c739d15b2523971874d00c",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level6",
+      "scene": 5
+    },
+    {
+      "after_sha256": "477f7c6f3e398a1107eaf4b9ca5d88465715368bc5c739d15b2523971874d00c",
+      "before_sha256": "477f7c6f3e398a1107eaf4b9ca5d88465715368bc5c739d15b2523971874d00c",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level6",
+      "scene": 6
+    },
+    {
+      "after_sha256": "477f7c6f3e398a1107eaf4b9ca5d88465715368bc5c739d15b2523971874d00c",
+      "before_sha256": "477f7c6f3e398a1107eaf4b9ca5d88465715368bc5c739d15b2523971874d00c",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level6",
+      "scene": 7
+    },
+    {
+      "after_sha256": "477f7c6f3e398a1107eaf4b9ca5d88465715368bc5c739d15b2523971874d00c",
+      "before_sha256": "477f7c6f3e398a1107eaf4b9ca5d88465715368bc5c739d15b2523971874d00c",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level6",
+      "scene": 8
+    },
+    {
+      "after_sha256": "477f7c6f3e398a1107eaf4b9ca5d88465715368bc5c739d15b2523971874d00c",
+      "before_sha256": "477f7c6f3e398a1107eaf4b9ca5d88465715368bc5c739d15b2523971874d00c",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level6",
+      "scene": 9
+    },
+    {
+      "after_sha256": "477f7c6f3e398a1107eaf4b9ca5d88465715368bc5c739d15b2523971874d00c",
+      "before_sha256": "477f7c6f3e398a1107eaf4b9ca5d88465715368bc5c739d15b2523971874d00c",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level6",
+      "scene": 10
+    },
+    {
+      "after_sha256": "477f7c6f3e398a1107eaf4b9ca5d88465715368bc5c739d15b2523971874d00c",
+      "before_sha256": "477f7c6f3e398a1107eaf4b9ca5d88465715368bc5c739d15b2523971874d00c",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level6",
+      "scene": 11
+    },
+    {
+      "after_sha256": "477f7c6f3e398a1107eaf4b9ca5d88465715368bc5c739d15b2523971874d00c",
+      "before_sha256": "477f7c6f3e398a1107eaf4b9ca5d88465715368bc5c739d15b2523971874d00c",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level6",
+      "scene": 12
+    },
+    {
+      "after_sha256": "477f7c6f3e398a1107eaf4b9ca5d88465715368bc5c739d15b2523971874d00c",
+      "before_sha256": "477f7c6f3e398a1107eaf4b9ca5d88465715368bc5c739d15b2523971874d00c",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level6",
+      "scene": 13
+    },
+    {
+      "after_sha256": "477f7c6f3e398a1107eaf4b9ca5d88465715368bc5c739d15b2523971874d00c",
+      "before_sha256": "477f7c6f3e398a1107eaf4b9ca5d88465715368bc5c739d15b2523971874d00c",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level6",
+      "scene": 14
+    },
+    {
+      "after_sha256": "477f7c6f3e398a1107eaf4b9ca5d88465715368bc5c739d15b2523971874d00c",
+      "before_sha256": "477f7c6f3e398a1107eaf4b9ca5d88465715368bc5c739d15b2523971874d00c",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level6",
+      "scene": 15
+    },
+    {
+      "after_sha256": "477f7c6f3e398a1107eaf4b9ca5d88465715368bc5c739d15b2523971874d00c",
+      "before_sha256": "477f7c6f3e398a1107eaf4b9ca5d88465715368bc5c739d15b2523971874d00c",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level6",
+      "scene": 16
+    },
+    {
+      "after_sha256": "477f7c6f3e398a1107eaf4b9ca5d88465715368bc5c739d15b2523971874d00c",
+      "before_sha256": "477f7c6f3e398a1107eaf4b9ca5d88465715368bc5c739d15b2523971874d00c",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level6",
+      "scene": 17
+    },
+    {
+      "after_sha256": "53b29ac24746fb18c035c22573c4f7b528c5f5cfabe534088ea155df52cce18f",
+      "before_sha256": "53b29ac24746fb18c035c22573c4f7b528c5f5cfabe534088ea155df52cce18f",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level7",
+      "scene": 0
+    },
+    {
+      "after_sha256": "53b29ac24746fb18c035c22573c4f7b528c5f5cfabe534088ea155df52cce18f",
+      "before_sha256": "53b29ac24746fb18c035c22573c4f7b528c5f5cfabe534088ea155df52cce18f",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level7",
+      "scene": 1
+    },
+    {
+      "after_sha256": "53b29ac24746fb18c035c22573c4f7b528c5f5cfabe534088ea155df52cce18f",
+      "before_sha256": "53b29ac24746fb18c035c22573c4f7b528c5f5cfabe534088ea155df52cce18f",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level7",
+      "scene": 2
+    },
+    {
+      "after_sha256": "53b29ac24746fb18c035c22573c4f7b528c5f5cfabe534088ea155df52cce18f",
+      "before_sha256": "53b29ac24746fb18c035c22573c4f7b528c5f5cfabe534088ea155df52cce18f",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level7",
+      "scene": 3
+    },
+    {
+      "after_sha256": "53b29ac24746fb18c035c22573c4f7b528c5f5cfabe534088ea155df52cce18f",
+      "before_sha256": "53b29ac24746fb18c035c22573c4f7b528c5f5cfabe534088ea155df52cce18f",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level7",
+      "scene": 4
+    },
+    {
+      "after_sha256": "53b29ac24746fb18c035c22573c4f7b528c5f5cfabe534088ea155df52cce18f",
+      "before_sha256": "53b29ac24746fb18c035c22573c4f7b528c5f5cfabe534088ea155df52cce18f",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level7",
+      "scene": 5
+    },
+    {
+      "after_sha256": "53b29ac24746fb18c035c22573c4f7b528c5f5cfabe534088ea155df52cce18f",
+      "before_sha256": "53b29ac24746fb18c035c22573c4f7b528c5f5cfabe534088ea155df52cce18f",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level7",
+      "scene": 6
+    },
+    {
+      "after_sha256": "53b29ac24746fb18c035c22573c4f7b528c5f5cfabe534088ea155df52cce18f",
+      "before_sha256": "53b29ac24746fb18c035c22573c4f7b528c5f5cfabe534088ea155df52cce18f",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level7",
+      "scene": 7
+    },
+    {
+      "after_sha256": "53b29ac24746fb18c035c22573c4f7b528c5f5cfabe534088ea155df52cce18f",
+      "before_sha256": "53b29ac24746fb18c035c22573c4f7b528c5f5cfabe534088ea155df52cce18f",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level7",
+      "scene": 8
+    },
+    {
+      "after_sha256": "53b29ac24746fb18c035c22573c4f7b528c5f5cfabe534088ea155df52cce18f",
+      "before_sha256": "53b29ac24746fb18c035c22573c4f7b528c5f5cfabe534088ea155df52cce18f",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level7",
+      "scene": 9
+    },
+    {
+      "after_sha256": "53b29ac24746fb18c035c22573c4f7b528c5f5cfabe534088ea155df52cce18f",
+      "before_sha256": "53b29ac24746fb18c035c22573c4f7b528c5f5cfabe534088ea155df52cce18f",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level7",
+      "scene": 10
+    },
+    {
+      "after_sha256": "53b29ac24746fb18c035c22573c4f7b528c5f5cfabe534088ea155df52cce18f",
+      "before_sha256": "53b29ac24746fb18c035c22573c4f7b528c5f5cfabe534088ea155df52cce18f",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level7",
+      "scene": 11
+    },
+    {
+      "after_sha256": "53b29ac24746fb18c035c22573c4f7b528c5f5cfabe534088ea155df52cce18f",
+      "before_sha256": "53b29ac24746fb18c035c22573c4f7b528c5f5cfabe534088ea155df52cce18f",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level7",
+      "scene": 12
+    },
+    {
+      "after_sha256": "53b29ac24746fb18c035c22573c4f7b528c5f5cfabe534088ea155df52cce18f",
+      "before_sha256": "53b29ac24746fb18c035c22573c4f7b528c5f5cfabe534088ea155df52cce18f",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level7",
+      "scene": 13
+    },
+    {
+      "after_sha256": "53b29ac24746fb18c035c22573c4f7b528c5f5cfabe534088ea155df52cce18f",
+      "before_sha256": "53b29ac24746fb18c035c22573c4f7b528c5f5cfabe534088ea155df52cce18f",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level7",
+      "scene": 14
+    },
+    {
+      "after_sha256": "53b29ac24746fb18c035c22573c4f7b528c5f5cfabe534088ea155df52cce18f",
+      "before_sha256": "53b29ac24746fb18c035c22573c4f7b528c5f5cfabe534088ea155df52cce18f",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level7",
+      "scene": 15
+    },
+    {
+      "after_sha256": "53b29ac24746fb18c035c22573c4f7b528c5f5cfabe534088ea155df52cce18f",
+      "before_sha256": "53b29ac24746fb18c035c22573c4f7b528c5f5cfabe534088ea155df52cce18f",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level7",
+      "scene": 16
+    },
+    {
+      "after_sha256": "53b29ac24746fb18c035c22573c4f7b528c5f5cfabe534088ea155df52cce18f",
+      "before_sha256": "53b29ac24746fb18c035c22573c4f7b528c5f5cfabe534088ea155df52cce18f",
+      "changed_pixels": 0,
+      "dataset": "ln2_loader_level7",
+      "scene": 17
+    },
+    {
+      "after_sha256": "653095de7697c7aa09afb69b4601fcfea917af92f19bf2f7dbc73cdcfd704f2a",
+      "before_sha256": "d6b996eb32fa5155bb908bac0299575307af12c51073aa5509705b4fd8a48879",
+      "changed_pixels": 1392,
+      "dataset": "ln3_game_level1",
+      "scene": 0
+    },
+    {
+      "after_sha256": "5dc56d4dbb25262f903d749e9ec6a2fc4164f07045602d95026b21b1780a7ea2",
+      "before_sha256": "4e21516d0adbedcf606e6d06bc9729feaf0d1b1c6f8524fac7e5fbc9566adc08",
+      "changed_pixels": 274,
+      "dataset": "ln3_game_level1",
+      "scene": 1
+    },
+    {
+      "after_sha256": "0bc551add77cadd2f24bd1aba6cc3e32d6ddd099b71883b45464c4201048372b",
+      "before_sha256": "954dbe2051245ed428acb39cd14cbb16d4375d5b56194e9b46d475ff700dbd2a",
+      "changed_pixels": 1410,
+      "dataset": "ln3_game_level1",
+      "scene": 2
+    },
+    {
+      "after_sha256": "54778011bdbedab6cd4de378d9fa696cb8290ccfa3c282345b99af2791ccd51a",
+      "before_sha256": "28538bb4db26865f61f2ee0ef5016979866138afe3e567077fbc1414297709e2",
+      "changed_pixels": 366,
+      "dataset": "ln3_game_level1",
+      "scene": 3
+    },
+    {
+      "after_sha256": "8c4f7d8030aa1a5d7568327ba984ad9a98229c786c0ee11c88d81d70863017b9",
+      "before_sha256": "40db48ed796fb965d2208988371c56d84ba2b388a00e0f14abfe6b261d59f0cc",
+      "changed_pixels": 402,
+      "dataset": "ln3_game_level1",
+      "scene": 4
+    },
+    {
+      "after_sha256": "33e3e52b2404baf66a6f33f7ad78e8df4695cfea6bbf37eae7a6c39a3cb0eda0",
+      "before_sha256": "e1676ab8b3fd7472a8679a5d6abb1395b50d367714755063fe1088b8983d7644",
+      "changed_pixels": 130,
+      "dataset": "ln3_game_level1",
+      "scene": 5
+    },
+    {
+      "after_sha256": "b5ec8a089789e6e24d406d8f582c5f4f3a6732f47c7f1146e8a5269b3d1a4732",
+      "before_sha256": "8764c4cca483b8a54fef8c5f8998cff93155bc9b164c56492e2b59b593e51f14",
+      "changed_pixels": 400,
+      "dataset": "ln3_game_level1",
+      "scene": 6
+    },
+    {
+      "after_sha256": "024ffeab5ca0764adef9ee94f20f2aa7acc5088e55768c6feb115573a1c5e7aa",
+      "before_sha256": "75868741e562e53cf326928e6afb1f9b2047fa0f67fe0c16856df0f5831f87ab",
+      "changed_pixels": 36,
+      "dataset": "ln3_game_level1",
+      "scene": 7
+    },
+    {
+      "after_sha256": "88f58849b457e450e199a909fa92084c482194354df4fd901527f87569b4fbfe",
+      "before_sha256": "742a29ecc62bfdb15d1198f6657caeaac2ffe414fb58faa694ce6713c9de8a27",
+      "changed_pixels": 678,
+      "dataset": "ln3_game_level1",
+      "scene": 8
+    },
+    {
+      "after_sha256": "4d77a628576bee3b2f4ea73b9652ac41d30723e4ca81e4c630197fb2c39838fd",
+      "before_sha256": "0e46f27380812bfcb8e85bd2fa7591aad4247b9341c892507f8fc1f837e7c341",
+      "changed_pixels": 598,
+      "dataset": "ln3_game_level1",
+      "scene": 9
+    },
+    {
+      "after_sha256": "63c02dfbc58aa5c9abb6c7c762a7fc7fe176b60197ded94ae577fe022e7a3189",
+      "before_sha256": "319eb766b969d3f7bcaa6d94a43125a17e300af68c83bbc958fa036aac6cf098",
+      "changed_pixels": 286,
+      "dataset": "ln3_game_level1",
+      "scene": 10
+    },
+    {
+      "after_sha256": "0e50dbc5fce10ae9d6d27d8dcd4bc8f582b077f013a0feebf75e5974860c226b",
+      "before_sha256": "ce2141014e2c3dad32e3071149e1a374a058a13a5e67100064e6ffb972c9abff",
+      "changed_pixels": 818,
+      "dataset": "ln3_game_level1",
+      "scene": 11
+    },
+    {
+      "after_sha256": "dfcad723a3ec78809abf8ccc69a53d9f329359720265240f1e6d313eb79db152",
+      "before_sha256": "fef0ce33acf1098590eec1a14bdc918cb33ef6e7c7b107bfe822468ff4bd09c2",
+      "changed_pixels": 214,
+      "dataset": "ln3_game_level1",
+      "scene": 13
+    },
+    {
+      "after_sha256": "dfcad723a3ec78809abf8ccc69a53d9f329359720265240f1e6d313eb79db152",
+      "before_sha256": "fef0ce33acf1098590eec1a14bdc918cb33ef6e7c7b107bfe822468ff4bd09c2",
+      "changed_pixels": 214,
+      "dataset": "ln3_game_level1",
+      "scene": 14
+    },
+    {
+      "after_sha256": "1e5b7871a6fa99f9f889efd538c9e374954993ff8124d580f51aacc2a772689f",
+      "before_sha256": "bc81625b2936921398b7b262e175dafa8d9ab4ab4b536cc4916f128ebeefff5b",
+      "changed_pixels": 284,
+      "dataset": "ln3_game_level2",
+      "scene": 0
+    },
+    {
+      "after_sha256": "70911ee885f7cb0ac110ff4c18ade2ac73b3d482078d49b2a30c0835ec013df9",
+      "before_sha256": "ad3bf77ce11f945ae3e1e375305ae042553763c532a0d06bee409b84bcc4bcf4",
+      "changed_pixels": 392,
+      "dataset": "ln3_game_level2",
+      "scene": 1
+    },
+    {
+      "after_sha256": "702aabfc02eb887ee1b754f0a5baf1e693f72a8bf03aa91c55f6d60c22c5a7f4",
+      "before_sha256": "96d87980a92392ef4976a93247c5109c001c098aadfcc7afae7cf03f83229615",
+      "changed_pixels": 262,
+      "dataset": "ln3_game_level2",
+      "scene": 2
+    },
+    {
+      "after_sha256": "3804d511362cecb0d077e76732ec41b7b7db5923ea3fe044a5e5fde49a3bba4c",
+      "before_sha256": "1c697d514efaaa4af341fdadeab9339ae41762e01f523ce25a8b9567c0bd8138",
+      "changed_pixels": 536,
+      "dataset": "ln3_game_level2",
+      "scene": 3
+    },
+    {
+      "after_sha256": "845c8339c65679c36ed2eaa3ec788ea9622c76c96ccfc0417181689aee386c64",
+      "before_sha256": "218dfbf809a665b8fc59625e04642d9de07948169dd6bedf8a4bc1c19356cc7d",
+      "changed_pixels": 200,
+      "dataset": "ln3_game_level2",
+      "scene": 4
+    },
+    {
+      "after_sha256": "3856c46af9f3d6af429395ebc56b6db153c2f596d1bea96725eee37eb973775c",
+      "before_sha256": "d4c56d2e5dbb5a69467ea09567727b6b845b19b5f47bf91ee73d54009efaafbf",
+      "changed_pixels": 348,
+      "dataset": "ln3_game_level2",
+      "scene": 5
+    },
+    {
+      "after_sha256": "70807937c2575b1543a6b3ee19bfab99c7f59ed7164360385ab019d8f3ea67d4",
+      "before_sha256": "907f76cc14727b205dd21d597d4d53d36d611efff8b50af03a2607d35cd9e7dc",
+      "changed_pixels": 212,
+      "dataset": "ln3_game_level2",
+      "scene": 6
+    },
+    {
+      "after_sha256": "bd9ddef682715f7e33eccb06870dbc0268858487a71fe555e13e424e8ee3eb7c",
+      "before_sha256": "df1d574116d1da0224bed98161dfd71a375cf9513cb1b56fa0cd3bffe7c93391",
+      "changed_pixels": 364,
+      "dataset": "ln3_game_level2",
+      "scene": 7
+    },
+    {
+      "after_sha256": "f689f5010cd95c888c56690bf201e93b37dd7cb1ed0a08ac0f62c4827a4a56fa",
+      "before_sha256": "097046fc9843ea7ff510c00993dc05d2c5906a092d4e63c50a963cfce9482768",
+      "changed_pixels": 284,
+      "dataset": "ln3_game_level2",
+      "scene": 8
+    },
+    {
+      "after_sha256": "3f711c7d3701369c7d64ce5625c5dd193792ac3c7c26255db8788b34d25f9c00",
+      "before_sha256": "caf8056fad0610b45d07f486b072af9621e59ec3b37367ced729014e645bd2a5",
+      "changed_pixels": 314,
+      "dataset": "ln3_game_level2",
+      "scene": 9
+    },
+    {
+      "after_sha256": "816fc552210fa583a0107cfad3de38042ac0899911155d2333e62b7f3bc2ffdd",
+      "before_sha256": "a87fe33361d8ced03a7b0a9931f4767011ae3c6fe9dca6c3c26d3491227cfeb0",
+      "changed_pixels": 282,
+      "dataset": "ln3_game_level2",
+      "scene": 10
+    },
+    {
+      "after_sha256": "a334e8088a9eb5bff4a25f8260ecb4167e8165fc5aed6742bc4115b4f69c0ab6",
+      "before_sha256": "59e9089d4e096cbdf812488a595a94998b8ea61f8f1d386f8eeb19fea4dcc52e",
+      "changed_pixels": 12,
+      "dataset": "ln3_game_level2",
+      "scene": 11
+    },
+    {
+      "after_sha256": "7ce57b6d51b818b947c3491aba33c416df0ce042bc9b509c73dc2a82aaafee79",
+      "before_sha256": "67dd72b35997a19443abecacfb5ef74d1a573fbe12c3031b2ad8769fe010cc22",
+      "changed_pixels": 352,
+      "dataset": "ln3_game_level2",
+      "scene": 13
+    },
+    {
+      "after_sha256": "7ce57b6d51b818b947c3491aba33c416df0ce042bc9b509c73dc2a82aaafee79",
+      "before_sha256": "67dd72b35997a19443abecacfb5ef74d1a573fbe12c3031b2ad8769fe010cc22",
+      "changed_pixels": 352,
+      "dataset": "ln3_game_level2",
+      "scene": 14
+    },
+    {
+      "after_sha256": "51e8f24db7338df1c628784ac420ccb7a73e4c25f3ec3b038e062bbb79ee86b3",
+      "before_sha256": "2804cfe0c5294078f0d4f5343cb053b7e98013e5f245de5c9ab59e38e132f752",
+      "changed_pixels": 246,
+      "dataset": "ln3_game_level3",
+      "scene": 0
+    },
+    {
+      "after_sha256": "ba507958a6dfc366bee68108c192fb50e9bce651abae3bf6c5669246c9fd1cef",
+      "before_sha256": "0f66e2287c7b4bec859b9ef7e841938210a401bb3f4efd49b0b776b6ef1e52d1",
+      "changed_pixels": 1934,
+      "dataset": "ln3_game_level3",
+      "scene": 1
+    },
+    {
+      "after_sha256": "b88d6dea1271526fbfad7332ed008b8d30cf5d9fb7bbcfeb01a84adaa3a17a7f",
+      "before_sha256": "3a4660f1617fdacda88bd0778966f1c0a4617d0908a7b46b597e086be240d70f",
+      "changed_pixels": 336,
+      "dataset": "ln3_game_level3",
+      "scene": 2
+    },
+    {
+      "after_sha256": "d8a1f2a99c6793f1ed1e886da81d14d5df5c338a7d59c27dd85c873ab5e335e7",
+      "before_sha256": "24a20cf738be462ff474b400802cfa2979a6b55b2a36d36ee577ae0cd0d64794",
+      "changed_pixels": 352,
+      "dataset": "ln3_game_level3",
+      "scene": 3
+    },
+    {
+      "after_sha256": "21374be1e46d14758690fe7634376b98ec6633893c06b531b97359fabb031b5f",
+      "before_sha256": "29a68d6724bebd2c55af5d302893335502943e28b7fe6f983fea833969e42056",
+      "changed_pixels": 480,
+      "dataset": "ln3_game_level3",
+      "scene": 4
+    },
+    {
+      "after_sha256": "1c637100d06bb4a27dab6a82306f0f07f5cd460012628794b42e891a87de48ea",
+      "before_sha256": "1ecdfc7fa0447b95533ff1a6d6e7b3a164ea0ab5f07cf1ed479e917b07773ce8",
+      "changed_pixels": 284,
+      "dataset": "ln3_game_level3",
+      "scene": 5
+    },
+    {
+      "after_sha256": "4aa3a22c22ecf2b1d6a0601b07c32ce538b7998befa8af1c01c419d0ce234567",
+      "before_sha256": "094292783ff98d412f800bece75ae16e27a3d99384582976b073dbedacf68e52",
+      "changed_pixels": 1518,
+      "dataset": "ln3_game_level3",
+      "scene": 6
+    },
+    {
+      "after_sha256": "8edb6f1487f479423f840388a4c11a33bce866455e75f4f58e0d921f525b3d1d",
+      "before_sha256": "18d39ac329debc6fea17cf2a69e1b13e53ff8897e6d41999fa1f455455dd36d0",
+      "changed_pixels": 1020,
+      "dataset": "ln3_game_level3",
+      "scene": 7
+    },
+    {
+      "after_sha256": "d67fa22f5aea4d5b86e709db7617d88baf3041f1f253c594a4bd6d7df2326560",
+      "before_sha256": "0b64f0a7a56a7ebe85eab8e794d463838620b241c8ba0c885236dfcdc7a80c79",
+      "changed_pixels": 384,
+      "dataset": "ln3_game_level3",
+      "scene": 8
+    },
+    {
+      "after_sha256": "68e6b99c288518a535adf7366648df2d74ce74da4480a75f49cc2a21cc3c6057",
+      "before_sha256": "f57a0fefb3343b63dd435c572d9c029e636d37cf5eac68f356b441471ce62e48",
+      "changed_pixels": 2058,
+      "dataset": "ln3_game_level3",
+      "scene": 9
+    },
+    {
+      "after_sha256": "429d64f19d4e920f1489b6edfb0eacab4d0de6796b078de89528fbdde1015d5c",
+      "before_sha256": "0b0dbfe08a1a3f53700e045b7cd497fd337598ff2739362ae2cd85e64b4852c4",
+      "changed_pixels": 388,
+      "dataset": "ln3_game_level3",
+      "scene": 10
+    },
+    {
+      "after_sha256": "cfcc67770300c2f8dd54d45f375d02652dd3c2b171dfd21eae5f0fc678bf29d1",
+      "before_sha256": "22aabefe1b14b2b4c7e49d2ff23d03eead88f6a7afc6ff5822615487f20b343e",
+      "changed_pixels": 400,
+      "dataset": "ln3_game_level3",
+      "scene": 11
+    },
+    {
+      "after_sha256": "eaccd044801e887db3c8d1054001febb09ec7455b62608bb601f8ddc10a2a2a2",
+      "before_sha256": "4727eb548d63217b90e9e07b1d19c73a427e9244a11c67f41a837fff76fd14d4",
+      "changed_pixels": 174,
+      "dataset": "ln3_game_level3",
+      "scene": 13
+    },
+    {
+      "after_sha256": "eaccd044801e887db3c8d1054001febb09ec7455b62608bb601f8ddc10a2a2a2",
+      "before_sha256": "4727eb548d63217b90e9e07b1d19c73a427e9244a11c67f41a837fff76fd14d4",
+      "changed_pixels": 174,
+      "dataset": "ln3_game_level3",
+      "scene": 14
+    },
+    {
+      "after_sha256": "d7c7e7f3b23a8e540910d0d5b35f6c2aeb94dbe1461ae9dd472494f1ff8307c0",
+      "before_sha256": "dbd52aa88e9b9762663ec209b3ec45155eeca708f4946db69207612f935e9db8",
+      "changed_pixels": 150,
+      "dataset": "ln3_game_level4",
+      "scene": 0
+    },
+    {
+      "after_sha256": "2fb77b541979a70aad94ac2ea37798602d20cffcf988fd0a86f81b4641d4b178",
+      "before_sha256": "aa04d897032df0cf1f9229bff78e453b8f30c5bd15e74d0ee8952e6de1b8cbec",
+      "changed_pixels": 148,
+      "dataset": "ln3_game_level4",
+      "scene": 1
+    },
+    {
+      "after_sha256": "4f104f567acd71e1efc2800956cb73689e1f5831124bb8315c00bd76403717d0",
+      "before_sha256": "addb66c2825ef8b00be3c92b52f02047d2f1244087f2f8c886b9342297ec46f8",
+      "changed_pixels": 408,
+      "dataset": "ln3_game_level4",
+      "scene": 2
+    },
+    {
+      "after_sha256": "55ba03f80623e0aeeab9aecd425d7c0f6d8e72e64227c79346c6fdaf51bb7bd4",
+      "before_sha256": "80c25e0649b5c034057b53046df0330993403ade57f909ab98212d9e4ce0903f",
+      "changed_pixels": 260,
+      "dataset": "ln3_game_level4",
+      "scene": 3
+    },
+    {
+      "after_sha256": "2d04d480c2100ec744b147bdf1bfbc1a5ce64a079303b16dbef2002639a6375c",
+      "before_sha256": "9c996fc228e163c351760767abd88b5059ee4f9b51d7e9c4837dab90706bc7e6",
+      "changed_pixels": 196,
+      "dataset": "ln3_game_level4",
+      "scene": 4
+    },
+    {
+      "after_sha256": "f347cce9a7aa8aa449f126c58192b898080cb780811ffc9eae0980fb4708eca5",
+      "before_sha256": "30a7939741e68c41d3dec15b583cf2dcf857ddea2efb8f32ef9310db648a0219",
+      "changed_pixels": 244,
+      "dataset": "ln3_game_level4",
+      "scene": 5
+    },
+    {
+      "after_sha256": "98f66a8996f89d0312a49e41aea46d670e41b4d268bc71d6a4c88f1be6cb8b82",
+      "before_sha256": "09c9b358ee5255487f41866258e2fd22a9347072bcc82c0b4409b36a8f7e854b",
+      "changed_pixels": 464,
+      "dataset": "ln3_game_level4",
+      "scene": 6
+    },
+    {
+      "after_sha256": "253f095f9ee8bd338806c85c51d8b1bf5cd1ac0ad8ca20d351a2ed588d3f6b61",
+      "before_sha256": "ba57a418d8f4e5836b29199c32466c9af01cc6d08dc86736f98cdcd44f5b5ff0",
+      "changed_pixels": 182,
+      "dataset": "ln3_game_level4",
+      "scene": 7
+    },
+    {
+      "after_sha256": "5b4a050d72c529e19000f39fe25cdfd770980b9bba2e4319d8eb8edd22299d05",
+      "before_sha256": "3a61012bbcee26bd0153a23db577f7d1eb5c9e98dfbfe7829126cb9b0174e683",
+      "changed_pixels": 130,
+      "dataset": "ln3_game_level4",
+      "scene": 8
+    },
+    {
+      "after_sha256": "e7c43ac4977aa43a1258190e325948b5d39007ed3efb0b661bbd452c7acb834a",
+      "before_sha256": "d68857895acf4384064e78b6a279c49b43382f35b97557e4a49cb10b62942655",
+      "changed_pixels": 176,
+      "dataset": "ln3_game_level4",
+      "scene": 9
+    },
+    {
+      "after_sha256": "b41e71177b72f6ad5a37b1c72e9bcb0e0c4e5e3ffa8e8d74e677c26a89ed867b",
+      "before_sha256": "d599b128411c8af6fb35e941a7e845e09774366904e87f585132aa30b5feea2d",
+      "changed_pixels": 72,
+      "dataset": "ln3_game_level4",
+      "scene": 10
+    },
+    {
+      "after_sha256": "0af1206fc1c92a4be11ae3c5ca730f080361b6f70c9d19e0e51694d834511815",
+      "before_sha256": "522b19d40707e86fe651c68a25b2e3563b30e9f1dfc8997ba7c5d0f7b7db0d33",
+      "changed_pixels": 232,
+      "dataset": "ln3_game_level4",
+      "scene": 11
+    },
+    {
+      "after_sha256": "50e7e08b40a138e1d86b6ab165d5b761ced876b0825a8b607c943072a1de44f3",
+      "before_sha256": "9bbda98d9859f8ab4dceee72074c4e10c7a2cfdd0883f798622dfd223202b2c8",
+      "changed_pixels": 16,
+      "dataset": "ln3_game_level4",
+      "scene": 12
+    },
+    {
+      "after_sha256": "8ed05a56e2d62113291f60102e11337c656cb9c46d57444770a5cda51c251d53",
+      "before_sha256": "1adac2744721b2011fc30d65ee20610358a9224abfa57e7c31d9e8181bdb0586",
+      "changed_pixels": 38,
+      "dataset": "ln3_game_level4",
+      "scene": 13
+    },
+    {
+      "after_sha256": "8ed05a56e2d62113291f60102e11337c656cb9c46d57444770a5cda51c251d53",
+      "before_sha256": "1adac2744721b2011fc30d65ee20610358a9224abfa57e7c31d9e8181bdb0586",
+      "changed_pixels": 38,
+      "dataset": "ln3_game_level4",
+      "scene": 14
+    },
+    {
+      "after_sha256": "51b43aa28bed36fa99b358fac4e0c57e4a8b5e4ef17594ec915adadff8604248",
+      "before_sha256": "87fa71ab55cd95c9c1a324a3b67560cf9547f4e0211902133f1f9fee80fffe27",
+      "changed_pixels": 250,
+      "dataset": "ln3_game_level5",
+      "scene": 0
+    },
+    {
+      "after_sha256": "000b4eb5be9739952fa75cfa280757124089160a993d93bf157df1a9897d31e9",
+      "before_sha256": "123ac7b66dd28ef07225c5c52ac16b985ce7ab8a970506fa1ac065d5472e9bcb",
+      "changed_pixels": 204,
+      "dataset": "ln3_game_level5",
+      "scene": 1
+    },
+    {
+      "after_sha256": "a652ddfd8d361035850fc9c440e99f7ab1d744aced5f340bf6c8aabf7bbf99b6",
+      "before_sha256": "592005093821d6eb7403ea0bfdd58aab4115bdd5a91aed07034d0144fd3b9e1e",
+      "changed_pixels": 114,
+      "dataset": "ln3_game_level5",
+      "scene": 2
+    },
+    {
+      "after_sha256": "6cbe6a9e7b24e0800c8f0f8d300df0d24de8bc4f522722e1806cfc54d3d0983f",
+      "before_sha256": "fabe2ff37cef63530ecfda830afe873c37fde6dc70dca19fe148ee66c2a647bf",
+      "changed_pixels": 144,
+      "dataset": "ln3_game_level5",
+      "scene": 3
+    },
+    {
+      "after_sha256": "c76931814401402e5d35c9abdc59fdc72fb2468bd6ad63ab35ddea65caf565c6",
+      "before_sha256": "729d42b7f7e94f89964de6a34bb53b1399960722c27898b4eb0306a3498f9bc2",
+      "changed_pixels": 254,
+      "dataset": "ln3_game_level5",
+      "scene": 4
+    },
+    {
+      "after_sha256": "42bf4321e11641c0b86f2f0c07675427431aaf2533ebc2f9d2ac1a972fb06cef",
+      "before_sha256": "94e4fb9583c3fdd67bbe904e09c84dd6ecd82adb054e68d6d58a455b198389ce",
+      "changed_pixels": 340,
+      "dataset": "ln3_game_level5",
+      "scene": 5
+    },
+    {
+      "after_sha256": "1718d5c2133acb61957ada5c15c07ebc379dd05c98f9420eefd5f622927317ee",
+      "before_sha256": "ac4c229ab648cf9de138015bd81dc9a48a240900844dc9f0c2e2942d0789c287",
+      "changed_pixels": 82,
+      "dataset": "ln3_game_level5",
+      "scene": 6
+    },
+    {
+      "after_sha256": "be179eb221ee3ce5bd712343922784a93d39b962bf0ac989382e7bcecdf75172",
+      "before_sha256": "c348f9d8675b791450f9ee502a73984b769febc99da1a57a6ca1fe5d251f3768",
+      "changed_pixels": 160,
+      "dataset": "ln3_game_level5",
+      "scene": 7
+    },
+    {
+      "after_sha256": "0bd7a8eba59ff4ed27e9902f2211c102f659210658d91ad8a4cc562dc870bb74",
+      "before_sha256": "61de86913d76fd42307125afe5846cf5474a9215cbecaaa6a51545413f489208",
+      "changed_pixels": 214,
+      "dataset": "ln3_game_level5",
+      "scene": 8
+    },
+    {
+      "after_sha256": "a490c09c4f49a66379d7496c7e8545cbdb3e06bee76134bc47eb2e05c9805453",
+      "before_sha256": "3d190ad368080f146948944095fb5020c1fc3f39b5cebf4d7f1b974ba76c9c66",
+      "changed_pixels": 152,
+      "dataset": "ln3_game_level5",
+      "scene": 9
+    },
+    {
+      "after_sha256": "e40e94f56f6afba0087dd68768cb35ece2b30492b480b398e5897c408944dcc5",
+      "before_sha256": "34fec1bb74ce7156f1c31221deac40131574ea996547258d990f00765606cd05",
+      "changed_pixels": 166,
+      "dataset": "ln3_game_level5",
+      "scene": 10
+    },
+    {
+      "after_sha256": "8347b74fb924455e29f402b557fbe41af0dafd5b396325a96a1debbadd0c699e",
+      "before_sha256": "9ee0fe64bd25bcde89b8a57cb70ad134d65e1b4bf9310bf7fcce486d28faa57f",
+      "changed_pixels": 324,
+      "dataset": "ln3_game_level5",
+      "scene": 11
+    },
+    {
+      "after_sha256": "374646db51a7697bf9921f52e6927d50c22d526ebfd533ba0351c076779e778e",
+      "before_sha256": "81a64159fb84443480a0b443ae6de0222c18167c2f4ecd7d1ccc0b0aa455ff06",
+      "changed_pixels": 148,
+      "dataset": "ln3_game_level5",
+      "scene": 12
+    }
+  ],
+  "scene_records": 436,
+  "scope": "Static scenery only; original input timing and full-game parity excluded",
+  "selected_scope": "Only LN3 level 1 opening scene, per explicit user selection"
+}

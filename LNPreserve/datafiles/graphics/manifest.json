@@ -16173,12 +16173,18 @@
           "background": 5,
           "path": "datafiles/graphics/ln3_game_level1/ln3_game_level1_location_00.png",
           "mask_path": null,
-          "status": "diagnostic_unverified",
-          "warnings": [
-            "palette_merge_not_validated"
-          ],
+          "status": "original_bitmap_verified",
+          "warnings": [],
           "canonical_name": "ln3_game_level1_location_00",
-          "canonical_folder": "ln3_game_level1"
+          "canonical_folder": "ln3_game_level1",
+          "verification": {
+            "dataset_matches_supplied_game": true,
+            "dataset_payload_sha256": "9e5443d2ba4b715b01f0e058e2353014a9273dcf799848a6a904f1a335e3f2ac",
+            "differing_pixels": 0,
+            "pixel_sha256": "653095de7697c7aa09afb69b4601fcfea917af92f19bf2f7dbc73cdcfd704f2a",
+            "pixels_compared": 34560,
+            "source_ram_sha256": "cff9cbcd78cbe22aa1aae5d8e6fc6d58444dd5f6e1367608c06f7da5b60c585c"
+          }
         },
         {
           "name": "ln3_game_level1_location_01",

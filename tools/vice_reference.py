@@ -4,13 +4,14 @@ import socket,struct,subprocess,time,json
 ROOT=Path(__file__).resolve().parents[1]
 
 class Reference:
-    def __init__(self):
+    def __init__(self,disk=None):
         self.id=0;self.events=[]
         with socket.socket() as reserve:reserve.bind(('127.0.0.1',0));port=reserve.getsockname()[1]
         exe=next((ROOT/'tools/vendor/vice').rglob('x64sc.exe'))
         self.log=open(ROOT/'source/local/captures/binary-reference.log','w')
         args=[str(exe),'-default','-console','-pal','+sound','-warp','-binarymonitor',
               '-binarymonitoraddress',f'127.0.0.1:{port}']
+        if disk:args.extend(['-8',str(Path(disk).resolve()),'-attach8ro'])
         self.process=subprocess.Popen(args,cwd=exe.parent,stdout=self.log,stderr=subprocess.STDOUT,
             creationflags=getattr(subprocess,'CREATE_NO_WINDOW',0))
         for _ in range(100):
@@ -77,19 +78,25 @@ class Reference:
     def step(self,count):
         self.events=[];self.command(0x71,struct.pack('<BH',0,count));self.wait_stopped()
     def until(self,address):
+        self.until_any([address])
+    def until_any(self,addresses):
         # VICE 3.10 resumes after a temporary checkpoint in this configuration.
         # Keep the checkpoint persistent until stopped, then remove it explicitly.
-        body=self.command(0x12,struct.pack('<HHBBBBB',address,address,1,1,4,0,0))
-        checkpoint=int.from_bytes(body[:4],'little');self.events=[]
+        checkpoints={}
+        for address in addresses:
+            body=self.command(0x12,struct.pack('<HHBBBBB',address,address,1,1,4,0,0))
+            checkpoints[int.from_bytes(body[:4],'little')]=address
+        self.events=[]
         self.command(0xaa);hit=False
         while True:
             response=self.events.pop(0) if self.events else self.receive()
-            if response[0]==0x11 and int.from_bytes(response[3][:4],'little')==checkpoint and response[3][4]:hit=True
+            if response[0]==0x11 and int.from_bytes(response[3][:4],'little') in checkpoints and response[3][4]:
+                hit=True;address=checkpoints[int.from_bytes(response[3][:4],'little')]
             if response[0]==0x62 and hit:
                 self.last_stop=int.from_bytes(response[3][:2],'little')
-                self.command(0x13,struct.pack('<I',checkpoint))
+                for checkpoint in checkpoints:self.command(0x13,struct.pack('<I',checkpoint))
                 if self.registers()['PC']!=address:raise RuntimeError('Reference advanced beyond its requested checkpoint')
-                return
+                return address
     def close(self):
         if hasattr(self,'socket'):
             try:self.command(0xbb)
