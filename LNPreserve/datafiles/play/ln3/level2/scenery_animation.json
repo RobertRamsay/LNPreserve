@@ -1,0 +1,84 @@
+{
+  "level": 2,
+  "rooms": [
+    {
+      "first": [],
+      "id": 0,
+      "repeat": [],
+      "sequence": []
+    },
+    {
+      "first": [],
+      "id": 1,
+      "repeat": [],
+      "sequence": []
+    },
+    {
+      "first": [],
+      "id": 2,
+      "repeat": [],
+      "sequence": []
+    },
+    {
+      "first": [],
+      "id": 3,
+      "repeat": [],
+      "sequence": []
+    },
+    {
+      "first": [],
+      "id": 4,
+      "repeat": [],
+      "sequence": []
+    },
+    {
+      "first": [],
+      "id": 5,
+      "repeat": [],
+      "sequence": []
+    },
+    {
+      "first": [],
+      "id": 6,
+      "repeat": [],
+      "sequence": []
+    },
+    {
+      "first": [],
+      "id": 7,
+      "repeat": [],
+      "sequence": []
+    },
+    {
+      "first": [],
+      "id": 8,
+      "repeat": [],
+      "sequence": []
+    },
+    {
+      "first": [],
+      "id": 9,
+      "repeat": [],
+      "sequence": []
+    },
+    {
+      "first": [],
+      "id": 10,
+      "repeat": [],
+      "sequence": []
+    },
+    {
+      "first": [],
+      "id": 11,
+      "repeat": [],
+      "sequence": []
+    },
+    {
+      "first": [],
+      "id": 13,
+      "repeat": [],
+      "sequence": []
+    }
+  ],
+  "sprite": "spr_ln3_scenery_animation"
+}

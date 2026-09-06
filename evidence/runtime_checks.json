@@ -33,6 +33,12 @@
   "ln3_enemy_pass": true,
   "ln3_combat_pass": true,
   "ln3_scenes_pass": true,
+  "ln3_items_pass": true,
+  "ln3_scenery_pass": true,
+  "ln3_scenery_gpu_pass": true,
+  "ln3_special_pass": true,
+  "ln3_transition_pass": true,
+  "ln3_mechanism_gpu_pass": true,
   "ln3_world_pass": true,
   "ln3_gpu_pass": true
 }

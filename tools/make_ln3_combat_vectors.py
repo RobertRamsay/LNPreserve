@@ -12,7 +12,7 @@ from export_ln1_world import call
 from export_ln1_levels import register_project
 
 FIELDS=dict(enemy_flash_mode=0x2dd,enemy_flash=0x2db,death_wait=0x150,boss_honour=0x15a,
-            honour_fraction=0x32c,level_sequence=0x315)
+            honour_fraction=0x32c,level_sequence=0x315,bolt_reflected=0x30b)
 
 def state(mem,a,requested=False):
     result=enemy_state(mem,a);result.update({k:mem[p] for k,p in FIELDS.items()})
@@ -68,7 +68,9 @@ def main():
                         vectors.append(dict(level=level,operation=0,before=before,expected=state(mem,a,requested)))
         for case in range(400):
             mem=list(ram);mem[0x53]=mem[0x57]=114;mem[0xe1]=rng.choice([6,102,255])
-            mem[0xfb]=rng.choice([0,1,255]);mem[0xfc]=rng.choice([0,0,255]);mem[0xe6]=rng.choice([0,6,28,29])
+            mem[0xfb]=rng.choice([0,1,255]);mem[0xfc]=rng.choice([0,0,255]);mem[0xe6]=rng.choice([0,6,24,28,29])
+            if level==5:
+                mem[0xe3]=rng.choice([0,11]);mem[0x30b]=rng.choice([0,1,255]);mem[0x1c]=rng.choice([0,1,44])
             mem[0x54]=rng.choice([116,138]) if level!=5 else 116
             mem[0x42]=mem[0x4a]=120;mem[0x43]=mem[0x4b]=100
             for x,y in ((0x46,0x47),(0x4e,0x4f)):

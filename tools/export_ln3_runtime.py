@@ -18,7 +18,7 @@ FIELDS=dict(mask_spill=0x63,multicolour=0x2d4,expand_x=0x2d5,expand_y=0x2d6,
     logic_wait=0x146,regeneration_wait=0x14e,scene_wait=0x14b,
     item_wait=0x14d,climb_request=0x30a,water_gate=0x312,
     carrier_state=0x2f8,carrier_left=0x2d0,carrier_right=0x2d1,
-    ammo_pile=0x2ff,special_wait=0x151,fall_count=0x304)
+    ammo_pile=0x2ff,special_wait=0x151,fall_count=0x304,portrait_visible=0x31b)
 
 def state(mem,a):
     result=combat_state(mem,a);result.update({k:mem[p] for k,p in FIELDS.items()})

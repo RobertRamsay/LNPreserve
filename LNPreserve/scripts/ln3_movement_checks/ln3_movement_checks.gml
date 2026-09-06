@@ -19,5 +19,5 @@ function ln3_movement_checks() {
             ln_check(_a==_e,"LN3 move "+string(_i)+" "+_key+" got "+string(_a)+" expected "+string(_e));
         }
     }
-    show_debug_message("LN3_MOVEMENT_PASS: "+string(array_length(_o.vectors))+" original sprite-part movement states across five banks. Full gameplay remains unconnected.");
+    show_debug_message("LN3_MOVEMENT_PASS: "+string(array_length(_o.vectors))+" original sprite-part movement states across five banks, including Wind platform edges. Whole-game timing remains unverified.");
 }

@@ -1,0 +1,7 @@
+{
+  "animation_steps": 49,
+  "scope": "Recover original LN3 animated scenery as editable PNG overlays and masks.\n\nOnly pixels touched over the original animation cycle are included in the\noverlay. First-entry and repeating cycles are retained separately; identical\nframes share one sprite bank. Existing static scene artwork is preserved.\n",
+  "selector_vectors": 1176,
+  "unique_overlay_frames": 50,
+  "whole_game_parity": false
+}

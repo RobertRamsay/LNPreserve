@@ -1,0 +1,74 @@
+{
+  "fade_colours": [
+    17,
+    221,
+    51,
+    85,
+    238,
+    68,
+    34,
+    153,
+    0
+  ],
+  "part_sprite": "spr_ln3_transition_parts",
+  "parts": [
+    {
+      "frame": 0,
+      "scale_x": 1,
+      "scale_y": 2,
+      "x": 216,
+      "y": 0
+    },
+    {
+      "frame": 1,
+      "scale_x": 2,
+      "scale_y": 1,
+      "x": 179,
+      "y": 10
+    },
+    {
+      "frame": 2,
+      "scale_x": 1,
+      "scale_y": 1,
+      "x": 240,
+      "y": 11
+    },
+    {
+      "frame": 3,
+      "scale_x": 2,
+      "scale_y": 2,
+      "x": 216,
+      "y": 0
+    },
+    {
+      "frame": 4,
+      "scale_x": 2,
+      "scale_y": 1,
+      "x": 168,
+      "y": 10
+    },
+    {
+      "frame": 4,
+      "scale_x": 2,
+      "scale_y": 1,
+      "x": 120,
+      "y": 10
+    },
+    {
+      "frame": 4,
+      "scale_x": 2,
+      "scale_y": 1,
+      "x": 72,
+      "y": 10
+    },
+    {
+      "frame": 4,
+      "scale_x": 2,
+      "scale_y": 1,
+      "x": 24,
+      "y": 10
+    }
+  ],
+  "scope": "Recover Void's original transition sprites, messages and timing tables.\n\nThe eight hardware sprites form the moving curtain and figure. Their original\npixel data, positions, expansion and multicolour settings remain separate from\nthe editable native sequence logic. Disk-loaded ENDING remains separate work.\n",
+  "text_sprite": "spr_ln3_transition_text"
+}

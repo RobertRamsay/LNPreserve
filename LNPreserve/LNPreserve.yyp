@@ -296,6 +296,35 @@
   ],
   "ForcedPrefabProjectReferences": [],
   "IncludedFiles": [
+    {"$GMIncludedFile":"","%Name":"transition.json","CopyToMask":-1,"filePath":"datafiles/play/ln3","name":"transition.json","resourceType":"GMIncludedFile","resourceVersion":"2.0"},
+    {"$GMIncludedFile":"","%Name":"ln3_transition_vectors.json","CopyToMask":-1,"filePath":"datafiles/verification","name":"ln3_transition_vectors.json","resourceType":"GMIncludedFile","resourceVersion":"2.0"},
+
+    {"$GMIncludedFile":"","%Name":"mechanisms.json","CopyToMask":-1,"filePath":"datafiles/play/ln3","name":"mechanisms.json","resourceType":"GMIncludedFile","resourceVersion":"2.0"},
+    {"$GMIncludedFile":"","%Name":"ln3_mechanism_gpu.json","CopyToMask":-1,"filePath":"datafiles/verification","name":"ln3_mechanism_gpu.json","resourceType":"GMIncludedFile","resourceVersion":"2.0"},
+
+    {"$GMIncludedFile":"","%Name":"special.json","CopyToMask":-1,"filePath":"datafiles/play/ln3/level1","name":"special.json","resourceType":"GMIncludedFile","resourceVersion":"2.0"},
+    {"$GMIncludedFile":"","%Name":"special.json","CopyToMask":-1,"filePath":"datafiles/play/ln3/level2","name":"special.json","resourceType":"GMIncludedFile","resourceVersion":"2.0"},
+    {"$GMIncludedFile":"","%Name":"special.json","CopyToMask":-1,"filePath":"datafiles/play/ln3/level3","name":"special.json","resourceType":"GMIncludedFile","resourceVersion":"2.0"},
+    {"$GMIncludedFile":"","%Name":"special.json","CopyToMask":-1,"filePath":"datafiles/play/ln3/level4","name":"special.json","resourceType":"GMIncludedFile","resourceVersion":"2.0"},
+    {"$GMIncludedFile":"","%Name":"special.json","CopyToMask":-1,"filePath":"datafiles/play/ln3/level5","name":"special.json","resourceType":"GMIncludedFile","resourceVersion":"2.0"},
+    {"$GMIncludedFile":"","%Name":"ln3_special_vectors.json","CopyToMask":-1,"filePath":"datafiles/verification","name":"ln3_special_vectors.json","resourceType":"GMIncludedFile","resourceVersion":"2.0"},
+
+    {"$GMIncludedFile":"","%Name":"ln3_scenery_gpu.json","CopyToMask":-1,"filePath":"datafiles/verification","name":"ln3_scenery_gpu.json","resourceType":"GMIncludedFile","resourceVersion":"2.0"},
+
+    {"$GMIncludedFile":"","%Name":"scenery_animation.json","CopyToMask":-1,"filePath":"datafiles/play/ln3/level1","name":"scenery_animation.json","resourceType":"GMIncludedFile","resourceVersion":"2.0"},
+    {"$GMIncludedFile":"","%Name":"scenery_animation.json","CopyToMask":-1,"filePath":"datafiles/play/ln3/level2","name":"scenery_animation.json","resourceType":"GMIncludedFile","resourceVersion":"2.0"},
+    {"$GMIncludedFile":"","%Name":"scenery_animation.json","CopyToMask":-1,"filePath":"datafiles/play/ln3/level3","name":"scenery_animation.json","resourceType":"GMIncludedFile","resourceVersion":"2.0"},
+    {"$GMIncludedFile":"","%Name":"scenery_animation.json","CopyToMask":-1,"filePath":"datafiles/play/ln3/level4","name":"scenery_animation.json","resourceType":"GMIncludedFile","resourceVersion":"2.0"},
+    {"$GMIncludedFile":"","%Name":"scenery_animation.json","CopyToMask":-1,"filePath":"datafiles/play/ln3/level5","name":"scenery_animation.json","resourceType":"GMIncludedFile","resourceVersion":"2.0"},
+    {"$GMIncludedFile":"","%Name":"ln3_scenery_vectors.json","CopyToMask":-1,"filePath":"datafiles/verification","name":"ln3_scenery_vectors.json","resourceType":"GMIncludedFile","resourceVersion":"2.0"},
+
+    {"$GMIncludedFile":"","%Name":"items.json","CopyToMask":-1,"filePath":"datafiles/play/ln3/level1","name":"items.json","resourceType":"GMIncludedFile","resourceVersion":"2.0"},
+    {"$GMIncludedFile":"","%Name":"items.json","CopyToMask":-1,"filePath":"datafiles/play/ln3/level2","name":"items.json","resourceType":"GMIncludedFile","resourceVersion":"2.0"},
+    {"$GMIncludedFile":"","%Name":"items.json","CopyToMask":-1,"filePath":"datafiles/play/ln3/level3","name":"items.json","resourceType":"GMIncludedFile","resourceVersion":"2.0"},
+    {"$GMIncludedFile":"","%Name":"items.json","CopyToMask":-1,"filePath":"datafiles/play/ln3/level4","name":"items.json","resourceType":"GMIncludedFile","resourceVersion":"2.0"},
+    {"$GMIncludedFile":"","%Name":"items.json","CopyToMask":-1,"filePath":"datafiles/play/ln3/level5","name":"items.json","resourceType":"GMIncludedFile","resourceVersion":"2.0"},
+    {"$GMIncludedFile":"","%Name":"ln3_item_vectors.json","CopyToMask":-1,"filePath":"datafiles/verification","name":"ln3_item_vectors.json","resourceType":"GMIncludedFile","resourceVersion":"2.0"},
+
     {"$GMIncludedFile":"","%Name":"ln3_gpu_vectors.json","CopyToMask":-1,"filePath":"datafiles/verification","name":"ln3_gpu_vectors.json","resourceType":"GMIncludedFile","resourceVersion":"2.0"},
 
     {"$GMIncludedFile":"","%Name":"ln3_scene_vectors.json","CopyToMask":-1,"filePath":"datafiles/verification","name":"ln3_scene_vectors.json","resourceType":"GMIncludedFile","resourceVersion":"2.0"},
@@ -19712,6 +19741,20 @@
   "resourceType": "GMProject",
   "resourceVersion": "2.0",
   "resources": [
+    {"id":{"name":"spr_ln3_transition_parts","path":"sprites/spr_ln3_transition_parts/spr_ln3_transition_parts.yy"}},
+    {"id":{"name":"spr_ln3_transition_text","path":"sprites/spr_ln3_transition_text/spr_ln3_transition_text.yy"}},
+
+    {"id":{"name":"spr_ln3_mechanisms","path":"sprites/spr_ln3_mechanisms/spr_ln3_mechanisms.yy"}},
+
+    {"id":{"name":"ln3_special","path":"scripts/ln3_special/ln3_special.yy"}},
+    {"id":{"name":"ln3_special_checks","path":"scripts/ln3_special_checks/ln3_special_checks.yy"}},
+
+    {"id":{"name":"spr_ln3_scenery_animation","path":"sprites/spr_ln3_scenery_animation/spr_ln3_scenery_animation.yy"}},
+    {"id":{"name":"ln3_scenery","path":"scripts/ln3_scenery/ln3_scenery.yy"}},
+
+    {"id":{"name":"ln3_items","path":"scripts/ln3_items/ln3_items.yy"}},
+    {"id":{"name":"ln3_item_checks","path":"scripts/ln3_item_checks/ln3_item_checks.yy"}},
+
     {"id":{"name":"ln3_scenes","path":"scripts/ln3_scenes/ln3_scenes.yy"}},
     {"id":{"name":"ln3_play","path":"scripts/ln3_play/ln3_play.yy"}},
     {"id":{"name":"ln3_scene_checks","path":"scripts/ln3_scene_checks/ln3_scene_checks.yy"}},

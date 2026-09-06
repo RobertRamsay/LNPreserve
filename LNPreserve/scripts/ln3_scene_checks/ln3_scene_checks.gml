@@ -37,12 +37,24 @@ function ln3_world_checks() {
         }
         ln3_test_enter(_g,0);_g.state.enemy_health=17;ln3_play_enter(_g,_g.last_entry);
         ln_check(_g.state.enemy_health==17,"LN3 scene remembers enemy health");
+        for (var _i=0;_i<array_length(_g.items.rooms);_i++) {
+            var _r=_g.items.rooms[_i];
+            if (array_length(_r.items)==0 || _r.items[0][0]==25) continue;
+            ln3_test_enter(_g,_r.id);var _item=_r.items[0],_s=_g.state;
+            _s.parts[2].x=_item[1];_s.parts[2].y=_item[3];_s.player_action=26;_s.parts[1].cursor=3;
+            _s.inventory[_item[0]]=0;ln3_play_items(_g);
+            ln_check(_g.found_item>=0 && _s.weapon_notice_timer==200,"LN3 runtime FOUND feedback");
+            _s.parts[2].x=255;_s.parts[2].y=255;_s.player_action=0;_s.logic_wait=2;_s.weapon_notice_timer=1;
+            ln3_play_tick(_g,0);ln_check(_g.found_item==-1,"LN3 FOUND expiry");break;
+        }
         if (_level<5) {ln3_level_load(_g,_level+1);ln_check(_g.level==_level+1,"LN3 next native level loads");}
     }
     show_debug_message("LN3_WORLD_PASS: "+string(_rooms)+" native scenes, "+string(_exits)+" destination records and "+string(_ticks)+" integration ticks; full-game parity remains incomplete.");
 }
 
 function ln3_world_capture() {
+    ln3_scenery_gpu_checks();
+    ln3_mechanism_gpu_checks();
     var _o=ln3_data_read("verification/ln3_gpu_vectors.json"),_g=undefined,_level=0;
     var _b=buffer_create(24*21*4,buffer_fixed,1),_surface=surface_create(240,144);
     for (var _i=0;_i<array_length(_o.vectors);_i++) {

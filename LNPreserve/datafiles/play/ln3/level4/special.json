@@ -1,0 +1,13 @@
+{
+  "initial": {
+    "bolt_energy": 0,
+    "bolt_flash": 0,
+    "bolt_flash_wait": 0,
+    "bolt_vx": 0,
+    "bolt_vy": 0,
+    "fire_cauldron": 0,
+    "fire_damage_wait": 0,
+    "wind_damage_wait": 0
+  },
+  "level": 4
+}

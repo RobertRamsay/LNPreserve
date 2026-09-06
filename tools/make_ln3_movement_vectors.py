@@ -8,7 +8,7 @@ from export_ln1_world import call
 from export_ln1_levels import register_project
 
 def state(mem):
-    s=actor_state(mem);s.update(enemy_turn_direction=mem[0x2f3],enemy_turn_wait=mem[0x2f4])
+    s=actor_state(mem);s.update(enemy_turn_direction=mem[0x2f3],enemy_turn_wait=mem[0x2f4],room_id=mem[0xe3])
     for i,part in enumerate(s['parts']):part.update(old_x=mem[0x240+i*2],old_y=mem[0x241+i*2])
     return s
 
@@ -22,6 +22,7 @@ def main():
         path=PROJECT/f'datafiles/play/ln3/level{level}/movement.json';write_json(path,data);included.append(path)
         for case in range(1200):
             mem=list(ram);mem[0xe1]=rng.choice([0,6,96,102,255]);mem[0xde]=rng.randrange(256)
+            if level==2:mem[0xe3]=rng.choice([0,4,5,6])
             mem[0xe6]=rng.choice([0,2,5,6,28,29,35]);mem[0xfc]=rng.choice([0,0,255])
             for i in range(8):
                 mem[0x40+i*2]=rng.choice([0,1,12,23,24,40,80,120,239,240,243,244,255])

@@ -61,6 +61,21 @@ for (var _i = 1; _i <= parameter_count(); _i++) {
         catch (_failure) { show_debug_message("LN3_SCENES_FAILURE: "+string(_failure)); }
         game_end();exit;
     }
+    if (parameter_string(_i) == "--ln3-items-only") {
+        try {ln3_item_checks();}
+        catch (_failure) {show_debug_message("LN3_ITEMS_FAILURE: "+string(_failure));}
+        game_end();exit;
+    }
+    if (parameter_string(_i) == "--ln3-scenery-only") {
+        try {ln3_scenery_checks();}
+        catch (_failure) {show_debug_message("LN3_SCENERY_FAILURE: "+string(_failure));}
+        game_end();exit;
+    }
+    if (parameter_string(_i) == "--ln3-special-only") {
+        try {ln3_special_checks();}
+        catch (_failure) {show_debug_message("LN3_SPECIAL_FAILURE: "+string(_failure));}
+        game_end();exit;
+    }
     if (parameter_string(_i) == "--ln3-world-only") {
         try {ln3_world_checks();ln3_only=true;}
         catch (_failure) {show_debug_message("LN3_WORLD_FAILURE: "+string(_failure));game_end();exit;}

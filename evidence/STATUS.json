@@ -29,7 +29,11 @@
     "ln3_native_selectable_scenes": 65,
     "ln3_unique_actor_part_frames": 1158,
     "ln3_ordinary_enemy_placements": 57,
-    "ln3_special_entry_actor_scenes": 6
+    "ln3_special_entry_actor_scenes": 6,
+    "ln3_item_and_mechanism_records": 29,
+    "ln3_scenery_animation_steps": 49,
+    "ln3_unique_animation_overlays": 50,
+    "ln3_unique_mechanism_overlays": 52
   },
   "provenance": {
     "disk_memory_region_verified": [
@@ -177,7 +181,7 @@
   "pending": [
     "Complete and verify LN1 puzzle sequences, special enemies, projectile combat, palette effects, death presentation and ending",
     "Complete LN2 boundary hazards, projectile combat, remaining object handlers, final boss/objectives and ending",
-    "Complete LN3 object pickup/use, animated scenery, special encounter progression, final objectives and ending",
+    "Complete LN3 ENDING program, dashboard/portrait and remaining palette effects; verify full objectives and encounters against original input replays",
     "Verify LN3 multicolour/expanded special actors and full composition; validate LN1/LN2 composition, palette changes and missing special effects",
     "LN2 original dashboard, item flashing, pickup continuation and complete death presentation",
     "Validate recovered LN1 composition, room masks, dynamic dashboard and palette semantics against original display captures",
@@ -202,8 +206,15 @@
     "scene_ticks": 6500,
     "destination_records": 201,
     "complete_gameplay_parity": false,
-    "special_final_entrance": "Void scene 12, original position/facing at $69ea-$6a1a; F11 testing available, preceding reflected-bolt gateway pending",
-    "unselectable_record": "Fire scene 12: partial scenery without ordinary entry, exit or enemy"
+    "special_final_entrance": "Void reflected-bolt gateway and native curtain/message sequence connect scene 11 to scene 12 at $69ea-$6a1a; final fight reaches ENDING loader boundary, program not converted",
+    "unselectable_record": "Fire scene 12: partial scenery without ordinary entry, exit or enemy",
+    "item_states": 3480,
+    "special_states": 3520,
+    "curtain_motion_states": 1260,
+    "scenery_selector_states": 1176,
+    "scenery_gpu_samples": 6028,
+    "mechanism_gpu_samples": 5280,
+    "full_interrupt_timing_verified": false
   },
   "runtime_checks": {
     "command": "GameMaker VM --selftest",
@@ -240,6 +251,12 @@
     "ln3_enemy_pass": true,
     "ln3_combat_pass": true,
     "ln3_scenes_pass": true,
+    "ln3_items_pass": true,
+    "ln3_scenery_pass": true,
+    "ln3_scenery_gpu_pass": true,
+    "ln3_special_pass": true,
+    "ln3_transition_pass": true,
+    "ln3_mechanism_gpu_pass": true,
     "ln3_world_pass": true,
     "ln3_gpu_pass": true
   },
@@ -799,7 +816,8 @@
         "title": "Void"
       }
     ],
-    "scope": "Recover LN3's own room, boundary, actor and animation records offline.\n\nOnly decoded records and original PNG pixels are produced. This does not\nconnect or certify native LN3 gameplay; the handlers still require translation.\n"
+    "scope": "Recover LN3's own room, boundary, actor and animation records offline.\n\nOnly decoded records and original PNG pixels are produced. This does not\nconnect or certify native LN3 gameplay; the handlers still require translation.\n",
+    "scope_note": "Historical offline recovery report; current native integration is recorded separately."
   },
   "ln3_mask_checks": {
     "full_gameplay_parity": false,

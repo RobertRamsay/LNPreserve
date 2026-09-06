@@ -28,6 +28,18 @@ function ln3_movement_actor_collision(_s,_data) {
     _s.player_x=_legs.x;_s.player_y=_legs.y;
 }
 
+function ln3_movement_platform_edge(_s,_data,_direction) {
+    if (_data.level!=2) return;
+    var _head=_s.parts[4],_remove=false;
+    if (_direction==1) _remove=_s.room_id==5 && _head.y<120;
+    if (_direction==2) _remove=_s.room_id==5 && _head.y>=172;
+    if (_direction==4) _remove=_s.room_id==6 && _head.x<16;
+    if (_direction==8) _remove=_s.room_id==4 && _head.x>=248;
+    if (!_remove) return;
+    _s.enabled&=15;
+    for (var _i=4;_i<8;_i++) _s.parts[_i].move_mode=_s.enabled;
+}
+
 function ln3_movement(_s,_data) {
     for (var _i=7;_i>=0;_i--) {
         var _p=_s.parts[_i];_p.old_x=_p.x;_p.old_y=_p.y;
@@ -36,11 +48,13 @@ function ln3_movement(_s,_data) {
             _p.y=(_p.y-_p.dy)&255;
             if (_i==2) _s.player_y=(_s.player_y-_p.dy)&255;
             if (_i==6) _s.enemy_y=(_s.enemy_y-_p.dy)&255;
+            ln3_movement_platform_edge(_s,_data,1);
         }
         if (_p.direction&2) {
             _p.y=(_p.y+_p.dy)&255;
             if (_i==2) _s.player_y=(_s.player_y+_p.dy)&255;
             if (_i==6) _s.enemy_y=(_s.enemy_y+_p.dy)&255;
+            ln3_movement_platform_edge(_s,_data,2);
         }
         for (var _side=0;_side<2;_side++) {
             if (!(_p.direction&(_side==0?4:8))) continue;
@@ -56,6 +70,7 @@ function ln3_movement(_s,_data) {
                 if (_side==0?_nx<24:_nx>=240) ln3_movement_projectile_edge(_s,_data,_i);
             }
             if (_i==1) ln3_movement_actor_collision(_s,_data);
+            ln3_movement_platform_edge(_s,_data,_side==0?4:8);
         }
     }
 }

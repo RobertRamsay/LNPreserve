@@ -15,6 +15,9 @@ if '--ln3-enemy' in sys.argv:flag='--ln3-enemy-only';marker='LN3_ENEMY_PASS'
 if '--ln3-combat' in sys.argv:flag='--ln3-combat-only';marker='LN3_COMBAT_PASS'
 if '--ln3-scenes' in sys.argv:flag='--ln3-scenes-only';marker='LN3_SCENES_PASS'
 if '--ln3-world' in sys.argv:flag='--ln3-world-only';marker='LN3_GPU_PASS'
+if '--ln3-items' in sys.argv:flag='--ln3-items-only';marker='LN3_ITEMS_PASS'
+if '--ln3-scenery' in sys.argv:flag='--ln3-scenery-only';marker='LN3_SCENERY_PASS'
+if '--ln3-special' in sys.argv:flag='--ln3-special-only';marker='LN3_SPECIAL_PASS'
 info=subprocess.STARTUPINFO();info.dwFlags|=subprocess.STARTF_USESHOWWINDOW;info.wShowWindow=0
 result=subprocess.run([str(runner),'-game',str(ROOT/'build/LNPreserve.win'),flag],cwd=ROOT/'build',
                       capture_output=True,text=True,timeout=60,startupinfo=info)

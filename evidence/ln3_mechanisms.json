@@ -1,0 +1,6 @@
+{
+  "gpu_states": 55,
+  "scope": "Recover Fire's opened gate/lit cauldron and Void's original impact colours.\n\nRun the original bitmap handlers offline; retain editable PNG overlays and\noriginal dynamic masks. GPU fixtures sample the resulting original bitmaps.\n",
+  "unique_frames": 52,
+  "whole_game_parity": false
+}

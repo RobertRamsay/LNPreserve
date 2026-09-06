@@ -87,6 +87,11 @@ function ln3_projectile_hits(_s,_data) {
     if (_p.animation!=114 || _s.player_action==28 || _s.player_action==29) return;
     var _dx=_target.x-_p.x,_dy=_p.y-_target.y;
     if (_dx>=0 && _dx<24 && _dy>=0 && _dy<21) {
+        if (_data.level==5 && _s.room_id==11 && _s.player_action==24) {
+            _s.bolt_reflected=(_s.bolt_reflected+1)&255;_s.player_health=(_s.player_health-1)&255;_s.inventory[26]=_s.player_health;
+            if (_s.player_health!=0) return;
+            _s.player_dead=(_s.player_dead+1)&255;if (_s.player_dead!=0) return;
+        }
         _p.animation=0;_p.move_mode=0;_s.player_health=0;_s.inventory[26]=0;_s.enabled&=127;_s.player_dead=(_s.player_dead+1)&255;
     }
 }
