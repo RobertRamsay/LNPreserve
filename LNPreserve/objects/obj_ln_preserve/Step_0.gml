@@ -19,7 +19,8 @@ if (keyboard_check_pressed(vk_f11)) {
 if (keyboard_check_pressed(vk_home)) {
     var _transport = play.timer;
     if (surface_exists(play.stage_surface)) surface_free(play.stage_surface);
-    play = play.game_number==1?new LN1Play():new LN2Play(); play.timer = _transport;
+    if (variable_struct_exists(play,"part_surface") && surface_exists(play.part_surface)) surface_free(play.part_surface);
+    play = play.game_number==1?new LN1Play():(play.game_number==2?new LN2Play():new LN3Play()); play.timer = _transport;
     play.timer.cycles_per_frame=play.data.timer_period_cycles;
     var _control_buffer = buffer_load("actors/ln1/initial_control_state.json");
     control_state_ln1 = json_parse(buffer_read(_control_buffer,buffer_text)); buffer_delete(_control_buffer);

@@ -4,7 +4,7 @@ One editable GameMaker project for The Last Ninja, Last Ninja 2 and Last Ninja 3
 
 The single shared project is [RobertRamsay/LNPreserve](https://github.com/RobertRamsay/LNPreserve), on `main`. Future updates go into this repository and the same `LNPreserve/LNPreserve.yyp`; separately named project downloads are not the current development copy.
 
-**Current build: six connected native LN1 level prototypes and seven connected native LN2 level prototypes. The complete trilogy is not playable, and 1:1 system timing has not been verified.**
+**Current build: native prototypes in all 18 levels across the three games, with 291 selectable scenes. Complete objectives, encounters and endings are still in progress; the complete trilogy and 1:1 system timing have not passed verification.**
 
 Open [LNPreserve/LNPreserve.yyp](LNPreserve/LNPreserve.yyp) in GameMaker LTS 2026 and run it. The project now starts in the game view. No C64 emulator runs inside GameMaker.
 
@@ -30,7 +30,9 @@ LN2 now supports native testing in Central Park, Street, Sewers, Basement, Offic
 
 LN2 is also **incomplete**: boundary hazard sequences, projectile behavior, final objectives/boss, several object interactions, item flashes, original dashboard, palette changes and complete death/ending presentation still require work. Its HUD currently uses temporary text, and its isolated original-routine comparisons do not establish complete combat or playthrough parity.
 
-LN3 remains scenery-only in the playable build. All five original level programs and 66 scene records are recovered offline. Native GML for movement, player/enemy action setup, input selection, animation/body/weapon placement and original fragment masking now passes original-code comparisons. Room transitions, collision, encounters, objects and objectives are not yet connected; these component checks do not make LN3 playable.
+LN3 now has five native level prototypes and 65 selectable scenes. Original player/enemy animation, movement, collision, ordinary melee/projectiles, room entrances, climbing and falling responses, health persistence and fragment masking are connected. Its 1,158 unique editable sprite-part frames share one sprite resource; 66 scenery records are preserved. Fire scene 12 is an isolated partial scenery record with no ordinary entrance, exit or enemy, so it is excluded from gameplay selection. Void’s final encounter uses its original special entrance and can be selected for testing.
+
+LN3 remains **incomplete**: item pickup/use and objectives, animated scenery, special encounter progression (including the reflected-bolt gateway to the final encounter), the final ending, original dashboard, several palette effects and whole-system update timing still require work. The HUD uses temporary text. Level progression is connected to the recovered ordinary guardian defeat request; complete guardian encounters have not passed original replays.
 
 ## Controls
 
@@ -49,9 +51,9 @@ LN3 remains scenery-only in the playable build. All five original level programs
 
 Music assets are still named silent placeholders. Replace the corresponding WAV in GameMaker to supply music. Sound effects are not recovered.
 
-The arrow shortcuts follow LN1/LN2 levels' real room links and use each destination's original entrance position and facing, including the one-way Dungeons entrance. When two exits face the same direction, the nearer exit is used. One press performs one jump. Missing directions leave the current room unchanged. Inventory, living-player health and saved enemy wounds survive; LN1 entry flashes restart. Test jumps cancel an unfinished action, prayer or death, and restore a dead player so testing can continue. Original entrance-specific sequences still run. These are development controls, not original gameplay behavior.
+The arrow shortcuts follow the three games’ recovered ordinary room links and use each destination's original entrance position and facing, including the one-way Dungeons entrance. When two exits face the same direction, the nearer exit is used. One press performs one jump. Missing directions leave the current room unchanged. Inventory, living-player health and saved enemy wounds survive; LN1 entry flashes restart. Test jumps cancel an unfinished action, prayer or death, and restore a dead player so testing can continue. Original entrance-specific sequences still run. These are development controls, not original gameplay behavior.
 
-F11's scene picker exposes all 18 level datasets across the three games. All six LN1 levels and seven LN2 levels support native prototype testing. LN3 opens clearly marked scenery previews; Page Up/Down browses those previews and Escape returns to gameplay. Its movement, collision, objects, combat and directional exits remain unconnected. Gameplay pauses while the picker, a preview or the workbench is open. The alternate Mansion room-10 drawing shares that room's state and is not offered as a separate entrance.
+F11’s scene picker exposes native prototypes in all 18 levels: six LN1, seven LN2 and five LN3. The original special entrance makes Void’s final encounter selectable even though it has no ordinary room link. LN3’s remaining object work is labelled in the picker. Gameplay pauses while the picker, a preview or the workbench is open. The alternate Mansion room-10 drawing shares that room's state and is not offered as a separate entrance.
 
 ## Verification
 
@@ -70,7 +72,9 @@ Actual compiled GML passes comparisons against offline execution of original mac
 - LN2: 784 entrance state comparisons, 11,136 automatic entrance-motion states/poses, 3,520 moving-world state comparisons and 256 Mansion helicopter attachment/drop states/poses. Display calls are intercepted; the helicopter check excludes world-event dispatch.
 - LN2: 191 original ordinary exits and 9,200 integration ticks across 92 selectable native scenes, plus per-scene health persistence.
 - LN3: 6,000 movement states, 5,490 action states, 3,510 input states and 10,925 animation updates across all five original banks. Animation comparisons intercept the bitmap compositor.
-- LN3: 4,224 original sprite visibility masks across all 66 recovered scenes, including edge-fragment carryover. GPU application remains separate work.
+- LN3: 4,224 original sprite visibility masks across all 66 recovered scenes, including edge-fragment carryover. GPU application additionally passes 66,528 alpha/tint pixel checks against 132 original decompressed and masked ordinary sprite parts. Expanded and multicolour special actors still need full original-output comparisons.
+- LN3: 7,191 collision responses, 6,000 enemy decision/attack/patrol/recovery states, 6,000 melee/projectile states, and 3,064 room-entry/climbing/falling states.
+- LN3: 201 destination records and 6,500 integration ticks across 65 selectable scenes, with all scenes rendered in the compiled runner. These integration ticks are regression coverage, not original-playthrough comparisons.
 
 A further 660-update integration check crosses the first original exit and runs an enemy encounter. Feedback regressions check pickup expiry across clock wrap, scene-entry flash state, enemy damage/death persistence, armed/unarmed prayer, sinking and stale death frames after respawn. GPU tests check scenery masking, transparent holes and the waterline cutoff. These checks **do not certify full gameplay, complete combat dispatch, sprite composition, hardware random timing or cycle accuracy**. See [evidence/STATUS.json](evidence/STATUS.json) and [docs/ACCURACY.md](docs/ACCURACY.md).
 
@@ -86,7 +90,7 @@ The supplied LN1 Wastelands river was inspected through full submersion in VICE.
 
 This was also checked through walking and a failed jump from the river entrance, followed by complete sinking. Both retained the original pose during masking. The three white flapping frames are used by birds in the Buddha scenes. [River-entry captures](evidence/ln1_river_entry_comparison.png) document the check; no new LN1 splash artwork was added.
 
-Build with `tools/compile.ps1`; run native checks with `tools/run_checks.py --runner <installed GameMaker Runner.exe>`. `tools/validate_project.py` checks source identities and project resources. Native code is under `LNPreserve/scripts/ln1_*` and `ln2_*`; decoded gameplay tables are under `LNPreserve/datafiles/play/ln1` and `ln2`.
+Build with `tools/compile.ps1`; run native checks with `tools/run_checks.py --runner <installed GameMaker Runner.exe>`. `tools/validate_project.py` checks source identities and project resources. Native code is under `LNPreserve/scripts/ln1_*`, `ln2_*` and `ln3_*`; decoded gameplay tables are under `LNPreserve/datafiles/play/ln1`, `ln2` and `ln3`.
 
 Extraction tools use original RAM only offline. They do not become part of the game runtime. `export_ln1_world.py` and `export_ln1_play.py` preserve existing sprite edits unless explicitly invoked with `--refresh`. Original disks, emulator tools and captures remain local under ignored directories.
 

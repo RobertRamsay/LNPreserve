@@ -30,8 +30,9 @@ function ln2_controls_update(_g,_row0,_row7) {
 }
 
 function ln_game_select(_g,_game,_level) {
-    if (_game==_g.game_number) return _game==1?ln1_level_load(_g,_level):ln2_level_load(_g,_level);
-    var _fresh=_game==1?new LN1Play(_level):new LN2Play(_level);
+    if (_game==_g.game_number) return _game==1?ln1_level_load(_g,_level):(_game==2?ln2_level_load(_g,_level):ln3_level_load(_g,_level));
+    if (variable_struct_exists(_g,"part_surface") && surface_exists(_g.part_surface)) {surface_free(_g.part_surface);_g.part_surface=-1;}
+    var _fresh=_game==1?new LN1Play(_level):(_game==2?new LN2Play(_level):new LN3Play(_level));
     var _transport=_g.timer,_surface=_g.stage_surface,_controls=_g.controls;
     var _names=variable_struct_get_names(_fresh);
     for (var _i=0;_i<array_length(_names);_i++) variable_struct_set(_g,_names[_i],variable_struct_get(_fresh,_names[_i]));

@@ -10,6 +10,8 @@ def main():
     item_count=sum(len(w['items']) for w in worlds)
     ln2=[read(PROJECT/f'datafiles/play/ln2/level{n}/world.json') for n in range(1,8)]
     ln2_rooms=sum(sum(r['spawn_entry']>=0 for r in w['rooms']) for w in ln2)
+    ln3=[read(PROJECT/f'datafiles/play/ln3/level{n}/world.json') for n in range(1,6)]
+    ln3_rooms=sum(sum(r['playable'] for r in w['rooms']) for w in ln3)
     levels=read(ROOT/'evidence/ln1_level_content.json')['levels']
     status=dict(schema=1,project='LNPreserve',stage='native_conversion_in_progress',
         playable_trilogy=False,complete_asset_conversion=False,cycle_accurate_gameplay_verified=False,
@@ -32,11 +34,11 @@ def main():
             verification='192 byte payloads and original instruction-cycle counts; no VIC/CIA/interrupt timing'),
             dict(name='LN1 F1/F3/F5/F7 and Space selection',address='$6eac-$6f6c',
             verification='1024 key-chord transitions; state and external request order; display callees intercepted; timing not tested')],
-        current_gameplay='Six connected LN1 and seven connected LN2 native level prototypes; no verified complete game',
+        current_gameplay='Native prototypes in all 18 levels across LN1, LN2 and LN3; no verified complete game',
         pending=['Complete and verify LN1 puzzle sequences, special enemies, projectile combat, palette effects, death presentation and ending',
             'Complete LN2 boundary hazards, projectile combat, remaining object handlers, final boss/objectives and ending',
-            'Connect verified LN3 movement/input/actions/animation/masking to native rooms; translate collision, enemies, combat, objects and objectives',
-            'Finish LN3 part PNG import and GPU composition; validate LN1/LN2 composition, palette changes and missing special effects',
+            'Complete LN3 object pickup/use, animated scenery, special encounter progression, final objectives and ending',
+            'Verify LN3 multicolour/expanded special actors and full composition; validate LN1/LN2 composition, palette changes and missing special effects',
             'LN2 original dashboard, item flashing, pickup continuation and complete death presentation',
             'Validate recovered LN1 composition, room masks, dynamic dashboard and palette semantics against original display captures',
             'Whole-game cycle-stamped reference traces and native comparisons',
@@ -47,8 +49,8 @@ def main():
         dict(name='LN1 melee hit testing',address='$7ecc',verification='6843 valid-attack samples; damage dispatch and whole combat replay excluded'),
         dict(name='LN1 river sinking timer',address='$bee3/$56f7',verification='1536 tick/clock states including wrap; rendering and interrupt timing excluded')])
     status['scene_testing']=dict(arrow_mapping=dict(right='NE',down='SE',left='SW',up='NW'),
-        playable_rooms=room_count+ln2_rooms,playable_scope='All six LN1 and seven LN2 levels, native prototypes',level_datasets_in_picker=18,
-        remaining_levels='LN3 scenery previews; native gameplay and directional exits unavailable',
+        playable_rooms=room_count+ln2_rooms+ln3_rooms,playable_scope='All 18 levels across the three games, native prototypes',level_datasets_in_picker=18,
+        remaining_levels='No scenery-only level; complete gameplay content remains unfinished in all three games',
         original_exit_routine_vectors=54+sum(l['navigation_vectors'] for l in levels)+191,whole_game_test_coverage=False)
     status['native_original_routines'].extend([
         dict(name='LN1 levels 2-6 enemy action selection',verification='4480 original selector cases, including skeleton and final enemy'),
@@ -66,9 +68,19 @@ def main():
         dict(name='LN3 player/enemy action setup',verification='5490 original action states, including mutable movement directions'),
         dict(name='LN3 input selection',verification='3510 original input states, including weapon selection and climbing exits; world interactions and timing excluded'),
         dict(name='LN3 animation and weapon placement',verification='10925 original animation updates and body/weapon placements; bitmap compositor intercepted'),
-        dict(name='LN3 sprite visibility masks',verification='4224 original 24x21 masks across 66 scenes, including retained fragment data; GPU application and timing excluded')])
-    status['counts'].update(ln3_recovered_level_banks=5,ln3_recovered_scene_records=66,ln3_native_playable_levels=0)
-    for name in ('runtime_checks','structural_checks','ln1_actor_decoder_checks','asset_cleanup','asset_rebuild_check','ln1_level_content','ln1_level_asset_sharing','ln2_content_recovery','ln3_content_recovery','ln3_mask_checks'):
+        dict(name='LN3 sprite visibility masks',verification='4224 original 24x21 masks across 66 scenery records, including retained fragment data'),
+        dict(name='LN3 scene collision',verification='7191 original boundary responses across five banks'),
+        dict(name='LN3 enemy decisions',verification='6000 original decision/attack/patrol/recovery states with shared random input'),
+        dict(name='LN3 combat',verification='6000 melee/projectile states; score display and level loading intercepted; complete special encounters excluded'),
+        dict(name='LN3 room/hazard/climbing state',verification='3064 original room reset, enemy entry, climbing and falling states'),
+        dict(name='LN3 ordinary sprite GPU composition',verification='66528 alpha/tint pixels from 132 original decompressed and masked ordinary sprite parts; expanded/multicolour special actors excluded')])
+    status['counts'].update(ln3_recovered_level_banks=5,ln3_recovered_scene_records=66,ln3_native_playable_levels=5,
+        ln3_native_selectable_scenes=ln3_rooms,ln3_unique_actor_part_frames=1158,ln3_ordinary_enemy_placements=57,
+        ln3_special_entry_actor_scenes=6)
+    status['ln3_integration']=dict(scene_ticks=6500,destination_records=201,complete_gameplay_parity=False,
+        special_final_entrance='Void scene 12, original position/facing at $69ea-$6a1a; F11 testing available, preceding reflected-bolt gateway pending',
+        unselectable_record='Fire scene 12: partial scenery without ordinary entry, exit or enemy')
+    for name in ('runtime_checks','structural_checks','ln1_actor_decoder_checks','asset_cleanup','asset_rebuild_check','ln1_level_content','ln1_level_asset_sharing','ln2_content_recovery','ln3_content_recovery','ln3_mask_checks','ln3_asset_import'):
         path=ROOT/'evidence'/f'{name}.json'
         if path.exists():
             status[name]=read(path)

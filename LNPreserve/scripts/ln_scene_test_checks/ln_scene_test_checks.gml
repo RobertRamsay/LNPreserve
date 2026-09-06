@@ -68,10 +68,9 @@ function ln_scene_test_checks() {
         if (_level.game==3 && _level.number==1) _ln3=_i;
         ln_check(array_length(_level.scenes)>0,"each selectable level has exported scenes");
     }
-    ln_check(_counts[0]==6 && _counts[1]==7 && _counts[2]==5 && _playable==13,"picker exposes native LN1/LN2 prototypes and LN3 scenery datasets");
-    var _room_before=_g.room_id,_tick_before=_g.player.tick;
+    ln_check(_counts[0]==6 && _counts[1]==7 && _counts[2]==5 && _playable==18,"picker exposes native prototypes across all three games");
     _t.level_index=_ln3;ln_scene_test_open(_t,_g,0);
-    ln_check(_t.preview && _g.room_id==_room_before && _g.player.tick==_tick_before,"LN3 preview does not replace or simulate the LN1 game");
+    ln_check(!_t.preview && _g.game_number==3 && _g.room_id==0,"LN3 picker opens native gameplay");
     _t.level_index=0;ln_scene_test_open(_t,_g,1);
     ln_check(!_t.preview && !_t.menu && _g.room_id==2,"scene picker enters the selected playable room");
     show_debug_message("LN_NAVIGATION_PASS: 54 original exit vectors, all 25 rooms reachable, direction mapping, state persistence, and 18-level picker availability.");
@@ -83,5 +82,6 @@ function ln_scene_test_capture(_catalog) {
     for (var _i=0;_i<array_length(_t.levels);_i++) {
         if (_t.levels[_i].game==3 && _t.levels[_i].number==1) { _t.level_index=_i; break; }
     }
-    _t.menu=false;_t.preview=true;ln_scene_test_draw(_t);surface_save(application_surface,"lnpreserve-scene-preview.png");
+    var _g=new LN3Play();ln3_play_draw(_g);surface_save(application_surface,"lnpreserve-scene-preview.png");
+    surface_free(_g.stage_surface);surface_free(_g.part_surface);
 }

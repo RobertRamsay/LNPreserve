@@ -25,7 +25,11 @@
     "silent_sound_assets": 41,
     "ln3_recovered_level_banks": 5,
     "ln3_recovered_scene_records": 66,
-    "ln3_native_playable_levels": 0
+    "ln3_native_playable_levels": 5,
+    "ln3_native_selectable_scenes": 65,
+    "ln3_unique_actor_part_frames": 1158,
+    "ln3_ordinary_enemy_placements": 57,
+    "ln3_special_entry_actor_scenes": 6
   },
   "provenance": {
     "disk_memory_region_verified": [
@@ -146,15 +150,35 @@
     },
     {
       "name": "LN3 sprite visibility masks",
-      "verification": "4224 original 24x21 masks across 66 scenes, including retained fragment data; GPU application and timing excluded"
+      "verification": "4224 original 24x21 masks across 66 scenery records, including retained fragment data"
+    },
+    {
+      "name": "LN3 scene collision",
+      "verification": "7191 original boundary responses across five banks"
+    },
+    {
+      "name": "LN3 enemy decisions",
+      "verification": "6000 original decision/attack/patrol/recovery states with shared random input"
+    },
+    {
+      "name": "LN3 combat",
+      "verification": "6000 melee/projectile states; score display and level loading intercepted; complete special encounters excluded"
+    },
+    {
+      "name": "LN3 room/hazard/climbing state",
+      "verification": "3064 original room reset, enemy entry, climbing and falling states"
+    },
+    {
+      "name": "LN3 ordinary sprite GPU composition",
+      "verification": "66528 alpha/tint pixels from 132 original decompressed and masked ordinary sprite parts; expanded/multicolour special actors excluded"
     }
   ],
-  "current_gameplay": "Six connected LN1 and seven connected LN2 native level prototypes; no verified complete game",
+  "current_gameplay": "Native prototypes in all 18 levels across LN1, LN2 and LN3; no verified complete game",
   "pending": [
     "Complete and verify LN1 puzzle sequences, special enemies, projectile combat, palette effects, death presentation and ending",
     "Complete LN2 boundary hazards, projectile combat, remaining object handlers, final boss/objectives and ending",
-    "Connect verified LN3 movement/input/actions/animation/masking to native rooms; translate collision, enemies, combat, objects and objectives",
-    "Finish LN3 part PNG import and GPU composition; validate LN1/LN2 composition, palette changes and missing special effects",
+    "Complete LN3 object pickup/use, animated scenery, special encounter progression, final objectives and ending",
+    "Verify LN3 multicolour/expanded special actors and full composition; validate LN1/LN2 composition, palette changes and missing special effects",
     "LN2 original dashboard, item flashing, pickup continuation and complete death presentation",
     "Validate recovered LN1 composition, room masks, dynamic dashboard and palette semantics against original display captures",
     "Whole-game cycle-stamped reference traces and native comparisons",
@@ -167,12 +191,19 @@
       "left": "SW",
       "up": "NW"
     },
-    "playable_rooms": 226,
-    "playable_scope": "All six LN1 and seven LN2 levels, native prototypes",
+    "playable_rooms": 291,
+    "playable_scope": "All 18 levels across the three games, native prototypes",
     "level_datasets_in_picker": 18,
-    "remaining_levels": "LN3 scenery previews; native gameplay and directional exits unavailable",
+    "remaining_levels": "No scenery-only level; complete gameplay content remains unfinished in all three games",
     "original_exit_routine_vectors": 494,
     "whole_game_test_coverage": false
+  },
+  "ln3_integration": {
+    "scene_ticks": 6500,
+    "destination_records": 201,
+    "complete_gameplay_parity": false,
+    "special_final_entrance": "Void scene 12, original position/facing at $69ea-$6a1a; F11 testing available, preceding reflected-bolt gateway pending",
+    "unselectable_record": "Fire scene 12: partial scenery without ordinary entry, exit or enemy"
   },
   "runtime_checks": {
     "command": "GameMaker VM --selftest",
@@ -204,7 +235,13 @@
     "ln3_actions_pass": true,
     "ln3_input_pass": true,
     "ln3_animation_pass": true,
-    "ln3_masks_pass": true
+    "ln3_masks_pass": true,
+    "ln3_collision_pass": true,
+    "ln3_enemy_pass": true,
+    "ln3_combat_pass": true,
+    "ln3_scenes_pass": true,
+    "ln3_world_pass": true,
+    "ln3_gpu_pass": true
   },
   "structural_checks": {
     "tests_run": 8,
@@ -804,6 +841,51 @@
       }
     ],
     "scope": "Recover LN3 part PNGs and scene occlusion from the supplied game routines.\n\nThe offline mask comparison uses solid original sprite bytes so every occluded\npixel can be checked independently of a particular animation pose.\n"
+  },
+  "ln3_asset_import": {
+    "full_gameplay_parity": false,
+    "levels": [
+      {
+        "level": 1,
+        "original_decoder_calls": 604,
+        "physical_parts": 302,
+        "scene_records": 13,
+        "source_sha256": "d36204ddb57a6295225a507280e1bd185e526d50adc75202af163abb2e12210f"
+      },
+      {
+        "level": 2,
+        "original_decoder_calls": 604,
+        "physical_parts": 302,
+        "scene_records": 13,
+        "source_sha256": "702e39d01837cf33d5fdba363f03efcc61fa2788b59bc6bbf155ed4d9bb70cd4"
+      },
+      {
+        "level": 3,
+        "original_decoder_calls": 608,
+        "physical_parts": 304,
+        "scene_records": 13,
+        "source_sha256": "b6f47231e2e9f4d23c5714b29419d7ffe1c319ced84616e5acc9678b359d3afe"
+      },
+      {
+        "level": 4,
+        "original_decoder_calls": 608,
+        "physical_parts": 304,
+        "scene_records": 14,
+        "source_sha256": "d3b46223eee28234cc011f88781ba804c084f1ada6bdb9d9982288c22c693206"
+      },
+      {
+        "level": 5,
+        "original_decoder_calls": 596,
+        "physical_parts": 298,
+        "scene_records": 13,
+        "source_sha256": "f629fdbba3fa0e1d4e1dbb005d01fcc220f897ef1bdb1245015f9b10b0a298f8"
+      }
+    ],
+    "method": "Import original LN3 scenes and editable sprite-part PNGs into one project.\n\nParts are white alpha images tinted with the original per-part VIC colour at\ndraw time. Multicolour parts use three editable alpha layers. Identical images\nshare a frame; identical scenery reuses an existing sprite resource.\n",
+    "native_gameplay_connected": false,
+    "scene_sprite_resources_added": 65,
+    "unique_part_frames": 1158,
+    "scope_note": "Asset-import evidence recorded before native gameplay integration; current playable scope is in STATUS.json."
   },
   "scenery_colour_check": {
     "applied_scenes": [

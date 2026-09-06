@@ -30,7 +30,7 @@ Host keyboard polling cannot recover key transitions that occur entirely between
 
 Directional testing uses separate host key edges: Right=NE, Down=SE, Left=SW, Up=NW. Those keys never enter the original joystick. Wastelands directions are derived from reciprocal entrance positions/facings, excluding padded exit-table defaults that do not represent connected doors. Each selected boundary point runs the original $7478 routine offline; 54 cases check destination, entrance, position and facing against compiled GML. Both ordinary exits and test jumps share `ln1_play_travel`. Test jumps additionally cancel transient actions and recover dead players, deliberately differing from gameplay. A graph check establishes that all 25 Wastelands rooms are reachable; persistence checks retain items and enemy wounds. These tests do not certify LN2/LN3 gameplay or cycle timing.
 
-The F11 picker lists each decoded scene identity, including aliases of shared artwork, across the 18 level datasets. Only Wastelands is marked playable. Remaining levels display scenery with gameplay and directional navigation explicitly unavailable. The native game stops updating during picker/preview/workbench use, while input edges are consumed to prevent queued menu inputs from affecting it on return.
+The F11 picker exposes native prototypes in all 18 levels, including LN3’s original special entrance to Void’s final encounter. Fire’s isolated partial scene-12 record remains preserved as scenery but has no selectable gameplay entrance. Native prototypes do not establish complete object, objective or playthrough parity.
 
 ## Depth and masking
 
@@ -77,3 +77,12 @@ The sprite-bit trimming at $7b27 becomes a shader cutoff at hardware cutoff minu
 The FOUND, wounded, prayer and water screenshots are deterministic native visual fixtures. They are not original-game reference replays.
 
 `inspect_ln1_river_entry.py` extends the river fixture to original walking and failed-jump logic before $bef2, using entrance 44's recovered position/facing and input supplied after the original poll. Both traces retain a fixed player frame during sinking. Logical frames 150â€“152 reference white bird parts 17â€“19 and are used by scripts $ae82/$aeaa in Buddha rooms 6/17; they were not observed as river-death sprites. Room/entrance injection and monitor input substitution remain explicit limits of this evidence.
+
+
+## LN3 native integration
+
+All five original banks now supply native scene prototypes. The PAL timer follows the recovered IRQ byte-counter decrements and 16-bit throw-timer wrap; gameplay uses the original four-frame gate. The relative phase of the IRQ, main loop, bitmap drawing, input and raster-random reads is not verified. No system or whole-game timing claim follows from this integration.
+
+Original comparisons cover 7,191 collision states, 6,000 enemy decisions, 6,000 melee/projectile states and 3,064 scene reset/entry/climbing/falling states, in addition to the previously recorded movement, action, input, animation and mask comparisons. GPU readback validates 66,528 alpha/tint pixels from 132 original ordinary sprite parts, after applying recovered scenery masks. Special-actor expansion/multicolour and complete VIC output remain outside that pixel check.
+
+The native regression run visits 65 selectable scenes, exercises 201 destination records and advances 6,500 ticks. It does not replace original input replays. LN3’s pickup/use handlers, animated scenery, special encounter progression, final objectives/ending, dashboard and some palette effects remain incomplete. Void’s final scene is reachable through F11 using the entrance recovered at $69ea-$6a1a; the preceding reflected-bolt gateway still needs native integration.

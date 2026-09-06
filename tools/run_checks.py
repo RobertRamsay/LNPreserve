@@ -35,13 +35,19 @@ if __name__=='__main__':
                       ln3_actions_pass='LN3_ACTION_PASS' in log,
                       ln3_input_pass='LN3_INPUT_PASS' in log,
                       ln3_animation_pass='LN3_ANIMATION_PASS' in log,
-                      ln3_masks_pass='LN3_MASK_PASS' in log)
+                      ln3_masks_pass='LN3_MASK_PASS' in log,
+                      ln3_collision_pass='LN3_COLLISION_PASS' in log,
+                      ln3_enemy_pass='LN3_ENEMY_PASS' in log,
+                      ln3_combat_pass='LN3_COMBAT_PASS' in log,
+                      ln3_scenes_pass='LN3_SCENES_PASS' in log,
+                      ln3_world_pass='LN3_WORLD_PASS' in log,
+                      ln3_gpu_pass='LN3_GPU_PASS' in log)
         match=re.search(r'LN_CAPTURE_DIRECTORY:([^\r\n]+)',log)
         if match:
             capture_dir=Path(match.group(1).strip())
             for name in ('lnpreserve-mask-test.png','lnpreserve-workbench.png','lnpreserve-player.png','lnpreserve-encounter.png',
                          'lnpreserve-found.png','lnpreserve-wounded.png','lnpreserve-prayer.png','lnpreserve-water.png',
-                         'lnpreserve-scene-picker.png','lnpreserve-scene-preview.png') + tuple(f'lnpreserve-level{level}.png' for level in range(1,7)) + tuple(f'lnpreserve-ln2-level{level}.png' for level in range(1,8)):
+                         'lnpreserve-scene-picker.png','lnpreserve-scene-preview.png') + tuple(f'lnpreserve-level{level}.png' for level in range(1,7)) + tuple(f'lnpreserve-ln2-level{level}.png' for level in range(1,8)) + tuple(f'lnpreserve-ln3-level{level}.png' for level in range(1,6)):
                 if (capture_dir/name).is_file():shutil.copy2(capture_dir/name,ROOT/'evidence'/name)
     except subprocess.TimeoutExpired as exc:
         report.update(native_checks_pass=False,runtime_pass=False,error='runner_timeout')
@@ -51,4 +57,4 @@ if __name__=='__main__':
         (out/'runner-console.log').write_text(log)
     (ROOT/'evidence/runtime_checks.json').write_text(json.dumps(report,indent=2)+'\n')
     print(json.dumps(report,indent=2))
-    sys.exit(0 if report.get('exit_code')==0 and all(report.get(key) for key in ('native_checks_pass','runtime_pass','mask_gpu_pass','sprite_decoder_pass','ln1_control_vectors_pass','ln1_player_vectors_pass','ln1_enemy_vectors_pass','ln1_combat_vectors_pass','ln1_world_smoke_pass','ln1_feedback_pass','ln1_water_vectors_pass','scene_navigation_pass','ln1_levels_pass','ln1_projectiles_pass','ln2_player_vectors_pass','ln2_enemy_vectors_pass','ln2_entrances_pass','ln2_helicopter_pass','ln2_vehicles_pass','ln2_effects_pass','ln2_combat_vectors_pass','ln2_world_pass','ln3_movement_pass','ln3_actions_pass','ln3_input_pass','ln3_animation_pass','ln3_masks_pass')) else 1)
+    sys.exit(0 if report.get('exit_code')==0 and all(report.get(key) for key in ('native_checks_pass','runtime_pass','mask_gpu_pass','sprite_decoder_pass','ln1_control_vectors_pass','ln1_player_vectors_pass','ln1_enemy_vectors_pass','ln1_combat_vectors_pass','ln1_world_smoke_pass','ln1_feedback_pass','ln1_water_vectors_pass','scene_navigation_pass','ln1_levels_pass','ln1_projectiles_pass','ln2_player_vectors_pass','ln2_enemy_vectors_pass','ln2_entrances_pass','ln2_helicopter_pass','ln2_vehicles_pass','ln2_effects_pass','ln2_combat_vectors_pass','ln2_world_pass','ln3_movement_pass','ln3_actions_pass','ln3_input_pass','ln3_animation_pass','ln3_masks_pass','ln3_collision_pass','ln3_enemy_pass','ln3_combat_pass','ln3_scenes_pass','ln3_world_pass','ln3_gpu_pass')) else 1)

@@ -1,0 +1,45 @@
+{
+  "full_gameplay_parity": false,
+  "levels": [
+    {
+      "level": 1,
+      "original_decoder_calls": 604,
+      "physical_parts": 302,
+      "scene_records": 13,
+      "source_sha256": "d36204ddb57a6295225a507280e1bd185e526d50adc75202af163abb2e12210f"
+    },
+    {
+      "level": 2,
+      "original_decoder_calls": 604,
+      "physical_parts": 302,
+      "scene_records": 13,
+      "source_sha256": "702e39d01837cf33d5fdba363f03efcc61fa2788b59bc6bbf155ed4d9bb70cd4"
+    },
+    {
+      "level": 3,
+      "original_decoder_calls": 608,
+      "physical_parts": 304,
+      "scene_records": 13,
+      "source_sha256": "b6f47231e2e9f4d23c5714b29419d7ffe1c319ced84616e5acc9678b359d3afe"
+    },
+    {
+      "level": 4,
+      "original_decoder_calls": 608,
+      "physical_parts": 304,
+      "scene_records": 14,
+      "source_sha256": "d3b46223eee28234cc011f88781ba804c084f1ada6bdb9d9982288c22c693206"
+    },
+    {
+      "level": 5,
+      "original_decoder_calls": 596,
+      "physical_parts": 298,
+      "scene_records": 13,
+      "source_sha256": "f629fdbba3fa0e1d4e1dbb005d01fcc220f897ef1bdb1245015f9b10b0a298f8"
+    }
+  ],
+  "method": "Import original LN3 scenes and editable sprite-part PNGs into one project.\n\nParts are white alpha images tinted with the original per-part VIC colour at\ndraw time. Multicolour parts use three editable alpha layers. Identical images\nshare a frame; identical scenery reuses an existing sprite resource.\n",
+  "native_gameplay_connected": false,
+  "scene_sprite_resources_added": 65,
+  "unique_part_frames": 1158,
+  "scope_note": "Asset-import evidence recorded before native gameplay integration; current playable scope is in STATUS.json."
+}

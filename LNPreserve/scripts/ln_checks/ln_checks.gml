@@ -78,6 +78,11 @@ function ln_run_checks() {
     ln3_input_checks();
     ln3_animation_checks();
     ln3_mask_checks();
+    ln3_collision_checks();
+    ln3_enemy_checks();
+    ln3_combat_checks();
+    ln3_scene_checks();
+    ln3_world_checks();
     ln2_world_checks();
     show_debug_message("LN_SELFTEST_PASS: clock, input, depth and isolated player routines. Full gameplay parity is NOT established.");
 }

@@ -1,0 +1,686 @@
+{
+  "hazard_kneel_actions": [
+    1,
+    4,
+    5,
+    10,
+    11,
+    12,
+    13,
+    16,
+    27,
+    19,
+    29,
+    38,
+    36,
+    31,
+    32,
+    33
+  ],
+  "initial": {
+    "action_flags": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      128,
+      128,
+      128,
+      128,
+      128,
+      128,
+      128,
+      128,
+      128,
+      128,
+      128,
+      128,
+      128,
+      128,
+      128,
+      128,
+      128,
+      128,
+      128,
+      128,
+      128,
+      128,
+      132,
+      132,
+      128,
+      6,
+      7,
+      0,
+      128,
+      5,
+      5,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      128,
+      128,
+      128,
+      128,
+      128,
+      128,
+      128,
+      128,
+      128,
+      128,
+      128,
+      128,
+      128,
+      128,
+      128,
+      128
+    ],
+    "ammo": 0,
+    "ammo_pile": 1,
+    "boss_honour": 0,
+    "boundary_index": 0,
+    "carrier_left": 0,
+    "carrier_right": 0,
+    "carrier_state": 0,
+    "climb_counter": 0,
+    "climb_end_x": 0,
+    "climb_end_y": 0,
+    "climb_flags": 0,
+    "climb_goal": 0,
+    "climb_request": 0,
+    "climb_return_x": 0,
+    "climb_return_y": 0,
+    "climb_start": 0,
+    "collision_extended": 0,
+    "collision_flags": 0,
+    "collision_pass": 0,
+    "collision_retried": 0,
+    "collision_type": 0,
+    "death_wait": 0,
+    "draw_buffer": 0,
+    "drawn_mask": 0,
+    "enabled": 119,
+    "enemy_action": 40,
+    "enemy_action_flags": 0,
+    "enemy_attack_wait": 0,
+    "enemy_behavior": 131,
+    "enemy_costume": 1,
+    "enemy_dead": 0,
+    "enemy_dodge_direction": 0,
+    "enemy_dodge_wait": 0,
+    "enemy_flash": 0,
+    "enemy_flash_mode": 1,
+    "enemy_health": 44,
+    "enemy_pending_weapon": 0,
+    "enemy_probe_wait": 0,
+    "enemy_probe_x": 0,
+    "enemy_throw_wait": 0,
+    "enemy_turn_direction": 0,
+    "enemy_turn_wait": 0,
+    "enemy_weapon": 0,
+    "enemy_x": 160,
+    "enemy_y": 144,
+    "expand_x": 0,
+    "expand_y": 0,
+    "fall_count": 0,
+    "fire_gate": 0,
+    "fire_latch": 255,
+    "fire_mode": 0,
+    "honour": 13,
+    "honour_fraction": 0,
+    "input_block": 0,
+    "inventory": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      13,
+      44,
+      5,
+      0,
+      3
+    ],
+    "item_wait": 0,
+    "joy": 0,
+    "last_boundary": 255,
+    "level_requested": false,
+    "level_sequence": 0,
+    "lives": 5,
+    "logic_wait": 0,
+    "mask_spill": 0,
+    "mirror": 96,
+    "motion_directions": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      2,
+      1,
+      2,
+      0,
+      10,
+      6,
+      9,
+      5,
+      253,
+      254,
+      253
+    ],
+    "multicolour": 0,
+    "near_enemy": 0,
+    "notice_icon": 255,
+    "parts": [
+      {
+        "animation": 67,
+        "colour": 10,
+        "cursor": 0,
+        "direction": 0,
+        "dx": 0,
+        "dy": 0,
+        "frame": 0,
+        "move_mode": 128,
+        "old_x": 0,
+        "old_y": 0,
+        "x": 52,
+        "y": 95
+      },
+      {
+        "animation": 0,
+        "colour": 0,
+        "cursor": 0,
+        "direction": 0,
+        "dx": 0,
+        "dy": 0,
+        "frame": 0,
+        "move_mode": 128,
+        "old_x": 0,
+        "old_y": 0,
+        "x": 52,
+        "y": 95
+      },
+      {
+        "animation": 1,
+        "colour": 0,
+        "cursor": 0,
+        "direction": 0,
+        "dx": 0,
+        "dy": 0,
+        "frame": 0,
+        "move_mode": 128,
+        "old_x": 0,
+        "old_y": 0,
+        "x": 52,
+        "y": 116
+      },
+      {
+        "animation": 0,
+        "colour": 0,
+        "cursor": 0,
+        "direction": 0,
+        "dx": 0,
+        "dy": 0,
+        "frame": 0,
+        "move_mode": 0,
+        "old_x": 0,
+        "old_y": 0,
+        "x": 0,
+        "y": 0
+      },
+      {
+        "animation": 117,
+        "colour": 0,
+        "cursor": 0,
+        "direction": 0,
+        "dx": 0,
+        "dy": 0,
+        "frame": 0,
+        "move_mode": 128,
+        "old_x": 0,
+        "old_y": 0,
+        "x": 0,
+        "y": 0
+      },
+      {
+        "animation": 2,
+        "colour": 10,
+        "cursor": 0,
+        "direction": 0,
+        "dx": 0,
+        "dy": 0,
+        "frame": 0,
+        "move_mode": 128,
+        "old_x": 0,
+        "old_y": 0,
+        "x": 160,
+        "y": 123
+      },
+      {
+        "animation": 3,
+        "colour": 0,
+        "cursor": 0,
+        "direction": 0,
+        "dx": 0,
+        "dy": 0,
+        "frame": 0,
+        "move_mode": 128,
+        "old_x": 0,
+        "old_y": 0,
+        "x": 160,
+        "y": 144
+      },
+      {
+        "animation": 0,
+        "colour": 0,
+        "cursor": 0,
+        "direction": 0,
+        "dx": 0,
+        "dy": 0,
+        "frame": 0,
+        "move_mode": 0,
+        "old_x": 0,
+        "old_y": 0,
+        "x": 0,
+        "y": 0
+      }
+    ],
+    "patrol_index": 0,
+    "patrol_joy": 0,
+    "patrol_remaining": 0,
+    "pending_weapon": 0,
+    "player_action": 0,
+    "player_action_flags": 0,
+    "player_dead": 0,
+    "player_health": 44,
+    "player_weapon": 0,
+    "player_x": 52,
+    "player_y": 116,
+    "previous_joy": 0,
+    "regeneration_wait": 0,
+    "room_id": 0,
+    "scene_cursor": 0,
+    "scene_wait": 0,
+    "score_digits": [
+      48,
+      48,
+      48,
+      48,
+      48,
+      48
+    ],
+    "selected_item": 4,
+    "shared_colour1": 0,
+    "shared_colour2": 0,
+    "special_scene_phase": 0,
+    "special_wait": 0,
+    "stun": 0,
+    "trap_contacts": 0,
+    "trap_count": 0,
+    "trap_flags": 0,
+    "water_gate": 0,
+    "waterline": 173,
+    "weapon_fx_request": 0,
+    "weapon_fx_state": 0,
+    "weapon_notice_timer": 0
+  },
+  "initial_enemy_health": [
+    44,
+    44,
+    44,
+    44,
+    44,
+    44,
+    44,
+    44,
+    44,
+    44,
+    44,
+    44,
+    44,
+    44
+  ],
+  "level": 4,
+  "palette": [
+    [
+      0,
+      0,
+      0
+    ],
+    [
+      255,
+      255,
+      255
+    ],
+    [
+      129,
+      51,
+      56
+    ],
+    [
+      117,
+      206,
+      200
+    ],
+    [
+      142,
+      60,
+      151
+    ],
+    [
+      86,
+      172,
+      77
+    ],
+    [
+      46,
+      44,
+      155
+    ],
+    [
+      237,
+      241,
+      113
+    ],
+    [
+      142,
+      80,
+      41
+    ],
+    [
+      85,
+      56,
+      0
+    ],
+    [
+      196,
+      108,
+      113
+    ],
+    [
+      74,
+      74,
+      74
+    ],
+    [
+      123,
+      123,
+      123
+    ],
+    [
+      169,
+      255,
+      159
+    ],
+    [
+      112,
+      109,
+      235
+    ],
+    [
+      178,
+      178,
+      178
+    ]
+  ],
+  "rooms": [
+    {
+      "climbs": [],
+      "enemy": [
+        160,
+        144,
+        97,
+        131,
+        160,
+        40
+      ],
+      "id": 0,
+      "playable": true
+    },
+    {
+      "climbs": [],
+      "enemy": [
+        96,
+        144,
+        0,
+        129,
+        128,
+        40
+      ],
+      "id": 1,
+      "playable": true
+    },
+    {
+      "climbs": [],
+      "enemy": [],
+      "id": 2,
+      "playable": true
+    },
+    {
+      "climbs": [],
+      "enemy": [],
+      "id": 3,
+      "playable": true
+    },
+    {
+      "climbs": [],
+      "enemy": [
+        116,
+        148,
+        1,
+        129,
+        128,
+        40
+      ],
+      "id": 4,
+      "playable": true
+    },
+    {
+      "climbs": [
+        [
+          80,
+          96,
+          80,
+          144,
+          2,
+          132,
+          92,
+          108,
+          100,
+          88,
+          84,
+          144
+        ],
+        [
+          80,
+          96,
+          140,
+          156,
+          1,
+          106,
+          88,
+          144,
+          100,
+          88,
+          84,
+          144
+        ]
+      ],
+      "enemy": [
+        132,
+        160,
+        96,
+        131,
+        160,
+        40
+      ],
+      "id": 5,
+      "playable": true
+    },
+    {
+      "climbs": [],
+      "enemy": [
+        110,
+        112,
+        1,
+        130,
+        128,
+        39
+      ],
+      "id": 6,
+      "playable": true
+    },
+    {
+      "climbs": [],
+      "enemy": [
+        224,
+        158,
+        96,
+        131,
+        160,
+        40
+      ],
+      "id": 7,
+      "playable": true
+    },
+    {
+      "climbs": [],
+      "enemy": [
+        132,
+        139,
+        1,
+        130,
+        160,
+        39
+      ],
+      "id": 8,
+      "playable": true
+    },
+    {
+      "climbs": [],
+      "enemy": [
+        48,
+        124,
+        0,
+        130,
+        128,
+        39
+      ],
+      "id": 9,
+      "playable": true
+    },
+    {
+      "climbs": [],
+      "enemy": [
+        92,
+        104,
+        1,
+        130,
+        160,
+        40
+      ],
+      "id": 10,
+      "playable": true
+    },
+    {
+      "climbs": [
+        [
+          48,
+          64,
+          92,
+          108,
+          2,
+          124,
+          60,
+          100,
+          64,
+          96,
+          56,
+          134
+        ],
+        [
+          48,
+          64,
+          128,
+          144,
+          1,
+          112,
+          56,
+          132,
+          64,
+          96,
+          56,
+          134
+        ]
+      ],
+      "enemy": [
+        96,
+        160,
+        0,
+        129,
+        128,
+        40
+      ],
+      "id": 11,
+      "playable": true
+    },
+    {
+      "climbs": [],
+      "enemy": [],
+      "id": 12,
+      "playable": false
+    },
+    {
+      "climbs": [],
+      "enemy": [
+        76,
+        140,
+        2,
+        129,
+        160,
+        40
+      ],
+      "id": 13,
+      "playable": true
+    }
+  ],
+  "special": {
+    "animations": [
+      138,
+      139
+    ],
+    "y": [
+      106,
+      87
+    ]
+  },
+  "startup_scope": "Recover native LN3 room-entry data, climbing records and initial globals.\n\nThe level captures stop at each original main loop. Their global inventory was\ncarried through a loader fixture; new-game health/honour/lives instead come from\nthe earlier supplied-game loading capture. No emulator is shipped in gameplay.\n",
+  "startup_sha256": "ff0cf954bc9e370834c097c4e0d3bb16538a2cddedc729b09afe9760b5285a16",
+  "timer_period_cycles": 19656
+}

@@ -1,4 +1,5 @@
 gpu_set_texfilter(false);
+ln3_only=false;
 window_set_caption("LNPreserve | The Last Ninja");
 clock = new LNClock();
 input_state = new LNInput();
@@ -43,6 +44,30 @@ for (var _i = 1; _i <= parameter_count(); _i++) {
     if (parameter_string(_i) == "--ln3-masks-only") {
         try { ln3_mask_checks(); }
         catch (_failure) { show_debug_message("LN3_MASK_FAILURE: "+string(_failure)); }
+        game_end();exit;
+    }
+    if (parameter_string(_i) == "--ln3-collision-only") {
+        try { ln3_collision_checks(); }
+        catch (_failure) { show_debug_message("LN3_COLLISION_FAILURE: "+string(_failure)); }
+        game_end();exit;
+    }
+    if (parameter_string(_i) == "--ln3-enemy-only") {
+        try { ln3_enemy_checks(); }
+        catch (_failure) { show_debug_message("LN3_ENEMY_FAILURE: "+string(_failure)); }
+        game_end();exit;
+    }
+    if (parameter_string(_i) == "--ln3-scenes-only") {
+        try { ln3_scene_checks(); }
+        catch (_failure) { show_debug_message("LN3_SCENES_FAILURE: "+string(_failure)); }
+        game_end();exit;
+    }
+    if (parameter_string(_i) == "--ln3-world-only") {
+        try {ln3_world_checks();ln3_only=true;}
+        catch (_failure) {show_debug_message("LN3_WORLD_FAILURE: "+string(_failure));game_end();exit;}
+    }
+    if (parameter_string(_i) == "--ln3-combat-only") {
+        try { ln3_combat_checks(); }
+        catch (_failure) { show_debug_message("LN3_COMBAT_FAILURE: "+string(_failure)); }
         game_end();exit;
     }
     if (parameter_string(_i) == "--ln2-sequences-only") {
@@ -92,6 +117,11 @@ tick_native = function(_from, _to, _frame) {
     if (play.game_number==2) {
         ln2_controls_update(play,_rows[0],_rows[1]);
         if (!play.paused) ln2_play_tick(play,input_state.joystick()^255);
+        return;
+    }
+    if (play.game_number==3) {
+        ln3_controls_update(play,input_state);
+        if (!play.paused) ln3_play_tick(play,input_state.joystick()^255);
         return;
     }
     var _music_before = control_state_ln1.music;

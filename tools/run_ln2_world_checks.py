@@ -10,6 +10,11 @@ if '--ln3-actions' in sys.argv:flag='--ln3-actions-only';marker='LN3_ACTION_PASS
 if '--ln3-input' in sys.argv:flag='--ln3-input-only';marker='LN3_INPUT_PASS'
 if '--ln3-animation' in sys.argv:flag='--ln3-animation-only';marker='LN3_ANIMATION_PASS'
 if '--ln3-masks' in sys.argv:flag='--ln3-masks-only';marker='LN3_MASK_PASS'
+if '--ln3-collision' in sys.argv:flag='--ln3-collision-only';marker='LN3_COLLISION_PASS'
+if '--ln3-enemy' in sys.argv:flag='--ln3-enemy-only';marker='LN3_ENEMY_PASS'
+if '--ln3-combat' in sys.argv:flag='--ln3-combat-only';marker='LN3_COMBAT_PASS'
+if '--ln3-scenes' in sys.argv:flag='--ln3-scenes-only';marker='LN3_SCENES_PASS'
+if '--ln3-world' in sys.argv:flag='--ln3-world-only';marker='LN3_GPU_PASS'
 info=subprocess.STARTUPINFO();info.dwFlags|=subprocess.STARTF_USESHOWWINDOW;info.wShowWindow=0
 result=subprocess.run([str(runner),'-game',str(ROOT/'build/LNPreserve.win'),flag],cwd=ROOT/'build',
                       capture_output=True,text=True,timeout=60,startupinfo=info)
