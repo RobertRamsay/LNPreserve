@@ -1,0 +1,76 @@
+{
+  "animation": [
+    {
+      "cycles": 91173,
+      "frame": 6
+    },
+    {
+      "cycles": 91528,
+      "frame": 7
+    },
+    {
+      "cycles": 93636,
+      "frame": 8
+    },
+    {
+      "cycles": 91532,
+      "frame": 7
+    }
+  ],
+  "background_fade": [
+    1,
+    7,
+    3,
+    10,
+    8,
+    4,
+    2,
+    9,
+    0
+  ],
+  "characters": {
+    " ": 0,
+    "A": 1,
+    "B": 2,
+    "C": 3,
+    "D": 4,
+    "E": 5,
+    "G": 6,
+    "H": 7,
+    "I": 8,
+    "K": 9,
+    "L": 10,
+    "N": 11,
+    "O": 12,
+    "P": 13,
+    "Q": 14,
+    "R": 15,
+    "S": 16,
+    "T": 17,
+    "U": 18,
+    "V": 19,
+    "W": 20,
+    "Y": 21
+  },
+  "flash_panel": 4,
+  "font_sprite": "spr_ln3_ending_font",
+  "panels": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "scope": "Recover original ENDING panels, animation costs, font and scroll traces.\n\nBitmap updates run offline in the original 6502 routines. Raster reveal and\nmid-draw VIC observations are not certified by these whole-image samples.\n",
+  "scroll_colours": [
+    0,
+    0,
+    0,
+    3
+  ],
+  "silhouette": 9,
+  "source_sha256": "f044fa6b5f1a4e87b273157db6ff8c51c61002737cd706e900be90a58068cc00",
+  "sprite": "spr_ln3_ending",
+  "text": "THE SHOGUN IS VANQUISHED                        YOU ARE VICTORIOUS                        CAN ANYTHING THREATEN THE WORLD AGAIN                        THERE CANNOT BE ANOTHER ADVERSARY SO STRONG                                                    OR CAN THERE                        ALWAYS BE READY TO TAKE UP THE CAUSE SHOULD YOUR SPECIAL SKILLS EVER BE REQUIRED AGAIN                        PRAY THEY ARE NOT                        "
+}

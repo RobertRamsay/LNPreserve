@@ -55,6 +55,7 @@ function ln3_world_checks() {
 function ln3_world_capture() {
     ln3_scenery_gpu_checks();
     ln3_mechanism_gpu_checks();
+    ln3_ending_gpu_checks();
     var _o=ln3_data_read("verification/ln3_gpu_vectors.json"),_g=undefined,_level=0;
     var _b=buffer_create(24*21*4,buffer_fixed,1),_surface=surface_create(240,144);
     for (var _i=0;_i<array_length(_o.vectors);_i++) {

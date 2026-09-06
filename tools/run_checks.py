@@ -45,6 +45,8 @@ if __name__=='__main__':
                       ln3_scenery_gpu_pass='LN3_SCENERY_GPU_PASS' in log,
                       ln3_special_pass='LN3_SPECIAL_PASS' in log,
                       ln3_transition_pass='LN3_TRANSITION_PASS' in log,
+                      ln3_ending_pass='LN3_ENDING_PASS' in log,
+                      ln3_ending_gpu_pass='LN3_ENDING_GPU_PASS' in log,
                       ln3_mechanism_gpu_pass='LN3_MECHANISM_GPU_PASS' in log,
                       ln3_world_pass='LN3_WORLD_PASS' in log,
                       ln3_gpu_pass='LN3_GPU_PASS' in log)
@@ -63,4 +65,4 @@ if __name__=='__main__':
         (out/'runner-console.log').write_text(log)
     (ROOT/'evidence/runtime_checks.json').write_text(json.dumps(report,indent=2)+'\n')
     print(json.dumps(report,indent=2))
-    sys.exit(0 if report.get('exit_code')==0 and all(report.get(key) for key in ('native_checks_pass','runtime_pass','mask_gpu_pass','sprite_decoder_pass','ln1_control_vectors_pass','ln1_player_vectors_pass','ln1_enemy_vectors_pass','ln1_combat_vectors_pass','ln1_world_smoke_pass','ln1_feedback_pass','ln1_water_vectors_pass','scene_navigation_pass','ln1_levels_pass','ln1_projectiles_pass','ln2_player_vectors_pass','ln2_enemy_vectors_pass','ln2_entrances_pass','ln2_helicopter_pass','ln2_vehicles_pass','ln2_effects_pass','ln2_combat_vectors_pass','ln2_world_pass','ln3_movement_pass','ln3_actions_pass','ln3_input_pass','ln3_animation_pass','ln3_masks_pass','ln3_collision_pass','ln3_enemy_pass','ln3_combat_pass','ln3_scenes_pass','ln3_items_pass','ln3_scenery_pass','ln3_scenery_gpu_pass','ln3_special_pass','ln3_transition_pass','ln3_mechanism_gpu_pass','ln3_world_pass','ln3_gpu_pass')) else 1)
+    sys.exit(0 if report.get('exit_code')==0 and all(report.get(key) for key in ('native_checks_pass','runtime_pass','mask_gpu_pass','sprite_decoder_pass','ln1_control_vectors_pass','ln1_player_vectors_pass','ln1_enemy_vectors_pass','ln1_combat_vectors_pass','ln1_world_smoke_pass','ln1_feedback_pass','ln1_water_vectors_pass','scene_navigation_pass','ln1_levels_pass','ln1_projectiles_pass','ln2_player_vectors_pass','ln2_enemy_vectors_pass','ln2_entrances_pass','ln2_helicopter_pass','ln2_vehicles_pass','ln2_effects_pass','ln2_combat_vectors_pass','ln2_world_pass','ln3_movement_pass','ln3_actions_pass','ln3_input_pass','ln3_animation_pass','ln3_masks_pass','ln3_collision_pass','ln3_enemy_pass','ln3_combat_pass','ln3_scenes_pass','ln3_items_pass','ln3_scenery_pass','ln3_scenery_gpu_pass','ln3_special_pass','ln3_transition_pass','ln3_ending_pass','ln3_ending_gpu_pass','ln3_mechanism_gpu_pass','ln3_world_pass','ln3_gpu_pass')) else 1)

@@ -296,6 +296,9 @@
   ],
   "ForcedPrefabProjectReferences": [],
   "IncludedFiles": [
+    {"$GMIncludedFile":"","%Name":"ending.json","CopyToMask":-1,"filePath":"datafiles/play/ln3","name":"ending.json","resourceType":"GMIncludedFile","resourceVersion":"2.0"},
+    {"$GMIncludedFile":"","%Name":"ln3_ending_vectors.json","CopyToMask":-1,"filePath":"datafiles/verification","name":"ln3_ending_vectors.json","resourceType":"GMIncludedFile","resourceVersion":"2.0"},
+
     {"$GMIncludedFile":"","%Name":"transition.json","CopyToMask":-1,"filePath":"datafiles/play/ln3","name":"transition.json","resourceType":"GMIncludedFile","resourceVersion":"2.0"},
     {"$GMIncludedFile":"","%Name":"ln3_transition_vectors.json","CopyToMask":-1,"filePath":"datafiles/verification","name":"ln3_transition_vectors.json","resourceType":"GMIncludedFile","resourceVersion":"2.0"},
 
@@ -19741,6 +19744,11 @@
   "resourceType": "GMProject",
   "resourceVersion": "2.0",
   "resources": [
+    {"id":{"name":"ln3_ending","path":"scripts/ln3_ending/ln3_ending.yy"}},
+
+    {"id":{"name":"spr_ln3_ending","path":"sprites/spr_ln3_ending/spr_ln3_ending.yy"}},
+    {"id":{"name":"spr_ln3_ending_font","path":"sprites/spr_ln3_ending_font/spr_ln3_ending_font.yy"}},
+
     {"id":{"name":"spr_ln3_transition_parts","path":"sprites/spr_ln3_transition_parts/spr_ln3_transition_parts.yy"}},
     {"id":{"name":"spr_ln3_transition_text","path":"sprites/spr_ln3_transition_text/spr_ln3_transition_text.yy"}},
 

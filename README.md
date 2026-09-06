@@ -34,7 +34,7 @@ LN3 now has five native level prototypes and 65 selectable scenes. Original play
 
 LN3's 29 item/mechanism records, pickup/use recipes, FOUND feedback and animated scenery are now connected. Mechanisms include Earth's ritual, Wind's carriers, Water's bell, Fire's cauldron and gate, and Void's reflected-bolt route into the final fight. The original gate, lit cauldron, impact flashes, curtain sprites and transition messages are editable PNG assets.
 
-LN3 remains **incomplete**: the separately loaded ENDING program, original dashboard/portrait presentation, several palette effects and whole-system timing still require work. The final encounter reaches the original ending request and retains the recovered victory message while that program awaits conversion. The HUD uses temporary text. Complete objectives and guardian encounters have not passed original input replays.
+LN3 remains **incomplete**: the separate high-score program, original dashboard/portrait presentation, several palette effects and whole-system timing still require work. The final encounter runs the native ending picture sequence and original scrolling text. Its ten unique picture/animation frames and 22 font images are editable PNGs. Press J after the text to finish; the original victory message is shown while the separate high-score program awaits conversion. Raster reveal and mid-draw timing remain unverified. The HUD uses temporary text. Complete objectives and guardian encounters have not passed original input replays.
 
 ## Controls
 
@@ -76,7 +76,8 @@ Actual compiled GML passes comparisons against offline execution of original mac
 - LN3: 6,000 movement states, 5,490 action states, 3,510 input states and 10,925 animation updates across all five original banks. Animation comparisons intercept the bitmap compositor.
 - LN3: 4,224 original sprite visibility masks across all 66 recovered scenes, including edge-fragment carryover. GPU application additionally passes 66,528 alpha/tint pixel checks against 132 original decompressed and masked ordinary sprite parts. Expanded and multicolour special actors still need full original-output comparisons.
 - LN3: 7,191 collision responses, 6,000 enemy decision/attack/patrol/recovery states, 6,000 melee/projectile states, and 3,064 room-entry/climbing/falling states.
-- LN3: 3,480 original item/proximity states, 3,520 level-mechanism states and 1,260 curtain-motion states. Native checks cover the 54/45 PAL-tick ritual/bell waits and route to the final encounter. Full raster timing and the ENDING program are excluded.
+- LN3: 3,480 original item/proximity states, 3,520 level-mechanism states and 1,260 curtain-motion states. Native checks cover the 54/45 PAL-tick ritual/bell waits and route to the final encounter. Full raster timing is excluded.
+- LN3: 1,736 original ending-scroll states and 58,368 original bitmap pixel comparisons for the native PNG font rendering. The full ending sequence has a native completion check; raster presentation and the high-score program remain pending.
 - LN3: 1,176 scenery selectors, 6,028 original animated-bitmap GPU samples, and 5,280 gate/cauldron/impact GPU samples.
 - LN3: 201 destination records and 6,500 integration ticks across 65 selectable scenes, with all scenes rendered in the compiled runner. These integration ticks are regression coverage, not original-playthrough comparisons.
 

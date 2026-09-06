@@ -31,6 +31,7 @@ function ln3_special_checks() {
         ln3_state_check(_s,_v.expected,"LN3 special "+string(_i));
     }
     ln3_transition_checks();
+    ln3_ending_checks();
     show_debug_message("LN3_SPECIAL_PASS: "+string(array_length(_o.vectors))+" original mechanism states and special sequence requests; full interrupt timing excluded.");
 }
 
@@ -66,7 +67,7 @@ function ln3_transition_checks() {
     ln_check(_g.room_id==12 && _g.special_sequence==0 && _g.state.parts[2].x==104 && _g.state.parts[2].y==124,"LN3 Void portal reaches original final-fight entrance");
     ln3_special_start(_g,4);_ticks=0;while (!_g.ending_requested && _ticks<900) {ln3_play_tick(_g,0);_ticks++;}
     ln_check(_g.ending_requested && _g.state.honour==40,"LN3 final fight requests original ending boundary");
-    show_debug_message("LN3_TRANSITION_PASS: "+string(_count)+" original curtain-motion states, ritual/bell PAL waits and native puzzle/final-room integration; ENDING program and full raster timing pending.");
+    show_debug_message("LN3_TRANSITION_PASS: "+string(_count)+" original curtain-motion states, ritual/bell PAL waits and native puzzle/final-room integration; full raster timing pending.");
 }
 
 function ln3_mechanism_gpu_checks() {

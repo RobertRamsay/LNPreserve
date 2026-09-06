@@ -23,6 +23,7 @@ function LN3Play(_level=1) constructor {
     special_sequence=0;special_step=0;special_request=0;special_colours=array_create(8,-1);
     transition=ln3_data_read("play/ln3/transition.json");transition_phase=0;transition_y=[];transition_mode=0;transition_signal=0;transition_wipe=0;ending_requested=false;
     hud_player_health=0;hud_enemy_health=0;hud_honour=0;hud_wait=0;
+    ending=undefined;ending_surface=-1;
     palette=[];for (var _i=0;_i<16;_i++) palette[_i]=make_colour_rgb(data.palette[_i][0],data.palette[_i][1],data.palette[_i][2]);
     stage_surface=-1;part_surface=-1;timer=new LNClock();controls=undefined;
     paused=false;music=true;game_over=false;level_complete=false;level_states=array_create(5,undefined);
@@ -44,6 +45,8 @@ function ln3_play_enter(_g,_entry) {
     var _scene=ln3_room_record(_g.world.rooms,_entry.destination);if (!is_struct(_scene)) return false;
     ln3_enemy_remember(_g);_g.room_id=_entry.destination;_g.last_entry=_entry;_g.scene_record=_scene;_g.room_age=0;
     _g.special_sequence=0;_g.special_request=0;_g.special_colours=array_create(8,-1);
+    if (is_struct(_g.ending) && surface_exists(_g.ending.scroll_surface)) surface_free(_g.ending.scroll_surface);
+    _g.ending=undefined;
     var _s=_g.state;_s.room_id=_g.room_id;
     var _saved=variable_struct_exists(_g.room_enemies,string(_g.room_id))?variable_struct_get(_g.room_enemies,string(_g.room_id)):
         {health:_g.data.initial_enemy_health[_g.room_id],dead:0,mirror:0,x:0,y:0};
@@ -125,6 +128,7 @@ function ln3_level_load(_g,_level,_ordinary=false) {
     if (_level>5) {_g.level_complete=true;return false;}
     if (_level<1) return false;
     if (_level==_g.level && !_ordinary) return true;
+    ln3_ending_free(_g);
     ln3_enemy_remember(_g);_g.level_states[_g.level-1]={enemies:_g.room_enemies};
     var _inventory=_g.state.inventory,_health=_g.state.player_health,_honour=_g.state.honour,
         _lives=_g.state.lives,_score=_g.state.score_digits;
@@ -156,6 +160,7 @@ function ln3_play_prepare_draw(_g,_s) {
 
 function ln3_play_tick(_g,_joy) {
     if (_g.game_over || _g.level_complete) return;
+    if (is_struct(_g.ending)) {ln3_ending_tick(_g.ending,_joy);return;}
     var _s=_g.state;_g.room_age++;
     // The original PAL IRQ decrements byte timers and wraps its word timer.
     var _timers=["logic_wait","enemy_attack_wait","weapon_notice_timer","scene_wait","regeneration_wait","death_wait","item_wait","special_wait","fire_damage_wait","wind_damage_wait"];
@@ -268,6 +273,14 @@ function ln3_play_actor_part(_g,_d,_i) {
 }
 
 function ln3_play_draw(_g) {
+    if (is_struct(_g.ending)) {
+        ln3_ending_draw(_g);
+        if (_g.ending.finished) {
+            draw_sprite_ext(asset_get_index(_g.transition.text_sprite),2,160,84,4,4,0,c_white,1);
+            draw_text(420,744,"F11 Choose scene    Home Restart");
+        }
+        return;
+    }
     draw_clear(c_black);draw_set_colour(c_white);
     if (!surface_exists(_g.stage_surface)) _g.stage_surface=surface_create(240,144);
     surface_set_target(_g.stage_surface);draw_clear(c_black);draw_sprite(asset_get_index(_g.scene_record.sprite),0,0,0);

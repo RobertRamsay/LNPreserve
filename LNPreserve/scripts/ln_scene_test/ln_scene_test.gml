@@ -181,7 +181,7 @@ function ln_scene_test_draw(_t) {
             _row++;
         }
         draw_set_colour(_level.playable ? make_colour_rgb(125,210,171) : make_colour_rgb(245,190,100));
-        draw_text(480,224,_level.game==3 ? "Movement and combat prototype — objects still in progress" : "Playable prototype — movement, objects and combat");
+        draw_text(480,224,"Playable prototype — movement, objects and combat");
         for (var _i = 0; _i < array_length(_level.scenes); _i++)
             ln_scene_test_button(480+(_i mod 7)*88,266+(_i div 7)*64,76,48,string(_i+1),_t.scene_index==_i);
         ln_scene_test_button(160,674,282,48,"Return to gameplay",false);

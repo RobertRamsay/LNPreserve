@@ -38,6 +38,8 @@
   "ln3_scenery_gpu_pass": true,
   "ln3_special_pass": true,
   "ln3_transition_pass": true,
+  "ln3_ending_pass": true,
+  "ln3_ending_gpu_pass": true,
   "ln3_mechanism_gpu_pass": true,
   "ln3_world_pass": true,
   "ln3_gpu_pass": true

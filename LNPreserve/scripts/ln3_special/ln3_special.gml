@@ -200,7 +200,7 @@ function ln3_transition_tick(_g) {
                 ln3_play_enter(_g,ln3_room_record(_g.world.rooms,12).special_entry);
             } else {
                 // The source requests the separately loaded ENDING program here.
-                _g.transition_phase=11;_g.ending_requested=true;
+                _g.transition_phase=11;_g.ending_requested=true;_g.ending=new LN3Ending();
             }
             return;
     }
