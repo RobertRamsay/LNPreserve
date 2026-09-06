@@ -121,7 +121,7 @@ def main(levels=range(1,8)):
         w['player_banks']=[];w['enemy_banks']={};w['player_extra_banks']=[];w['enemy_extra_banks']={}
         shared=tuple(w['shared_sprite_colours'])
         for enemy in (False,True):
-            kinds=sorted({(r['enemy']['weapon'],r['enemy']['costume']) for r in w['rooms'] if r['enemy']['active']>=128}) if enemy else [(i,0) for i in range(5)]
+            kinds=sorted({(r['enemy']['weapon'],r['enemy']['costume']) for r in w['rooms'] if r['enemy']['active']>=128 or (level==7 and r['id']==1)}) if enemy else [(i,0) for i in range(5)]
             for weapon,costume in kinds:
                 for suffix,poses,field in [('body',range(64),'enemy_banks' if enemy else 'player_banks'),
                                            ('effects',frames,'enemy_extra_banks' if enemy else 'player_extra_banks')]:
@@ -135,6 +135,9 @@ def main(levels=range(1,8)):
         register_project(resources,included)
         print('LN2 level',level,len(w['rooms']),'rooms',len(nav),'source exit comparisons',flush=True)
     write_import_report()
+    if 7 in levels:
+        from export_ln2_final_enemy import main as recover_final_enemy
+        recover_final_enemy()
 
 if __name__=='__main__':
     import argparse

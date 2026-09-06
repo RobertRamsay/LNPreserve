@@ -5,6 +5,8 @@ ROOT=Path(__file__).resolve().parents[1]
 runner=Path('C:/ProgramData/GameMakerStudio2-LTS2026/Cache/runtimes/runtime-2026.0.0.23/windows/x64/Runner.exe')
 flag='--ln2-sequences-only' if '--sequences' in sys.argv else '--ln2-world-only'
 marker='LN2_EFFECTS_PASS' if '--sequences' in sys.argv else 'LN2_WORLD_PASS'
+if '--objects' in sys.argv:flag='--ln2-objects-only';marker='LN2_ENDING_PASS'
+if '--final-gpu' in sys.argv:flag='--ln2-final-gpu-only';marker='LN2_ENDING_GPU_PASS'
 if '--ln3-movement' in sys.argv:flag='--ln3-movement-only';marker='LN3_MOVEMENT_PASS'
 if '--ln3-actions' in sys.argv:flag='--ln3-actions-only';marker='LN3_ACTION_PASS'
 if '--ln3-input' in sys.argv:flag='--ln3-input-only';marker='LN3_INPUT_PASS'

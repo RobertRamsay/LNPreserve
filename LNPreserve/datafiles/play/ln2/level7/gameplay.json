@@ -1615,6 +1615,33 @@
       "next": 0,
       "state": -1
     },
+    "49593": {
+      "duration": 16,
+      "dx": 0,
+      "dy": 0,
+      "flags": 26,
+      "frame": 44,
+      "next": 49596,
+      "state": -1
+    },
+    "49596": {
+      "duration": -1,
+      "dx": 0,
+      "dy": 0,
+      "flags": 24,
+      "frame": 99,
+      "next": 49598,
+      "state": -1
+    },
+    "49598": {
+      "duration": -1,
+      "dx": 0,
+      "dy": 0,
+      "flags": 24,
+      "frame": 100,
+      "next": 49600,
+      "state": -1
+    },
     "49600": {
       "duration": 16,
       "dx": 0,

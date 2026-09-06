@@ -1,4 +1,9 @@
 try {
+if (ln2_final_only) {
+    try {ln2_final_gpu_checks();}
+    catch (_failure) {show_debug_message("LN2_FINAL_GPU_FAILURE: "+string(_failure));}
+    game_end();exit;
+}
 if (ln3_only) {
     try {ln3_world_capture();show_debug_message("LN_CAPTURE_DIRECTORY:"+game_save_id);}
     catch (_failure) {show_debug_message("LN3_GPU_FAILURE: "+string(_failure));}

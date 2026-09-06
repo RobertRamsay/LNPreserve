@@ -35,7 +35,9 @@
     "ln3_unique_animation_overlays": 50,
     "ln3_unique_mechanism_overlays": 52,
     "ln3_ending_unique_picture_frames": 10,
-    "ln3_ending_unique_font_frames": 22
+    "ln3_ending_unique_font_frames": 22,
+    "ln2_latent_final_enemy_placements": 1,
+    "ln2_final_enemy_pose_mirror_images": 208
   },
   "provenance": {
     "disk_memory_region_verified": [
@@ -177,15 +179,39 @@
     {
       "name": "LN3 ordinary sprite GPU composition",
       "verification": "66528 alpha/tint pixels from 132 original decompressed and masked ordinary sprite parts; expanded/multicolour special actors excluded"
+    },
+    {
+      "name": "LN2 keypad input/acceptance",
+      "verification": "4096 original states; temporary display and pre-poll delay excluded"
+    },
+    {
+      "name": "LN2 candle/final-defeat rules",
+      "verification": "3840 original states and drawing/animation requests"
+    },
+    {
+      "name": "LN2 final enemy release",
+      "verification": "384 original states, plus 1916928 unmasked pose/mirror GPU pixels"
+    },
+    {
+      "name": "LN2 post-item animation",
+      "verification": "12544 original action/countdown states across seven banks"
+    },
+    {
+      "name": "LN2 score, clock and health display",
+      "verification": "6144 original states; raster and complete score-event dispatch excluded"
+    },
+    {
+      "name": "LN2 victory loop and spirit motion",
+      "verification": "3072 victory, 2048 palette and 2048 motion states; 30720 game/ending bitmap samples"
     }
   ],
   "current_gameplay": "Native prototypes in all 18 levels across LN1, LN2 and LN3; no verified complete game",
   "pending": [
     "Complete and verify LN1 puzzle sequences, special enemies, projectile combat, palette effects, death presentation and ending",
-    "Complete LN2 boundary hazards, projectile combat, remaining object handlers, final boss/objectives and ending",
+    "Complete LN2 boundary hazards, projectile combat and remaining object details; verify the final encounter and ending with original input replays",
     "Complete LN3 high-score program, dashboard/portrait, raster ending presentation and remaining palette effects; verify full objectives and encounters against original input replays",
     "Verify LN3 multicolour/expanded special actors and full composition; validate LN1/LN2 composition, palette changes and missing special effects",
-    "LN2 original dashboard, item flashing, pickup continuation and complete death presentation",
+    "LN2 original dashboard/eyes, item flashing, keypad pre-poll delay, complete score-event dispatch and death/game-over presentation",
     "Validate recovered LN1 composition, room masks, dynamic dashboard and palette semantics against original display captures",
     "Whole-game cycle-stamped reference traces and native comparisons",
     "Real music and sound effects; silent named placeholders are supplied"
@@ -220,6 +246,19 @@
     "ending_scroll_states": 1736,
     "ending_scroll_gpu_pixels": 58368
   },
+  "ln2_final_content": {
+    "keypad": true,
+    "boss_release": true,
+    "five_candles": true,
+    "both_defeat_entrances": true,
+    "final_item": true,
+    "native_ending": true,
+    "original_picture_and_digit_pngs": true,
+    "first_and_repeated_palette_states": 12,
+    "palette_loop_return": 4,
+    "original_full_playthrough_verified": false,
+    "raster_timing_verified": false
+  },
   "runtime_checks": {
     "command": "GameMaker VM --selftest",
     "original_gameplay_parity": "not_tested",
@@ -246,6 +285,15 @@
     "ln2_effects_pass": true,
     "ln2_combat_vectors_pass": true,
     "ln2_world_pass": true,
+    "ln2_keypad_pass": true,
+    "ln2_candles_pass": true,
+    "ln2_boss_release_pass": true,
+    "ln2_object_integration_pass": true,
+    "ln2_item_flow_pass": true,
+    "ln2_final_gpu_pass": true,
+    "ln2_status_pass": true,
+    "ln2_ending_pass": true,
+    "ln2_ending_gpu_pass": true,
     "ln3_movement_pass": true,
     "ln3_actions_pass": true,
     "ln3_input_pass": true,
@@ -822,8 +870,7 @@
         "title": "Void"
       }
     ],
-    "scope": "Recover LN3's own room, boundary, actor and animation records offline.\n\nOnly decoded records and original PNG pixels are produced. This does not\nconnect or certify native LN3 gameplay; the handlers still require translation.\n",
-    "scope_note": "Historical offline recovery report; current native integration is recorded separately."
+    "scope": "Recover LN3's own room, boundary, actor and animation records offline.\n\nOnly decoded records and original PNG pixels are produced. This does not\nconnect or certify native LN3 gameplay; the handlers still require translation.\n"
   },
   "ln3_mask_checks": {
     "full_gameplay_parity": false,

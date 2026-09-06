@@ -175,7 +175,8 @@ def main(metadata_only=False):
         knockout_tail=ram.index(bytes.fromhex('a5 6b 29 04 d0'),hurt+65,hurt+180)
         enemy_falls=[ram[knockout_tail+7]+256*ram[knockout_tail+9],ram[knockout_tail+13]+256*ram[knockout_tail+15]]
         entrance_entries=entrance_actions(ram,s,level,tables['exit_destinations'],rooms)
-        graph=actions(ram,action_entries+enemy_entries+special+enemy_recovery+reactions+enemy_falls+entrance_entries)
+        item_tail=locate(ram,0xbf56,33);item_resume=word(ram,item_tail+17)
+        graph=actions(ram,action_entries+enemy_entries+special+enemy_recovery+reactions+enemy_falls+entrance_entries+[word(ram,item_resume+i) for i in range(0,12,2)])
         move=s['move'];movement={key:list(ram[move+offset:move+offset+4]) for key,offset in
             [('left',0x109),('right',0x10d),('up',0x111),('down',0x115),('triple_y',0x119),
              ('no_y',0x11d),('forward',0x121),('mirror',0x125)]}

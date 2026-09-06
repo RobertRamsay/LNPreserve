@@ -36,10 +36,10 @@ def main():
             verification='1024 key-chord transitions; state and external request order; display callees intercepted; timing not tested')],
         current_gameplay='Native prototypes in all 18 levels across LN1, LN2 and LN3; no verified complete game',
         pending=['Complete and verify LN1 puzzle sequences, special enemies, projectile combat, palette effects, death presentation and ending',
-            'Complete LN2 boundary hazards, projectile combat, remaining object handlers, final boss/objectives and ending',
-            'Complete LN3 object pickup/use, animated scenery, special encounter progression, final objectives and ending',
+            'Complete LN2 boundary hazards, projectile combat and remaining object details; verify the final encounter and ending with original input replays',
+            'Complete LN3 high-score program, dashboard/portrait, raster ending presentation and remaining palette effects; verify full objectives and encounters against original input replays',
             'Verify LN3 multicolour/expanded special actors and full composition; validate LN1/LN2 composition, palette changes and missing special effects',
-            'LN2 original dashboard, item flashing, pickup continuation and complete death presentation',
+            'LN2 original dashboard/eyes, item flashing, keypad pre-poll delay, complete score-event dispatch and death/game-over presentation',
             'Validate recovered LN1 composition, room masks, dynamic dashboard and palette semantics against original display captures',
             'Whole-game cycle-stamped reference traces and native comparisons',
             'Real music and sound effects; silent named placeholders are supplied'])
@@ -78,8 +78,26 @@ def main():
         ln3_native_selectable_scenes=ln3_rooms,ln3_unique_actor_part_frames=1158,ln3_ordinary_enemy_placements=57,
         ln3_special_entry_actor_scenes=6)
     status['ln3_integration']=dict(scene_ticks=6500,destination_records=201,complete_gameplay_parity=False,
-        special_final_entrance='Void scene 12, original position/facing at $69ea-$6a1a; F11 testing available, preceding reflected-bolt gateway pending',
+        special_final_entrance='Void reflected-bolt gateway connects the final fight; the native ENDING picture sequence and text reach the high-score request boundary. High-score program remains pending.',
         unselectable_record='Fire scene 12: partial scenery without ordinary entry, exit or enemy')
+    status['counts'].update(ln3_item_and_mechanism_records=29,ln3_scenery_animation_steps=49,
+        ln3_unique_animation_overlays=50,ln3_unique_mechanism_overlays=52,
+        ln3_ending_unique_picture_frames=10,ln3_ending_unique_font_frames=22,
+        ln2_latent_final_enemy_placements=1,ln2_final_enemy_pose_mirror_images=208)
+    status['ln3_integration'].update(item_states=3480,special_states=3520,curtain_motion_states=1260,
+        scenery_selector_states=1176,scenery_gpu_samples=6028,mechanism_gpu_samples=5280,
+        full_interrupt_timing_verified=False,ending_scroll_states=1736,ending_scroll_gpu_pixels=58368)
+    status['native_original_routines'].extend([
+        dict(name='LN2 keypad input/acceptance',verification='4096 original states; temporary display and pre-poll delay excluded'),
+        dict(name='LN2 candle/final-defeat rules',verification='3840 original states and drawing/animation requests'),
+        dict(name='LN2 final enemy release',verification='384 original states, plus 1916928 unmasked pose/mirror GPU pixels'),
+        dict(name='LN2 post-item animation',verification='12544 original action/countdown states across seven banks'),
+        dict(name='LN2 score, clock and health display',verification='6144 original states; raster and complete score-event dispatch excluded'),
+        dict(name='LN2 victory loop and spirit motion',verification='3072 victory, 2048 palette and 2048 motion states; 30720 game/ending bitmap samples')])
+    status['ln2_final_content']=dict(keypad=True,boss_release=True,five_candles=True,both_defeat_entrances=True,
+        final_item=True,native_ending=True,original_picture_and_digit_pngs=True,
+        first_and_repeated_palette_states=12,palette_loop_return=4,
+        original_full_playthrough_verified=False,raster_timing_verified=False)
     for name in ('runtime_checks','structural_checks','ln1_actor_decoder_checks','asset_cleanup','asset_rebuild_check','ln1_level_content','ln1_level_asset_sharing','ln2_content_recovery','ln3_content_recovery','ln3_mask_checks','ln3_asset_import'):
         path=ROOT/'evidence'/f'{name}.json'
         if path.exists():

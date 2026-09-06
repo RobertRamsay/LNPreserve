@@ -17,6 +17,7 @@ if (keyboard_check_pressed(vk_f11)) {
     }
 }
 if (keyboard_check_pressed(vk_home)) {
+    if (play.game_number==2) ln2_ending_free(play);
     if (play.game_number==3) ln3_ending_free(play);
     var _transport = play.timer;
     if (surface_exists(play.stage_surface)) surface_free(play.stage_surface);

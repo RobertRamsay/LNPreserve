@@ -1,5 +1,6 @@
 gpu_set_texfilter(false);
 ln3_only=false;
+ln2_final_only=false;
 window_set_caption("LNPreserve | The Last Ninja");
 clock = new LNClock();
 input_state = new LNInput();
@@ -21,6 +22,12 @@ selftest = false;
 host_frames = 0;
 for (var _i = 1; _i <= parameter_count(); _i++) {
     if (parameter_string(_i) == "--selftest") selftest = true;
+    if (parameter_string(_i) == "--ln2-final-gpu-only") ln2_final_only=true;
+    if (parameter_string(_i) == "--ln2-objects-only") {
+        try {ln2_keypad_checks();}
+        catch (_failure) {show_debug_message("LN2_OBJECT_FAILURE: "+string(_failure));}
+        game_end();exit;
+    }
     if (parameter_string(_i) == "--ln3-movement-only") {
         try { ln3_movement_checks(); }
         catch (_failure) { show_debug_message("LN3_MOVEMENT_FAILURE: "+string(_failure)); }

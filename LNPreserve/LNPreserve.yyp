@@ -296,6 +296,35 @@
   ],
   "ForcedPrefabProjectReferences": [],
   "IncludedFiles": [
+    {"$GMIncludedFile":"","%Name":"ending.json","CopyToMask":-1,"filePath":"datafiles/play/ln2","name":"ending.json","resourceType":"GMIncludedFile","resourceVersion":"2.0"},
+    {"$GMIncludedFile":"","%Name":"ln2_ending_vectors.json","CopyToMask":-1,"filePath":"datafiles/verification","name":"ln2_ending_vectors.json","resourceType":"GMIncludedFile","resourceVersion":"2.0"},
+    {"$GMIncludedFile":"","%Name":"ln2_ending_gpu.json","CopyToMask":-1,"filePath":"datafiles/verification","name":"ln2_ending_gpu.json","resourceType":"GMIncludedFile","resourceVersion":"2.0"},
+
+    {"$GMIncludedFile":"","%Name":"status.json","CopyToMask":-1,"filePath":"datafiles/play/ln2","name":"status.json","resourceType":"GMIncludedFile","resourceVersion":"2.0"},
+    {"$GMIncludedFile":"","%Name":"ln2_status_vectors.json","CopyToMask":-1,"filePath":"datafiles/verification","name":"ln2_status_vectors.json","resourceType":"GMIncludedFile","resourceVersion":"2.0"},
+
+    {"$GMIncludedFile":"","%Name":"item_flow.json","CopyToMask":-1,"filePath":"datafiles/play/ln2/level1","name":"item_flow.json","resourceType":"GMIncludedFile","resourceVersion":"2.0"},
+    {"$GMIncludedFile":"","%Name":"item_flow.json","CopyToMask":-1,"filePath":"datafiles/play/ln2/level2","name":"item_flow.json","resourceType":"GMIncludedFile","resourceVersion":"2.0"},
+    {"$GMIncludedFile":"","%Name":"item_flow.json","CopyToMask":-1,"filePath":"datafiles/play/ln2/level3","name":"item_flow.json","resourceType":"GMIncludedFile","resourceVersion":"2.0"},
+    {"$GMIncludedFile":"","%Name":"item_flow.json","CopyToMask":-1,"filePath":"datafiles/play/ln2/level4","name":"item_flow.json","resourceType":"GMIncludedFile","resourceVersion":"2.0"},
+    {"$GMIncludedFile":"","%Name":"item_flow.json","CopyToMask":-1,"filePath":"datafiles/play/ln2/level5","name":"item_flow.json","resourceType":"GMIncludedFile","resourceVersion":"2.0"},
+    {"$GMIncludedFile":"","%Name":"item_flow.json","CopyToMask":-1,"filePath":"datafiles/play/ln2/level6","name":"item_flow.json","resourceType":"GMIncludedFile","resourceVersion":"2.0"},
+    {"$GMIncludedFile":"","%Name":"item_flow.json","CopyToMask":-1,"filePath":"datafiles/play/ln2/level7","name":"item_flow.json","resourceType":"GMIncludedFile","resourceVersion":"2.0"},
+    {"$GMIncludedFile":"","%Name":"ln2_item_flow_vectors.json","CopyToMask":-1,"filePath":"datafiles/verification","name":"ln2_item_flow_vectors.json","resourceType":"GMIncludedFile","resourceVersion":"2.0"},
+
+    {"$GMIncludedFile":"","%Name":"ln2_final_enemy_gpu.json","CopyToMask":-1,"filePath":"datafiles/verification","name":"ln2_final_enemy_gpu.json","resourceType":"GMIncludedFile","resourceVersion":"2.0"},
+
+    {"$GMIncludedFile":"","%Name":"ln2_boss_release_vectors.json","CopyToMask":-1,"filePath":"datafiles/verification","name":"ln2_boss_release_vectors.json","resourceType":"GMIncludedFile","resourceVersion":"2.0"},
+    {"$GMIncludedFile":"","%Name":"boss_release.json","CopyToMask":-1,"filePath":"datafiles/play/ln2","name":"boss_release.json","resourceType":"GMIncludedFile","resourceVersion":"2.0"},
+
+    {"$GMIncludedFile":"","%Name":"final_art.json","CopyToMask":-1,"filePath":"datafiles/play/ln2","name":"final_art.json","resourceType":"GMIncludedFile","resourceVersion":"2.0"},
+    {"$GMIncludedFile":"","%Name":"ln2_candle_gpu.json","CopyToMask":-1,"filePath":"datafiles/verification","name":"ln2_candle_gpu.json","resourceType":"GMIncludedFile","resourceVersion":"2.0"},
+
+    {"$GMIncludedFile":"","%Name":"final_mechanisms.json","CopyToMask":-1,"filePath":"datafiles/play/ln2","name":"final_mechanisms.json","resourceType":"GMIncludedFile","resourceVersion":"2.0"},
+    {"$GMIncludedFile":"","%Name":"ln2_candle_vectors.json","CopyToMask":-1,"filePath":"datafiles/verification","name":"ln2_candle_vectors.json","resourceType":"GMIncludedFile","resourceVersion":"2.0"},
+
+    {"$GMIncludedFile":"","%Name":"ln2_keypad_vectors.json","CopyToMask":-1,"filePath":"datafiles/verification","name":"ln2_keypad_vectors.json","resourceType":"GMIncludedFile","resourceVersion":"2.0"},
+
     {"$GMIncludedFile":"","%Name":"ending.json","CopyToMask":-1,"filePath":"datafiles/play/ln3","name":"ending.json","resourceType":"GMIncludedFile","resourceVersion":"2.0"},
     {"$GMIncludedFile":"","%Name":"ln3_ending_vectors.json","CopyToMask":-1,"filePath":"datafiles/verification","name":"ln3_ending_vectors.json","resourceType":"GMIncludedFile","resourceVersion":"2.0"},
 
@@ -19744,6 +19773,22 @@
   "resourceType": "GMProject",
   "resourceVersion": "2.0",
   "resources": [
+    {"id":{"name":"spr_ln2_final_palette","path":"sprites/spr_ln2_final_palette/spr_ln2_final_palette.yy"}},
+    {"id":{"name":"spr_ln2_ending","path":"sprites/spr_ln2_ending/spr_ln2_ending.yy"}},
+    {"id":{"name":"spr_ln2_ending_candles","path":"sprites/spr_ln2_ending_candles/spr_ln2_ending_candles.yy"}},
+    {"id":{"name":"spr_ln2_ending_digits","path":"sprites/spr_ln2_ending_digits/spr_ln2_ending_digits.yy"}},
+    {"id":{"name":"ln2_ending","path":"scripts/ln2_ending/ln2_ending.yy"}},
+
+    {"id":{"name":"ln2_status","path":"scripts/ln2_status/ln2_status.yy"}},
+
+    {"id":{"name":"spr_ln2_level7_enemy_1_2_effects_final","path":"sprites/spr_ln2_level7_enemy_1_2_effects_final/spr_ln2_level7_enemy_1_2_effects_final.yy"}},
+
+    {"id":{"name":"spr_ln2_level7_enemy_1_2_body","path":"sprites/spr_ln2_level7_enemy_1_2_body/spr_ln2_level7_enemy_1_2_body.yy"}},
+
+    {"id":{"name":"spr_ln2_final_candles","path":"sprites/spr_ln2_final_candles/spr_ln2_final_candles.yy"}},
+
+    {"id":{"name":"ln2_object_rules","path":"scripts/ln2_object_rules/ln2_object_rules.yy"}},
+
     {"id":{"name":"ln3_ending","path":"scripts/ln3_ending/ln3_ending.yy"}},
 
     {"id":{"name":"spr_ln3_ending","path":"sprites/spr_ln3_ending/spr_ln3_ending.yy"}},

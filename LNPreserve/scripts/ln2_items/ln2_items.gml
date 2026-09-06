@@ -7,14 +7,21 @@ function ln2_item_interact(_g,_kind) {
         if (_item.facing!=0 && _item.facing!=_p.facing) continue;
         if (_p.x<_item.x_min || _p.x>=_item.x_max || _p.y<_item.y_min || _p.y>=_item.y_max) continue;
         var _id=ln2_item_handler(_g,_item);
+        if (_id==-2) {_g.pending_item=_item;return;}
         if (_id<0) continue;
-        if (_id!=255) {
-            if (_g.inventory[_id]==0) _g.inventory[_id]=_id==4?137:255;
-            if (_id<17) { _g.notice_item=_id;_g.notice_tick=_p.tick;_g.notice_duration=100; }
-        }
-        ln2_refresh_scene(_g);
+        ln2_item_complete(_g,_item,_id);
         return;
     }
+}
+
+function ln2_item_complete(_g,_item,_id) {
+    if (_id!=255) {
+        if (_g.inventory[_id]==0) _g.inventory[_id]=_id==4?137:255;
+        if (_id<17) {_g.notice_item=_id;_g.notice_tick=_g.player.tick;_g.notice_duration=100;}
+        if (_id!=8) ln2_score_add(_g,5);
+    }
+    ln2_refresh_scene(_g);
+    ln2_item_animation_finish(_g.player,_g.item_flow);
 }
 
 function ln2_item_open_line(_g) {
@@ -85,6 +92,12 @@ function ln2_item_handler(_g,_item) {
             if (_id==24) { _g.inventory[18]&=128;return _id; }
             break;
         case 7:
+            if (_id==18) {
+                if (_g.inventory[17]==0) return -1;
+                _g.keypad={cursor:0,previous:_g.last_joy,digits:[27,27,27,27],code:_g.keycode};return -2;
+            }
+            if (_id==22) return ln2_final_candle_use(_g);
+            if (_id==16) return ln2_boss_release(_g)?16:-1;
             if (_id==23) return _selected==16 && _g.world_state.boss_defeated?_id:-1;
             break;
     }

@@ -73,6 +73,7 @@ function ln_run_checks() {
     ln2_player_checks();
     ln2_enemy_checks();
     ln2_entry_checks();
+    ln2_keypad_checks();
     ln3_movement_checks();
     ln3_action_checks();
     ln3_input_checks();

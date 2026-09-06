@@ -43,6 +43,7 @@ function ln2_world_checks() {
 }
 
 function ln2_world_capture() {
+    ln2_final_gpu_checks();
     for (var _level=1;_level<=7;_level++) {
         var _g=new LN2Play(_level);
         if (_level==6) repeat(64) ln2_play_tick(_g,0);

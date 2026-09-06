@@ -1,0 +1,73 @@
+{
+  "candle_sprite": "spr_ln2_ending_candles",
+  "font_sprite": "spr_ln2_ending_digits",
+  "palette_frames": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    3,
+    2,
+    5,
+    6,
+    5,
+    2,
+    3
+  ],
+  "palette_next": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    4
+  ],
+  "palette_period": 6,
+  "palette_phases": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    0,
+    1,
+    2,
+    3
+  ],
+  "palette_sprite": "spr_ln2_final_palette",
+  "picture_frames": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    3,
+    2,
+    5,
+    6,
+    5,
+    2,
+    3
+  ],
+  "picture_sprite": "spr_ln2_ending",
+  "scope": "Original LN2 victory picture, palette loop, digit font and state fixtures.\n\nOriginal bitmap/text instructions execute offline. Native display uses PNGs;\nthe VIC raster, health-bar drawing and score-event completeness are separate.\n",
+  "score_xy": [
+    32,
+    128
+  ],
+  "source_sha256": "9ea998a916d9e2964ee90b1d590dee903a14813e69ea1fcd95a3a8c1662e1342",
+  "time_xy": [
+    152,
+    128
+  ]
+}
