@@ -22,7 +22,10 @@
     "ln2_scene_records": 93,
     "ln2_enemy_placements": 53,
     "ln2_item_and_mechanism_records": 70,
-    "silent_sound_assets": 41
+    "silent_sound_assets": 41,
+    "ln3_recovered_level_banks": 5,
+    "ln3_recovered_scene_records": 66,
+    "ln3_native_playable_levels": 0
   },
   "provenance": {
     "disk_memory_region_verified": [
@@ -124,15 +127,34 @@
     {
       "name": "LN2 Mansion helicopter",
       "verification": "256 original attachment/drop states and poses; world event dispatch excluded"
+    },
+    {
+      "name": "LN3 sprite-part movement",
+      "verification": "6000 original part-movement states across five banks; scene collision and system timing excluded"
+    },
+    {
+      "name": "LN3 player/enemy action setup",
+      "verification": "5490 original action states, including mutable movement directions"
+    },
+    {
+      "name": "LN3 input selection",
+      "verification": "3510 original input states, including weapon selection and climbing exits; world interactions and timing excluded"
+    },
+    {
+      "name": "LN3 animation and weapon placement",
+      "verification": "10925 original animation updates and body/weapon placements; bitmap compositor intercepted"
+    },
+    {
+      "name": "LN3 sprite visibility masks",
+      "verification": "4224 original 24x21 masks across 66 scenes, including retained fragment data; GPU application and timing excluded"
     }
   ],
   "current_gameplay": "Six connected LN1 and seven connected LN2 native level prototypes; no verified complete game",
   "pending": [
     "Complete and verify LN1 puzzle sequences, special enemies, projectile combat, palette effects, death presentation and ending",
     "Complete LN2 boundary hazards, projectile combat, remaining object handlers, final boss/objectives and ending",
-    "Translate and connect all LN3 native gameplay and objective handlers",
-    "LN3 levels 2-5 source-disk verification; LN3 level 1 payload and opening background are verified",
-    "Finish LN3 character/animation recovery; validate LN1/LN2 composition, palette changes and missing special effects",
+    "Connect verified LN3 movement/input/actions/animation/masking to native rooms; translate collision, enemies, combat, objects and objectives",
+    "Finish LN3 part PNG import and GPU composition; validate LN1/LN2 composition, palette changes and missing special effects",
     "LN2 original dashboard, item flashing, pickup continuation and complete death presentation",
     "Validate recovered LN1 composition, room masks, dynamic dashboard and palette semantics against original display captures",
     "Whole-game cycle-stamped reference traces and native comparisons",
@@ -154,30 +176,35 @@
   },
   "runtime_checks": {
     "command": "GameMaker VM --selftest",
+    "original_gameplay_parity": "not_tested",
     "exit_code": 0,
-    "ln1_combat_vectors_pass": true,
+    "native_checks_pass": true,
+    "runtime_pass": true,
+    "mask_gpu_pass": true,
+    "sprite_decoder_pass": true,
     "ln1_control_vectors_pass": true,
-    "ln1_enemy_vectors_pass": true,
-    "ln1_feedback_pass": true,
-    "ln1_levels_pass": true,
     "ln1_player_vectors_pass": true,
-    "ln1_projectiles_pass": true,
-    "ln1_water_vectors_pass": true,
+    "ln1_enemy_vectors_pass": true,
+    "ln1_combat_vectors_pass": true,
     "ln1_world_smoke_pass": true,
-    "ln2_combat_vectors_pass": true,
-    "ln2_effects_pass": true,
+    "ln1_feedback_pass": true,
+    "ln1_water_vectors_pass": true,
+    "scene_navigation_pass": true,
+    "ln1_levels_pass": true,
+    "ln1_projectiles_pass": true,
+    "ln2_player_vectors_pass": true,
     "ln2_enemy_vectors_pass": true,
     "ln2_entrances_pass": true,
     "ln2_helicopter_pass": true,
-    "ln2_player_vectors_pass": true,
     "ln2_vehicles_pass": true,
+    "ln2_effects_pass": true,
+    "ln2_combat_vectors_pass": true,
     "ln2_world_pass": true,
-    "mask_gpu_pass": true,
-    "native_checks_pass": true,
-    "original_gameplay_parity": "not_tested",
-    "runtime_pass": true,
-    "scene_navigation_pass": true,
-    "sprite_decoder_pass": true
+    "ln3_movement_pass": true,
+    "ln3_actions_pass": true,
+    "ln3_input_pass": true,
+    "ln3_animation_pass": true,
+    "ln3_masks_pass": true
   },
   "structural_checks": {
     "tests_run": 8,
@@ -675,6 +702,108 @@
     ],
     "offline_only": true,
     "source": "Seven original-game loader captures from the supplied disks"
+  },
+  "ln3_content_recovery": {
+    "full_gameplay_parity": false,
+    "levels": [
+      {
+        "animations": 142,
+        "boundary_records": 174,
+        "exits": 43,
+        "level": 1,
+        "native_gameplay_connected": false,
+        "rooms": 13,
+        "scenery_payload_matches_supplied_game": true,
+        "source_sha256": "d36204ddb57a6295225a507280e1bd185e526d50adc75202af163abb2e12210f",
+        "title": "Earth"
+      },
+      {
+        "animations": 142,
+        "boundary_records": 150,
+        "exits": 36,
+        "level": 2,
+        "native_gameplay_connected": false,
+        "rooms": 13,
+        "scenery_payload_matches_supplied_game": true,
+        "source_sha256": "702e39d01837cf33d5fdba363f03efcc61fa2788b59bc6bbf155ed4d9bb70cd4",
+        "title": "Wind"
+      },
+      {
+        "animations": 141,
+        "boundary_records": 183,
+        "exits": 47,
+        "level": 3,
+        "native_gameplay_connected": false,
+        "rooms": 13,
+        "scenery_payload_matches_supplied_game": true,
+        "source_sha256": "b6f47231e2e9f4d23c5714b29419d7ffe1c319ced84616e5acc9678b359d3afe",
+        "title": "Water"
+      },
+      {
+        "animations": 140,
+        "boundary_records": 199,
+        "exits": 41,
+        "level": 4,
+        "native_gameplay_connected": false,
+        "rooms": 14,
+        "scenery_payload_matches_supplied_game": true,
+        "source_sha256": "d3b46223eee28234cc011f88781ba804c084f1ada6bdb9d9982288c22c693206",
+        "title": "Fire"
+      },
+      {
+        "animations": 138,
+        "boundary_records": 93,
+        "exits": 34,
+        "level": 5,
+        "native_gameplay_connected": false,
+        "rooms": 13,
+        "scenery_payload_matches_supplied_game": true,
+        "source_sha256": "f629fdbba3fa0e1d4e1dbb005d01fcc220f897ef1bdb1245015f9b10b0a298f8",
+        "title": "Void"
+      }
+    ],
+    "scope": "Recover LN3's own room, boundary, actor and animation records offline.\n\nOnly decoded records and original PNG pixels are produced. This does not\nconnect or certify native LN3 gameplay; the handlers still require translation.\n"
+  },
+  "ln3_mask_checks": {
+    "full_gameplay_parity": false,
+    "levels": [
+      {
+        "level": 1,
+        "mask_pixels_compared": 194376,
+        "rooms": 13,
+        "source_sha256": "d36204ddb57a6295225a507280e1bd185e526d50adc75202af163abb2e12210f",
+        "static_depth_disagreements": 228
+      },
+      {
+        "level": 2,
+        "mask_pixels_compared": 193981,
+        "rooms": 13,
+        "source_sha256": "702e39d01837cf33d5fdba363f03efcc61fa2788b59bc6bbf155ed4d9bb70cd4",
+        "static_depth_disagreements": 138
+      },
+      {
+        "level": 3,
+        "mask_pixels_compared": 195816,
+        "rooms": 13,
+        "source_sha256": "b6f47231e2e9f4d23c5714b29419d7ffe1c319ced84616e5acc9678b359d3afe",
+        "static_depth_disagreements": 206
+      },
+      {
+        "level": 4,
+        "mask_pixels_compared": 209838,
+        "rooms": 14,
+        "source_sha256": "d3b46223eee28234cc011f88781ba804c084f1ada6bdb9d9982288c22c693206",
+        "static_depth_disagreements": 226
+      },
+      {
+        "level": 5,
+        "mask_pixels_compared": 197067,
+        "rooms": 13,
+        "source_sha256": "f629fdbba3fa0e1d4e1dbb005d01fcc220f897ef1bdb1245015f9b10b0a298f8",
+        "static_depth_disagreements": 40
+      }
+    ],
+    "scope": "Recover LN3 part PNGs and scene occlusion from the supplied game routines.\n\nThe offline mask comparison uses solid original sprite bytes so every occluded\npixel can be checked independently of a particular animation pose.\n"
   },
   "scenery_colour_check": {
     "applied_scenes": [

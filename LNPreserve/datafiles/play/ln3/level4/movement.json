@@ -1,0 +1,96 @@
+{
+  "clear_masks": [
+    254,
+    253,
+    251,
+    247,
+    239,
+    223,
+    191,
+    127
+  ],
+  "hazard_actor_exempt": true,
+  "level": 4,
+  "motion": [
+    {
+      "direction": 0,
+      "dx": 0,
+      "dy": 0
+    },
+    {
+      "direction": 0,
+      "dx": 4,
+      "dy": 1
+    },
+    {
+      "direction": 0,
+      "dx": 4,
+      "dy": 4
+    },
+    {
+      "direction": 0,
+      "dx": 4,
+      "dy": 0
+    },
+    {
+      "direction": 0,
+      "dx": 8,
+      "dy": 2
+    },
+    {
+      "direction": 2,
+      "dx": 0,
+      "dy": 8
+    },
+    {
+      "direction": 1,
+      "dx": 0,
+      "dy": 4
+    },
+    {
+      "direction": 2,
+      "dx": 0,
+      "dy": 4
+    },
+    {
+      "direction": 0,
+      "dx": 4,
+      "dy": 1
+    },
+    {
+      "direction": 10,
+      "dx": 12,
+      "dy": 3
+    },
+    {
+      "direction": 6,
+      "dx": 12,
+      "dy": 3
+    },
+    {
+      "direction": 9,
+      "dx": 12,
+      "dy": 3
+    },
+    {
+      "direction": 5,
+      "dx": 12,
+      "dy": 3
+    },
+    {
+      "direction": 253,
+      "dx": 15,
+      "dy": 14
+    },
+    {
+      "direction": 254,
+      "dx": 15,
+      "dy": 14
+    },
+    {
+      "direction": 253,
+      "dx": 15,
+      "dy": 13
+    }
+  ]
+}

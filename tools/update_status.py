@@ -35,9 +35,8 @@ def main():
         current_gameplay='Six connected LN1 and seven connected LN2 native level prototypes; no verified complete game',
         pending=['Complete and verify LN1 puzzle sequences, special enemies, projectile combat, palette effects, death presentation and ending',
             'Complete LN2 boundary hazards, projectile combat, remaining object handlers, final boss/objectives and ending',
-            'Translate and connect all LN3 native gameplay and objective handlers',
-            'LN3 levels 2-5 source-disk verification; LN3 level 1 payload and opening background are verified',
-            'Finish LN3 character/animation recovery; validate LN1/LN2 composition, palette changes and missing special effects',
+            'Connect verified LN3 movement/input/actions/animation/masking to native rooms; translate collision, enemies, combat, objects and objectives',
+            'Finish LN3 part PNG import and GPU composition; validate LN1/LN2 composition, palette changes and missing special effects',
             'LN2 original dashboard, item flashing, pickup continuation and complete death presentation',
             'Validate recovered LN1 composition, room masks, dynamic dashboard and palette semantics against original display captures',
             'Whole-game cycle-stamped reference traces and native comparisons',
@@ -62,7 +61,14 @@ def main():
         dict(name='LN2 automatic entrance motion',verification='11136 original states and requested poses across seven banks'),
         dict(name='LN2 moving-world handlers',verification='3520 original state comparisons; rendering requests intercepted'),
         dict(name='LN2 Mansion helicopter',verification='256 original attachment/drop states and poses; world event dispatch excluded')])
-    for name in ('runtime_checks','structural_checks','ln1_actor_decoder_checks','asset_cleanup','asset_rebuild_check','ln1_level_content','ln1_level_asset_sharing','ln2_content_recovery'):
+    status['native_original_routines'].extend([
+        dict(name='LN3 sprite-part movement',verification='6000 original part-movement states across five banks; scene collision and system timing excluded'),
+        dict(name='LN3 player/enemy action setup',verification='5490 original action states, including mutable movement directions'),
+        dict(name='LN3 input selection',verification='3510 original input states, including weapon selection and climbing exits; world interactions and timing excluded'),
+        dict(name='LN3 animation and weapon placement',verification='10925 original animation updates and body/weapon placements; bitmap compositor intercepted'),
+        dict(name='LN3 sprite visibility masks',verification='4224 original 24x21 masks across 66 scenes, including retained fragment data; GPU application and timing excluded')])
+    status['counts'].update(ln3_recovered_level_banks=5,ln3_recovered_scene_records=66,ln3_native_playable_levels=0)
+    for name in ('runtime_checks','structural_checks','ln1_actor_decoder_checks','asset_cleanup','asset_rebuild_check','ln1_level_content','ln1_level_asset_sharing','ln2_content_recovery','ln3_content_recovery','ln3_mask_checks'):
         path=ROOT/'evidence'/f'{name}.json'
         if path.exists():
             status[name]=read(path)

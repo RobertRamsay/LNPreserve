@@ -30,7 +30,12 @@ if __name__=='__main__':
                       ln2_vehicles_pass='LN2_VEHICLES_PASS' in log,
                       ln2_effects_pass='LN2_EFFECTS_PASS' in log,
                       ln2_combat_vectors_pass='LN2_COMBAT_PASS' in log,
-                      ln2_world_pass='LN2_WORLD_PASS' in log)
+                      ln2_world_pass='LN2_WORLD_PASS' in log,
+                      ln3_movement_pass='LN3_MOVEMENT_PASS' in log,
+                      ln3_actions_pass='LN3_ACTION_PASS' in log,
+                      ln3_input_pass='LN3_INPUT_PASS' in log,
+                      ln3_animation_pass='LN3_ANIMATION_PASS' in log,
+                      ln3_masks_pass='LN3_MASK_PASS' in log)
         match=re.search(r'LN_CAPTURE_DIRECTORY:([^\r\n]+)',log)
         if match:
             capture_dir=Path(match.group(1).strip())
@@ -46,4 +51,4 @@ if __name__=='__main__':
         (out/'runner-console.log').write_text(log)
     (ROOT/'evidence/runtime_checks.json').write_text(json.dumps(report,indent=2)+'\n')
     print(json.dumps(report,indent=2))
-    sys.exit(0 if report.get('exit_code')==0 and all(report.get(key) for key in ('native_checks_pass','runtime_pass','mask_gpu_pass','sprite_decoder_pass','ln1_control_vectors_pass','ln1_player_vectors_pass','ln1_enemy_vectors_pass','ln1_combat_vectors_pass','ln1_world_smoke_pass','ln1_feedback_pass','ln1_water_vectors_pass','scene_navigation_pass','ln1_levels_pass','ln1_projectiles_pass','ln2_player_vectors_pass','ln2_enemy_vectors_pass','ln2_entrances_pass','ln2_helicopter_pass','ln2_vehicles_pass','ln2_effects_pass','ln2_combat_vectors_pass','ln2_world_pass')) else 1)
+    sys.exit(0 if report.get('exit_code')==0 and all(report.get(key) for key in ('native_checks_pass','runtime_pass','mask_gpu_pass','sprite_decoder_pass','ln1_control_vectors_pass','ln1_player_vectors_pass','ln1_enemy_vectors_pass','ln1_combat_vectors_pass','ln1_world_smoke_pass','ln1_feedback_pass','ln1_water_vectors_pass','scene_navigation_pass','ln1_levels_pass','ln1_projectiles_pass','ln2_player_vectors_pass','ln2_enemy_vectors_pass','ln2_entrances_pass','ln2_helicopter_pass','ln2_vehicles_pass','ln2_effects_pass','ln2_combat_vectors_pass','ln2_world_pass','ln3_movement_pass','ln3_actions_pass','ln3_input_pass','ln3_animation_pass','ln3_masks_pass')) else 1)

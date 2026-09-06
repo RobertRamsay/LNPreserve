@@ -47,6 +47,41 @@
   ],
   "ForcedPrefabProjectReferences":[],
   "IncludedFiles":[
+    {"$GMIncludedFile":"","%Name":"masks.json","CopyToMask":-1,"filePath":"datafiles/play/ln3/level1","name":"masks.json","resourceType":"GMIncludedFile","resourceVersion":"2.0"},
+    {"$GMIncludedFile":"","%Name":"masks.json","CopyToMask":-1,"filePath":"datafiles/play/ln3/level2","name":"masks.json","resourceType":"GMIncludedFile","resourceVersion":"2.0"},
+    {"$GMIncludedFile":"","%Name":"masks.json","CopyToMask":-1,"filePath":"datafiles/play/ln3/level3","name":"masks.json","resourceType":"GMIncludedFile","resourceVersion":"2.0"},
+    {"$GMIncludedFile":"","%Name":"masks.json","CopyToMask":-1,"filePath":"datafiles/play/ln3/level4","name":"masks.json","resourceType":"GMIncludedFile","resourceVersion":"2.0"},
+    {"$GMIncludedFile":"","%Name":"masks.json","CopyToMask":-1,"filePath":"datafiles/play/ln3/level5","name":"masks.json","resourceType":"GMIncludedFile","resourceVersion":"2.0"},
+    {"$GMIncludedFile":"","%Name":"ln3_mask_vectors.json","CopyToMask":-1,"filePath":"datafiles/verification","name":"ln3_mask_vectors.json","resourceType":"GMIncludedFile","resourceVersion":"2.0"},
+
+    {"$GMIncludedFile":"","%Name":"animation.json","CopyToMask":-1,"filePath":"datafiles/play/ln3/level1","name":"animation.json","resourceType":"GMIncludedFile","resourceVersion":"2.0"},
+    {"$GMIncludedFile":"","%Name":"animation.json","CopyToMask":-1,"filePath":"datafiles/play/ln3/level2","name":"animation.json","resourceType":"GMIncludedFile","resourceVersion":"2.0"},
+    {"$GMIncludedFile":"","%Name":"animation.json","CopyToMask":-1,"filePath":"datafiles/play/ln3/level3","name":"animation.json","resourceType":"GMIncludedFile","resourceVersion":"2.0"},
+    {"$GMIncludedFile":"","%Name":"animation.json","CopyToMask":-1,"filePath":"datafiles/play/ln3/level4","name":"animation.json","resourceType":"GMIncludedFile","resourceVersion":"2.0"},
+    {"$GMIncludedFile":"","%Name":"animation.json","CopyToMask":-1,"filePath":"datafiles/play/ln3/level5","name":"animation.json","resourceType":"GMIncludedFile","resourceVersion":"2.0"},
+    {"$GMIncludedFile":"","%Name":"ln3_animation_vectors.json","CopyToMask":-1,"filePath":"datafiles/verification","name":"ln3_animation_vectors.json","resourceType":"GMIncludedFile","resourceVersion":"2.0"},
+
+    {"$GMIncludedFile":"","%Name":"input.json","CopyToMask":-1,"filePath":"datafiles/play/ln3/level1","name":"input.json","resourceType":"GMIncludedFile","resourceVersion":"2.0"},
+    {"$GMIncludedFile":"","%Name":"input.json","CopyToMask":-1,"filePath":"datafiles/play/ln3/level2","name":"input.json","resourceType":"GMIncludedFile","resourceVersion":"2.0"},
+    {"$GMIncludedFile":"","%Name":"input.json","CopyToMask":-1,"filePath":"datafiles/play/ln3/level3","name":"input.json","resourceType":"GMIncludedFile","resourceVersion":"2.0"},
+    {"$GMIncludedFile":"","%Name":"input.json","CopyToMask":-1,"filePath":"datafiles/play/ln3/level4","name":"input.json","resourceType":"GMIncludedFile","resourceVersion":"2.0"},
+    {"$GMIncludedFile":"","%Name":"input.json","CopyToMask":-1,"filePath":"datafiles/play/ln3/level5","name":"input.json","resourceType":"GMIncludedFile","resourceVersion":"2.0"},
+    {"$GMIncludedFile":"","%Name":"ln3_input_vectors.json","CopyToMask":-1,"filePath":"datafiles/verification","name":"ln3_input_vectors.json","resourceType":"GMIncludedFile","resourceVersion":"2.0"},
+
+    {"$GMIncludedFile":"","%Name":"actions.json","CopyToMask":-1,"filePath":"datafiles/play/ln3/level1","name":"actions.json","resourceType":"GMIncludedFile","resourceVersion":"2.0"},
+    {"$GMIncludedFile":"","%Name":"actions.json","CopyToMask":-1,"filePath":"datafiles/play/ln3/level2","name":"actions.json","resourceType":"GMIncludedFile","resourceVersion":"2.0"},
+    {"$GMIncludedFile":"","%Name":"actions.json","CopyToMask":-1,"filePath":"datafiles/play/ln3/level3","name":"actions.json","resourceType":"GMIncludedFile","resourceVersion":"2.0"},
+    {"$GMIncludedFile":"","%Name":"actions.json","CopyToMask":-1,"filePath":"datafiles/play/ln3/level4","name":"actions.json","resourceType":"GMIncludedFile","resourceVersion":"2.0"},
+    {"$GMIncludedFile":"","%Name":"actions.json","CopyToMask":-1,"filePath":"datafiles/play/ln3/level5","name":"actions.json","resourceType":"GMIncludedFile","resourceVersion":"2.0"},
+    {"$GMIncludedFile":"","%Name":"ln3_action_vectors.json","CopyToMask":-1,"filePath":"datafiles/verification","name":"ln3_action_vectors.json","resourceType":"GMIncludedFile","resourceVersion":"2.0"},
+
+    {"$GMIncludedFile":"","%Name":"movement.json","CopyToMask":-1,"filePath":"datafiles/play/ln3/level1","name":"movement.json","resourceType":"GMIncludedFile","resourceVersion":"2.0"},
+    {"$GMIncludedFile":"","%Name":"movement.json","CopyToMask":-1,"filePath":"datafiles/play/ln3/level2","name":"movement.json","resourceType":"GMIncludedFile","resourceVersion":"2.0"},
+    {"$GMIncludedFile":"","%Name":"movement.json","CopyToMask":-1,"filePath":"datafiles/play/ln3/level3","name":"movement.json","resourceType":"GMIncludedFile","resourceVersion":"2.0"},
+    {"$GMIncludedFile":"","%Name":"movement.json","CopyToMask":-1,"filePath":"datafiles/play/ln3/level4","name":"movement.json","resourceType":"GMIncludedFile","resourceVersion":"2.0"},
+    {"$GMIncludedFile":"","%Name":"movement.json","CopyToMask":-1,"filePath":"datafiles/play/ln3/level5","name":"movement.json","resourceType":"GMIncludedFile","resourceVersion":"2.0"},
+    {"$GMIncludedFile":"","%Name":"ln3_movement_vectors.json","CopyToMask":-1,"filePath":"datafiles/verification","name":"ln3_movement_vectors.json","resourceType":"GMIncludedFile","resourceVersion":"2.0"},
+
     {"$GMIncludedFile":"","%Name":"ln2_sequence_vectors.json","CopyToMask":-1,"filePath":"datafiles/verification","name":"ln2_sequence_vectors.json","resourceType":"GMIncludedFile","resourceVersion":"2.0"},
 
     {"$GMIncludedFile":"","%Name":"ln2_intro_vectors.json","CopyToMask":-1,"filePath":"datafiles/verification","name":"ln2_intro_vectors.json","resourceType":"GMIncludedFile","resourceVersion":"2.0"},
@@ -2178,6 +2213,21 @@
   },
   "name":"LNPreserve",
   "resources":[
+    {"id":{"name":"ln3_masks","path":"scripts/ln3_masks/ln3_masks.yy"}},
+    {"id":{"name":"ln3_mask_checks","path":"scripts/ln3_mask_checks/ln3_mask_checks.yy"}},
+
+    {"id":{"name":"ln3_animation","path":"scripts/ln3_animation/ln3_animation.yy"}},
+    {"id":{"name":"ln3_animation_checks","path":"scripts/ln3_animation_checks/ln3_animation_checks.yy"}},
+
+    {"id":{"name":"ln3_input","path":"scripts/ln3_input/ln3_input.yy"}},
+    {"id":{"name":"ln3_input_checks","path":"scripts/ln3_input_checks/ln3_input_checks.yy"}},
+
+    {"id":{"name":"ln3_actions","path":"scripts/ln3_actions/ln3_actions.yy"}},
+    {"id":{"name":"ln3_action_checks","path":"scripts/ln3_action_checks/ln3_action_checks.yy"}},
+
+    {"id":{"name":"ln3_movement","path":"scripts/ln3_movement/ln3_movement.yy"}},
+    {"id":{"name":"ln3_movement_checks","path":"scripts/ln3_movement_checks/ln3_movement_checks.yy"}},
+
     {"id":{"name":"ln2_entry_checks","path":"scripts/ln2_entry_checks/ln2_entry_checks.yy"}},
 
     {"id":{"name":"ln2_levels","path":"scripts/ln2_levels/ln2_levels.yy"}},

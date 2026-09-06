@@ -28,7 +28,9 @@ This is **not a verified complete first game**. The level-specific puzzle, speci
 
 LN2 now supports native testing in Central Park, Street, Sewers, Basement, Office, Mansion and Final Battle: 92 selectable scenes, original entrances and collision boundaries, assembled player/enemy animation, melee and per-scene wounds. Its source item records, partial interaction handlers, inventory scene variants, automatic entrance motion, moving scenery actors and Mansion helicopter attachment/drop are connected. The original room/actor packages were recovered from all seven supplied-game loader captures; identical images and normal actor banks share resources.
 
-LN2 is also **incomplete**: boundary hazard sequences, projectile behavior, final objectives/boss, several object interactions, item flashes, original dashboard, palette changes and complete death/ending presentation still require work. Its HUD currently uses temporary text, and its isolated original-routine comparisons do not establish complete combat or playthrough parity. LN3 remains scenery-only.
+LN2 is also **incomplete**: boundary hazard sequences, projectile behavior, final objectives/boss, several object interactions, item flashes, original dashboard, palette changes and complete death/ending presentation still require work. Its HUD currently uses temporary text, and its isolated original-routine comparisons do not establish complete combat or playthrough parity.
+
+LN3 remains scenery-only in the playable build. All five original level programs and 66 scene records are recovered offline. Native GML for movement, player/enemy action setup, input selection, animation/body/weapon placement and original fragment masking now passes original-code comparisons. Room transitions, collision, encounters, objects and objectives are not yet connected; these component checks do not make LN3 playable.
 
 ## Controls
 
@@ -67,12 +69,14 @@ Actual compiled GML passes comparisons against offline execution of original mac
 - LN2: 34,664 player updates, 50,432 enemy updates and 21,000 melee range comparisons across all seven original banks.
 - LN2: 784 entrance state comparisons, 11,136 automatic entrance-motion states/poses, 3,520 moving-world state comparisons and 256 Mansion helicopter attachment/drop states/poses. Display calls are intercepted; the helicopter check excludes world-event dispatch.
 - LN2: 191 original ordinary exits and 9,200 integration ticks across 92 selectable native scenes, plus per-scene health persistence.
+- LN3: 6,000 movement states, 5,490 action states, 3,510 input states and 10,925 animation updates across all five original banks. Animation comparisons intercept the bitmap compositor.
+- LN3: 4,224 original sprite visibility masks across all 66 recovered scenes, including edge-fragment carryover. GPU application remains separate work.
 
 A further 660-update integration check crosses the first original exit and runs an enemy encounter. Feedback regressions check pickup expiry across clock wrap, scene-entry flash state, enemy damage/death persistence, armed/unarmed prayer, sinking and stale death frames after respawn. GPU tests check scenery masking, transparent holes and the waterline cutoff. These checks **do not certify full gameplay, complete combat dispatch, sprite composition, hardware random timing or cycle accuracy**. See [evidence/STATUS.json](evidence/STATUS.json) and [docs/ACCURACY.md](docs/ACCURACY.md).
 
 ## Assets and rebuilding
 
-The earlier scenery resources and workbench remain available. All six LN1 scenery datasets match supplied disk payloads or captured original memory. LN2's new gameplay scenery is rendered offline by the supplied game's recovered drawing code; its older workbench previews retain their earlier provenance. Most LN3 reference scenery still needs matching to the supplied disk versions. Edit sprites and native GML directly in GameMaker.
+The earlier scenery resources and workbench remain available. All six LN1 scenery datasets match supplied disk payloads or captured original memory. LN2's new gameplay scenery is rendered offline by the supplied game's recovered drawing code; its older workbench previews retain their earlier provenance. All five LN3 scenery payloads now match the supplied-game loader captures; this does not change the older preview images beyond the previously approved opening-scene fix. Edit sprites and native GML directly in GameMaker.
 
 LN3 level 1's opening scene now matches all 34,560 background pixels of the supplied C64 game, using the project's chosen palette. Its 1,392 corrected pixels include the grey rock faces and overlapping scenery edges. Only this scene was updated; the wider colour corrections remain unapplied, as requested. The complete level-1 scenery payload also matches the supplied game's loaded memory. See [the colour comparison](evidence/scenery_colour_comparison.png) and [audit scope](evidence/scenery_colour_audit.json); the comparison includes proposed changes to other scenes that are not in the project.
 

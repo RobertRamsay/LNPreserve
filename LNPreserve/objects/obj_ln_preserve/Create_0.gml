@@ -20,6 +20,31 @@ selftest = false;
 host_frames = 0;
 for (var _i = 1; _i <= parameter_count(); _i++) {
     if (parameter_string(_i) == "--selftest") selftest = true;
+    if (parameter_string(_i) == "--ln3-movement-only") {
+        try { ln3_movement_checks(); }
+        catch (_failure) { show_debug_message("LN3_MOVEMENT_FAILURE: "+string(_failure)); }
+        game_end();exit;
+    }
+    if (parameter_string(_i) == "--ln3-actions-only") {
+        try { ln3_action_checks(); }
+        catch (_failure) { show_debug_message("LN3_ACTION_FAILURE: "+string(_failure)); }
+        game_end();exit;
+    }
+    if (parameter_string(_i) == "--ln3-input-only") {
+        try { ln3_input_checks(); }
+        catch (_failure) { show_debug_message("LN3_INPUT_FAILURE: "+string(_failure)); }
+        game_end();exit;
+    }
+    if (parameter_string(_i) == "--ln3-animation-only") {
+        try { ln3_animation_checks(); }
+        catch (_failure) { show_debug_message("LN3_ANIMATION_FAILURE: "+string(_failure)); }
+        game_end();exit;
+    }
+    if (parameter_string(_i) == "--ln3-masks-only") {
+        try { ln3_mask_checks(); }
+        catch (_failure) { show_debug_message("LN3_MASK_FAILURE: "+string(_failure)); }
+        game_end();exit;
+    }
     if (parameter_string(_i) == "--ln2-sequences-only") {
         try { ln2_sequence_checks(); }
         catch (_failure) { show_debug_message("LN2_SEQUENCE_FAILURE: "+string(_failure)); }

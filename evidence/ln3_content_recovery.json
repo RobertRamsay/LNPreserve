@@ -1,0 +1,61 @@
+{
+  "full_gameplay_parity": false,
+  "levels": [
+    {
+      "animations": 142,
+      "boundary_records": 174,
+      "exits": 43,
+      "level": 1,
+      "native_gameplay_connected": false,
+      "rooms": 13,
+      "scenery_payload_matches_supplied_game": true,
+      "source_sha256": "d36204ddb57a6295225a507280e1bd185e526d50adc75202af163abb2e12210f",
+      "title": "Earth"
+    },
+    {
+      "animations": 142,
+      "boundary_records": 150,
+      "exits": 36,
+      "level": 2,
+      "native_gameplay_connected": false,
+      "rooms": 13,
+      "scenery_payload_matches_supplied_game": true,
+      "source_sha256": "702e39d01837cf33d5fdba363f03efcc61fa2788b59bc6bbf155ed4d9bb70cd4",
+      "title": "Wind"
+    },
+    {
+      "animations": 141,
+      "boundary_records": 183,
+      "exits": 47,
+      "level": 3,
+      "native_gameplay_connected": false,
+      "rooms": 13,
+      "scenery_payload_matches_supplied_game": true,
+      "source_sha256": "b6f47231e2e9f4d23c5714b29419d7ffe1c319ced84616e5acc9678b359d3afe",
+      "title": "Water"
+    },
+    {
+      "animations": 140,
+      "boundary_records": 199,
+      "exits": 41,
+      "level": 4,
+      "native_gameplay_connected": false,
+      "rooms": 14,
+      "scenery_payload_matches_supplied_game": true,
+      "source_sha256": "d3b46223eee28234cc011f88781ba804c084f1ada6bdb9d9982288c22c693206",
+      "title": "Fire"
+    },
+    {
+      "animations": 138,
+      "boundary_records": 93,
+      "exits": 34,
+      "level": 5,
+      "native_gameplay_connected": false,
+      "rooms": 13,
+      "scenery_payload_matches_supplied_game": true,
+      "source_sha256": "f629fdbba3fa0e1d4e1dbb005d01fcc220f897ef1bdb1245015f9b10b0a298f8",
+      "title": "Void"
+    }
+  ],
+  "scope": "Recover LN3's own room, boundary, actor and animation records offline.\n\nOnly decoded records and original PNG pixels are produced. This does not\nconnect or certify native LN3 gameplay; the handlers still require translation.\n"
+}

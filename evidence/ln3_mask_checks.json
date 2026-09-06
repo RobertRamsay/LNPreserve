@@ -1,0 +1,41 @@
+{
+  "full_gameplay_parity": false,
+  "levels": [
+    {
+      "level": 1,
+      "mask_pixels_compared": 194376,
+      "rooms": 13,
+      "source_sha256": "d36204ddb57a6295225a507280e1bd185e526d50adc75202af163abb2e12210f",
+      "static_depth_disagreements": 228
+    },
+    {
+      "level": 2,
+      "mask_pixels_compared": 193981,
+      "rooms": 13,
+      "source_sha256": "702e39d01837cf33d5fdba363f03efcc61fa2788b59bc6bbf155ed4d9bb70cd4",
+      "static_depth_disagreements": 138
+    },
+    {
+      "level": 3,
+      "mask_pixels_compared": 195816,
+      "rooms": 13,
+      "source_sha256": "b6f47231e2e9f4d23c5714b29419d7ffe1c319ced84616e5acc9678b359d3afe",
+      "static_depth_disagreements": 206
+    },
+    {
+      "level": 4,
+      "mask_pixels_compared": 209838,
+      "rooms": 14,
+      "source_sha256": "d3b46223eee28234cc011f88781ba804c084f1ada6bdb9d9982288c22c693206",
+      "static_depth_disagreements": 226
+    },
+    {
+      "level": 5,
+      "mask_pixels_compared": 197067,
+      "rooms": 13,
+      "source_sha256": "f629fdbba3fa0e1d4e1dbb005d01fcc220f897ef1bdb1245015f9b10b0a298f8",
+      "static_depth_disagreements": 40
+    }
+  ],
+  "scope": "Recover LN3 part PNGs and scene occlusion from the supplied game routines.\n\nThe offline mask comparison uses solid original sprite bytes so every occluded\npixel can be checked independently of a particular animation pose.\n"
+}
