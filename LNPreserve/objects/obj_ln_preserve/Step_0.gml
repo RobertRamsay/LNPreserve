@@ -1,4 +1,11 @@
 try {
+if (window_presets_test) {
+    crt_live_frame++;
+    if (crt_live_frame==0) ln_window_preset(1);
+    if (crt_live_frame==2) ln_window_preset(2);
+    if (crt_live_frame==4) ln_window_preset(0);
+    exit;
+}
 if (crt_live_test) {
     crt_live_frame++;
     if (crt_live_frame==1 || crt_live_frame==2) ln_crt_toggle();

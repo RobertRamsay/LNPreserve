@@ -184,7 +184,7 @@ function ln_saves_draw(_ui) {
         if (_filled) {draw_set_colour(make_colour_rgb(150,190,170));draw_text(1138,_y+22,"LN"+string(_ui.slots[_i].game)+"  Click to load");}
     }
     draw_set_colour(c_white);draw_text(1136,584,"Newest at top");
-    if (_ui.message_ticks>0) draw_text_ext(1136,632,_ui.message,18,132);
+    if (_ui.message_ticks>0) draw_text_ext(24,84,_ui.message,18,120);
 }
 
 /// Serialization checks run with the existing native selftest, without touching saves.

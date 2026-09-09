@@ -262,7 +262,7 @@ function ln1_reverse_roll_prepare(_d) {
                 frame:_pose.frame,duration:_pose.duration,flags:_last?56:(_i==0?26:28),
                 dx:0,dy:0,state:-1,combat_data:-1,next:_last?0:_base+_i+1});
         }
-        // Keep the forward landing pose for its full duration without travel.
+        // Brief stationary forward landing: two ticks, then release control.
         // Use a separate track so original-data regression vectors stay intact.
         var _forward=65664+_side*32;
         array_push(_d.forward_roll_entries,_forward);
@@ -270,7 +270,7 @@ function ln1_reverse_roll_prepare(_d) {
             var _release=_i==_count,_landing=_i>=_count-1;
             var _pose=_records[min(_i,_count-1)];
             variable_struct_set(_d.actions,string(_forward+_i),{
-                frame:_pose.frame,duration:_pose.duration,flags:_landing?56:(_i==0?30:28),
+                frame:_pose.frame,duration:_landing?2:_pose.duration,flags:_landing?56:(_i==0?30:28),
                 dx:0,dy:0,state:-1,combat_data:-1,next:_release?0:_forward+_i+1});
         }
     }
@@ -341,7 +341,8 @@ function ln1_roll_landing_checks() {
             } else if (_p.x!=_x || _p.y!=_y) _travel++;
             if (_p.action<256) break;
         }
-        ln_check(_held>=7 && _travel>0 && _p.action<256,"landing is held stationary while airborne roll still travels");
+        ln_check((_reverse?_held>=7:_held==3) && _travel>0 && _p.action<256,
+            "backward landing retains its hold; forward landing releases after two ticks plus the release frame");
     }
     show_debug_message("LN_ROLL_LANDING_PASS: stationary first backward / last forward pose for every facing");
 }

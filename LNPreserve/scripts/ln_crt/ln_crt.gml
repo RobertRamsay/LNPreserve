@@ -1,9 +1,13 @@
 /// Presentation only: source surfaces and gameplay pixels remain untouched.
-function ln_crt_surface(_surface,_x,_y,_scale,_pixel_scale=1) {
+function ln_crt_surface(_surface,_x,_y,_scale,_pixel_scale=1,_region=undefined) {
     var _enabled=variable_global_exists("ln_crt_enabled") && global.ln_crt_enabled && shader_is_compiled(sh_ln_crt);
     var _filter=gpu_get_texfilter();
     if (_enabled) {
         shader_set(sh_ln_crt);
+        var _bounds=is_array(_region)?_region:[0,0,surface_get_width(_surface),surface_get_height(_surface)];
+        shader_set_uniform_f(shader_get_uniform(sh_ln_crt,"u_region"),
+            _bounds[0]/surface_get_width(_surface),_bounds[1]/surface_get_height(_surface),
+            _bounds[2]/surface_get_width(_surface),_bounds[3]/surface_get_height(_surface));
         shader_set_uniform_f(shader_get_uniform(sh_ln_crt,"u_size"),surface_get_width(_surface),surface_get_height(_surface));
         shader_set_uniform_f(shader_get_uniform(sh_ln_crt,"u_scale"),_scale);
         shader_set_uniform_f(shader_get_uniform(sh_ln_crt,"u_pixel_scale"),_pixel_scale);
@@ -17,9 +21,20 @@ function ln_crt_surface(_surface,_x,_y,_scale,_pixel_scale=1) {
     if (_enabled) {shader_reset();gpu_set_texfilter(_filter);}
 }
 
-/// Apply once after all screen content, including the native HUD, is drawn.
+/// CRT covers only the native picture and built-in HUD, never the debug UI.
+function ln_crt_game_region(_host) {
+    if (_host.workbench || _host.scene_test.menu || _host.scene_test.preview) return undefined;
+    if (_host.play.game_number==1) return [160,84,1120,684];
+    if ((_host.play.game_number==2 && _host.play.victory==2) ||
+        (_host.play.game_number==3 && is_struct(_host.play.ending))) return [0,0,1280,800];
+    return [160,84,1120,660];
+}
+
+/// Apply once after the game and its surrounding controls are drawn.
 function ln_crt_present(_host) {
     if (!global.ln_crt_enabled || !shader_is_compiled(sh_ln_crt) || !surface_exists(application_surface)) return;
+    var _region=ln_crt_game_region(_host);
+    if (!is_array(_region)) return;
     var _w=surface_get_width(application_surface),_h=surface_get_height(application_surface);
     if (surface_exists(_host.crt_surface) && (surface_get_width(_host.crt_surface)!=_w || surface_get_height(_host.crt_surface)!=_h)) {
         surface_free(_host.crt_surface);_host.crt_surface=-1;
@@ -28,9 +43,9 @@ function ln_crt_present(_host) {
     if (!surface_exists(_host.crt_surface)) return;
     // Separate output avoids reading from the surface currently being rendered.
     surface_set_target(_host.crt_surface);
-    ln_crt_surface(application_surface,0,0,1,_host.play.game_number==1?3:4);
+    ln_crt_surface(application_surface,0,0,1,_host.play.game_number==1?3:4,_region);
     surface_reset_target();
-    draw_surface(_host.crt_surface,0,0);
+    draw_surface_part(_host.crt_surface,_region[0],_region[1],_region[2]-_region[0],_region[3]-_region[1],_region[0],_region[1]);
 }
 
 function ln_crt_toggle() {
@@ -73,7 +88,42 @@ function ln_crt_sliders_draw() {
     draw_set_colour(c_white);
 }
 
+function ln_window_fit_factor(_width,_height) {
+    return clamp(floor(min((_width-32)/1280,(_height-96)/800)),1,2);
+}
+
+function ln_window_preset(_factor) {
+    if (_factor==0) _factor=ln_window_fit_factor(display_get_width(),display_get_height());
+    window_set_size(1280*_factor,800*_factor);
+    window_center();
+}
+
+function ln_window_buttons() {
+    draw_set_colour(make_colour_rgb(24,28,34));draw_rectangle(1128,602,1272,648,false);
+    draw_set_colour(make_colour_rgb(150,190,215));
+    draw_text(1136,604,string(window_get_width())+"x"+string(window_get_height()));
+    var _labels=["1x","2x","Fit"];
+    for (var _i=0;_i<3;_i++) {
+        var _x=1132+46*_i,_hover=mouse_x>=_x && mouse_x<_x+42 && mouse_y>=624 && mouse_y<645;
+        var _selected=(_i==0 && window_get_width()==1280 && window_get_height()==800) ||
+            (_i==1 && window_get_width()==2560 && window_get_height()==1600);
+        draw_set_colour(_selected?make_colour_rgb(44,82,110):make_colour_rgb(42,48,57));draw_rectangle(_x,624,_x+42,644,false);
+        draw_set_colour(_hover?c_white:make_colour_rgb(180,215,236));draw_text(_x+8,626,_labels[_i]);
+        if (_hover) {
+            var _tip=_i==0?"1280 x 800":(_i==1?"2560 x 1600":"Largest whole-pixel size that fits");
+            draw_set_colour(c_white);draw_text(1120-string_width(_tip),626,_tip);
+        }
+    }
+    draw_set_colour(c_white);
+}
+
 function ln_crt_step() {
+    if (mouse_check_button_pressed(mb_left) && mouse_y>=624 && mouse_y<645) {
+        for (var _i=0;_i<3;_i++) {
+            var _x=1132+46*_i;
+            if (mouse_x>=_x && mouse_x<_x+42) {ln_window_preset(_i==2?0:_i+1);break;}
+        }
+    }
     if (keyboard_check_pressed(vk_f10) || (mouse_check_button_pressed(mb_left) &&
         mouse_x>=1128 && mouse_x<1272 && mouse_y>=36 && mouse_y<72)) {
         ln_crt_toggle();
@@ -154,9 +204,14 @@ function ln_crt_checks() {
     surface_save(application_surface,"lnpreserve-crt-scene-off.png");
     global.ln_crt_enabled=true;
     ln1_play_draw(_preview,false);ln_crt_button();
+    var _debug_before=surface_getpixel(application_surface,170,40);
+    var _button_before=surface_getpixel(application_surface,1150,50);
     var _hud_before=surface_getpixel(application_surface,900,100);
     var _bottom_before=surface_getpixel(application_surface,200,540);
     ln_crt_present(self);
+    ln_check(surface_getpixel(application_surface,170,40)==_debug_before &&
+        surface_getpixel(application_surface,1150,50)==_button_before,"outer debug UI remains pixel-identical with CRT on");
+    ln_check(ln_window_fit_factor(3840,2160)==2 && ln_window_fit_factor(1920,1080)==1,"window Fit selects integer sizes for 4K and 1080p");
     ln_check(surface_getpixel(application_surface,900,100)!=_hud_before,"CRT affects the built-in side HUD");
     ln_check(surface_getpixel(application_surface,200,540)!=_bottom_before,"CRT affects the built-in bottom HUD");
     surface_save(application_surface,"lnpreserve-crt-scene-on.png");

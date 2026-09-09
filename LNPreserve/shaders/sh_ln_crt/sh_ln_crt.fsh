@@ -1,6 +1,7 @@
 varying vec2 v_vTexcoord;
 varying vec4 v_vColour;
 uniform vec2 u_size;
+uniform vec4 u_region;
 uniform float u_scale;
 uniform float u_pixel_scale;
 uniform float u_time;
@@ -9,15 +10,20 @@ uniform float u_honeycomb;
 uniform float u_scanlines;
 const float PI=3.14159265359;
 void main() {
-    vec2 p=v_vTexcoord*2.0-1.0;
+    if (v_vTexcoord.x<u_region.x || v_vTexcoord.y<u_region.y ||
+        v_vTexcoord.x>=u_region.z || v_vTexcoord.y>=u_region.w) {
+        gl_FragColor=texture2D(gm_BaseTexture,v_vTexcoord)*v_vColour;return;
+    }
+    vec2 p=(v_vTexcoord-u_region.xy)/(u_region.zw-u_region.xy)*2.0-1.0;
     // Fixed geometry: all borders and HUD lines stay straight and stationary.
     vec2 uv=v_vTexcoord;
     vec2 edge=0.5/u_size;
-    vec2 sampleUV=clamp(uv,edge,1.0-edge);
+    vec2 lo=u_region.xy+edge,hi=u_region.zw-edge;
+    vec2 sampleUV=clamp(uv,lo,hi);
     float phase=(0.14+0.025*sin(u_time*0.8))*u_pixel_scale/u_size.x;
-    vec3 col=vec3(texture2D(gm_BaseTexture,clamp(sampleUV+vec2(phase,0.0),edge,1.0-edge)).r,
+    vec3 col=vec3(texture2D(gm_BaseTexture,clamp(sampleUV+vec2(phase,0.0),lo,hi)).r,
                   texture2D(gm_BaseTexture,sampleUV).g,
-                  texture2D(gm_BaseTexture,clamp(sampleUV-vec2(phase,0.0),edge,1.0-edge)).b);
+                  texture2D(gm_BaseTexture,clamp(sampleUV-vec2(phase,0.0),lo,hi)).b);
     // Normalized 7x7 Gaussian kernel, sampled to three standard deviations.
     // Blur radius grows continuously with the slider; zero bypasses the filter.
     if (u_blur>0.0001) {
@@ -28,7 +34,7 @@ void main() {
             for (int x=-3;x<=3;x++) {
                 vec2 offset=vec2(float(x),float(y));
                 float weight=exp(-0.5*dot(offset,offset));
-                blurred+=texture2D(gm_BaseTexture,clamp(sampleUV+offset*sigma,edge,1.0-edge)).rgb*weight;
+                blurred+=texture2D(gm_BaseTexture,clamp(sampleUV+offset*sigma,lo,hi)).rgb*weight;
                 total+=weight;
             }
         }
@@ -36,9 +42,9 @@ void main() {
         col=mix(blurred/total,col,0.08*(1.0-u_blur));
     }
     col*=vec3(0.985,1.0,1.035);
-    col*=1.0-u_scanlines*0.4*(0.5-0.5*cos(2.0*PI*uv.y*u_size.y/u_pixel_scale));
+    col*=1.0-u_scanlines*0.4*(0.5-0.5*cos(2.0*PI*(uv.y-u_region.y)*u_size.y/u_pixel_scale));
     // Staggered RGB phosphor dots on a hexagonal (honeycomb) lattice.
-    vec2 pixel=v_vTexcoord*u_size*u_scale;
+    vec2 pixel=(v_vTexcoord-u_region.xy)*u_size*u_scale;
     float row=floor(pixel.y/2.598);
     float cx=pixel.x/3.0-0.5*mod(row,2.0);
     vec2 dotpos=vec2((fract(cx)-0.5)*3.0,(fract(pixel.y/2.598)-0.5)*2.598);

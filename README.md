@@ -109,7 +109,7 @@ Extraction tools use original RAM only offline. They do not become part of the g
 
 Dungeon guard colours, skeleton frames and spider steering are corrected; see the [dungeon test guide](docs/DUNGEON_TESTING.md). The Inner Sanctum special-actor bank is also refreshed, and all six LN1 levels share the original uniform colours. LN2 thrown weapons now use original projectile art, ammunition/damage rules and per-part masking, with separate body parts during throws. These component checks do not establish complete trilogy or cycle-accurate playthrough parity.
 
-Click **CRT OFF / ON** above the save slots, or press **F10**, to toggle a subtle CRT treatment of the entire screen, including the built-in side and bottom HUD: cool tint, staggered RGB phosphors, scanlines and gentle colour phasing. Geometry stays fixed, with no curvature, edge wobble or cropping. Default is off.
+Click **CRT OFF / ON** above the save slots, or press **F10**, to toggle a subtle CRT treatment of the C64 picture and built-in side and bottom HUD, excluding outer debug controls: cool tint, staggered RGB phosphors, scanlines and gentle colour phasing. Geometry stays fixed, with no curvature, edge wobble or cropping. Default is off.
 
 LN1: pressing # alone near a collectible assists positioning and plays the original pickup crouch before collecting. F11 entry into Wilderness supplies the sack, sword, nunchakus, five shuriken, three smoke bombs, four lives and full health. F11 switching levels restores full health in all three games; ordinary progression already does this.
 
@@ -118,3 +118,5 @@ LN1: press fire while walking backwards to somersault backwards without turning.
 With CRT on, bottom-right sliders adjust Pixel blur, Honeycomb strength and Scanlines (0–100%). Click or drag a track to update the effect immediately. Settings survive toggling CRT off/on for the current session; the panel hides when CRT is off.
 
 LN1 river/log/rock crossings: fire alone assists a jump to the nearest reachable safe platform ahead of the current facing. It skips the current platform and does not cross solid walls. Fire plus a direction retains the manual controls.
+
+Window buttons below the save slots: 1x = 1280x800, 2x = 2560x1600, Fit = largest of these that fits the display. These use whole-number scaling of the finished image to avoid uneven scanline spacing from arbitrary window resizing. 2x fits a 3840x2160 desktop; external OS bitmap scaling can still affect physical-pixel alignment.

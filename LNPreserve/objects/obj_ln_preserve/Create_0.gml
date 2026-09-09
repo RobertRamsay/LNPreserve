@@ -9,6 +9,7 @@ global.ln_test_no_enemy_damage=false;
 ln3_only=false;
 presentation_test=false;
 crt_live_test=false;
+window_presets_test=false;
 crt_live_frame=-1;
 crt_live_baseline=0;
 ln2_final_only=false;
@@ -33,6 +34,7 @@ function_presses = [0,0,0,0];
 selftest = false;
 host_frames = 0;
 for (var _i = 1; _i <= parameter_count(); _i++) {
+    if (parameter_string(_i) == "--window-presets-test") {window_presets_test=true;global.ln_crt_enabled=true;}
     if (parameter_string(_i) == "--crt-live-test") crt_live_test=true;
     if (parameter_string(_i) == "--jump-assist-test") {
         try {ln1_jump_assist_checks();}
