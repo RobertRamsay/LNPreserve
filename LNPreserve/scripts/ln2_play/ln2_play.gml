@@ -210,7 +210,7 @@ function ln2_play_draw(_g) {
     } else {
         ln2_play_actor(_g,_g.enemy,true);ln2_projectile_draw(_g,true);ln2_play_actor(_g,_g.player,false);ln2_projectile_draw(_g,false);
     }
-    surface_reset_target();ln_crt_surface(_g.stage_surface,160,84,4);
+    surface_reset_target();draw_surface_ext(_g.stage_surface,160,84,4,4,0,c_white,1);
     draw_text(160,36,"LAST NINJA 2 — "+string_upper(_g.title));draw_text(1000,36,"Scene "+string(_g.room_id));
     draw_text(160,62,"Score "+ln2_status_digits(_g.status.score));
     draw_text(160,672,"Health "+string(_g.player_health)+"   Lives "+string(_g.lives_left)+"   Enemy "+string(_g.enemy.health));

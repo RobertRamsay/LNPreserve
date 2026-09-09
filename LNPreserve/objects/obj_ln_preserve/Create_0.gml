@@ -1,5 +1,6 @@
 gpu_set_texfilter(false);
 global.ln_crt_enabled=false;
+crt_surface=-1;
 global.ln_test_no_enemy_damage=false;
 ln3_only=false;
 presentation_test=false;

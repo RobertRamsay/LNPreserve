@@ -288,7 +288,7 @@ function ln3_play_draw(_g) {
     ln3_mechanism_draw(_g);
     if (_g.special_sequence<3 || _g.transition_phase<5) for (var _order=0;_order<8;_order++) ln3_play_actor_part(_g,_g.display,_g.animation.order[_order]);
     ln3_transition_draw(_g);
-    surface_reset_target();ln_crt_surface(_g.stage_surface,160,84,4);
+    surface_reset_target();draw_surface_ext(_g.stage_surface,160,84,4,4,0,c_white,1);
     var _s=_g.state;
     draw_text(160,36,"LAST NINJA 3 — "+string_upper(_g.title));draw_text(1000,36,"Scene "+string(_g.room_id));
     draw_text(160,672,"Health "+string(_s.player_health)+"   Lives "+string(_s.lives)+"   Honour "+string(_s.honour)+"   Enemy "+string(_s.enemy_health));
