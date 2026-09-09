@@ -35,8 +35,8 @@ function LN1Play(_level = 1) constructor {
     timer = new LNClock();
     // CIA1 timer interrupt drives game logic separately from the VIC video frame.
     timer.cycles_per_frame = data.timer_period_cycles;
-    sprites = [spr_ln1_player_weapon_0, spr_ln1_player_weapon_1, spr_ln1_player_weapon_2, spr_ln1_player_weapon_3];
-    enemy_sprites = [spr_ln1_enemy_weapon_0, spr_ln1_enemy_weapon_1, spr_ln1_enemy_weapon_2, spr_ln1_enemy_weapon_3];
+    sprites = ["spr_ln1_player_weapon_0", "spr_ln1_player_weapon_1", "spr_ln1_player_weapon_2", "spr_ln1_player_weapon_3"];
+    enemy_sprites = ["spr_ln1_enemy_weapon_0", "spr_ln1_enemy_weapon_1", "spr_ln1_enemy_weapon_2", "spr_ln1_enemy_weapon_3"];
     ln1_play_enter(self, last_entry >> 2);
 }
 
@@ -262,7 +262,8 @@ function ln1_play_actor(_g, _actor, _enemy) {
         _sprite=asset_get_index(_g.world.enemy_colour_bank);
         _frame=_g.world.enemy_colour_frames[_pose];_mirror_offset=0;
     }
-    ln_draw_masked_actor(_sprite, _frame + (_actor.mirror ? _mirror_offset : 0), _actor.x, _actor.y,
+    var _pose=ln_character_pose(_sprite,_frame+(_actor.mirror?_mirror_offset:0),_enemy?"ln1_guards":"ln1_ninja");
+    ln_draw_masked_actor(_pose.sprite, _pose.frame, _actor.x, _actor.y,
         1, 1, _g.mask, 0, 0, 240, 144, max(0.001, (_actor.y - 0.25) / 255),
         _enemy ? 144 : _g.water_cutoff - 29,
         !_enemy && _g.world_state.protection == 2);

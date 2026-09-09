@@ -4504,7 +4504,7 @@
       "flashes": 2,
       "id": 4,
       "room": 7,
-      "sprite": "spr_ln1_pickup_4",
+      "sprite": "spr_ln1_actor_part_168",
       "x": 104,
       "x_max": 112,
       "x_min": 104,
@@ -4552,7 +4552,7 @@
       "y_min": 123
     },
     {
-      "flash_sprite": "spr_ln1_pickup_8_flash",
+      "flash_sprite": "spr_ln1_pickup_15_flash",
       "flashes": 2,
       "id": 8,
       "room": 21,
@@ -4687,7 +4687,7 @@
         {
           "baseline": 255,
           "source_offset": 52,
-          "sprite": "spr_ln1_wastelands_room_02_occluder_0"
+          "sprite": "spr_ln1_wastelands_room_02_depth"
         }
       ],
       "sprite": "spr_ln1_wastelands_room_02"
@@ -4800,7 +4800,7 @@
         ]
       ],
       "boundary_mode": 0,
-      "depth_sprite": "spr_ln1_wastelands_room_04_depth",
+      "depth_sprite": "spr_ln1_wastelands_room_01_depth",
       "enemy_script": 44618,
       "entrance_crossings": [
         0,
@@ -4867,7 +4867,7 @@
         {
           "baseline": 255,
           "source_offset": 48,
-          "sprite": "spr_ln1_wastelands_room_05_occluder_0"
+          "sprite": "spr_ln1_wastelands_room_05_depth"
         }
       ],
       "sprite": "spr_ln1_wastelands_room_05"
@@ -5107,7 +5107,7 @@
         ]
       ],
       "boundary_mode": 0,
-      "depth_sprite": "spr_ln1_wastelands_room_08_depth",
+      "depth_sprite": "spr_ln1_wastelands_room_07_occluder_2",
       "enemy_script": 0,
       "entrance_crossings": [
         0,
@@ -5132,7 +5132,7 @@
         {
           "baseline": 255,
           "source_offset": 64,
-          "sprite": "spr_ln1_wastelands_room_08_occluder_0"
+          "sprite": "spr_ln1_wastelands_room_07_occluder_2"
         }
       ],
       "sprite": "spr_ln1_wastelands_room_08"
@@ -5304,7 +5304,7 @@
         {
           "baseline": 255,
           "source_offset": 88,
-          "sprite": "spr_ln1_wastelands_room_10_occluder_0"
+          "sprite": "spr_ln1_wastelands_room_10_depth"
         }
       ],
       "sprite": "spr_ln1_wastelands_room_10"
@@ -5503,7 +5503,7 @@
         {
           "baseline": 255,
           "source_offset": 100,
-          "sprite": "spr_ln1_wastelands_room_12_occluder_0"
+          "sprite": "spr_ln1_wastelands_room_12_depth"
         }
       ],
       "sprite": "spr_ln1_wastelands_room_12"
@@ -5656,7 +5656,7 @@
         ]
       ],
       "boundary_mode": 0,
-      "depth_sprite": "spr_ln1_wastelands_room_14_depth",
+      "depth_sprite": "spr_ln1_wastelands_room_01_depth",
       "enemy_script": 44666,
       "entrance_crossings": [
         0,
@@ -5828,7 +5828,7 @@
         ]
       ],
       "boundary_mode": 18,
-      "depth_sprite": "spr_ln1_wastelands_room_16_depth",
+      "depth_sprite": "spr_ln1_wastelands_room_01_depth",
       "enemy_script": 0,
       "entrance_crossings": [
         0,
@@ -5898,7 +5898,7 @@
         ]
       ],
       "boundary_mode": 161,
-      "depth_sprite": "spr_ln1_wastelands_room_17_depth",
+      "depth_sprite": "spr_ln1_wastelands_room_06_depth",
       "enemy_script": 44714,
       "entrance_crossings": [
         0,
@@ -5923,65 +5923,65 @@
         {
           "baseline": 255,
           "source_offset": 0,
-          "sprite": "spr_ln1_wastelands_room_17_occluder_0"
+          "sprite": "spr_ln1_wastelands_room_06_occluder_0"
         },
         {
           "baseline": 84,
           "source_offset": 4,
-          "sprite": "spr_ln1_wastelands_room_17_occluder_1"
+          "sprite": "spr_ln1_wastelands_room_06_occluder_1"
         },
         {
           "baseline": 87,
           "source_offset": 8,
-          "sprite": "spr_ln1_wastelands_room_17_occluder_2"
+          "sprite": "spr_ln1_wastelands_room_06_occluder_2"
         },
         {
           "baseline": 87,
           "source_offset": 12,
-          "sprite": "spr_ln1_wastelands_room_17_occluder_3"
+          "sprite": "spr_ln1_wastelands_room_06_occluder_3"
         },
         {
           "baseline": 87,
           "source_offset": 16,
-          "sprite": "spr_ln1_wastelands_room_17_occluder_4"
+          "sprite": "spr_ln1_wastelands_room_06_occluder_4"
         },
         {
           "baseline": 87,
           "source_offset": 20,
-          "sprite": "spr_ln1_wastelands_room_17_occluder_5"
+          "sprite": "spr_ln1_wastelands_room_06_occluder_5"
         },
         {
           "baseline": 87,
           "source_offset": 24,
-          "sprite": "spr_ln1_wastelands_room_17_occluder_6"
+          "sprite": "spr_ln1_wastelands_room_06_occluder_6"
         },
         {
           "baseline": 87,
           "source_offset": 28,
-          "sprite": "spr_ln1_wastelands_room_17_occluder_7"
+          "sprite": "spr_ln1_wastelands_room_06_occluder_7"
         },
         {
           "baseline": 87,
           "source_offset": 32,
-          "sprite": "spr_ln1_wastelands_room_17_occluder_8"
+          "sprite": "spr_ln1_wastelands_room_06_occluder_8"
         },
         {
           "baseline": 87,
           "source_offset": 36,
-          "sprite": "spr_ln1_wastelands_room_17_occluder_9"
+          "sprite": "spr_ln1_wastelands_room_06_occluder_9"
         },
         {
           "baseline": 255,
           "source_offset": 40,
-          "sprite": "spr_ln1_wastelands_room_17_occluder_10"
+          "sprite": "spr_ln1_wastelands_room_06_occluder_10"
         },
         {
           "baseline": 87,
           "source_offset": 44,
-          "sprite": "spr_ln1_wastelands_room_17_occluder_11"
+          "sprite": "spr_ln1_wastelands_room_06_occluder_11"
         }
       ],
-      "sprite": "spr_ln1_wastelands_room_17"
+      "sprite": "spr_ln1_wastelands_room_06"
     },
     {
       "boundaries": [
@@ -6022,7 +6022,7 @@
         ]
       ],
       "boundary_mode": 0,
-      "depth_sprite": "spr_ln1_wastelands_room_18_depth",
+      "depth_sprite": "spr_ln1_wastelands_room_01_depth",
       "enemy_script": 44642,
       "entrance_crossings": [
         0,
@@ -6085,7 +6085,7 @@
         ]
       ],
       "boundary_mode": 0,
-      "depth_sprite": "spr_ln1_wastelands_room_19_depth",
+      "depth_sprite": "spr_ln1_wastelands_room_01_depth",
       "enemy_script": 44650,
       "entrance_crossings": [
         0,
@@ -6285,7 +6285,7 @@
         ]
       ],
       "boundary_mode": 0,
-      "depth_sprite": "spr_ln1_wastelands_room_22_depth",
+      "depth_sprite": "spr_ln1_wastelands_room_01_depth",
       "enemy_script": 0,
       "entrance_crossings": [
         0,
@@ -6327,7 +6327,7 @@
         ]
       ],
       "boundary_mode": 0,
-      "depth_sprite": "spr_ln1_wastelands_room_23_depth",
+      "depth_sprite": "spr_ln1_wastelands_room_01_depth",
       "enemy_script": 44650,
       "entrance_crossings": [
         0,
@@ -6397,7 +6397,7 @@
         ]
       ],
       "boundary_mode": 0,
-      "depth_sprite": "spr_ln1_wastelands_room_24_depth",
+      "depth_sprite": "spr_ln1_wastelands_room_01_depth",
       "enemy_script": 44658,
       "entrance_crossings": [
         0,

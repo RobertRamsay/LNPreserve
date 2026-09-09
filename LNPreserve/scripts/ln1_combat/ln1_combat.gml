@@ -35,6 +35,14 @@ function ln1_combat_hurt(_g, _enemy_hurt) {
         _actor.combat_state = 36 + (_actor.facing >> 1);
     }
     if (!_enemy_hurt && _g.player_health == 0) { _g.enemy.attack_count = 0; return; }
+    // Inner Sanctum $4d20/$4d4d: the Shogun has his own hurt and defeat
+    // records. The defeat record also drives the exit toward the scroll.
+    if (_enemy_hurt && _g.level==6 && _actor.active==136) {
+        _actor.action_mirror=_actor.facing&4;
+        ln1_level_enemy_action(_g,_actor.wounds>=32?$507e:$50c7);
+        if (_actor.wounds>=32) _actor.mode=7;
+        return;
+    }
     var _index = (_actor.facing & 4) | (((_actor.facing >> 1) ^ _other.combat_state) & 2);
     if (_enemy_hurt && _g.enemy.wounds >= 32) {
         _index = 8 + ((_actor.facing & 4) >> 2);

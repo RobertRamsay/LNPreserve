@@ -8,6 +8,28 @@ from build_project import read_json
 ROOT=Path(__file__).resolve().parents[1];PROJECT=ROOT/'LNPreserve'
 
 class ConversionChecks(unittest.TestCase):
+    def test_shared_character_banks_and_type_references(self):
+        path=PROJECT/'datafiles/graphics/characters.json'
+        if not path.exists():self.skipTest('Character consolidation not applied')
+        data=read_json(path)
+        names={r['id']['name'] for r in read_json(PROJECT/'LNPreserve.yyp')['resources']}
+        sizes={}
+        for pose in data['poses']:
+            name=pose['sprite'];self.assertIn(name,names)
+            if name not in sizes:sizes[name]=len(read_json(PROJECT/f'sprites/{name}/{name}.yy')['frames'])
+            self.assertGreaterEqual(pose['frame'],0);self.assertLess(pose['frame'],sizes[name])
+        for name,bank in data['banks'].items():
+            self.assertNotIn(name,names,'Logical banks must not retain duplicate sprite resources')
+            for index in bank['poses']:self.assertGreaterEqual(index,0);self.assertLess(index,len(data['poses']))
+            for kind in bank['types']:self.assertIn(kind,data['types'])
+        for level in range(1,8):
+            world=read_json(PROJECT/f'datafiles/play/ln2/level{level}/world.json')
+            for field in ('player_banks','player_extra_banks','enemy_banks','enemy_extra_banks'):
+                banks=world[field];banks=banks.values() if isinstance(banks,dict) else banks
+                for bank in banks:self.assertIn(bank,data['banks'])
+        for profile in data['types'].values():
+            for override in profile.get('overrides',{}).values():self.assertIn(override['sprite'],names)
+
     def test_ln1_enemy_action_graphs_and_scripted_entries_exist(self):
         paths=[PROJECT/'datafiles/play/ln1/gameplay.json']+[
             PROJECT/f'datafiles/play/ln1/level{level}/gameplay.json' for level in range(2,7)]

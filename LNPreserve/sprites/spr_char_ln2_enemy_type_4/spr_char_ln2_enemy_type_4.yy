@@ -1,0 +1,13458 @@
+{
+  "$GMSprite": "v2",
+  "%Name": "spr_char_ln2_enemy_type_4",
+  "DynamicTexturePage": false,
+  "For3D": false,
+  "HTile": false,
+  "VTile": false,
+  "bboxMode": 0,
+  "bbox_bottom": 95,
+  "bbox_left": 0,
+  "bbox_right": 95,
+  "bbox_top": 0,
+  "collisionKind": 1,
+  "collisionTolerance": 0,
+  "edgeFiltering": false,
+  "frames": [
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "a964f1f5-8a9e-54c3-a1f3-2527510ba75e",
+      "name": "a964f1f5-8a9e-54c3-a1f3-2527510ba75e",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "bce940fe-87cd-5547-b805-541e1e32e874",
+      "name": "bce940fe-87cd-5547-b805-541e1e32e874",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "e8406e93-5bf0-58d8-84d2-930ee37b6178",
+      "name": "e8406e93-5bf0-58d8-84d2-930ee37b6178",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "35779ef2-8bfb-5bc6-a7e5-3c15ec4d1d32",
+      "name": "35779ef2-8bfb-5bc6-a7e5-3c15ec4d1d32",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "5cf43d85-8790-5029-92a7-72d693da8117",
+      "name": "5cf43d85-8790-5029-92a7-72d693da8117",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "cf19fdb0-1c26-579f-93fa-9c0fad82946f",
+      "name": "cf19fdb0-1c26-579f-93fa-9c0fad82946f",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "6ee96605-645b-5ec4-beb9-6b012ac5925a",
+      "name": "6ee96605-645b-5ec4-beb9-6b012ac5925a",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "5909e689-8438-589a-b441-e47b87d3e4f6",
+      "name": "5909e689-8438-589a-b441-e47b87d3e4f6",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "80d2a38f-e9e0-5d24-b912-3b7db8f2f8dc",
+      "name": "80d2a38f-e9e0-5d24-b912-3b7db8f2f8dc",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "2ea053d0-8d8a-564b-87fa-f7d9c9bbf986",
+      "name": "2ea053d0-8d8a-564b-87fa-f7d9c9bbf986",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "3c5a6788-890c-523f-8a4c-5dede8f13c2b",
+      "name": "3c5a6788-890c-523f-8a4c-5dede8f13c2b",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "5f33af31-8e09-5112-a579-bd6f11d1e087",
+      "name": "5f33af31-8e09-5112-a579-bd6f11d1e087",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "e911fa8a-f5b1-500c-8d0e-d605a8a6c4bf",
+      "name": "e911fa8a-f5b1-500c-8d0e-d605a8a6c4bf",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "8971fcc0-c0af-5dd4-a094-77fc7161e1e4",
+      "name": "8971fcc0-c0af-5dd4-a094-77fc7161e1e4",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "36255edc-67f8-5409-9bda-fc9d7b98f094",
+      "name": "36255edc-67f8-5409-9bda-fc9d7b98f094",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "5027c72b-17c0-558e-9113-f99df9cf1bbd",
+      "name": "5027c72b-17c0-558e-9113-f99df9cf1bbd",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "5d4ecd2a-8734-5789-8af5-67635d892c10",
+      "name": "5d4ecd2a-8734-5789-8af5-67635d892c10",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "2e765a77-a9fb-529b-bd48-219fd75a2267",
+      "name": "2e765a77-a9fb-529b-bd48-219fd75a2267",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "c75307e0-3abb-58c0-8bc9-341a3210e1a5",
+      "name": "c75307e0-3abb-58c0-8bc9-341a3210e1a5",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "752c48f7-f7bd-599d-9342-a0e0db57d0b4",
+      "name": "752c48f7-f7bd-599d-9342-a0e0db57d0b4",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "9e1769ef-5d6e-5c80-989a-62d5e1de7f7d",
+      "name": "9e1769ef-5d6e-5c80-989a-62d5e1de7f7d",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "2848e023-9d46-52de-8d4a-921f59721dae",
+      "name": "2848e023-9d46-52de-8d4a-921f59721dae",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "c6d58aa2-e72b-5b5e-ab9e-a2b3f55f436e",
+      "name": "c6d58aa2-e72b-5b5e-ab9e-a2b3f55f436e",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "6f10d1e6-596e-5f18-bebf-22c3fbfb5f75",
+      "name": "6f10d1e6-596e-5f18-bebf-22c3fbfb5f75",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "aa7f1542-3e19-55da-bef2-49b8eafdd996",
+      "name": "aa7f1542-3e19-55da-bef2-49b8eafdd996",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "760695df-4cc9-585c-9ba0-ef84491f63fb",
+      "name": "760695df-4cc9-585c-9ba0-ef84491f63fb",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "b2465ac9-5159-5a54-93b4-34e39a663098",
+      "name": "b2465ac9-5159-5a54-93b4-34e39a663098",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "4ac9fc69-8dd8-5850-92a1-0edb33777fbf",
+      "name": "4ac9fc69-8dd8-5850-92a1-0edb33777fbf",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "82515e2b-e068-5f90-afbf-1c0815d74733",
+      "name": "82515e2b-e068-5f90-afbf-1c0815d74733",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "e5b0bbe8-3e99-531a-8140-6282461379c1",
+      "name": "e5b0bbe8-3e99-531a-8140-6282461379c1",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "21444143-effe-52f5-9f64-9e50809a6aaf",
+      "name": "21444143-effe-52f5-9f64-9e50809a6aaf",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "b1cf7e05-f0ba-5c87-a57e-666a701f0f48",
+      "name": "b1cf7e05-f0ba-5c87-a57e-666a701f0f48",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "f18549ac-a275-5dfd-8bad-b30097615d11",
+      "name": "f18549ac-a275-5dfd-8bad-b30097615d11",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "310e13e9-337e-5be9-8e8d-f86f64a212d1",
+      "name": "310e13e9-337e-5be9-8e8d-f86f64a212d1",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "1f1bfde3-9f2e-5a30-86e9-99a8a4c54f4b",
+      "name": "1f1bfde3-9f2e-5a30-86e9-99a8a4c54f4b",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "f7c47cc5-92e1-5460-b47e-f49f8d68a199",
+      "name": "f7c47cc5-92e1-5460-b47e-f49f8d68a199",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "8518ef63-4ae9-5f90-b154-ad94a9ce5be4",
+      "name": "8518ef63-4ae9-5f90-b154-ad94a9ce5be4",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "fef8b2aa-edc1-5f45-91ea-9a214db6fd10",
+      "name": "fef8b2aa-edc1-5f45-91ea-9a214db6fd10",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "b55c5bbc-966a-542c-b784-bd96c66805b0",
+      "name": "b55c5bbc-966a-542c-b784-bd96c66805b0",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "de2f7666-6e4d-5868-9c8f-fcc93a727b4a",
+      "name": "de2f7666-6e4d-5868-9c8f-fcc93a727b4a",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "c0586be2-5642-56df-b2f3-36090de28373",
+      "name": "c0586be2-5642-56df-b2f3-36090de28373",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "4160f8cb-73b8-5b7b-ae16-be28726d22eb",
+      "name": "4160f8cb-73b8-5b7b-ae16-be28726d22eb",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "d4ad9e48-abce-5726-9673-6c9640d6a7e7",
+      "name": "d4ad9e48-abce-5726-9673-6c9640d6a7e7",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "8ff4b144-e48e-5bb3-954d-ea91285f52e1",
+      "name": "8ff4b144-e48e-5bb3-954d-ea91285f52e1",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "dbee8ef2-aca5-5cde-ba57-e1a6d6b7810b",
+      "name": "dbee8ef2-aca5-5cde-ba57-e1a6d6b7810b",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "daab1e2f-0472-537f-8dbe-018e03469595",
+      "name": "daab1e2f-0472-537f-8dbe-018e03469595",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "7db4bb0e-20e5-5bb7-980a-53e57bb575e8",
+      "name": "7db4bb0e-20e5-5bb7-980a-53e57bb575e8",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "1f65fbf8-32fa-56d8-99db-4a8660a68740",
+      "name": "1f65fbf8-32fa-56d8-99db-4a8660a68740",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "5cab3d7b-d095-5ec3-869d-8dda9b901807",
+      "name": "5cab3d7b-d095-5ec3-869d-8dda9b901807",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "24371029-785c-53d6-ae44-c1817efcf8ae",
+      "name": "24371029-785c-53d6-ae44-c1817efcf8ae",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "62f5b3f0-06bd-59a1-9229-61db2d44b05e",
+      "name": "62f5b3f0-06bd-59a1-9229-61db2d44b05e",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "ea6356b1-e414-5b27-8585-87e4e6f21677",
+      "name": "ea6356b1-e414-5b27-8585-87e4e6f21677",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "0c92234d-a6c2-5a32-b4f1-abad93ad0a08",
+      "name": "0c92234d-a6c2-5a32-b4f1-abad93ad0a08",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "4d420a6a-402a-5bd0-b35b-485616999916",
+      "name": "4d420a6a-402a-5bd0-b35b-485616999916",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "0595db2e-69da-58c7-b2a5-93ae281153ae",
+      "name": "0595db2e-69da-58c7-b2a5-93ae281153ae",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "321c298d-7630-5d1f-9fed-caeeae3cc473",
+      "name": "321c298d-7630-5d1f-9fed-caeeae3cc473",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "d22f4448-98a3-5619-a1bc-fe98ddf80b1d",
+      "name": "d22f4448-98a3-5619-a1bc-fe98ddf80b1d",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "509321ab-e571-5b05-8dd4-3ab7bad714bd",
+      "name": "509321ab-e571-5b05-8dd4-3ab7bad714bd",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "ab4f2392-731c-5683-9a5f-3888838e6ca5",
+      "name": "ab4f2392-731c-5683-9a5f-3888838e6ca5",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "25b148c2-cb0a-5605-ba92-da939ab65d55",
+      "name": "25b148c2-cb0a-5605-ba92-da939ab65d55",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "191be516-7533-569a-92aa-c90ada47ed87",
+      "name": "191be516-7533-569a-92aa-c90ada47ed87",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "8ba7fa94-39e2-56ce-adf5-32829f19d70b",
+      "name": "8ba7fa94-39e2-56ce-adf5-32829f19d70b",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "433fa3af-79d4-5c54-8b13-8d9c8bc0ca4a",
+      "name": "433fa3af-79d4-5c54-8b13-8d9c8bc0ca4a",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "3a4fa088-0a8f-51e0-94a4-74707f7b45db",
+      "name": "3a4fa088-0a8f-51e0-94a4-74707f7b45db",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "85152dc4-8a6e-5127-a260-a3e9cbc3e79f",
+      "name": "85152dc4-8a6e-5127-a260-a3e9cbc3e79f",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "e9d8625d-60d1-5ced-bc72-18d9aac132da",
+      "name": "e9d8625d-60d1-5ced-bc72-18d9aac132da",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "ed047909-3313-5079-a5a2-ef115b4fbc6f",
+      "name": "ed047909-3313-5079-a5a2-ef115b4fbc6f",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "b1f970f8-ed4c-59da-8c24-35e6b578da79",
+      "name": "b1f970f8-ed4c-59da-8c24-35e6b578da79",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "764dab02-85bb-5f34-8cd8-4aeec284b096",
+      "name": "764dab02-85bb-5f34-8cd8-4aeec284b096",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "9112d9c6-dacf-56cf-85d4-b842b589c7d5",
+      "name": "9112d9c6-dacf-56cf-85d4-b842b589c7d5",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "dab44abc-21cc-5c6d-8815-94ce2b55f8c1",
+      "name": "dab44abc-21cc-5c6d-8815-94ce2b55f8c1",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "0ff7ac97-3f80-514b-be55-92de1a4744ee",
+      "name": "0ff7ac97-3f80-514b-be55-92de1a4744ee",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "6ac6e315-f34a-526f-91e2-5c5f2807b6b5",
+      "name": "6ac6e315-f34a-526f-91e2-5c5f2807b6b5",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "bec2bfaf-c792-5d57-a531-3e014590215c",
+      "name": "bec2bfaf-c792-5d57-a531-3e014590215c",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "ad9ca89b-78e6-5554-bc0e-3f67381be0de",
+      "name": "ad9ca89b-78e6-5554-bc0e-3f67381be0de",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "d14a46fb-54d4-58ec-8d8e-43c3710e3567",
+      "name": "d14a46fb-54d4-58ec-8d8e-43c3710e3567",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "43b8c2f6-18c8-52e8-929c-821a341cd94c",
+      "name": "43b8c2f6-18c8-52e8-929c-821a341cd94c",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "7b237f23-aaf5-573f-9cdd-bcc89b87521f",
+      "name": "7b237f23-aaf5-573f-9cdd-bcc89b87521f",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "bc7b0581-b440-5d76-9e30-7a4fec653b77",
+      "name": "bc7b0581-b440-5d76-9e30-7a4fec653b77",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "c48a9063-9e94-54d8-8723-2d32347ea121",
+      "name": "c48a9063-9e94-54d8-8723-2d32347ea121",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "1ef23e95-06f8-589e-a060-c5b74cb5490c",
+      "name": "1ef23e95-06f8-589e-a060-c5b74cb5490c",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "93ab7455-b2fd-5998-857f-f149ff1a4704",
+      "name": "93ab7455-b2fd-5998-857f-f149ff1a4704",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "b33b1e34-1adc-54ff-ab4a-d271ea311e93",
+      "name": "b33b1e34-1adc-54ff-ab4a-d271ea311e93",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "a0a479f4-6f28-51f1-8aae-216e073e4df6",
+      "name": "a0a479f4-6f28-51f1-8aae-216e073e4df6",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "700b7f81-e8c0-5416-a63f-61c6f854d21d",
+      "name": "700b7f81-e8c0-5416-a63f-61c6f854d21d",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "2f6e502a-317e-56e9-8260-2b3fbea54f34",
+      "name": "2f6e502a-317e-56e9-8260-2b3fbea54f34",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "217b32c4-fbf1-57ae-93f2-2318361bbfb8",
+      "name": "217b32c4-fbf1-57ae-93f2-2318361bbfb8",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "36c3397b-1393-5d71-bccf-cca41359847d",
+      "name": "36c3397b-1393-5d71-bccf-cca41359847d",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "a74a95f7-4cfb-57ce-a501-9922ae4961bb",
+      "name": "a74a95f7-4cfb-57ce-a501-9922ae4961bb",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "3dc7b642-d525-53a9-a941-47380e151db9",
+      "name": "3dc7b642-d525-53a9-a941-47380e151db9",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "2be31e5d-0b53-5ea0-9634-d5d00a6ea38e",
+      "name": "2be31e5d-0b53-5ea0-9634-d5d00a6ea38e",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "512ed145-e2c8-55ad-a3de-80aa1144db23",
+      "name": "512ed145-e2c8-55ad-a3de-80aa1144db23",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "1e9fc160-890e-5e6c-851a-3e6d29bf7312",
+      "name": "1e9fc160-890e-5e6c-851a-3e6d29bf7312",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "d9586b28-cf17-555e-8f62-64563a91fb17",
+      "name": "d9586b28-cf17-555e-8f62-64563a91fb17",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "55f9773a-70bf-5416-9782-484f369c81b3",
+      "name": "55f9773a-70bf-5416-9782-484f369c81b3",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "fed41e6b-cb18-54cc-88b8-28f0519ae1bf",
+      "name": "fed41e6b-cb18-54cc-88b8-28f0519ae1bf",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "40c5f86b-ba10-5641-8f51-bcfd7afbe54c",
+      "name": "40c5f86b-ba10-5641-8f51-bcfd7afbe54c",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "680cdda9-ab8a-514a-9d43-980d78ca209d",
+      "name": "680cdda9-ab8a-514a-9d43-980d78ca209d",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "5a5472a2-cc22-5934-9cf9-6508746c100b",
+      "name": "5a5472a2-cc22-5934-9cf9-6508746c100b",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "fd8a4562-efc2-5cc9-896a-36f9c17a251d",
+      "name": "fd8a4562-efc2-5cc9-896a-36f9c17a251d",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "ccd8f5f3-80f0-51fd-bc29-f4e307e4bac5",
+      "name": "ccd8f5f3-80f0-51fd-bc29-f4e307e4bac5",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "7c20434b-9543-592f-8d52-7b6a5322b148",
+      "name": "7c20434b-9543-592f-8d52-7b6a5322b148",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "dc1abf63-d8ea-5cb2-a5b6-b9209ebfe494",
+      "name": "dc1abf63-d8ea-5cb2-a5b6-b9209ebfe494",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "c302e799-4e7b-59bb-8b9a-25b2e0627629",
+      "name": "c302e799-4e7b-59bb-8b9a-25b2e0627629",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "12c03aae-cabc-599b-81a2-ab4ab8f044a7",
+      "name": "12c03aae-cabc-599b-81a2-ab4ab8f044a7",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "b5733e90-d7eb-55f0-8fa7-1c581cc18cad",
+      "name": "b5733e90-d7eb-55f0-8fa7-1c581cc18cad",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "2e0058d7-9a12-58d1-b492-70e7ccde00ba",
+      "name": "2e0058d7-9a12-58d1-b492-70e7ccde00ba",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "5b8ef6c2-6bbe-5295-b8e3-8d37971fb722",
+      "name": "5b8ef6c2-6bbe-5295-b8e3-8d37971fb722",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "1cdf6280-aa97-5707-99f3-7829199da176",
+      "name": "1cdf6280-aa97-5707-99f3-7829199da176",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "5feb9b34-a75b-573b-865c-4777d7d1efd2",
+      "name": "5feb9b34-a75b-573b-865c-4777d7d1efd2",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "e91b4e30-c267-51ed-89d0-dcefe021433e",
+      "name": "e91b4e30-c267-51ed-89d0-dcefe021433e",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "9cfca0af-1ae7-543b-8678-55e616b381a9",
+      "name": "9cfca0af-1ae7-543b-8678-55e616b381a9",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "d41c3d87-c8ad-526f-ab49-1feb0a1c9f0a",
+      "name": "d41c3d87-c8ad-526f-ab49-1feb0a1c9f0a",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "b526a96f-9e38-593e-aee1-bf4474d8c391",
+      "name": "b526a96f-9e38-593e-aee1-bf4474d8c391",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "f957d297-93ec-5c9f-9b76-971092e40114",
+      "name": "f957d297-93ec-5c9f-9b76-971092e40114",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "d958585c-bef6-5890-95ed-0e4d451ae7b5",
+      "name": "d958585c-bef6-5890-95ed-0e4d451ae7b5",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "a9e632d4-14c9-55f8-a7e4-7f0ef94130dc",
+      "name": "a9e632d4-14c9-55f8-a7e4-7f0ef94130dc",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "4f285ee3-f817-5aed-9dba-2d3de0277e0d",
+      "name": "4f285ee3-f817-5aed-9dba-2d3de0277e0d",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "e1133def-824a-5c51-806e-18d8ed30983b",
+      "name": "e1133def-824a-5c51-806e-18d8ed30983b",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "a8ae8ec1-999f-5459-8da5-114fb4bcfca0",
+      "name": "a8ae8ec1-999f-5459-8da5-114fb4bcfca0",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "9b4425d3-df5e-5d4f-8e2b-0ac199bdb8d0",
+      "name": "9b4425d3-df5e-5d4f-8e2b-0ac199bdb8d0",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "7b396dd0-a7c2-51bb-9d5c-98bf9de865ad",
+      "name": "7b396dd0-a7c2-51bb-9d5c-98bf9de865ad",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "82987cf7-50b0-5bb5-ba88-a9c9db7a8f5b",
+      "name": "82987cf7-50b0-5bb5-ba88-a9c9db7a8f5b",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "407e3c3f-7868-5ba3-8aeb-583227e59868",
+      "name": "407e3c3f-7868-5ba3-8aeb-583227e59868",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "e232f5f8-4c47-5964-baa5-3295a9bde707",
+      "name": "e232f5f8-4c47-5964-baa5-3295a9bde707",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "91e70bb3-055f-5232-8026-15e124fcddd9",
+      "name": "91e70bb3-055f-5232-8026-15e124fcddd9",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "10a01429-4e6b-5f6b-bd02-a9e57ae39e43",
+      "name": "10a01429-4e6b-5f6b-bd02-a9e57ae39e43",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "2bee535a-4eba-5ac5-9dc3-db573bcfe3c7",
+      "name": "2bee535a-4eba-5ac5-9dc3-db573bcfe3c7",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "89d187bd-fecc-58b6-8873-8cb04d8598f9",
+      "name": "89d187bd-fecc-58b6-8873-8cb04d8598f9",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "92e94bd3-14ac-5005-a829-25583d110d84",
+      "name": "92e94bd3-14ac-5005-a829-25583d110d84",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "9eca307c-5359-5601-82fa-3d9e428023fc",
+      "name": "9eca307c-5359-5601-82fa-3d9e428023fc",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "943e0cab-c0f3-54eb-843c-234c9be95a65",
+      "name": "943e0cab-c0f3-54eb-843c-234c9be95a65",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "00fb2fc8-f78f-5f28-9f01-aecd74b6f264",
+      "name": "00fb2fc8-f78f-5f28-9f01-aecd74b6f264",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "d01f85c1-87cd-5bec-9fff-6d54b69fba7f",
+      "name": "d01f85c1-87cd-5bec-9fff-6d54b69fba7f",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "4ed3bb0b-68e7-5820-a8d1-fac6cf1f0fb3",
+      "name": "4ed3bb0b-68e7-5820-a8d1-fac6cf1f0fb3",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "0df167a2-c68b-5698-85a1-eb9dc34bb624",
+      "name": "0df167a2-c68b-5698-85a1-eb9dc34bb624",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "b102c188-7b39-5082-9ec8-1e625b976295",
+      "name": "b102c188-7b39-5082-9ec8-1e625b976295",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "0089442a-0d4c-5c8e-bb2a-c26ecb22b0d0",
+      "name": "0089442a-0d4c-5c8e-bb2a-c26ecb22b0d0",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "6d9054c0-68ee-551e-8057-7ef56d389d01",
+      "name": "6d9054c0-68ee-551e-8057-7ef56d389d01",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "c8c45b30-fc95-5929-a211-c677b96719c8",
+      "name": "c8c45b30-fc95-5929-a211-c677b96719c8",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "96c19b85-1abb-5358-8da0-096666136f4d",
+      "name": "96c19b85-1abb-5358-8da0-096666136f4d",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "6ef59e03-3f91-5d4c-bc48-4294458268d1",
+      "name": "6ef59e03-3f91-5d4c-bc48-4294458268d1",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "7e230570-f8c4-542c-8f78-74f1eb3b6d10",
+      "name": "7e230570-f8c4-542c-8f78-74f1eb3b6d10",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "d884f21e-d28d-59e5-a675-03da29cd66f6",
+      "name": "d884f21e-d28d-59e5-a675-03da29cd66f6",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "bade845e-705f-56b6-9751-4d74c9addea8",
+      "name": "bade845e-705f-56b6-9751-4d74c9addea8",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "82c8fac8-e425-5a1d-ba30-9f3ed1c7776b",
+      "name": "82c8fac8-e425-5a1d-ba30-9f3ed1c7776b",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "fdf2b7b3-c8cc-5278-ab12-bedea6ba9ff9",
+      "name": "fdf2b7b3-c8cc-5278-ab12-bedea6ba9ff9",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "4b7ac719-badb-53c3-869d-2658d08bdfab",
+      "name": "4b7ac719-badb-53c3-869d-2658d08bdfab",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "df386225-b478-55e5-aeb6-2d928e3b2e20",
+      "name": "df386225-b478-55e5-aeb6-2d928e3b2e20",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "8d9c574a-8e55-56b8-8608-5d48410a84e0",
+      "name": "8d9c574a-8e55-56b8-8608-5d48410a84e0",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "8fe7dd3b-927f-597b-b255-dd1294cbdb95",
+      "name": "8fe7dd3b-927f-597b-b255-dd1294cbdb95",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "a5bc667c-8f3f-5fd2-9eed-cbae906e3cfe",
+      "name": "a5bc667c-8f3f-5fd2-9eed-cbae906e3cfe",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "ecd6bc29-ef50-5c7b-8508-ac3d68dcc812",
+      "name": "ecd6bc29-ef50-5c7b-8508-ac3d68dcc812",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "da0bbc49-2dec-5e6d-a3a4-f0d4bc5d99c3",
+      "name": "da0bbc49-2dec-5e6d-a3a4-f0d4bc5d99c3",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "535770f3-cc01-5dc2-8310-f3284c5bff2d",
+      "name": "535770f3-cc01-5dc2-8310-f3284c5bff2d",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "8b5cae3c-68d0-5dbf-b1b3-b3544eb520ca",
+      "name": "8b5cae3c-68d0-5dbf-b1b3-b3544eb520ca",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "0eba0bb5-f113-56f1-a378-c523f0c9be50",
+      "name": "0eba0bb5-f113-56f1-a378-c523f0c9be50",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "d8722191-fce4-5c45-b318-129dc14a831b",
+      "name": "d8722191-fce4-5c45-b318-129dc14a831b",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "158773a7-7fc5-5ea1-9c50-ebbc23597599",
+      "name": "158773a7-7fc5-5ea1-9c50-ebbc23597599",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "ef7e8629-c805-58cb-8594-f87976b8a8fb",
+      "name": "ef7e8629-c805-58cb-8594-f87976b8a8fb",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "2ee844d1-a788-5c1d-9212-8da396540983",
+      "name": "2ee844d1-a788-5c1d-9212-8da396540983",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "a2437147-cb66-5950-b6ae-b884bf48ad5d",
+      "name": "a2437147-cb66-5950-b6ae-b884bf48ad5d",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "1ce6df56-db57-5c6a-9bf4-8c63eada32f2",
+      "name": "1ce6df56-db57-5c6a-9bf4-8c63eada32f2",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "33351002-bd47-506f-8342-67a4e9294d08",
+      "name": "33351002-bd47-506f-8342-67a4e9294d08",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "55d23e2e-b2c0-5941-8ee7-d2d39c27c03f",
+      "name": "55d23e2e-b2c0-5941-8ee7-d2d39c27c03f",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "5e28eaa0-c2e6-5b82-b9c1-b2f704aabd36",
+      "name": "5e28eaa0-c2e6-5b82-b9c1-b2f704aabd36",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "377505a9-4338-5926-a38a-b871e175c7d4",
+      "name": "377505a9-4338-5926-a38a-b871e175c7d4",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "620eb9d1-412a-5b71-950d-c550b2fd893f",
+      "name": "620eb9d1-412a-5b71-950d-c550b2fd893f",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "49230e68-9073-578b-8bc5-4f03473c02da",
+      "name": "49230e68-9073-578b-8bc5-4f03473c02da",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "b08c5dfa-9c18-5db5-bde9-0bda0ca01ec6",
+      "name": "b08c5dfa-9c18-5db5-bde9-0bda0ca01ec6",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "94e8d6b7-2f8b-5fa9-a80a-1386d36be33d",
+      "name": "94e8d6b7-2f8b-5fa9-a80a-1386d36be33d",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "d879227d-b0a3-504d-8c8e-e28e23a52c86",
+      "name": "d879227d-b0a3-504d-8c8e-e28e23a52c86",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "6bac6a97-93c1-5585-88b0-82107bbee7ef",
+      "name": "6bac6a97-93c1-5585-88b0-82107bbee7ef",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "c8a5888c-106b-533a-80f3-60650e2fabe3",
+      "name": "c8a5888c-106b-533a-80f3-60650e2fabe3",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "9d8fe27b-dfd7-5447-a207-5388bb377d63",
+      "name": "9d8fe27b-dfd7-5447-a207-5388bb377d63",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "90e505da-5a5b-58b9-a06e-ad115acf9cfa",
+      "name": "90e505da-5a5b-58b9-a06e-ad115acf9cfa",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "5bd947c4-c04e-57b6-9d9c-73018aaca3c6",
+      "name": "5bd947c4-c04e-57b6-9d9c-73018aaca3c6",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "d7d38f35-a709-598d-b4f5-1e8ad5e0d4e9",
+      "name": "d7d38f35-a709-598d-b4f5-1e8ad5e0d4e9",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "5e46d35c-4d07-5245-bd57-e8ccc59ae066",
+      "name": "5e46d35c-4d07-5245-bd57-e8ccc59ae066",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "6acc2307-033b-581d-b827-26e26a96c70b",
+      "name": "6acc2307-033b-581d-b827-26e26a96c70b",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "5851f107-87df-5b29-a2c7-e6e33c74a4e4",
+      "name": "5851f107-87df-5b29-a2c7-e6e33c74a4e4",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "500dd3b5-a164-56ec-a322-064c1452246c",
+      "name": "500dd3b5-a164-56ec-a322-064c1452246c",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "6838038c-ecbf-595d-a765-5823a7060374",
+      "name": "6838038c-ecbf-595d-a765-5823a7060374",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "585d2d72-d014-5890-b005-150010fd71d1",
+      "name": "585d2d72-d014-5890-b005-150010fd71d1",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "6e9cf6a9-fa11-5ac2-bc6f-8c8acbf9d253",
+      "name": "6e9cf6a9-fa11-5ac2-bc6f-8c8acbf9d253",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "3e5eef91-34da-5f5c-8d88-c7f08bc0d774",
+      "name": "3e5eef91-34da-5f5c-8d88-c7f08bc0d774",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "751a2ce4-54b4-5407-847f-f8b49e030367",
+      "name": "751a2ce4-54b4-5407-847f-f8b49e030367",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "a8e11b6f-1645-5be9-aa67-29c365ecd9e0",
+      "name": "a8e11b6f-1645-5be9-aa67-29c365ecd9e0",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "4acaab2f-cb0c-5218-89c0-4094e8c71439",
+      "name": "4acaab2f-cb0c-5218-89c0-4094e8c71439",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "b1fd58ae-4b74-550b-87f4-f81587961fa8",
+      "name": "b1fd58ae-4b74-550b-87f4-f81587961fa8",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "ca279a14-96e0-524f-a54d-f886942a482c",
+      "name": "ca279a14-96e0-524f-a54d-f886942a482c",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "53aa5f0e-3b7b-5bb3-ad0d-245d50e499ae",
+      "name": "53aa5f0e-3b7b-5bb3-ad0d-245d50e499ae",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "904243cd-1c77-5e08-bc84-62f636fc21de",
+      "name": "904243cd-1c77-5e08-bc84-62f636fc21de",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "8c7ecefb-2226-5eda-8547-82213ca454dd",
+      "name": "8c7ecefb-2226-5eda-8547-82213ca454dd",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "cdc9fb3f-0213-5486-b4c9-06009ef92f67",
+      "name": "cdc9fb3f-0213-5486-b4c9-06009ef92f67",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "d13d27e3-823b-51f8-ad6a-c021af46afdc",
+      "name": "d13d27e3-823b-51f8-ad6a-c021af46afdc",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "a9bea137-9b9a-523c-893d-c6256cab4d2f",
+      "name": "a9bea137-9b9a-523c-893d-c6256cab4d2f",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "d7b4268a-471b-5aa1-9cc6-20c2808c0415",
+      "name": "d7b4268a-471b-5aa1-9cc6-20c2808c0415",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "f2e19851-9e3a-5082-8a5f-af6609f84df8",
+      "name": "f2e19851-9e3a-5082-8a5f-af6609f84df8",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "6f051e47-8f6a-5ac1-a9be-1e8957995c8d",
+      "name": "6f051e47-8f6a-5ac1-a9be-1e8957995c8d",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "9b0c4ab5-9bd0-5ad5-8685-efa3e206a6db",
+      "name": "9b0c4ab5-9bd0-5ad5-8685-efa3e206a6db",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "9af40e75-d42e-5165-a779-63bef4b66943",
+      "name": "9af40e75-d42e-5165-a779-63bef4b66943",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "577ee154-fdbb-50c4-a843-a285ee765974",
+      "name": "577ee154-fdbb-50c4-a843-a285ee765974",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "00b0995c-fb80-5f62-ade2-f203f9d224f3",
+      "name": "00b0995c-fb80-5f62-ade2-f203f9d224f3",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "92978e69-4d75-56db-91fa-7025773a9e43",
+      "name": "92978e69-4d75-56db-91fa-7025773a9e43",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "a5c7a726-d91b-5aca-90b0-97a71e36472c",
+      "name": "a5c7a726-d91b-5aca-90b0-97a71e36472c",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "7fd5722c-1deb-548d-b117-828ee3b80a46",
+      "name": "7fd5722c-1deb-548d-b117-828ee3b80a46",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "eb1cf884-f009-5bc3-a9ca-20e691afde53",
+      "name": "eb1cf884-f009-5bc3-a9ca-20e691afde53",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "def26bc0-eabe-528e-80b5-be608e0555ab",
+      "name": "def26bc0-eabe-528e-80b5-be608e0555ab",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "eb0fa6bd-32cb-5c89-ae9b-78e204146768",
+      "name": "eb0fa6bd-32cb-5c89-ae9b-78e204146768",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "3a41b451-70aa-56d4-9659-a992cafe59bc",
+      "name": "3a41b451-70aa-56d4-9659-a992cafe59bc",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "0fd5fb2b-69b5-5a21-97cb-2ee2be6bf4c4",
+      "name": "0fd5fb2b-69b5-5a21-97cb-2ee2be6bf4c4",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "dce247c7-117f-5d08-8ebb-34ddbbae0d11",
+      "name": "dce247c7-117f-5d08-8ebb-34ddbbae0d11",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "ea868384-929f-5423-9bce-4c1d8b87ede9",
+      "name": "ea868384-929f-5423-9bce-4c1d8b87ede9",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "1fc154ff-ca96-5d76-9d79-6d145f37ab07",
+      "name": "1fc154ff-ca96-5d76-9d79-6d145f37ab07",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "1a189aef-13fa-5c58-a22e-9932e21cca10",
+      "name": "1a189aef-13fa-5c58-a22e-9932e21cca10",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "4f4a0b98-94ed-5d7f-a6ef-db2abe021d4a",
+      "name": "4f4a0b98-94ed-5d7f-a6ef-db2abe021d4a",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "5850bce3-237e-5f49-a0cd-04b3c8f1b186",
+      "name": "5850bce3-237e-5f49-a0cd-04b3c8f1b186",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "dd29f4eb-81fc-5380-8ad6-e2dbf3d299c8",
+      "name": "dd29f4eb-81fc-5380-8ad6-e2dbf3d299c8",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "fb0a522b-a127-56c9-bf5a-4efe6dc0db3f",
+      "name": "fb0a522b-a127-56c9-bf5a-4efe6dc0db3f",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "5c218693-480e-5648-b994-f755e12bd45d",
+      "name": "5c218693-480e-5648-b994-f755e12bd45d",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "59182357-7e54-5468-90c7-e1dbb59eba75",
+      "name": "59182357-7e54-5468-90c7-e1dbb59eba75",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "a0fb8424-c9fb-582f-8c53-c7fa4a49b3c7",
+      "name": "a0fb8424-c9fb-582f-8c53-c7fa4a49b3c7",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "e3017493-2b95-5238-b9d0-4aab1e3477f8",
+      "name": "e3017493-2b95-5238-b9d0-4aab1e3477f8",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "a891bd6f-8dc4-5870-8320-f5316b468e23",
+      "name": "a891bd6f-8dc4-5870-8320-f5316b468e23",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "a4e42b1b-f3d2-538f-bbaa-f8ad4ebdce91",
+      "name": "a4e42b1b-f3d2-538f-bbaa-f8ad4ebdce91",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "589f3884-38f3-5ae8-9f94-c4f2656b3a2d",
+      "name": "589f3884-38f3-5ae8-9f94-c4f2656b3a2d",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "3febccbc-4390-575f-be92-81ab87c78d15",
+      "name": "3febccbc-4390-575f-be92-81ab87c78d15",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "88fd975c-6c6a-5e6b-81b1-6c440e1623c3",
+      "name": "88fd975c-6c6a-5e6b-81b1-6c440e1623c3",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "1d32bda0-04d4-58d7-a484-a9ee436b37b7",
+      "name": "1d32bda0-04d4-58d7-a484-a9ee436b37b7",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "1a57af40-d9e7-54ac-b248-12263e4fe689",
+      "name": "1a57af40-d9e7-54ac-b248-12263e4fe689",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "e40f7f13-b8cf-5024-ba83-26a5abc59af7",
+      "name": "e40f7f13-b8cf-5024-ba83-26a5abc59af7",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "e1a77ade-a739-5681-a2c0-7cce26bf5120",
+      "name": "e1a77ade-a739-5681-a2c0-7cce26bf5120",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "580325d2-017b-5e7f-b35f-9162c3f13a4c",
+      "name": "580325d2-017b-5e7f-b35f-9162c3f13a4c",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "29c78720-2092-54a1-81ce-46da06e8e7a8",
+      "name": "29c78720-2092-54a1-81ce-46da06e8e7a8",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "f77f7141-7834-543a-8c6e-668fbbed993f",
+      "name": "f77f7141-7834-543a-8c6e-668fbbed993f",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "b7febb2d-f641-57f6-bd6d-f7e2ff9b0ea0",
+      "name": "b7febb2d-f641-57f6-bd6d-f7e2ff9b0ea0",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "7b639f93-cc1c-5f0b-b7a8-f01be5a5c5e1",
+      "name": "7b639f93-cc1c-5f0b-b7a8-f01be5a5c5e1",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "11ab8954-6784-5b49-92f0-b8115881c173",
+      "name": "11ab8954-6784-5b49-92f0-b8115881c173",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "4ec6d544-4181-5721-8a97-07dc283fb445",
+      "name": "4ec6d544-4181-5721-8a97-07dc283fb445",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "4ce036da-afe4-5ecb-93b4-698d1559eeda",
+      "name": "4ce036da-afe4-5ecb-93b4-698d1559eeda",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "b479b50c-6d07-5967-8ebe-53db6ee1c06e",
+      "name": "b479b50c-6d07-5967-8ebe-53db6ee1c06e",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "2d3cacfd-aef2-5030-b2b4-c1a18df8ea61",
+      "name": "2d3cacfd-aef2-5030-b2b4-c1a18df8ea61",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "76eb88e8-5ec0-55f0-b187-68eab66b667b",
+      "name": "76eb88e8-5ec0-55f0-b187-68eab66b667b",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "89eb2a70-dfca-5068-bd34-05cb7f19fdef",
+      "name": "89eb2a70-dfca-5068-bd34-05cb7f19fdef",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "a485b21d-8783-50e8-95db-a82c88c0405f",
+      "name": "a485b21d-8783-50e8-95db-a82c88c0405f",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "e3cd99e7-a410-5551-b7f4-500f619fed04",
+      "name": "e3cd99e7-a410-5551-b7f4-500f619fed04",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "ec8f98db-a897-51e7-8dbd-7c629d842199",
+      "name": "ec8f98db-a897-51e7-8dbd-7c629d842199",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "4385f201-c84b-5f97-8e62-6bd88adb2e51",
+      "name": "4385f201-c84b-5f97-8e62-6bd88adb2e51",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "b21e0b9c-df2d-5045-bb38-a67347738333",
+      "name": "b21e0b9c-df2d-5045-bb38-a67347738333",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "2ddd421b-7dc4-5a53-81c0-807217616908",
+      "name": "2ddd421b-7dc4-5a53-81c0-807217616908",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "77c51b1d-8fb3-5573-97be-25d03684fd7e",
+      "name": "77c51b1d-8fb3-5573-97be-25d03684fd7e",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "c94c8ba0-b069-545a-b124-190a61947080",
+      "name": "c94c8ba0-b069-545a-b124-190a61947080",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "a4f20133-cf98-53bd-9fe7-5f0003e4648a",
+      "name": "a4f20133-cf98-53bd-9fe7-5f0003e4648a",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "64518ffb-9d6e-50d8-a612-20e59075b896",
+      "name": "64518ffb-9d6e-50d8-a612-20e59075b896",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "0490b95c-ddf0-5d6d-8ed4-c97bbaf33ea1",
+      "name": "0490b95c-ddf0-5d6d-8ed4-c97bbaf33ea1",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "ee7a70ac-ab6b-515d-927b-8ea6811a9923",
+      "name": "ee7a70ac-ab6b-515d-927b-8ea6811a9923",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "0d91c2a1-9068-5be5-8dda-0c357f4bc776",
+      "name": "0d91c2a1-9068-5be5-8dda-0c357f4bc776",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "a1ec87b9-ab73-5c3d-80e2-99463a44e98a",
+      "name": "a1ec87b9-ab73-5c3d-80e2-99463a44e98a",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "eaf5eea3-d902-5012-87c8-bb5d4c526f97",
+      "name": "eaf5eea3-d902-5012-87c8-bb5d4c526f97",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "e098d757-c8b6-5d62-b609-d2341093cc4d",
+      "name": "e098d757-c8b6-5d62-b609-d2341093cc4d",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "749f8cfb-e91a-593f-bb11-7ded9d48d51b",
+      "name": "749f8cfb-e91a-593f-bb11-7ded9d48d51b",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "eeda5ec4-5522-5918-89c7-27bf302e32f5",
+      "name": "eeda5ec4-5522-5918-89c7-27bf302e32f5",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "cc7977f5-b0ea-5ab8-95da-3a02b21cc153",
+      "name": "cc7977f5-b0ea-5ab8-95da-3a02b21cc153",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "95382f35-57a5-579c-be44-65cc06cee1c9",
+      "name": "95382f35-57a5-579c-be44-65cc06cee1c9",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "71f8ca09-3780-50af-9223-257a618b021e",
+      "name": "71f8ca09-3780-50af-9223-257a618b021e",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "ad95e630-1164-54fa-bfe2-c07706e845ad",
+      "name": "ad95e630-1164-54fa-bfe2-c07706e845ad",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "02e362f7-be1c-570a-a841-29046e6c01c0",
+      "name": "02e362f7-be1c-570a-a841-29046e6c01c0",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "30a8e950-f84e-55e7-905e-12e850ac2edd",
+      "name": "30a8e950-f84e-55e7-905e-12e850ac2edd",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "ea251875-2bfc-571a-8040-47619116a4b8",
+      "name": "ea251875-2bfc-571a-8040-47619116a4b8",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "30d447d5-710c-5017-aa1e-4840ea3e6cc9",
+      "name": "30d447d5-710c-5017-aa1e-4840ea3e6cc9",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "1d1f8b66-f13a-529c-b33b-999b122120c8",
+      "name": "1d1f8b66-f13a-529c-b33b-999b122120c8",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "c517412d-7c55-5971-876c-34dce042ee59",
+      "name": "c517412d-7c55-5971-876c-34dce042ee59",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "d907adf6-5975-5e0e-948e-fc5776c6275a",
+      "name": "d907adf6-5975-5e0e-948e-fc5776c6275a",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "da466547-388a-53f4-9cf1-fdd2c5e736ba",
+      "name": "da466547-388a-53f4-9cf1-fdd2c5e736ba",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "1f7f45dd-df88-5093-82a7-b64ebd44a7b4",
+      "name": "1f7f45dd-df88-5093-82a7-b64ebd44a7b4",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "4cbfb829-9d74-5db2-8730-39d1c1d7d0d1",
+      "name": "4cbfb829-9d74-5db2-8730-39d1c1d7d0d1",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "0030d0a3-e31b-55cf-91eb-a1a0b4fece58",
+      "name": "0030d0a3-e31b-55cf-91eb-a1a0b4fece58",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "8f31ee50-1e7e-516e-9c95-8ce46b4838e0",
+      "name": "8f31ee50-1e7e-516e-9c95-8ce46b4838e0",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "2f3b2439-c971-5970-b9b3-4c3d95425731",
+      "name": "2f3b2439-c971-5970-b9b3-4c3d95425731",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "2b9b77f5-0987-518c-a433-8f6b1a826c73",
+      "name": "2b9b77f5-0987-518c-a433-8f6b1a826c73",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "e2acd554-5f02-5bf9-80c4-0e6b1463c430",
+      "name": "e2acd554-5f02-5bf9-80c4-0e6b1463c430",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "81ea798d-47d7-5f19-a74e-ec5045a4f7af",
+      "name": "81ea798d-47d7-5f19-a74e-ec5045a4f7af",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "641975bd-93a1-5b3c-b966-a0ecd17a0e13",
+      "name": "641975bd-93a1-5b3c-b966-a0ecd17a0e13",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "57e2a630-c6e8-5063-bb89-3ed1b64d461f",
+      "name": "57e2a630-c6e8-5063-bb89-3ed1b64d461f",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "d43b8fef-274d-5780-b051-a610069becf2",
+      "name": "d43b8fef-274d-5780-b051-a610069becf2",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "f6a57478-6e94-53f1-90f1-4afca9c6ed35",
+      "name": "f6a57478-6e94-53f1-90f1-4afca9c6ed35",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "4f31216b-b2d1-5752-8a80-7138afbd1595",
+      "name": "4f31216b-b2d1-5752-8a80-7138afbd1595",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "ec000330-51d3-5f6c-985e-2e2190dd511a",
+      "name": "ec000330-51d3-5f6c-985e-2e2190dd511a",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "0e83aa7a-6788-56f7-9664-c939d957f46d",
+      "name": "0e83aa7a-6788-56f7-9664-c939d957f46d",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "1a57bbe4-4da6-5349-966b-df1773202316",
+      "name": "1a57bbe4-4da6-5349-966b-df1773202316",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "41405e7a-6618-5dce-bd7c-6ff58aaed1b0",
+      "name": "41405e7a-6618-5dce-bd7c-6ff58aaed1b0",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "bb37f166-c031-537f-aad3-fe4ce350a717",
+      "name": "bb37f166-c031-537f-aad3-fe4ce350a717",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "1e5bf804-3bd5-5969-b44d-ec47be3ae561",
+      "name": "1e5bf804-3bd5-5969-b44d-ec47be3ae561",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "643dae5b-8f4a-58ac-8881-5b1dcbcb28ca",
+      "name": "643dae5b-8f4a-58ac-8881-5b1dcbcb28ca",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "405a4e84-756a-5fdf-8fb0-14882eef2ac2",
+      "name": "405a4e84-756a-5fdf-8fb0-14882eef2ac2",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "87170928-2547-54d0-96ed-4b3d557b72fc",
+      "name": "87170928-2547-54d0-96ed-4b3d557b72fc",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "9bedf4bd-1338-5475-9edc-ad201c4cb1b2",
+      "name": "9bedf4bd-1338-5475-9edc-ad201c4cb1b2",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "960c1a3b-1626-5af0-a82d-e09f048f28ee",
+      "name": "960c1a3b-1626-5af0-a82d-e09f048f28ee",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "50811c98-36e1-5e46-b309-2cc8a1aa9acd",
+      "name": "50811c98-36e1-5e46-b309-2cc8a1aa9acd",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "18df3271-cc30-5fd0-8f8d-00606939c472",
+      "name": "18df3271-cc30-5fd0-8f8d-00606939c472",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "e0e7d7da-9560-5d2b-b4f6-bafd7ba2d6d1",
+      "name": "e0e7d7da-9560-5d2b-b4f6-bafd7ba2d6d1",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "d780317e-ae4c-5d67-a65b-50d49091a4ea",
+      "name": "d780317e-ae4c-5d67-a65b-50d49091a4ea",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "5b71a171-9b37-5751-92ed-fd28f15a7f69",
+      "name": "5b71a171-9b37-5751-92ed-fd28f15a7f69",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "a4edcaf5-f17e-5ac8-b571-9d87101bd059",
+      "name": "a4edcaf5-f17e-5ac8-b571-9d87101bd059",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "d4a392e7-b7ca-5130-8897-603186c161ad",
+      "name": "d4a392e7-b7ca-5130-8897-603186c161ad",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "0b82472b-4896-5be9-bf57-11ec51cb9b20",
+      "name": "0b82472b-4896-5be9-bf57-11ec51cb9b20",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "43d27697-d6c7-5cf7-9314-5eb1d8f6b166",
+      "name": "43d27697-d6c7-5cf7-9314-5eb1d8f6b166",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "ff720c44-3af4-5a04-902d-b9653c6a6435",
+      "name": "ff720c44-3af4-5a04-902d-b9653c6a6435",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "b98eb5ff-2cce-55f3-84e8-db535d66c393",
+      "name": "b98eb5ff-2cce-55f3-84e8-db535d66c393",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "1c0a2be9-f3ae-5cb9-b7bc-4cc2869fcccc",
+      "name": "1c0a2be9-f3ae-5cb9-b7bc-4cc2869fcccc",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "b4e79b8d-5f9e-5b1d-be62-e30814e438aa",
+      "name": "b4e79b8d-5f9e-5b1d-be62-e30814e438aa",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "abf1753d-1c57-5289-8a1d-8b5dca07fa1e",
+      "name": "abf1753d-1c57-5289-8a1d-8b5dca07fa1e",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "794b37db-a4e6-5b27-9850-cf2e20a7d21f",
+      "name": "794b37db-a4e6-5b27-9850-cf2e20a7d21f",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "e870a17c-b37e-5a12-8543-d2046467f574",
+      "name": "e870a17c-b37e-5a12-8543-d2046467f574",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "60050f13-706f-5cf0-8be9-0a96e7ee260b",
+      "name": "60050f13-706f-5cf0-8be9-0a96e7ee260b",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "97497364-c34d-5a04-ab31-f983ad3cff4f",
+      "name": "97497364-c34d-5a04-ab31-f983ad3cff4f",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "74fb253d-c500-56b0-8fbb-4b761830adb4",
+      "name": "74fb253d-c500-56b0-8fbb-4b761830adb4",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "0b567d48-4b60-5488-9afa-3c430e5ce698",
+      "name": "0b567d48-4b60-5488-9afa-3c430e5ce698",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "d3f6601e-66f9-54be-96de-616c0d6ee916",
+      "name": "d3f6601e-66f9-54be-96de-616c0d6ee916",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "c73ceb65-78b3-55d4-b2d8-733cfb9d64d8",
+      "name": "c73ceb65-78b3-55d4-b2d8-733cfb9d64d8",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "e80f5bb7-7465-53ff-9737-1e8987f602fe",
+      "name": "e80f5bb7-7465-53ff-9737-1e8987f602fe",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "484d464b-ea4b-5d78-8fa1-8a38749530e2",
+      "name": "484d464b-ea4b-5d78-8fa1-8a38749530e2",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "a2868327-c9bf-5d33-abca-73970c46a327",
+      "name": "a2868327-c9bf-5d33-abca-73970c46a327",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "865be8c1-3fda-58de-8ad8-bac70db540a2",
+      "name": "865be8c1-3fda-58de-8ad8-bac70db540a2",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "584490cb-1ac6-59d9-b6e8-d8e3fff59e3a",
+      "name": "584490cb-1ac6-59d9-b6e8-d8e3fff59e3a",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "c528edf8-d2c9-5627-975d-dc8705bc1999",
+      "name": "c528edf8-d2c9-5627-975d-dc8705bc1999",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "9c7aeb00-76db-5f34-9bef-974d2dfe8a80",
+      "name": "9c7aeb00-76db-5f34-9bef-974d2dfe8a80",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "e4c10674-338a-5504-acf1-7aa46a4eb59e",
+      "name": "e4c10674-338a-5504-acf1-7aa46a4eb59e",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "92ebc1b2-e26d-5615-8559-5aacc3c56a9b",
+      "name": "92ebc1b2-e26d-5615-8559-5aacc3c56a9b",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "517c1410-0866-5825-bcaf-923fd89509c1",
+      "name": "517c1410-0866-5825-bcaf-923fd89509c1",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "9ff0605e-0e7c-56a2-9a81-37c43bed8c10",
+      "name": "9ff0605e-0e7c-56a2-9a81-37c43bed8c10",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "250a9bfe-fcef-5695-91a8-a290382673a1",
+      "name": "250a9bfe-fcef-5695-91a8-a290382673a1",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "3477c32c-c577-5460-b68c-c8c497b3b4e0",
+      "name": "3477c32c-c577-5460-b68c-c8c497b3b4e0",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "d864ca22-9d83-528f-ba83-17da4befa5f9",
+      "name": "d864ca22-9d83-528f-ba83-17da4befa5f9",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "f19e4849-9fd9-58f7-a576-0ed98a9f5853",
+      "name": "f19e4849-9fd9-58f7-a576-0ed98a9f5853",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "d00cb5d1-f70c-517a-86a3-c822302dbff2",
+      "name": "d00cb5d1-f70c-517a-86a3-c822302dbff2",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "569a1b17-8a18-5d1c-8f56-89f77620071d",
+      "name": "569a1b17-8a18-5d1c-8f56-89f77620071d",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "f04ad328-d1d9-546d-a38c-70ee67e9a0a4",
+      "name": "f04ad328-d1d9-546d-a38c-70ee67e9a0a4",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "c16f3495-ab8a-5b5b-920a-d360f4c0e083",
+      "name": "c16f3495-ab8a-5b5b-920a-d360f4c0e083",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "fa9e0fac-9001-575c-a6d3-130338d7751a",
+      "name": "fa9e0fac-9001-575c-a6d3-130338d7751a",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "85bc89b2-4f9d-5338-a129-9d69013f13d6",
+      "name": "85bc89b2-4f9d-5338-a129-9d69013f13d6",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "93c2b1c7-19e8-5665-8460-c752bd08a0ac",
+      "name": "93c2b1c7-19e8-5665-8460-c752bd08a0ac",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "110c6669-9f38-577a-b776-0115c2aac215",
+      "name": "110c6669-9f38-577a-b776-0115c2aac215",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "750bcda0-37ef-58da-82ea-6be4d93fab43",
+      "name": "750bcda0-37ef-58da-82ea-6be4d93fab43",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "367e3284-d275-50b7-827d-0ea4b9ac07d8",
+      "name": "367e3284-d275-50b7-827d-0ea4b9ac07d8",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "bea048f1-c980-56cb-8d87-be86519e034f",
+      "name": "bea048f1-c980-56cb-8d87-be86519e034f",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "65e61e5c-f277-59a5-882e-c9bff1aa0a96",
+      "name": "65e61e5c-f277-59a5-882e-c9bff1aa0a96",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "3abc39fd-e82e-5fa9-9ab4-09bdce9928b3",
+      "name": "3abc39fd-e82e-5fa9-9ab4-09bdce9928b3",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "9a97e6d3-ad30-5be1-b23c-d6452ed92c68",
+      "name": "9a97e6d3-ad30-5be1-b23c-d6452ed92c68",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "c48fb20e-d0a5-5c3e-87f0-aa2acd8f84f6",
+      "name": "c48fb20e-d0a5-5c3e-87f0-aa2acd8f84f6",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "7109cccf-6db8-59b1-a631-e49f0770cd04",
+      "name": "7109cccf-6db8-59b1-a631-e49f0770cd04",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "bc0d912d-5908-5feb-afcc-ad30fb0ca713",
+      "name": "bc0d912d-5908-5feb-afcc-ad30fb0ca713",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "009439f9-5010-5971-93fc-a555b907a957",
+      "name": "009439f9-5010-5971-93fc-a555b907a957",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "630b809b-c0a8-56f4-8e28-0c66e49f552c",
+      "name": "630b809b-c0a8-56f4-8e28-0c66e49f552c",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "704fae70-1ba9-5eee-98cf-f237b886c249",
+      "name": "704fae70-1ba9-5eee-98cf-f237b886c249",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "6aaabd48-4e51-5c6a-b8c5-4c2cc88c1711",
+      "name": "6aaabd48-4e51-5c6a-b8c5-4c2cc88c1711",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "eeefa5af-ed2e-5bba-a5fa-067270fad264",
+      "name": "eeefa5af-ed2e-5bba-a5fa-067270fad264",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "95be7cce-1821-5340-9ca0-3758b80cc2dc",
+      "name": "95be7cce-1821-5340-9ca0-3758b80cc2dc",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "ee47ae19-3d83-547c-9f0f-eb73c9c79641",
+      "name": "ee47ae19-3d83-547c-9f0f-eb73c9c79641",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "0b77d175-75ed-5a26-aa3d-904984f2b3e8",
+      "name": "0b77d175-75ed-5a26-aa3d-904984f2b3e8",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "3a461cc5-4fca-5f27-8a8f-2c35a0a96bab",
+      "name": "3a461cc5-4fca-5f27-8a8f-2c35a0a96bab",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "41e67adc-f5d8-5025-b660-370efe1bb2aa",
+      "name": "41e67adc-f5d8-5025-b660-370efe1bb2aa",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "e478b84e-e3bd-5625-802f-e38a182dde11",
+      "name": "e478b84e-e3bd-5625-802f-e38a182dde11",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "8266f876-9fcc-5e74-b683-1bb42af368cc",
+      "name": "8266f876-9fcc-5e74-b683-1bb42af368cc",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "b00d2601-6b8b-5311-ad52-f03da561bed2",
+      "name": "b00d2601-6b8b-5311-ad52-f03da561bed2",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "ea4d6c10-83a0-5559-8cbd-07d7b55b4fe2",
+      "name": "ea4d6c10-83a0-5559-8cbd-07d7b55b4fe2",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "32b159e2-713c-59c0-aa93-a1c28f13fb5b",
+      "name": "32b159e2-713c-59c0-aa93-a1c28f13fb5b",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "d26a432b-00a0-5dbc-aca3-a784415fd037",
+      "name": "d26a432b-00a0-5dbc-aca3-a784415fd037",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "6f4ff99f-301a-5812-b2bc-a4309026333f",
+      "name": "6f4ff99f-301a-5812-b2bc-a4309026333f",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "2bfb3657-7ccc-5bf7-bd74-e3479a358d39",
+      "name": "2bfb3657-7ccc-5bf7-bd74-e3479a358d39",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "c6967e3f-842e-5231-9833-1a420112d75f",
+      "name": "c6967e3f-842e-5231-9833-1a420112d75f",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "b9fdbb20-7942-5bda-b38b-6429a7c6df6d",
+      "name": "b9fdbb20-7942-5bda-b38b-6429a7c6df6d",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "9f319ef1-0b57-518e-bc96-47769becfd01",
+      "name": "9f319ef1-0b57-518e-bc96-47769becfd01",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "75827f72-40f7-5d90-8bd5-4d453d8c2249",
+      "name": "75827f72-40f7-5d90-8bd5-4d453d8c2249",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "a0f63d02-9dca-50d2-a6da-ddfd706a1f01",
+      "name": "a0f63d02-9dca-50d2-a6da-ddfd706a1f01",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "9b58f1fe-dd77-59b8-9183-f5bae441e145",
+      "name": "9b58f1fe-dd77-59b8-9183-f5bae441e145",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "4fa54ebc-b45e-5fd1-a5f0-327268171df6",
+      "name": "4fa54ebc-b45e-5fd1-a5f0-327268171df6",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "2f2fa6dc-3a6a-5162-97ac-f23e7bd0e599",
+      "name": "2f2fa6dc-3a6a-5162-97ac-f23e7bd0e599",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "a7d006e7-8de4-531f-b12e-2baacf592a94",
+      "name": "a7d006e7-8de4-531f-b12e-2baacf592a94",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "11e0f000-a8ac-5c9f-8fdd-db167a78eb67",
+      "name": "11e0f000-a8ac-5c9f-8fdd-db167a78eb67",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "64909153-927a-579d-99f3-405caee7b8cf",
+      "name": "64909153-927a-579d-99f3-405caee7b8cf",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "b81f24a4-6f35-572d-ba03-9f486c1e2cc0",
+      "name": "b81f24a4-6f35-572d-ba03-9f486c1e2cc0",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "d32a79af-3b69-503c-8cdd-ff5a60b32d7c",
+      "name": "d32a79af-3b69-503c-8cdd-ff5a60b32d7c",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "d3f5c55b-13de-5f5f-8655-670f400fc42b",
+      "name": "d3f5c55b-13de-5f5f-8655-670f400fc42b",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "85aabe6f-3f2f-5657-8848-e414d4e0ed4e",
+      "name": "85aabe6f-3f2f-5657-8848-e414d4e0ed4e",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "fa1cfa9b-30ab-59b6-b51d-4bd81a8beae3",
+      "name": "fa1cfa9b-30ab-59b6-b51d-4bd81a8beae3",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "46e18d08-833b-5880-b3e9-fd1aa884be78",
+      "name": "46e18d08-833b-5880-b3e9-fd1aa884be78",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "b6ba13ce-3282-5b82-82b9-2bccd0c23cd0",
+      "name": "b6ba13ce-3282-5b82-82b9-2bccd0c23cd0",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "77183ca5-155e-58bf-a571-20aabadb6017",
+      "name": "77183ca5-155e-58bf-a571-20aabadb6017",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "054cbfdc-188c-501c-bcab-6e6c7e17f16c",
+      "name": "054cbfdc-188c-501c-bcab-6e6c7e17f16c",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "4871d6fb-6af6-5a5f-8ba1-e8968e68c6b9",
+      "name": "4871d6fb-6af6-5a5f-8ba1-e8968e68c6b9",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "15cec5e5-db45-542c-87fd-193703a7fbcf",
+      "name": "15cec5e5-db45-542c-87fd-193703a7fbcf",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "aa755deb-1897-558f-965d-33b868fb4aa7",
+      "name": "aa755deb-1897-558f-965d-33b868fb4aa7",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "b66497e1-fd79-503c-baa3-e66e18ac493c",
+      "name": "b66497e1-fd79-503c-baa3-e66e18ac493c",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "832bf541-67c4-5f8c-8cc8-4124ffca97e1",
+      "name": "832bf541-67c4-5f8c-8cc8-4124ffca97e1",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "8233550c-8837-57c3-b58f-921a7c12fbfb",
+      "name": "8233550c-8837-57c3-b58f-921a7c12fbfb",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "2226419e-5501-53ea-a2d8-9af1156076ae",
+      "name": "2226419e-5501-53ea-a2d8-9af1156076ae",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "65f3ea9f-89f0-598d-b496-6cd2ef986113",
+      "name": "65f3ea9f-89f0-598d-b496-6cd2ef986113",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "ae6c7b9d-b2e9-5917-87cf-fba558640cd0",
+      "name": "ae6c7b9d-b2e9-5917-87cf-fba558640cd0",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "86cddb8d-2ffb-5b72-81ec-0ee8cb2160cc",
+      "name": "86cddb8d-2ffb-5b72-81ec-0ee8cb2160cc",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "c57db78e-2565-594d-9b47-f6f6072430f9",
+      "name": "c57db78e-2565-594d-9b47-f6f6072430f9",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "8d89495f-0be6-584e-8fa1-b559c90e8095",
+      "name": "8d89495f-0be6-584e-8fa1-b559c90e8095",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "7a0bb7e5-66f1-58b7-8e15-c58567a5664b",
+      "name": "7a0bb7e5-66f1-58b7-8e15-c58567a5664b",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "7899fac5-1520-5a57-ab8d-d2a8403ffce3",
+      "name": "7899fac5-1520-5a57-ab8d-d2a8403ffce3",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "d0fe848b-f4d1-5061-8512-7ef6bba481b5",
+      "name": "d0fe848b-f4d1-5061-8512-7ef6bba481b5",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "1ae02739-6931-51e4-9680-5f72895fe4ee",
+      "name": "1ae02739-6931-51e4-9680-5f72895fe4ee",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "5c2c6252-0aa2-506d-9174-fd543e99f5b9",
+      "name": "5c2c6252-0aa2-506d-9174-fd543e99f5b9",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "190bc157-8aa8-5669-aa5f-a0c90ddd12dc",
+      "name": "190bc157-8aa8-5669-aa5f-a0c90ddd12dc",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "868fee6a-3541-5837-9f2d-e6de61a5d5c9",
+      "name": "868fee6a-3541-5837-9f2d-e6de61a5d5c9",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "418f628c-4d8e-54c8-acda-ce4d1cc84a8b",
+      "name": "418f628c-4d8e-54c8-acda-ce4d1cc84a8b",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "c3d7dd57-7568-5dfc-9632-e005e9f89c29",
+      "name": "c3d7dd57-7568-5dfc-9632-e005e9f89c29",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "c142bb11-fe08-5238-b5ab-ac6375b28e4b",
+      "name": "c142bb11-fe08-5238-b5ab-ac6375b28e4b",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "dc8c1154-f564-5458-8f24-726ecfb57cac",
+      "name": "dc8c1154-f564-5458-8f24-726ecfb57cac",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "894a1de8-b59a-531e-8d5c-8e39cdf34274",
+      "name": "894a1de8-b59a-531e-8d5c-8e39cdf34274",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "53fed12b-cc78-567e-bb24-dcac01149380",
+      "name": "53fed12b-cc78-567e-bb24-dcac01149380",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "1c82c217-04d5-5845-85fa-72e4c122bd8a",
+      "name": "1c82c217-04d5-5845-85fa-72e4c122bd8a",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "6b1cffaa-b93a-505e-9746-7f3105e48bf9",
+      "name": "6b1cffaa-b93a-505e-9746-7f3105e48bf9",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "0cf4a519-0426-54c2-a18f-21acce34b648",
+      "name": "0cf4a519-0426-54c2-a18f-21acce34b648",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "219b7c86-7e1a-555a-9286-370b04c8ea98",
+      "name": "219b7c86-7e1a-555a-9286-370b04c8ea98",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "6265b6f1-72ca-511b-9fac-7b7269dacb0d",
+      "name": "6265b6f1-72ca-511b-9fac-7b7269dacb0d",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "30375424-125e-5965-b235-ccf3bc2635de",
+      "name": "30375424-125e-5965-b235-ccf3bc2635de",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "e33dc7d7-47a6-5979-bd9b-8a95ad84ab66",
+      "name": "e33dc7d7-47a6-5979-bd9b-8a95ad84ab66",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "5d011cc1-6645-59fb-9766-163df44b1177",
+      "name": "5d011cc1-6645-59fb-9766-163df44b1177",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "4761147c-5f58-5e09-b4b1-d19035d0b2a6",
+      "name": "4761147c-5f58-5e09-b4b1-d19035d0b2a6",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "f51cd53b-31d5-5b39-8dc2-e8cd44def5de",
+      "name": "f51cd53b-31d5-5b39-8dc2-e8cd44def5de",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "b794b9c1-cf74-5dd9-a127-5f31b80d326a",
+      "name": "b794b9c1-cf74-5dd9-a127-5f31b80d326a",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "aa2e8099-6792-5394-920a-859dd5e0c9af",
+      "name": "aa2e8099-6792-5394-920a-859dd5e0c9af",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "ccfa4fee-c3dc-5256-b330-1f40858c2b78",
+      "name": "ccfa4fee-c3dc-5256-b330-1f40858c2b78",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "34bdbf6f-f3f7-5656-9cfe-d1fdb1d1f13d",
+      "name": "34bdbf6f-f3f7-5656-9cfe-d1fdb1d1f13d",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "e1f06183-df21-5036-b5ea-c399fa210ff5",
+      "name": "e1f06183-df21-5036-b5ea-c399fa210ff5",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "73894535-eb34-5f99-afd0-488d731f2a39",
+      "name": "73894535-eb34-5f99-afd0-488d731f2a39",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "3d14c783-e623-50f2-a66a-0641c356df1d",
+      "name": "3d14c783-e623-50f2-a66a-0641c356df1d",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "04afd2ac-d08b-50e8-8238-9c87bc995574",
+      "name": "04afd2ac-d08b-50e8-8238-9c87bc995574",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "014c7b3e-0847-59c5-9cc9-53c383684cb2",
+      "name": "014c7b3e-0847-59c5-9cc9-53c383684cb2",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "e08b66c5-614a-5e6e-8a55-2abbd070d163",
+      "name": "e08b66c5-614a-5e6e-8a55-2abbd070d163",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "f9adfbe9-456b-5c5a-843b-09bb0aedfc28",
+      "name": "f9adfbe9-456b-5c5a-843b-09bb0aedfc28",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "df0e384e-ffd6-5f23-a8df-d12f4df6d0bc",
+      "name": "df0e384e-ffd6-5f23-a8df-d12f4df6d0bc",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "8ef6f695-e212-5cdd-ad50-df58df70517c",
+      "name": "8ef6f695-e212-5cdd-ad50-df58df70517c",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "35ca35fc-9e13-5a0d-877b-e71f480576ec",
+      "name": "35ca35fc-9e13-5a0d-877b-e71f480576ec",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "48c76857-b0b2-5326-8154-25c5cdba0790",
+      "name": "48c76857-b0b2-5326-8154-25c5cdba0790",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "30f66ba5-61e8-5f8b-9ba3-a7207fe6d1be",
+      "name": "30f66ba5-61e8-5f8b-9ba3-a7207fe6d1be",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "2a0b3e32-ebe9-570d-adfe-c96a00ec39c5",
+      "name": "2a0b3e32-ebe9-570d-adfe-c96a00ec39c5",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "d659cde7-020e-53cc-8d64-45a63db7cd64",
+      "name": "d659cde7-020e-53cc-8d64-45a63db7cd64",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "4be55206-476b-5116-b98c-fc5cf598d536",
+      "name": "4be55206-476b-5116-b98c-fc5cf598d536",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "c15975e2-b15d-51cb-b2c4-5dea03fb4c36",
+      "name": "c15975e2-b15d-51cb-b2c4-5dea03fb4c36",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "2cccd1cf-ddb9-5112-b443-956fcc7f9ee3",
+      "name": "2cccd1cf-ddb9-5112-b443-956fcc7f9ee3",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "fc9c9016-c84b-5131-b045-1e213a8cf9d8",
+      "name": "fc9c9016-c84b-5131-b045-1e213a8cf9d8",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "325cec69-5b15-59fc-a421-69adc5a4787b",
+      "name": "325cec69-5b15-59fc-a421-69adc5a4787b",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "21b84766-d214-5594-a2a1-11cf471f46ff",
+      "name": "21b84766-d214-5594-a2a1-11cf471f46ff",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "0b9a3ae4-7880-5a6c-a667-c938d2314cdf",
+      "name": "0b9a3ae4-7880-5a6c-a667-c938d2314cdf",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "4dee8d83-1a8a-5ccc-93a4-105f815a6400",
+      "name": "4dee8d83-1a8a-5ccc-93a4-105f815a6400",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "3162b1b4-1d82-5ccb-818d-e4c044f6cd0b",
+      "name": "3162b1b4-1d82-5ccb-818d-e4c044f6cd0b",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "df298c4a-4f49-52dd-80cb-38c4f225aaa3",
+      "name": "df298c4a-4f49-52dd-80cb-38c4f225aaa3",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "4d2a90c9-390e-59f9-ab6a-c163a385ce6a",
+      "name": "4d2a90c9-390e-59f9-ab6a-c163a385ce6a",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "3861ed00-86cf-5c40-a63a-3a9e42b75cbf",
+      "name": "3861ed00-86cf-5c40-a63a-3a9e42b75cbf",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "0030c8b2-c43b-5179-9510-778d0dac371f",
+      "name": "0030c8b2-c43b-5179-9510-778d0dac371f",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "d108af59-fddb-5380-b665-08764b03a2be",
+      "name": "d108af59-fddb-5380-b665-08764b03a2be",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "395f8480-82b2-58b3-971b-1a3abe7c9aff",
+      "name": "395f8480-82b2-58b3-971b-1a3abe7c9aff",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "v1",
+      "%Name": "31d16c13-7b4c-5798-871a-246811adb540",
+      "name": "31d16c13-7b4c-5798-871a-246811adb540",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    }
+  ],
+  "gridX": 8,
+  "gridY": 8,
+  "height": 96,
+  "layers": [
+    {
+      "$GMImageLayer": "",
+      "%Name": "e88e844b-e780-5281-a62b-eabf3ab84fd7",
+      "blendMode": 0,
+      "displayName": "Original pixels",
+      "isLocked": false,
+      "name": "e88e844b-e780-5281-a62b-eabf3ab84fd7",
+      "opacity": 100.0,
+      "resourceType": "GMImageLayer",
+      "resourceVersion": "2.0",
+      "visible": true
+    }
+  ],
+  "name": "spr_char_ln2_enemy_type_4",
+  "nineSlice": null,
+  "origin": 9,
+  "parent": {
+    "name": "Characters",
+    "path": "folders/Graphics/Characters.yy"
+  },
+  "preMultiplyAlpha": false,
+  "resourceType": "GMSprite",
+  "resourceVersion": "2.0",
+  "sequence": {
+    "$GMSequence": "v1",
+    "%Name": "spr_char_ln2_enemy_type_4",
+    "autoRecord": true,
+    "backdropHeight": 768,
+    "backdropImageOpacity": 0.5,
+    "backdropImagePath": "",
+    "backdropWidth": 1366,
+    "backdropXOffset": 0,
+    "backdropYOffset": 0,
+    "eventStubScript": null,
+    "eventToFunction": {},
+    "events": {
+      "$KeyframeStore<MessageEventKeyframe>": "",
+      "Keyframes": [],
+      "resourceType": "KeyframeStore<MessageEventKeyframe>",
+      "resourceVersion": "2.0"
+    },
+    "length": 460.0,
+    "lockOrigin": false,
+    "moments": {
+      "$KeyframeStore<MomentsEventKeyframe>": "",
+      "Keyframes": [],
+      "resourceType": "KeyframeStore<MomentsEventKeyframe>",
+      "resourceVersion": "2.0"
+    },
+    "name": "spr_char_ln2_enemy_type_4",
+    "playback": 1,
+    "playbackSpeed": 0.0,
+    "playbackSpeedType": 0,
+    "resourceType": "GMSequence",
+    "resourceVersion": "2.0",
+    "showBackdrop": true,
+    "showBackdropImage": false,
+    "timeUnits": 1,
+    "tracks": [
+      {
+        "$GMSpriteFramesTrack": "",
+        "builtinName": 0,
+        "events": [],
+        "inheritsTrackColour": true,
+        "interpolation": 1,
+        "isCreationTrack": false,
+        "keyframes": {
+          "$KeyframeStore<SpriteFrameKeyframe>": "",
+          "Keyframes": [
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "a964f1f5-8a9e-54c3-a1f3-2527510ba75e",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 0.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "7164374b-1ca4-5441-b7f4-922c3198be49",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "bce940fe-87cd-5547-b805-541e1e32e874",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 1.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "77cca778-3851-5a2b-8e3e-cbcea957f696",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "e8406e93-5bf0-58d8-84d2-930ee37b6178",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 2.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "79c992a7-aeb2-5a41-a9a2-00ac1da70195",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "35779ef2-8bfb-5bc6-a7e5-3c15ec4d1d32",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 3.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "edf8447f-cf89-5ab9-9de0-6c924e022336",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "5cf43d85-8790-5029-92a7-72d693da8117",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 4.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "48e8dc94-c04e-5cc7-bbfc-ec1d00f47736",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "cf19fdb0-1c26-579f-93fa-9c0fad82946f",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 5.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "5c1b8032-fc40-512b-9011-f3674427214c",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "6ee96605-645b-5ec4-beb9-6b012ac5925a",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 6.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "47fb1bfd-21e6-5061-ab6b-37080ebe91f7",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "5909e689-8438-589a-b441-e47b87d3e4f6",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 7.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "a27fa089-dd86-5665-8e0c-1544c356699f",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "80d2a38f-e9e0-5d24-b912-3b7db8f2f8dc",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 8.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "9e5a96fd-c205-5935-96ef-6b1c96800ba8",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "2ea053d0-8d8a-564b-87fa-f7d9c9bbf986",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 9.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "5054dcc5-7b52-5a15-9474-c1b1105f6c07",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "3c5a6788-890c-523f-8a4c-5dede8f13c2b",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 10.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "2a082d5e-c0b7-5a95-81a0-4fbf35d855de",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "5f33af31-8e09-5112-a579-bd6f11d1e087",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 11.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "0790e5f5-42c8-50e0-9972-4233380d0bd7",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "e911fa8a-f5b1-500c-8d0e-d605a8a6c4bf",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 12.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "d6b84a9e-84ef-5158-be51-efe3fcf54f46",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "8971fcc0-c0af-5dd4-a094-77fc7161e1e4",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 13.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "3465fc67-e2fa-5a14-9161-facb0e8d68b3",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "36255edc-67f8-5409-9bda-fc9d7b98f094",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 14.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "3dc5a34c-cd9c-5ce2-a15a-367d57c4abd2",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "5027c72b-17c0-558e-9113-f99df9cf1bbd",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 15.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "bac2ff0b-5142-5fb8-8736-b4f07c2aa2f4",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "5d4ecd2a-8734-5789-8af5-67635d892c10",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 16.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "963d849d-7d45-54eb-9c6a-45aa9d88b8e5",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "2e765a77-a9fb-529b-bd48-219fd75a2267",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 17.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "b1c6038b-39b0-563d-b5ab-c6d4e3ab26eb",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "c75307e0-3abb-58c0-8bc9-341a3210e1a5",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 18.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "cb0abac0-3265-5a14-b02c-1c8e4911cd0c",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "752c48f7-f7bd-599d-9342-a0e0db57d0b4",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 19.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "db987381-e3df-5261-a280-28b07c7c95e5",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "9e1769ef-5d6e-5c80-989a-62d5e1de7f7d",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 20.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "97a395a8-4294-5be3-b3d1-f549a45b7294",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "2848e023-9d46-52de-8d4a-921f59721dae",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 21.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "f002be40-63cf-5b05-a542-47b0098decd1",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "c6d58aa2-e72b-5b5e-ab9e-a2b3f55f436e",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 22.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "47696e2f-cda1-5cf5-8acc-b1a923e8b82d",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "6f10d1e6-596e-5f18-bebf-22c3fbfb5f75",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 23.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "ed51f58e-b6d6-5053-bec3-9f94323d1f25",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "aa7f1542-3e19-55da-bef2-49b8eafdd996",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 24.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "3079282e-22c4-50ac-af0a-b112fff32a8d",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "760695df-4cc9-585c-9ba0-ef84491f63fb",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 25.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "5136a68d-7650-56a4-b93e-59172fb95a5d",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "b2465ac9-5159-5a54-93b4-34e39a663098",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 26.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "5ad969d8-c6f5-513e-99c2-2c2fed14df20",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "4ac9fc69-8dd8-5850-92a1-0edb33777fbf",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 27.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "7a71432c-b05e-534a-8220-9b1fffceafcd",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "82515e2b-e068-5f90-afbf-1c0815d74733",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 28.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "0c014cc0-e193-57db-83a3-2af3784b18d9",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "e5b0bbe8-3e99-531a-8140-6282461379c1",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 29.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "218c700f-9ee4-5313-8001-f21b2de66a02",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "21444143-effe-52f5-9f64-9e50809a6aaf",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 30.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "93e0232c-b415-58ec-b615-108524ef1138",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "b1cf7e05-f0ba-5c87-a57e-666a701f0f48",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 31.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "bd0bad9d-b29c-5001-8d09-f671c4a6c71d",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "f18549ac-a275-5dfd-8bad-b30097615d11",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 32.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "890d98a1-0097-5669-965f-4faa11e982b8",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "310e13e9-337e-5be9-8e8d-f86f64a212d1",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 33.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "6c2f7b21-9400-5013-85a0-173564f3de44",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "1f1bfde3-9f2e-5a30-86e9-99a8a4c54f4b",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 34.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "ce20c51f-375c-552d-8f9a-0095e1844a1e",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "f7c47cc5-92e1-5460-b47e-f49f8d68a199",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 35.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "6566a3bc-5416-5619-9040-eefb0f3a87ac",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "8518ef63-4ae9-5f90-b154-ad94a9ce5be4",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 36.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "ea0251b6-b7a9-5220-a10d-e4af9029348d",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "fef8b2aa-edc1-5f45-91ea-9a214db6fd10",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 37.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "b2c4c85e-4de6-5a1d-b773-1ebd7df4fe47",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "b55c5bbc-966a-542c-b784-bd96c66805b0",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 38.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "f5b67d82-c4a1-5200-8f27-d7798665db4f",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "de2f7666-6e4d-5868-9c8f-fcc93a727b4a",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 39.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "fbcbada1-0856-53d0-bfa2-e75251ed3ccc",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "c0586be2-5642-56df-b2f3-36090de28373",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 40.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "88f80265-2c4e-5bff-996c-5a8d3c2b949d",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "4160f8cb-73b8-5b7b-ae16-be28726d22eb",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 41.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "069db4ed-fc70-5be8-aa87-263636298ecd",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "d4ad9e48-abce-5726-9673-6c9640d6a7e7",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 42.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "2261e155-85cd-54f1-8223-e08761ae119a",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "8ff4b144-e48e-5bb3-954d-ea91285f52e1",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 43.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "48447056-abd6-5a96-b415-26d9156f6650",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "dbee8ef2-aca5-5cde-ba57-e1a6d6b7810b",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 44.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "6843647b-e32f-5fa8-8110-b6cacc4f870e",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "daab1e2f-0472-537f-8dbe-018e03469595",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 45.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "54e05387-2316-5209-822c-44ba71e3a3bd",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "7db4bb0e-20e5-5bb7-980a-53e57bb575e8",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 46.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "9dff8302-0d25-52fb-b11d-dc64d53d0933",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "1f65fbf8-32fa-56d8-99db-4a8660a68740",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 47.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "0c1ad337-84ba-5a2a-ad56-7fc873622e44",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "5cab3d7b-d095-5ec3-869d-8dda9b901807",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 48.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "c9206af5-84bf-52f6-aef9-5ca6df10d813",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "24371029-785c-53d6-ae44-c1817efcf8ae",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 49.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "82e0d905-2d7e-5810-84ea-1ca12e899641",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "62f5b3f0-06bd-59a1-9229-61db2d44b05e",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 50.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "85f85c00-bbde-507d-9738-d9545dafb706",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "ea6356b1-e414-5b27-8585-87e4e6f21677",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 51.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "0e3e536b-8749-567b-8ec1-59ef46088874",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "0c92234d-a6c2-5a32-b4f1-abad93ad0a08",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 52.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "2c0a6a73-be89-561a-90b2-8abd265b4160",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "4d420a6a-402a-5bd0-b35b-485616999916",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 53.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "7142dcbd-d796-5567-9d5a-81d94e6b6023",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "0595db2e-69da-58c7-b2a5-93ae281153ae",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 54.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "09c9b546-3cab-5aa4-b505-d39f1cb05a3c",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "321c298d-7630-5d1f-9fed-caeeae3cc473",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 55.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "7c3e6733-2bee-5c36-a2bd-f128dc99a3f1",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "d22f4448-98a3-5619-a1bc-fe98ddf80b1d",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 56.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "06f91acc-220b-5492-a262-3fb7cfcb2972",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "509321ab-e571-5b05-8dd4-3ab7bad714bd",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 57.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "27477a87-0dab-5755-94d7-72c7d575ef05",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "ab4f2392-731c-5683-9a5f-3888838e6ca5",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 58.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "b0783b38-8dcc-5f9b-9cb5-dbb183c732d2",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "25b148c2-cb0a-5605-ba92-da939ab65d55",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 59.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "18c23980-05c4-5f18-a2ff-10f1b928a2ed",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "191be516-7533-569a-92aa-c90ada47ed87",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 60.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "c60807fb-423e-5e1f-82e7-654982f555f1",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "8ba7fa94-39e2-56ce-adf5-32829f19d70b",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 61.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "f557d03a-ed01-5aa8-a4db-91d47b24feb0",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "433fa3af-79d4-5c54-8b13-8d9c8bc0ca4a",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 62.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "aa88def6-7bbe-535c-adcd-02ca43ad7eda",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "3a4fa088-0a8f-51e0-94a4-74707f7b45db",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 63.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "6c45771e-31c2-5b58-b04a-18d8f6ed71a4",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "85152dc4-8a6e-5127-a260-a3e9cbc3e79f",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 64.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "86c1591c-577f-5bb8-b0bc-2ca3681e5980",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "e9d8625d-60d1-5ced-bc72-18d9aac132da",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 65.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "bc31c44f-6cb6-55b5-9923-e08ada3728c3",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "ed047909-3313-5079-a5a2-ef115b4fbc6f",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 66.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "e7eefe86-2d8b-5a6f-a454-2b1e27c7bb58",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "b1f970f8-ed4c-59da-8c24-35e6b578da79",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 67.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "a28568d2-da67-5e48-b1ca-58dae05eb6b6",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "764dab02-85bb-5f34-8cd8-4aeec284b096",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 68.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "db478a69-bf15-5de2-9f2a-b65c500f5ad8",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "9112d9c6-dacf-56cf-85d4-b842b589c7d5",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 69.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "08b216b6-efd3-5edf-8102-2e9036c3beb6",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "dab44abc-21cc-5c6d-8815-94ce2b55f8c1",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 70.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "5324b246-1aef-575b-8721-41f84bb4d789",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "0ff7ac97-3f80-514b-be55-92de1a4744ee",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 71.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "c8a8cca1-f2d3-5f55-9016-d7ef0ae5d475",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "6ac6e315-f34a-526f-91e2-5c5f2807b6b5",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 72.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "e0996793-29bc-5a66-8daa-ddfb31974eb4",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "bec2bfaf-c792-5d57-a531-3e014590215c",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 73.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "9160721b-8ec2-510e-a399-3167c4d68250",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "ad9ca89b-78e6-5554-bc0e-3f67381be0de",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 74.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "58821ba0-80e5-5d96-842d-80f462a6cad7",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "d14a46fb-54d4-58ec-8d8e-43c3710e3567",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 75.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "294134b6-0864-5c02-a4e0-f062dcc90d05",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "43b8c2f6-18c8-52e8-929c-821a341cd94c",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 76.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "192b5549-1198-5c97-968e-3e72d2110e16",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "7b237f23-aaf5-573f-9cdd-bcc89b87521f",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 77.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "a0e8ed7f-eae2-5b78-88f5-634251b2454f",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "bc7b0581-b440-5d76-9e30-7a4fec653b77",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 78.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "d0c15e18-82ef-51fb-a61d-6d71d2ffef02",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "c48a9063-9e94-54d8-8723-2d32347ea121",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 79.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "3061d349-15bd-59de-8391-7378404d6f0c",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "1ef23e95-06f8-589e-a060-c5b74cb5490c",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 80.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "3a9a796c-0039-573c-b91f-15e693fed7c1",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "93ab7455-b2fd-5998-857f-f149ff1a4704",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 81.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "4b8216cd-5251-5cc8-87a2-f600fc5797fb",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "b33b1e34-1adc-54ff-ab4a-d271ea311e93",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 82.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "a843cddd-3da0-5016-99aa-b2b7c0663bcc",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "a0a479f4-6f28-51f1-8aae-216e073e4df6",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 83.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "ca1beba7-a5ea-5053-8bbf-1fe8f6d02029",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "700b7f81-e8c0-5416-a63f-61c6f854d21d",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 84.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "5ac1991d-e84a-5640-b94f-d84b40232f81",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "2f6e502a-317e-56e9-8260-2b3fbea54f34",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 85.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "ccbcf44a-de86-51f1-822c-e83f45ec18ef",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "217b32c4-fbf1-57ae-93f2-2318361bbfb8",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 86.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "7360eace-14b8-53b6-8260-ec1121681dce",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "36c3397b-1393-5d71-bccf-cca41359847d",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 87.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "2b648b13-1627-556c-9311-588f9cd95e96",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "a74a95f7-4cfb-57ce-a501-9922ae4961bb",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 88.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "201f9ec5-916d-5f73-b6eb-671a09f76127",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "3dc7b642-d525-53a9-a941-47380e151db9",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 89.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "ba9cdadb-ccda-5bb5-8b5d-c9e79e12e920",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "2be31e5d-0b53-5ea0-9634-d5d00a6ea38e",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 90.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "e5bfa961-c492-5b79-a900-d14dba2bb40e",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "512ed145-e2c8-55ad-a3de-80aa1144db23",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 91.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "7b2f2a03-79d8-5793-be5b-1917e9bcf7e5",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "1e9fc160-890e-5e6c-851a-3e6d29bf7312",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 92.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "f8ab6bfd-7745-5895-b360-22a5cb4b9458",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "d9586b28-cf17-555e-8f62-64563a91fb17",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 93.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "4ec63e79-3a11-5531-969f-b15e8302d9e7",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "55f9773a-70bf-5416-9782-484f369c81b3",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 94.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "3dee823d-ea6b-5b32-86a6-4d19234e176a",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "fed41e6b-cb18-54cc-88b8-28f0519ae1bf",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 95.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "0aa1546b-e12b-5517-8b00-61559742d7da",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "40c5f86b-ba10-5641-8f51-bcfd7afbe54c",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 96.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "675e1e14-858f-5999-84ca-c27907a18e3b",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "680cdda9-ab8a-514a-9d43-980d78ca209d",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 97.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "91a54166-2c64-5165-8263-c1af3b2aaacb",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "5a5472a2-cc22-5934-9cf9-6508746c100b",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 98.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "53d03a81-cf50-5b3e-80e4-057086ffb750",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "fd8a4562-efc2-5cc9-896a-36f9c17a251d",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 99.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "d78163e7-0aa4-58e5-965f-bf3d6149f623",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "ccd8f5f3-80f0-51fd-bc29-f4e307e4bac5",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 100.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "9d7e86a6-2dee-56a0-9353-c9426d370124",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "7c20434b-9543-592f-8d52-7b6a5322b148",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 101.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "8ff48446-639f-5a13-bc93-1f9bc2de113d",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "dc1abf63-d8ea-5cb2-a5b6-b9209ebfe494",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 102.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "f7736482-8b34-53b7-aede-ab03d3de3882",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "c302e799-4e7b-59bb-8b9a-25b2e0627629",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 103.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "e19f3368-d4d5-552e-8b75-a531acbb606c",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "12c03aae-cabc-599b-81a2-ab4ab8f044a7",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 104.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "2ca156a8-2067-52bb-b641-4ad680fd0843",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "b5733e90-d7eb-55f0-8fa7-1c581cc18cad",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 105.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "d9521057-4273-5eb0-9fdd-613342f2696d",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "2e0058d7-9a12-58d1-b492-70e7ccde00ba",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 106.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "d03225df-47dd-506a-b6c4-6b376d6f9a95",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "5b8ef6c2-6bbe-5295-b8e3-8d37971fb722",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 107.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "169cd1f0-aadb-5ab4-886a-ddc45362c69c",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "1cdf6280-aa97-5707-99f3-7829199da176",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 108.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "cd78ca8f-8e4d-5fee-ac12-e57ab7f3a8ad",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "5feb9b34-a75b-573b-865c-4777d7d1efd2",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 109.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "b1828a1c-63a0-5ef8-a321-a5a19c5ff620",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "e91b4e30-c267-51ed-89d0-dcefe021433e",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 110.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "6bf5b767-6723-55f5-8c86-dfed8e3ab6d0",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "9cfca0af-1ae7-543b-8678-55e616b381a9",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 111.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "4691bbca-4acd-5343-b045-cb75f561bdd5",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "d41c3d87-c8ad-526f-ab49-1feb0a1c9f0a",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 112.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "60d4cd15-7230-5433-99a5-bbdc49f370e7",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "b526a96f-9e38-593e-aee1-bf4474d8c391",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 113.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "05e85cc0-cf94-5010-b744-b2a1409edfa6",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "f957d297-93ec-5c9f-9b76-971092e40114",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 114.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "ac989234-8dfa-5bc0-b5c2-045449d72bbb",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "d958585c-bef6-5890-95ed-0e4d451ae7b5",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 115.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "03f42098-d4d6-54db-a5fa-3408a8515dcc",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "a9e632d4-14c9-55f8-a7e4-7f0ef94130dc",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 116.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "fc641992-85c3-576e-a57e-97f66bb8cfe2",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "4f285ee3-f817-5aed-9dba-2d3de0277e0d",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 117.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "0de9af0d-0611-5f3a-ae8d-183b97f49ac6",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "e1133def-824a-5c51-806e-18d8ed30983b",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 118.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "d48616d2-314d-5f8b-8937-56173ddc6f48",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "a8ae8ec1-999f-5459-8da5-114fb4bcfca0",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 119.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "b01d9a24-0183-5a54-ba37-d019f89292d1",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "9b4425d3-df5e-5d4f-8e2b-0ac199bdb8d0",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 120.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "1bfd6857-8ed2-5dc8-894b-752699784a9d",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "7b396dd0-a7c2-51bb-9d5c-98bf9de865ad",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 121.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "43559f5e-9f59-50c5-ba05-1c9a54e8c91e",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "82987cf7-50b0-5bb5-ba88-a9c9db7a8f5b",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 122.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "ab118eba-6e2b-5cce-b20a-ca1bb8d48da3",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "407e3c3f-7868-5ba3-8aeb-583227e59868",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 123.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "a54506ca-63ee-58f4-842d-69dd93af7035",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "e232f5f8-4c47-5964-baa5-3295a9bde707",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 124.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "16beb77e-3731-583b-9939-8a892c2d5b7b",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "91e70bb3-055f-5232-8026-15e124fcddd9",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 125.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "86e7896b-7a73-5713-9c8a-24089ccdfa2f",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "10a01429-4e6b-5f6b-bd02-a9e57ae39e43",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 126.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "4d43bcf0-569f-573a-bc3e-305b1ef67233",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "2bee535a-4eba-5ac5-9dc3-db573bcfe3c7",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 127.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "29869140-5d0f-5f4f-8181-e3eccaf53e1b",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "89d187bd-fecc-58b6-8873-8cb04d8598f9",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 128.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "0a3fa61c-ee15-552a-ae46-c718bcec63fc",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "92e94bd3-14ac-5005-a829-25583d110d84",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 129.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "61545d2e-2ce5-594b-991b-acf44d20a8dc",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "9eca307c-5359-5601-82fa-3d9e428023fc",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 130.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "74e517b2-1dce-5d81-a08c-a945dc0019ca",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "943e0cab-c0f3-54eb-843c-234c9be95a65",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 131.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "cae7b31a-0c6f-54a1-81fb-c191dd2aa544",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "00fb2fc8-f78f-5f28-9f01-aecd74b6f264",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 132.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "4b50604f-19a9-52b1-8763-697fb6e0fa6d",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "d01f85c1-87cd-5bec-9fff-6d54b69fba7f",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 133.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "15ad8865-fa48-5665-85fa-6b52214b8dfb",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "4ed3bb0b-68e7-5820-a8d1-fac6cf1f0fb3",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 134.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "7c1ebc6e-23db-5730-a472-95373d5630e0",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "0df167a2-c68b-5698-85a1-eb9dc34bb624",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 135.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "de02c73b-d5da-5ce3-a98a-b6cfa667a28d",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "b102c188-7b39-5082-9ec8-1e625b976295",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 136.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "f510809a-cfe8-58c1-bd79-889358e7a9eb",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "0089442a-0d4c-5c8e-bb2a-c26ecb22b0d0",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 137.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "addd92e3-80a2-5eca-96c6-605f3b8382f8",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "6d9054c0-68ee-551e-8057-7ef56d389d01",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 138.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "8a515223-0af5-5807-9d56-4c9316f98a2e",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "c8c45b30-fc95-5929-a211-c677b96719c8",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 139.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "bcd184a0-92f3-53b4-b47b-b8a972639cf4",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "96c19b85-1abb-5358-8da0-096666136f4d",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 140.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "56490f5c-515f-5bf3-b8df-2fd7260f9091",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "6ef59e03-3f91-5d4c-bc48-4294458268d1",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 141.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "765c8aba-fe9c-5746-84e0-747289879def",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "7e230570-f8c4-542c-8f78-74f1eb3b6d10",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 142.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "756d0bf1-9c92-5fba-ad81-c63f1d6496d3",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "d884f21e-d28d-59e5-a675-03da29cd66f6",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 143.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "cbfc196d-88ad-5d54-850f-2c199e8d3ae6",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "bade845e-705f-56b6-9751-4d74c9addea8",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 144.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "a07b37be-7cbc-53d7-a798-65fc97c8efa5",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "82c8fac8-e425-5a1d-ba30-9f3ed1c7776b",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 145.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "96026315-82b8-5df4-b8b3-a76605bbfe5e",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "fdf2b7b3-c8cc-5278-ab12-bedea6ba9ff9",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 146.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "8ebe82fe-3d9b-5f4a-bb70-760fd53b8873",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "4b7ac719-badb-53c3-869d-2658d08bdfab",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 147.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "93a7a511-96fa-5c17-ae92-c0149ad2852f",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "df386225-b478-55e5-aeb6-2d928e3b2e20",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 148.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "c5590797-37b1-5abc-b5e0-ab919d40cca2",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "8d9c574a-8e55-56b8-8608-5d48410a84e0",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 149.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "fbe932bc-027c-5ef2-8abd-93e6ed4baf19",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "8fe7dd3b-927f-597b-b255-dd1294cbdb95",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 150.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "762f01c0-b946-5314-a6ee-116e37c47446",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "a5bc667c-8f3f-5fd2-9eed-cbae906e3cfe",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 151.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "07b76836-c58e-59a6-9187-7956b7c8be3a",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "ecd6bc29-ef50-5c7b-8508-ac3d68dcc812",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 152.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "f34d99ff-4e88-5c13-8fe1-1d94d3a1c845",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "da0bbc49-2dec-5e6d-a3a4-f0d4bc5d99c3",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 153.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "357f4bd4-6f47-56dd-b651-521ccb751540",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "535770f3-cc01-5dc2-8310-f3284c5bff2d",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 154.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "8ce2f4a6-8a58-5209-910a-8fcf6c3f6f29",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "8b5cae3c-68d0-5dbf-b1b3-b3544eb520ca",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 155.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "595b60fb-aa43-5002-abac-225707ba5b7f",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "0eba0bb5-f113-56f1-a378-c523f0c9be50",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 156.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "611b176c-9466-5c90-8a2b-e4da35cc55e1",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "d8722191-fce4-5c45-b318-129dc14a831b",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 157.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "8a722611-1964-554c-9e2f-e30ea1c1fff3",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "158773a7-7fc5-5ea1-9c50-ebbc23597599",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 158.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "d04c2dd1-4d46-5dbd-b314-5a24ec6564cc",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "ef7e8629-c805-58cb-8594-f87976b8a8fb",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 159.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "bab90fc5-e73d-52b3-9cb8-187691a45f22",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "2ee844d1-a788-5c1d-9212-8da396540983",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 160.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "8b1cd32f-c7e5-58e2-8a34-41af9a888183",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "a2437147-cb66-5950-b6ae-b884bf48ad5d",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 161.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "7aff17fb-1475-5b4f-884a-db16c86acfe8",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "1ce6df56-db57-5c6a-9bf4-8c63eada32f2",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 162.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "6f52b709-4ad2-54e1-958f-2821815775bf",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "33351002-bd47-506f-8342-67a4e9294d08",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 163.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "dafb4221-c174-5249-b575-acc3c37945f0",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "55d23e2e-b2c0-5941-8ee7-d2d39c27c03f",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 164.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "efdadb0c-d1d0-5098-bfcc-7845c827408f",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "5e28eaa0-c2e6-5b82-b9c1-b2f704aabd36",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 165.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "12bf3154-ad2e-5766-bc3b-2fccc680ed28",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "377505a9-4338-5926-a38a-b871e175c7d4",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 166.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "c340fbe0-47bd-53b9-a888-a52c5158ecf1",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "620eb9d1-412a-5b71-950d-c550b2fd893f",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 167.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "f5d3afa4-0e0e-585b-a793-023dfb39c7f5",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "49230e68-9073-578b-8bc5-4f03473c02da",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 168.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "0d30da0a-f610-511c-963d-8c1809798028",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "b08c5dfa-9c18-5db5-bde9-0bda0ca01ec6",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 169.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "b67a9a93-1280-55ff-adcd-20bb08e1cfcb",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "94e8d6b7-2f8b-5fa9-a80a-1386d36be33d",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 170.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "95f9db05-dc64-5b15-8ecd-9c0700aa9d69",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "d879227d-b0a3-504d-8c8e-e28e23a52c86",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 171.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "69de0f81-fdf2-54e0-b45f-9ddad76ed0e5",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "6bac6a97-93c1-5585-88b0-82107bbee7ef",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 172.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "82920eb3-1331-5e4a-8795-fdfea0ced2af",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "c8a5888c-106b-533a-80f3-60650e2fabe3",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 173.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "907f9b6d-1617-5b46-9f63-d04f0c69d1c8",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "9d8fe27b-dfd7-5447-a207-5388bb377d63",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 174.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "a7f37edf-cc83-54a8-8c75-d371ae668b52",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "90e505da-5a5b-58b9-a06e-ad115acf9cfa",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 175.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "5479489a-c4aa-5abe-8532-d025f87a251a",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "5bd947c4-c04e-57b6-9d9c-73018aaca3c6",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 176.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "29ea8dd3-8ae5-5cdd-bb10-603f16cc1e95",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "d7d38f35-a709-598d-b4f5-1e8ad5e0d4e9",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 177.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "cdac185e-3c23-5496-8015-64dd910f490a",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "5e46d35c-4d07-5245-bd57-e8ccc59ae066",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 178.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "91762ca5-14d8-5a70-9d65-7aa31267aa2a",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "6acc2307-033b-581d-b827-26e26a96c70b",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 179.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "b60b83b5-7e9c-569e-bce5-ad22852df323",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "5851f107-87df-5b29-a2c7-e6e33c74a4e4",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 180.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "b24fae4f-4853-5ccb-8bb0-bd618c8146f1",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "500dd3b5-a164-56ec-a322-064c1452246c",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 181.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "dd8dd083-b040-5c3a-9c7d-d2bd6b38e88d",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "6838038c-ecbf-595d-a765-5823a7060374",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 182.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "be74b92b-d698-501f-a009-09b3a84aca8c",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "585d2d72-d014-5890-b005-150010fd71d1",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 183.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "7aa793c9-59f4-5def-989d-249cd2470cb5",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "6e9cf6a9-fa11-5ac2-bc6f-8c8acbf9d253",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 184.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "3839ad0d-e60c-5c0a-ba50-6a75e4f45bcb",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "3e5eef91-34da-5f5c-8d88-c7f08bc0d774",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 185.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "4128d96c-9c13-5dc4-839d-161245541cc7",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "751a2ce4-54b4-5407-847f-f8b49e030367",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 186.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "11ce570a-ab87-5d75-8628-6901dbef4140",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "a8e11b6f-1645-5be9-aa67-29c365ecd9e0",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 187.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "90879953-6f58-521f-8504-6722ce9739f8",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "4acaab2f-cb0c-5218-89c0-4094e8c71439",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 188.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "56cb1031-44ad-50b6-9ae6-5ad790458dde",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "b1fd58ae-4b74-550b-87f4-f81587961fa8",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 189.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "c2d50e7b-6cf9-5e75-8bc1-3fcfffb6490a",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "ca279a14-96e0-524f-a54d-f886942a482c",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 190.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "bd3b0fd0-ce8d-5e1b-b93a-1df50945f22c",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "53aa5f0e-3b7b-5bb3-ad0d-245d50e499ae",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 191.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "8122680f-f45e-5988-bc2c-11cf4da14ea7",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "904243cd-1c77-5e08-bc84-62f636fc21de",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 192.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "5b398556-1b4f-5466-91b7-044ccb722df0",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "8c7ecefb-2226-5eda-8547-82213ca454dd",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 193.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "593f8995-feab-5750-927f-44c369e73721",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "cdc9fb3f-0213-5486-b4c9-06009ef92f67",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 194.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "c4f942ef-86c5-536d-b06b-4eba2be4bece",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "d13d27e3-823b-51f8-ad6a-c021af46afdc",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 195.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "dddfa1a5-ef6e-5989-9b3f-0a0bf3dd268f",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "a9bea137-9b9a-523c-893d-c6256cab4d2f",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 196.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "451d2b51-2cd7-54a4-86e7-12947a6e0420",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "d7b4268a-471b-5aa1-9cc6-20c2808c0415",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 197.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "1160c37d-c9d1-5d4c-a7f2-18443b337e23",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "f2e19851-9e3a-5082-8a5f-af6609f84df8",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 198.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "97215267-abf6-5584-8510-d3451f2201bc",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "6f051e47-8f6a-5ac1-a9be-1e8957995c8d",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 199.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "0c616fc4-b024-509c-ac4d-6aedd7bf1bf2",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "9b0c4ab5-9bd0-5ad5-8685-efa3e206a6db",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 200.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "1493bc62-00bf-56f3-a8e0-750a021876ad",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "9af40e75-d42e-5165-a779-63bef4b66943",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 201.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "197044c1-ca75-53c3-aa7b-b981c2019011",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "577ee154-fdbb-50c4-a843-a285ee765974",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 202.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "cae5c2c2-8c11-5c32-8e90-7e3cf142f971",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "00b0995c-fb80-5f62-ade2-f203f9d224f3",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 203.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "b8586f14-95f0-58e8-b660-eb1ee28a410a",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "92978e69-4d75-56db-91fa-7025773a9e43",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 204.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "fce8c4f6-e30f-5842-90cd-411bb0744833",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "a5c7a726-d91b-5aca-90b0-97a71e36472c",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 205.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "47c979de-b2e6-58c1-916a-8fcdd5a303c0",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "7fd5722c-1deb-548d-b117-828ee3b80a46",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 206.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "8e6b4cda-b321-50bf-ba28-76a5f1b77ac6",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "eb1cf884-f009-5bc3-a9ca-20e691afde53",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 207.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "e62b9cfa-a5bc-51bd-95a9-489a1fd6e06f",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "def26bc0-eabe-528e-80b5-be608e0555ab",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 208.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "5f8114ee-88eb-5000-8915-56c6ae453033",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "eb0fa6bd-32cb-5c89-ae9b-78e204146768",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 209.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "81fc2c0b-dca7-5349-a41c-d47d4c36bad3",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "3a41b451-70aa-56d4-9659-a992cafe59bc",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 210.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "d6f92693-8047-5e50-a8f5-e4037a9d5fa6",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "0fd5fb2b-69b5-5a21-97cb-2ee2be6bf4c4",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 211.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "fbe3c1c5-6add-5b33-bca0-7db6a46174b7",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "dce247c7-117f-5d08-8ebb-34ddbbae0d11",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 212.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "1f29b417-7050-5123-8980-041b60174556",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "ea868384-929f-5423-9bce-4c1d8b87ede9",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 213.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "44b54e33-0203-599c-8bfa-dbb29eaaaf97",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "1fc154ff-ca96-5d76-9d79-6d145f37ab07",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 214.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "e24eabd1-0b28-53b7-9035-70cd6b680d2c",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "1a189aef-13fa-5c58-a22e-9932e21cca10",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 215.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "c54af414-9ce3-55c2-b964-cd2f0a9e3a55",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "4f4a0b98-94ed-5d7f-a6ef-db2abe021d4a",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 216.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "c0f1b77b-b3d4-5e2b-87d0-7bec5f437459",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "5850bce3-237e-5f49-a0cd-04b3c8f1b186",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 217.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "529a104f-1ff9-5385-9ff5-923ca7a1e24d",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "dd29f4eb-81fc-5380-8ad6-e2dbf3d299c8",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 218.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "35f4726d-38e7-543d-b9cb-58472eeddc98",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "fb0a522b-a127-56c9-bf5a-4efe6dc0db3f",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 219.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "e26f2997-5623-5fe9-b5a8-9718b9025f41",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "5c218693-480e-5648-b994-f755e12bd45d",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 220.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "e8210a0a-1807-54a8-bfcd-6a022fa520d4",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "59182357-7e54-5468-90c7-e1dbb59eba75",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 221.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "327324f0-1ac4-5eef-8c58-8db17279d89b",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "a0fb8424-c9fb-582f-8c53-c7fa4a49b3c7",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 222.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "0b89c19a-74a8-5c9e-bdce-5fe3a8a92f63",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "e3017493-2b95-5238-b9d0-4aab1e3477f8",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 223.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "28e0c7d0-9d21-5269-9e60-fe0c55ebab27",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "a891bd6f-8dc4-5870-8320-f5316b468e23",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 224.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "98d0a058-20c0-59fb-b5be-28bf403a13f9",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "a4e42b1b-f3d2-538f-bbaa-f8ad4ebdce91",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 225.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "24ca0b75-6391-50ef-8a1b-11ccaa44c82f",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "589f3884-38f3-5ae8-9f94-c4f2656b3a2d",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 226.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "6a025052-9dd8-57e5-b278-bccb0ea716e3",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "3febccbc-4390-575f-be92-81ab87c78d15",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 227.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "df6bb364-11db-52fb-b6f5-fee2a8c607a4",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "88fd975c-6c6a-5e6b-81b1-6c440e1623c3",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 228.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "1cdd7fd4-f55e-5ef7-b631-b50febbaebe1",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "1d32bda0-04d4-58d7-a484-a9ee436b37b7",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 229.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "ab62f92a-e226-5fe2-a52a-82d1cbaf2c40",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "1a57af40-d9e7-54ac-b248-12263e4fe689",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 230.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "c672df0e-8266-52f1-854d-b40817546f43",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "e40f7f13-b8cf-5024-ba83-26a5abc59af7",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 231.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "ffab001d-d2ba-509e-a796-f2b8e76e01a2",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "e1a77ade-a739-5681-a2c0-7cce26bf5120",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 232.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "06aa4d62-20c7-51aa-bc10-ee93f75e9d62",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "580325d2-017b-5e7f-b35f-9162c3f13a4c",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 233.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "fa37a768-a0d4-5648-b5ec-5b5f7ef8e5bb",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "29c78720-2092-54a1-81ce-46da06e8e7a8",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 234.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "b18ee781-e33f-5244-b943-2f26e99a40e4",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "f77f7141-7834-543a-8c6e-668fbbed993f",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 235.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "002c1f36-2725-5fe3-b298-1edf942b56df",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "b7febb2d-f641-57f6-bd6d-f7e2ff9b0ea0",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 236.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "cd6b430a-47df-5f2a-a385-ec8e06152ed0",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "7b639f93-cc1c-5f0b-b7a8-f01be5a5c5e1",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 237.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "851d1cce-6332-594a-b080-a9fd6895bf82",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "11ab8954-6784-5b49-92f0-b8115881c173",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 238.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "38a19032-7b87-5271-b146-062ff5c12ac0",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "4ec6d544-4181-5721-8a97-07dc283fb445",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 239.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "50f28030-d6c0-573e-828a-5773f2a1bb44",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "4ce036da-afe4-5ecb-93b4-698d1559eeda",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 240.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "9c2b46d8-8ecf-50dc-8b4a-9979d6f57627",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "b479b50c-6d07-5967-8ebe-53db6ee1c06e",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 241.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "03357443-4b1c-5043-8542-4f3344187b65",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "2d3cacfd-aef2-5030-b2b4-c1a18df8ea61",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 242.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "dd143bbd-b705-5ef4-8dca-21e019329954",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "76eb88e8-5ec0-55f0-b187-68eab66b667b",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 243.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "24d1dea2-790d-57d6-a8ed-4abca13bb69f",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "89eb2a70-dfca-5068-bd34-05cb7f19fdef",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 244.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "d0bde46b-ce75-5fca-a5af-894591258189",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "a485b21d-8783-50e8-95db-a82c88c0405f",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 245.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "5b451b2f-45bf-5a1a-bf5a-bf3e75c9aaba",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "e3cd99e7-a410-5551-b7f4-500f619fed04",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 246.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "280c3658-1d3b-5b7b-9ee3-afe5b77441e8",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "ec8f98db-a897-51e7-8dbd-7c629d842199",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 247.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "ff108b0e-b8fa-59dd-bc7e-01e75516fbe6",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "4385f201-c84b-5f97-8e62-6bd88adb2e51",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 248.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "2da2f5cd-7811-541e-aca6-180196f3db5d",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "b21e0b9c-df2d-5045-bb38-a67347738333",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 249.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "87957204-144d-5fcf-b721-095b914aec20",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "2ddd421b-7dc4-5a53-81c0-807217616908",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 250.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "79db4314-d896-5de9-81ac-25961aecedbe",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "77c51b1d-8fb3-5573-97be-25d03684fd7e",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 251.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "a1d79123-8de8-5410-bb08-53914e1fd497",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "c94c8ba0-b069-545a-b124-190a61947080",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 252.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "2c713882-6744-5567-8020-9de854cdcc56",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "a4f20133-cf98-53bd-9fe7-5f0003e4648a",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 253.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "bc5a2d77-d0de-53c3-aaeb-c2bacb64bb71",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "64518ffb-9d6e-50d8-a612-20e59075b896",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 254.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "26904f12-9ca7-51a1-8ba8-e27d3c303503",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "0490b95c-ddf0-5d6d-8ed4-c97bbaf33ea1",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 255.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "2d5fc92e-1593-5067-ae15-bc91ac190e17",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "ee7a70ac-ab6b-515d-927b-8ea6811a9923",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 256.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "09854f36-7329-5337-af08-a269ef1335b5",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "0d91c2a1-9068-5be5-8dda-0c357f4bc776",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 257.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "76e3e63c-202e-55a0-b5b2-073e8841c7dc",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "a1ec87b9-ab73-5c3d-80e2-99463a44e98a",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 258.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "4800bc15-9a26-58fc-96e9-d1a367da49e8",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "eaf5eea3-d902-5012-87c8-bb5d4c526f97",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 259.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "2fbd80df-4118-5466-af66-c4373e3f0fae",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "e098d757-c8b6-5d62-b609-d2341093cc4d",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 260.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "36566f3e-eb7e-52ef-b402-3a4f95a99b4a",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "749f8cfb-e91a-593f-bb11-7ded9d48d51b",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 261.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "ae67fa7b-f38d-5141-b776-a83fa942bc8e",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "eeda5ec4-5522-5918-89c7-27bf302e32f5",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 262.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "1b5882c4-a22a-53f7-b230-1cb6e750835c",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "cc7977f5-b0ea-5ab8-95da-3a02b21cc153",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 263.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "4beb74cb-c1de-5a7b-8bca-7449a108f70a",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "95382f35-57a5-579c-be44-65cc06cee1c9",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 264.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "0dd1f9c0-d54a-5560-8e3f-4946125de345",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "71f8ca09-3780-50af-9223-257a618b021e",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 265.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "c6ccd8b7-84ee-5914-946b-dd542646f59e",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "ad95e630-1164-54fa-bfe2-c07706e845ad",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 266.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "ee8dc18b-a84c-52bd-9731-e6be224895ba",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "02e362f7-be1c-570a-a841-29046e6c01c0",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 267.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "0604d97c-3921-525a-9e2a-11c3caa017d4",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "30a8e950-f84e-55e7-905e-12e850ac2edd",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 268.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "8aeee4e5-e87a-5946-ba93-1bcc33902675",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "ea251875-2bfc-571a-8040-47619116a4b8",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 269.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "be19a670-0000-5c68-9189-1b984dbce76a",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "30d447d5-710c-5017-aa1e-4840ea3e6cc9",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 270.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "f69946dd-a9d9-5055-bb87-e0707702292b",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "1d1f8b66-f13a-529c-b33b-999b122120c8",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 271.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "df1f9890-4d1a-5cde-8544-5590d5da40b5",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "c517412d-7c55-5971-876c-34dce042ee59",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 272.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "78fcd469-1cd2-5c80-a7ff-3c4bba7bd976",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "d907adf6-5975-5e0e-948e-fc5776c6275a",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 273.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "cb4f96a8-9ab5-5b25-83be-f2fbaca59be6",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "da466547-388a-53f4-9cf1-fdd2c5e736ba",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 274.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "023f68d8-8b82-5c78-97c9-3932cf597f96",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "1f7f45dd-df88-5093-82a7-b64ebd44a7b4",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 275.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "01abfd0b-7498-5621-9606-282ed13c53c2",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "4cbfb829-9d74-5db2-8730-39d1c1d7d0d1",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 276.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "b365ef22-8b49-50fc-9652-f234ccf98cf0",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "0030d0a3-e31b-55cf-91eb-a1a0b4fece58",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 277.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "4fc30bcb-36dd-52a2-b747-f86fb153f98d",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "8f31ee50-1e7e-516e-9c95-8ce46b4838e0",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 278.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "aa609e7f-82fe-52dd-a8cb-a99d0b98fa0e",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "2f3b2439-c971-5970-b9b3-4c3d95425731",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 279.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "418bc94c-126a-53b6-9144-bc76341d580f",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "2b9b77f5-0987-518c-a433-8f6b1a826c73",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 280.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "c8665217-45bd-5024-a91c-cac4cc2ad5a6",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "e2acd554-5f02-5bf9-80c4-0e6b1463c430",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 281.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "39d0e752-616d-5b13-9dd3-fc922d181217",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "81ea798d-47d7-5f19-a74e-ec5045a4f7af",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 282.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "275879ad-2f8b-5e41-b4ed-669d121a4a53",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "641975bd-93a1-5b3c-b966-a0ecd17a0e13",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 283.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "e481df24-41aa-5dfb-b7df-2957a2cc54a8",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "57e2a630-c6e8-5063-bb89-3ed1b64d461f",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 284.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "5d1093e5-0530-5ec8-a19a-c1a2de068352",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "d43b8fef-274d-5780-b051-a610069becf2",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 285.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "ba5a1564-65b3-5738-8cc2-93a40b61d7a0",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "f6a57478-6e94-53f1-90f1-4afca9c6ed35",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 286.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "3eb98f40-c2aa-5122-8a7a-8f8ef6679902",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "4f31216b-b2d1-5752-8a80-7138afbd1595",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 287.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "833d539e-a451-5dbe-857c-2ea042a29101",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "ec000330-51d3-5f6c-985e-2e2190dd511a",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 288.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "34377068-7a80-53ed-a063-ce3c543a4fe7",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "0e83aa7a-6788-56f7-9664-c939d957f46d",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 289.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "50f0a931-ba99-517b-b08f-5f6bc709aad6",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "1a57bbe4-4da6-5349-966b-df1773202316",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 290.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "559527e8-28b7-53b4-b0e4-fd7c210b0fb0",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "41405e7a-6618-5dce-bd7c-6ff58aaed1b0",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 291.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "7d6a546b-35d7-5acd-87f4-ce675d8591b7",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "bb37f166-c031-537f-aad3-fe4ce350a717",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 292.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "13256da8-fe9d-5846-ba30-9024d5719efc",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "1e5bf804-3bd5-5969-b44d-ec47be3ae561",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 293.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "445f801b-6253-52b2-9bde-c4881f6352b4",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "643dae5b-8f4a-58ac-8881-5b1dcbcb28ca",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 294.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "fe5c3e4c-497c-5a1f-971e-cabf1fccb71c",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "405a4e84-756a-5fdf-8fb0-14882eef2ac2",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 295.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "de211002-fdc6-54be-8b0c-9b8aca78dd27",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "87170928-2547-54d0-96ed-4b3d557b72fc",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 296.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "0f391861-528d-59c4-8576-e83f8a0e1276",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "9bedf4bd-1338-5475-9edc-ad201c4cb1b2",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 297.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "ac884935-2e09-58cd-8317-965ee86b1b5b",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "960c1a3b-1626-5af0-a82d-e09f048f28ee",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 298.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "6693d984-ca0d-5614-9cc6-6d6dd1e8471e",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "50811c98-36e1-5e46-b309-2cc8a1aa9acd",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 299.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "971eaa59-add7-5f0d-b35f-9c5f4f83c084",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "18df3271-cc30-5fd0-8f8d-00606939c472",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 300.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "c92ccf5d-229c-5044-8c17-ff5a987a582e",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "e0e7d7da-9560-5d2b-b4f6-bafd7ba2d6d1",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 301.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "9f24b769-d9d2-5e09-85ee-54236854891b",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "d780317e-ae4c-5d67-a65b-50d49091a4ea",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 302.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "ecee44e1-5d61-5206-b257-4309862ea3c0",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "5b71a171-9b37-5751-92ed-fd28f15a7f69",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 303.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "23ade752-89ba-582a-8ef3-3067f884bce4",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "a4edcaf5-f17e-5ac8-b571-9d87101bd059",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 304.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "3614b280-d1be-5394-9fcc-936cb62b08c8",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "d4a392e7-b7ca-5130-8897-603186c161ad",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 305.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "96a4e3bd-3c9e-5d60-88c0-9e5bc6b4681f",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "0b82472b-4896-5be9-bf57-11ec51cb9b20",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 306.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "07a71316-2e20-5b40-9603-4af5e1cd3f7e",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "43d27697-d6c7-5cf7-9314-5eb1d8f6b166",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 307.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "ef8eb6ba-199f-5e00-902c-bec5f6252807",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "ff720c44-3af4-5a04-902d-b9653c6a6435",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 308.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "920cf231-7fad-5c72-b933-6081583f87ea",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "b98eb5ff-2cce-55f3-84e8-db535d66c393",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 309.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "23e9e861-227e-5abc-8509-c2fc3651b77a",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "1c0a2be9-f3ae-5cb9-b7bc-4cc2869fcccc",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 310.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "e8206b99-9b42-5cca-8ed5-56a98b743416",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "b4e79b8d-5f9e-5b1d-be62-e30814e438aa",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 311.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "bc367431-e28e-58fa-aae4-1779eae9518a",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "abf1753d-1c57-5289-8a1d-8b5dca07fa1e",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 312.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "6f1bee3c-4833-5aae-953f-7229499b13c5",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "794b37db-a4e6-5b27-9850-cf2e20a7d21f",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 313.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "d8714728-01fd-51a8-8f87-5617f8af72e3",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "e870a17c-b37e-5a12-8543-d2046467f574",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 314.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "d308f361-c499-5e4a-90b9-906ec501e94d",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "60050f13-706f-5cf0-8be9-0a96e7ee260b",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 315.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "1323ed2e-eea5-5dcc-9eb8-063c31d45523",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "97497364-c34d-5a04-ab31-f983ad3cff4f",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 316.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "82e7c9ec-ec59-5f31-a6dc-f140d32457ef",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "74fb253d-c500-56b0-8fbb-4b761830adb4",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 317.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "0933498e-c56e-5958-bebd-6fde8d0fc65a",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "0b567d48-4b60-5488-9afa-3c430e5ce698",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 318.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "734f729e-89a8-5cfd-953f-a9127dae073d",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "d3f6601e-66f9-54be-96de-616c0d6ee916",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 319.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "ed3604b3-aaa5-5a41-baf9-d9ab6a014e77",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "c73ceb65-78b3-55d4-b2d8-733cfb9d64d8",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 320.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "6eb86253-1b98-5a75-9c9c-26dc6618bc3d",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "e80f5bb7-7465-53ff-9737-1e8987f602fe",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 321.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "c212616f-fffd-5fca-a186-b260ea3113b2",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "484d464b-ea4b-5d78-8fa1-8a38749530e2",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 322.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "62c113c4-7f60-54ea-950d-b84992873524",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "a2868327-c9bf-5d33-abca-73970c46a327",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 323.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "cce2fa18-860d-5f4c-9469-efa59e8906ca",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "865be8c1-3fda-58de-8ad8-bac70db540a2",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 324.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "8274b8d4-c04f-50a3-8dc4-dd151dc537fc",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "584490cb-1ac6-59d9-b6e8-d8e3fff59e3a",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 325.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "9dd77854-dbf2-5110-b04e-73feb2555a00",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "c528edf8-d2c9-5627-975d-dc8705bc1999",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 326.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "f6af6c9c-6faf-5a05-a4f0-a43fc37f0fb0",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "9c7aeb00-76db-5f34-9bef-974d2dfe8a80",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 327.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "e8931193-b23b-5b7e-a123-0a1922b83ab9",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "e4c10674-338a-5504-acf1-7aa46a4eb59e",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 328.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "fd728670-8d5f-5511-ac5a-41ad718c70c9",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "92ebc1b2-e26d-5615-8559-5aacc3c56a9b",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 329.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "07cf7b50-c1af-5e58-b1dd-845ee66ef6a5",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "517c1410-0866-5825-bcaf-923fd89509c1",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 330.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "42610719-6faa-53f8-9582-a353afb2d3e1",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "9ff0605e-0e7c-56a2-9a81-37c43bed8c10",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 331.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "1f4f6c2a-cc89-57ed-bb80-1ae87a0bc5a7",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "250a9bfe-fcef-5695-91a8-a290382673a1",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 332.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "b08bb9a6-3eab-54be-baf1-07682bfc0f91",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "3477c32c-c577-5460-b68c-c8c497b3b4e0",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 333.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "dd797c25-63d8-52ed-9ecc-401b576beeeb",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "d864ca22-9d83-528f-ba83-17da4befa5f9",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 334.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "749a1a6e-d599-5ff7-bc71-6f4ad45bd76b",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "f19e4849-9fd9-58f7-a576-0ed98a9f5853",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 335.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "f8652809-ccea-53d6-adff-9049afb1ca9b",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "d00cb5d1-f70c-517a-86a3-c822302dbff2",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 336.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "7166c98c-95e7-5f77-86e6-d079a0357b00",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "569a1b17-8a18-5d1c-8f56-89f77620071d",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 337.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "4656c91c-d6e6-565d-bd4a-02a8e241e3ae",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "f04ad328-d1d9-546d-a38c-70ee67e9a0a4",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 338.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "d520c280-f17e-5016-aa42-0ab8261356d9",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "c16f3495-ab8a-5b5b-920a-d360f4c0e083",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 339.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "6f7e5ff3-f534-5edf-86f3-a52d62a285ec",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "fa9e0fac-9001-575c-a6d3-130338d7751a",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 340.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "7ab708f7-3b41-5eb3-b91b-6ac6a7e6a67a",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "85bc89b2-4f9d-5338-a129-9d69013f13d6",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 341.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "be11b31a-bc70-57a1-889a-f0ec29f833f8",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "93c2b1c7-19e8-5665-8460-c752bd08a0ac",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 342.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "fa4a18fd-05c5-5785-b353-d7f60510a2b5",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "110c6669-9f38-577a-b776-0115c2aac215",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 343.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "720423b3-6286-55d7-81c7-48e81025d8a0",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "750bcda0-37ef-58da-82ea-6be4d93fab43",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 344.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "3c3e2df6-8afe-5881-b5e5-4aa8568358ed",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "367e3284-d275-50b7-827d-0ea4b9ac07d8",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 345.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "2d18b3c3-3fea-50bd-9cd8-ef270c42d3a6",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "bea048f1-c980-56cb-8d87-be86519e034f",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 346.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "b155b0e6-d8ef-5c0f-aaf4-27925eed594f",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "65e61e5c-f277-59a5-882e-c9bff1aa0a96",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 347.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "435b05ce-7edc-565d-a5a1-2d83d561b6be",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "3abc39fd-e82e-5fa9-9ab4-09bdce9928b3",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 348.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "6f263da8-829e-5d9b-8d4a-3b020384d014",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "9a97e6d3-ad30-5be1-b23c-d6452ed92c68",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 349.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "607d096c-9596-5925-9230-2ea2830f260c",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "c48fb20e-d0a5-5c3e-87f0-aa2acd8f84f6",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 350.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "c99721bb-8f09-515f-8d1a-f6b9c6b79091",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "7109cccf-6db8-59b1-a631-e49f0770cd04",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 351.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "5368b720-9c12-5bd8-80aa-37387a617553",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "bc0d912d-5908-5feb-afcc-ad30fb0ca713",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 352.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "05984896-1484-5dfe-92c8-a615778c6611",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "009439f9-5010-5971-93fc-a555b907a957",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 353.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "3a771cb8-62a9-57d3-a75a-c3db8bd1eeae",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "630b809b-c0a8-56f4-8e28-0c66e49f552c",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 354.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "7487f7b3-133a-5754-9250-46da47366612",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "704fae70-1ba9-5eee-98cf-f237b886c249",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 355.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "bfd859ea-6eac-5d32-873d-9a1d3120913d",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "6aaabd48-4e51-5c6a-b8c5-4c2cc88c1711",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 356.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "548f62b4-5c8a-5889-9474-09be7928cbb3",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "eeefa5af-ed2e-5bba-a5fa-067270fad264",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 357.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "340218b7-69de-5ff9-83c7-581b86291017",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "95be7cce-1821-5340-9ca0-3758b80cc2dc",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 358.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "27970265-933a-58e6-8b7c-a181ee38c9d7",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "ee47ae19-3d83-547c-9f0f-eb73c9c79641",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 359.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "c3efdde2-0b64-50da-a158-d3696d4eafba",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "0b77d175-75ed-5a26-aa3d-904984f2b3e8",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 360.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "a3d52d3c-efb5-584b-a308-8d34804c5403",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "3a461cc5-4fca-5f27-8a8f-2c35a0a96bab",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 361.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "edc060cf-d7fb-5547-a568-58fb5381a833",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "41e67adc-f5d8-5025-b660-370efe1bb2aa",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 362.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "c4c6502e-4c96-5b79-ae7a-909a497bfd7b",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "e478b84e-e3bd-5625-802f-e38a182dde11",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 363.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "bada647b-3639-58ff-a16c-f84d22faf38e",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "8266f876-9fcc-5e74-b683-1bb42af368cc",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 364.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "3338cdae-3d24-5cf0-b4e8-74a18803e56c",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "b00d2601-6b8b-5311-ad52-f03da561bed2",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 365.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "c1ec4de1-5fb2-5ed9-8a3d-556af21eca66",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "ea4d6c10-83a0-5559-8cbd-07d7b55b4fe2",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 366.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "1dfb0e19-a595-5138-808c-1268e2f001de",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "32b159e2-713c-59c0-aa93-a1c28f13fb5b",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 367.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "a44528fd-033d-5e1f-9aac-be9fadbf27ec",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "d26a432b-00a0-5dbc-aca3-a784415fd037",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 368.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "df3a53dd-8a24-5e37-ad89-282e37a17749",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "6f4ff99f-301a-5812-b2bc-a4309026333f",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 369.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "d690256c-b391-5eb8-b291-c6f77a16ad0f",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "2bfb3657-7ccc-5bf7-bd74-e3479a358d39",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 370.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "e1d9a766-caf5-550b-af38-51556d5b61fe",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "c6967e3f-842e-5231-9833-1a420112d75f",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 371.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "b2d8ecfa-5300-514b-9fc6-660a2018ff8e",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "b9fdbb20-7942-5bda-b38b-6429a7c6df6d",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 372.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "403b35fb-b694-541c-a934-6aeb86156b5f",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "9f319ef1-0b57-518e-bc96-47769becfd01",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 373.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "54674705-37dc-5621-b90b-c9e318c7e9ba",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "75827f72-40f7-5d90-8bd5-4d453d8c2249",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 374.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "a6863a70-c038-5d33-a9de-ba5d3ce285da",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "a0f63d02-9dca-50d2-a6da-ddfd706a1f01",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 375.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "f60991ab-0865-53a0-a16f-8a41fd410be9",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "9b58f1fe-dd77-59b8-9183-f5bae441e145",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 376.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "c0d97481-da8d-5069-a480-a3657d0c7528",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "4fa54ebc-b45e-5fd1-a5f0-327268171df6",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 377.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "d2fd6ac8-9622-5c6f-817d-48cb3b2b0b11",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "2f2fa6dc-3a6a-5162-97ac-f23e7bd0e599",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 378.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "77e71f14-40c8-5cb2-9e7a-35b6a176999b",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "a7d006e7-8de4-531f-b12e-2baacf592a94",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 379.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "c2fb9ded-0215-55d7-ab11-5cc97e14bdae",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "11e0f000-a8ac-5c9f-8fdd-db167a78eb67",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 380.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "36228b25-17cc-56cc-82c6-9d7ac641c74f",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "64909153-927a-579d-99f3-405caee7b8cf",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 381.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "4e62eade-5cd6-5b0b-a7ae-013a365b81e6",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "b81f24a4-6f35-572d-ba03-9f486c1e2cc0",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 382.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "9a10c450-72a3-5cad-9adf-60834f292aa0",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "d32a79af-3b69-503c-8cdd-ff5a60b32d7c",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 383.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "237d0199-7e19-510f-970e-622acc9cbe81",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "d3f5c55b-13de-5f5f-8655-670f400fc42b",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 384.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "0d6aa402-2b6a-5eeb-b119-c4ce293e22fe",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "85aabe6f-3f2f-5657-8848-e414d4e0ed4e",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 385.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "0cbe37c6-a5b8-5e5d-8646-d7d614f3ac51",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "fa1cfa9b-30ab-59b6-b51d-4bd81a8beae3",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 386.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "97212acf-48f8-5457-8bfe-91f0e6e97d13",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "46e18d08-833b-5880-b3e9-fd1aa884be78",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 387.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "2c5396a6-7e09-5fd4-8bda-3dc3a5b1f206",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "b6ba13ce-3282-5b82-82b9-2bccd0c23cd0",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 388.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "880261f6-5775-5b79-a7e0-983d668340ed",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "77183ca5-155e-58bf-a571-20aabadb6017",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 389.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "9e0eef47-3cef-5c70-aee0-33d06c357884",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "054cbfdc-188c-501c-bcab-6e6c7e17f16c",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 390.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "4112a21e-c174-54ad-a5a9-c6704189085d",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "4871d6fb-6af6-5a5f-8ba1-e8968e68c6b9",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 391.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "725ef475-aac1-5a87-822c-21ef7cc5f23d",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "15cec5e5-db45-542c-87fd-193703a7fbcf",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 392.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "e2f9f6aa-a72e-504b-a588-1a66fd91e2db",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "aa755deb-1897-558f-965d-33b868fb4aa7",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 393.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "54237c3c-0242-5406-ace0-95a35eaafaf0",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "b66497e1-fd79-503c-baa3-e66e18ac493c",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 394.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "4064a209-c347-5ccf-9c53-835b5e57b5e8",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "832bf541-67c4-5f8c-8cc8-4124ffca97e1",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 395.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "31fd9205-b132-5733-9732-35440077386a",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "8233550c-8837-57c3-b58f-921a7c12fbfb",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 396.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "a1a9b5bb-0e40-539c-968d-d39469637961",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "2226419e-5501-53ea-a2d8-9af1156076ae",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 397.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "3e358d31-5436-5ae4-a9f8-fefedce5f24c",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "65f3ea9f-89f0-598d-b496-6cd2ef986113",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 398.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "0f9d0153-5817-56cb-b05e-cfe12fa5150b",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "ae6c7b9d-b2e9-5917-87cf-fba558640cd0",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 399.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "55c31315-8ef3-5c06-a728-cf23a5cca1d0",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "86cddb8d-2ffb-5b72-81ec-0ee8cb2160cc",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 400.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "d69bed63-fd8f-5144-9abf-63930e6303de",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "c57db78e-2565-594d-9b47-f6f6072430f9",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 401.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "fa086110-f603-50f4-8317-c15f23c71753",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "8d89495f-0be6-584e-8fa1-b559c90e8095",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 402.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "a7d6ce8f-26df-5dba-b07d-4220fa76ffcc",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "7a0bb7e5-66f1-58b7-8e15-c58567a5664b",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 403.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "562a46fb-2b50-5129-ae3e-ff81ab6df058",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "7899fac5-1520-5a57-ab8d-d2a8403ffce3",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 404.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "c2ec3db8-0089-5510-8baf-28182ec69b90",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "d0fe848b-f4d1-5061-8512-7ef6bba481b5",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 405.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "d61884d4-ea8a-52e6-9618-b1ef2ffa7982",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "1ae02739-6931-51e4-9680-5f72895fe4ee",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 406.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "d507a19e-ae30-58a0-9a75-54a26e26b59a",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "5c2c6252-0aa2-506d-9174-fd543e99f5b9",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 407.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "100e9921-899a-5878-9317-a7d893a840e0",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "190bc157-8aa8-5669-aa5f-a0c90ddd12dc",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 408.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "306d4463-a0c1-565b-9beb-14c5b64d6bf6",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "868fee6a-3541-5837-9f2d-e6de61a5d5c9",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 409.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "07302ce2-f46b-501f-ab65-e95bb548cbe5",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "418f628c-4d8e-54c8-acda-ce4d1cc84a8b",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 410.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "50de9b9d-bfa7-5ee3-98a6-707be4232dbb",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "c3d7dd57-7568-5dfc-9632-e005e9f89c29",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 411.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "564582a8-e921-5d95-93cf-48525914ed53",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "c142bb11-fe08-5238-b5ab-ac6375b28e4b",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 412.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "f6b25068-7211-5baa-870d-7feb5394a898",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "dc8c1154-f564-5458-8f24-726ecfb57cac",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 413.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "fc77c0fd-879b-5832-8bd6-2f6941a21c02",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "894a1de8-b59a-531e-8d5c-8e39cdf34274",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 414.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "936d42de-298c-54a9-8b1c-104f59304c0f",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "53fed12b-cc78-567e-bb24-dcac01149380",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 415.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "41828be7-9718-53d8-a59e-6104fd9a9a4b",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "1c82c217-04d5-5845-85fa-72e4c122bd8a",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 416.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "3b259f56-8a06-564e-9201-4e5b30e88c36",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "6b1cffaa-b93a-505e-9746-7f3105e48bf9",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 417.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "cfee2d7f-25da-5d98-8c7b-a5f8767c1744",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "0cf4a519-0426-54c2-a18f-21acce34b648",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 418.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "f64fe94d-8577-52a2-bad3-c5fc8a667d0e",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "219b7c86-7e1a-555a-9286-370b04c8ea98",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 419.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "7babe194-d214-5dd0-85f1-1e41f0b13614",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "6265b6f1-72ca-511b-9fac-7b7269dacb0d",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 420.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "72b03054-dcfe-5216-bec8-a888b36b29ce",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "30375424-125e-5965-b235-ccf3bc2635de",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 421.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "e1f3b86e-e9b4-589f-ac76-bbcea548da57",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "e33dc7d7-47a6-5979-bd9b-8a95ad84ab66",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 422.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "9a5e3802-a012-5d9e-91f9-1155db3c7270",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "5d011cc1-6645-59fb-9766-163df44b1177",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 423.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "bea22698-22e0-5e0e-8dff-9716ab1d09de",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "4761147c-5f58-5e09-b4b1-d19035d0b2a6",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 424.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "faa310b9-1f83-5231-b153-942721d0bc52",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "f51cd53b-31d5-5b39-8dc2-e8cd44def5de",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 425.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "4ccbed36-bd66-518a-827e-f0ec07eedeb4",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "b794b9c1-cf74-5dd9-a127-5f31b80d326a",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 426.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "425b5b56-a223-5be1-aff4-eb023e18578c",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "aa2e8099-6792-5394-920a-859dd5e0c9af",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 427.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "25deecd7-6772-5a95-9e8b-097e4e9a63af",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "ccfa4fee-c3dc-5256-b330-1f40858c2b78",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 428.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "e3d0d7a9-0bdb-5b43-ba72-863355f73635",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "34bdbf6f-f3f7-5656-9cfe-d1fdb1d1f13d",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 429.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "65b99f35-bfd7-5e8c-bca1-1ea6bb54e451",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "e1f06183-df21-5036-b5ea-c399fa210ff5",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 430.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "33b37b5e-64ed-512b-8842-ced540ec939c",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "73894535-eb34-5f99-afd0-488d731f2a39",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 431.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "52c766f0-53fe-5bc9-ac5b-0cf166df0867",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "3d14c783-e623-50f2-a66a-0641c356df1d",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 432.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "70c5a637-c4e0-5c27-bad6-a0857c351f25",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "04afd2ac-d08b-50e8-8238-9c87bc995574",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 433.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "3f5e071d-97a3-50af-9547-f944a8ff3eb7",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "014c7b3e-0847-59c5-9cc9-53c383684cb2",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 434.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "f3f8275f-d722-521a-896b-441d2dc1a3a4",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "e08b66c5-614a-5e6e-8a55-2abbd070d163",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 435.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "5878f19d-7ad9-5210-8fc8-1c194b3192f4",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "f9adfbe9-456b-5c5a-843b-09bb0aedfc28",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 436.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "5d96850f-1513-5126-9928-d208809e83f4",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "df0e384e-ffd6-5f23-a8df-d12f4df6d0bc",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 437.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "254ef074-b367-528c-9fd4-90b3cf8d7640",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "8ef6f695-e212-5cdd-ad50-df58df70517c",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 438.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "223f7176-f640-5f97-81dc-c1ec4e3fbfc1",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "35ca35fc-9e13-5a0d-877b-e71f480576ec",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 439.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "ac105c48-571c-5124-8173-fd48104ffbd7",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "48c76857-b0b2-5326-8154-25c5cdba0790",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 440.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "8e56c2c1-942f-5f97-803b-0be5402d162b",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "30f66ba5-61e8-5f8b-9ba3-a7207fe6d1be",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 441.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "8936a162-7895-5114-afa1-504f38a6adea",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "2a0b3e32-ebe9-570d-adfe-c96a00ec39c5",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 442.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "be0e2d14-a751-5ab8-8088-8fb601138d3c",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "d659cde7-020e-53cc-8d64-45a63db7cd64",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 443.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "82182719-ad53-57d8-ab65-f4596140e171",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "4be55206-476b-5116-b98c-fc5cf598d536",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 444.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "213dddf7-b0df-5a22-bcff-8e6bd73df35f",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "c15975e2-b15d-51cb-b2c4-5dea03fb4c36",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 445.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "225e6a5d-17c0-5c8f-920f-a4a49c284d20",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "2cccd1cf-ddb9-5112-b443-956fcc7f9ee3",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 446.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "4df952d5-c477-5199-a84f-b3fa3429dfb0",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "fc9c9016-c84b-5131-b045-1e213a8cf9d8",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 447.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "8b77152e-833f-537d-aec9-0be0776511ca",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "325cec69-5b15-59fc-a421-69adc5a4787b",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 448.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "d1aa0cb2-0de0-5bb7-8ae4-7a03f981f3df",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "21b84766-d214-5594-a2a1-11cf471f46ff",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 449.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "abbab7ca-6ef4-5cd1-bcd6-117e0e242d12",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "0b9a3ae4-7880-5a6c-a667-c938d2314cdf",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 450.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "429fd726-2136-5cbf-b3a7-f230151338a8",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "4dee8d83-1a8a-5ccc-93a4-105f815a6400",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 451.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "9597893e-3b88-57aa-b49a-0d629d3e3a4d",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "3162b1b4-1d82-5ccb-818d-e4c044f6cd0b",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 452.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "d2133323-3d63-5f60-b5f5-ff782b75d3ed",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "df298c4a-4f49-52dd-80cb-38c4f225aaa3",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 453.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "6e596e40-63c9-560b-b93b-840291d7b994",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "4d2a90c9-390e-59f9-ab6a-c163a385ce6a",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 454.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "7eee520b-1555-548a-bf62-51eef1dc5b12",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "3861ed00-86cf-5c40-a63a-3a9e42b75cbf",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 455.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "34d4ea3c-4fed-5e27-afdd-7f4600f62bfa",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "0030c8b2-c43b-5179-9510-778d0dac371f",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 456.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "5acfa6e4-508b-517b-9c72-84922d769dd4",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "d108af59-fddb-5380-b665-08764b03a2be",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 457.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "015ec5bb-30ef-5b45-8e6f-efbeadd5e917",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "395f8480-82b2-58b3-971b-1a3abe7c9aff",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 458.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "a87060b2-9e18-5953-9d23-caae8662931a",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "31d16c13-7b4c-5798-871a-246811adb540",
+                    "path": "sprites/spr_char_ln2_enemy_type_4/spr_char_ln2_enemy_type_4.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "IsCreationKey": false,
+              "Key": 459.0,
+              "Length": 1.0,
+              "Stretch": false,
+              "id": "7b0b247f-3364-5a64-977e-979e560a7145",
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0"
+            }
+          ],
+          "resourceType": "KeyframeStore<SpriteFrameKeyframe>",
+          "resourceVersion": "2.0"
+        },
+        "modifiers": [],
+        "name": "frames",
+        "resourceType": "GMSpriteFramesTrack",
+        "resourceVersion": "2.0",
+        "spriteId": null,
+        "trackColour": 0,
+        "tracks": [],
+        "traits": 0
+      }
+    ],
+    "visibleRange": null,
+    "volume": 1.0,
+    "xorigin": 48,
+    "yorigin": 64
+  },
+  "swatchColours": null,
+  "swfPrecision": 2.525,
+  "textureGroupId": {
+    "name": "Default",
+    "path": "texturegroups/Default"
+  },
+  "type": 0,
+  "width": 96
+}
