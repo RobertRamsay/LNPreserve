@@ -4,6 +4,31 @@ function ln_actor_depth(_foot_y, _layer_bias = 0) {
     return -floor(_foot_y * 256) + _layer_bias;
 }
 
+/// Logical character banks retain the original pose indices while identical
+/// pixels share editable frames. graphics/characters.json is the asset map.
+function ln_character_pose(_bank, _frame, _type = "") {
+    var _original=_bank;
+    if (!is_string(_bank)) _bank=sprite_get_name(_bank);
+    if (!variable_global_exists("ln_character_assets")) {
+        var _buffer=buffer_load("graphics/characters.json");
+        global.ln_character_assets=json_parse(buffer_read(_buffer,buffer_text));buffer_delete(_buffer);
+        global.ln_character_sprite_ids={};
+    }
+    var _assets=global.ln_character_assets;
+    if (_type!="" && variable_struct_exists(_assets.types,_type)) {
+        var _profile=variable_struct_get(_assets.types,_type);
+        if (variable_struct_exists(_profile,"overrides") && variable_struct_exists(_profile.overrides,_bank)) {
+            var _replacement=variable_struct_get(_profile.overrides,_bank);
+            return {sprite:asset_get_index(_replacement.sprite),frame:_replacement.frames[_frame]};
+        }
+    }
+    if (!variable_struct_exists(_assets.banks,_bank)) return {sprite:is_string(_original)?asset_get_index(_bank):_original,frame:_frame};
+    var _mapping=variable_struct_get(_assets.banks,_bank);
+    var _pose=_assets.poses[_mapping.poses[_frame]],_ids=global.ln_character_sprite_ids;
+    if (!variable_struct_exists(_ids,_pose.sprite)) variable_struct_set(_ids,_pose.sprite,asset_get_index(_pose.sprite));
+    return {sprite:variable_struct_get(_ids,_pose.sprite),frame:_pose.frame};
+}
+
 function ln_draw_masked_actor(_sprite, _frame, _x, _y, _xscale, _yscale,
                               _mask_sprite, _scene_x, _scene_y, _scene_width, _scene_height, _threshold = 0.5, _clip_bottom = 1000000, _red_dye = false) {
     if (!shader_is_compiled(sh_ln_occlusion)) {

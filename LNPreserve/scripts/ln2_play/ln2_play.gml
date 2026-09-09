@@ -192,9 +192,10 @@ function ln2_play_actor(_g,_a,_enemy) {
     var _enemies=_extra?_g.world.enemy_extra_banks:_g.world.enemy_banks;
     var _players=_extra?_g.world.player_extra_banks:_g.world.player_banks;
     var _name=_enemy && !_a.custom?variable_struct_get(_enemies,string(_a.weapon)+"_"+string(_a.costume)):_players[min(4,_a.weapon)];
-    var _sprite=asset_get_index(_name);
     if (_a.mirror) _index+=_extra?array_length(_frames):64;
-    ln_draw_masked_actor(_sprite,_index,_a.x,_a.y,1,1,_g.mask,0,0,240,144,max(0.001,(_a.depth_y-0.25)/255));
+    var _type=_enemy?(_a.custom?"":"ln2_enemy_type_"+string(_a.costume)):"ln2_ninja";
+    var _pose=ln_character_pose(_name,_index,_type);
+    ln_draw_masked_actor(_pose.sprite,_pose.frame,_a.x,_a.y,1,1,_g.mask,0,0,240,144,max(0.001,(_a.depth_y-0.25)/255));
 }
 
 function ln2_play_draw(_g) {

@@ -23,6 +23,12 @@ Keep original graphics. LN1 river deaths use sinking and masking, with no invent
 
 ## Next work
 
+Graphics cleanup: read `docs/CHARACTER_ASSETS.md` before changing character art
+or running old exporters. LN1/LN2 assembled character banks now resolve through
+`datafiles/graphics/characters.json`; legacy bank names are logical identifiers,
+not sprite resources. Type-specific overrides allow independent replacements.
+Existing part-based projectile/LN3 paths and special-actor mappings remain.
+
 LN1 Shogun follow-up: native hurt/death now uses original actor-136 branches
 $50c7/$507e, including the defeat event that sends the player to the scroll
 room. See `docs/LN1_SHOGUN_FOLLOWUP.md`; original state checks pass, updated
