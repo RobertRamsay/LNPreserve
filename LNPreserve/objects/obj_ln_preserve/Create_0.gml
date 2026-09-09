@@ -1,6 +1,8 @@
 gpu_set_texfilter(false);
+global.ln_crt_enabled=false;
 global.ln_test_no_enemy_damage=false;
 ln3_only=false;
+presentation_test=false;
 ln2_final_only=false;
 ln2_projectile_only=false;
 window_set_caption("LNPreserve | The Last Ninja");
@@ -23,6 +25,11 @@ function_presses = [0,0,0,0];
 selftest = false;
 host_frames = 0;
 for (var _i = 1; _i <= parameter_count(); _i++) {
+    if (parameter_string(_i) == "--pickup-crt-test") {
+        presentation_test=true;
+        try {ln1_pickup_assist_checks();show_debug_message("LN_PICKUP_PASS");}
+        catch (_failure) {show_debug_message("LN_PICKUP_FAILURE: "+string(_failure));game_end();exit;}
+    }
     if (parameter_string(_i) == "--selftest") selftest = true;
     if (parameter_string(_i) == "--ln2-final-gpu-only") ln2_final_only=true;
     if (parameter_string(_i) == "--ln2-projectile-gpu-only") ln2_projectile_only=true;

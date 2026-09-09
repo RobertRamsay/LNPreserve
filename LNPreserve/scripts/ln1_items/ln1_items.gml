@@ -55,18 +55,22 @@ function ln1_pickup_assist_start(_g) {
             _item.id>=16 || _item.id==1 || _item.id==9 || _item.id==10) continue;
         if (_g.inventory[2]==0 && _item.id!=2 && _item.id<10) continue;
         for (var _side=0;_side<2;_side++) {
-            var _x=floor((_item.x_min+_item.x_max-1)/2)+(_side?36:0);
-            var _y=floor((_item.y_min+_item.y_max-1)/2);
-            var _dx=_x-_p.x,_dy=_y-_p.y,_dist=_dx*_dx+_dy*_dy;
-            if (abs(_dx)>20 || abs(_dy)>16 || _dist>=_distance) continue;
-            var _probe={x:_p.x,y:_p.y,boundary_mode:128,boundary_crossings:0},_clear=true;
-            var _steps=max(1,ceil(max(abs(_dx),abs(_dy))));
-            for (var _step=1;_step<=_steps;_step++) {
-                var _nx=round(_p.x+_dx*_step/_steps),_ny=round(_p.y+_dy*_step/_steps);
-                if (ln1_player_boundary(_probe,_g.data,_nx,_ny)!=0 || _probe.boundary_crossings!=0) {_clear=false;break;}
-                _probe.x=_nx;_probe.y=_ny;
+            // Find the nearest reachable point, including sloping boundary edges.
+            // Testing only the centre or clamped point can miss a clear approach.
+            var _offset=_side?36:0;
+            for (var _x=max(0,_item.x_min+_offset);_x<min(256,_item.x_max+_offset);_x++)
+            for (var _y=_item.y_min;_y<_item.y_max;_y++) {
+                var _dx=_x-_p.x,_dy=_y-_p.y,_dist=_dx*_dx+_dy*_dy;
+                if (abs(_dx)>20 || abs(_dy)>16 || _dist>=_distance) continue;
+                var _probe={x:_p.x,y:_p.y,boundary_mode:128,boundary_crossings:0},_clear=true;
+                var _steps=max(1,ceil(max(abs(_dx),abs(_dy))));
+                for (var _step=1;_step<=_steps;_step++) {
+                    var _nx=round(_p.x+_dx*_step/_steps),_ny=round(_p.y+_dy*_step/_steps);
+                    if (ln1_player_boundary(_probe,_g.data,_nx,_ny)!=0 || _probe.boundary_crossings!=0) {_clear=false;break;}
+                    _probe.x=_nx;_probe.y=_ny;
+                }
+                if (_clear) {_best={id:_item.id,room:_g.room_id,x:_x,y:_y,facing:_side?7:1};_distance=_dist;}
             }
-            if (_clear) {_best={id:_item.id,room:_g.room_id,x:_x,y:_y,facing:_side?7:1};_distance=_dist;}
         }
     }
     if (!is_struct(_best)) return false;
@@ -88,7 +92,7 @@ function ln1_pickup_assist_tick(_g) {
     // The second crouch hold begins after four ticks. The source hit rectangle
     // aligns the reaching pose with the object; collect only once that pose is held.
     if (!_cancel && !_a.collected && _a.elapsed>=5 && (_p.display_frame==18 || _p.display_frame==19)) {
-        ln1_item_interact(_g,_a.id);_a.collected=true;
+        ln1_item_interact(_g,_a.id);_a.collected=_g.inventory[_a.id]!=0;
     }
     if (_cancel || _p.action<256) {
         _p.weapon=_a.weapon;
@@ -99,6 +103,26 @@ function ln1_pickup_assist_tick(_g) {
 }
 
 function ln1_pickup_assist_checks() {
+    for (var _id_index=0;_id_index<2;_id_index++) for (var _side=0;_side<2;_side++) {
+        var _test=new LN1Play(),_id=_id_index==0?2:4;
+        var _item=_test.world.items[_id_index];
+        ln1_play_enter(_test,_item.room);
+        _test.inventory[2]=_id==2?0:1;_test.inventory[_id]=0;
+        var _n=_test.player;
+        _n.x=clamp((_side?_item.x_max-1+36:_item.x_min)+(_side?19:-19),0,255);
+        _n.y=floor((_item.y_min+_item.y_max-1)/2);
+        _n.action=0;_n.input_lock=0;_n.fire_previous=0;_n.weapon=2;_n.selected_weapon=2;
+        ln1_player_update(_n,_test.data,16,(_n.tick+1)&255);
+        ln_check(is_struct(_test.pickup_assist),"fire near sack/key edge starts assistance: item="+string(_id)+" side="+string(_side)+" x="+string(_n.x)+" y="+string(_n.y));
+        ln_check(_test.inventory[_id]==0,"sack/key is not collected before crouching");
+        repeat(20) {
+            ln1_pickup_assist_tick(_test);
+            ln1_player_update(_n,_test.data,16,(_n.tick+1)&255);
+        }
+        ln_check(_test.inventory[_id]==1 && !is_struct(_test.pickup_assist) && _n.input_lock==0 && _n.weapon==2,
+            "fire-only sack/key pickup completes and restores input/weapon on both sides");
+    }
+
     var _g=new LN1Play();_g.room_id=5;_g.data.boundaries=[];
     var _p=_g.player;_p.x=185;_p.y=60;_p.action=0;_p.input_lock=0;_p.weapon=2;_p.selected_weapon=2;
     ln_check(ln1_pickup_assist_start(_g),"nearby sack starts assisted pickup");
@@ -111,7 +135,7 @@ function ln1_pickup_assist_checks() {
         "assisted pickup collects sack and restores weapon/input");
     _g.inventory[2]=0;_p.action=0;_p.x=20;_p.y=60;
     ln_check(!ln1_pickup_assist_start(_g),"distant pickup is not assisted");
-    _p.x=202;_p.y=50;_g.data.boundaries=[[0,55,255,55,0]];
+    _p.x=202;_p.y=50;_g.data.boundaries=[[0,53,255,53,0]];
     ln_check(!ln1_pickup_assist_start(_g),"pickup assistance does not cross a blocking boundary");
     _g=new LN1Play(2);ln1_test_wilderness_kit(_g);
     ln_check(_g.inventory[2]==1 && _g.inventory[11]==1 && _g.inventory[13]==1 &&

@@ -296,7 +296,7 @@ function ln1_play_draw(_game, _paused) {
     else { ln1_play_actor(_game, _game.enemy, true); ln1_play_actor(_game, _s, false); }
     ln1_projectile_draw(_game);
     surface_reset_target();
-    draw_surface_ext(_game.stage_surface, _x, _y, _scale, _scale, 0, c_white, 1);
+    ln_crt_surface(_game.stage_surface,_x,_y,_scale);
     draw_sprite_ext(spr_ln1_dashboard, 0, _x, _y, _scale, _scale, 0, c_white, 1);
     // Original $65bf: the bottom inventory shows owned weapons 1..5.
     var _weapons = 0;

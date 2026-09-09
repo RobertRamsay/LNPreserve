@@ -1,4 +1,9 @@
 try {
+if (presentation_test) {
+    try {ln_crt_checks();show_debug_message("LN_CRT_PASS");}
+    catch (_failure) {show_debug_message("LN_CRT_FAILURE: "+string(_failure));}
+    game_end();exit;
+}
 if (ln2_projectile_only) {
     try {ln2_projectile_gpu_checks();}
     catch (_failure) {show_debug_message("LN2_PROJECTILE_GPU_FAILURE: "+string(_failure));}
@@ -18,6 +23,7 @@ if (!workbench) {
     if (scene_test.menu || scene_test.preview) { ln_scene_test_draw(scene_test); exit; }
     if (play.game_number==1) ln1_play_draw(play, control_state_ln1.pause != 0);else if (play.game_number==2) ln2_play_draw(play);else ln3_play_draw(play);
     ln_saves_draw(saves);
+    ln_crt_button();
     if (scene_test.message_us > 0) {
         draw_set_colour(make_colour_rgb(125,210,171)); draw_text(160,12,scene_test.message); draw_set_colour(c_white);
     }

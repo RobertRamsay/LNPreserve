@@ -109,4 +109,6 @@ Extraction tools use original RAM only offline. They do not become part of the g
 
 Dungeon guard colours, skeleton frames and spider steering are corrected; see the [dungeon test guide](docs/DUNGEON_TESTING.md). The Inner Sanctum special-actor bank is also refreshed, and all six LN1 levels share the original uniform colours. LN2 thrown weapons now use original projectile art, ammunition/damage rules and per-part masking, with separate body parts during throws. These component checks do not establish complete trilogy or cycle-accurate playthrough parity.
 
+Click **CRT OFF / ON** above the save slots, or press **F10**, to toggle a subtle CRT treatment of the LN1/LN2/LN3 gameplay scene: cool tint, staggered RGB phosphors, scanlines and gentle sub-pixel phasing/curvature. Default is off; menus and save controls stay crisp.
+
 LN1: pressing # alone near a collectible assists positioning and plays the original pickup crouch before collecting. F11 entry into Wilderness supplies the sack, sword, nunchakus, five shuriken, three smoke bombs, four lives and full health. F11 switching levels restores full health in all three games; ordinary progression already does this.

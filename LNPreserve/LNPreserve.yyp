@@ -2239,6 +2239,8 @@
     {"id":{"name":"ln3_scenes","path":"scripts/ln3_scenes/ln3_scenes.yy",},},
     {"id":{"name":"ln3_special_checks","path":"scripts/ln3_special_checks/ln3_special_checks.yy",},},
     {"id":{"name":"ln3_special","path":"scripts/ln3_special/ln3_special.yy",},},
+    {"id":{"name":"ln_crt","path":"scripts/ln_crt/ln_crt.yy",},},
+    {"id":{"name":"sh_ln_crt","path":"shaders/sh_ln_crt/sh_ln_crt.yy",},},
     {"id":{"name":"sh_ln_occlusion","path":"shaders/sh_ln_occlusion/sh_ln_occlusion.yy",},},
     {"id":{"name":"snd_ln1_dungeons_game","path":"sounds/snd_ln1_dungeons_game/snd_ln1_dungeons_game.yy",},},
     {"id":{"name":"snd_ln1_dungeons_loader","path":"sounds/snd_ln1_dungeons_loader/snd_ln1_dungeons_loader.yy",},},

@@ -1,4 +1,6 @@
 try {
+if (presentation_test) exit;
+if (!selftest && !workbench && !scene_test.menu && !scene_test.preview) ln_crt_step();
 if (!selftest && ln_saves_step(self)) exit;
 elapsed_us += int64(delta_time);
 // Input is stamped at observation time, not retroactively applied to host-stall debt.
