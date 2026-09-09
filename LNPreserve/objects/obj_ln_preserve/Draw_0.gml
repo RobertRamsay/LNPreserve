@@ -17,6 +17,7 @@ if (ln3_only) {
 if (!workbench) {
     if (scene_test.menu || scene_test.preview) { ln_scene_test_draw(scene_test); exit; }
     if (play.game_number==1) ln1_play_draw(play, control_state_ln1.pause != 0);else if (play.game_number==2) ln2_play_draw(play);else ln3_play_draw(play);
+    ln_saves_draw(saves);
     if (scene_test.message_us > 0) {
         draw_set_colour(make_colour_rgb(125,210,171)); draw_text(160,12,scene_test.message); draw_set_colour(c_white);
     }
@@ -76,7 +77,7 @@ draw_text(838,194,"Q / E   Previous / next dataset");
 draw_text(838,222,"Left / Right   Previous / next asset");
 draw_text(838,250,"Tab   Scene / object view");
 draw_text(838,292,"WASD   Move the mask probe");
-draw_text(838,320,"J   Fire input / lift probe");
+draw_text(838,320,"#   Fire input / lift probe");
 draw_text(838,348,"Space   Weapon input");
 draw_text(838,376,"1 2 3 4   F1 F3 F5 F7 input");
 draw_text(838,418,"M   Mask " + (mask_enabled ? "on" : "off"));

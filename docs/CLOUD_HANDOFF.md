@@ -53,3 +53,5 @@ The working GameMaker runtime was Windows LTS 2026.0.0.23. Build with `tools/com
 ## Starting the cloud task
 
 Read this brief and current repository status, confirm repository access and available tools, then report which local-only prerequisites are missing. Continue using the existing repository. If source captures or a compatible GameMaker runtime are unavailable, work on bounded changes that can be checked with the available evidence and report the remaining validation explicitly.
+
+Save slots: Ctrl+S adds a local persistent snapshot; click the right-side list to restore. Ten shared slots, newest first, named LN1_SAVE_1410 etc. See docs/SAVE_SLOTS.md for implementation and pending Windows checks.

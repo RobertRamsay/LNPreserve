@@ -2178,6 +2178,7 @@
   },
   "name":"LNPreserve",
   "resources":[
+    {"id":{"name":"ln_saves","path":"scripts/ln_saves/ln_saves.yy",},},
     {"id":{"name":"spr_ln1_weapon_inventory","path":"sprites/spr_ln1_weapon_inventory/spr_ln1_weapon_inventory.yy",},},
     {"id":{"name":"spr_ln1_player_health","path":"sprites/spr_ln1_player_health/spr_ln1_player_health.yy",},},
     {"id":{"name":"obj_ln_preserve","path":"objects/obj_ln_preserve/obj_ln_preserve.yy",},},

@@ -125,6 +125,8 @@ var _control_buffer = buffer_load("actors/ln1/initial_control_state.json");
 control_state_ln1 = json_parse(buffer_read(_control_buffer,buffer_text));
 buffer_delete(_control_buffer);
 play.controls = control_state_ln1;
+saves = new LNSaves();
+if (selftest) ln_save_checks();
 ln_music_play(1, "wastelands", false);
 tick_native = function(_from, _to, _frame) {
     input_state.consume(_to);

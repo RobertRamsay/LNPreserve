@@ -1,4 +1,5 @@
 try {
+if (!selftest && ln_saves_step(self)) exit;
 elapsed_us += int64(delta_time);
 // Input is stamped at observation time, not retroactively applied to host-stall debt.
 input_state.sample((elapsed_us div 1000000) * clock.hz + ((elapsed_us mod 1000000) * clock.hz) div 1000000);

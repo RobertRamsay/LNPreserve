@@ -43,6 +43,8 @@ LN3 remains **incomplete**: the separate high-score program, original dashboard/
 | Key | Action |
 | --- | --- |
 | WASD | Original joystick directions, including diagonals |
+| Ctrl+S | Add a persistent save to the right-hand list (10 slots; newest first) |
+| Click a save | Restore its game, level, room and gameplay state |
 | # (UK keyboard) | Original fire button; combine with directions for actions |
 | Space | Cycle available weapons |
 | 1 | Music toggle |

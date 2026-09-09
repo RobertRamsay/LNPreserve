@@ -16,6 +16,7 @@ function LNInput() constructor {
     sample = function(_cycle) {
         for (var _i = 0; _i < LNKey.Count; _i++) {
             var _down = keyboard_check(bindings[_i]);
+            if (_i == LNKey.Down && keyboard_check(vk_control)) _down = false;
             if (_down != sampled[_i]) {
                 enqueue(_cycle, _i, _down);
                 sampled[_i] = _down;
