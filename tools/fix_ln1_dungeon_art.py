@@ -23,7 +23,10 @@ def original_pose(ram,frame,mirror,weapon=0,trait=0,active=133):
     for slot in [7,6,5,4]:
         if not mem[0x210+slot]:continue
         address=mem[0x7e0b+slot]+256*mem[0x7e13+slot]
-        part=sprite_image(mem[address:address+63],bool(mem[0x238+slot]),mem[0x220+slot]&15)
+        # Source $5513 chooses level-specific shared VIC sprite colours.
+        # Keep this correction scoped to the four dungeon spider poses.
+        shared=(ram[0x552a],ram[0x5530]) if ram[0x805]==0x44 and 141<=frame<=144 else (7,8)
+        part=sprite_image(mem[address:address+63],bool(mem[0x238+slot]),mem[0x220+slot]&15,shared=shared)
         if mem[0x228+slot] or mem[0x230+slot]:
             part=part.resize((24*(2 if mem[0x228+slot] else 1),21*(2 if mem[0x230+slot] else 1)),Image.Resampling.NEAREST)
         image.alpha_composite(part,(mem[0x200+slot]+256*mem[0x208+slot]-96,mem[0x210+slot]-106))

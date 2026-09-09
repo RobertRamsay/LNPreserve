@@ -81,17 +81,36 @@ function ln1_level_checks() {
     ln_check(_g.room_wounds[2]==32,"first-level defeated enemy survives level browsing");
     ln1_level_load(_g,2);
     ln_check(_g.room_wounds[3]==17,"later-level wounds survive level browsing");
+    var _dye=new LN1Play(6);
+    _dye.world_state.protection=2;_dye.world_state.protection_tick=250;
+    _dye.player.tick=243;ln1_level_effect_tick(_dye);
+    ln_check(_dye.world_state.protection==2,"red dye persists through 249 ticks across byte wrap");
+    _dye.player.tick=244;ln1_level_effect_tick(_dye);
+    ln_check(_dye.world_state.protection==0,"red dye expires at 250 ticks across byte wrap");
+    var _final=new LN1Play(6);
+    ln1_test_enter(_final,48);_final.player.x=247;_final.player.y=85;ln1_play_exit(_final);
+    ln_check(_final.level==6 && _final.room_id==13,"final approach room 12 exits to 13 without changing level");
+    _final.player.x=0;_final.player.y=79;ln1_play_exit(_final);
+    ln_check(_final.level==6 && _final.room_id==14,"final approach room 13 exits to 14 without changing level");
+    _final.player.x=0;_final.player.y=112;ln1_play_exit(_final);
+    ln_check(_final.level==6 && _final.room_id==15,"final approach room 14 exits to 15 without changing level");
     var _dog=new LN1Play(6);ln1_test_enter(_dog,45);
     ln1_play_tick(_dog,0);ln1_play_tick(_dog,0);
-    ln_check(_dog.room_id==11 && _dog.enemy.active==134 && _dog.enemy.display_frame==141 &&
-        _dog.enemy.action==$4e0f,"Inner Sanctum dog enters its recovered $4e0c animation instead of executable $4e08");
+    ln_check(_dog.room_id==11 && _dog.enemy.active==134 && _dog.enemy.display_frame==142 &&
+        _dog.enemy.action==0,"Inner Sanctum dog waits in original idle pose $4e08");
+    var _dog_x=_dog.enemy.x,_dog_y=_dog.enemy.y;
+    for (var _idle_tick=0;_idle_tick<32;_idle_tick++) ln1_play_tick(_dog,0);
+    ln_check(_dog.enemy.x==_dog_x && _dog.enemy.y==_dog_y && _dog.enemy.display_frame==142,
+        "dog does not pursue before its approach boundary is crossed");
+    _dog.player.boundary_crossings=1;ln1_level_hazard(_dog,13);
+    ln_check(_dog.enemy.action==$4e0c && _dog.enemy.speed==3,"approach boundary releases dog pursuit");
     for (var _dog_tick=0;_dog_tick<16;_dog_tick++) ln1_play_tick(_dog,0);
     ln_check(_dog.enemy.active==134 && _dog.enemy.display_frame>=133 && _dog.enemy.display_frame<=141,
         "Inner Sanctum dog pursuit retains special dog frames instead of ordinary humanoid combat frames");
     _dog.player.x=_dog.enemy.x;_dog.player.y=_dog.enemy.y;
     ln1_level_events(_dog);
-    ln_check(_dog.enemy.action==$4e2d && _dog.world_state.mode==0,
-        "Inner Sanctum dog contact enters recovered animation $4e2d instead of executable $4e20");
+    ln_check(_dog.enemy.action==$4e20 && _dog.world_state.mode==0,
+        "Inner Sanctum dog contact enters original tail-called record $4e20");
     for (var _contact_tick=0;_contact_tick<24;_contact_tick++) ln1_play_tick(_dog,0);
     ln_check(array_length(_dog.pending_events)==0,"Inner Sanctum dog contact animation stays in the recovered action graph");
     _dog.world_state.mode=7;ln1_test_enter(_dog,40);

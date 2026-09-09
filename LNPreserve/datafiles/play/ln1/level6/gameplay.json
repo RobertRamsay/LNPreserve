@@ -61,6 +61,66 @@
     23674
   ],
   "actions": {
+    "20000": {
+      "flags": 10,
+      "duration": 8,
+      "frame": 139,
+      "dx": 0,
+      "dy": 0,
+      "state": -1,
+      "combat_data": -1,
+      "next": 20003
+    },
+    "20003": {
+      "flags": 8,
+      "duration": -1,
+      "frame": 140,
+      "dx": 0,
+      "dy": 0,
+      "state": -1,
+      "combat_data": -1,
+      "next": 20005
+    },
+    "20005": {
+      "flags": 8,
+      "duration": -1,
+      "frame": 139,
+      "dx": 0,
+      "dy": 0,
+      "state": -1,
+      "combat_data": -1,
+      "next": 20007
+    },
+    "20007": {
+      "flags": 8,
+      "duration": -1,
+      "frame": 140,
+      "dx": 0,
+      "dy": 0,
+      "state": -1,
+      "combat_data": -1,
+      "next": 20009
+    },
+    "20009": {
+      "flags": 40,
+      "duration": -1,
+      "frame": 139,
+      "dx": 0,
+      "dy": 0,
+      "state": -1,
+      "combat_data": -1,
+      "next": 0
+    },
+    "19976": {
+      "flags": 40,
+      "duration": -1,
+      "frame": 142,
+      "dx": 0,
+      "dy": 0,
+      "state": -1,
+      "combat_data": -1,
+      "next": 0
+    },
     "19968": {
       "combat_data": 0,
       "duration": -1,

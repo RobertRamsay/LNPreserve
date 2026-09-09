@@ -206,9 +206,8 @@ function ln1_level_events(_g) {
         _e.facing=ln1_enemy_face(_e,_p.x,_p.y);
         if (min(255,abs(_p.x-_e.x)+abs(_p.y-_e.y))<(_g.level==4?8:18)) {
             _p.input_lock=255;_state.mode=0;
-            // $4e20 is executable dispatch code, like the dog's $4e08 entry.
-            // Its close-contact animation record begins at $4e2d.
-            ln1_level_enemy_action(_g,_g.level==4?$514f:$4e2d);
+            // Source $bf92 tail-calls the contact animation at $4e20.
+            ln1_level_enemy_action(_g,_g.level==4?$514f:$4e20);
         } else {
             // The special actor keeps its current animation while pursuit
             // steering changes direction. Starting an ordinary guard stance

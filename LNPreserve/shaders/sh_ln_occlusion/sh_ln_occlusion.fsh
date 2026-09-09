@@ -6,8 +6,12 @@ uniform vec4 u_mask_uv;
 uniform vec4 u_scene;
 uniform float u_mask_threshold;
 uniform float u_clip_bottom;
+uniform float u_red_dye;
 void main() {
     vec4 colour = v_vColour * texture2D(gm_BaseTexture, v_vTexcoord);
+    // LN1 $561f: red body/weapon pixels; retain the face colour and alpha.
+    if (u_red_dye > 0.5 && max(colour.r, max(colour.g, colour.b)) < 0.001)
+        colour.rgb = vec3(129.0, 51.0, 56.0) / 255.0;
     if (v_world.y >= u_clip_bottom) discard;
     vec2 p = (v_world - u_scene.xy) / u_scene.zw;
     if (p.x >= 0.0 && p.y >= 0.0 && p.x < 1.0 && p.y < 1.0) {

@@ -79,6 +79,8 @@ function ln1_play_exit(_g) {
 
 /// Shared destination/entrance handling for an ordinary exit and scene testing.
 function ln1_play_travel(_g, _entry) {
+    show_debug_message("LN1_TRAVEL level="+string(_g.level)+" room="+string(_g.room_id)+
+        " entry="+string(_entry)+" target_room="+string(_entry >> 2));
     var _p = _g.player, _room_id = _entry >> 2;
     if (_room_id == 0) { ln1_level_load(_g, _g.level + 1, true); return; }
     _g.last_entry = _entry;
@@ -262,7 +264,8 @@ function ln1_play_actor(_g, _actor, _enemy) {
     }
     ln_draw_masked_actor(_sprite, _frame + (_actor.mirror ? _mirror_offset : 0), _actor.x, _actor.y,
         1, 1, _g.mask, 0, 0, 240, 144, max(0.001, (_actor.y - 0.25) / 255),
-        _enemy ? 144 : _g.water_cutoff - 29);
+        _enemy ? 144 : _g.water_cutoff - 29,
+        !_enemy && _g.world_state.protection == 2);
 }
 
 function ln1_play_draw(_game, _paused) {

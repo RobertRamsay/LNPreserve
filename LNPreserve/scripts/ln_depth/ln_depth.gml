@@ -5,13 +5,17 @@ function ln_actor_depth(_foot_y, _layer_bias = 0) {
 }
 
 function ln_draw_masked_actor(_sprite, _frame, _x, _y, _xscale, _yscale,
-                              _mask_sprite, _scene_x, _scene_y, _scene_width, _scene_height, _threshold = 0.5, _clip_bottom = 1000000) {
-    if (_mask_sprite < 0 || !shader_is_compiled(sh_ln_occlusion)) {
+                              _mask_sprite, _scene_x, _scene_y, _scene_width, _scene_height, _threshold = 0.5, _clip_bottom = 1000000, _red_dye = false) {
+    if (!shader_is_compiled(sh_ln_occlusion)) {
         draw_sprite_ext(_sprite, _frame, _x, _y, _xscale, _yscale, 0, c_white, 1);
         return;
     }
+    // An unmasked room must still display palette effects. Alpha cannot reach 2.
+    if (_mask_sprite < 0) { _mask_sprite=_sprite; _threshold=2; }
     var _uv = sprite_get_uvs(_mask_sprite, 0);
     shader_set(sh_ln_occlusion);
+    // Reset per draw so a dyed player cannot recolour enemies or other games.
+    shader_set_uniform_f(shader_get_uniform(sh_ln_occlusion, "u_red_dye"), real(_red_dye));
     texture_set_stage(shader_get_sampler_index(sh_ln_occlusion, "u_mask"), sprite_get_texture(_mask_sprite, 0));
     shader_set_uniform_f(shader_get_uniform(sh_ln_occlusion, "u_mask_uv"), _uv[0], _uv[1], _uv[2], _uv[3]);
     shader_set_uniform_f(shader_get_uniform(sh_ln_occlusion, "u_scene"), _scene_x, _scene_y, _scene_width, _scene_height);

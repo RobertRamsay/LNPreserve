@@ -321,10 +321,10 @@ def main():
                 world['prayer_hint_items'].append(ram[hint]);hint+=1
         if level==6:special.append(world['vision_enemy'])
         # Include all sequences directly referenced by the original level code.
-        # JSR $7e00 (enemy) passes X/Y; JSR $583a (player) passes X/A.
+        # JSR/JMP $7e00 (enemy) passes X/Y; $583a (player) passes X/A.
         for start,end in [(0x600,0x800),(0x4a00,0x5400),(0xa700,0xaf00),(0xbc60,0xc000)]:
             for address in range(start,end-7):
-                if ram[address]==0xa2 and ram[address+2] in (0xa0,0xa9) and ram[address+4]==0x20:
+                if ram[address]==0xa2 and ram[address+2] in (0xa0,0xa9) and ram[address+4] in (0x20,0x4c):
                     target=word(ram,address+5)
                     if target in (0x7e00,0x583a):
                         special.append(ram[address+1]+256*ram[address+3])

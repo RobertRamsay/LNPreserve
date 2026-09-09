@@ -1,0 +1,20 @@
+{
+  "base_commit": "30a3952eb889b3056484b4ef6208b087aebd7f60",
+  "source_archive_sha256": "9bbea4ea6af78bb2f90f5f2bfc20bfb4c00c892a6ed51e0286fcad3d955dddb7",
+  "method": "bounded offline py65 execution of privately recovered CCS banks",
+  "dog_missing_records_matched": 6,
+  "dog_boundary_cases_passed": 5,
+  "dye_state_and_colour_cases_passed": 5,
+  "spider_pose_images_verified": 8,
+  "spider_pngs_including_layers": 16,
+  "spider_geometry_unchanged": true,
+  "spider_shared_palette_indices": [11, 1],
+  "inner_sanctum_exit_tables_matched": 15,
+  "final_area_exit_cases_passed": 10,
+  "reported_level_one_reset_reproduced": false,
+  "gamemaker_compiled_here": false,
+  "native_integration_tests_run_here": false,
+  "gpu_tests_run_here": false,
+  "full_original_playthrough_verified": false,
+  "cycle_accuracy_verified": false
+}

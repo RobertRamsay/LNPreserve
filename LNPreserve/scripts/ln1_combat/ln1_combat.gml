@@ -85,9 +85,9 @@ function ln1_combat_event(_g, _event, _enemy_event) {
         if (_g.level==6 && _e.active==134) {
             if (_e.facing==1) _e.active=0;
             else {
-                // $4e08 is executable dispatch code; the dog animation record
-                // it selects begins at $4e0c and is present in the source graph.
-                _g.world_state.mode=7;ln1_level_enemy_action(_g,$4e0c);
+                // Source $4ac4: show the stationary dog. Boundary handler
+                // $be9b starts $4e0c only after the player approaches.
+                _g.world_state.mode=7;ln1_level_enemy_action(_g,$4e08);
             }
             return;
         }
