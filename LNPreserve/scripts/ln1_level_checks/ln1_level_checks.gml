@@ -85,11 +85,14 @@ function ln1_level_checks() {
     ln1_play_tick(_dog,0);ln1_play_tick(_dog,0);
     ln_check(_dog.room_id==11 && _dog.enemy.active==134 && _dog.enemy.display_frame==141 &&
         _dog.enemy.action==$4e0f,"Inner Sanctum dog enters its recovered $4e0c animation instead of executable $4e08");
+    for (var _dog_tick=0;_dog_tick<16;_dog_tick++) ln1_play_tick(_dog,0);
+    ln_check(_dog.enemy.active==134 && _dog.enemy.display_frame>=133 && _dog.enemy.display_frame<=141,
+        "Inner Sanctum dog pursuit retains special dog frames instead of ordinary humanoid combat frames");
     _dog.player.x=_dog.enemy.x;_dog.player.y=_dog.enemy.y;
     ln1_level_events(_dog);
     ln_check(_dog.enemy.action==$4e2d && _dog.world_state.mode==0,
         "Inner Sanctum dog contact enters recovered animation $4e2d instead of executable $4e20");
-    for (var _dog_tick=0;_dog_tick<24;_dog_tick++) ln1_play_tick(_dog,0);
+    for (var _contact_tick=0;_contact_tick<24;_contact_tick++) ln1_play_tick(_dog,0);
     ln_check(array_length(_dog.pending_events)==0,"Inner Sanctum dog contact animation stays in the recovered action graph");
     _dog.world_state.mode=7;ln1_test_enter(_dog,40);
     ln_check(_dog.room_id==10 && _dog.world_state.mode==0,

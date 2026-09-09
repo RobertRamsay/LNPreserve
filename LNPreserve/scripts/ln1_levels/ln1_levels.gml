@@ -209,14 +209,15 @@ function ln1_level_events(_g) {
             // $4e20 is executable dispatch code, like the dog's $4e08 entry.
             // Its close-contact animation record begins at $4e2d.
             ln1_level_enemy_action(_g,_g.level==4?$514f:$4e2d);
-        } else if (_g.level==4) {
-            // Original $be d9 jumps to $6c89: steer the current spider action.
-            // Starting an ordinary guard stance here replaces its spider frames.
+        } else {
+            // The special actor keeps its current animation while pursuit
+            // steering changes direction. Starting an ordinary guard stance
+            // here replaces the spider or dog with humanoid combat frames.
             var _dx=abs(_p.x-_e.x),_dy=abs(_p.y-_e.y);
             var _headings=[0,2,4,2,4,6,0,6];
             _e.heading=(_dx>>2)<_dy ? _headings[_e.facing-1] :
                 (_dy<4 ? _headings[_e.facing] : _e.facing);
-        } else ln1_enemy_attack_stance(_g);
+        }
     }
     if (_g.level==6 && _state.mode==9 && _p.action<256) ln1_special_action(_g,$5113);
 }
