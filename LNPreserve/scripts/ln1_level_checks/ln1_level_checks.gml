@@ -1,4 +1,17 @@
 function ln1_level_checks() {
+    var _apple = new LN1Play();
+    _apple.world.items = [{id:8, room:1, x_min:0, x_max:20, y_min:0, y_max:20}];
+    _apple.room_id=1; _apple.player.x=10; _apple.player.y=10; _apple.player.facing=0;
+    _apple.inventory[2]=1; _apple.inventory[8]=0;
+    _apple.lives_left=2; _apple.player_health=7;
+    ln1_item_interact(_apple);
+    ln_check(_apple.lives_left==3 && _apple.player_health==32 && _apple.inventory[8]==128,
+        "LN1 apple grants one immediate life and full health");
+    ln1_item_interact(_apple);
+    ln_check(_apple.lives_left==3,"LN1 credited apple cannot be collected twice");
+    ln1_level_load(_apple,2,true);
+    ln_check(_apple.lives_left==3 && _apple.inventory[8]==0,
+        "LN1 credited apple does not grant another life at level exit");
     var _dungeon=new LN1Play(4);
     for (var _i=0;_i<array_length(_dungeon.world.dungeon_spider_vectors);_i++) {
         var _v=_dungeon.world.dungeon_spider_vectors[_i];

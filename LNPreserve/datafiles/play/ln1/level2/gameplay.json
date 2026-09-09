@@ -1321,6 +1321,16 @@
       "next": 24047,
       "state": -1
     },
+    "43550": {
+      "combat_data": -1,
+      "duration": 8,
+      "dx": 0,
+      "dy": 0,
+      "flags": 26,
+      "frame": 30,
+      "next": 43553,
+      "state": -1
+    },
     "43553": {
       "combat_data": -1,
       "duration": 12,
@@ -1439,6 +1449,46 @@
       "flags": 56,
       "frame": 16,
       "next": 0,
+      "state": -1
+    },
+    "43597": {
+      "combat_data": -1,
+      "duration": 2,
+      "dx": 0,
+      "dy": 8,
+      "flags": 154,
+      "frame": 68,
+      "next": 43602,
+      "state": -1
+    },
+    "43602": {
+      "combat_data": -1,
+      "duration": -1,
+      "dx": 0,
+      "dy": 8,
+      "flags": 152,
+      "frame": 68,
+      "next": 43606,
+      "state": -1
+    },
+    "43606": {
+      "combat_data": -1,
+      "duration": -1,
+      "dx": 0,
+      "dy": 8,
+      "flags": 152,
+      "frame": 68,
+      "next": 43610,
+      "state": -1
+    },
+    "43610": {
+      "combat_data": -1,
+      "duration": -1,
+      "dx": 0,
+      "dy": 8,
+      "flags": 152,
+      "frame": 68,
+      "next": 43614,
       "state": -1
     },
     "43614": {

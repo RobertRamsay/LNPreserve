@@ -22,12 +22,20 @@ function ln1_item_interact(_g) {
             return;
         }
         _g.inventory[_item.id] = _item.id == 14 ? 133 : (_item.id == 15 ? 3 : 1);
+        // Requested LN1 enhancement: award the apple now, with full healing.
+        // 128 marks an already credited apple: hide it without banking a life.
+        if (_item.id == 8) {
+            _g.inventory[8] = 128;
+            _g.lives_left++;
+            _g.player_health = 32;
+        }
         if (_item.id == 9) _g.world_state.mode = 9;
         _g.notice_item = _item.id; _g.notice_tick = _p.tick;
         _g.notice_label = 1; _g.notice_duration = 150;
         if (is_struct(_g.controls)) {
             for (var _j = 0; _j < 11; _j++) _g.controls.inventory[_j] = _g.inventory[_j];
             for (var _j = 0; _j < 6; _j++) _g.controls.weapons[_j] = _g.inventory[10 + _j];
+            if (_g.inventory[8] == 128) _g.controls.inventory[8] = 0;
             _g.controls.action_reset = 150;
         }
         return;

@@ -42,6 +42,9 @@ class ConversionChecks(unittest.TestCase):
         sources='\n'.join(path.read_text() for path in (PROJECT/'scripts').glob('ln1_*/*.gml'))
         for raw in re.findall(r'ln1_level_enemy_action\s*\(\s*_g\s*,\s*\$([0-9a-fA-F]+)',sources):
             self.assertIn(int(raw,16),available,f'scripted LN1 enemy action ${raw}')
+        level2=read_json(PROJECT/'datafiles/play/ln1/level2/gameplay.json')['actions']
+        for entry in (0xaa1e, 0xaa4d):
+            self.assertIn(str(entry),level2,'Wilderness climbing requires its original action root')
         level6=read_json(PROJECT/'datafiles/play/ln1/level6/gameplay.json')['actions']
         self.assertEqual(level6[str(0x4e08)]['frame'],142)
         self.assertEqual(level6[str(0x4e08)]['next'],0)

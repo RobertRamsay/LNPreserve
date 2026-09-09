@@ -328,6 +328,8 @@ def main():
                     target=word(ram,address+5)
                     if target in (0x7e00,0x583a):
                         special.append(ram[address+1]+256*ram[address+3])
+        # Wilderness climb starts are selected by native boundary modes 2/4.
+        if level == 2: special.extend([0xaa1e, 0xaa4d])
         data['actions']=actions(ram,data['action_entries']+data['enemy_entries']+data['reactions']+
                                 [0x5d34,0x5dce,0x5de1]+special+[r['enemy_script'] for r in rooms])
         used=sorted({r['frame'] for r in data['actions'].values() if 64<=r['frame']<255})

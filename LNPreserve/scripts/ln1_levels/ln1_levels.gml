@@ -8,7 +8,7 @@ function ln1_level_load(_g, _level, _ordinary_exit = false) {
     if (_ordinary_exit) {
         // $6e36 carries the inventory, converts the extra-life pickup and clears
         // the shuriken high bit before $6df8 restores the next level's state.
-        if (_inventory[8] != 0) _lives++;
+        if (_inventory[8] != 0 && _inventory[8] != 128) _lives++;
         _inventory[8] = 0; _inventory[14] &= 127;
         if (_g.level == 1 && _lives == 1) _lives++;
     }
@@ -34,6 +34,7 @@ function ln1_level_sync_controls(_g) {
     if (!is_struct(_g.controls)) return;
     for (var _i=0;_i<11;_i++) _g.controls.inventory[_i] = _g.inventory[_i];
     for (var _i=0;_i<6;_i++) _g.controls.weapons[_i] = _g.inventory[_i+10];
+    if (_g.inventory[8] == 128) _g.controls.inventory[8] = 0;
     _g.controls.weapon = _g.player.selected_weapon;
     _g.controls.weapon_locked = 0;
 }

@@ -18,6 +18,7 @@ function LN1Play(_level = 1) constructor {
     player.previous_combat = 0;
     player.world_game = self;
     enemy = new LN1Enemy();
+    health_display = 32; health_display_tick = 0;
     player_health = 32; room_wounds = array_create(array_length(world.rooms)+1, 0); room_id = 1;
     level_states = array_create(6, undefined);
     level_complete = false; sequence_kind = 0; sequence_phase = 0; sequence_wait = 0;
@@ -95,6 +96,11 @@ function ln1_play_travel(_g, _entry) {
 function ln1_play_tick(_g, _joy) {
     var _p = _g.player, _e = _g.enemy;
     if (_g.game_over || _g.level_complete) return;
+    // Original spiral cell order, one step every two native PAL ticks.
+    _g.health_display_tick = (_g.health_display_tick + 1) & 1;
+    if (_g.health_display_tick == 0) {
+        _g.health_display += sign(_g.player_health - _g.health_display);
+    }
     _g.room_age = min(62, _g.room_age + 1);
     ln1_level_effect_tick(_g);
     if (_g.sequence_kind != 0) { ln1_level_sequence_tick(_g, _joy); return; }
@@ -105,7 +111,7 @@ function ln1_play_tick(_g, _joy) {
         ln1_notice_update(_g);
         if (_g.death_wait == 0) {
             _g.lives_left--;
-            if (_g.lives_left == 0 && _g.inventory[8] != 0) {
+            if (_g.lives_left == 0 && _g.inventory[8] != 0 && _g.inventory[8] != 128) {
                 _g.lives_left++; _g.inventory[8] = 0;
                 if (is_struct(_g.controls)) _g.controls.inventory[8] = 0;
             }
@@ -296,7 +302,7 @@ function ln1_play_draw(_game, _paused) {
         if ((_game.inventory[11 + _w] & 127) != 0) _weapons |= (1 << _w);
     }
     draw_sprite_ext(spr_ln1_weapon_inventory, _weapons, _x + 96 * _scale, _y + 152 * _scale, _scale, _scale, 0, c_white, 1);
-    draw_sprite_ext(spr_ln1_player_health, clamp(floor(_game.player_health), 0, 32), _x + 8 * _scale, _y + 152 * _scale, _scale, _scale, 0, c_white, 1);
+    draw_sprite_ext(spr_ln1_player_health, clamp(floor(_game.health_display), 0, 32), _x + 8 * _scale, _y + 152 * _scale, _scale, _scale, 0, c_white, 1);
     draw_sprite_ext(spr_ln1_enemy_wounds, _game.room_wounds[_game.room_id], _x+248*_scale, _y+24*_scale, _scale, _scale, 0, c_white, 1);
     draw_sprite_ext(spr_ln1_status_label, _game.notice_label, _x+248*_scale, _y+64*_scale, _scale, _scale, 0, c_white, 1);
     var _icon = _game.notice_item >= 0 ? _game.notice_item : _s.selected_weapon + 10;
