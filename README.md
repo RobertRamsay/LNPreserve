@@ -43,7 +43,7 @@ LN3 remains **incomplete**: the separate high-score program, original dashboard/
 | Key | Action |
 | --- | --- |
 | WASD | Original joystick directions, including diagonals |
-| J | Original fire button; combine with directions for actions |
+| # (UK keyboard) | Original fire button; combine with directions for actions |
 | Space | Cycle available weapons |
 | 1 | Music toggle |
 | 2 / 3 | Next / previous available inventory item |

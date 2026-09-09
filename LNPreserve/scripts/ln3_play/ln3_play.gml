@@ -293,7 +293,7 @@ function ln3_play_draw(_g) {
     draw_text(160,36,"LAST NINJA 3 — "+string_upper(_g.title));draw_text(1000,36,"Scene "+string(_g.room_id));
     draw_text(160,672,"Health "+string(_s.player_health)+"   Lives "+string(_s.lives)+"   Honour "+string(_s.honour)+"   Enemy "+string(_s.enemy_health));
     draw_text(790,672,_g.found_item>=0?"FOUND   Item "+string(_g.found_item):"Item "+string(_s.selected_item)+"   Weapon "+string(_s.player_weapon));
-    draw_text(160,712,"WASD Move    J + direction Action    Space Weapon    1 2 3 4 Function keys");
+    draw_text(160,712,"WASD Move    # + direction Action    Space Weapon    1 2 3 4 Function keys");
     draw_text(160,744,"Arrows: Right NE / Down SE / Left SW / Up NW    F11 Scenes    Home Restart");
     if (_g.paused) draw_text(600,60,"PAUSED");
     if (_g.game_over) draw_text(520,60,"GAME OVER — HOME TO RESTART");

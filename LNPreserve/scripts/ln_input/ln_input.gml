@@ -1,7 +1,8 @@
 enum LNKey { Up, Down, Left, Right, Fire, F1, F3, F5, F7, Weapon, Count }
 
 function LNInput() constructor {
-    bindings = [ord("W"), ord("S"), ord("A"), ord("D"), ord("J"),
+    // Windows UK keyboard: dedicated # key (OEM 7), not character code 35 (End).
+    bindings = [ord("W"), ord("S"), ord("A"), ord("D"), 222,
                 ord("1"), ord("2"), ord("3"), ord("4"), vk_space];
     sampled = array_create(LNKey.Count, false);
     held = array_create(LNKey.Count, false);

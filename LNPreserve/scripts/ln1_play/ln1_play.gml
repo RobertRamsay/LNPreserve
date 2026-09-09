@@ -290,6 +290,13 @@ function ln1_play_draw(_game, _paused) {
     surface_reset_target();
     draw_surface_ext(_game.stage_surface, _x, _y, _scale, _scale, 0, c_white, 1);
     draw_sprite_ext(spr_ln1_dashboard, 0, _x, _y, _scale, _scale, 0, c_white, 1);
+    // Original $65bf: the bottom inventory shows owned weapons 1..5.
+    var _weapons = 0;
+    for (var _w = 0; _w < 5; _w++) {
+        if ((_game.inventory[11 + _w] & 127) != 0) _weapons |= (1 << _w);
+    }
+    draw_sprite_ext(spr_ln1_weapon_inventory, _weapons, _x + 96 * _scale, _y + 152 * _scale, _scale, _scale, 0, c_white, 1);
+    draw_sprite_ext(spr_ln1_player_health, clamp(floor(_game.player_health), 0, 32), _x + 8 * _scale, _y + 152 * _scale, _scale, _scale, 0, c_white, 1);
     draw_sprite_ext(spr_ln1_enemy_wounds, _game.room_wounds[_game.room_id], _x+248*_scale, _y+24*_scale, _scale, _scale, 0, c_white, 1);
     draw_sprite_ext(spr_ln1_status_label, _game.notice_label, _x+248*_scale, _y+64*_scale, _scale, _scale, 0, c_white, 1);
     var _icon = _game.notice_item >= 0 ? _game.notice_item : _s.selected_weapon + 10;
@@ -303,7 +310,7 @@ function ln1_play_draw(_game, _paused) {
         draw_set_colour(c_white);draw_text(400,560,"THE QUEST — COMPLETE");
         draw_text(400,592,"F11: choose a scene    Home: restart");
     }
-    draw_text(160, 700, "WASD  Move    J + direction  Action    Space  Weapon    1 2 3 4  Function keys");
+    draw_text(160, 700, "WASD  Move    # + direction  Action    Space  Weapon    1 2 3 4  Function keys");
     draw_text(160, 728, "Arrows: Right NE / Down SE / Left SW / Up NW    F11 Scenes    Home Restart");
     draw_text(160, 760, "Health " + string(_game.player_health) + "    Lives " + string(_game.lives_left));
     if (_game.prayer_phase > 0) draw_text(710, 760, "S + D  Finish prayer");

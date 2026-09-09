@@ -6,7 +6,7 @@ Prepared 9 September 2026. Use the existing repository https://github.com/Robert
 
 Convert all three supplied C64 Last Ninja games into one editable native GameMaker project, verified against the originals. An embedded C64 emulator is not the requested product. Offline execution of original 6502 code is used for recovery and verification. All 18 levels are accessible as prototypes; no complete game or cycle-accurate playthrough has passed acceptance.
 
-Controls: WASD movement; J plus direction for original fire/actions; Space selects weapons; 1–4 replace F keys. Testing arrows: Right NE, Down SE, Left SW, Up NW. F11 selects scenes and offers an off-by-default enemy-damage protection switch; environmental hazards remain active. F12 opens the optional workbench. Keep the gameplay interface nontechnical.
+Controls: WASD movement; # plus direction for original fire/actions; Space selects weapons; 1–4 replace F keys. Testing arrows: Right NE, Down SE, Left SW, Up NW. F11 selects scenes and offers an off-by-default enemy-damage protection switch; environmental hazards remain active. F12 opens the optional workbench. Keep the gameplay interface nontechnical.
 
 Keep original graphics. LN1 river deaths use sinking and masking, with no invented splash. Earlier broad scenery colour corrections were restricted by the user to LN3's opening scene. Do not apply the remaining diagnostic colour proposals without a new request. Preserve the user's GameMaker edits and fetch before publishing to the same main branch.
 
