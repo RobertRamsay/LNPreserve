@@ -18,18 +18,24 @@ void main() {
     vec3 col=vec3(texture2D(gm_BaseTexture,clamp(sampleUV+vec2(phase,0.0),edge,1.0-edge)).r,
                   texture2D(gm_BaseTexture,sampleUV).g,
                   texture2D(gm_BaseTexture,clamp(sampleUV-vec2(phase,0.0),edge,1.0-edge)).b);
-    // Blur the underlying pixels before adding phosphors and scanlines.
-    vec2 radius=vec2(2.0*u_blur*u_pixel_scale)/u_size;
-    vec3 blurred=texture2D(gm_BaseTexture,sampleUV).rgb*0.25;
-    blurred+=(texture2D(gm_BaseTexture,clamp(sampleUV+vec2(radius.x,0.0),edge,1.0-edge)).rgb+
-              texture2D(gm_BaseTexture,clamp(sampleUV-vec2(radius.x,0.0),edge,1.0-edge)).rgb+
-              texture2D(gm_BaseTexture,clamp(sampleUV+vec2(0.0,radius.y),edge,1.0-edge)).rgb+
-              texture2D(gm_BaseTexture,clamp(sampleUV-vec2(0.0,radius.y),edge,1.0-edge)).rgb)*0.125;
-    blurred+=(texture2D(gm_BaseTexture,clamp(sampleUV+radius,edge,1.0-edge)).rgb+
-              texture2D(gm_BaseTexture,clamp(sampleUV-radius,edge,1.0-edge)).rgb+
-              texture2D(gm_BaseTexture,clamp(sampleUV+vec2(radius.x,-radius.y),edge,1.0-edge)).rgb+
-              texture2D(gm_BaseTexture,clamp(sampleUV+vec2(-radius.x,radius.y),edge,1.0-edge)).rgb)*0.0625;
-    col=mix(col,blurred,u_blur)*vec3(0.985,1.0,1.035);
+    // Normalized 7x7 Gaussian kernel, sampled to three standard deviations.
+    // Blur radius grows continuously with the slider; zero bypasses the filter.
+    if (u_blur>0.0001) {
+        vec2 sigma=vec2(1.25*u_blur*u_pixel_scale)/u_size;
+        vec3 blurred=vec3(0.0);
+        float total=0.0;
+        for (int y=-3;y<=3;y++) {
+            for (int x=-3;x<=3;x++) {
+                vec2 offset=vec2(float(x),float(y));
+                float weight=exp(-0.5*dot(offset,offset));
+                blurred+=texture2D(gm_BaseTexture,clamp(sampleUV+offset*sigma,edge,1.0-edge)).rgb*weight;
+                total+=weight;
+            }
+        }
+        // Retain gentle colour phasing at low blur without a sharp overlay at high blur.
+        col=mix(blurred/total,col,0.08*(1.0-u_blur));
+    }
+    col*=vec3(0.985,1.0,1.035);
     col*=1.0-u_scanlines*0.4*(0.5-0.5*cos(2.0*PI*uv.y*u_size.y/u_pixel_scale));
     // Staggered RGB phosphor dots on a hexagonal (honeycomb) lattice.
     vec2 pixel=v_vTexcoord*u_size*u_scale;

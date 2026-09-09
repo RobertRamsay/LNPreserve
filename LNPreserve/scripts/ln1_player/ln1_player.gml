@@ -72,6 +72,7 @@ function ln1_player_input(_s, _d, _joy) {
     var _new_fire = _s.fire_previous != 16;
     _s.fire_previous = 16;
     if (_new_fire) {
+        if (_joy==16 && variable_struct_exists(_s,"world_game") && ln1_jump_assist_start(_s.world_game)) return;
         var _relative=(_heading-_s.facing)&7;
         if (_heading<128 && _s.stopped==0 && _relative>=3 && _relative<=5 &&
             variable_struct_exists(_d,"reverse_roll_entries")) {
@@ -209,7 +210,12 @@ function ln1_player_update(_s, _d, _joy, _tick) {
     var _ticks = (_s.tick - _s.last_tick) & 255;
     if (_ticks == 0) return;
     _s.last_tick = _s.tick;
+    if (variable_struct_exists(_s,"jump_assist") && is_struct(_s.jump_assist)) {
+        if (_s.action>=256) {ln1_jump_assist_tick(_s,_d,_ticks);return;}
+        _s.jump_assist=undefined;
+    }
     if (_s.action < 256) ln1_player_input(_s, _d, _joy);
+    if (variable_struct_exists(_s,"jump_assist") && is_struct(_s.jump_assist)) {ln1_jump_assist_tick(_s,_d,_ticks);return;}
     if (_s.action >= 256) {
         ln1_player_action(_s, _d, _ticks);
         if (_s.action < 256 || (_s.flags & 8)) return;
@@ -338,4 +344,119 @@ function ln1_roll_landing_checks() {
         ln_check(_held>=7 && _travel>0 && _p.action<256,"landing is held stationary while airborne roll still travels");
     }
     show_debug_message("LN_ROLL_LANDING_PASS: stationary first backward / last forward pose for every facing");
+}
+
+/// Fire-only convenience for the recovered river/log/rock safe rectangles.
+function ln1_jump_assist_target(_g) {
+    var _p=_g.player,_kind=_p.boundary_mode&31;
+    if (_kind<16 || _kind>=20) return undefined;
+    var _areas=_g.world.safe_areas[_kind&3];
+    var _direction={x:120,y:100,facing:_p.facing,heading:_p.facing,fraction_y:0,
+        boundary_mode:0,boundary_crossings:0,enemy_active:0};
+    var _empty={boundaries:[],left:_g.data.left,right:_g.data.right,no_y:_g.data.no_y,
+        double_y:_g.data.double_y,up:_g.data.up,down:_g.data.down};
+    ln1_player_move(_direction,_empty,8);
+    var _fx=_direction.x-120,_fy=2*(_direction.y-100),_best=undefined,_nearest=100000;
+    for (var _i=0;_i<array_length(_areas);_i++) {
+        var _r=_areas[_i];
+        if (_p.x>=_r[0] && _p.x<_r[1] && _p.y>=_r[2] && _p.y<_r[3]) continue;
+        var _x=floor((_r[0]+_r[1]-1)/2),_y=floor((_r[2]+_r[3]-1)/2);
+        var _dx=_x-_p.x,_dy=_y-_p.y,_distance=_dx*_dx+4*_dy*_dy;
+        var _dot=_dx*_fx+2*_dy*_fy,_cross=_dx*_fy-2*_dy*_fx;
+        if (_dot<=0 || abs(_cross)>_dot || abs(_dx)>64 || abs(_dy)>40 || _distance>=_nearest) continue;
+        var _probe={x:_p.x,y:_p.y,boundary_mode:0,boundary_crossings:0},_clear=true;
+        var _steps=max(1,ceil(max(abs(_dx),abs(_dy))));
+        for (var _step=1;_step<=_steps;_step++) {
+            var _nx=round(_p.x+_dx*_step/_steps),_ny=round(_p.y+_dy*_step/_steps);
+            // Water boundaries may be crossed in flight; solid boundaries may not.
+            if (ln1_player_boundary(_probe,_g.data,_nx,_ny)!=0) {_clear=false;break;}
+            _probe.x=_nx;_probe.y=_ny;
+        }
+        if (_clear) {_nearest=_distance;_best={x:_x,y:_y,area:_i};}
+    }
+    return _best;
+}
+
+function ln1_jump_assist_start(_g) {
+    var _p=_g.player;
+    if (_p.action>=256 || _p.input_lock!=0 || _g.player_health<=0 || _g.water_active ||
+        _g.sequence_kind!=0 || _g.prayer_phase!=0 || _g.death_wait>0) return false;
+    var _target=ln1_jump_assist_target(_g);
+    if (!is_struct(_target)) return false;
+    _p.jump_assist={x0:_p.x,y0:_p.y,x1:_target.x,y1:_target.y,elapsed:0,room:_g.room_id};
+    _p.heading=_p.facing;_p.stopped=255;_p.fraction_x=0;_p.fraction_y=0;
+    ln1_player_begin_action(_p,_g.data,4);
+    return true;
+}
+
+function ln1_jump_assist_tick(_p,_d,_ticks) {
+    var _a=_p.jump_assist,_g=_p.world_game;
+    if (_a.room!=_g.room_id || _g.player_health<=0) {_p.jump_assist=undefined;_p.action=0;return;}
+    repeat(_ticks) {
+        _a.elapsed++;
+        var _t=min(1,_a.elapsed/35),_nx=round(lerp(_a.x0,_a.x1,_t)),_ny=round(lerp(_a.y0,_a.y1,_t));
+        var _probe={x:_p.x,y:_p.y,boundary_mode:0,boundary_crossings:_p.boundary_crossings};
+        if (ln1_player_boundary(_probe,_d,_nx,_ny)!=0) {
+            _p.jump_assist=undefined;_p.action=0;return;
+        }
+        _p.x=_nx;_p.y=_ny;_p.boundary_crossings=_probe.boundary_crossings;
+        var _side=((_p.facing+2)&4)>>2,_frames=_side==0?[20,21,22,23,18,0]:[24,25,26,27,19,8];
+        _p.frame=_frames[min(5,(_a.elapsed-1) div 7)];
+        ln1_player_render(_p,_p.facing&2);
+        if (_a.elapsed>=42) {
+            _p.jump_assist=undefined;_p.action=0;_p.flags=0;_p.countdown=0;
+            _p.combat_state=_p.facing>>1;_p.stopped=255;return;
+        }
+    }
+}
+
+function ln1_jump_assist_checks() {
+    var _g=new LN1Play();ln1_play_enter(_g,11);
+    var _p=_g.player;_p.action=0;_p.input_lock=0;_p.fire_previous=0;_p.facing=1;
+    // Controlled fixtures isolate nearest/ahead selection from scene geometry.
+    _g.data.boundaries=[];_p.x=80;_p.y=110;
+    _g.world.safe_areas[0]=[[76,85,106,115],[99,108,96,105],[119,128,86,95],[59,68,116,125]];
+    var _target=ln1_jump_assist_target(_g);
+    ln_check(is_struct(_target) && _target.area==1,"jump chooses nearest platform ahead and skips current/behind platforms");
+    ln1_player_update(_p,_g.data,16,(_p.tick+1)&255);
+    ln_check(is_struct(_p.jump_assist),"fire alone starts assisted jump");
+    repeat(48) {if (!is_struct(_p.jump_assist)) break;ln1_player_update(_p,_g.data,16,(_p.tick+1)&255);ln1_play_hazards(_g);}
+    ln_check(_p.x==_target.x && _p.y==_target.y && _g.player_health==32 && !_g.water_active && _p.action==0,"assisted jump lands safely and finishes");
+    _p.x=80;_p.y=110;_p.action=0;_p.fire_previous=0;_p.stopped=0;
+    ln1_player_update(_p,_g.data,25,(_p.tick+1)&255);
+    ln_check(!is_struct(_p.jump_assist),"fire plus direction retains manual jump");
+    _p.action=0;_p.x=80;_p.y=110;_p.facing=1;_g.data.boundaries=[[0,105,255,105,0]];
+    ln_check(!is_struct(ln1_jump_assist_target(_g)),"jump assistance rejects a solid wall");
+    _g.data.boundaries=[];_g.world.safe_areas[0]=[[59,68,116,125]];
+    ln_check(!is_struct(ln1_jump_assist_target(_g)),"jump assistance never chooses a platform behind");
+    var _tested=0;
+    for (var _level=1;_level<=3;_level++) {
+        var _real=new LN1Play(_level);
+        for (var _room=1;_room<=array_length(_real.world.rooms);_room++) {
+            var _kind=_real.world.rooms[_room-1].boundary_mode&31;
+            if (_kind<16 || _kind>=20) continue;
+            ln1_play_enter(_real,_room);
+            var _areas=_real.world.safe_areas[_kind&3],_n=_real.player;
+            for (var _area=0;_area<array_length(_areas);_area++) for (var _face=1;_face<8;_face+=2) {
+                var _rect=_areas[_area];
+                _n.x=floor((_rect[0]+_rect[1]-1)/2);_n.y=floor((_rect[2]+_rect[3]-1)/2);
+                _n.facing=_face;_n.action=0;_n.input_lock=0;_n.fire_previous=0;_n.boundary_crossings=1;
+                _n.jump_assist=undefined;_real.player_health=32;_real.water_active=false;
+                var _landing=ln1_jump_assist_target(_real);
+                if (!is_struct(_landing)) continue;
+                ln1_player_update(_n,_real.data,16,(_n.tick+1)&255);
+                ln_check(is_struct(_n.jump_assist),"real river/log room fire starts jump");
+                repeat(48) {
+                    if (!is_struct(_n.jump_assist)) break;
+                    ln1_player_update(_n,_real.data,16,(_n.tick+1)&255);ln1_play_hazards(_real);
+                }
+                ln_check(_n.x==_landing.x && _n.y==_landing.y && _real.player_health==32 && !_real.water_active,
+                    "assisted jump lands safely using original room boundaries and platform rectangles");
+                _tested++;
+            }
+        }
+    }
+    ln_check(_tested>20,"real crossing regression covers multiple levels and platforms");
+    show_debug_message("LN_JUMP_REAL_PASS: "+string(_tested)+" original-room platform approaches");
+    show_debug_message("LN_JUMP_ASSIST_PASS: nearest ahead, fire-only, safe landing, manual controls and walls");
 }

@@ -1,5 +1,6 @@
 function ln1_level_checks() {
     ln1_pickup_assist_checks();
+    ln1_jump_assist_checks();
     ln1_reverse_roll_checks();
     var _apple = new LN1Play();
     _apple.world.items = [{id:8, room:1, x_min:0, x_max:20, y_min:0, y_max:20}];

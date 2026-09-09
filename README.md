@@ -116,3 +116,5 @@ LN1: pressing # alone near a collectible assists positioning and plays the origi
 LN1: press fire while walking backwards to somersault backwards without turning. The existing somersault poses play in reverse, with the same movement/collision rules as the forward roll. This is a requested control enhancement.
 
 With CRT on, bottom-right sliders adjust Pixel blur, Honeycomb strength and Scanlines (0–100%). Click or drag a track to update the effect immediately. Settings survive toggling CRT off/on for the current session; the panel hides when CRT is off.
+
+LN1 river/log/rock crossings: fire alone assists a jump to the nearest reachable safe platform ahead of the current facing. It skips the current platform and does not cross solid walls. Fire plus a direction retains the manual controls.

@@ -34,6 +34,11 @@ selftest = false;
 host_frames = 0;
 for (var _i = 1; _i <= parameter_count(); _i++) {
     if (parameter_string(_i) == "--crt-live-test") crt_live_test=true;
+    if (parameter_string(_i) == "--jump-assist-test") {
+        try {ln1_jump_assist_checks();}
+        catch (_failure) {show_debug_message("LN_JUMP_ASSIST_FAILURE: "+string(_failure));}
+        game_end();exit;
+    }
     if (parameter_string(_i) == "--reverse-roll-test") {
         try {ln1_reverse_roll_checks();}
         catch (_failure) {show_debug_message("LN_REVERSE_ROLL_FAILURE: "+string(_failure));}
