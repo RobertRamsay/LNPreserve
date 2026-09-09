@@ -120,7 +120,16 @@ class ConversionChecks(unittest.TestCase):
                     for layer in obj['layers']:
                         self.assertTrue((path.parent/'layers'/frame['name']/(layer['name']+'.png')).is_file())
             elif obj['resourceType']=='GMSound':
-                with wave.open(str(path.parent/obj['soundFile'])) as audio:self.assertGreater(audio.getnframes(),0)
+                sound=path.parent/obj['soundFile'];self.assertTrue(sound.is_file(),str(sound))
+                if sound.suffix.lower()=='.wav':
+                    with wave.open(str(sound)) as audio:self.assertGreater(audio.getnframes(),0)
+                elif sound.suffix.lower()=='.mp3':
+                    header=sound.read_bytes()[:4096]
+                    self.assertGreater(sound.stat().st_size,1024)
+                    self.assertTrue(header.startswith(b'ID3') or any(
+                        header[i]==255 and (header[i+1]&224)==224 for i in range(len(header)-1)),
+                        f'Invalid MP3 header: {sound}')
+                else:self.fail(f'Unsupported sound file: {sound}')
         for included in project['IncludedFiles']:
             self.assertTrue((PROJECT/included['filePath']/included['name']).is_file())
         self.assertFalse(project['TextureGroups'][0]['autocrop'],'Mask texture coordinates require full transparent bounds')

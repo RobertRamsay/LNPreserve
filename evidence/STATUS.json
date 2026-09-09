@@ -22,7 +22,7 @@
     "ln2_scene_records": 93,
     "ln2_enemy_placements": 53,
     "ln2_item_and_mechanism_records": 70,
-    "silent_sound_assets": 41,
+    "silent_sound_assets": 29,
     "ln3_recovered_level_banks": 5,
     "ln3_recovered_scene_records": 66,
     "ln3_native_playable_levels": 5,
@@ -234,7 +234,7 @@
     "LN2 original dashboard/eyes, item flashing, keypad pre-poll delay, complete score-event dispatch and death/game-over presentation",
     "Validate recovered LN1 composition, room masks, dynamic dashboard and palette semantics against original display captures",
     "Whole-game cycle-stamped reference traces and native comparisons",
-    "Real music and sound effects; silent named placeholders are supplied"
+    "LN2/LN3 music and all sound effects; 29 silent named music placeholders remain"
   ],
   "scene_testing": {
     "arrow_mapping": {

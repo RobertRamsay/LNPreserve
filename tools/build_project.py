@@ -149,17 +149,21 @@ def main():
         sounds.append(dict(game=3,level=role,role='cue',subtune=tune))
     for sound in sounds:
         name=f"snd_ln{sound['game']}_{sound['level']}_{sound['role']}";out=PROJECT/'sounds'/name;out.mkdir(parents=True,exist_ok=True)
-        wav=out/f'{name}.wav'
+        wav=out/f'{name}.wav';resource=out/f'{name}.yy'
+        active=read_json(resource).get('soundFile',wav.name) if resource.exists() else wav.name
+        active_path=out/active
         # Re-running the importer never overwrites user-supplied replacement audio.
-        if not wav.exists():
+        if resource.exists() and not active_path.exists():
+            raise FileNotFoundError(f'Missing active sound file: {active_path}')
+        if not resource.exists():
             with wave.open(str(wav),'wb') as w:w.setnchannels(1);w.setsampwidth(2);w.setframerate(44100);w.writeframes(bytes(88200))
         data=res('GMSound',name,'v2');data.update(audioGroupId={'name':'audiogroup_default','path':'audiogroups/audiogroup_default'},
             bitDepth=1,channelFormat=0,compression=0,compressionQuality=4,conversionMode=0,duration=1.0,exportDir='',
             parent=parent('Music placeholders'),preload=False,sampleRate=44100,soundFile=wav.name,volume=1.0)
         # Preserve edits to sound metadata in GameMaker too.
-        if not (out/f'{name}.yy').exists():write_json(out/f'{name}.yy',data)
+        if not resource.exists():write_json(resource,data)
         resources[name]={'id':{'name':name,'path':f'sounds/{name}/{name}.yy'}}
-        active=read_json(out/f'{name}.yy').get('soundFile',wav.name)
+        active=read_json(resource).get('soundFile',wav.name)
         active_path=out/active
         silent=False
         if active_path.suffix.lower()=='.wav' and active_path.exists():

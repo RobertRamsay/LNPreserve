@@ -42,7 +42,7 @@ def main():
             'LN2 original dashboard/eyes, item flashing, keypad pre-poll delay, complete score-event dispatch and death/game-over presentation',
             'Validate recovered LN1 composition, room masks, dynamic dashboard and palette semantics against original display captures',
             'Whole-game cycle-stamped reference traces and native comparisons',
-            'Real music and sound effects; silent named placeholders are supplied'])
+            'LN2/LN3 music and all sound effects; 29 silent named music placeholders remain'])
     status['native_original_routines'].extend([
         dict(name='LN1 player movement and animation',address='$5727/$5a12/$5b69/$7540',verification='2856 source-code updates, including 128 prayer animation samples; rendering intercepted; world and system timing excluded'),
         dict(name='LN1 enemy decisions and animation',address='$6a48/$5b54',verification='7680 source-code updates with shared random returns; dispatch and hardware read timing excluded'),

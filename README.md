@@ -53,7 +53,7 @@ LN3 remains **incomplete**: the separate high-score program, original dashboard/
 | F11 | Choose a game, level and scene |
 | F12 | Optional conversion workbench |
 
-Music assets are still named silent placeholders. Replace the corresponding WAV in GameMaker to supply music. Sound effects are not recovered.
+The 12 LN1 level and loader music resources now contain user-supplied MP3 audio. The 29 LN2/LN3 resources remain named silent WAV placeholders. Loader tracks are registered but the current native prototype has no loader-screen playback path. Sound effects are not recovered.
 
 The arrow shortcuts follow the three games’ recovered ordinary room links and use each destination's original entrance position and facing, including the one-way Dungeons entrance. When two exits face the same direction, the nearer exit is used. One press performs one jump. Missing directions leave the current room unchanged. Inventory, living-player health and saved enemy wounds survive; LN1 entry flashes restart. Test jumps cancel an unfinished action, prayer or death, and restore a dead player so testing can continue. Original entrance-specific sequences still run. These are development controls, not original gameplay behavior.
 

@@ -91,7 +91,7 @@ draw_set_colour(make_colour_rgb(245,190,100));
 draw_text(32,666,"Scene previews and masks are diagnostic. Original gameplay parity has not passed.");
 draw_set_colour(make_colour_rgb(165,173,184));
 draw_text(32,696,"Scenery objects are editable PNG sprite resources. Yellow rectangle = synthetic depth probe.");
-draw_text(32,724,"Silent level/loader sound assets are in Music placeholders. Replace their WAVs in GameMaker.");
+draw_text(32,724,"LN1 music is supplied. LN2/LN3 remain silent placeholders; loader playback is not connected.");
 draw_text(32,752,"See README and evidence/STATUS.json for verified extraction and remaining work.");
 draw_set_colour(c_white);
 if (selftest && host_frames == 3) {

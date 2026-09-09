@@ -30,6 +30,6 @@ The [VICE PAL constants](https://github.com/VICE-Team/svn-mirror/blob/main/vice/
 
 ## Music
 
-Known SID subtune labels were checked against the HVSC metadata displayed by SLAY Radio: [LN1](https://www.slayradio.org/sidinfo/MUSICIANS/D/Daglish_Ben/Last_Ninja.sid), [LN2](https://www.slayradio.org/sidinfo/MUSICIANS/G/Gray_Matt/Last_Ninja_2.sid), and [LN3](https://www.slayradio.org/songinfo/6350). Unknown mappings remain unset rather than guessed. The original compositions are not synthesized or replaced here: the user-authorized sound assets are silent placeholders.
+Known SID subtune labels were checked against the HVSC metadata displayed by SLAY Radio: [LN1](https://www.slayradio.org/sidinfo/MUSICIANS/D/Daglish_Ben/Last_Ninja.sid), [LN2](https://www.slayradio.org/sidinfo/MUSICIANS/G/Gray_Matt/Last_Ninja_2.sid), and [LN3](https://www.slayradio.org/songinfo/6350). Unknown mappings remain unset rather than guessed. The 12 LN1 level and loader resources contain user-supplied MP3 audio. The remaining 29 LN2/LN3 resources are silent placeholders; no authorship or source-provenance claim is made for replacement audio merely because it is stored in the project.
 
 The original games and reference materials retain their respective authorship. No claim of authorship over original game graphics, music or 6502 program bytes is made. Downloaded reference tools are kept outside version control.

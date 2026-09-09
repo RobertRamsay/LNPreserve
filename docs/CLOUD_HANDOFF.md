@@ -24,7 +24,7 @@ Keep original graphics. LN1 river deaths use sinking and masking, with no invent
 
 Prioritise reported gameplay defects and original behaviour over diagnostic UI. The next identified LN2 gap is its special boundary dispatcher: hazards, climbs and scripted exits. The original level-1 dispatcher starts at $9fd8; other banks relocate it. It requires boundary-crossing bit 7, waits for an action to finish unless boundary bit 6 allows interruption, then dispatches the low six mode bits. Its low return-address table is obtained from the absolute operand at dispatcher + 26; handler addresses are table words plus one. Do not confuse these with ordinary perimeter exits. Some boundary records may be inactive/padding; verify original activation before implementing their apparent modes.
 
-Other unfinished areas: LN2 swarm behaviour, remaining item details/flashes, HUD/eyes, full death/game-over and keypad delay; LN1 remaining puzzles, projectile collisions, special sequences, recoverable knockouts and ending; LN3 high-score program, HUD/portraits and raster details. All three need original input replays and system-timing validation. Music remains 41 named silent placeholders.
+Other unfinished areas: LN2 swarm behaviour, remaining item details/flashes, HUD/eyes, full death/game-over and keypad delay; LN1 remaining puzzles, projectile collisions, special sequences, recoverable knockouts and ending; LN3 high-score program, HUD/portraits and raster details. All three need original input replays and system-timing validation. Twelve LN1 music resources now contain user-supplied MP3 audio; 29 LN2/LN3 resources remain silent placeholders. Loader tracks are registered but no loader-screen playback path exists yet.
 
 ## What is and is not transferred
 
