@@ -61,3 +61,22 @@ refactor. No new GameMaker compilation or GPU result is claimed here.
 existing map. Older original-data exporters may recreate legacy banks; review
 their output and update the logical mappings when regenerating art. Do not
 treat a full re-export as a safe way to preserve later hand-edited characters.
+
+## LN1 overlapping unused poses (9 September 2026)
+
+The old compositor exported all 64 normal frame slots, but 56..63 start at
+$d700, which is the special composition table. Treating these as 32-byte
+normal records added unrelated parts (especially with weapon 2), producing
+baked overlapping prayer/climb/death-looking images. This predates pooling;
+the pool preserved those faulty source images. No recovered action graph in
+any LN1 level uses normal frames 56..63.
+
+User-reported GameMaker frames 257..261 and 311..312 correspond to zero-based
+pool indices 256..260 and 310..311. These were affected. The repair clears
+only unused ninja frames whose composite AND editable layer exactly match
+the old exporter. User-edited pixels, sprite metadata and all frame indices
+are preserved. Valid prayer/climb special frames remain intact. The exporter
+now leaves unused normal slots transparent; a structural check rejects action
+records that reference them. `repair_ln1_unused_poses.py` documents the scoped
+repair and refuses to overwrite changed images. No native runner test was
+performed in the cloud.

@@ -37,6 +37,7 @@ class ConversionChecks(unittest.TestCase):
         for path in paths:
             actions=read_json(path)['actions'];available.update(map(int,actions))
             for address,record in actions.items():
+                self.assertFalse(56<=record['frame']<64, 'Unused normal frames alias special composition tables')
                 if record['next']>=256:
                     self.assertIn(str(record['next']),actions,f'{path}: ${int(address):04x} next')
         sources='\n'.join(path.read_text() for path in (PROJECT/'scripts').glob('ln1_*/*.gml'))

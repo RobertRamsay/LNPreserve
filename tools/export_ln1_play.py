@@ -21,9 +21,12 @@ FIELDS={
  'boundary_mode':0x2b5,'boundary_crossings':0x2b6,
 }
 
-def composition(ram,frame,mirror,weapon=0,enemy=False):
+def composition(ram,frame,mirror,weapon=0,enemy=False,legacy_unused=False):
     canvas=Image.new('RGBA',(96,96))
     if frame==255:return canvas
+    # Normal records end at $d6ff. Slots 56..63 alias special tables at
+    # $d700 and are never used by recovered action graphs.
+    if 56<=frame<64 and not legacy_unused:return canvas
     base=0xd000+frame*32 if frame<64 else (0xd700+(frame-64)*16 if frame<128 else 0xd800+(frame&127)*16)
     width=ram[base+3]*2 if frame<64 else (ram[base+1]*2 if ram[base]==255 else 16)
     # Hardware sprite 0 wins overlap over sprite 1, so composite back to front.
