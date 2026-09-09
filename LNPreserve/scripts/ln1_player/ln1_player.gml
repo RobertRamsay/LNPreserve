@@ -71,6 +71,7 @@ function ln1_player_input(_s, _d, _joy) {
     var _new_fire = _s.fire_previous != 16;
     _s.fire_previous = 16;
     if (_new_fire) {
+        if (_heading>=128 && variable_struct_exists(_s,"world_game") && ln1_pickup_assist_start(_s.world_game)) return;
         if (_s.stopped != 0) {
             _s.frame = 16 + (((_s.facing + 2) & 4) >> 2);
             _s.redraw = 255;

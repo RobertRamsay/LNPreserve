@@ -29,6 +29,7 @@ function LN1Play(_level = 1) constructor {
     inventory = world.initial_inventory; controls = undefined;
     while (array_length(inventory) < 20) array_push(inventory, 0);
     notice_item = -1; notice_tick = 0; notice_duration = 0; notice_label = 0;
+    pickup_assist=undefined;
     room_age = 0; prayer_phase = 0;
     water_active = false; water_ticks = 0; water_cutoff = 173; water_clock = world.initial_water_clock;
     random_pointer = 0; random_value = 0;
@@ -137,6 +138,7 @@ function ln1_play_tick(_g, _joy) {
     _p.enemy_active = _e.active; _p.enemy_x = _e.x; _p.enemy_y = _e.y;
     _p.separation_y = _e.separation_y;
     ln1_player_update(_p, _g.data, _joy, (_p.tick + 1) & 255);
+    ln1_pickup_assist_tick(_g);
     ln1_enemy_decide(_g);
     ln1_enemy_action(_g);
     ln1_combat_event(_g, _p.action_state, false); _p.action_state = 0;
@@ -317,7 +319,7 @@ function ln1_play_draw(_game, _paused) {
         draw_text(400,592,"F11: choose a scene    Home: restart");
     }
     draw_text(160, 700, "WASD  Move    # + direction  Action    Space  Weapon    1 2 3 4  Function keys");
-    draw_text(160, 728, "Arrows: Right NE / Down SE / Left SW / Up NW    F11 Scenes    Home Restart");
+    draw_text(160, 728, "Numpad: 7 NW / 9 NE / 1 SW / 3 SE    F11 Scenes    Home Restart");
     draw_text(160, 760, "Health " + string(_game.player_health) + "    Lives " + string(_game.lives_left));
     if (_game.prayer_phase > 0) draw_text(710, 760, "S + D  Finish prayer");
     if (_game.game_over) { draw_set_colour(c_white); draw_text(510, 54, "GAME OVER — HOME TO RESTART"); }

@@ -14,6 +14,7 @@ function ln1_test_enter(_g, _entry) {
     var _p = _g.player;
     // Cancel transient activity so a jump, prayer or drowning sequence cannot
     // continue in the destination. Inventory and saved enemy wounds survive.
+    _g.pickup_assist=undefined;
     _g.prayer_phase = 0; _g.water_active = false; _g.water_ticks = 0;
     _g.water_cutoff = 173; _g.death_wait = 0; _g.game_over = false;
     _g.sequence_kind = 0; _g.sequence_wait = 0; _g.water_travel = false;
@@ -97,7 +98,15 @@ function ln_scene_test_open(_t, _g, _scene_index) {
     if (_scene_index < 0 || _scene_index >= array_length(_level.scenes)) return false;
     _t.scene_index = _scene_index; _t.menu = false; _t.preview = !_level.playable;
     if (_level.playable) {
+        var _new_level=_g.game_number!=_level.game || _g.level!=_level.number;
         ln_game_select(_g,_level.game,_level.number);
+        if (_new_level) {
+            if (_level.game==1) {
+                _g.player_health=32;_g.health_display=32;
+                if (_level.number==2) ln1_test_wilderness_kit(_g);
+            } else if (_level.game==2) _g.player_health=44;
+            else {_g.state.player_health=44;_g.state.inventory[26]=44;}
+        }
         var _room = _level.scenes[_scene_index].id;
         if (_level.game==3) return ln3_test_enter(_g,_room);
         if (_level.game==2) {
@@ -153,8 +162,8 @@ function ln_scene_test_step(_t, _g) {
         if (point_in_rectangle(_mx,_my,160,674,442,722)) { _t.menu = false; _t.preview = false; }
         return;
     }
-    var _direction = ln_test_direction(keyboard_check_pressed(vk_right),keyboard_check_pressed(vk_down),
-        keyboard_check_pressed(vk_left),keyboard_check_pressed(vk_up));
+    var _direction = ln_test_direction(keyboard_check_pressed(vk_numpad9),keyboard_check_pressed(vk_numpad3),
+        keyboard_check_pressed(vk_numpad1),keyboard_check_pressed(vk_numpad7));
     if (_t.preview) {
         if (_direction >= 0) ln_scene_test_message(_t,"Directional exits and gameplay are not connected for this level yet.");
         var _next = real(keyboard_check_pressed(vk_pagedown)) - real(keyboard_check_pressed(vk_pageup));
@@ -199,7 +208,7 @@ function ln_scene_test_draw(_t) {
             "Enemy damage: OFF (test protection)" : "Enemy damage: ON",ln_test_enemy_damage_disabled());
         ln_scene_test_button(160,674,282,48,"Return to gameplay",false);
         draw_set_colour(make_colour_rgb(165,173,184));
-        draw_text(480,674,"Arrow exits: Right NE / Down SE / Left SW / Up NW");
+        draw_text(480,674,"Numpad exits: 7 NW / 9 NE / 1 SW / 3 SE (Num Lock)");
         draw_text(480,700,"Collected items and enemy wounds persist; hazards stay active.");
     } else {
         var _scene = _level.scenes[_t.scene_index];
@@ -211,4 +220,15 @@ function ln_scene_test_draw(_t) {
         if (_t.message_us > 0) draw_text(160,730,_t.message);
     }
     draw_set_colour(c_white);
+}
+
+/// F11 Wilderness starter equipment; normal progression still carries inventory.
+function ln1_test_wilderness_kit(_g) {
+    _g.inventory[2]=1; // Sack
+    _g.inventory[11]=1; // Sword
+    _g.inventory[13]=1; // Nunchakus
+    _g.inventory[14]=5; // Throwing stars
+    _g.inventory[15]=3; // Smoke bombs
+    _g.lives_left=4;_g.player_health=32;_g.health_display=32;
+    ln1_level_sync_controls(_g);
 }

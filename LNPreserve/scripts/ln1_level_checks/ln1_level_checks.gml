@@ -1,4 +1,5 @@
 function ln1_level_checks() {
+    ln1_pickup_assist_checks();
     var _apple = new LN1Play();
     _apple.world.items = [{id:8, room:1, x_min:0, x_max:20, y_min:0, y_max:20}];
     _apple.room_id=1; _apple.player.x=10; _apple.player.y=10; _apple.player.facing=0;

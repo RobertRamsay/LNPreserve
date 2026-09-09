@@ -51,13 +51,13 @@ LN3 remains **incomplete**: the separate high-score program, original dashboard/
 | 2 / 3 | Next / previous available inventory item |
 | 4 | Pause |
 | Home | Restart this prototype |
-| Right / Down / Left / Up arrows | Test exits: NE / SE / SW / NW |
+| Numpad 7 / 9 / 1 / 3 (Num Lock on) | Test exits: NW / NE / SW / SE |
 | F11 | Choose a game, level and scene; optionally disable enemy damage for testing |
 | F12 | Optional conversion workbench |
 
 The 12 LN1 level and loader music resources now contain user-supplied MP3 audio. The 29 LN2/LN3 resources remain named silent WAV placeholders. Loader tracks are registered but the current native prototype has no loader-screen playback path. Sound effects are not recovered.
 
-The arrow shortcuts follow the three games’ recovered ordinary room links and use each destination's original entrance position and facing, including the one-way Dungeons entrance. When two exits face the same direction, the nearer exit is used. One press performs one jump. Missing directions leave the current room unchanged. Inventory, living-player health and saved enemy wounds survive; LN1 entry flashes restart. Test jumps cancel an unfinished action, prayer or death, and restore a dead player so testing can continue. Original entrance-specific sequences still run. These are development controls, not original gameplay behavior.
+The numpad shortcuts follow the three games’ recovered ordinary room links and use each destination's original entrance position and facing, including the one-way Dungeons entrance. When two exits face the same direction, the nearer exit is used. One press performs one jump. Missing directions leave the current room unchanged. Inventory, living-player health and saved enemy wounds survive; LN1 entry flashes restart. Test jumps cancel an unfinished action, prayer or death, and restore a dead player so testing can continue. Original entrance-specific sequences still run. These are development controls, not original gameplay behavior.
 
 F11’s scene picker exposes native prototypes in all 18 levels: six LN1, seven LN2 and five LN3. Its test-protection switch disables damage from enemy melee and hostile projectiles while leaving environmental hazards active; it is off by default. The original special entrance makes Void’s final encounter selectable even though it has no ordinary room link. Gameplay pauses while the picker, a preview or the workbench is open. The alternate Mansion room-10 drawing shares that room's state and is not offered as a separate entrance.
 
@@ -108,3 +108,5 @@ Extraction tools use original RAM only offline. They do not become part of the g
 `capture_ln1_levels.py`, `ln1_level_source.py` and `export_ln1_levels.py` recover the later LN1 level packages. Identical new assets share existing sprite resources; 83 duplicate resources are avoided. The fountain animation also uses the original sprite's scrolling rows. `capture_ln2_levels.py`, `export_ln2_content.py` and `export_ln2_assets.py` recover LN2's seven original room/actor packages. The LN2 tools recover conditional animation entries by exercising the original entrance hooks as well as decoding direct references.
 
 Dungeon guard colours, skeleton frames and spider steering are corrected; see the [dungeon test guide](docs/DUNGEON_TESTING.md). The Inner Sanctum special-actor bank is also refreshed, and all six LN1 levels share the original uniform colours. LN2 thrown weapons now use original projectile art, ammunition/damage rules and per-part masking, with separate body parts during throws. These component checks do not establish complete trilogy or cycle-accurate playthrough parity.
+
+LN1: pressing # alone near a collectible assists positioning and plays the original pickup crouch before collecting. F11 entry into Wilderness supplies the sack, sword, nunchakus, five shuriken, three smoke bombs, four lives and full health. F11 switching levels restores full health in all three games; ordinary progression already does this.

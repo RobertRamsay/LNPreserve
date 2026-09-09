@@ -6,7 +6,7 @@ Prepared 9 September 2026. Use the existing repository https://github.com/Robert
 
 Convert all three supplied C64 Last Ninja games into one editable native GameMaker project, verified against the originals. An embedded C64 emulator is not the requested product. Offline execution of original 6502 code is used for recovery and verification. All 18 levels are accessible as prototypes; no complete game or cycle-accurate playthrough has passed acceptance.
 
-Controls: WASD movement; # plus direction for original fire/actions; Space selects weapons; 1–4 replace F keys. Testing arrows: Right NE, Down SE, Left SW, Up NW. F11 selects scenes and offers an off-by-default enemy-damage protection switch; environmental hazards remain active. F12 opens the optional workbench. Keep the gameplay interface nontechnical.
+Controls: WASD movement; # plus direction for original fire/actions; Space selects weapons; 1–4 replace F keys. Testing numpad (Num Lock on): 7 NW, 9 NE, 1 SW, 3 SE. F11 selects scenes and offers an off-by-default enemy-damage protection switch; environmental hazards remain active. F12 opens the optional workbench. Keep the gameplay interface nontechnical.
 
 Keep original graphics. LN1 river deaths use sinking and masking, with no invented splash. Earlier broad scenery colour corrections were restricted by the user to LN3's opening scene. Do not apply the remaining diagnostic colour proposals without a new request. Preserve the user's GameMaker edits and fetch before publishing to the same main branch.
 
@@ -55,3 +55,5 @@ The working GameMaker runtime was Windows LTS 2026.0.0.23. Build with `tools/com
 Read this brief and current repository status, confirm repository access and available tools, then report which local-only prerequisites are missing. Continue using the existing repository. If source captures or a compatible GameMaker runtime are unavailable, work on bounded changes that can be checked with the available evidence and report the remaining validation explicitly.
 
 Save slots: Ctrl+S adds a local persistent snapshot; click the right-side list to restore. Ten shared slots, newest first, named LN1_SAVE_1410 etc. See docs/SAVE_SLOTS.md for implementation and pending Windows checks.
+
+Testing conveniences: F11 switching levels restores health; entering LN1 Wilderness grants the requested starter kit and four lives. LN1 fire-only pickup assistance uses nearby source pickup rectangles and original crouching; it rejects boundary crossings and retains sack requirements. See docs/LN1_PICKUP_ASSIST.md for validation limits.

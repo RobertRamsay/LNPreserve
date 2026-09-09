@@ -216,7 +216,7 @@ function ln2_play_draw(_g) {
     draw_text(160,672,"Health "+string(_g.player_health)+"   Lives "+string(_g.lives_left)+"   Enemy "+string(_g.enemy.health));
     draw_text(700,672,_g.notice_item>=0?"FOUND   Item "+string(_g.notice_item):"Item "+string(_g.selected_item)+"   Weapon "+string(_g.player.selected_weapon));
     draw_text(160,712,"WASD Move    # + direction Action    Space Weapon    1 2 3 4 Function keys");
-    draw_text(160,744,"Arrows: Right NE / Down SE / Left SW / Up NW    F11 Scenes    Home Restart");
+    draw_text(160,744,"Numpad: 7 NW / 9 NE / 1 SW / 3 SE    F11 Scenes    Home Restart");
     if (_g.paused) draw_text(600,60,"PAUSED");
     if (_g.game_over) draw_text(540,60,"GAME OVER — HOME TO RESTART");
     if (_g.level_complete) draw_text(530,60,"END OF LAST NINJA 2");
