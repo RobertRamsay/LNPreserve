@@ -94,6 +94,17 @@ function ln1_level_checks() {
     ln_check(_final.level==6 && _final.room_id==14,"final approach room 13 exits to 14 without changing level");
     _final.player.x=0;_final.player.y=112;ln1_play_exit(_final);
     ln_check(_final.level==6 && _final.room_id==15,"final approach room 14 exits to 15 without changing level");
+    var _boss=new LN1Play(6);ln1_test_enter(_boss,56);
+    _boss.enemy.active=136;_boss.enemy.wounds=1;_boss.enemy.facing=3;
+    ln1_combat_hurt(_boss,true);
+    ln_check(_boss.enemy.action==$50c7,"Shogun uses original special hurt record");
+    ln1_play_tick(_boss,0);
+    ln_check(_boss.enemy.display_frame==158,"Shogun hurt retains original boss pose");
+    _boss.enemy.wounds=32;_boss.room_wounds[14]=32;ln1_combat_hurt(_boss,true);
+    ln_check(_boss.enemy.action==$507e && _boss.enemy.mode==7,"Shogun uses original defeat sequence");
+    repeat(240) {if (_boss.room_id==14) ln1_play_tick(_boss,0);}
+    ln_check(_boss.level==6 && _boss.room_id==15 && _boss.last_entry==60,
+        "Shogun defeat reaches scroll room through original action event and exit");
     var _dog=new LN1Play(6);ln1_test_enter(_dog,45);
     ln1_play_tick(_dog,0);ln1_play_tick(_dog,0);
     ln_check(_dog.room_id==11 && _dog.enemy.active==134 && _dog.enemy.display_frame==142 &&

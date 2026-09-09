@@ -61,6 +61,26 @@
     23674
   ],
   "actions": {
+    "20679": {
+      "flags": 26,
+      "duration": 24,
+      "frame": 158,
+      "dx": 0,
+      "dy": 0,
+      "state": -1,
+      "combat_data": -1,
+      "next": 20682
+    },
+    "20682": {
+      "flags": 57,
+      "duration": -1,
+      "frame": 150,
+      "dx": 0,
+      "dy": 0,
+      "state": 33,
+      "combat_data": -1,
+      "next": 0
+    },
     "20000": {
       "flags": 10,
       "duration": 8,

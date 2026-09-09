@@ -52,8 +52,18 @@ def records(ram, entries):
 
 def main():
     ram=bank(6)
+    for facing in range(8):
+        for wounds in (0,1,31,32):
+            mem=list(ram);mem[0xcb]=136;mem[0x6b]=facing;mem[0x2b9]=wounds;mem[0x6f]=0
+            call(mem,0x4cdf,x=2)
+            assert (mem[0x62]|mem[0x63]<<8)==(0x507e if wounds>=32 else 0x50c7)
+            assert mem[0x5f]==(facing&4)
+            if wounds>=32:assert mem[0xcf]==7
+    mem=list(ram);mem[0xa2]=14;mem[0x54]=1;mem[0x55]=128;call(mem,0x7478)
+    assert mem[0x278]==60
+    print('Shogun: 32 original hurt/defeat cases; scripted exit reaches entry 60 (scroll room)')
     gameplay=json.loads((ROOT/'LNPreserve/datafiles/play/ln1/level6/gameplay.json').read_text())
-    for address,record in records(ram,[0x4e08,0x4e20]).items():
+    for address,record in records(ram,[0x4e08,0x4e20,0x50c7,0x507e]).items():
         assert gameplay['actions'][address]==record,(address,record)
     print('dog missing records:',json.dumps(records(ram,[0x4e08,0x4e20]),sort_keys=True))
     for crossings in [0,1,127,128,129]:

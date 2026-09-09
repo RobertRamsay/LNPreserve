@@ -23,6 +23,11 @@ Keep original graphics. LN1 river deaths use sinking and masking, with no invent
 
 ## Next work
 
+LN1 Shogun follow-up: native hurt/death now uses original actor-136 branches
+$50c7/$507e, including the defeat event that sends the player to the scroll
+room. See `docs/LN1_SHOGUN_FOLLOWUP.md`; original state checks pass, updated
+native integration checks await the user's Windows run.
+
 The private reference archive is now supplied and all seven LN2 captures are available in this cloud workspace. See `docs/LN2_PROGRESSION_AUDIT.md`: Central Park's switched-hole mode 5 and original final-safe interaction drawing are connected; 199 original exit cases and 32 bounded hole-dispatcher cases pass here. Native/GPU checks remain pending on the Windows runner. The other special-boundary modes are still open.
 
 Prioritise reported gameplay defects and original behaviour over diagnostic UI. The next identified LN2 gap is its special boundary dispatcher: hazards, climbs and scripted exits. The original level-1 dispatcher starts at $9fd8; other banks relocate it. It requires boundary-crossing bit 7, waits for an action to finish unless boundary bit 6 allows interruption, then dispatches the low six mode bits. Its low return-address table is obtained from the absolute operand at dispatcher + 26; handler addresses are table words plus one. Do not confuse these with ordinary perimeter exits. Some boundary records may be inactive/padding; verify original activation before implementing their apparent modes.
