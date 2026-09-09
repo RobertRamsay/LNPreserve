@@ -112,3 +112,5 @@ Dungeon guard colours, skeleton frames and spider steering are corrected; see th
 Click **CRT OFF / ON** above the save slots, or press **F10**, to toggle a subtle CRT treatment of the entire screen, including the built-in side and bottom HUD: cool tint, staggered RGB phosphors, scanlines and gentle colour phasing. Geometry stays fixed, with no curvature, edge wobble or cropping. Default is off.
 
 LN1: pressing # alone near a collectible assists positioning and plays the original pickup crouch before collecting. F11 entry into Wilderness supplies the sack, sword, nunchakus, five shuriken, three smoke bombs, four lives and full health. F11 switching levels restores full health in all three games; ordinary progression already does this.
+
+LN1: press fire while walking backwards to somersault backwards without turning. The existing somersault poses play in reverse, with the same movement/collision rules as the forward roll. This is a requested control enhancement.

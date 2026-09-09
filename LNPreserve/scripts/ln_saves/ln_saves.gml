@@ -91,6 +91,7 @@ function ln_save_restore(_save) {
     if (!_room_ok) throw "Invalid saved room";
     // Reconnect the mutable current-room records detached by JSON copying.
     if (_g.game_number==1) {
+        ln1_reverse_roll_prepare(_g.data);
         _g.player.world_game=_g;
         _g.data.initial=_g.player;
         _g.world.rooms[_g.room_id-1].boundaries=_g.data.boundaries;

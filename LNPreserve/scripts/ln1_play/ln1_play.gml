@@ -5,6 +5,7 @@ function LN1Play(_level = 1) constructor {
     var _folder = _level == 1 ? "play/ln1/" : "play/ln1/level" + string(_level) + "/";
     var _buffer = buffer_load(_folder + "gameplay.json");
     data = json_parse(buffer_read(_buffer, buffer_text)); buffer_delete(_buffer);
+    ln1_reverse_roll_prepare(data);
     _buffer = buffer_load(_folder + "world.json");
     world = json_parse(buffer_read(_buffer, buffer_text)); buffer_delete(_buffer);
     _buffer = buffer_load(_folder + "navigation.json");

@@ -71,6 +71,15 @@ function ln1_player_input(_s, _d, _joy) {
     var _new_fire = _s.fire_previous != 16;
     _s.fire_previous = 16;
     if (_new_fire) {
+        var _relative=(_heading-_s.facing)&7;
+        if (_heading<128 && _s.stopped==0 && _relative>=3 && _relative<=5 &&
+            variable_struct_exists(_d,"reverse_roll_entries")) {
+            _s.heading=_heading;_s.stopped=255;
+            ln1_player_begin_action(_s,_d,4);
+            _s.action=_d.reverse_roll_entries[((_s.facing+2)&4)>>2];
+            _s.flags=variable_struct_get(_d.actions,string(_s.action)).flags;
+            return;
+        }
         if (_heading>=128 && variable_struct_exists(_s,"world_game") && ln1_pickup_assist_start(_s.world_game)) return;
         if (_s.stopped != 0) {
             _s.frame = 16 + (((_s.facing + 2) & 4) >> 2);
@@ -221,4 +230,73 @@ function ln1_player_update(_s, _d, _joy, _tick) {
         _s.frame = (_s.frame & 248) | ((_s.frame + _advance) & 7);
         ln1_player_render(_s, _d.mirror[_group] & _mask);
     }
+}
+
+/// Requested LN1 control enhancement. Build separate reverse tracks from the
+/// recovered roll; original action entries and reference vectors remain intact.
+function ln1_reverse_roll_prepare(_d) {
+    _d.reverse_roll_entries=[];
+    for (var _side=0;_side<2;_side++) {
+        var _records=[],_address=_d.action_entries[2+_side],_duration=0;
+        while (_address>=256) {
+            var _r=variable_struct_get(_d.actions,string(_address));
+            if (_r.duration>=0) _duration=_r.duration;
+            array_push(_records,{frame:_r.frame,duration:_duration});
+            _address=_r.next;
+        }
+        var _base=65536+_side*32,_count=array_length(_records);
+        array_push(_d.reverse_roll_entries,_base);
+        for (var _i=0;_i<_count;_i++) {
+            // Reverse the airborne/crouch poses, then land in the original stance.
+            var _last=_i==_count-1,_pose=_records[_last?_count-1:_count-2-_i];
+            variable_struct_set(_d.actions,string(_base+_i),{
+                frame:_pose.frame,duration:_pose.duration,flags:_last?60:(_i==0?30:28),
+                dx:0,dy:0,state:-1,combat_data:-1,next:_last?0:_base+_i+1});
+        }
+    }
+}
+
+function ln1_reverse_roll_checks() {
+    for (var _facing=1;_facing<8;_facing+=2) for (var _weapon=0;_weapon<=2;_weapon+=2) {
+        var _g=new LN1Play(),_p=_g.player,_d=_g.data;
+        _d.boundaries=[];_p.x=120;_p.y=100;_p.facing=_facing;_p.heading=_facing;
+        _p.turn_lock=0;_p.action=0;_p.input_lock=0;_p.fire_previous=0;
+        _p.weapon=_weapon;_p.selected_weapon=_weapon;_p.enemy_active=0;
+        var _back=(_facing+4)&7,_joy=0;
+        for (var _j=0;_j<16;_j++) if (_d.directions[_j]==_back) {_joy=_j;break;}
+        // Walk backwards first, then press fire while keeping that direction.
+        ln1_player_update(_p,_d,_joy,(_p.tick+1)&255);
+        var _x=_p.x,_y=_p.y,_frames=[],_previous=-1;
+        ln1_player_update(_p,_d,_joy|16,(_p.tick+1)&255);
+        ln_check(_p.action>=65536,"backward walking plus fire starts reverse roll");
+        if (_facing==1 && _weapon==0) {
+            var _snapshot=json_parse(json_stringify(ln_save_capture(_g)));
+            variable_struct_remove(_snapshot.state.data,"reverse_roll_entries");
+            var _loaded=ln_save_restore(_snapshot);
+            ln_check(variable_struct_exists(_loaded.data,"reverse_roll_entries"),"loading older saves enables backward rolls");
+            repeat(40) {if (_loaded.player.action<256) break;ln1_player_update(_loaded.player,_loaded.data,0,(_loaded.player.tick+1)&255);}
+            ln_check(_loaded.player.action<256 && _p.action>=65536,"saved mid-roll resumes independently and lands");
+        }
+        var _side=((_facing+2)&4)>>2;
+        repeat(40) {
+            if (_p.display_frame!=_previous) {array_push(_frames,_p.display_frame);_previous=_p.display_frame;}
+            if (_p.action<256) break;
+            ln1_player_update(_p,_d,_joy|16,(_p.tick+1)&255);
+        }
+        var _expected=_side==0?[18,23,22,21,20,0]:[19,27,26,25,24,8];
+        ln_check(json_stringify(_frames)==json_stringify(_expected),"reverse roll displays original poses in reverse order and lands");
+        ln_check(_p.facing==_facing && _p.weapon==_weapon && _p.input_lock==0 && _p.action<256,"reverse roll preserves facing/weapon and releases control");
+        var _probe={x:_x,y:_y,heading:_back,facing:_facing,unconsumed:0,fraction_y:0,
+            boundary_mode:128,boundary_crossings:0,enemy_active:0};
+        ln1_player_move(_probe,_d,4);
+        ln_check(sign(_p.x-_x)==sign(_probe.x-_x) && sign(_p.y-_y)==sign(_probe.y-_y),"reverse roll travels backwards");
+        // The same roll cannot cross a blocking line behind the player.
+        _p.x=120;_p.y=100;_p.action=0;_p.fire_previous=0;_p.stopped=0;
+        _p.fraction_y=0;var _line=sign(_probe.y-_y)>0?102:98;
+        _d.boundaries=[[0,_line,255,_line,0]];
+        ln1_player_update(_p,_d,_joy|16,(_p.tick+1)&255);
+        repeat(40) {if (_p.action<256) break;ln1_player_update(_p,_d,_joy|16,(_p.tick+1)&255);}
+        ln_check(_line>100?_p.y<_line:_p.y>=_line,"backward roll respects walls");
+    }
+    show_debug_message("LN_REVERSE_ROLL_PASS: reverse poses, facing, weapons, backward movement and walls");
 }
