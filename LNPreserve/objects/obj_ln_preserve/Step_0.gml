@@ -1,4 +1,9 @@
 try {
+if (crt_live_test) {
+    crt_live_frame++;
+    if (crt_live_frame==1 || crt_live_frame==2) ln_crt_toggle();
+    exit;
+}
 if (presentation_test) exit;
 if (!selftest && !workbench && !scene_test.menu && !scene_test.preview) ln_crt_step();
 if (!selftest && ln_saves_step(self)) exit;

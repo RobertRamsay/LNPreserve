@@ -30,10 +30,14 @@ function ln_crt_present(_host) {
     draw_surface(_host.crt_surface,0,0);
 }
 
+function ln_crt_toggle() {
+    if (shader_is_compiled(sh_ln_crt)) global.ln_crt_enabled=!global.ln_crt_enabled;
+}
+
 function ln_crt_step() {
     if (keyboard_check_pressed(vk_f10) || (mouse_check_button_pressed(mb_left) &&
         mouse_x>=1128 && mouse_x<1272 && mouse_y>=36 && mouse_y<72)) {
-        if (shader_is_compiled(sh_ln_crt)) global.ln_crt_enabled=!global.ln_crt_enabled;
+        ln_crt_toggle();
     }
 }
 

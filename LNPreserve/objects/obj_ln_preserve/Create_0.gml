@@ -4,6 +4,9 @@ crt_surface=-1;
 global.ln_test_no_enemy_damage=false;
 ln3_only=false;
 presentation_test=false;
+crt_live_test=false;
+crt_live_frame=-1;
+crt_live_baseline=0;
 ln2_final_only=false;
 ln2_projectile_only=false;
 window_set_caption("LNPreserve | The Last Ninja");
@@ -26,6 +29,7 @@ function_presses = [0,0,0,0];
 selftest = false;
 host_frames = 0;
 for (var _i = 1; _i <= parameter_count(); _i++) {
+    if (parameter_string(_i) == "--crt-live-test") crt_live_test=true;
     if (parameter_string(_i) == "--pickup-crt-test") {
         presentation_test=true;
         try {ln1_pickup_assist_checks();show_debug_message("LN_PICKUP_PASS");}
