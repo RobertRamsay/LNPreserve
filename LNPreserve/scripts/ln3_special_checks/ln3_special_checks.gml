@@ -50,6 +50,12 @@ function ln3_transition_checks() {
     repeat(53) ln3_play_tick(_g,0);
     ln_check(_g.special_sequence==1,"LN3 Earth fade holds 54 PAL ticks");ln3_play_tick(_g,0);
     ln_check(_g.special_sequence==0 && _g.state.parts[4].move_mode==141,"LN3 Earth ritual resumes statue movement");
+    _g=new LN3Play(1);_g.state.inventory[0]=128;_g.state.inventory[3]=128;_g.state.inventory[8]=128;
+    _g.state.inventory[21]=128;_g.state.inventory[28]=3;_g.state.player_health=7;
+    ln3_level_load(_g,2,true);
+    ln_check(_g.state.player_health==44 && _g.state.inventory[0]==128 && _g.state.inventory[3]==128 &&
+        _g.state.inventory[8]==0 && _g.state.inventory[21]==0 && _g.state.inventory[28]==3,
+        "LN3 ordinary level travel resets health, preserves weapons/ammo and clears level objects");
     _g=new LN3Play(3);ln3_test_enter(_g,3);ln3_special_start(_g,2);
     repeat(44) ln3_play_tick(_g,0);
     ln_check(_g.special_sequence==2,"LN3 Water fade holds 45 PAL ticks");ln3_play_tick(_g,0);

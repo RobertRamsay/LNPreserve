@@ -63,7 +63,7 @@ function ln2_combat_attack(_g,_enemy,_interaction) {
     var _index=ln2_combat_hit(_a,_b,_g.enemy.active,_g.enemy.attack_count,_g.data);
     if (_index<0 || (_b.combat_state&252)==36) return;
     var _damage=_enemy?_g.data.enemy_damage:_g.data.player_damage;
-    ln2_damage(_g,_damage[_index],!_enemy);
+    if (!_enemy || !ln_test_enemy_damage_disabled()) ln2_damage(_g,_damage[_index],!_enemy);
     ln2_combat_hurt(_g,!_enemy);
 }
 

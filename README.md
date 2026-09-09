@@ -50,14 +50,14 @@ LN3 remains **incomplete**: the separate high-score program, original dashboard/
 | 4 | Pause |
 | Home | Restart this prototype |
 | Right / Down / Left / Up arrows | Test exits: NE / SE / SW / NW |
-| F11 | Choose a game, level and scene |
+| F11 | Choose a game, level and scene; optionally disable enemy damage for testing |
 | F12 | Optional conversion workbench |
 
 The 12 LN1 level and loader music resources now contain user-supplied MP3 audio. The 29 LN2/LN3 resources remain named silent WAV placeholders. Loader tracks are registered but the current native prototype has no loader-screen playback path. Sound effects are not recovered.
 
 The arrow shortcuts follow the three games’ recovered ordinary room links and use each destination's original entrance position and facing, including the one-way Dungeons entrance. When two exits face the same direction, the nearer exit is used. One press performs one jump. Missing directions leave the current room unchanged. Inventory, living-player health and saved enemy wounds survive; LN1 entry flashes restart. Test jumps cancel an unfinished action, prayer or death, and restore a dead player so testing can continue. Original entrance-specific sequences still run. These are development controls, not original gameplay behavior.
 
-F11’s scene picker exposes native prototypes in all 18 levels: six LN1, seven LN2 and five LN3. The original special entrance makes Void’s final encounter selectable even though it has no ordinary room link. Gameplay pauses while the picker, a preview or the workbench is open. The alternate Mansion room-10 drawing shares that room's state and is not offered as a separate entrance.
+F11’s scene picker exposes native prototypes in all 18 levels: six LN1, seven LN2 and five LN3. Its test-protection switch disables damage from enemy melee and hostile projectiles while leaving environmental hazards active; it is off by default. The original special entrance makes Void’s final encounter selectable even though it has no ordinary room link. Gameplay pauses while the picker, a preview or the workbench is open. The alternate Mansion room-10 drawing shares that room's state and is not offered as a separate entrance.
 
 ## Verification
 

@@ -1,4 +1,5 @@
 gpu_set_texfilter(false);
+global.ln_test_no_enemy_damage=false;
 ln3_only=false;
 ln2_final_only=false;
 ln2_projectile_only=false;

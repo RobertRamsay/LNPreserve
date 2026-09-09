@@ -1,8 +1,8 @@
 {
-  "tests_run": 8,
+  "tests_run": 9,
   "failures": 0,
   "errors": 0,
-  "skipped": 0,
+  "skipped": 1,
   "passed": true,
   "original_gameplay_parity": "not_tested"
 }

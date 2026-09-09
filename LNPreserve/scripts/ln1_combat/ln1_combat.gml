@@ -84,7 +84,11 @@ function ln1_combat_event(_g, _event, _enemy_event) {
         _e.facing = ln1_enemy_face(_e, _p.x, _p.y); _e.heading = _e.facing;
         if (_g.level==6 && _e.active==134) {
             if (_e.facing==1) _e.active=0;
-            else { _g.world_state.mode=7;ln1_level_enemy_action(_g,$4e08); }
+            else {
+                // $4e08 is executable dispatch code; the dog animation record
+                // it selects begins at $4e0c and is present in the source graph.
+                _g.world_state.mode=7;ln1_level_enemy_action(_g,$4e0c);
+            }
             return;
         }
         if ((_e.facing == 7 || _e.facing == 1) && _e.active >= 132 && _e.active != 133) { _e.active = 0; return; }
@@ -105,8 +109,10 @@ function ln1_combat_event(_g, _event, _enemy_event) {
         var _hit = ln1_combat_hit(_g, true);
         if (_hit >= 0) {
             var _damage=(_g.level==4 && _e.active==133)?16:_g.data.player_damage[_hit];
-            _g.player_health = max(0, _g.player_health - _damage);
-            if (_g.player_health == 0) { _p.combat_state = 36 + (_p.facing >> 1); _p.input_lock = 255; }
+            if (!ln_test_enemy_damage_disabled()) {
+                _g.player_health = max(0, _g.player_health - _damage);
+                if (_g.player_health == 0) { _p.combat_state = 36 + (_p.facing >> 1); _p.input_lock = 255; }
+            }
             ln1_combat_hurt(_g, false);
         }
         return;

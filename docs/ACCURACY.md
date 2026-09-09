@@ -32,6 +32,8 @@ Directional testing uses separate host key edges: Right=NE, Down=SE, Left=SW, Up
 
 The F11 picker exposes native prototypes in all 18 levels, including LN3’s original special entrance to Void’s final encounter. Fire’s isolated partial scene-12 record remains preserved as scenery but has no selectable gameplay entrance. Native prototypes do not establish complete object, objective or playthrough parity.
 
+The picker also has an off-by-default enemy-damage test switch. It suppresses health loss from enemy melee and hostile projectiles in all three games, while retaining collision/reaction behaviour and leaving environmental hazards active. This is a development aid and is excluded from original-game accuracy claims. Ordinary level transitions have native regressions for their distinct rules: LN1 carries collected items/weapons and resets health, LN2 carries common inventory while clearing local puzzle flags, and LN3 carries weapons/ammunition while clearing level objects.
+
 ## Depth and masking
 
 Use two independent actor coordinates: its ground-contact position and its displayed height. Sort ordinary props and actors by the ground position; jumping changes displayed height without changing which side of a prop the actor occupies.
@@ -109,6 +111,8 @@ Boundary hazards, swarm behaviour, remaining object details, item flashing, eye/
 ## LN1 actor corrections and LN2 thrown weapons
 
 The dungeon fix regenerates 88 special poses with the supplied $7655 compositor, replacing stale PNGs whose indices no longer matched the expanded frame map. The same fault affected Inner Sanctum; its 78 poses are regenerated. The source $777e uniform rule is now used across all six LN1 levels, sharing 3,121 unique images for 4,096 pose/weapon/mirror/colour selections. The dungeon spider keeps its current animation when $6c89 steers it, and the descent-to-pursuit transition waits until the next tick. 1,024 original states check that handler. See [dungeon testing](DUNGEON_TESTING.md) for encounter scenes and a route through the original maze.
+
+Inner Sanctum's dog spawn now enters the recovered animation record at $4e0c. The earlier native dispatcher incorrectly stored executable entry $4e08 as an animation pointer, leaving the dog undisplayed and crashing when `ln1_enemy_action` requested its nonexistent record. Structural validation now checks that exported action graphs are closed and that literal scripted enemy entries resolve to recovered records.
 
 LN2 now has native player/enemy projectiles, ammunition use, launch offsets, lifetime and collision damage. 14,336 original spawn/update states compare successfully. Its 18 unique projectile images come from the original compositor. Original masking cannot be represented exactly by one fixed depth PNG: the source aligns bit pairs relative to each overlapping sprite and object. The native per-part mask port matches 2,976 original 63-byte visibility probes, including odd horizontal positions and screen edges. GPU checks compare 1,499,904 projectile pixels.
 

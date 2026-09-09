@@ -229,8 +229,9 @@ function ln2_object_integration_checks() {
     ln2_damage(_g,44,true);ln2_combat_hurt(_g,true);
     ln_check(_g.world_state.boss_defeated && _g.enemy.action==$c1b9 && _g.enemy.active==0,
         "LN2 candles lit before final blow use the original alternate victory animation");
-    _g=new LN2Play(5);_g.inventory[1]=255;_g.inventory[18]=255;ln2_level_load(_g,6,true);
-    ln_check(_g.inventory[1]==255 && _g.inventory[18]==0,"LN2 ordinary level travel preserves carried objects and clears local puzzle flags");
+    _g=new LN2Play(5);_g.inventory[1]=255;_g.inventory[4]=131;_g.inventory[18]=255;_g.player_health=7;ln2_level_load(_g,6,true);
+    ln_check(_g.player_health==44 && _g.inventory[1]==255 && _g.inventory[4]==131 && _g.inventory[18]==0,
+        "LN2 ordinary level travel resets health, preserves carried objects/weapons and clears local puzzle flags");
     ln2_level_load(_g,5);ln_check(_g.inventory[18]==255,"LN2 scene testing restores visited level puzzle state");
     show_debug_message("LN2_OBJECT_INTEGRATION_PASS: keypad, final enemy release, five-candle condition and per-level puzzle flags; original full-playthrough parity remains pending.");
 }

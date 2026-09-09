@@ -12,5 +12,12 @@ function ln3_combat_checks() {
         if (_v.operation==0) ln3_combat_update(_s,_actions,_data);else ln3_projectile_hits(_s,_data);
         ln3_state_check(_s,_v.expected,"LN3 combat "+string(_i));
     }
+    var _g=new LN3Play(1);_g.state.player_health=44;_g.state.inventory[26]=44;_g.state.enemy_weapon=0;
+    global.ln_test_no_enemy_damage=false;ln3_combat_damage_player(_g.state,_g.actions,_g.combat);
+    ln_check(_g.state.player_health<44,"LN3 enemy attack reduces health normally");
+    _g.state.player_health=44;_g.state.inventory[26]=44;global.ln_test_no_enemy_damage=true;
+    ln3_combat_damage_player(_g.state,_g.actions,_g.combat);
+    ln_check(_g.state.player_health==44 && _g.state.inventory[26]==44,"F11 protection absorbs LN3 enemy attack damage");
+    global.ln_test_no_enemy_damage=false;
     show_debug_message("LN3_COMBAT_PASS: "+string(array_length(_o.vectors))+" original melee, honour, score and projectile states across five banks.");
 }

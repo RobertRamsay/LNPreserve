@@ -51,7 +51,10 @@ function ln1_projectile_tick(_g) {
         if (_g.enemy.active>=128 && (_target.combat_state&252)!=36 && (_target.combat_state&252)!=12) {
             if (_kind==1 && (_slot==1 || _g.enemy.active<133)) {
                 if (abs(_target.y-_s.y)<8 && abs(_target.x-_s.x)<6) {
-                    if (_slot==1) { _g.player_health=max(0,_g.player_health-16);ln1_combat_hurt(_g,false); }
+                    if (_slot==1) {
+                        if (!ln_test_enemy_damage_disabled()) _g.player_health=max(0,_g.player_health-16);
+                        ln1_combat_hurt(_g,false);
+                    }
                     else { _g.enemy.wounds=32;_g.room_wounds[_g.room_id]=32;ln1_combat_hurt(_g,true); }
                     _s.active=0;
                 }

@@ -13,6 +13,7 @@ function ln3_score_add(_s,_data,_weapon) {
 }
 
 function ln3_combat_damage_player(_s,_actions,_data) {
+    if (ln_test_enemy_damage_disabled()) return;
     var _weapon=_s.enemy_weapon==4?0:_s.enemy_weapon;
     _s.player_health=max(0,_s.player_health-_data.enemy_damage[_weapon]);_s.inventory[26]=_s.player_health;
     if (_s.player_health!=0) return;
@@ -88,10 +89,13 @@ function ln3_projectile_hits(_s,_data) {
     var _dx=_target.x-_p.x,_dy=_p.y-_target.y;
     if (_dx>=0 && _dx<24 && _dy>=0 && _dy<21) {
         if (_data.level==5 && _s.room_id==11 && _s.player_action==24) {
-            _s.bolt_reflected=(_s.bolt_reflected+1)&255;_s.player_health=(_s.player_health-1)&255;_s.inventory[26]=_s.player_health;
+            _s.bolt_reflected=(_s.bolt_reflected+1)&255;
+            if (ln_test_enemy_damage_disabled()) {_p.animation=0;_p.move_mode=0;return;}
+            _s.player_health=(_s.player_health-1)&255;_s.inventory[26]=_s.player_health;
             if (_s.player_health!=0) return;
             _s.player_dead=(_s.player_dead+1)&255;if (_s.player_dead!=0) return;
         }
+        if (ln_test_enemy_damage_disabled()) {_p.animation=0;_p.move_mode=0;return;}
         _p.animation=0;_p.move_mode=0;_s.player_health=0;_s.inventory[26]=0;_s.enabled&=127;_s.player_dead=(_s.player_dead+1)&255;
     }
 }

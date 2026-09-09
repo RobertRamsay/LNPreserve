@@ -4,6 +4,11 @@ function ln_test_direction(_right, _down, _left, _up) {
     return _right ? 0 : (_down ? 1 : (_left ? 2 : 3));
 }
 
+/// F11-only protection. It deliberately excludes scenery and level hazards.
+function ln_test_enemy_damage_disabled() {
+    return variable_global_exists("ln_test_no_enemy_damage") && global.ln_test_no_enemy_damage;
+}
+
 function ln1_test_enter(_g, _entry) {
     if (_entry < 4 || (_entry >> 2) > array_length(_g.world.rooms)) return false;
     var _p = _g.player;
@@ -139,6 +144,12 @@ function ln_scene_test_step(_t, _g) {
                 ln_scene_test_open(_t,_g,_i); return;
             }
         }
+        if (point_in_rectangle(_mx,_my,480,610,854,658)) {
+            global.ln_test_no_enemy_damage = !ln_test_enemy_damage_disabled();
+            ln_scene_test_message(_t,global.ln_test_no_enemy_damage ?
+                "Enemy damage disabled for testing." : "Enemy damage restored.");
+            return;
+        }
         if (point_in_rectangle(_mx,_my,160,674,442,722)) { _t.menu = false; _t.preview = false; }
         return;
     }
@@ -184,10 +195,12 @@ function ln_scene_test_draw(_t) {
         draw_text(480,224,"Playable prototype — movement, objects and combat");
         for (var _i = 0; _i < array_length(_level.scenes); _i++)
             ln_scene_test_button(480+(_i mod 7)*88,266+(_i div 7)*64,76,48,string(_i+1),_t.scene_index==_i);
+        ln_scene_test_button(480,610,374,48,ln_test_enemy_damage_disabled() ?
+            "Enemy damage: OFF (test protection)" : "Enemy damage: ON",ln_test_enemy_damage_disabled());
         ln_scene_test_button(160,674,282,48,"Return to gameplay",false);
         draw_set_colour(make_colour_rgb(165,173,184));
         draw_text(480,674,"Arrow exits: Right NE / Down SE / Left SW / Up NW");
-        draw_text(480,700,"Scene testing preserves collected items and enemy wounds.");
+        draw_text(480,700,"Collected items and enemy wounds persist; hazards stay active.");
     } else {
         var _scene = _level.scenes[_t.scene_index];
         draw_text(160,48,"LAST NINJA " + string(_level.game) + " — " + _level.title + " — Scene " + string(_t.scene_index+1));

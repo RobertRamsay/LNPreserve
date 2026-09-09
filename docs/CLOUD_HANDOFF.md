@@ -6,7 +6,7 @@ Prepared 9 September 2026. Use the existing repository https://github.com/Robert
 
 Convert all three supplied C64 Last Ninja games into one editable native GameMaker project, verified against the originals. An embedded C64 emulator is not the requested product. Offline execution of original 6502 code is used for recovery and verification. All 18 levels are accessible as prototypes; no complete game or cycle-accurate playthrough has passed acceptance.
 
-Controls: WASD movement; J plus direction for original fire/actions; Space selects weapons; 1–4 replace F keys. Testing arrows: Right NE, Down SE, Left SW, Up NW. F11 selects scenes; F12 opens the optional workbench. Keep the gameplay interface nontechnical.
+Controls: WASD movement; J plus direction for original fire/actions; Space selects weapons; 1–4 replace F keys. Testing arrows: Right NE, Down SE, Left SW, Up NW. F11 selects scenes and offers an off-by-default enemy-damage protection switch; environmental hazards remain active. F12 opens the optional workbench. Keep the gameplay interface nontechnical.
 
 Keep original graphics. LN1 river deaths use sinking and masking, with no invented splash. Earlier broad scenery colour corrections were restricted by the user to LN3's opening scene. Do not apply the remaining diagnostic colour proposals without a new request. Preserve the user's GameMaker edits and fetch before publishing to the same main branch.
 
@@ -16,6 +16,7 @@ Keep original graphics. LN1 river deaths use sinking and masking, with no invent
 - Read `README.md`, `docs/ACCURACY.md`, `evidence/STATUS.json` and `evidence/runtime_checks.json` for scope and actual results. Some older research notes describe earlier stages; do not treat them as current acceptance claims.
 - Published dungeon fixes: original guard colours, 88 refreshed special poses, and spider steering/descent timing. Original maze retained; see `docs/DUNGEON_TESTING.md`. Skeleton scene 8, giant spider scene 20, exit scene 23. Source comparisons cover 1,024 spider states.
 - All six LN1 levels share the original ordinary enemy colour bank. Inner Sanctum's 78 special poses were also refreshed after finding stale frame images.
+- Inner Sanctum's dog uses recovered animation record $4e0c. Do not restore the former $4e08 pointer: that is executable dispatch code, not an action record, and caused a missing dog followed by a `record.flags` crash on approach.
 - LN2 thrown weapons now use original art, ammo/lifetime/damage rules, per-part masking and three body sprites while a projectile occupies the fourth slot. Checks cover 14,336 projectile states, 2,976 original full-sprite mask probes, 1,499,904 projectile GPU pixels and 2,764,800 body GPU pixels. Full display timing and original input replays remain pending.
 - LN2 final keypad, boss release, candles and native ending are present. LN3 mechanisms and the original ending picture/text sequence are present; completeness remains limited as documented.
 - Latest local compilation, full native regression run and eight structural checks passed. Existing reports describe that Windows run; do not present them as a new cloud run.

@@ -1,6 +1,6 @@
 """Check disk integrity, C64 pixel decoding and every registered GM resource."""
 from pathlib import Path
-import hashlib,json,sys,unittest,wave
+import hashlib,json,re,sys,unittest,wave
 from PIL import Image
 from extract_disks import sector_offset,chain,directory
 from decode_graphics import decode_object,decode_dataset,render_panel,PALETTE
@@ -8,6 +8,19 @@ from build_project import read_json
 ROOT=Path(__file__).resolve().parents[1];PROJECT=ROOT/'LNPreserve'
 
 class ConversionChecks(unittest.TestCase):
+    def test_ln1_enemy_action_graphs_and_scripted_entries_exist(self):
+        paths=[PROJECT/'datafiles/play/ln1/gameplay.json']+[
+            PROJECT/f'datafiles/play/ln1/level{level}/gameplay.json' for level in range(2,7)]
+        available=set()
+        for path in paths:
+            actions=read_json(path)['actions'];available.update(map(int,actions))
+            for address,record in actions.items():
+                if record['next']>=256:
+                    self.assertIn(str(record['next']),actions,f'{path}: ${int(address):04x} next')
+        sources='\n'.join(path.read_text() for path in (PROJECT/'scripts').glob('ln1_*/*.gml'))
+        for raw in re.findall(r'ln1_level_enemy_action\s*\(\s*_g\s*,\s*\$([0-9a-fA-F]+)',sources):
+            self.assertIn(int(raw,16),available,f'scripted LN1 enemy action ${raw}')
+
     def test_ln3_opening_scene_matches_captured_original_bitmap(self):
         manifest=read_json(PROJECT/'datafiles/graphics/manifest.json')
         dataset=next(d for d in manifest['datasets'] if d['id']=='ln3_game_level1')

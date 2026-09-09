@@ -70,15 +70,21 @@ function ln1_level_checks() {
             _rooms++;
         }
     }
-    var _g=new LN1Play();_g.inventory[13]=1;_g.inventory[8]=1;_g.inventory[14]=133;
+    var _g=new LN1Play();_g.inventory[4]=255;_g.inventory[8]=1;_g.inventory[11]=1;
+    _g.inventory[13]=1;_g.inventory[14]=133;_g.player_health=7;
     _g.lives_left=2;_g.room_wounds[2]=32;
     ln1_level_load(_g,2,true);
-    ln_check(_g.lives_left==3 && _g.inventory[8]==0 && _g.inventory[14]==5 && _g.inventory[13]==1,
-             "original extra-life and projectile inventory carry at level end");
+    ln_check(_g.player_health==32 && _g.lives_left==3 && _g.inventory[8]==0 && _g.inventory[14]==5 &&
+             _g.inventory[4]==255 && _g.inventory[11]==1 && _g.inventory[13]==1,
+             "original health reset, extra-life conversion, items and weapons carry at level end");
     _g.room_wounds[3]=17;ln1_level_load(_g,1);
     ln_check(_g.room_wounds[2]==32,"first-level defeated enemy survives level browsing");
     ln1_level_load(_g,2);
     ln_check(_g.room_wounds[3]==17,"later-level wounds survive level browsing");
+    var _dog=new LN1Play(6);ln1_test_enter(_dog,45);
+    ln1_play_tick(_dog,0);ln1_play_tick(_dog,0);
+    ln_check(_dog.room_id==11 && _dog.enemy.active==134 && _dog.enemy.display_frame==141 &&
+        _dog.enemy.action==$4e0f,"Inner Sanctum dog enters its recovered $4e0c animation instead of executable $4e08");
     show_debug_message("LN_LEVELS_PASS: "+string(_rooms)+" additional rooms, "+string(_exits)+" original exits, "+
                        string(_selectors)+" original enemy selectors, "+string(_ticks)+" integration ticks and level-state persistence.");
     var _buf=buffer_load("verification/ln1_projectile_vectors.json");
@@ -92,6 +98,13 @@ function ln1_level_checks() {
         ln_check(_s.active==_v.expected[0] && _s.x==_v.expected[1] && _s.y==_v.expected[2] && _s.life==_v.expected[3],
                  "original projectile lifetime/motion "+string(_i));
     }
+    global.ln_test_no_enemy_damage=false;_g=new LN1Play();_g.enemy.active=128;_g.enemy.combat_state=20;
+    var _shot=_g.projectiles[1];_shot.active=1;_shot.life=7;_shot.x=_g.player.x;_shot.y=_g.player.y;
+    ln1_projectile_tick(_g);ln_check(_g.player_health==16,"LN1 hostile projectile reduces health normally");
+    global.ln_test_no_enemy_damage=true;_g=new LN1Play();_g.enemy.active=128;_g.enemy.combat_state=20;
+    _shot=_g.projectiles[1];_shot.active=1;_shot.life=7;_shot.x=_g.player.x;_shot.y=_g.player.y;
+    ln1_projectile_tick(_g);ln_check(_g.player_health==32 && _shot.active==0,"F11 protection absorbs LN1 hostile projectile damage");
+    global.ln_test_no_enemy_damage=false;
     show_debug_message("LN_PROJECTILES_PASS: "+string(array_length(_oracle.vectors))+" original one-tick projectile movement and lifetime cases.");
 }
 

@@ -1,4 +1,9 @@
 function ln_scene_test_checks() {
+    global.ln_test_no_enemy_damage=false;
+    ln_check(!ln_test_enemy_damage_disabled(),"enemy damage protection defaults off");
+    global.ln_test_no_enemy_damage=true;
+    ln_check(ln_test_enemy_damage_disabled(),"F11 enemy damage protection can be enabled");
+    global.ln_test_no_enemy_damage=false;
     ln_check(ln_test_direction(true,false,false,false)==0,"Right arrow means NE");
     ln_check(ln_test_direction(false,true,false,false)==1,"Down arrow means SE");
     ln_check(ln_test_direction(false,false,true,false)==2,"Left arrow means SW");

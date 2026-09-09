@@ -178,7 +178,9 @@ function ln2_projectile_throw(_g,_enemy) {
 function ln2_projectile_motion(_g,_tick) {
     var _s=ln2_projectile_state(_g,_tick),_requests=ln2_projectile_update_rule(_s,_g.projectile_data);_g.projectile_clock=_s.previous;
     for (var _i=0;_i<array_length(_requests);_i++) {
-        var _r=_requests[_i];if (_r.kind=="damage") ln2_damage(_g,_r.value,_r.actor==1);
+        var _r=_requests[_i];if (_r.kind=="damage") {
+            if (_r.actor!=0 || !ln_test_enemy_damage_disabled()) ln2_damage(_g,_r.value,_r.actor==1);
+        }
         else if (_r.kind=="hurt") ln2_combat_hurt(_g,_r.actor==1);
     }
     _g.player_projectile_active=_g.projectiles[0].kind!=0;_g.enemy.projectile_active=_g.projectiles[1].kind;
@@ -230,6 +232,11 @@ function ln2_projectile_integration_checks() {
     var _q=_g.projectiles[1];_q.kind=1;_q.x=_g.player.x;_q.y=_g.player.y;_q.life=7;
     ln2_projectile_motion(_g,(_g.projectile_clock+1)&255);
     ln_check(_g.player_health==22 && _q.kind==0,"LN2 original enemy projectile applies 22 damage and despawns");
+    global.ln_test_no_enemy_damage=true;ln2_projectile_reset(_g);_g.player.combat_state=0;_g.player_health=44;
+    _q=_g.projectiles[1];_q.kind=1;_q.x=_g.player.x;_q.y=_g.player.y;_q.life=7;
+    ln2_projectile_motion(_g,(_g.projectile_clock+1)&255);
+    ln_check(_g.player_health==44 && _q.kind==0,"F11 protection absorbs LN2 hostile projectile damage");
+    global.ln_test_no_enemy_damage=false;
     ln2_test_enter(_g,0);ln_check(_g.projectiles[0].kind==0 && _g.projectiles[1].kind==0,"LN2 scene entry clears both projectiles");
     show_debug_message("LN2_PROJECTILE_INTEGRATION_PASS: original action dispatch, ammunition, graphics buffer, player hit and room reset; complete combat replay pending.");
 }
