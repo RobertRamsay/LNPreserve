@@ -202,10 +202,13 @@ function ln1_level_events(_g) {
         else { _state.mode=6;ln1_level_enemy_action(_g,$5145);_e.speed=2; }
         return;
     }
-    if ((_g.level==4 && _state.mode==6) || (_g.level==6 && _state.mode==7)) {
+    if ((_g.level==4 && _state.mode==6) || (_g.level==6 && _state.mode==7 && _e.active==134)) {
         _e.facing=ln1_enemy_face(_e,_p.x,_p.y);
         if (min(255,abs(_p.x-_e.x)+abs(_p.y-_e.y))<(_g.level==4?8:18)) {
-            _p.input_lock=255;_state.mode=0;ln1_level_enemy_action(_g,_g.level==4?$514f:$4e20);
+            _p.input_lock=255;_state.mode=0;
+            // $4e20 is executable dispatch code, like the dog's $4e08 entry.
+            // Its close-contact animation record begins at $4e2d.
+            ln1_level_enemy_action(_g,_g.level==4?$514f:$4e2d);
         } else if (_g.level==4) {
             // Original $be d9 jumps to $6c89: steer the current spider action.
             // Starting an ordinary guard stance here replaces its spider frames.

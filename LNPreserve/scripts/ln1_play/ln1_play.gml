@@ -42,6 +42,10 @@ function LN1Play(_level = 1) constructor {
 
 function ln1_play_enter(_g, _room_id) {
     _g.room_id = _room_id;
+    // The spider and dog pursuit modes belong to their encounter rooms.  Do
+    // not apply their handlers to an ordinary enemy after walking back out.
+    if ((_g.level == 4 && _room_id != 20 && (_g.world_state.mode == 4 || _g.world_state.mode == 6)) ||
+        (_g.level == 6 && _room_id != 11 && _g.world_state.mode == 7)) _g.world_state.mode = 0;
     var _room = _g.world.rooms[_room_id - 1];
     _g.data.boundaries = _room.boundaries;
     _g.scene = asset_get_index(_room.sprite);

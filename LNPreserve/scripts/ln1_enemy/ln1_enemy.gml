@@ -195,7 +195,15 @@ function ln1_enemy_action(_g) {
         if (_e.flags & 4) ln1_enemy_move(_g, _ticks);
         return;
     }
-    var _record = variable_struct_get(_g.data.actions, string(_e.action));
+    var _key = string(_e.action);
+    if (!variable_struct_exists(_g.data.actions, _key)) {
+        // Executable dispatcher addresses are not animation records. Keep a
+        // malformed special transition diagnosable without crashing play.
+        array_push(_g.pending_events, _e.action);
+        _e.active = 0; _e.action = 0; _e.frame = 255; _e.display_frame = 255;
+        return;
+    }
+    var _record = variable_struct_get(_g.data.actions, _key);
     _e.flags = _record.flags;
     if (_record.duration >= 0) _e.duration = _record.duration;
     _e.countdown = _e.duration; _e.frame = _record.frame;

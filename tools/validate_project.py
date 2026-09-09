@@ -20,6 +20,10 @@ class ConversionChecks(unittest.TestCase):
         sources='\n'.join(path.read_text() for path in (PROJECT/'scripts').glob('ln1_*/*.gml'))
         for raw in re.findall(r'ln1_level_enemy_action\s*\(\s*_g\s*,\s*\$([0-9a-fA-F]+)',sources):
             self.assertIn(int(raw,16),available,f'scripted LN1 enemy action ${raw}')
+        level6=read_json(PROJECT/'datafiles/play/ln1/level6/gameplay.json')['actions']
+        self.assertIn(str(0x4e2d),level6)
+        levels=(PROJECT/'scripts/ln1_levels/ln1_levels.gml').read_text()
+        self.assertNotRegex(levels,r'ln1_level_enemy_action\s*\([^\n]*\$4e20')
 
     def test_ln3_opening_scene_matches_captured_original_bitmap(self):
         manifest=read_json(PROJECT/'datafiles/graphics/manifest.json')
