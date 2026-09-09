@@ -361,6 +361,8 @@ def main():
     register_project(resources,included)
     from deduplicate_ln1_levels import main as share_identical_assets
     share_identical_assets()
+    from fix_ln1_dungeon_art import main as refresh_dungeon_art
+    refresh_dungeon_art()
     write_json(ROOT/'evidence/ln1_level_content.json',dict(method='Original disk banks and offline original drawing/room routines',
                full_gameplay_parity=False,levels=report))
 

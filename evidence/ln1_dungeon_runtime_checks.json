@@ -1,0 +1,15 @@
+{
+  "compilation_pass": true,
+  "original_spider_states_pass": 1024,
+  "dungeon_rooms_reachable": 27,
+  "ln1_all_later_level_original_exit_cases_pass": 239,
+  "structural_tests_pass": 8,
+  "native_visual_scenes_reviewed": [
+    2,
+    3,
+    8,
+    20
+  ],
+  "full_playthrough_verified": false,
+  "scope": "Dungeon correction; original maze retained; whole trilogy still incomplete"
+}

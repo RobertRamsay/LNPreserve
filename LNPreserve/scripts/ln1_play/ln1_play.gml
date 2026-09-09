@@ -249,6 +249,13 @@ function ln1_play_actor(_g, _actor, _enemy) {
         }
     } else if (_frame >= 64 && _frame < 128) { _sprite = spr_ln1_actor_extra; _frame -= 64; }
     else if (_frame >= 128) return;
+    if (_enemy && _actor.display_frame < 64 && _actor.active >= 128 && _actor.active < 132 &&
+        variable_struct_exists(_g.world,"enemy_colour_bank")) {
+        var _weapon = _actor.weapon < 4 ? _actor.weapon : 0;
+        var _pose = (_actor.colour_traits*4+_weapon)*128+(_actor.mirror?64:0)+_actor.display_frame;
+        _sprite=asset_get_index(_g.world.enemy_colour_bank);
+        _frame=_g.world.enemy_colour_frames[_pose];_mirror_offset=0;
+    }
     ln_draw_masked_actor(_sprite, _frame + (_actor.mirror ? _mirror_offset : 0), _actor.x, _actor.y,
         1, 1, _g.mask, 0, 0, 240, 144, max(0.001, (_actor.y - 0.25) / 255),
         _enemy ? 144 : _g.water_cutoff - 29);

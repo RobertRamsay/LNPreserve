@@ -200,11 +200,19 @@ function ln1_level_events(_g) {
     if (_g.level==4 && _state.mode==4) {
         if (_e.y<120) { _e.facing=5;_e.heading=4; }
         else { _state.mode=6;ln1_level_enemy_action(_g,$5145);_e.speed=2; }
+        return;
     }
     if ((_g.level==4 && _state.mode==6) || (_g.level==6 && _state.mode==7)) {
         _e.facing=ln1_enemy_face(_e,_p.x,_p.y);
         if (min(255,abs(_p.x-_e.x)+abs(_p.y-_e.y))<(_g.level==4?8:18)) {
             _p.input_lock=255;_state.mode=0;ln1_level_enemy_action(_g,_g.level==4?$514f:$4e20);
+        } else if (_g.level==4) {
+            // Original $be d9 jumps to $6c89: steer the current spider action.
+            // Starting an ordinary guard stance here replaces its spider frames.
+            var _dx=abs(_p.x-_e.x),_dy=abs(_p.y-_e.y);
+            var _headings=[0,2,4,2,4,6,0,6];
+            _e.heading=(_dx>>2)<_dy ? _headings[_e.facing-1] :
+                (_dy<4 ? _headings[_e.facing] : _e.facing);
         } else ln1_enemy_attack_stance(_g);
     }
     if (_g.level==6 && _state.mode==9 && _p.action<256) ln1_special_action(_g,$5113);

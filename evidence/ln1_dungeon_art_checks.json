@@ -1,0 +1,9 @@
+{
+  "full_playthrough_verified": false,
+  "source_colour_routine": "$777e",
+  "source_sha256": "4313ac82f10a7cee93fcf747cb61adef637762ae35ab50ad2d4272339e398f94",
+  "special_pose_pngs_checked": 88,
+  "spider_source_vectors": 1024,
+  "uniform_pose_selections": 4096,
+  "unique_uniform_pngs": 3121
+}

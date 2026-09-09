@@ -1,4 +1,19 @@
 function ln1_level_checks() {
+    var _dungeon=new LN1Play(4);
+    for (var _i=0;_i<array_length(_dungeon.world.dungeon_spider_vectors);_i++) {
+        var _v=_dungeon.world.dungeon_spider_vectors[_i];
+        _dungeon.enemy=new LN1Enemy();
+        _dungeon.enemy.x=_v.ex;_dungeon.enemy.y=_v.ey;
+        _dungeon.enemy.facing=1;_dungeon.enemy.heading=1;_dungeon.enemy.action=$5145;
+        _dungeon.player.x=_v.px;_dungeon.player.y=_v.py;_dungeon.player.input_lock=0;
+        _dungeon.world_state.mode=_v.mode;
+        ln1_level_events(_dungeon);
+        var _actual=[_dungeon.world_state.mode,_dungeon.enemy.facing,_dungeon.enemy.heading,
+                     _dungeon.enemy.action,_dungeon.player.input_lock,_dungeon.enemy.speed];
+        for (var _j=0;_j<6;_j++) ln_check(_actual[_j]==_v.expected[_j],
+            "dungeon spider original steering "+string(_i)+"/"+string(_j));
+    }
+    show_debug_message("LN_DUNGEON_PASS: 1024 original spider steering/approach/capture states.");
     var _rooms=0,_exits=0,_selectors=0,_ticks=0;
     for (var _level=2;_level<=6;_level++) {
         var _g=new LN1Play(_level);
@@ -81,6 +96,15 @@ function ln1_level_checks() {
 }
 
 function ln1_level_capture() {
+    var _dungeon_rooms=[2,3,8,20];
+    for (var _i=0;_i<array_length(_dungeon_rooms);_i++) {
+        var _g=new LN1Play(4),_room=_dungeon_rooms[_i];
+        ln1_test_enter(_g,_g.navigation.rooms[_room-1].spawn_entry);
+        repeat(90) ln1_play_tick(_g,0);
+        ln1_play_draw(_g,false);
+        surface_save(application_surface,"lnpreserve-dungeon-room"+string(_room)+".png");
+        surface_free(_g.stage_surface);
+    }
     for (var _level=1;_level<=6;_level++) {
         var _g=new LN1Play(_level),_room=[2,3,1,2,7,11][_level-1];
         ln1_test_enter(_g,_g.navigation.rooms[_room-1].spawn_entry);
