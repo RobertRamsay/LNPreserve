@@ -10,6 +10,7 @@ function ln1_player_begin_action(_s, _d, _kind) {
     _s.combat_state = (_s.facing >> 1) + _d.action_classes[_kind >> 2];
     var _entry = (((_s.facing + 2) & 4) >> 1) + _kind;
     _s.action = _d.action_entries[_entry >> 1];
+    if (_kind==4 && variable_struct_exists(_d,"forward_roll_entries")) _s.action=_d.forward_roll_entries[((_s.facing+2)&4)>>2];
     _s.flags = variable_struct_get(_d.actions, string(_s.action)).flags;
     _s.countdown = 0;
     _s.saved_heading = _s.heading;
@@ -236,6 +237,7 @@ function ln1_player_update(_s, _d, _joy, _tick) {
 /// recovered roll; original action entries and reference vectors remain intact.
 function ln1_reverse_roll_prepare(_d) {
     _d.reverse_roll_entries=[];
+    _d.forward_roll_entries=[];
     for (var _side=0;_side<2;_side++) {
         var _records=[],_address=_d.action_entries[2+_side],_duration=0;
         while (_address>=256) {
@@ -251,8 +253,19 @@ function ln1_reverse_roll_prepare(_d) {
             // A final standing command releases the action cleanly after landing.
             var _last=_i==_count,_pose=_records[_last?_count-1:_count-1-_i];
             variable_struct_set(_d.actions,string(_base+_i),{
-                frame:_pose.frame,duration:_i==0?1:_pose.duration,flags:_last?60:(_i==0?26:28),
+                frame:_pose.frame,duration:_pose.duration,flags:_last?56:(_i==0?26:28),
                 dx:0,dy:0,state:-1,combat_data:-1,next:_last?0:_base+_i+1});
+        }
+        // Keep the forward landing pose for its full duration without travel.
+        // Use a separate track so original-data regression vectors stay intact.
+        var _forward=65664+_side*32;
+        array_push(_d.forward_roll_entries,_forward);
+        for (var _i=0;_i<=_count;_i++) {
+            var _release=_i==_count,_landing=_i>=_count-1;
+            var _pose=_records[min(_i,_count-1)];
+            variable_struct_set(_d.actions,string(_forward+_i),{
+                frame:_pose.frame,duration:_pose.duration,flags:_landing?56:(_i==0?30:28),
+                dx:0,dy:0,state:-1,combat_data:-1,next:_release?0:_forward+_i+1});
         }
     }
 }
@@ -275,11 +288,11 @@ function ln1_reverse_roll_checks() {
             variable_struct_remove(_snapshot.state.data,"reverse_roll_entries");
             var _loaded=ln_save_restore(_snapshot);
             ln_check(variable_struct_exists(_loaded.data,"reverse_roll_entries"),"loading older saves enables backward rolls");
-            repeat(40) {if (_loaded.player.action<256) break;ln1_player_update(_loaded.player,_loaded.data,0,(_loaded.player.tick+1)&255);}
+            repeat(64) {if (_loaded.player.action<256) break;ln1_player_update(_loaded.player,_loaded.data,0,(_loaded.player.tick+1)&255);}
             ln_check(_loaded.player.action<256 && _p.action>=65536,"saved mid-roll resumes independently and lands");
         }
         var _side=((_facing+2)&4)>>2;
-        repeat(40) {
+        repeat(64) {
             if (_p.display_frame!=_previous) {array_push(_frames,_p.display_frame);_previous=_p.display_frame;}
             if (_p.action<256) break;
             ln1_player_update(_p,_d,_joy|16,(_p.tick+1)&255);
@@ -296,8 +309,33 @@ function ln1_reverse_roll_checks() {
         _p.fraction_y=0;var _line=sign(_probe.y-_y)>0?102:98;
         _d.boundaries=[[0,_line,255,_line,0]];
         ln1_player_update(_p,_d,_joy|16,(_p.tick+1)&255);
-        repeat(40) {if (_p.action<256) break;ln1_player_update(_p,_d,_joy|16,(_p.tick+1)&255);}
+        repeat(64) {if (_p.action<256) break;ln1_player_update(_p,_d,_joy|16,(_p.tick+1)&255);}
         ln_check(_line>100?_p.y<_line:_p.y>=_line,"backward roll respects walls");
     }
+    ln1_roll_landing_checks();
     show_debug_message("LN_REVERSE_ROLL_PASS: reverse poses, facing, weapons, backward movement and walls");
+}
+
+function ln1_roll_landing_checks() {
+    for (var _facing=1;_facing<8;_facing+=2) for (var _reverse=0;_reverse<2;_reverse++) {
+        var _g=new LN1Play(),_p=_g.player,_d=_g.data;
+        _d.boundaries=[];_p.x=120;_p.y=100;_p.fraction_y=0;
+        _p.facing=_facing;_p.heading=_reverse?(_facing+4)&7:_facing;
+        _p.stopped=255;_p.enemy_active=0;
+        ln1_player_begin_action(_p,_d,4);
+        var _side=((_facing+2)&4)>>2;
+        if (_reverse) {_p.action=_d.reverse_roll_entries[_side];_p.flags=variable_struct_get(_d.actions,string(_p.action)).flags;}
+        var _landing=_side?8:0,_held=0,_travel=0;
+        repeat(64) {
+            var _x=_p.x,_y=_p.y,_fraction=_p.fraction_y;
+            ln1_player_update(_p,_d,0,(_p.tick+1)&255);
+            if (_p.display_frame==_landing) {
+                ln_check(_p.x==_x && _p.y==_y && _p.fraction_y==_fraction,"landing pose never moves, including fractional movement");
+                _held++;
+            } else if (_p.x!=_x || _p.y!=_y) _travel++;
+            if (_p.action<256) break;
+        }
+        ln_check(_held>=7 && _travel>0 && _p.action<256,"landing is held stationary while airborne roll still travels");
+    }
+    show_debug_message("LN_ROLL_LANDING_PASS: stationary first backward / last forward pose for every facing");
 }
