@@ -7,6 +7,7 @@ Existing sprite resources and the previously approved scenery edits are kept.
 import hashlib
 import json
 import re
+import sys
 from PIL import Image
 import build_project as builder
 from build_project import ROOT, PROJECT, read_json, write_json
@@ -212,6 +213,7 @@ def main():
         ram = (ROOT/f'source/local/captures/ln1-level{level}-ram.bin').read_bytes()
         source = layout(ram); folder = PROJECT/f'datafiles/play/ln1/level{level}'
         folder.mkdir(parents=True,exist_ok=True)
+        previous_world=read_json(folder/'world.json') if (folder/'world.json').exists() else {}
         dataset,_ = decode_dataset(bytes([0,6])+ram[0x600:0x5400],1)
         def sprite(name, images, origin=False):
             path = folder/f'{name}.png'; images[0].save(path)
@@ -340,6 +342,8 @@ def main():
             for weapon in range(4):
                 for frame in range(64):
                     assert composition(ram,frame,0,weapon,enemy).tobytes()==composition(original,frame,0,weapon,enemy).tobytes()
+        for key in ('enemy_colour_bank','enemy_colour_frames','dungeon_spider_vectors'):
+            if key in previous_world:world[key]=previous_world[key]
         nav,vectors=navigation(ram,world)
         selectors=[]
         for active_type in [128,129,133,136]:
@@ -361,8 +365,11 @@ def main():
     register_project(resources,included)
     from deduplicate_ln1_levels import main as share_identical_assets
     share_identical_assets()
-    from fix_ln1_dungeon_art import main as refresh_dungeon_art
-    refresh_dungeon_art()
+    if '--refresh' in sys.argv or not (PROJECT/'sprites/spr_ln1_dungeon_uniforms').exists():
+        from fix_ln1_dungeon_art import main as refresh_dungeon_art
+        refresh_dungeon_art()
+        from refresh_ln1_remaining_actors import main as refresh_remaining_actors
+        refresh_remaining_actors()
     write_json(ROOT/'evidence/ln1_level_content.json',dict(method='Original disk banks and offline original drawing/room routines',
                full_gameplay_parity=False,levels=report))
 

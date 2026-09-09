@@ -1,0 +1,17 @@
+{
+  "full_playthrough_verified": false,
+  "original_uniform_bank_shared_by_levels": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "special_banks": [
+    {
+      "level": 6,
+      "original_special_pose_pngs_verified": 78
+    }
+  ]
+}

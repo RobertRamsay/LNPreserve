@@ -5,7 +5,13 @@ function ln3_state_check(_s,_expected,_label) {
         if (_key=="parts") {
             for (var _i=0;_i<8;_i++) ln2_compare_fields(_a[_i],_e[_i],_label+" part "+string(_i));
         } else if (is_array(_e)) {
-            for (var _i=0;_i<array_length(_e);_i++) ln_check(_a[_i]==_e[_i],_label+" "+_key+" "+string(_i)+" got "+string(_a[_i])+" expected "+string(_e[_i]));
+            ln_check(is_array(_a) && array_length(_a)==array_length(_e),_label+" "+_key+" array length");
+            for (var _i=0;_i<array_length(_e);_i++) {
+                if (is_struct(_e[_i])) ln3_state_check(_a[_i],_e[_i],_label+" "+_key+" "+string(_i));
+                else ln_check(_a[_i]==_e[_i],_label+" "+_key+" "+string(_i)+" got "+string(_a[_i])+" expected "+string(_e[_i]));
+            }
+        } else if (is_struct(_e)) {
+            ln3_state_check(_a,_e,_label+" "+_key);
         } else ln_check(_a==_e,_label+" "+_key+" got "+string(_a)+" expected "+string(_e));
     }
 }

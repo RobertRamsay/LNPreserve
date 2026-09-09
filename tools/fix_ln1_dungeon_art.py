@@ -6,7 +6,6 @@ import hashlib
 import random
 from build_project import ROOT, PROJECT, read_json, write_json
 import build_project as builder
-from export_ln1_play import composition
 from export_ln1_levels import register_project
 from export_ln1_world import call
 from extract_ln1_actors import sprite_image

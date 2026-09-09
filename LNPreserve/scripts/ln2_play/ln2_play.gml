@@ -24,6 +24,7 @@ function LN2Play(_level=1) constructor {
     status={score:array_create(6,27),clock:{digits:array_create(6,27),fraction:0,running:255,blocked:0,dirty:0},health:[44,44]};
     visited_scenes={};ending_data=ln3_data_read("play/ln2/ending.json");victory=0;ending_surface=-1;
     ending_score=[];ending_time=[];final_palette_tick=player.tick;victory_palette_index=0;
+    ln2_projectile_init(self);sprite_masks=[];
     random_queue=[];random_head=0;random_pointer=data.random_pointer;random_value=data.random_value;
     timer=new LNClock();timer.cycles_per_frame=data.timer_period_cycles;stage_surface=-1;
     ln2_play_travel(self,last_entry);
@@ -38,9 +39,11 @@ function ln2_enemy_remember(_g) {
 
 function ln2_play_enter(_g,_id) {
     _g.keypad=undefined;_g.pending_item=undefined;
+    ln2_projectile_reset(_g);
     ln2_enemy_remember(_g);_g.room_id=_id;_g.player.room_id=_id;
     for (var _i=0;_i<array_length(_g.world.rooms);_i++) if (_g.world.rooms[_i].id==_id) { _g.scene_record=_g.world.rooms[_i];break; }
     var _room=_g.scene_record;_g.data.boundaries=json_parse(json_stringify(_room.boundaries));
+    _g.sprite_masks=[];for (var _i=0;_i<array_length(_g.projectile_art.depth);_i++) if (_g.projectile_art.depth[_i].room==_id) {_g.sprite_masks=_g.projectile_art.depth[_i].masks;break;}
     _g.final_palette_tick=_g.player.tick;
     if (variable_struct_exists(_g.opened_passages,string(_id))) ln2_item_open_line(_g);
     _g.mask=asset_get_index(_room.depth_sprite);_g.room_age=0;_g.world_clock=_g.player.tick;_g.pending_entry=-1;_g.fall_remaining=-1;
@@ -165,7 +168,8 @@ function ln2_play_tick(_g,_joy) {
     ln2_combat_event(_g,_p.action_state,false);_p.action_state=0;
     ln2_combat_event(_g,_g.enemy.action_state,true);_g.enemy.action_state=0;
     if (_g.fall_remaining>=0) return;
-    ln2_play_exit(_g);ln2_level_effect_tick(_g,_joy);ln2_enemy_remember(_g);
+    ln2_play_exit(_g);ln2_level_effect_tick(_g,_joy);
+    ln2_projectile_motion(_g,_g.player.tick);ln2_projectile_present(_g);ln2_enemy_remember(_g);
     if (_g.pending_entry>=0) { var _entry=_g.pending_entry;_g.pending_entry=-1;ln2_play_travel(_g,_entry); }
     if (_p.input_lock!=0 && _p.action<256 && _g.respawn_wait==0) {
         _g.player_health=0;ln2_player_special(_g,_g.data.enemy_falls[(_p.facing&4)?1:0]);
@@ -175,6 +179,7 @@ function ln2_play_tick(_g,_joy) {
 
 function ln2_play_actor(_g,_a,_enemy) {
     if (_a.display_frame==255 || (_enemy && _a.active<128 && !_a.custom && !(_g.level==7 && _g.world_state.boss_defeated))) return;
+    if (_g.projectiles[_enemy?1:0].kind!=0 && _g.victory==0) {ln2_projectile_body_draw(_g,_a,_enemy);return;}
     var _extra=_a.display_frame>=64,_index=_extra?-1:_a.display_frame,_frames=_g.world.actor_frames;
     var _key=_enemy && !_a.custom?string(_a.weapon)+"_"+string(_a.costume):"";
     if (_extra && _enemy && !_a.custom && variable_struct_exists(_g.world,"enemy_extra_frames") && variable_struct_exists(_g.world.enemy_extra_frames,_key))
@@ -196,8 +201,11 @@ function ln2_play_draw(_g) {
     surface_set_target(_g.stage_surface);draw_clear(c_black);draw_sprite(_g.scene,0,0,0);
     ln2_victory_palette_draw(_g);
     ln2_final_candles_draw(_g);
-    if (_g.player.depth_y<_g.enemy.depth_y) { ln2_play_actor(_g,_g.player,false);ln2_play_actor(_g,_g.enemy,true); }
-    else { ln2_play_actor(_g,_g.enemy,true);ln2_play_actor(_g,_g.player,false); }
+    if (_g.player.depth_y<_g.enemy.depth_y) {
+        ln2_play_actor(_g,_g.player,false);ln2_projectile_draw(_g,false);ln2_play_actor(_g,_g.enemy,true);ln2_projectile_draw(_g,true);
+    } else {
+        ln2_play_actor(_g,_g.enemy,true);ln2_projectile_draw(_g,true);ln2_play_actor(_g,_g.player,false);ln2_projectile_draw(_g,false);
+    }
     surface_reset_target();draw_surface_ext(_g.stage_surface,160,84,4,4,0,c_white,1);
     draw_text(160,36,"LAST NINJA 2 — "+string_upper(_g.title));draw_text(1000,36,"Scene "+string(_g.room_id));
     draw_text(160,62,"Score "+ln2_status_digits(_g.status.score));

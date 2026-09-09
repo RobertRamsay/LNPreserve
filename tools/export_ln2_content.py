@@ -73,7 +73,7 @@ def render_room(ram,source,room,inventory=None):
     call(mem,0x140e);call(mem,source['scene_choose']);call(mem,source['item_enter'])
     return bitmap(mem)
 
-def composition(ram,source,frame,mirror,weapon=0,costume=0,enemy=False,shared=(11,2)):
+def composition(ram,source,frame,mirror,weapon=0,costume=0,enemy=False,shared=(11,2),omit_weapon=False):
     """Run the actual compositor offline, then assemble its four hardware parts."""
     mem=list(ram);mem[0x200:0x250]=[0]*80;mem[0x9e]=255
     mem[0x54:0x58]=[120,120,120,120];mem[0x70]=weapon;mem[0x72]=weapon
@@ -82,6 +82,7 @@ def composition(ram,source,frame,mirror,weapon=0,costume=0,enemy=False,shared=(1
     call(mem,draw,a=255 if mirror else 0,x=4 if enemy else 0,y=frame)
     image=Image.new('RGBA',(96,96));slots=range(4,8) if enemy else range(4)
     for i in reversed(list(slots)):
+        if omit_weapon and i%4==3:continue
         x=mem[0x200+i]+256*mem[0x208+i];y=mem[0x210+i]
         if not y:continue
         pointer=word(bytes([mem[0x169d+i],mem[0x16a5+i]]),0)

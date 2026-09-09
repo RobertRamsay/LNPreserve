@@ -1,0 +1,1 @@
+{"sprite":"spr_ln2_projectile_bodies","unique_frames":1754,"scope":"Original LN2 body parts while the fourth hardware sprite is a projectile.\n\nKeep the three body sprites separate so the source mask's per-sprite paired\nalignment remains exact. Identical 24x21 PNGs are shared across poses/banks.\n"}

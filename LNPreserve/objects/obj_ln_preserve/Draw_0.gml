@@ -1,4 +1,9 @@
 try {
+if (ln2_projectile_only) {
+    try {ln2_projectile_gpu_checks();}
+    catch (_failure) {show_debug_message("LN2_PROJECTILE_GPU_FAILURE: "+string(_failure));}
+    game_end();exit;
+}
 if (ln2_final_only) {
     try {ln2_final_gpu_checks();}
     catch (_failure) {show_debug_message("LN2_FINAL_GPU_FAILURE: "+string(_failure));}

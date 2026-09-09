@@ -84,6 +84,7 @@ function ln2_combat_event(_g,_event,_enemy) {
             return;
         case 4:ln2_combat_attack(_g,_enemy,3);return;
         case 5:ln2_combat_attack(_g,_enemy,4);return;
+        case 6:ln2_projectile_throw(_g,_enemy);return;
         case 7:ln2_combat_attack(_g,_enemy,5);return;
         case 8:ln2_combat_attack(_g,_enemy,6);return;
         case 9:if (!_enemy) ln2_item_interact(_g,0);return;

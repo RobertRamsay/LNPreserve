@@ -15,6 +15,7 @@
   "ln1_water_vectors_pass": true,
   "scene_navigation_pass": true,
   "ln1_levels_pass": true,
+  "ln1_dungeon_spider_pass": true,
   "ln1_projectiles_pass": true,
   "ln2_player_vectors_pass": true,
   "ln2_enemy_vectors_pass": true,
@@ -33,6 +34,11 @@
   "ln2_status_pass": true,
   "ln2_ending_pass": true,
   "ln2_ending_gpu_pass": true,
+  "ln2_projectiles_pass": true,
+  "ln2_projectile_mask_pass": true,
+  "ln2_projectile_integration_pass": true,
+  "ln2_projectile_gpu_pass": true,
+  "ln2_projectile_bodies_gpu_pass": true,
   "ln3_movement_pass": true,
   "ln3_actions_pass": true,
   "ln3_input_pass": true,
@@ -51,5 +57,6 @@
   "ln3_ending_gpu_pass": true,
   "ln3_mechanism_gpu_pass": true,
   "ln3_world_pass": true,
-  "ln3_gpu_pass": true
+  "ln3_gpu_pass": true,
+  "elapsed_seconds": 160.48
 }
