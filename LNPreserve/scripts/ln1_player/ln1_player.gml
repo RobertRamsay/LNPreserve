@@ -246,11 +246,12 @@ function ln1_reverse_roll_prepare(_d) {
         }
         var _base=65536+_side*32,_count=array_length(_records);
         array_push(_d.reverse_roll_entries,_base);
-        for (var _i=0;_i<_count;_i++) {
-            // Reverse the airborne/crouch poses, then land in the original stance.
-            var _last=_i==_count-1,_pose=_records[_last?_count-1:_count-2-_i];
+        for (var _i=0;_i<=_count;_i++) {
+            // Start on the forward roll's final pose, then reverse every pose.
+            // A final standing command releases the action cleanly after landing.
+            var _last=_i==_count,_pose=_records[_last?_count-1:_count-1-_i];
             variable_struct_set(_d.actions,string(_base+_i),{
-                frame:_pose.frame,duration:_pose.duration,flags:_last?60:(_i==0?30:28),
+                frame:_pose.frame,duration:_i==0?1:_pose.duration,flags:_last?60:(_i==0?26:28),
                 dx:0,dy:0,state:-1,combat_data:-1,next:_last?0:_base+_i+1});
         }
     }
@@ -283,7 +284,7 @@ function ln1_reverse_roll_checks() {
             if (_p.action<256) break;
             ln1_player_update(_p,_d,_joy|16,(_p.tick+1)&255);
         }
-        var _expected=_side==0?[18,23,22,21,20,0]:[19,27,26,25,24,8];
+        var _expected=_side==0?[0,18,23,22,21,20,0]:[8,19,27,26,25,24,8];
         ln_check(json_stringify(_frames)==json_stringify(_expected),"reverse roll displays original poses in reverse order and lands");
         ln_check(_p.facing==_facing && _p.weapon==_weapon && _p.input_lock==0 && _p.action<256,"reverse roll preserves facing/weapon and releases control");
         var _probe={x:_x,y:_y,heading:_back,facing:_facing,unconsumed:0,fraction_y:0,
