@@ -1,4 +1,26 @@
 function ln2_world_checks() {
+    var _hole=new LN2Play(1);
+    ln2_play_enter(_hole,2);_hole.player.x=160;_hole.player.y=86;_hole.player.facing=1;
+    ln2_item_interact(_hole,4);
+    ln_check(_hole.inventory[18]!=0,"LN2 wall punch sets the hole switch flag");
+    ln2_test_enter(_hole,0);
+    _hole.player.boundary_mode=5;_hole.player.boundary_crossings=129;_hole.player.action=0;
+    ln_check(ln2_hole_boundary(_hole) && _hole.hole_steps==5 && _hole.inventory[18]==0,
+        "LN2 switched hole consumes flag and starts five sink actions");
+    repeat(200) {if (_hole.hole_steps>0) ln2_play_tick(_hole,0);}
+    ln_check(_hole.hole_steps==0 && _hole.level==1 && _hole.room_id==3,
+        "LN2 hole finishes its scripted exit within Central Park");
+    var _safe=new LN2Play(7);ln2_play_enter(_safe,1);
+    var _ids=[17,18,16,23];
+    for (var _stage=0;_stage<4;_stage++) {
+        for (var _item_index=0;_item_index<array_length(_safe.world.items);_item_index++) {
+            var _item=_safe.world.items[_item_index];
+            if (_item.id==_ids[_stage]) ln2_item_complete(_safe,_item,_item.id);
+        }
+        ln2_refresh_scene(_safe);
+        ln_check(_safe.scene_frame==_stage+1 && _safe.scene==asset_get_index("spr_ln2_safe_states"),
+            "LN2 successful safe interaction retains its original drawn panel");
+    }
     var _b=buffer_load("verification/ln2_combat_vectors.json"),_v=json_parse(buffer_read(_b,buffer_text));buffer_delete(_b);
     var _level=0,_d=undefined;
     for (var _i=0;_i<array_length(_v.vectors);_i++) {

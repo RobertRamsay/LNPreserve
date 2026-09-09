@@ -1,0 +1,18 @@
+{
+  "changed_pixels": [
+    820,
+    244,
+    42,
+    42
+  ],
+  "frames_verified": 5,
+  "gpu_tested": false,
+  "interaction_order": [
+    17,
+    18,
+    16,
+    23
+  ],
+  "method": "Original $7e8a panel drawing after successful interactions",
+  "source_sha256": "9ea998a916d9e2964ee90b1d590dee903a14813e69ea1fcd95a3a8c1662e1342"
+}

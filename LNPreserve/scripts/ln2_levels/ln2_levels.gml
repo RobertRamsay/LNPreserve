@@ -2,6 +2,34 @@ function ln2_environment_action(_g,_address) {
     _g.enemy.custom=true;_g.enemy.depth_y=1;ln2_enemy_special(_g,_address);
 }
 
+/// Central Park $9fd8 / $a081: switched hole, five original sink actions,
+/// then outgoing slot zero. Other boundary modes remain separate work.
+function ln2_hole_boundary(_g) {
+    var _p=_g.player;
+    if (_g.level!=1 || (_p.boundary_mode&63)!=5 || !(_p.boundary_crossings&128)) return false;
+    if (!(_p.boundary_mode&64) && _p.action>=256) return false;
+    if (!(_p.boundary_crossings&1) || _g.inventory[18]==0) return false;
+    _g.inventory[18]=0;_g.exit_locked=true;_g.hole_steps=5;
+    ln2_player_special(_g,((_p.facing+2)&4)?$cd02:$ccf9);
+    return true;
+}
+
+function ln2_hole_tick(_g,_tick) {
+    var _p=_g.player;
+    ln2_player_update(_p,_g.data,0,_tick);
+    ln2_enemy_decide(_g);ln2_enemy_action(_g);
+    ln2_combat_event(_g,_p.action_state,false);_p.action_state=0;
+    ln2_combat_event(_g,_g.enemy.action_state,true);_g.enemy.action_state=0;
+    ln2_projectile_motion(_g,_p.tick);ln2_projectile_present(_g);ln2_enemy_remember(_g);
+    if (_p.action>=256) return;
+    _g.hole_steps--;
+    if (_g.hole_steps>0) {
+        ln2_player_special(_g,((_p.facing+2)&4)?$cd02:$ccf9);return;
+    }
+    _g.exit_locked=false;
+    ln2_play_travel(_g,_g.scene_record.entries[0]);
+}
+
 /// Original per-entrance vehicle modes, scenery actors, and inventory gates.
 function ln2_entry_hook(_g) {
     var _p=_g.player,_id=_g.room_id;_p.vehicle=0;

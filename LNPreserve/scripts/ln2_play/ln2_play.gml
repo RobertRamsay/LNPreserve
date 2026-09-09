@@ -38,6 +38,7 @@ function ln2_enemy_remember(_g) {
 }
 
 function ln2_play_enter(_g,_id) {
+    _g.safe_scene_phase=0;_g.hole_steps=0;
     _g.keypad=undefined;_g.pending_item=undefined;
     ln2_projectile_reset(_g);
     ln2_enemy_remember(_g);_g.room_id=_id;_g.player.room_id=_id;
@@ -162,12 +163,14 @@ function ln2_play_tick(_g,_joy) {
         return;
     }
     if (_g.fall_remaining>=0) { ln2_fall_tick(_g,_tick);return; }
+    if (_g.hole_steps>0) { ln2_hole_tick(_g,_tick);return; }
     _p.enemy_active=_g.enemy.active;_p.enemy_x=_g.enemy.x;_p.enemy_y=_g.enemy.y;_p.separation_y=_g.enemy.separation_y;
     _p.gate_open=_g.inventory[18];_p.gate_mode=_g.inventory[20];
     ln2_player_update(_p,_g.data,_joy,_tick);ln2_enemy_decide(_g);ln2_enemy_action(_g);
     ln2_combat_event(_g,_p.action_state,false);_p.action_state=0;
     ln2_combat_event(_g,_g.enemy.action_state,true);_g.enemy.action_state=0;
     if (_g.fall_remaining>=0) return;
+    if (ln2_hole_boundary(_g)) return;
     ln2_play_exit(_g);ln2_level_effect_tick(_g,_joy);
     ln2_projectile_motion(_g,_g.player.tick);ln2_projectile_present(_g);ln2_enemy_remember(_g);
     if (_g.pending_entry>=0) { var _entry=_g.pending_entry;_g.pending_entry=-1;ln2_play_travel(_g,_entry); }
@@ -198,7 +201,7 @@ function ln2_play_draw(_g) {
     draw_clear(c_black);draw_set_colour(c_white);
     if (_g.victory==2) {ln2_ending_draw(_g);return;}
     if (!surface_exists(_g.stage_surface)) _g.stage_surface=surface_create(240,144);
-    surface_set_target(_g.stage_surface);draw_clear(c_black);draw_sprite(_g.scene,0,0,0);
+    surface_set_target(_g.stage_surface);draw_clear(c_black);draw_sprite(_g.scene,_g.scene_frame,0,0);
     ln2_victory_palette_draw(_g);
     ln2_final_candles_draw(_g);
     if (_g.player.depth_y<_g.enemy.depth_y) {

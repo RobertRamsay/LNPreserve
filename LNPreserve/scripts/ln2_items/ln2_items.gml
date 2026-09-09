@@ -15,6 +15,14 @@ function ln2_item_interact(_g,_kind) {
 }
 
 function ln2_item_complete(_g,_item,_id) {
+    if (_g.level==7 && _g.room_id==1 && _id!=255) {
+        switch (_item.id) {
+            case 17:_g.safe_scene_phase=1;break;
+            case 18:_g.safe_scene_phase=2;break;
+            case 16:_g.safe_scene_phase=3;break;
+            case 23:_g.safe_scene_phase=4;break;
+        }
+    }
     if (_id!=255) {
         if (_g.inventory[_id]==0) _g.inventory[_id]=_id==4?137:255;
         if (_id<17) {_g.notice_item=_id;_g.notice_tick=_g.player.tick;_g.notice_duration=100;}
@@ -107,6 +115,7 @@ function ln2_item_handler(_g,_item) {
 }
 
 function ln2_refresh_scene(_g) {
+    _g.scene_frame=0;
     // Scene variants are source-rendered and selected by their inventory flags.
     var _room=_g.scene_record;
     _g.scene=asset_get_index(_room.sprite);
@@ -115,5 +124,9 @@ function ln2_refresh_scene(_g) {
         for (var _i=0;_i<array_length(_room.variant_flags);_i++)
             if (_g.inventory[_room.variant_flags[_i]]!=0) _bits|=1<<_i;
         _g.scene=asset_get_index(_room.variants[_bits]);
+    }
+    // Source item completion draws these panels immediately, not on room entry.
+    if (_g.level==7 && _g.room_id==1 && _g.safe_scene_phase>0) {
+        _g.scene=asset_get_index("spr_ln2_safe_states");_g.scene_frame=_g.safe_scene_phase;
     }
 }
