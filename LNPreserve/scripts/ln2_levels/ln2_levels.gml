@@ -963,113 +963,96 @@ function ln2_sewer_flame_checks() {
     show_debug_message("LN2_SEWER_FLAMES_PASS: seven rooms, 21 rendered frames, six-tick cadence, wrap, save phase, open grate");
 }
 
-/// Authored optional routes. Original source doors and progression remain intact.
+/// Retain original routes and migrate saves from the withdrawn experiments.
 function ln2_sewer_network_prepare(_g) {
     if (_g.level!=3) return;
     _g.water_data=undefined;
-    if (variable_struct_exists(_g.world,"sewer_network_version") && _g.world.sewer_network_version==2) return;
+    if (variable_struct_exists(_g.world,"sewer_network_version") && _g.world.sewer_network_version==3) return;
     var _fresh=ln3_data_read("play/ln2/level3/world.json");
-    var _keys=["exit_destinations","exit_thresholds","entry_x","entry_y","entry_heading"];
-    for(var _i=0;_i<array_length(_keys);_i++) {
-        var _old=variable_struct_get(_g.world.tables,_keys[_i]),_new=variable_struct_get(_fresh.tables,_keys[_i]);
-        array_resize(_old,39);
-        for(var _j=31;_j<39;_j++) _old[_j]=_new[_j];
-        variable_struct_set(_g.world.tables,_keys[_i],_old);
-    }
+    _g.world.tables=_fresh.tables;
     _g.world.rooms=array_filter(_g.world.rooms,function(_room,_index) {return _room.id!=15;});
-    _g.world.sewer_doors=_fresh.sewer_doors;_g.world.sewer_network_version=2;
+    if (variable_struct_exists(_g.world,"sewer_doors")) variable_struct_remove(_g.world,"sewer_doors");
+    _g.world.sewer_wrong_doors=_fresh.sewer_wrong_doors;_g.world.sewer_network_version=3;
+    _g.world_state.sewer_door_lock=-1;
     if (_g.room_id==15) {
-        // A save made in the withdrawn gallery returns to its entrance side.
-        var _entry=_g.last_entry==40?38:37,_p=_g.player;
-        _p.action=0;_p.action_state=0;_p.flags=0;_p.countdown=0;_p.duration=0;
+        var _target=_g.last_entry==40?12:10,_entry=0;
+        for(var _i=0;_i<array_length(_g.world.rooms);_i++) if (_g.world.rooms[_i].id==_target) _entry=_g.world.rooms[_i].spawn_entry;
+        var _p=_g.player;_p.action=0;_p.action_state=0;_p.flags=0;_p.countdown=0;
         _p.input_lock=0;_p.stopped=255;_p.fraction_x=0;_p.fraction_y=0;
         ln2_play_travel(_g,_entry);_p.boundary_crossings=0;_p.collision=0;
-        _p.combat_state=_p.facing>>1;_p.previous_combat=_p.combat_state;_p.saved_heading=_p.heading;
-        _g.world_state.sewer_door_lock=_entry-31;
         if (_g.player_health<=0) _g.respawn_wait=20;
-    } else if (variable_struct_exists(_g.world_state,"sewer_door_lock") && _g.world_state.sewer_door_lock>=8) {
-        _g.world_state.sewer_door_lock=-1;
+    } else if (_g.last_entry>=31) {
+        // Keep the current position; respawn through this room's original entry.
+        _g.last_entry=_g.scene_record.spawn_entry;
     }
 }
 
-function ln2_sewer_door_tick(_g) {
-    if (_g.level!=3) return false;
-    var _doors=_g.world.sewer_doors,_p=_g.player;
-    var _lock=variable_struct_exists(_g.world_state,"sewer_door_lock")?_g.world_state.sewer_door_lock:-1;
-    if (_lock>=0) {
-        var _arrival=_doors[_lock];
-        if (_arrival.room==_g.room_id && point_distance(_p.x,_p.y,_arrival.x,_arrival.y)<14) {
-            _p.boundary_crossings=0;return false;
+/// Original Sewer mode 24 at $89bd calls $9b18 with A=2, then clears $81.
+function ln2_sewer_wrong_door(_g) {
+    if (_g.level!=3) return;
+    var _p=_g.player;
+    if (_p.action>=256 || _p.input_lock!=0 || _g.player_health<=0) return;
+    var _touch=(_p.boundary_crossings&128) && ((_p.boundary_mode&63)==24);
+    if (!_touch && _p.collision==255 && _p.hit_side==1 && _p.stopped==0) {
+        // Reach recessed original sensors from their solid front lip.
+        var _doors=_g.world.sewer_wrong_doors;
+        for(var _i=0;_i<array_length(_doors);_i++) {
+            var _door=_doors[_i];
+            if (_door.room==_g.room_id && abs(_p.x-_door.x)<=7 && _p.y>=_door.y && _p.y<=_door.y+12) {_touch=true;break;}
         }
-        _g.world_state.sewer_door_lock=-1;
     }
-    if ((!(_p.boundary_crossings&128) && _p.collision!=255) || _p.action>=256 || _p.input_lock!=0 || _g.player_health<=0) return false;
-    for(var _i=0;_i<array_length(_doors);_i++) {
-        var _door=_doors[_i];
-        // Some arches have a solid front lip before the recessed trigger.
-        // Enter when walking against that lip within the actual arch width.
-        if (_door.room!=_g.room_id || abs(_p.x-_door.x)>7 || _p.y<_door.y || _p.y>_door.y+12 || _p.hit_side!=1) continue;
-        var _target=_doors[_door.target];
-        _p.action=0;_p.action_state=0;_p.flags=0;_p.countdown=0;_p.duration=0;
-        _p.stopped=255;_p.fraction_x=0;_p.fraction_y=0;_p.walk_clock=0;
-        _p.fire_previous=0;_p.attack_direction=255;_p.attack_previous=255;_p.collision=0;
-        ln2_play_travel(_g,_target.entry);
-        _p.boundary_crossings=0;_p.hit_boundary=255;_p.combat_state=_p.facing>>1;
-        _p.previous_combat=_p.combat_state;_p.saved_heading=_p.heading;
-        _g.world_state.sewer_door_lock=_target.id;
-        return true;
-    }
-    return false;
+    if (_touch) {ln2_damage(_g,2,false);_p.boundary_crossings=0;}
 }
 
-function ln2_sewer_network_checks() {
-    var _g=new LN2Play(3),_p=_g.player,_doors=_g.world.sewer_doors;
-    ln_check(array_length(_g.world.rooms)==15 && array_length(_doors)==8,"original rooms and eight endpoints present");
+function ln2_sewer_original_checks() {
+    var _g=new LN2Play(3),_doors=_g.world.sewer_wrong_doors;
+    ln_check(array_length(_g.world.rooms)==15 && array_length(_g.world.tables.entry_x)==31 && !variable_struct_exists(_g.world,"sewer_doors"),"original rooms and entrances only");
+    ln_check(array_length(_doors)==7,"seven original mode 24 doors");
     for(var _i=0;_i<array_length(_doors);_i++) {
-        var _door=_doors[_i],_target=_doors[_door.target];
-        ln2_test_enter(_g,_door.entry);_g.world_state.sewer_door_lock=-1;
-        _g.player_health=31;_g.lives_left=4;
-        var _inventory=json_stringify(_g.inventory),_old_y=_door.y+2;
-        _p.x=_door.x;_p.y=_old_y;
-        _p.boundary_crossings=0;
-        _p.collision=ln2_player_boundary(_p,_g.data,_door.x,_old_y,_door.x,_door.y-2);
-        ln_check(_p.collision==255,"door collision "+_door.name);
-        ln_check(ln2_sewer_door_tick(_g) && _g.room_id==_target.room && _g.last_entry==_target.entry,"destination "+_door.name);
-        ln_check(_p.facing==_target.facing && _p.y==_target.y+8,"safe outward arrival "+_door.name);
-        ln_check(_g.player_health==31 && _g.lives_left==4 && json_stringify(_g.inventory)==_inventory,"travel preserves player state");
-        _g=ln_save_restore(json_parse(json_stringify(ln_save_capture(_g))));_p=_g.player;
-        ln_check(_g.last_entry==_target.entry && _g.world_state.sewer_door_lock==_target.id,"saved door arrival");
-        ln_check(!ln2_sewer_door_tick(_g),"no immediate return loop");
-        var _walked=false;
-        for(var _joy=1;_joy<16 && !_walked;_joy++) {
-            var _trial=new LN2Play(3);ln2_test_enter(_trial,_door.entry);
-            _trial.enemy.active=0;_trial.enemy.custom=false;_trial.world_state.sewer_door_lock=-1;
-            repeat(30) {
-                ln2_play_tick(_trial,_joy);
-                if (_trial.room_id!=_door.room) break;
-            }
-            _walked=_trial.room_id==_target.room && _trial.last_entry==_target.entry;
+        var _door=_doors[_i];ln2_play_enter(_g,_door.room);var _p=_g.player;
+        _p.action=0;_p.input_lock=0;_g.player_health=44;_p.boundary_crossings=129;_p.boundary_mode=152;
+        ln2_sewer_wrong_door(_g);
+        ln_check(_g.player_health==42 && _p.boundary_crossings==0 && _g.room_id==_door.room,"original two-point damage, no teleport: "+_door.name);
+        repeat(21) {_p.boundary_crossings=129;ln2_sewer_wrong_door(_g);}
+        ln_check(_g.player_health==0 && _p.input_lock==255,"false door can kill: "+_door.name);
+        var _killed=false;
+        for(var _joy=1;_joy<16 && !_killed;_joy++) {
+            var _trial=new LN2Play(3);ln2_play_enter(_trial,_door.room);ln2_test_enter(_trial,_trial.scene_record.spawn_entry);
+            _trial.enemy.active=0;_trial.enemy.custom=false;_trial.special_mode=0;
+            _trial.player.x=_door.x+(_door.facing==3?10:-10);_trial.player.y=_door.y+8;
+            _trial.player.depth_y=_trial.player.y;_trial.player.facing=_door.facing;
+            _trial.player.action=0;_trial.player.input_lock=0;
+            repeat(100) {ln2_play_tick(_trial,_joy);if (_trial.player_health==0 || _trial.room_id!=_door.room) break;}
+            _killed=_trial.player_health==0 && _trial.room_id==_door.room;
+            if (_killed) ln_check(_trial.player.action>=256,"wrong door starts death animation");
         }
-        ln_check(_walked,"actual walking enters "+_door.name);
+        ln_check(_killed,"walking into false door kills without teleport: "+_door.name);
+
     }
-    // Simulate a pre-network save without losing its progression flags.
-    ln2_test_enter(_g,0);_g.inventory[20]=255;
-    var _save=ln_save_capture(_g);
-    variable_struct_remove(_save.state.world,"sewer_network_version");variable_struct_remove(_save.state.world,"sewer_doors");
-    array_resize(_save.state.world.rooms,15);
-    var _keys=["exit_destinations","exit_thresholds","entry_x","entry_y","entry_heading"];
-    for(var _i=0;_i<array_length(_keys);_i++) {var _arr=variable_struct_get(_save.state.world.tables,_keys[_i]);array_resize(_arr,31);variable_struct_set(_save.state.world.tables,_keys[_i],_arr);}
+    // The source rat action must produce three visible, distinct frames.
+    _g=new LN2Play(3);ln2_play_enter(_g,10);_g.enemy.x=0;_g.enemy.y=0;
+    var _surface=surface_create(240,144),_seen=[],_moved=false,_old_x=-1;
+    repeat(100) {
+        _g.player.tick=(_g.player.tick+1)&255;ln2_enemy_action(_g);ln2_level_effect_tick(_g,0);
+        var _e=_g.enemy;
+        if (_e.x<20 || _e.x>220) continue;
+        _moved=_moved || (_old_x>=0 && _old_x!=_e.x);_old_x=_e.x;
+        if (array_contains(_seen,_e.display_frame)) continue;
+        array_push(_seen,_e.display_frame);
+        surface_set_target(_surface);draw_clear_alpha(c_black,0);ln2_play_actor(_g,_e,true);surface_reset_target();
+        var _visible=0;
+        for(var _y=0;_y<144;_y++) for(var _x=0;_x<240;_x++) if ((surface_getpixel_ext(_surface,_x,_y)>>24)&255) _visible++;
+        ln_check(_visible>10,"rat frame visibly renders "+string(_e.display_frame));
+        surface_set_target(_surface);draw_clear(c_black);draw_sprite(_g.scene,0,0,0);ln2_play_actor(_g,_e,true);surface_reset_target();
+        surface_save(_surface,"ln2-sewer-rat-"+string(_e.display_frame)+".png");
+    }
+    surface_free(_surface);ln_check(array_length(_seen)==3 && _moved,"three animated scurrying rat frames");
+    _g.enemy.x=120;_g.enemy.y=160;_g.player.x=120;_g.player.y=88;_g.player.combat_state=0;_g.player_health=44;
+    ln2_level_effect_tick(_g,0);ln_check(_g.player_health==42,"visible rat retains source damage");
+    _g.player.x=20;ln2_level_effect_tick(_g,0);ln_check(_g.player_health==42,"rat out of range does not hurt");
+    ln2_play_enter(_g,10);_g.last_entry=37;_g.inventory[20]=255;
+    var _save=ln_save_capture(_g);_save.state.world.sewer_network_version=2;
     _g=ln_save_restore(_save);
-    ln_check(array_length(_g.world.rooms)==15 && _g.inventory[20]==255,"old save gains doors without losing grate progress");
-    for(var _side=0;_side<2;_side++) {
-        ln2_test_enter(_g,37+_side);_g.player_health=31;_g.lives_left=4;
-        var _legacy=ln_save_capture(_g);
-        _legacy.room=15;_legacy.state.room_id=15;_legacy.state.player.room_id=15;
-        _legacy.state.scene_record.id=15;_legacy.state.last_entry=39+_side;
-        _legacy.state.world.sewer_network_version=1;
-        _g=ln_save_restore(_legacy);
-        ln_check(_g.room_id==(_side==0?10:12) && _g.last_entry==37+_side,"withdrawn gallery save returns to entrance side");
-        ln_check(_g.player_health==31 && _g.lives_left==4 && _g.inventory[20]==255,"gallery save keeps progress");
-    }
-    show_debug_message("LN2_SEWER_NETWORK_PASS: eight door crossings, direct 10/12 link, arrivals, saves, migration");
+    ln_check(_g.room_id==10 && _g.last_entry<31 && _g.inventory[20]==255,"shortcut save keeps position/progress and gets original respawn");
+    show_debug_message("LN2_SEWER_ORIGINAL_PASS: original entrances, seven false doors, source damage, three visible rat frames, save migration");
 }

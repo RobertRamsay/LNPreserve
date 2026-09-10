@@ -1,95 +1,65 @@
 {
-  "added_rooms": 0,
-  "doors": [
+  "custom_routes": 0,
+  "damage_per_contact": 2,
+  "original_exit_count": 31,
+  "source_handler": 35261,
+  "version": 3,
+  "wrong_doors": [
     {
-      "entry": 31,
       "facing": 3,
-      "id": 0,
-      "line": 1,
-      "name": "6-door",
-      "room": 6,
-      "target": 1,
-      "x": 155,
-      "y": 83
-    },
-    {
-      "entry": 32,
-      "facing": 3,
-      "id": 1,
       "line": 10,
       "name": "7-right",
       "room": 7,
-      "target": 0,
       "x": 167,
       "y": 98
     },
     {
-      "entry": 33,
       "facing": 3,
-      "id": 2,
       "line": 2,
       "name": "7-left",
       "room": 7,
-      "target": 3,
       "x": 99,
       "y": 114
     },
     {
-      "entry": 34,
       "facing": 5,
-      "id": 3,
       "line": 2,
       "name": "9-right",
       "room": 9,
-      "target": 2,
       "x": 148,
       "y": 90
     },
     {
-      "entry": 35,
       "facing": 5,
-      "id": 4,
       "line": 6,
       "name": "9-middle",
       "room": 9,
-      "target": 0,
       "x": 116,
       "y": 82
     },
     {
-      "entry": 36,
       "facing": 3,
-      "id": 5,
       "line": 9,
       "name": "10-left",
       "room": 10,
-      "target": 4,
       "x": 76,
       "y": 73
     },
     {
-      "entry": 37,
       "facing": 3,
-      "id": 6,
       "line": 13,
       "name": "10-right",
       "room": 10,
-      "target": 7,
       "x": 108,
       "y": 65
     },
     {
-      "entry": 38,
       "facing": 5,
-      "id": 7,
       "line": 6,
       "name": "12-right",
       "room": 12,
-      "target": 6,
       "x": 92,
       "y": 72
     }
-  ],
-  "original_room_count": 15,
-  "version": 2
+  ]
 }

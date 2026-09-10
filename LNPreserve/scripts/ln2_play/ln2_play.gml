@@ -185,7 +185,7 @@ function ln2_play_tick(_g,_joy) {
     ln2_combat_event(_g,_p.action_state,false);_p.action_state=0;
     ln2_combat_event(_g,_g.enemy.action_state,true);_g.enemy.action_state=0;
     if (_g.fall_remaining>=0) return;
-    if (ln2_sewer_door_tick(_g)) return;
+    ln2_sewer_wrong_door(_g);
     if (ln2_hole_boundary(_g)) return;
     if (ln2_hazard_boundary(_g)) return;
     if (ln2_boundary_exit(_g)) return;
@@ -207,6 +207,10 @@ function ln2_play_actor(_g,_a,_enemy) {
             ln_draw_masked_actor(asset_get_index(_g.water_data.sprite),_index*2+real(_a.mirror),_a.x,_a.y,
                 1,1,_g.mask,0,0,240,144,max(0.001,(_a.depth_y-0.25)/255));return;
         }
+    }
+    if (_enemy && _a.custom && _g.level==3 && _g.room_id==10 && _a.display_frame>=102 && _a.display_frame<=104) {
+        ln_draw_masked_actor(spr_ln2_sewer_rats,(_a.display_frame-102)*2+real(_a.mirror),_a.x,_a.y,
+            1,1,_g.mask,0,0,240,144,max(0.001,(_a.y-72-0.25)/255));return;
     }
     if (_enemy && _a.custom && _g.level==1 && _g.room_id==10 && _a.display_frame>=99 && _a.display_frame<=102) {
         ln_draw_masked_actor(spr_ln2_juggler,(_a.display_frame-99)*2+real(_a.mirror),_a.x,_a.y,

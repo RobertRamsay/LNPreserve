@@ -3310,97 +3310,65 @@
     }
   ],
   "schema": 1,
-  "sewer_doors": [
+  "sewer_network_version": 3,
+  "sewer_wrong_doors": [
     {
-      "entry": 31,
       "facing": 3,
-      "id": 0,
-      "line": 1,
-      "name": "6-door",
-      "room": 6,
-      "target": 1,
-      "x": 155,
-      "y": 83
-    },
-    {
-      "entry": 32,
-      "facing": 3,
-      "id": 1,
       "line": 10,
       "name": "7-right",
       "room": 7,
-      "target": 0,
       "x": 167,
       "y": 98
     },
     {
-      "entry": 33,
       "facing": 3,
-      "id": 2,
       "line": 2,
       "name": "7-left",
       "room": 7,
-      "target": 3,
       "x": 99,
       "y": 114
     },
     {
-      "entry": 34,
       "facing": 5,
-      "id": 3,
       "line": 2,
       "name": "9-right",
       "room": 9,
-      "target": 2,
       "x": 148,
       "y": 90
     },
     {
-      "entry": 35,
       "facing": 5,
-      "id": 4,
       "line": 6,
       "name": "9-middle",
       "room": 9,
-      "target": 0,
       "x": 116,
       "y": 82
     },
     {
-      "entry": 36,
       "facing": 3,
-      "id": 5,
       "line": 9,
       "name": "10-left",
       "room": 10,
-      "target": 4,
       "x": 76,
       "y": 73
     },
     {
-      "entry": 37,
       "facing": 3,
-      "id": 6,
       "line": 13,
       "name": "10-right",
       "room": 10,
-      "target": 7,
       "x": 108,
       "y": 65
     },
     {
-      "entry": 38,
       "facing": 5,
-      "id": 7,
       "line": 6,
       "name": "12-right",
       "room": 12,
-      "target": 6,
       "x": 92,
       "y": 72
     }
   ],
-  "sewer_network_version": 2,
   "shared_sprite_colours": [
     11,
     2
@@ -3479,15 +3447,7 @@
       1,
       5,
       5,
-      255,
-      3,
-      3,
-      3,
-      5,
-      5,
-      3,
-      3,
-      5
+      255
     ],
     "entry_x": [
       179,
@@ -3520,15 +3480,7 @@
       10,
       55,
       240,
-      255,
-      165,
-      177,
-      109,
-      138,
-      106,
-      86,
-      118,
-      82
+      255
     ],
     "entry_y": [
       18,
@@ -3561,15 +3513,7 @@
       118,
       68,
       63,
-      255,
-      91,
-      106,
-      122,
-      98,
-      90,
-      81,
-      73,
-      80
+      255
     ],
     "exit_destinations": [
       0,
@@ -3602,15 +3546,7 @@
       14,
       12,
       13,
-      255,
-      6,
-      7,
-      7,
-      9,
-      9,
-      10,
-      10,
-      12
+      255
     ],
     "exit_thresholds": [
       255,
@@ -3643,14 +3579,6 @@
       135,
       255,
       192,
-      255,
-      255,
-      255,
-      255,
-      255,
-      255,
-      255,
-      255,
       255
     ]
   },
