@@ -44,6 +44,16 @@ for (var _i = 1; _i <= parameter_count(); _i++) {
         catch (_failure) {show_debug_message("LN_JUMP_ASSIST_FAILURE: "+string(_failure));}
         game_end();exit;
     }
+    if (parameter_string(_i) == "--ln2-final-room-test") {
+        try {ln2_final_room_checks();}
+        catch (_failure) {show_debug_message("LN2_FINAL_ROOM_FAILURE: "+string(_failure));}
+        game_end();exit;
+    }
+    if (parameter_string(_i) == "--ln2-safe-code-test") {
+        try {ln2_safe_code_checks();}
+        catch (_failure) {show_debug_message("LN2_SAFE_CODE_FAILURE: "+string(_failure));}
+        game_end();exit;
+    }
     if (parameter_string(_i) == "--ln2-burger-test") {
         try {ln2_burger_checks();}
         catch (_failure) {show_debug_message("LN2_BURGER_FAILURE: "+string(_failure));}

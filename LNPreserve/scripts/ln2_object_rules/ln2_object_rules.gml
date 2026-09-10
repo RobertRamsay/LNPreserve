@@ -90,6 +90,11 @@ function ln2_candle_checks() {
 
 function ln2_keypad_tick(_g,_joy) {
     var _result=ln2_keypad_poll(_g.keypad,_joy);if (_result==0) return;
+    // Evaluate the override at submission time, never from a saved keypad flag.
+    if (_result==2 && _g.god_mode) {
+        var _zero=true;for(var _i=0;_i<4;_i++) if(_g.keypad.digits[_i]!=27) _zero=false;
+        if(_zero) _result=1;
+    }
     ln2_item_complete(_g,_g.pending_item,_result==1?18:255);_g.pending_item=undefined;_g.keypad=undefined;
 }
 
@@ -205,6 +210,7 @@ function ln2_object_integration_checks() {
     var _g=new LN2Play(7),_room=_g.world.rooms[1];ln2_test_enter(_g,_room.spawn_entry);
     var _records={};for (var _i=0;_i<array_length(_g.world.items);_i++) variable_struct_set(_records,string(_g.world.items[_i].id),_g.world.items[_i]);
     var _pad=variable_struct_get(_records,"18");
+    _g.inventory[17]=0;
     ln_check(ln2_item_handler(_g,_pad)==-1,"LN2 keypad needs its original prerequisite");
     _g.inventory[17]=255;_g.last_joy=16;
     ln_check(ln2_item_handler(_g,_pad)==-2,"LN2 original interaction opens keypad");_g.pending_item=_pad;
@@ -268,4 +274,36 @@ function ln2_final_gpu_checks() {
     buffer_delete(_b);surface_free(_surface);
     show_debug_message("LN2_FINAL_GPU_PASS: "+string(_count)+" original candle pixels and "+string(_pixels)+" original final-enemy pixels; unmasked compositor scope.");
     ln2_ending_gpu_checks();
+}
+
+function ln2_safe_code_checks() {
+    var _g=new LN2Play(5);ln2_play_enter(_g,3);
+    _g.keycode=[31,35,29,33]; // 4826: distinguish carried data from defaults.
+    _g.player.x=205;_g.player.y=130;_g.player.facing=1;
+    ln2_item_interact(_g,1);
+    ln_check(_g.office_code_known && _g.world_state.code_visible,"computer reveals code");
+    var _score=json_stringify(_g.status.score);
+    repeat(4) ln2_item_interact(_g,1);
+    ln_check(json_stringify(_g.status.score)==_score,"repeat computer use cannot farm points");
+    var _path="ln2-safe-code-regression.json";
+    ln_save_write(_path,ln_save_capture(_g));_g=ln_save_restore(ln_save_read(_path));
+    ln2_item_interact(_g,1);
+    ln_check(json_stringify(_g.status.score)==_score,"computer score protection survives disk save");
+    ln2_level_load(_g,6,true);
+    ln_save_write(_path,ln_save_capture(_g));_g=ln_save_restore(ln_save_read(_path));
+    ln2_level_load(_g,7,true);
+    ln_save_write(_path,ln_save_capture(_g));_g=ln_save_restore(ln_save_read(_path));
+    ln_check(_g.keycode[0]==31 && _g.keycode[1]==35 && _g.keycode[2]==29 && _g.keycode[3]==33 && _g.office_code_known,"office code survives both level changes and disk saves");
+    ln2_play_enter(_g,1);var _pad=undefined;
+    for(var _i=0;_i<array_length(_g.world.items);_i++) if(_g.world.items[_i].room==1 && _g.world.items[_i].id==18) _pad=_g.world.items[_i];
+    for(var _case=0;_case<4;_case++) {
+        _g.inventory[17]=255;_g.inventory[18]=0;_g.god_mode=_case==1 || _case==3;
+        ln_check(ln2_item_handler(_g,_pad)==-2,"safe opens keypad");_g.pending_item=_pad;
+        _g.keypad.digits=_case==2?[31,35,29,33]:(_case==3?[28,27,27,27]:[27,27,27,27]);
+        repeat(4) {ln2_keypad_tick(_g,0);ln2_keypad_tick(_g,16);}
+        ln_check((_g.inventory[18]!=0)==(_case==1 || _case==2),"safe accepts real code or god-mode zeros only, case "+string(_case));
+    }
+    if(file_exists(_path)) file_delete(_path);if(file_exists(_path+".bak")) file_delete(_path+".bak");
+    ln2_keypad_checks();
+    show_debug_message("LN2_SAFE_CODE_PASS: computer scoring, office code across levels/disk saves, real code and god-only zero override");
 }

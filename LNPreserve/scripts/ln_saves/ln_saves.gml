@@ -101,6 +101,7 @@ function ln_save_restore(_save) {
             if (_g.world.rooms[_i].id==_g.room_id) {_g.world.rooms[_i]=_g.scene_record;break;}
         }
     }
+    if (_g.game_number==2 && _g.level==7 && _g.room_id==1) ln2_refresh_scene(_g);
     _g.timer.cycle=int64(_save.cycle);_g.timer.frame=_save.frame;_g.timer.credit=int64(0);
     return _g;
 }

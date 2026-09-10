@@ -3,7 +3,8 @@ function ln2_item_interact(_g,_kind) {
     var _p=_g.player;
     for (var _i=0;_i<array_length(_g.world.items);_i++) {
         var _item=_g.world.items[_i];
-        if (_item.room!=_g.room_id || _item.action!=_kind || _g.inventory[_item.id]!=0) continue;
+        var _test_orb=_g.level==7 && _item.id==16 && _g.inventory[16]==1;
+        if (_item.room!=_g.room_id || _item.action!=_kind || (_g.inventory[_item.id]!=0 && !_test_orb)) continue;
         if (_item.facing!=0 && _item.facing!=_p.facing) continue;
         if (_p.x<_item.x_min || _p.x>=_item.x_max || _p.y<_item.y_min || _p.y>=_item.y_max) continue;
         var _id=ln2_item_handler(_g,_item);
@@ -19,15 +20,11 @@ function ln2_item_complete(_g,_item,_id) {
         switch (_item.id) {
             case 17:_g.safe_scene_phase=1;break;
             case 18:_g.safe_scene_phase=2;break;
-            case 16:_g.safe_scene_phase=3;break;
-            case 23:_g.safe_scene_phase=4;break;
+            case 16:_g.safe_scene_phase=3;_g.inventory[16]=255;break;
+            case 23:_g.safe_scene_phase=4;_g.inventory[16]=128;_g.selected_item=0;break;
         }
     }
     if (_id!=255) {
-        // Credit the burger once; the HUD eases its existing spiral toward full.
-        if (_id==8 && _g.inventory[8]==0) {
-            _g.lives_left++;_g.player_health=44;
-        }
         if (_g.inventory[_id]==0) _g.inventory[_id]=_id==4?137:255;
         if (_id<17) {_g.notice_item=_id;_g.notice_tick=_g.player.tick;_g.notice_duration=100;}
         if (_id!=8) ln2_score_add(_g,5);
@@ -94,7 +91,9 @@ function ln2_item_handler(_g,_item) {
             }
             if (_item.room==3) {
                 // Original code reveals the generated keypad number here.
-                _g.world_state.code_visible=true;return 18;
+                var _known=_g.office_code_known || _g.world_state.code_visible;
+                _g.office_code_known=true;_g.world_state.code_visible=true;
+                return _known?255:18;
             }
             break;
         case 6:
@@ -119,6 +118,7 @@ function ln2_item_handler(_g,_item) {
 }
 
 function ln2_refresh_scene(_g) {
+    ln2_final_test_setup(_g);
     _g.scene_frame=0;
     // Scene variants are source-rendered and selected by their inventory flags.
     var _room=_g.scene_record;
@@ -130,7 +130,8 @@ function ln2_refresh_scene(_g) {
         _g.scene=asset_get_index(_room.variants[_bits]);
     }
     // Source item completion draws these panels immediately, not on room entry.
-    if (_g.level==7 && _g.room_id==1 && _g.safe_scene_phase>0) {
+    if (_g.level==7 && _g.room_id==1) {
+        _g.safe_scene_phase=_g.inventory[23]!=0?4:(_g.inventory[18]!=0?(_g.inventory[16]==255?3:2):1);
         _g.scene=asset_get_index("spr_ln2_safe_states");_g.scene_frame=_g.safe_scene_phase;
     }
 }
@@ -153,24 +154,92 @@ function ln2_park_switch_checks() {
     surface_free(_surface);show_debug_message("LN2_SWITCH_PASS: actual punch, yellow-to-black pixels, revisit and reset");
 }
 
+/// Two distinct fire presses within 18 game ticks consume the selected burger.
+function ln2_burger_input(_g,_joy) {
+    if (!variable_struct_exists(_g,"burger_taps")) _g.burger_taps={remaining:0,previous:0};
+    var _tap=_g.burger_taps,_fire=_joy&16,_edge=_fire!=0 && _tap.previous==0;
+    _tap.previous=_fire;
+    if (_tap.remaining>0) _tap.remaining--;
+    if (_g.selected_item!=8 || !(_g.inventory[8]&127) || _g.player.input_lock!=0 ||
+        _g.respawn_wait>0 || _g.victory!=0 || is_struct(_g.keypad) || _g.hole_steps>0 ||
+        _g.fall_remaining>=0 || is_struct(_g.route_descent)) {_tap.remaining=0;return _joy;}
+    if (!_edge) return _joy;
+    if (_tap.remaining==0) {_tap.remaining=18;return _joy;}
+    _tap.remaining=0;
+    // 128 keeps the world pickup removed while excluding it from item cycling.
+    _g.inventory[8]=128;_g.selected_item=0;
+    if (_g.notice_item==8) _g.notice_item=-1;
+    _g.lives_left++;_g.player_health=44;
+    ln2_refresh_scene(_g);
+    return _joy&15;
+}
+
 function ln2_burger_checks() {
     var _g=new LN2Play(1);ln2_play_enter(_g,8);
     var _p=_g.player;_p.x=200;_p.y=67;_p.facing=1;
     _g.inventory[8]=0;_g.lives_left=2;_g.player_health=7;_g.status.health[0]=7;
     ln2_item_interact(_g,0);
-    ln_check(_g.lives_left==3 && _g.player_health==44 && _g.inventory[8]!=0,"burger awards one life and full health");
-    ln_check(_g.status.health[0]==7,"burger preserves current spiral frame for animated refill");
+    ln_check(_g.lives_left==2 && _g.player_health==7 && _g.inventory[8]==255,"pickup banks burger without reward");
+    _g.selected_item=0;ln2_burger_input(_g,16);ln2_burger_input(_g,0);ln2_burger_input(_g,16);
+    ln_check(_g.lives_left==2,"unselected double fire cannot consume burger");
+    _g.selected_item=7;ln2_controls_update(_g,223,255);
+    ln_check(_g.selected_item==8 && _g.notice_item==-1,"item cycle selects burger and shows holding");
+    ln2_burger_input(_g,0);ln2_burger_input(_g,16);
+    repeat(25) ln2_burger_input(_g,16);
+    ln_check(_g.lives_left==2,"held fire is not double fire");
+    ln2_burger_input(_g,0);ln2_burger_input(_g,16);
+    ln_check(_g.lives_left==2,"expired first tap does not consume");
+    ln2_burger_input(_g,0);ln2_burger_input(_g,16);
+    ln_check(_g.lives_left==3 && _g.player_health==44 && _g.inventory[8]==128 && _g.selected_item==0,"selected double fire consumes once");
+    ln_check(_g.status.health[0]==7,"consume preserves initial spiral frame");
     for(var _tick=1;_tick<=74;_tick++) {
         ln2_status_tick(_g,_tick);
-        ln_check(_g.status.health[0]==7+(_tick div 2),"burger spiral advances one frame every two ticks");
+        ln_check(_g.status.health[0]==7+(_tick div 2),"spiral refills progressively");
     }
-    ln2_status_tick(_g,76);ln_check(_g.status.health[0]==44,"spiral stops at full");
-    _g.player_health=20;ln2_item_interact(_g,0);
-    ln_check(_g.lives_left==3 && _g.player_health==20,"collected burger cannot award life or healing again");
-    // Damage during the refill must remain visible instead of being healed again.
-    _g.status.health[0]=30;ln2_status_tick(_g,78);
-    ln_check(_g.status.health[0]==29 && _g.player_health==20,"spiral follows damage after pickup");
+    _g.player_health=20;_g.selected_item=8;
+    ln2_burger_input(_g,0);ln2_burger_input(_g,16);ln2_burger_input(_g,0);ln2_burger_input(_g,16);
+    ln_check(_g.lives_left==3 && _g.player_health==20,"consumed burger cannot repeat reward");
     ln2_play_enter(_g,1);ln2_play_enter(_g,8);ln2_item_interact(_g,0);
-    ln_check(_g.lives_left==3 && _g.inventory[8]!=0,"burger stays collected on room revisit");
-    show_debug_message("LN2_BURGER_PASS: pickup, extra life, full healing, spiral refill, damage and repeat protection");
+    ln_check(_g.inventory[8]==128,"consumed burger cannot be picked up again on revisit");
+    _g.selected_item=7;ln2_controls_update(_g,255,255);ln2_controls_update(_g,223,255);
+    ln_check(_g.selected_item!=8,"consumed burger skipped by selection");
+    show_debug_message("LN2_BURGER_PASS: banked pickup, selection, double tap, held/expired fire, spiral refill and single consumption");
+}
+
+/// Temporary final-room testing aid: remove the orb grant after testing.
+function ln2_final_test_setup(_g) {
+    if (_g.level!=7 || _g.room_id!=1) return;
+    _g.inventory[17]=255; // Reveal the wall safe on arrival.
+    if (_g.inventory[16]==0 && _g.inventory[23]==0) {
+        // 1 is a loaned orb; 255 means the safe-removal interaction occurred.
+        _g.inventory[16]=1;_g.selected_item=16;_g.notice_item=-1;
+    }
+}
+
+function ln2_final_room_checks() {
+    var _g=new LN2Play(7);ln2_play_enter(_g,1);
+    ln_check(_g.scene==spr_ln2_safe_states && _g.scene_frame==1,"wall safe visible on arrival");
+    ln_check(_g.inventory[16]==1 && _g.selected_item==16,"temporary orb available without skipping removal");
+    _g.player.x=175;_g.player.y=83;_g.player.facing=1;ln2_item_interact(_g,0);
+    ln_check(is_struct(_g.keypad),"safe interaction opens keypad");
+    _g.keypad.digits=array_create(4);array_copy(_g.keypad.digits,0,_g.keycode,0,4);
+    repeat(4) {ln2_keypad_tick(_g,0);ln2_keypad_tick(_g,16);}
+    ln_check(_g.scene_frame==2,"safe opens with orb inside");
+    ln2_item_interact(_g,0);
+    ln_check(_g.inventory[16]==255 && _g.enemy.active==130 && _g.scene_frame==3,"taking orb releases Shogun and empties safe");
+    _g.enemy.x=118;_g.enemy.y=114;_g.enemy.knockouts=128;
+    for(var _i=0;_i<5;_i++) {
+        var _r=_g.final_rules.rectangles[_i*4];_g.player.x=(_r[0]+_r[2]) div 2;_g.player.y=(_r[1]+_r[3]) div 2;_g.player.facing=1;
+        ln2_item_interact(_g,2);
+    }
+    ln_check(_g.world_state.boss_defeated,"defeated Shogun and five candles trigger spirits");
+    _g.player.x=175;_g.player.y=83;_g.player.facing=1;_g.selected_item=16;
+    ln2_item_interact(_g,0);
+    ln_check(_g.inventory[23]!=0 && _g.inventory[16]==128 && _g.scene_frame==4,"returning orb completes safe sequence");
+    ln2_play_enter(_g,0);ln2_play_enter(_g,1);
+    ln_check(_g.scene_frame==4 && _g.inventory[16]==128,"revisit preserves returned orb and safe");
+    var _loaded=ln_save_restore(json_parse(json_stringify(ln_save_capture(_g))));
+    ln_check(_loaded.scene==spr_ln2_safe_states && _loaded.scene_frame==4 && _loaded.inventory[16]==128,"save reload preserves final safe");
+    ln2_keypad_checks();
+    show_debug_message("LN2_FINAL_ROOM_PASS: visible safe, temporary orb, keypad, removal/release, five candles, orb return and save/revisit");
 }

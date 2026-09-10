@@ -18,7 +18,8 @@ function ln2_controls_update(_g,_row0,_row7) {
             else { if (_g.selected_item==0) _g.selected_item=17;_g.selected_item--;if (_g.selected_item==4) _g.selected_item=0; }
             if (_g.inventory[_g.selected_item]&127) break;
         }
-        if (_direction==1) _g.notice_item=-1;
+        _g.notice_item=-1;
+        if (variable_struct_exists(_g,"burger_taps")) _g.burger_taps.remaining=0;
     }
     if (_pressed[3]) _g.paused=!_g.paused;
     if (_pressed[4] && !_g.player_projectile_active) {
