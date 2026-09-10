@@ -17,7 +17,10 @@ def main():
     assert hashlib.sha256(ram).hexdigest()==world['source_sha256']
     mem=list(ram);mem[0xa2]=1;mem[0x3d8:0x3f2]=[0]*26
     for address in (0x140e,source['scene_choose'],source['item_enter']):call(mem,address)
-    images=[bitmap(mem)];changes=[]
+    # The first original reveal step is the lowered curtain, not the bare wall.
+    lowered=mem.copy();lowered[0x700:0x707]=list(ram[0xb452:0xb458])+[255]
+    lowered[2]=0;lowered[3]=7;call(lowered,0x7e8a)
+    images=[bitmap(lowered)];changes=[]
     for item_id in (17,18,16,23):
         item=next(i for i in world['items'] if i['id']==item_id)
         pointer=item['removed_panel'];mem[2]=pointer&255;mem[3]=pointer>>8
@@ -26,7 +29,7 @@ def main():
         call(mem,0x7e8a);image=bitmap(mem)
         changes.append(sum(a!=b for a,b in zip(images[-1].get_flattened_data(),image.get_flattened_data())))
         images.append(image)
-    assert changes==[820,244,42,42],changes
+    assert changes==[1192,244,42,42],changes
     name='spr_ln2_safe_states';temp=ROOT/'build/ln2-safe.png';temp.parent.mkdir(exist_ok=True)
     images[0].save(temp)
     resource=sprite_resource(name,temp,'Graphics/ln2_game_level7',images)

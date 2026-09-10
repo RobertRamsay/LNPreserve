@@ -9,6 +9,11 @@ if (ln2_projectile_only) {
     catch (_failure) {show_debug_message("LN2_PROJECTILE_GPU_FAILURE: "+string(_failure));}
     game_end();exit;
 }
+if (ln2_keypad_visual_only) {
+    try {ln2_keypad_visual_checks();}
+    catch (_failure) {show_debug_message("LN2_KEYPAD_VISUAL_FAILURE: "+string(_failure));}
+    game_end();exit;
+}
 if (ln2_hud_only) {
     try {ln2_hud_checks();}
     catch (_failure) {show_debug_message("LN2_HUD_FAILURE: "+string(_failure));}

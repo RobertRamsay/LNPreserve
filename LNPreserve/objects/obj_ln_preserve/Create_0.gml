@@ -13,7 +13,7 @@ window_presets_test=false;
 crt_live_frame=-1;
 crt_live_baseline=0;
 ln2_final_only=false;
-ln2_hud_only=false;
+ln2_hud_only=false;ln2_keypad_visual_only=false;
 ln2_switch_only=false;
 ln2_spirits_only=false;
 ln2_projectile_only=false;
@@ -44,6 +44,7 @@ for (var _i = 1; _i <= parameter_count(); _i++) {
         catch (_failure) {show_debug_message("LN_JUMP_ASSIST_FAILURE: "+string(_failure));}
         game_end();exit;
     }
+    if (parameter_string(_i) == "--ln2-keypad-visual-test") ln2_keypad_visual_only=true;
     if (parameter_string(_i) == "--ln2-final-room-test") {
         try {ln2_final_room_checks();}
         catch (_failure) {show_debug_message("LN2_FINAL_ROOM_FAILURE: "+string(_failure));}

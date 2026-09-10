@@ -211,7 +211,9 @@ function ln2_final_room_checks() {
     ln_check(_g.scene_frame==1 && _g.inventory[17]!=0,"pulling curtain reveals safe");
     _g.player.x=175;_g.player.y=83;_g.player.facing=1;ln2_item_interact(_g,0);
     ln_check(is_struct(_g.keypad),"safe interaction opens keypad");
-    _g.keypad.digits=array_create(4);array_copy(_g.keypad.digits,0,_g.keycode,0,4);
+    // A standalone final-level test needs no office visit or god mode.
+    ln_check(!_g.god_mode,"standalone safe test has god mode off");
+    _g.keypad.digits=[27,27,27,27];
     repeat(4) {ln2_keypad_tick(_g,0);ln2_keypad_tick(_g,16);}
     ln_check(_g.scene_frame==2,"safe opens with orb inside");
     ln2_item_interact(_g,0);
@@ -229,6 +231,39 @@ function ln2_final_room_checks() {
     ln_check(_g.scene_frame==4 && _g.inventory[16]==128,"revisit preserves returned orb and safe");
     var _loaded=ln_save_restore(json_parse(json_stringify(ln_save_capture(_g))));
     ln_check(_loaded.scene==spr_ln2_safe_states && _loaded.scene_frame==4 && _loaded.inventory[16]==128,"save reload preserves final safe");
-    ln2_keypad_checks();
+    ln2_final_ritual_checks();ln2_keypad_checks();
     show_debug_message("LN2_FINAL_ROOM_PASS: curtain reveal, original keypad, removal/release, five candles, orb return and save/revisit");
+}
+
+function ln2_final_ritual_checks() {
+    var _g=new LN2Play(7);ln2_play_enter(_g,1);var _e=_g.enemy;
+    _g.inventory[18]=255;ln2_boss_release(_g);
+    _e.mode=11;_e.knockouts=128;_e.x=118;_e.y=114;_e.recovery_time=0;
+    _e.actor_blocked=0;_e.edge_blocked=0;_e.boundary_hit=255;_e.decision_tick=0;
+    _g.player.x=40;_g.player.y=160;_g.player.tick=200;_g.tick_epoch=100;
+    _g.world_state.candles=[128,128,0,128,0];ln2_enemy_decide(_g);
+    ln_check(_e.knockouts<128 && _e.mode==7,"Shogun revives after recovery");
+    for(var _i=0;_i<5;_i++) ln_check(_g.world_state.candles[_i]==0,"revival extinguishes every candle");
+    for(var _side=0;_side<2;_side++) {
+        _g=new LN2Play(7);ln2_play_enter(_g,1);_e=_g.enemy;
+        _e.x=110+_side*24;_e.y=120;_e.depth_y=120;_e.facing=_side?5:1;_e.knockouts=128;
+        _g.world_state.candles=[128,128,128,128,0];
+        var _r=_g.final_rules.rectangles[16];_g.player.x=(_r[0]+_r[2]) div 2;_g.player.y=(_r[1]+_r[3]) div 2;_g.player.facing=1;
+        ln2_final_candle_use(_g);
+        ln_check(_g.world_state.boss_defeated && _e.action_mirror==((_e.facing&4)^4),"spirit entrance follows fallen facing");
+        repeat(20) ln2_combat_event(_g,23,true);
+        ln_check(_e.x==110+_side*24 && _e.y==120,"spirit remains aligned with fallen body");
+    }
+    var _state={enemy_x:89,enemy_y:114,candles:[128,128,128,128,128]};
+    ln_check(!ln2_candles_ready(_state),"outside star cannot complete ritual");
+    show_debug_message("LN2_SEQUENCE_PASS: revival candle reset, star location gate, left/right spirit alignment");
+}
+
+function ln2_keypad_visual_checks() {
+    var _g=new LN2Play(7);ln2_play_enter(_g,1);
+    ln2_play_draw(_g);surface_save(application_surface,"ln2-curtain-start.png");
+    _g.player.x=175;_g.player.y=83;_g.player.facing=1;ln2_item_interact(_g,1);ln2_item_interact(_g,0);
+    ln2_play_draw(_g);surface_save(application_surface,"ln2-original-keypad.png");
+    ln_check(is_struct(_g.keypad) && sprite_get_number(spr_ln2_keypad_digits)==20,"original keypad glyphs rendered");
+    show_debug_message("LN2_KEYPAD_VISUAL_PASS");
 }

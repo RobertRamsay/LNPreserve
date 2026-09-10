@@ -90,8 +90,8 @@ function ln2_candle_checks() {
 
 function ln2_keypad_tick(_g,_joy) {
     var _result=ln2_keypad_poll(_g.keypad,_joy);if (_result==0) return;
-    // Evaluate the override at submission time, never from a saved keypad flag.
-    if (_result==2 && _g.god_mode) {
+    // Testing alternate code: four confirmed zeros also open the safe.
+    if (_result==2) {
         var _zero=true;for(var _i=0;_i<4;_i++) if(_g.keypad.digits[_i]!=27) _zero=false;
         if(_zero) _result=1;
     }
@@ -302,9 +302,9 @@ function ln2_safe_code_checks() {
         ln_check(ln2_item_handler(_g,_pad)==-2,"safe opens keypad");_g.pending_item=_pad;
         _g.keypad.digits=_case==2?[31,35,29,33]:(_case==3?[28,27,27,27]:[27,27,27,27]);
         repeat(4) {ln2_keypad_tick(_g,0);ln2_keypad_tick(_g,16);}
-        ln_check((_g.inventory[18]!=0)==(_case==1 || _case==2),"safe accepts real code or god-mode zeros only, case "+string(_case));
+        ln_check((_g.inventory[18]!=0)==(_case!=3),"safe accepts office code and zeros, rejects other codes, case "+string(_case));
     }
     if(file_exists(_path)) file_delete(_path);if(file_exists(_path+".bak")) file_delete(_path+".bak");
     ln2_keypad_checks();
-    show_debug_message("LN2_SAFE_CODE_PASS: computer scoring, office code across levels/disk saves, real code and god-only zero override");
+    show_debug_message("LN2_SAFE_CODE_PASS: computer scoring, office code across levels/disk saves, real code and unconditional zero alternate");
 }
