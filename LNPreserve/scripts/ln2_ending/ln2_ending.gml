@@ -132,9 +132,11 @@ function ln2_ending_gpu_checks() {
         }
     }
     var _g=new LN2Play(7);ln2_test_enter(_g,_g.world.rooms[1].spawn_entry);_g.victory=1;
+    // This oracle was exported against the original scene bitmap, before the
+    // interactive safe/curtain variants. Keep every original pixel comparison.
     for (var _i=0;_i<array_length(_o.game);_i++) {
         var _v=_o.game[_i];_g.victory_palette_index=_v.phase;
-        surface_set_target(_surface);draw_clear(c_black);draw_sprite(_g.scene,0,0,0);ln2_victory_palette_draw(_g);surface_reset_target();buffer_get_surface(_b,_surface,0);
+        surface_set_target(_surface);draw_clear(c_black);draw_sprite(asset_get_index(_g.scene_record.sprite),0,0,0);ln2_victory_palette_draw(_g);surface_reset_target();buffer_get_surface(_b,_surface,0);
         for (var _j=0;_j<array_length(_v.samples);_j++) {
             var _p=_v.samples[_j],_actual=buffer_peek(_b,(_p[1]*320+_p[0])*4,buffer_u32)&$ffffff;
             ln_check(_actual==make_colour_rgb(_p[2],_p[3],_p[4]),"LN2 original first/repeated victory palette pixel");_count++;

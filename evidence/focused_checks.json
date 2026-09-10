@@ -1,0 +1,84 @@
+{
+  "--ln1-magic-test": {
+    "status": "passed",
+    "exit_code": 0,
+    "markers": {
+      "LN1_MAGIC_PASS": true,
+      "LN1_WEAPON_LOCK_PASS": true
+    },
+    "error": null,
+    "log": "D:\\POLYTRICITY\\LNPreserve\\build\\ln1-magic-test.log",
+    "elapsed_seconds": 2.7
+  },
+  "--pickup-crt-test": {
+    "status": "passed",
+    "exit_code": 0,
+    "markers": {
+      "LN_PICKUP_PASS": true,
+      "LN_CRT_PASS": true
+    },
+    "error": null,
+    "log": "D:\\POLYTRICITY\\LNPreserve\\build\\pickup-crt-test.log",
+    "elapsed_seconds": 1.31
+  },
+  "--jump-assist-test": {
+    "status": "passed",
+    "exit_code": 0,
+    "markers": {
+      "LN_JUMP_ASSIST_PASS": true
+    },
+    "error": null,
+    "log": "D:\\POLYTRICITY\\LNPreserve\\build\\jump-assist-test.log",
+    "elapsed_seconds": 0.78
+  },
+  "--reverse-roll-test": {
+    "status": "passed",
+    "exit_code": 0,
+    "markers": {
+      "LN_REVERSE_ROLL_PASS": true
+    },
+    "error": null,
+    "log": "D:\\POLYTRICITY\\LNPreserve\\build\\reverse-roll-test.log",
+    "elapsed_seconds": 0.7
+  },
+  "--crt-live-test": {
+    "status": "passed",
+    "exit_code": 0,
+    "markers": {
+      "LN_CRT_LIVE_PASS": true
+    },
+    "error": null,
+    "log": "D:\\POLYTRICITY\\LNPreserve\\build\\crt-live-test.log",
+    "elapsed_seconds": 0.97
+  },
+  "--window-presets-test": {
+    "status": "passed",
+    "exit_code": 0,
+    "markers": {
+      "LN_WINDOW_PRESETS_PASS": true
+    },
+    "error": null,
+    "log": "D:\\POLYTRICITY\\LNPreserve\\build\\window-presets-test.log",
+    "elapsed_seconds": 1.38
+  },
+  "--xbox-test": {
+    "status": "passed",
+    "exit_code": 0,
+    "markers": {
+      "LN_XBOX_PASS": true
+    },
+    "error": null,
+    "log": "D:\\POLYTRICITY\\LNPreserve\\build\\xbox-test.log",
+    "elapsed_seconds": 0.61
+  },
+  "--save-ui-test": {
+    "status": "passed",
+    "exit_code": 0,
+    "markers": {
+      "LN_SAVE_UI_PASS": true
+    },
+    "error": null,
+    "log": "D:\\POLYTRICITY\\LNPreserve\\build\\save-ui-test.log",
+    "elapsed_seconds": 1.41
+  }
+}

@@ -32,3 +32,15 @@ if (window_presets_test && (crt_live_frame&1)==1) {
         if (crt_live_frame>=5) {show_debug_message("LN_WINDOW_PRESETS_PASS");game_end();}
     } catch (_failure) {show_debug_message("LN_WINDOW_PRESETS_FAILURE: "+string(_failure));game_end();}
 }
+
+if (save_ui_test && save_ui_frame mod 3==2) {
+    try {
+        var _case=save_ui_frame div 3,_factor=_case<2?1:2;
+        ln_check(window_get_width()==1280*_factor && window_get_height()==800*_factor,"save UI test client dimensions");
+        var _hint="Click to load",_scale=min(1,124/max(1,string_width(_hint)));
+        ln_check(1138+string_width(_hint)*_scale<=1268,"save hint fits inside occupied slot");
+        screen_save("lnpreserve-save-ui-"+string(_factor)+"x-"+string(_case&1)+".png");
+        show_debug_message("LN_SAVE_UI_CASE_PASS:"+string(_case));
+        if (_case==3) {show_debug_message("LN_SAVE_UI_PASS: three game labels and empty slots, both sizes, CRT off/on; in-memory fixtures only.");game_end();}
+    } catch (_failure) {show_debug_message("LN_SAVE_UI_FAILURE:"+string(_failure));game_end();}
+}

@@ -1,3 +1,11 @@
+if (save_ui_test) {
+    save_ui_frame++;
+    if (save_ui_frame mod 3==0) {
+        var _case=save_ui_frame div 3;global.ln_crt_enabled=bool(_case&1);
+        var _factor=_case<2?1:2;window_set_size(1280*_factor,800*_factor);
+    }
+    exit;
+}
 try {
 if (window_presets_test) {
     crt_live_frame++;

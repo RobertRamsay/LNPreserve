@@ -9,7 +9,7 @@ global.ln_test_no_enemy_damage=false;
 ln3_only=false;
 presentation_test=false;
 crt_live_test=false;
-window_presets_test=false;
+window_presets_test=false;save_ui_test=false;save_ui_frame=-1;
 crt_live_frame=-1;
 crt_live_baseline=0;
 ln2_final_only=false;
@@ -34,9 +34,10 @@ mask_enabled = true;
 test_fixture = false;
 weapon_presses = 0;
 function_presses = [0,0,0,0];
-selftest = false;ln1_only=false;
+selftest = false;ln1_only=false;selftest_inject_failure=false;
 host_frames = 0;
 for (var _i = 1; _i <= parameter_count(); _i++) {
+    if (parameter_string(_i) == "--save-ui-test") save_ui_test=true;
     if (parameter_string(_i) == "--window-presets-test") {window_presets_test=true;global.ln_crt_enabled=true;}
     if (parameter_string(_i) == "--crt-live-test") crt_live_test=true;
     if (parameter_string(_i) == "--jump-assist-test") {
@@ -101,6 +102,7 @@ for (var _i = 1; _i <= parameter_count(); _i++) {
         catch (_failure) {show_debug_message("LN_PICKUP_FAILURE: "+string(_failure));game_end();exit;}
     }
     if (parameter_string(_i) == "--selftest") selftest = true;
+    if (parameter_string(_i) == "--selftest-fail-early") selftest_inject_failure=true;
     if (parameter_string(_i) == "--ln1-selftest") {selftest=true;ln1_only=true;}
     if (parameter_string(_i) == "--ln2-hud-test") ln2_hud_only=true;
     if (parameter_string(_i) == "--ln2-switch-test") ln2_switch_only=true;
@@ -193,7 +195,10 @@ for (var _i = 1; _i <= parameter_count(); _i++) {
     }
 }
 if (selftest) {
-    try { ln_run_checks(ln1_only); }
+    try {
+        if (selftest_inject_failure) ln_test_run("ln1_core_checks",function(){ln_check(false,"deliberate reporting test");});
+        ln_run_checks(ln1_only);
+    }
     catch (_failure) {
         show_debug_message("LN_SELFTEST_FAILURE: " + string(_failure));
         game_end(); exit;
@@ -207,6 +212,10 @@ control_state_ln1 = json_parse(buffer_read(_control_buffer,buffer_text));
 buffer_delete(_control_buffer);
 play.controls = control_state_ln1;
 saves = new LNSaves();
+if (save_ui_test) {
+    // In-memory display fixtures only: never add, restore or overwrite a save.
+    saves.slots=[{name:"LN1_SAVE_12345",game:1},{name:"LN2_SAVE_12345",game:2},{name:"LN3_SAVE_12345",game:3}];
+}
 if (selftest) {
     try {ln_test_run("save_serialization",function(){ln_save_checks(ln1_only);});}
     catch (_failure) {show_debug_message("LN_SELFTEST_FAILURE: "+string(_failure));game_end();exit;}

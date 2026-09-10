@@ -1,87 +1,46 @@
-"""Run actual compiled GML checks in the installed GameMaker Windows runner."""
+"""Run native checks; a caught GML exception is a failure even with exit code zero."""
 from pathlib import Path
-import argparse,json,subprocess,uuid,re,shutil,sys,time
+import argparse,json,subprocess,re,sys,time,uuid
 ROOT=Path(__file__).resolve().parents[1]
-if __name__=='__main__':
-    p=argparse.ArgumentParser();p.add_argument('--runner',type=Path,required=True);a=p.parse_args()
+
+def classify(log,groups):
+    result={name:'not_run' for name in groups}
+    for event,name in re.findall(r'LN_TEST_(START|PASS|FAIL):([A-Za-z0-9_]+)',log):
+        result[name]={'START':'started','PASS':'passed','FAIL':'failed'}[event]
+    # A started check that never completed is an actual incomplete execution,
+    # distinct from a downstream check which was never entered.
+    return {name:('failed' if state=='started' else state) for name,state in result.items()}
+
+def main():
+    p=argparse.ArgumentParser();p.add_argument('--runner',type=Path,required=True)
+    p.add_argument('--suite',choices=['all','ln1'],default='all')
+    p.add_argument('--inject-failure',action='store_true',help='Verify fail-fast reporting with a deliberate first-check failure')
+    a=p.parse_args();manifest=json.loads((ROOT/'tools/check_manifest.json').read_text())
     out=ROOT/'build';out.mkdir(exist_ok=True)
-    debuglog=out/f'gml-runtime-{uuid.uuid4().hex}.log'
-    cmd=[str(a.runner),'-game',str(out/'LNPreserve.win'),'-debugoutput',str(debuglog),'--selftest']
-    info=subprocess.STARTUPINFO();info.dwFlags|=subprocess.STARTF_USESHOWWINDOW;info.wShowWindow=0
-    report={'command':'GameMaker VM --selftest','original_gameplay_parity':'not_tested'}
-    started=time.monotonic()
+    name=('runtime_checks' if a.suite=='all' else 'ln1_runtime_checks')+('_injected' if a.inject_failure else '')
+    flag='--selftest' if a.suite=='all' else '--ln1-selftest'
+    cmd=[str(a.runner),'-game',str(out/'LNPreserve.win'),flag]
+    if a.inject_failure:cmd.append('--selftest-fail-early')
+    si=subprocess.STARTUPINFO();si.dwFlags|=subprocess.STARTF_USESHOWWINDOW;si.wShowWindow=0
+    started=time.monotonic();error=None
     try:
-        r=subprocess.run(cmd,cwd=out,capture_output=True,text=True,timeout=240,startupinfo=info)
-        log=r.stdout+r.stderr
-        if debuglog.exists():log+='\n'+debuglog.read_text(errors='replace')
-        (out/'runner-console.log').write_text(log)
-        report.update(exit_code=r.returncode,native_checks_pass='LN_SELFTEST_PASS' in log,
-                      runtime_pass='LN_RUNTIME_PASS' in log,mask_gpu_pass='LN_MASK_PASS' in log,
-                      sprite_decoder_pass='LN_SPRITE_PASS' in log,ln1_control_vectors_pass='LN_CONTROLS_PASS' in log,
-                      ln1_player_vectors_pass='LN_PLAYER_PASS' in log,ln1_enemy_vectors_pass='LN_ENEMY_PASS' in log,
-                      ln1_combat_vectors_pass='LN_COMBAT_PASS' in log,ln1_world_smoke_pass='LN_WORLD_PASS' in log,
-                      ln1_feedback_pass='LN_FEEDBACK_PASS' in log,ln1_water_vectors_pass='LN_WATER_PASS' in log,
-                      scene_navigation_pass='LN_NAVIGATION_PASS' in log,
-                      ln1_levels_pass='LN_LEVELS_PASS' in log,
-                      ln1_dungeon_spider_pass='LN_DUNGEON_PASS' in log,
-                      ln1_projectiles_pass='LN_PROJECTILES_PASS' in log,
-                      ln2_player_vectors_pass='LN2_PLAYER_PASS' in log,
-                      ln2_enemy_vectors_pass='LN2_ENEMY_PASS' in log,
-                      ln2_entrances_pass='LN2_ENTRANCES_PASS' in log,
-                      ln2_helicopter_pass='LN2_HELICOPTER_PASS' in log,
-                      ln2_vehicles_pass='LN2_VEHICLES_PASS' in log,
-                      ln2_effects_pass='LN2_EFFECTS_PASS' in log,
-                      ln2_combat_vectors_pass='LN2_COMBAT_PASS' in log,
-                      ln2_world_pass='LN2_WORLD_PASS' in log,
-                      ln2_keypad_pass='LN2_KEYPAD_PASS' in log,
-                      ln2_candles_pass='LN2_CANDLES_PASS' in log,
-                      ln2_boss_release_pass='LN2_BOSS_RELEASE_PASS' in log,
-                      ln2_object_integration_pass='LN2_OBJECT_INTEGRATION_PASS' in log,
-                      ln2_item_flow_pass='LN2_ITEM_FLOW_PASS' in log,
-                      ln2_final_gpu_pass='LN2_FINAL_GPU_PASS' in log,
-                      ln2_status_pass='LN2_STATUS_PASS' in log,
-                      ln2_ending_pass='LN2_ENDING_PASS' in log,
-                      ln2_ending_gpu_pass='LN2_ENDING_GPU_PASS' in log,
-                      ln2_projectiles_pass='LN2_PROJECTILES_PASS' in log,
-                      ln2_projectile_mask_pass='LN2_PROJECTILE_MASK_PASS' in log,
-                      ln2_projectile_integration_pass='LN2_PROJECTILE_INTEGRATION_PASS' in log,
-                      ln2_projectile_gpu_pass='LN2_PROJECTILE_GPU_PASS' in log,
-                      ln2_projectile_bodies_gpu_pass='LN2_PROJECTILE_BODIES_GPU_PASS' in log,
-                      ln3_movement_pass='LN3_MOVEMENT_PASS' in log,
-                      ln3_actions_pass='LN3_ACTION_PASS' in log,
-                      ln3_input_pass='LN3_INPUT_PASS' in log,
-                      ln3_animation_pass='LN3_ANIMATION_PASS' in log,
-                      ln3_masks_pass='LN3_MASK_PASS' in log,
-                      ln3_collision_pass='LN3_COLLISION_PASS' in log,
-                      ln3_enemy_pass='LN3_ENEMY_PASS' in log,
-                      ln3_combat_pass='LN3_COMBAT_PASS' in log,
-                      ln3_scenes_pass='LN3_SCENES_PASS' in log,
-                      ln3_items_pass='LN3_ITEMS_PASS' in log,
-                      ln3_scenery_pass='LN3_SCENERY_PASS' in log,
-                      ln3_scenery_gpu_pass='LN3_SCENERY_GPU_PASS' in log,
-                      ln3_special_pass='LN3_SPECIAL_PASS' in log,
-                      ln3_transition_pass='LN3_TRANSITION_PASS' in log,
-                      ln3_ending_pass='LN3_ENDING_PASS' in log,
-                      ln3_ending_gpu_pass='LN3_ENDING_GPU_PASS' in log,
-                      ln3_mechanism_gpu_pass='LN3_MECHANISM_GPU_PASS' in log,
-                      ln3_world_pass='LN3_WORLD_PASS' in log,
-                      ln3_gpu_pass='LN3_GPU_PASS' in log)
-        match=re.search(r'LN_CAPTURE_DIRECTORY:([^\r\n]+)',log)
-        if match:
-            capture_dir=Path(match.group(1).strip())
-            for name in ('lnpreserve-mask-test.png','lnpreserve-workbench.png','lnpreserve-player.png','lnpreserve-encounter.png',
-                         'lnpreserve-found.png','lnpreserve-wounded.png','lnpreserve-prayer.png','lnpreserve-water.png',
-                         'lnpreserve-scene-picker.png','lnpreserve-scene-preview.png','lnpreserve-ln2-ending.png','lnpreserve-ln2-projectile.png') + tuple(f'lnpreserve-dungeon-room{room}.png' for room in (2,3,8,20)) + tuple(f'lnpreserve-level{level}.png' for level in range(1,7)) + tuple(f'lnpreserve-ln2-level{level}.png' for level in range(1,8)) + tuple(f'lnpreserve-ln3-level{level}.png' for level in range(1,6)):
-                if (capture_dir/name).is_file():shutil.copy2(capture_dir/name,ROOT/'evidence'/name)
-    except subprocess.TimeoutExpired as exc:
-        report.update(native_checks_pass=False,runtime_pass=False,error='runner_timeout')
-        log=''
-        for part in (exc.stdout,exc.stderr):
-            if part:log+=part.decode(errors='replace') if isinstance(part,bytes) else part
-        (out/'runner-console.log').write_text(log)
-        failure=re.search(r'LN_(?:RUNTIME|SELFTEST)_FAILURE:[^\r\n]*',log)
-        if failure:report['reported_runtime_failure']=failure.group(0)
-    report['elapsed_seconds']=round(time.monotonic()-started,2)
-    (ROOT/'evidence/runtime_checks.json').write_text(json.dumps(report,indent=2)+'\n')
-    print(json.dumps(report,indent=2))
-    sys.exit(0 if report.get('exit_code')==0 and all(report.get(key) for key in ('native_checks_pass','runtime_pass','mask_gpu_pass','sprite_decoder_pass','ln1_control_vectors_pass','ln1_player_vectors_pass','ln1_enemy_vectors_pass','ln1_combat_vectors_pass','ln1_world_smoke_pass','ln1_feedback_pass','ln1_water_vectors_pass','scene_navigation_pass','ln1_levels_pass','ln1_projectiles_pass','ln2_player_vectors_pass','ln2_enemy_vectors_pass','ln2_entrances_pass','ln2_helicopter_pass','ln2_vehicles_pass','ln2_effects_pass','ln2_combat_vectors_pass','ln2_world_pass','ln2_keypad_pass','ln2_candles_pass','ln2_boss_release_pass','ln2_object_integration_pass','ln2_item_flow_pass','ln2_final_gpu_pass','ln2_status_pass','ln2_ending_pass','ln2_ending_gpu_pass','ln2_projectiles_pass','ln2_projectile_mask_pass','ln2_projectile_integration_pass','ln2_projectile_gpu_pass','ln2_projectile_bodies_gpu_pass','ln3_movement_pass','ln3_actions_pass','ln3_input_pass','ln3_animation_pass','ln3_masks_pass','ln3_collision_pass','ln3_enemy_pass','ln3_combat_pass','ln3_scenes_pass','ln3_items_pass','ln3_scenery_pass','ln3_scenery_gpu_pass','ln3_special_pass','ln3_transition_pass','ln3_ending_pass','ln3_ending_gpu_pass','ln3_mechanism_gpu_pass','ln3_world_pass','ln3_gpu_pass')) else 1)
+        r=subprocess.run(cmd,cwd=out,capture_output=True,timeout=240,startupinfo=si)
+        log=(r.stdout+r.stderr).decode('utf-8',errors='replace');exit_code=r.returncode
+    except subprocess.TimeoutExpired as e:
+        log=((e.stdout or b'')+(e.stderr or b'')).decode('utf-8',errors='replace');exit_code=None;error='runner_timeout'
+    (out/(name+'.log')).write_text(log,encoding='utf-8')
+    groups=manifest[a.suite+'_groups'];checks=classify(log,groups)
+    markers={k:v for k,v in manifest['markers'].items() if a.suite=='all' or not k.startswith(('ln2_','ln3_'))}
+    marker_results={k:('passed' if v in log else 'not_run') for k,v in markers.items()}
+    failures=re.findall(r'[^\r\n]*FAILURE[^\r\n]*',log)
+    passed=(exit_code==0 and not failures and not error and all(v=='passed' for v in checks.values()) and all(v=='passed' for v in marker_results.values()))
+    report=dict(suite=a.suite,command=cmd,status='passed' if passed else 'failed',exit_code=exit_code,
+        original_gameplay_parity='not_tested',manual_playthrough='not_run',automated_room_coverage='component/integration checks only',
+        checks=checks,pass_markers=marker_results,failures=failures,error=error,elapsed_seconds=round(time.monotonic()-started,2),log=str(out/(name+'.log')))
+    # Legacy fields remain available; null means not reached, never a false failure claim.
+    report.update({k:(True if v=='passed' else None) for k,v in marker_results.items()})
+    (ROOT/'evidence'/(name+'.json')).write_text(json.dumps(report,indent=2)+'\n',encoding='utf-8')
+    print(json.dumps({k:report[k] for k in ('suite','status','checks','failures','elapsed_seconds')},indent=2))
+    return 0 if passed else 1
+
+if __name__=='__main__':sys.exit(main())
