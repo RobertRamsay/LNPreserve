@@ -16,7 +16,8 @@ function ln3_scenery_tick(_g) {
     if (_cursor>=array_length(_sequence)) _g.scenery_repeating=true;
     _g.scenery_mechanism=_g.level==4 && _g.room_id==10 && _g.state.fire_cauldron!=0;
     var _cycle=_g.scenery_mechanism?_g.mechanisms.cauldron:_g.scenery_record;
-    var _record=_g.scenery_repeating?_cycle.repeat[_phase]:_cycle.first[_phase];
+    var _frames=variable_struct_get(_cycle,_g.scenery_repeating?"repeat":"first");
+    var _record=_frames[_phase];
     _g.scenery_frame=_record.frame;_g.mask_shapes=_record.shapes;
 }
 

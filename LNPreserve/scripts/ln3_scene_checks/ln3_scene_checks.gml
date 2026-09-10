@@ -80,7 +80,7 @@ function ln3_world_capture() {
         }
     }
     buffer_delete(_b);surface_free(_surface);if (surface_exists(_g.part_surface)) surface_free(_g.part_surface);
-    for (var _level=1;_level<=5;_level++) {
+    for (_level=1;_level<=5;_level++) {
         _g=new LN3Play(_level);ln3_play_draw(_g);
         surface_save(application_surface,"lnpreserve-ln3-level"+string(_level)+".png");
         for (var _i=0;_i<array_length(_g.world.rooms);_i++) {

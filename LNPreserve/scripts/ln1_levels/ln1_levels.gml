@@ -107,8 +107,8 @@ function ln1_level_hazard(_g,_kind) {
             }
             return true;
         case 13:
-            var _crossings = _p.boundary_crossings; _p.boundary_crossings = 128;
-            if (_crossings < 128 && _g.enemy.active == 134) {
+            var _dog_crossings = _p.boundary_crossings; _p.boundary_crossings = 128;
+            if (_dog_crossings < 128 && _g.enemy.active == 134) {
                 ln1_level_enemy_action(_g,$4e0c); _g.enemy.speed = 3;
             }
             return true;

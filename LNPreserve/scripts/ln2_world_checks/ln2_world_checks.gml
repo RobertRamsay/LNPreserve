@@ -35,7 +35,7 @@ function ln2_world_checks() {
     }
     show_debug_message("LN2_COMBAT_PASS: "+string(array_length(_v.vectors))+" original melee range comparisons; complete combat replay remains open.");
     var _rooms=0,_exits=0,_ticks=0;
-    for (var _level=1;_level<=7;_level++) {
+    for (_level=1;_level<=7;_level++) {
         var _g=new LN2Play(_level);
         _b=buffer_load("play/ln2/level"+string(_level)+"/navigation_vectors.json");
         _v=json_parse(buffer_read(_b,buffer_text));buffer_delete(_b);

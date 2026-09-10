@@ -231,16 +231,17 @@ function ln2_route_descent_tick(_g,_tick) {
 }
 
 function ln2_curtain_checks() {
+    var _g=undefined,_p=undefined;
     for (var _flags=0;_flags<4;_flags++) for (var _busy=0;_busy<2;_busy++)
     for (var _interrupt=0;_interrupt<2;_interrupt++) for (var _lock=0;_lock<2;_lock++) {
-        var _g=new LN2Play(1),_p=_g.player;
+        _g=new LN2Play(1);_p=_g.player;
         _p.boundary_crossings=(_flags&1)|((_flags&2)?128:0);
         _p.boundary_mode=2|(_interrupt?64:0);_p.action=_busy?$c300:0;_g.exit_locked=_lock;
         var _expected=(_flags&2)!=0 && (!_busy || _interrupt) && !_lock;
         ln_check(ln2_boundary_exit(_g)==_expected,"curtain crossing obeys original new-crossing/action/exit locks");
         ln_check(_g.room_id==(_expected?2:1),"curtain uses original scene 2 entrance");
     }
-    var _g=new LN2Play(1),_p=_g.player;
+    _g=new LN2Play(1);_p=_g.player;
     _g.enemy.active=0;_p.x=70;_p.y=49;_p.depth_y=49;_p.action=0;_p.input_lock=0;
     _p.facing=1;_p.heading=1;_p.turn_lock=0;_p.fraction_x=0;_p.fraction_y=0;
     var _joy=0;
@@ -681,8 +682,9 @@ function ln2_test_finish_life_transition(_g) {
 }
 
 function ln2_lives_pickup_checks() {
+    var _g=undefined,_p=undefined;
     for(var _level_index=0;_level_index<2;_level_index++) {
-        var _g=new LN2Play(_level_index==0?1:6),_p=_g.player;
+        _g=new LN2Play(_level_index==0?1:6);_p=_g.player;
         _p.x=120;_p.y=110;_p.facing=3;_g.lives_left=3;_g.player_health=44;
         ln2_fall_begin(_g,16,100);var _ticks=0,_death_seen=false;
         while(_g.respawn_wait==0 && _ticks++<240) {
@@ -715,10 +717,24 @@ function ln2_lives_pickup_checks() {
             ln_check(_g.inventory[_item.id]!=0,"fire alone collects nearby source item in level "+string(_level)+" id "+string(_item.id)+" action "+string(_p.action)+" xy "+string(_p.x)+","+string(_p.y)+" state "+string(_p.action_state)+" vehicle "+string(_p.vehicle));_collected++;break;
         }
     }
-    _g=new LN2Play(1);var _item=undefined;
-    for(var _i=0;_i<array_length(_g.world.items);_i++) {var _candidate=_g.world.items[_i];if(_candidate.id<17 && _candidate.action<=2 && _candidate.handler==0) {_item=_candidate;break;}}var _entry=-1;for(var _j=0;_j<array_length(_g.world.tables.exit_destinations);_j++) if(_g.world.tables.exit_destinations[_j]==_item.room) {_entry=_j;break;}
-            ln_check(_entry>=0,"pickup fixture has valid room entrance");ln2_test_enter(_g,_entry);_p=_g.player;
-    _g.inventory[_item.id]=0;_p.vehicle=0;_p.height_fixed=0;_p.x=_item.x_min;_p.y=_item.y_min;_p.action=0;_p.input_lock=0;
+    _g=new LN2Play(1);
+    var _nearby_item=undefined;
+    for(var _candidate_index=0;_candidate_index<array_length(_g.world.items);_candidate_index++) {
+        var _candidate=_g.world.items[_candidate_index];
+        if(_candidate.id<17 && _candidate.action<=2 && _candidate.handler==0) {
+            _nearby_item=_candidate;break;
+        }
+    }
+    var _nearby_entry=-1;
+    for(var _entry_index=0;_entry_index<array_length(_g.world.tables.exit_destinations);_entry_index++) {
+        if(_g.world.tables.exit_destinations[_entry_index]==_nearby_item.room) {
+            _nearby_entry=_entry_index;break;
+        }
+    }
+    ln_check(_nearby_entry>=0,"pickup fixture has valid room entrance");
+    ln2_test_enter(_g,_nearby_entry);_p=_g.player;
+    _g.inventory[_nearby_item.id]=0;_p.vehicle=0;_p.height_fixed=0;
+    _p.x=_nearby_item.x_min;_p.y=_nearby_item.y_min;_p.action=0;_p.input_lock=0;
     _g.enemy.active=128;_g.enemy.health=44;_g.enemy.x=_p.x+20;_g.enemy.y=_p.y;_g.pickup_fire_previous=0;
     ln_check(ln2_pickup_assist_input(_g,16)==16 && _p.action==0,"enemy within 20 pixels leaves fire for combat");
     _g.enemy.x=_p.x+21;_g.pickup_fire_previous=0;

@@ -197,7 +197,8 @@ function ln2_projectile_present(_g) {
         _q.kind^=8;_q.buffer=_q.buffer==255?0:(_q.buffer^1);
         _q.draw_x=((_q.x+4)&255)-24;_q.draw_y=((_q.y+12)&255)-50;_q.sprite_y=_q.draw_y+50;_q.enabled=_q.sprite_y;
         _q.mask_bits=ln2_sprite_mask_bits(_g.sprite_masks,_q.draw_x+24,_q.sprite_y,_q.y);
-        var _raw=(_knife?global.ln2_knife_art:global.ln2_projectile_art).frames[_q.frame].raw;
+        var _art=_knife?global.ln2_knife_art:global.ln2_projectile_art;
+        var _raw=_art.frames[_q.frame].raw;
         _q.probes[_q.buffer]=(_raw[1]&_q.mask_bits[1])|(_raw[4]&_q.mask_bits[4])|(_raw[7]&_q.mask_bits[7]);
     }
     _g.enemy.projectile_active=_g.projectiles[1].kind;

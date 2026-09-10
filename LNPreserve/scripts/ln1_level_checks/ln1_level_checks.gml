@@ -147,7 +147,7 @@ function ln1_level_checks() {
                        string(_selectors)+" original enemy selectors, "+string(_ticks)+" integration ticks and level-state persistence.");
     var _buf=buffer_load("verification/ln1_projectile_vectors.json");
     var _oracle=json_parse(buffer_read(_buf,buffer_text));buffer_delete(_buf);
-    var _g=new LN1Play();_g.player.tick=100;_g.enemy.active=0;
+    _g=new LN1Play();_g.player.tick=100;_g.enemy.active=0;
     for (var _i=0;_i<array_length(_oracle.vectors);_i++) {
         var _v=_oracle.vectors[_i];_g.projectiles=[new LN1Projectile(),new LN1Projectile()];
         var _s=_g.projectiles[_v.slot];_s.active=_v.kind;_s.life=_v.life;_s.x=_v.x;_s.y=_v.y;
