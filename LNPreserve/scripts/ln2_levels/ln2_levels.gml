@@ -912,7 +912,7 @@ function ln2_street_snag_checks() {
 }
 
 function ln2_sewer_flame_room(_room) {
-    var _rooms=[0,1,3,5,10,11,13];
+    var _rooms=[0,1,3,5,10,11,13,15];
     for(var _i=0;_i<array_length(_rooms);_i++) if (_rooms[_i]==_room) return _i;
     return -1;
 }
@@ -929,6 +929,7 @@ function ln2_sewer_flame_tick(_g,_tick) {
 function ln2_sewer_flame_draw(_g) {
     if (_g.level!=3) return;
     var _room=ln2_sewer_flame_room(_g.room_id);
+    if (_room==7) {draw_sprite(spr_ln2_gallery_flames,clamp(_g.inventory[18],0,2),0,0);return;}
     if (_room>=0) draw_sprite(spr_ln2_sewer_flames,_room*3+clamp(_g.inventory[18],0,2),0,0);
 }
 
@@ -961,4 +962,134 @@ function ln2_sewer_flame_checks() {
     ln2_play_enter(_g,5);_g.inventory[20]=255;ln2_refresh_scene(_g);
     ln_check(_g.scene==spr_ln2_sewer_grate_states && _g.scene_frame==1,"flames preserve open grate background");
     show_debug_message("LN2_SEWER_FLAMES_PASS: seven rooms, 21 rendered frames, six-tick cadence, wrap, save phase, open grate");
+}
+
+/// Authored optional routes. Original source doors and progression remain intact.
+function ln2_sewer_network_prepare(_g) {
+    if (_g.level!=3) return;
+    _g.water_data=ln3_data_read("play/ln2/level3/water.json");
+    if (variable_struct_exists(_g.world,"sewer_network_version")) return;
+    var _fresh=ln3_data_read("play/ln2/level3/world.json");
+    var _keys=["exit_destinations","exit_thresholds","entry_x","entry_y","entry_heading"];
+    for(var _i=0;_i<array_length(_keys);_i++) {
+        var _old=variable_struct_get(_g.world.tables,_keys[_i]),_new=variable_struct_get(_fresh.tables,_keys[_i]);
+        for(var _j=array_length(_old);_j<array_length(_new);_j++) array_push(_old,_new[_j]);
+        variable_struct_set(_g.world.tables,_keys[_i],_old);
+    }
+    array_push(_g.world.rooms,_fresh.rooms[array_length(_fresh.rooms)-1]);
+    _g.world.sewer_doors=_fresh.sewer_doors;_g.world.sewer_network_version=1;
+}
+
+function ln2_sewer_door_tick(_g) {
+    if (_g.level!=3) return false;
+    var _doors=_g.world.sewer_doors,_p=_g.player;
+    var _lock=variable_struct_exists(_g.world_state,"sewer_door_lock")?_g.world_state.sewer_door_lock:-1;
+    if (_lock>=0) {
+        var _arrival=_doors[_lock];
+        if (_arrival.room==_g.room_id && point_distance(_p.x,_p.y,_arrival.x,_arrival.y)<14) {
+            _p.boundary_crossings=0;return false;
+        }
+        _g.world_state.sewer_door_lock=-1;
+    }
+    if ((!(_p.boundary_crossings&128) && _p.collision!=255) || _p.action>=256 || _p.input_lock!=0 || _g.player_health<=0) return false;
+    for(var _i=0;_i<array_length(_doors);_i++) {
+        var _door=_doors[_i];
+        // Some arches have a solid front lip before the recessed trigger.
+        // Enter when walking against that lip within the actual arch width.
+        if (_door.room!=_g.room_id || abs(_p.x-_door.x)>7 || _p.y<_door.y || _p.y>_door.y+12 || _p.hit_side!=1) continue;
+        var _target=_doors[_door.target];
+        _p.action=0;_p.action_state=0;_p.flags=0;_p.countdown=0;_p.duration=0;
+        _p.stopped=255;_p.fraction_x=0;_p.fraction_y=0;_p.walk_clock=0;
+        _p.fire_previous=0;_p.attack_direction=255;_p.attack_previous=255;_p.collision=0;
+        ln2_play_travel(_g,_target.entry);
+        _p.boundary_crossings=0;_p.hit_boundary=255;_p.combat_state=_p.facing>>1;
+        _p.previous_combat=_p.combat_state;_p.saved_heading=_p.heading;
+        _g.world_state.sewer_door_lock=_target.id;
+        return true;
+    }
+    return false;
+}
+
+function ln2_gallery_floor(_x,_y) {
+    // Source scene 11's dogleg pavement, bounded by its actual water edges.
+    var _v=[[0,91],[34,83],[66,91],[130,75],[254,106],[254,136],
+        [162,113],[196,105],[132,89],[36,113],[68,121],[0,138]],_inside=false;
+    for(var _i=0,_j=array_length(_v)-1;_i<array_length(_v);_j=_i++) {
+        var _a=_v[_i],_b=_v[_j];
+        if ((_a[1]>_y)!=(_b[1]>_y) && _x<(_b[0]-_a[0])*(_y-_a[1])/(_b[1]-_a[1])+_a[0]) _inside=!_inside;
+    }
+    return _inside;
+}
+
+function ln2_gallery_tick(_g) {
+    if (_g.level!=3 || _g.room_id!=15) return false;
+    var _p=_g.player;
+    // End railings close the inherited perimeter exits. Jumping uses the same
+    // ground position as the original action graph; assess water on landing.
+    _p.x=clamp(_p.x,4,244);
+    if (_p.action>=256) return false;
+    if (!ln2_gallery_floor(_p.x,_p.y)) {
+        ln2_drowning_begin(_g,7,1);return true;
+    }
+    return false;
+}
+
+function ln2_sewer_network_checks() {
+    var _g=new LN2Play(3),_p=_g.player,_doors=_g.world.sewer_doors;
+    ln_check(array_length(_g.world.rooms)==16 && array_length(_doors)==10,"gallery and ten endpoints present");
+    for(var _i=0;_i<array_length(_doors);_i++) {
+        var _door=_doors[_i],_target=_doors[_door.target];
+        ln2_test_enter(_g,_door.entry);_g.world_state.sewer_door_lock=-1;
+        _g.player_health=31;_g.lives_left=4;
+        var _inventory=json_stringify(_g.inventory),_old_y=_door.y+2;
+        _p.x=_door.x;_p.y=_old_y;
+        _p.boundary_crossings=0;
+        _p.collision=ln2_player_boundary(_p,_g.data,_door.x,_old_y,_door.x,_door.y-2);
+        ln_check(_p.collision==255,"door collision "+_door.name);
+        ln_check(ln2_sewer_door_tick(_g) && _g.room_id==_target.room && _g.last_entry==_target.entry,"destination "+_door.name);
+        ln_check(_p.facing==_target.facing && _p.y==_target.y+8,"safe outward arrival "+_door.name);
+        ln_check(_g.player_health==31 && _g.lives_left==4 && json_stringify(_g.inventory)==_inventory,"travel preserves player state");
+        _g=ln_save_restore(json_parse(json_stringify(ln_save_capture(_g))));_p=_g.player;
+        ln_check(_g.last_entry==_target.entry && _g.world_state.sewer_door_lock==_target.id,"saved door arrival");
+        ln_check(!ln2_sewer_door_tick(_g),"no immediate return loop");
+        var _walked=false;
+        for(var _joy=1;_joy<16 && !_walked;_joy++) {
+            var _trial=new LN2Play(3);ln2_test_enter(_trial,_door.entry);
+            _trial.enemy.active=0;_trial.enemy.custom=false;_trial.world_state.sewer_door_lock=-1;
+            repeat(30) {
+                ln2_play_tick(_trial,_joy);
+                if (_trial.room_id!=_door.room) break;
+            }
+            _walked=_trial.room_id==_target.room && _trial.last_entry==_target.entry;
+        }
+        ln_check(_walked,"actual walking enters "+_door.name);
+    }
+    ln2_test_enter(_g,39);_g.enemy.active=0;
+    var _path=[[27,98],[60,96],[100,88],[132,83],[164,94],[188,98],[220,109]];
+    for(var _i=0;_i<array_length(_path)-1;_i++) {
+        var _a=_path[_i],_b=_path[_i+1];
+        for(var _step=0;_step<=100;_step++) ln_check(ln2_gallery_floor(lerp(_a[0],_b[0],_step/100),lerp(_a[1],_b[1],_step/100)),"continuous gallery walkway");
+    }
+    _p.x=120;_p.y=140;_p.action=0;
+    ln_check(ln2_gallery_tick(_g) && _g.player_health==0 && _g.world_state.drowning.water,"gallery water fall");
+    repeat(400) {
+        if (_g.respawn_wait>0) break;
+        ln2_play_tick(_g,0);
+        ln_check(!array_contains([44,45,46],_p.display_frame),"water has no land corpse");
+    }
+    ln_check(_g.respawn_wait>0,"water sequence completes");
+    // Simulate a pre-network save without losing its progression flags.
+    ln2_test_enter(_g,0);_g.inventory[20]=255;
+    var _save=ln_save_capture(_g);
+    variable_struct_remove(_save.state.world,"sewer_network_version");variable_struct_remove(_save.state.world,"sewer_doors");
+    array_resize(_save.state.world.rooms,15);
+    var _keys=["exit_destinations","exit_thresholds","entry_x","entry_y","entry_heading"];
+    for(var _i=0;_i<array_length(_keys);_i++) {var _arr=variable_struct_get(_save.state.world.tables,_keys[_i]);array_resize(_arr,31);variable_struct_set(_save.state.world.tables,_keys[_i],_arr);}
+    _g=ln_save_restore(_save);
+    ln_check(array_length(_g.world.rooms)==16 && _g.inventory[20]==255,"old save gains gallery without losing grate progress");
+    ln2_test_enter(_g,39);_g.inventory[18]=0;
+    var _surface=surface_create(240,144);
+    surface_set_target(_surface);draw_clear(c_black);draw_sprite(_g.scene,0,0,0);ln2_sewer_flame_draw(_g);ln2_play_actor(_g,_g.player,false);surface_reset_target();
+    surface_save(_surface,"ln2-maintenance-gallery-runtime.png");surface_free(_surface);
+    show_debug_message("LN2_SEWER_NETWORK_PASS: ten door crossings, arrivals, saves, gallery floor, water, migration");
 }

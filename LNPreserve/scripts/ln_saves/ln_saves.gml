@@ -84,6 +84,7 @@ function ln_save_restore(_save) {
     }
     if (_g.game_number!=_save.game || _g.level!=_save.level || _g.room_id!=_save.room) throw "Invalid save identity";
     if (_save.game==2) {
+        ln2_sewer_network_prepare(_g);
         // Saves contain their original action graph. Add newly recovered roots
         // without replacing saved animation records or player progression.
         var _action_names=variable_struct_get_names(_fresh_ln2_actions);

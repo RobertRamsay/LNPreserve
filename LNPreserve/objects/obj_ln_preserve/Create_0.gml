@@ -1,3 +1,4 @@
+sewer_network_test=false;
 sewer_flames_test=false;
 item_use_test=false;
 street_snags_test=false;
@@ -46,6 +47,7 @@ function_presses = [0,0,0,0];
 selftest = false;ln1_only=false;selftest_inject_failure=false;
 host_frames = 0;
 for (var _i = 1; _i <= parameter_count(); _i++) {
+    if(parameter_string(_i)=="--ln2-sewer-network-test") sewer_network_test=true;
     if(parameter_string(_i)=="--ln2-sewer-flames-test") sewer_flames_test=true;
     if(parameter_string(_i)=="--ln2-item-use-test") item_use_test=true;
     if(parameter_string(_i)=="--ln2-street-snags-test") street_snags_test=true;
