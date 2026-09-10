@@ -2187,6 +2187,13 @@
   },
   "name":"LNPreserve",
   "resources":[
+    {"id":{"name":"spr_ln2_street_scenery","path":"sprites/spr_ln2_street_scenery/spr_ln2_street_scenery.yy"}},
+    {"id":{"name":"spr_ln2_street_bottle_states","path":"sprites/spr_ln2_street_bottle_states/spr_ln2_street_bottle_states.yy"}},
+    {"id":{"name":"spr_ln2_street_bottle_states_removed","path":"sprites/spr_ln2_street_bottle_states_removed/spr_ln2_street_bottle_states_removed.yy"}},
+    {"id":{"name":"spr_ln2_street_manhole_states","path":"sprites/spr_ln2_street_manhole_states/spr_ln2_street_manhole_states.yy"}},
+    {"id":{"name":"spr_ln2_street_manhole_states_removed","path":"sprites/spr_ln2_street_manhole_states_removed/spr_ln2_street_manhole_states_removed.yy"}},
+    {"id":{"name":"spr_ln2_street_lights","path":"sprites/spr_ln2_street_lights/spr_ln2_street_lights.yy"}},
+
     {"id":{"name":"obj_ln_preserve","path":"objects/obj_ln_preserve/obj_ln_preserve.yy",},},
     {"id":{"name":"Room1","path":"rooms/Room1/Room1.yy",},},
     {"id":{"name":"ln_checks","path":"scripts/ln_checks/ln_checks.yy",},},

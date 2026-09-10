@@ -61,6 +61,8 @@ function ln2_sequence_checks() {
         for (var _j=0;_j<array_length(_g.world.rooms);_j++) if (_g.world.rooms[_j].id==_v.room) { _g.scene_record=_g.world.rooms[_j];break; }
         var _keys=variable_struct_get_names(_v.before);
         for (var _j=0;_j<array_length(_keys);_j++) variable_struct_set(_g,_keys[_j],variable_struct_get(_v.before,_keys[_j]));
+        // Original vectors omit the native scenery-rendering classification.
+        _g.enemy.custom=_g.special_mode!=0;
         ln2_level_effect_tick(_g,0);
         ln2_compare_fields(_g.player,_v.expected.player,"LN2 world "+string(_i)+" player");
         ln2_compare_fields(_g.enemy,_v.expected.enemy,"LN2 world "+string(_i)+" enemy");

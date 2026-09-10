@@ -53600,6 +53600,2312 @@
     64,
     72
   ],
+  "street_traffic_checks": [
+    {
+      "action": 0,
+      "crossings": 0,
+      "enemy_y": 0,
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "flag": 0,
+      "mode": 35
+    },
+    {
+      "action": 48128,
+      "crossings": 0,
+      "enemy_y": 0,
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "flag": 0,
+      "mode": 35
+    },
+    {
+      "action": 0,
+      "crossings": 1,
+      "enemy_y": 0,
+      "expected": [
+        1,
+        0,
+        0
+      ],
+      "flag": 0,
+      "mode": 35
+    },
+    {
+      "action": 48128,
+      "crossings": 1,
+      "enemy_y": 0,
+      "expected": [
+        1,
+        0,
+        0
+      ],
+      "flag": 0,
+      "mode": 35
+    },
+    {
+      "action": 0,
+      "crossings": 128,
+      "enemy_y": 0,
+      "expected": [
+        0,
+        51406,
+        44
+      ],
+      "flag": 0,
+      "mode": 35
+    },
+    {
+      "action": 48128,
+      "crossings": 128,
+      "enemy_y": 0,
+      "expected": [
+        128,
+        0,
+        0
+      ],
+      "flag": 0,
+      "mode": 35
+    },
+    {
+      "action": 0,
+      "crossings": 129,
+      "enemy_y": 0,
+      "expected": [
+        0,
+        51406,
+        44
+      ],
+      "flag": 0,
+      "mode": 35
+    },
+    {
+      "action": 48128,
+      "crossings": 129,
+      "enemy_y": 0,
+      "expected": [
+        129,
+        0,
+        0
+      ],
+      "flag": 0,
+      "mode": 35
+    },
+    {
+      "action": 0,
+      "crossings": 0,
+      "enemy_y": 20,
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "flag": 0,
+      "mode": 35
+    },
+    {
+      "action": 48128,
+      "crossings": 0,
+      "enemy_y": 20,
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "flag": 0,
+      "mode": 35
+    },
+    {
+      "action": 0,
+      "crossings": 1,
+      "enemy_y": 20,
+      "expected": [
+        1,
+        0,
+        0
+      ],
+      "flag": 0,
+      "mode": 35
+    },
+    {
+      "action": 48128,
+      "crossings": 1,
+      "enemy_y": 20,
+      "expected": [
+        1,
+        0,
+        0
+      ],
+      "flag": 0,
+      "mode": 35
+    },
+    {
+      "action": 0,
+      "crossings": 128,
+      "enemy_y": 20,
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "flag": 0,
+      "mode": 35
+    },
+    {
+      "action": 48128,
+      "crossings": 128,
+      "enemy_y": 20,
+      "expected": [
+        128,
+        0,
+        0
+      ],
+      "flag": 0,
+      "mode": 35
+    },
+    {
+      "action": 0,
+      "crossings": 129,
+      "enemy_y": 20,
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "flag": 0,
+      "mode": 35
+    },
+    {
+      "action": 48128,
+      "crossings": 129,
+      "enemy_y": 20,
+      "expected": [
+        129,
+        0,
+        0
+      ],
+      "flag": 0,
+      "mode": 35
+    },
+    {
+      "action": 0,
+      "crossings": 0,
+      "enemy_y": 0,
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "flag": 255,
+      "mode": 35
+    },
+    {
+      "action": 48128,
+      "crossings": 0,
+      "enemy_y": 0,
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "flag": 255,
+      "mode": 35
+    },
+    {
+      "action": 0,
+      "crossings": 1,
+      "enemy_y": 0,
+      "expected": [
+        1,
+        0,
+        0
+      ],
+      "flag": 255,
+      "mode": 35
+    },
+    {
+      "action": 48128,
+      "crossings": 1,
+      "enemy_y": 0,
+      "expected": [
+        1,
+        0,
+        0
+      ],
+      "flag": 255,
+      "mode": 35
+    },
+    {
+      "action": 0,
+      "crossings": 128,
+      "enemy_y": 0,
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "flag": 255,
+      "mode": 35
+    },
+    {
+      "action": 48128,
+      "crossings": 128,
+      "enemy_y": 0,
+      "expected": [
+        128,
+        0,
+        0
+      ],
+      "flag": 255,
+      "mode": 35
+    },
+    {
+      "action": 0,
+      "crossings": 129,
+      "enemy_y": 0,
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "flag": 255,
+      "mode": 35
+    },
+    {
+      "action": 48128,
+      "crossings": 129,
+      "enemy_y": 0,
+      "expected": [
+        129,
+        0,
+        0
+      ],
+      "flag": 255,
+      "mode": 35
+    },
+    {
+      "action": 0,
+      "crossings": 0,
+      "enemy_y": 20,
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "flag": 255,
+      "mode": 35
+    },
+    {
+      "action": 48128,
+      "crossings": 0,
+      "enemy_y": 20,
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "flag": 255,
+      "mode": 35
+    },
+    {
+      "action": 0,
+      "crossings": 1,
+      "enemy_y": 20,
+      "expected": [
+        1,
+        0,
+        0
+      ],
+      "flag": 255,
+      "mode": 35
+    },
+    {
+      "action": 48128,
+      "crossings": 1,
+      "enemy_y": 20,
+      "expected": [
+        1,
+        0,
+        0
+      ],
+      "flag": 255,
+      "mode": 35
+    },
+    {
+      "action": 0,
+      "crossings": 128,
+      "enemy_y": 20,
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "flag": 255,
+      "mode": 35
+    },
+    {
+      "action": 48128,
+      "crossings": 128,
+      "enemy_y": 20,
+      "expected": [
+        128,
+        0,
+        0
+      ],
+      "flag": 255,
+      "mode": 35
+    },
+    {
+      "action": 0,
+      "crossings": 129,
+      "enemy_y": 20,
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "flag": 255,
+      "mode": 35
+    },
+    {
+      "action": 48128,
+      "crossings": 129,
+      "enemy_y": 20,
+      "expected": [
+        129,
+        0,
+        0
+      ],
+      "flag": 255,
+      "mode": 35
+    },
+    {
+      "action": 0,
+      "crossings": 0,
+      "enemy_y": 0,
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "flag": 0,
+      "mode": 36
+    },
+    {
+      "action": 48128,
+      "crossings": 0,
+      "enemy_y": 0,
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "flag": 0,
+      "mode": 36
+    },
+    {
+      "action": 0,
+      "crossings": 1,
+      "enemy_y": 0,
+      "expected": [
+        1,
+        0,
+        0
+      ],
+      "flag": 0,
+      "mode": 36
+    },
+    {
+      "action": 48128,
+      "crossings": 1,
+      "enemy_y": 0,
+      "expected": [
+        1,
+        0,
+        0
+      ],
+      "flag": 0,
+      "mode": 36
+    },
+    {
+      "action": 0,
+      "crossings": 128,
+      "enemy_y": 0,
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "flag": 0,
+      "mode": 36
+    },
+    {
+      "action": 48128,
+      "crossings": 128,
+      "enemy_y": 0,
+      "expected": [
+        128,
+        0,
+        0
+      ],
+      "flag": 0,
+      "mode": 36
+    },
+    {
+      "action": 0,
+      "crossings": 129,
+      "enemy_y": 0,
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "flag": 0,
+      "mode": 36
+    },
+    {
+      "action": 48128,
+      "crossings": 129,
+      "enemy_y": 0,
+      "expected": [
+        129,
+        0,
+        0
+      ],
+      "flag": 0,
+      "mode": 36
+    },
+    {
+      "action": 0,
+      "crossings": 0,
+      "enemy_y": 20,
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "flag": 0,
+      "mode": 36
+    },
+    {
+      "action": 48128,
+      "crossings": 0,
+      "enemy_y": 20,
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "flag": 0,
+      "mode": 36
+    },
+    {
+      "action": 0,
+      "crossings": 1,
+      "enemy_y": 20,
+      "expected": [
+        1,
+        0,
+        0
+      ],
+      "flag": 0,
+      "mode": 36
+    },
+    {
+      "action": 48128,
+      "crossings": 1,
+      "enemy_y": 20,
+      "expected": [
+        1,
+        0,
+        0
+      ],
+      "flag": 0,
+      "mode": 36
+    },
+    {
+      "action": 0,
+      "crossings": 128,
+      "enemy_y": 20,
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "flag": 0,
+      "mode": 36
+    },
+    {
+      "action": 48128,
+      "crossings": 128,
+      "enemy_y": 20,
+      "expected": [
+        128,
+        0,
+        0
+      ],
+      "flag": 0,
+      "mode": 36
+    },
+    {
+      "action": 0,
+      "crossings": 129,
+      "enemy_y": 20,
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "flag": 0,
+      "mode": 36
+    },
+    {
+      "action": 48128,
+      "crossings": 129,
+      "enemy_y": 20,
+      "expected": [
+        129,
+        0,
+        0
+      ],
+      "flag": 0,
+      "mode": 36
+    },
+    {
+      "action": 0,
+      "crossings": 0,
+      "enemy_y": 0,
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "flag": 255,
+      "mode": 36
+    },
+    {
+      "action": 48128,
+      "crossings": 0,
+      "enemy_y": 0,
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "flag": 255,
+      "mode": 36
+    },
+    {
+      "action": 0,
+      "crossings": 1,
+      "enemy_y": 0,
+      "expected": [
+        1,
+        0,
+        0
+      ],
+      "flag": 255,
+      "mode": 36
+    },
+    {
+      "action": 48128,
+      "crossings": 1,
+      "enemy_y": 0,
+      "expected": [
+        1,
+        0,
+        0
+      ],
+      "flag": 255,
+      "mode": 36
+    },
+    {
+      "action": 0,
+      "crossings": 128,
+      "enemy_y": 0,
+      "expected": [
+        0,
+        51436,
+        44
+      ],
+      "flag": 255,
+      "mode": 36
+    },
+    {
+      "action": 48128,
+      "crossings": 128,
+      "enemy_y": 0,
+      "expected": [
+        128,
+        0,
+        0
+      ],
+      "flag": 255,
+      "mode": 36
+    },
+    {
+      "action": 0,
+      "crossings": 129,
+      "enemy_y": 0,
+      "expected": [
+        0,
+        51436,
+        44
+      ],
+      "flag": 255,
+      "mode": 36
+    },
+    {
+      "action": 48128,
+      "crossings": 129,
+      "enemy_y": 0,
+      "expected": [
+        129,
+        0,
+        0
+      ],
+      "flag": 255,
+      "mode": 36
+    },
+    {
+      "action": 0,
+      "crossings": 0,
+      "enemy_y": 20,
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "flag": 255,
+      "mode": 36
+    },
+    {
+      "action": 48128,
+      "crossings": 0,
+      "enemy_y": 20,
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "flag": 255,
+      "mode": 36
+    },
+    {
+      "action": 0,
+      "crossings": 1,
+      "enemy_y": 20,
+      "expected": [
+        1,
+        0,
+        0
+      ],
+      "flag": 255,
+      "mode": 36
+    },
+    {
+      "action": 48128,
+      "crossings": 1,
+      "enemy_y": 20,
+      "expected": [
+        1,
+        0,
+        0
+      ],
+      "flag": 255,
+      "mode": 36
+    },
+    {
+      "action": 0,
+      "crossings": 128,
+      "enemy_y": 20,
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "flag": 255,
+      "mode": 36
+    },
+    {
+      "action": 48128,
+      "crossings": 128,
+      "enemy_y": 20,
+      "expected": [
+        128,
+        0,
+        0
+      ],
+      "flag": 255,
+      "mode": 36
+    },
+    {
+      "action": 0,
+      "crossings": 129,
+      "enemy_y": 20,
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "flag": 255,
+      "mode": 36
+    },
+    {
+      "action": 48128,
+      "crossings": 129,
+      "enemy_y": 20,
+      "expected": [
+        129,
+        0,
+        0
+      ],
+      "flag": 255,
+      "mode": 36
+    },
+    {
+      "action": 0,
+      "crossings": 0,
+      "enemy_y": 0,
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "flag": 0,
+      "mode": 37
+    },
+    {
+      "action": 48128,
+      "crossings": 0,
+      "enemy_y": 0,
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "flag": 0,
+      "mode": 37
+    },
+    {
+      "action": 0,
+      "crossings": 1,
+      "enemy_y": 0,
+      "expected": [
+        1,
+        0,
+        0
+      ],
+      "flag": 0,
+      "mode": 37
+    },
+    {
+      "action": 48128,
+      "crossings": 1,
+      "enemy_y": 0,
+      "expected": [
+        1,
+        0,
+        0
+      ],
+      "flag": 0,
+      "mode": 37
+    },
+    {
+      "action": 0,
+      "crossings": 128,
+      "enemy_y": 0,
+      "expected": [
+        0,
+        51448,
+        44
+      ],
+      "flag": 0,
+      "mode": 37
+    },
+    {
+      "action": 48128,
+      "crossings": 128,
+      "enemy_y": 0,
+      "expected": [
+        128,
+        0,
+        0
+      ],
+      "flag": 0,
+      "mode": 37
+    },
+    {
+      "action": 0,
+      "crossings": 129,
+      "enemy_y": 0,
+      "expected": [
+        0,
+        51448,
+        44
+      ],
+      "flag": 0,
+      "mode": 37
+    },
+    {
+      "action": 48128,
+      "crossings": 129,
+      "enemy_y": 0,
+      "expected": [
+        129,
+        0,
+        0
+      ],
+      "flag": 0,
+      "mode": 37
+    },
+    {
+      "action": 0,
+      "crossings": 0,
+      "enemy_y": 20,
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "flag": 0,
+      "mode": 37
+    },
+    {
+      "action": 48128,
+      "crossings": 0,
+      "enemy_y": 20,
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "flag": 0,
+      "mode": 37
+    },
+    {
+      "action": 0,
+      "crossings": 1,
+      "enemy_y": 20,
+      "expected": [
+        1,
+        0,
+        0
+      ],
+      "flag": 0,
+      "mode": 37
+    },
+    {
+      "action": 48128,
+      "crossings": 1,
+      "enemy_y": 20,
+      "expected": [
+        1,
+        0,
+        0
+      ],
+      "flag": 0,
+      "mode": 37
+    },
+    {
+      "action": 0,
+      "crossings": 128,
+      "enemy_y": 20,
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "flag": 0,
+      "mode": 37
+    },
+    {
+      "action": 48128,
+      "crossings": 128,
+      "enemy_y": 20,
+      "expected": [
+        128,
+        0,
+        0
+      ],
+      "flag": 0,
+      "mode": 37
+    },
+    {
+      "action": 0,
+      "crossings": 129,
+      "enemy_y": 20,
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "flag": 0,
+      "mode": 37
+    },
+    {
+      "action": 48128,
+      "crossings": 129,
+      "enemy_y": 20,
+      "expected": [
+        129,
+        0,
+        0
+      ],
+      "flag": 0,
+      "mode": 37
+    },
+    {
+      "action": 0,
+      "crossings": 0,
+      "enemy_y": 0,
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "flag": 255,
+      "mode": 37
+    },
+    {
+      "action": 48128,
+      "crossings": 0,
+      "enemy_y": 0,
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "flag": 255,
+      "mode": 37
+    },
+    {
+      "action": 0,
+      "crossings": 1,
+      "enemy_y": 0,
+      "expected": [
+        1,
+        0,
+        0
+      ],
+      "flag": 255,
+      "mode": 37
+    },
+    {
+      "action": 48128,
+      "crossings": 1,
+      "enemy_y": 0,
+      "expected": [
+        1,
+        0,
+        0
+      ],
+      "flag": 255,
+      "mode": 37
+    },
+    {
+      "action": 0,
+      "crossings": 128,
+      "enemy_y": 0,
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "flag": 255,
+      "mode": 37
+    },
+    {
+      "action": 48128,
+      "crossings": 128,
+      "enemy_y": 0,
+      "expected": [
+        128,
+        0,
+        0
+      ],
+      "flag": 255,
+      "mode": 37
+    },
+    {
+      "action": 0,
+      "crossings": 129,
+      "enemy_y": 0,
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "flag": 255,
+      "mode": 37
+    },
+    {
+      "action": 48128,
+      "crossings": 129,
+      "enemy_y": 0,
+      "expected": [
+        129,
+        0,
+        0
+      ],
+      "flag": 255,
+      "mode": 37
+    },
+    {
+      "action": 0,
+      "crossings": 0,
+      "enemy_y": 20,
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "flag": 255,
+      "mode": 37
+    },
+    {
+      "action": 48128,
+      "crossings": 0,
+      "enemy_y": 20,
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "flag": 255,
+      "mode": 37
+    },
+    {
+      "action": 0,
+      "crossings": 1,
+      "enemy_y": 20,
+      "expected": [
+        1,
+        0,
+        0
+      ],
+      "flag": 255,
+      "mode": 37
+    },
+    {
+      "action": 48128,
+      "crossings": 1,
+      "enemy_y": 20,
+      "expected": [
+        1,
+        0,
+        0
+      ],
+      "flag": 255,
+      "mode": 37
+    },
+    {
+      "action": 0,
+      "crossings": 128,
+      "enemy_y": 20,
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "flag": 255,
+      "mode": 37
+    },
+    {
+      "action": 48128,
+      "crossings": 128,
+      "enemy_y": 20,
+      "expected": [
+        128,
+        0,
+        0
+      ],
+      "flag": 255,
+      "mode": 37
+    },
+    {
+      "action": 0,
+      "crossings": 129,
+      "enemy_y": 20,
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "flag": 255,
+      "mode": 37
+    },
+    {
+      "action": 48128,
+      "crossings": 129,
+      "enemy_y": 20,
+      "expected": [
+        129,
+        0,
+        0
+      ],
+      "flag": 255,
+      "mode": 37
+    },
+    {
+      "action": 0,
+      "crossings": 0,
+      "enemy_y": 0,
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "flag": 0,
+      "mode": 99
+    },
+    {
+      "action": 48128,
+      "crossings": 0,
+      "enemy_y": 0,
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "flag": 0,
+      "mode": 99
+    },
+    {
+      "action": 0,
+      "crossings": 1,
+      "enemy_y": 0,
+      "expected": [
+        1,
+        0,
+        0
+      ],
+      "flag": 0,
+      "mode": 99
+    },
+    {
+      "action": 48128,
+      "crossings": 1,
+      "enemy_y": 0,
+      "expected": [
+        1,
+        0,
+        0
+      ],
+      "flag": 0,
+      "mode": 99
+    },
+    {
+      "action": 0,
+      "crossings": 128,
+      "enemy_y": 0,
+      "expected": [
+        0,
+        51406,
+        44
+      ],
+      "flag": 0,
+      "mode": 99
+    },
+    {
+      "action": 48128,
+      "crossings": 128,
+      "enemy_y": 0,
+      "expected": [
+        0,
+        51406,
+        44
+      ],
+      "flag": 0,
+      "mode": 99
+    },
+    {
+      "action": 0,
+      "crossings": 129,
+      "enemy_y": 0,
+      "expected": [
+        0,
+        51406,
+        44
+      ],
+      "flag": 0,
+      "mode": 99
+    },
+    {
+      "action": 48128,
+      "crossings": 129,
+      "enemy_y": 0,
+      "expected": [
+        0,
+        51406,
+        44
+      ],
+      "flag": 0,
+      "mode": 99
+    },
+    {
+      "action": 0,
+      "crossings": 0,
+      "enemy_y": 20,
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "flag": 0,
+      "mode": 99
+    },
+    {
+      "action": 48128,
+      "crossings": 0,
+      "enemy_y": 20,
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "flag": 0,
+      "mode": 99
+    },
+    {
+      "action": 0,
+      "crossings": 1,
+      "enemy_y": 20,
+      "expected": [
+        1,
+        0,
+        0
+      ],
+      "flag": 0,
+      "mode": 99
+    },
+    {
+      "action": 48128,
+      "crossings": 1,
+      "enemy_y": 20,
+      "expected": [
+        1,
+        0,
+        0
+      ],
+      "flag": 0,
+      "mode": 99
+    },
+    {
+      "action": 0,
+      "crossings": 128,
+      "enemy_y": 20,
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "flag": 0,
+      "mode": 99
+    },
+    {
+      "action": 48128,
+      "crossings": 128,
+      "enemy_y": 20,
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "flag": 0,
+      "mode": 99
+    },
+    {
+      "action": 0,
+      "crossings": 129,
+      "enemy_y": 20,
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "flag": 0,
+      "mode": 99
+    },
+    {
+      "action": 48128,
+      "crossings": 129,
+      "enemy_y": 20,
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "flag": 0,
+      "mode": 99
+    },
+    {
+      "action": 0,
+      "crossings": 0,
+      "enemy_y": 0,
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "flag": 255,
+      "mode": 99
+    },
+    {
+      "action": 48128,
+      "crossings": 0,
+      "enemy_y": 0,
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "flag": 255,
+      "mode": 99
+    },
+    {
+      "action": 0,
+      "crossings": 1,
+      "enemy_y": 0,
+      "expected": [
+        1,
+        0,
+        0
+      ],
+      "flag": 255,
+      "mode": 99
+    },
+    {
+      "action": 48128,
+      "crossings": 1,
+      "enemy_y": 0,
+      "expected": [
+        1,
+        0,
+        0
+      ],
+      "flag": 255,
+      "mode": 99
+    },
+    {
+      "action": 0,
+      "crossings": 128,
+      "enemy_y": 0,
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "flag": 255,
+      "mode": 99
+    },
+    {
+      "action": 48128,
+      "crossings": 128,
+      "enemy_y": 0,
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "flag": 255,
+      "mode": 99
+    },
+    {
+      "action": 0,
+      "crossings": 129,
+      "enemy_y": 0,
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "flag": 255,
+      "mode": 99
+    },
+    {
+      "action": 48128,
+      "crossings": 129,
+      "enemy_y": 0,
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "flag": 255,
+      "mode": 99
+    },
+    {
+      "action": 0,
+      "crossings": 0,
+      "enemy_y": 20,
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "flag": 255,
+      "mode": 99
+    },
+    {
+      "action": 48128,
+      "crossings": 0,
+      "enemy_y": 20,
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "flag": 255,
+      "mode": 99
+    },
+    {
+      "action": 0,
+      "crossings": 1,
+      "enemy_y": 20,
+      "expected": [
+        1,
+        0,
+        0
+      ],
+      "flag": 255,
+      "mode": 99
+    },
+    {
+      "action": 48128,
+      "crossings": 1,
+      "enemy_y": 20,
+      "expected": [
+        1,
+        0,
+        0
+      ],
+      "flag": 255,
+      "mode": 99
+    },
+    {
+      "action": 0,
+      "crossings": 128,
+      "enemy_y": 20,
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "flag": 255,
+      "mode": 99
+    },
+    {
+      "action": 48128,
+      "crossings": 128,
+      "enemy_y": 20,
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "flag": 255,
+      "mode": 99
+    },
+    {
+      "action": 0,
+      "crossings": 129,
+      "enemy_y": 20,
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "flag": 255,
+      "mode": 99
+    },
+    {
+      "action": 48128,
+      "crossings": 129,
+      "enemy_y": 20,
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "flag": 255,
+      "mode": 99
+    },
+    {
+      "action": 0,
+      "crossings": 0,
+      "enemy_y": 0,
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "flag": 0,
+      "mode": 100
+    },
+    {
+      "action": 48128,
+      "crossings": 0,
+      "enemy_y": 0,
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "flag": 0,
+      "mode": 100
+    },
+    {
+      "action": 0,
+      "crossings": 1,
+      "enemy_y": 0,
+      "expected": [
+        1,
+        0,
+        0
+      ],
+      "flag": 0,
+      "mode": 100
+    },
+    {
+      "action": 48128,
+      "crossings": 1,
+      "enemy_y": 0,
+      "expected": [
+        1,
+        0,
+        0
+      ],
+      "flag": 0,
+      "mode": 100
+    },
+    {
+      "action": 0,
+      "crossings": 128,
+      "enemy_y": 0,
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "flag": 0,
+      "mode": 100
+    },
+    {
+      "action": 48128,
+      "crossings": 128,
+      "enemy_y": 0,
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "flag": 0,
+      "mode": 100
+    },
+    {
+      "action": 0,
+      "crossings": 129,
+      "enemy_y": 0,
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "flag": 0,
+      "mode": 100
+    },
+    {
+      "action": 48128,
+      "crossings": 129,
+      "enemy_y": 0,
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "flag": 0,
+      "mode": 100
+    },
+    {
+      "action": 0,
+      "crossings": 0,
+      "enemy_y": 20,
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "flag": 0,
+      "mode": 100
+    },
+    {
+      "action": 48128,
+      "crossings": 0,
+      "enemy_y": 20,
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "flag": 0,
+      "mode": 100
+    },
+    {
+      "action": 0,
+      "crossings": 1,
+      "enemy_y": 20,
+      "expected": [
+        1,
+        0,
+        0
+      ],
+      "flag": 0,
+      "mode": 100
+    },
+    {
+      "action": 48128,
+      "crossings": 1,
+      "enemy_y": 20,
+      "expected": [
+        1,
+        0,
+        0
+      ],
+      "flag": 0,
+      "mode": 100
+    },
+    {
+      "action": 0,
+      "crossings": 128,
+      "enemy_y": 20,
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "flag": 0,
+      "mode": 100
+    },
+    {
+      "action": 48128,
+      "crossings": 128,
+      "enemy_y": 20,
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "flag": 0,
+      "mode": 100
+    },
+    {
+      "action": 0,
+      "crossings": 129,
+      "enemy_y": 20,
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "flag": 0,
+      "mode": 100
+    },
+    {
+      "action": 48128,
+      "crossings": 129,
+      "enemy_y": 20,
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "flag": 0,
+      "mode": 100
+    },
+    {
+      "action": 0,
+      "crossings": 0,
+      "enemy_y": 0,
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "flag": 255,
+      "mode": 100
+    },
+    {
+      "action": 48128,
+      "crossings": 0,
+      "enemy_y": 0,
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "flag": 255,
+      "mode": 100
+    },
+    {
+      "action": 0,
+      "crossings": 1,
+      "enemy_y": 0,
+      "expected": [
+        1,
+        0,
+        0
+      ],
+      "flag": 255,
+      "mode": 100
+    },
+    {
+      "action": 48128,
+      "crossings": 1,
+      "enemy_y": 0,
+      "expected": [
+        1,
+        0,
+        0
+      ],
+      "flag": 255,
+      "mode": 100
+    },
+    {
+      "action": 0,
+      "crossings": 128,
+      "enemy_y": 0,
+      "expected": [
+        0,
+        51436,
+        44
+      ],
+      "flag": 255,
+      "mode": 100
+    },
+    {
+      "action": 48128,
+      "crossings": 128,
+      "enemy_y": 0,
+      "expected": [
+        0,
+        51436,
+        44
+      ],
+      "flag": 255,
+      "mode": 100
+    },
+    {
+      "action": 0,
+      "crossings": 129,
+      "enemy_y": 0,
+      "expected": [
+        0,
+        51436,
+        44
+      ],
+      "flag": 255,
+      "mode": 100
+    },
+    {
+      "action": 48128,
+      "crossings": 129,
+      "enemy_y": 0,
+      "expected": [
+        0,
+        51436,
+        44
+      ],
+      "flag": 255,
+      "mode": 100
+    },
+    {
+      "action": 0,
+      "crossings": 0,
+      "enemy_y": 20,
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "flag": 255,
+      "mode": 100
+    },
+    {
+      "action": 48128,
+      "crossings": 0,
+      "enemy_y": 20,
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "flag": 255,
+      "mode": 100
+    },
+    {
+      "action": 0,
+      "crossings": 1,
+      "enemy_y": 20,
+      "expected": [
+        1,
+        0,
+        0
+      ],
+      "flag": 255,
+      "mode": 100
+    },
+    {
+      "action": 48128,
+      "crossings": 1,
+      "enemy_y": 20,
+      "expected": [
+        1,
+        0,
+        0
+      ],
+      "flag": 255,
+      "mode": 100
+    },
+    {
+      "action": 0,
+      "crossings": 128,
+      "enemy_y": 20,
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "flag": 255,
+      "mode": 100
+    },
+    {
+      "action": 48128,
+      "crossings": 128,
+      "enemy_y": 20,
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "flag": 255,
+      "mode": 100
+    },
+    {
+      "action": 0,
+      "crossings": 129,
+      "enemy_y": 20,
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "flag": 255,
+      "mode": 100
+    },
+    {
+      "action": 48128,
+      "crossings": 129,
+      "enemy_y": 20,
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "flag": 255,
+      "mode": 100
+    },
+    {
+      "action": 0,
+      "crossings": 0,
+      "enemy_y": 0,
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "flag": 0,
+      "mode": 101
+    },
+    {
+      "action": 48128,
+      "crossings": 0,
+      "enemy_y": 0,
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "flag": 0,
+      "mode": 101
+    },
+    {
+      "action": 0,
+      "crossings": 1,
+      "enemy_y": 0,
+      "expected": [
+        1,
+        0,
+        0
+      ],
+      "flag": 0,
+      "mode": 101
+    },
+    {
+      "action": 48128,
+      "crossings": 1,
+      "enemy_y": 0,
+      "expected": [
+        1,
+        0,
+        0
+      ],
+      "flag": 0,
+      "mode": 101
+    },
+    {
+      "action": 0,
+      "crossings": 128,
+      "enemy_y": 0,
+      "expected": [
+        0,
+        51448,
+        44
+      ],
+      "flag": 0,
+      "mode": 101
+    },
+    {
+      "action": 48128,
+      "crossings": 128,
+      "enemy_y": 0,
+      "expected": [
+        0,
+        51448,
+        44
+      ],
+      "flag": 0,
+      "mode": 101
+    },
+    {
+      "action": 0,
+      "crossings": 129,
+      "enemy_y": 0,
+      "expected": [
+        0,
+        51448,
+        44
+      ],
+      "flag": 0,
+      "mode": 101
+    },
+    {
+      "action": 48128,
+      "crossings": 129,
+      "enemy_y": 0,
+      "expected": [
+        0,
+        51448,
+        44
+      ],
+      "flag": 0,
+      "mode": 101
+    },
+    {
+      "action": 0,
+      "crossings": 0,
+      "enemy_y": 20,
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "flag": 0,
+      "mode": 101
+    },
+    {
+      "action": 48128,
+      "crossings": 0,
+      "enemy_y": 20,
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "flag": 0,
+      "mode": 101
+    },
+    {
+      "action": 0,
+      "crossings": 1,
+      "enemy_y": 20,
+      "expected": [
+        1,
+        0,
+        0
+      ],
+      "flag": 0,
+      "mode": 101
+    },
+    {
+      "action": 48128,
+      "crossings": 1,
+      "enemy_y": 20,
+      "expected": [
+        1,
+        0,
+        0
+      ],
+      "flag": 0,
+      "mode": 101
+    },
+    {
+      "action": 0,
+      "crossings": 128,
+      "enemy_y": 20,
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "flag": 0,
+      "mode": 101
+    },
+    {
+      "action": 48128,
+      "crossings": 128,
+      "enemy_y": 20,
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "flag": 0,
+      "mode": 101
+    },
+    {
+      "action": 0,
+      "crossings": 129,
+      "enemy_y": 20,
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "flag": 0,
+      "mode": 101
+    },
+    {
+      "action": 48128,
+      "crossings": 129,
+      "enemy_y": 20,
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "flag": 0,
+      "mode": 101
+    },
+    {
+      "action": 0,
+      "crossings": 0,
+      "enemy_y": 0,
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "flag": 255,
+      "mode": 101
+    },
+    {
+      "action": 48128,
+      "crossings": 0,
+      "enemy_y": 0,
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "flag": 255,
+      "mode": 101
+    },
+    {
+      "action": 0,
+      "crossings": 1,
+      "enemy_y": 0,
+      "expected": [
+        1,
+        0,
+        0
+      ],
+      "flag": 255,
+      "mode": 101
+    },
+    {
+      "action": 48128,
+      "crossings": 1,
+      "enemy_y": 0,
+      "expected": [
+        1,
+        0,
+        0
+      ],
+      "flag": 255,
+      "mode": 101
+    },
+    {
+      "action": 0,
+      "crossings": 128,
+      "enemy_y": 0,
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "flag": 255,
+      "mode": 101
+    },
+    {
+      "action": 48128,
+      "crossings": 128,
+      "enemy_y": 0,
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "flag": 255,
+      "mode": 101
+    },
+    {
+      "action": 0,
+      "crossings": 129,
+      "enemy_y": 0,
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "flag": 255,
+      "mode": 101
+    },
+    {
+      "action": 48128,
+      "crossings": 129,
+      "enemy_y": 0,
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "flag": 255,
+      "mode": 101
+    },
+    {
+      "action": 0,
+      "crossings": 0,
+      "enemy_y": 20,
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "flag": 255,
+      "mode": 101
+    },
+    {
+      "action": 48128,
+      "crossings": 0,
+      "enemy_y": 20,
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "flag": 255,
+      "mode": 101
+    },
+    {
+      "action": 0,
+      "crossings": 1,
+      "enemy_y": 20,
+      "expected": [
+        1,
+        0,
+        0
+      ],
+      "flag": 255,
+      "mode": 101
+    },
+    {
+      "action": 48128,
+      "crossings": 1,
+      "enemy_y": 20,
+      "expected": [
+        1,
+        0,
+        0
+      ],
+      "flag": 255,
+      "mode": 101
+    },
+    {
+      "action": 0,
+      "crossings": 128,
+      "enemy_y": 20,
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "flag": 255,
+      "mode": 101
+    },
+    {
+      "action": 48128,
+      "crossings": 128,
+      "enemy_y": 20,
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "flag": 255,
+      "mode": 101
+    },
+    {
+      "action": 0,
+      "crossings": 129,
+      "enemy_y": 20,
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "flag": 255,
+      "mode": 101
+    },
+    {
+      "action": 48128,
+      "crossings": 129,
+      "enemy_y": 20,
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "flag": 255,
+      "mode": 101
+    }
+  ],
   "timer_period_cycles": 19457,
   "triple_y": [
     17,

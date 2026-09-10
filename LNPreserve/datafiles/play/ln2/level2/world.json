@@ -2773,8 +2773,8 @@
         10
       ],
       "variants": [
-        "spr_ln2_level2_room_08",
-        "spr_ln2_level2_room_08_state1"
+        "spr_ln2_street_bottle_states",
+        "spr_ln2_street_bottle_states_removed"
       ]
     },
     {
@@ -4446,8 +4446,8 @@
         19
       ],
       "variants": [
-        "spr_ln2_level2_room_14",
-        "spr_ln2_level2_room_14"
+        "spr_ln2_street_manhole_states",
+        "spr_ln2_street_manhole_states_removed"
       ]
     },
     {

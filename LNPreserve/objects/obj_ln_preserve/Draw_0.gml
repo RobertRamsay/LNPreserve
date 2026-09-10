@@ -1,3 +1,8 @@
+if (street_snags_test) {
+    try {ln2_street_snag_checks();}
+    catch(_failure) {show_debug_message("LN2_STREET_SNAGS_FAILURE: "+string(_failure));}
+    game_end();exit;
+}
 if (ninja_transitions_test) {
     try {
         if (!variable_instance_exists(id,"transition_render_tick")) {

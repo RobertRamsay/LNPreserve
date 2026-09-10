@@ -159,6 +159,7 @@ function ln2_play_tick(_g,_joy) {
     _g.last_joy=_joy;
     var _drowning=ln2_blocking_sequence(_g);
     if (!_drowning) {_joy=ln2_burger_input(_g,_joy);_joy=ln2_candle_assist_input(_g,_joy);_joy=ln2_pickup_assist_input(_g,_joy);}
+    ln2_street_clock_tick(_g,_tick);
     ln2_status_tick(_g,_tick);
     _g.room_age++;
     if (_g.notice_item>=0 && ((_tick-_g.notice_tick)&255)>=_g.notice_duration) _g.notice_item=-1;
@@ -219,6 +220,10 @@ function ln2_play_actor(_g,_a,_enemy) {
             return;
         }
     }
+    if (_enemy && _a.custom && _g.level==2 && _a.display_frame>=99 && _a.display_frame<=114) {
+        ln_draw_masked_actor(spr_ln2_street_scenery,(_a.display_frame-99)*2+real(_a.mirror),_a.x,_a.y,
+            1,1,_g.mask,0,0,240,144,max(0.001,(_a.depth_y-0.25)/255));return;
+    }
     var _extra=_a.display_frame>=64,_index=_extra?-1:_a.display_frame,_frames=_g.world.actor_frames;
     var _key=_enemy && !_a.custom?string(_a.weapon)+"_"+string(_a.costume):"";
     if (_extra && _enemy && !_a.custom && variable_struct_exists(_g.world,"enemy_extra_frames") && variable_struct_exists(_g.world.enemy_extra_frames,_key))
@@ -241,6 +246,7 @@ function ln2_play_draw(_g) {
     surface_set_target(_g.stage_surface);draw_clear(c_black);draw_sprite(_g.scene,_g.scene_frame,0,0);
     ln2_victory_palette_draw(_g);
     ln2_final_candles_draw(_g);
+    ln2_street_lights_draw(_g);
     if (_g.player.depth_y<_g.enemy.depth_y) {
         ln2_play_actor(_g,_g.player,false);ln2_projectile_draw(_g,false);ln2_play_actor(_g,_g.enemy,true);ln2_projectile_draw(_g,true);
     } else {

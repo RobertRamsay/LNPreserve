@@ -135,6 +135,7 @@ function ln2_player_move(_s,_d,_ticks) {
         }
         _fy&=65535;_s.fraction_y=_fy&255;var _ny=_fy>>8;
         _s.collision=ln2_player_boundary(_s,_d,_s.x,_s.y,_nx,_ny);
+        if (_s.collision==0 && ln2_toilet_backstop(_s,_d,_nx,_ny)) _s.collision=255;
         if (_s.collision!=0) break;
         if (_s.enemy_active>=128 && abs(_s.enemy_x-_nx)<12 && abs(_s.enemy_y-_ny)<_s.separation_y) {
             _s.collision=127;break;
@@ -201,4 +202,21 @@ function ln2_player_update(_s,_d,_joy,_tick) {
         _s.frame=(_s.frame&248)|((_s.frame+_advance)&7);
         ln2_player_render(_s,_d.mirror[_s.facing>>1]&(1<<_s.heading));
     }
+}
+
+/// Close the far-end gaps between the original toilet wall endpoints.
+/// The source lines leave an unbounded lane out of the room behind each cabin.
+/// Only inward movement is stopped, so older saves beyond a cap can walk out.
+function ln2_toilet_backstop(_s,_d,_nx,_ny) {
+    if (_d.level!=1 || (_s.room_id!=5 && _s.room_id!=7) || _nx<=_s.x) return false;
+    var _caps=_s.room_id==5?[[196,60,202,81],[230,68,236,96]]:[[164,54,170,75],[228,71,234,92]];
+    for(var _i=0;_i<2;_i++) {
+        var _b=_caps[_i],_dx=_nx-_s.x,_dy=_ny-_s.y,_bx=_b[2]-_b[0],_by=_b[3]-_b[1];
+        var _den=_dx*_by-_dy*_bx;
+        if (_den==0) continue;
+        var _qx=_b[0]-_s.x,_qy=_b[1]-_s.y;
+        var _t=(_qx*_by-_qy*_bx)/_den,_u=(_qx*_dy-_qy*_dx)/_den;
+        if (_t>=0 && _t<=1 && _u>=0 && _u<=1) return true;
+    }
+    return false;
 }

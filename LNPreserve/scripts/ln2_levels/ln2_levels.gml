@@ -81,6 +81,9 @@ function ln2_entry_hook(_g) {
 /// Mansion's original helicopter attachment and release ($9b9a-$9c30).
 function ln2_level_effect_tick(_g,_joy) {
     var _p=_g.player,_e=_g.enemy;
+    if (_g.level==2 && _e.custom && _e.frame==114 && (_e.x>240 || _e.action<256)) {
+        _e.action=0;_e.y=0;_e.display_frame=255;
+    }
     switch (_g.special_mode) {
         case 0:return;
         case 1:
@@ -397,6 +400,7 @@ function ln2_drowning_tick(_g,_tick) {
 }
 
 function ln2_hazard_boundary(_g) {
+    if (_g.level==2) return ln2_street_traffic_boundary(_g);
     if (_g.level!=1) return false;
     if (ln2_park_traversal_boundary(_g)) return true;
     var _p=_g.player,_mode=_p.boundary_mode&63;
@@ -682,13 +686,15 @@ function ln2_pickup_assist_input(_g,_joy) {
     var _best=401,_target=undefined,_x=0,_y=0;
     for(var _i=0;_i<array_length(_g.world.items);_i++) {
         var _item=_g.world.items[_i];
-        if (_item.room!=_g.room_id || _item.id>=17 || _item.action>2 || _g.inventory[_item.id]!=0) continue;
+        var _manhole=_g.level==2 && _item.id==19 && _g.selected_item==11 && (_g.inventory[11]&127)!=0;
+        if (_item.room!=_g.room_id || (_item.id>=17 && !_manhole) || _item.action>2 || _g.inventory[_item.id]!=0) continue;
         var _tx=clamp(_p.x,_item.x_min,_item.x_max-1),_ty=clamp(_p.y,_item.y_min,_item.y_max-1);
         var _distance=sqr(_p.x-_tx)+sqr(_p.y-_ty);
         if (_distance<_best) {_best=_distance;_target=_item;_x=_tx;_y=_ty;}
     }
     if (!is_struct(_target)) return _joy;
-    _x=(_target.x_min+_target.x_max-1) div 2;_y=(_target.y_min+_target.y_max-1) div 2;
+    // Keep the nearest approach point. Large source rectangles (toilet interiors)
+    // describe valid interactions, not destinations at their far-away centres.
     _p.x=_x;_p.y=_y;_p.depth_y=_y;_p.fraction_x=0;_p.fraction_y=0;
     if (_target.facing!=0) _p.facing=_target.facing;
     _p.heading=_p.facing;_p.stopped=255;_p.turn_lock=0;_p.action_state=0;
@@ -770,3 +776,134 @@ function ln2_lives_pickup_checks() {
     show_debug_message("LN2_LIVES_PICKUP_PASS: falls, fades, source font, saved lives count and "+string(_collected)+" level pickups with enemy range guard");
 }
 
+
+/// Street $9ac4: $b0 increments each fourth game tick, toggles flag 18 at 50.
+function ln2_street_clock_tick(_g,_tick) {
+    if (_g.level!=2) return;
+    if (!variable_struct_exists(_g.world_state,"traffic_clock")) _g.world_state.traffic_clock=0;
+    if ((_tick&3)!=0) return;
+    if (++_g.world_state.traffic_clock<50) return;
+    _g.world_state.traffic_clock=0;_g.inventory[18]^=255;
+}
+
+function ln2_street_lights_draw(_g) {
+    if (_g.level!=2) return;
+    var _rooms=[1,4,5,8,9,11];
+    for(var _i=0;_i<array_length(_rooms);_i++) if (_g.room_id==_rooms[_i]) {
+        draw_sprite(spr_ln2_street_lights,_i*2+real(_g.inventory[18]!=0),0,0);return;
+    }
+}
+
+/// Source $9db1/$9dcb/$9de5: crossing against the lights summons a fatal bike.
+function ln2_street_traffic_boundary(_g) {
+    var _p=_g.player,_mode=_p.boundary_mode&63,_e=_g.enemy;
+    if (!(_p.boundary_crossings&128) || (!(_p.boundary_mode&64) && _p.action>=256)) return false;
+    if (_mode<35 || _mode>37) return false;
+    var _danger=_mode==36?_g.inventory[18]!=0:_g.inventory[18]==0;
+    if (_danger && _e.y==0) {
+        ln2_environment_action(_g,_mode==35?$c8ce:(_mode==36?$c8ec:$c8f8));
+        ln2_damage(_g,44,false);
+    }
+    _p.boundary_crossings=0;return false;
+}
+
+function ln2_street_snag_checks() {
+    var _g=new LN2Play(2),_p=_g.player;
+    var _tick=0,_room_index=0,_room=0,_item=0,_j=0;
+    // Clock parity, including pause/save midway through a cycle.
+    _g.inventory[18]=0;_g.world_state.traffic_clock=0;
+    for(_tick=1;_tick<=199;_tick++) ln2_street_clock_tick(_g,_tick);
+    ln_check(_g.inventory[18]==0,"traffic does not change early");
+    _g=ln_save_restore(json_parse(json_stringify(ln_save_capture(_g))));_p=_g.player;
+    ln2_street_clock_tick(_g,200);ln_check(_g.inventory[18]==255,"saved traffic clock changes at 200");
+    for(_tick=201;_tick<=400;_tick++) ln2_street_clock_tick(_g,_tick);
+    ln_check(_g.inventory[18]==0,"traffic completes both source phases");
+    var _vectors=_g.data.street_traffic_checks;
+    for(var _i=0;_i<array_length(_vectors);_i++) {
+        var _v=_vectors[_i];
+        _p.boundary_mode=_v.mode;_p.boundary_crossings=_v.crossings;_p.action=_v.action;
+        _g.inventory[18]=_v.flag;_g.enemy.y=_v.enemy_y;_g.enemy.action=0;_g.player_health=44;
+        ln2_street_traffic_boundary(_g);
+        ln_check(_p.boundary_crossings==_v.expected[0] && _g.enemy.action==_v.expected[1] &&
+            44-_g.player_health==_v.expected[2],"original traffic dispatch "+string(_i));
+    }
+    // Every source road approach, both signals, occupied and free actor slot.
+    for(var _mode=35;_mode<=37;_mode++) for(var _flag=0;_flag<=1;_flag++) for(var _busy=0;_busy<=1;_busy++) {
+        ln2_play_enter(_g,1);_g.inventory[18]=_flag*255;_g.enemy.y=_busy*20;
+        _g.enemy.action=0;_p.action=0;_p.boundary_crossings=129;_p.boundary_mode=_mode;
+        _g.player_health=44;_p.input_lock=0;
+        ln2_street_traffic_boundary(_g);
+        var _danger=(_mode==36?_flag==1:_flag==0) && !_busy;
+        ln_check(_g.player_health==(_danger?0:44),"bike respects traffic phase and actor occupancy");
+        ln_check((_g.enemy.action>=256)==_danger && _p.boundary_crossings==0,"bike source dispatch and crossing reset");
+    }
+    ln2_play_enter(_g,1);_g.enemy.x=0;_g.enemy.y=0;_p.action=0;_p.input_lock=0;
+    _p.boundary_mode=99;_p.boundary_crossings=129;_g.inventory[18]=0;
+    ln2_street_traffic_boundary(_g);
+    repeat(16) {_p.tick=(_p.tick+1)&255;ln2_enemy_action(_g);}
+    ln_check(_g.enemy.display_frame==114 && _g.enemy.x>32,"bike enters the street");
+    ln2_play_draw(_g);surface_save(_g.stage_surface,"ln2-street-motorcycle.png");
+    repeat(90) {_p.tick=(_p.tick+1)&255;ln2_enemy_action(_g);ln2_level_effect_tick(_g,0);}
+    ln_check(_g.enemy.y==0 && _g.enemy.display_frame==255,"bike leaves and frees source actor slot");
+    // Play both pot animations to their smash poses and capture native rendering.
+    for(_room_index=0;_room_index<2;_room_index++) {
+        _room=_room_index==0?5:7;
+        ln2_play_enter(_g,_room);_p.input_lock=0;_p.action=0;_p.x=20;_p.y=100;
+        _g.player_health=44;_p.tick=(_p.tick+1)&255;ln2_enemy_action(_g);
+        ln2_enemy_special(_g,_room==5?$c7bd:$c7dc);
+        var _smash=false;
+        repeat(90) {
+            _p.tick=(_p.tick+1)&255;ln2_enemy_action(_g);
+            if (_g.enemy.display_frame==(_room==5?107:113)) {
+                _smash=true;ln2_play_draw(_g);surface_save(_g.stage_surface,"ln2-pot-smash-"+string(_room)+".png");
+            }
+        }
+        ln_check(_smash,"pot reaches complete source smash pose");
+    }
+    ln2_play_enter(_g,8);_g.inventory[10]=0;ln2_refresh_scene(_g);
+    ln2_play_draw(_g);surface_save(_g.stage_surface,"ln2-street-bottle.png");
+    ln_check(_g.scene_frame==0,"uncollected bottle panel is visible");
+    _p.x=84;_p.y=105;_p.facing=1;_p.input_lock=0;_p.action=0;_p.stopped=255;_g.enemy.active=0;
+    _g.last_joy=0;ln2_pickup_assist_input(_g,0);ln2_pickup_assist_input(_g,16);
+    repeat(100) {if (_g.inventory[10]!=0) break;ln2_play_tick(_g,0);}
+    ln_check(_g.inventory[10]!=0 && _g.scene_frame==1,"bottle pickup removes only its original panel");
+    // Manhole requires the selected wrench, with actual pickup input and saved open art.
+    ln2_play_enter(_g,14);_g.inventory[19]=0;_g.inventory[11]=255;_g.selected_item=0;
+    _p.x=90;_p.y=120;_p.facing=3;_p.input_lock=0;_p.action=0;_g.enemy.active=0;
+    ln2_item_interact(_g,2);ln_check(_g.inventory[19]==0,"manhole rejects unselected wrench");
+    _g.selected_item=11;ln2_pickup_assist_input(_g,0);ln2_pickup_assist_input(_g,16);
+    repeat(100) {if (_g.inventory[19]!=0) break;ln2_play_tick(_g,0);}
+    ln_check(_g.inventory[19]!=0 && _g.scene_frame==1,"wrench and fire open manhole");
+    ln2_play_draw(_g);surface_save(_g.stage_surface,"ln2-manhole-open.png");
+    _g=ln_save_restore(json_parse(json_stringify(ln_save_capture(_g))));_p=_g.player;
+    ln_check(_g.scene==spr_ln2_street_manhole_states && _g.scene_frame==1,"saved open manhole remains visible");
+    _p.x=104;_p.y=119;_p.boundary_mode=38;_p.boundary_crossings=129;_p.action=0;
+    ln_check(ln2_boundary_exit(_g) && is_struct(_g.route_descent),"open manhole starts sewer descent");
+    // Both chains: stay near the door, collect, then walk out again.
+    _g=new LN2Play(1);_p=_g.player;
+    for(_room_index=0;_room_index<2;_room_index++) {
+        _room=_room_index==0?5:7;_item=_room_index==0?5:6;
+        ln2_play_enter(_g,_room);_g.enemy.active=0;_p.enemy_active=0;
+        _p.x=_room==5?210:218;_p.y=75;_p.depth_y=75;_p.input_lock=0;_p.action=0;_p.facing=1;
+        var _x=_p.x,_y=_p.y;
+        ln2_pickup_assist_input(_g,0);ln2_pickup_assist_input(_g,16);
+        ln_check(_p.x==_x && _p.y==_y,"toilet pickup does not teleport through back wall");
+        repeat(100) {if (_g.inventory[_item]!=0) break;ln2_play_tick(_g,0);}
+        ln_check(_g.inventory[_item]!=0,"toilet pull chain can be collected");
+        _p.action=0;_p.flags=0;_p.facing=1;_p.heading=1;_p.stopped=0;_p.turn_lock=0;
+        var _joy=0;for(_j=1;_j<16;_j++) if (_g.data.directions[_j]==1) {_joy=_j;break;}
+        repeat(100) ln2_play_tick(_g,_joy);
+        ln_check(_p.y>=68 && _p.x<232,"toilet back wall stops forward walking");
+        _p.action=0;_p.flags=0;_p.facing=5;_p.heading=5;_p.stopped=0;_p.turn_lock=0;
+        for(_j=1;_j<16;_j++) if (_g.data.directions[_j]==5) {_joy=_j;break;}
+        var _back_y=_p.y;repeat(24) ln2_play_tick(_g,_joy);
+        ln_check(_p.y>_back_y,"ninja can walk back out of toilet");
+    }
+    for(_room_index=0;_room_index<2;_room_index++) {
+        _p.room_id=_room_index==0?5:7;_p.x=_room_index==0?196:164;_p.y=_room_index==0?62:56;
+        ln_check(ln2_toilet_backstop(_p,_g.data,_p.x+2,_p.y-1),"other toilet back wall is closed");
+        ln_check(!ln2_toilet_backstop(_p,_g.data,_p.x-2,_p.y+1),"toilet caps allow outward movement");
+    }
+    ln_check(_g.inventory[3]!=0,"both toilet chains combine into nunchakus");
+    show_debug_message("LN2_STREET_SNAGS_PASS: pots, bottle, traffic/bikes, wrench manhole, both toilet chains and return, saves");
+}

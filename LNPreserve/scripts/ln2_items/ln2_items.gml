@@ -135,6 +135,12 @@ function ln2_refresh_scene(_g) {
             if (_g.inventory[_room.variant_flags[_i]]!=0) _bits|=1<<_i;
         _g.scene=asset_get_index(_room.variants[_bits]);
     }
+    // These removed panels are drawn on interaction, not by scene entry.
+    if (_g.level==2 && (_g.room_id==8 || _g.room_id==14)) {
+        var _bottle=_g.room_id==8,_flag=_bottle?10:19;
+        _g.scene=asset_get_index(_bottle?"spr_ln2_street_bottle_states":"spr_ln2_street_manhole_states");
+        _g.scene_frame=real(_g.inventory[_flag]!=0);
+    }
     // Source item completion draws these panels immediately, not on room entry.
     if (_g.level==7 && _g.room_id==1) {
         _g.safe_scene_phase=_g.inventory[23]!=0?4:(_g.inventory[18]!=0?(_g.inventory[16]==255?3:2):(_g.inventory[17]!=0?1:0));
