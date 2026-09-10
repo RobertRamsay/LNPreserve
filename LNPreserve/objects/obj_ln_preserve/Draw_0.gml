@@ -1,3 +1,8 @@
+if (sewer_flames_test) {
+    try {ln2_sewer_flame_checks();}
+    catch(_failure) {show_debug_message("LN2_SEWER_FLAMES_FAILURE: "+string(_failure));}
+    game_end();exit;
+}
 if (item_use_test) {
     try {ln2_item_use_checks();}
     catch(_failure) {show_debug_message("LN2_ITEM_USE_FAILURE: "+string(_failure));}

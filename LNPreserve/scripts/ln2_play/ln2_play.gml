@@ -160,6 +160,7 @@ function ln2_play_tick(_g,_joy) {
     var _drowning=ln2_blocking_sequence(_g);
     if (!_drowning) {_joy=ln2_burger_input(_g,_joy);_joy=ln2_candle_assist_input(_g,_joy);_joy=ln2_pickup_assist_input(_g,_joy);}
     ln2_street_clock_tick(_g,_tick);
+    ln2_sewer_flame_tick(_g,_tick);
     ln2_status_tick(_g,_tick);
     _g.room_age++;
     if (_g.notice_item>=0 && ((_tick-_g.notice_tick)&255)>=_g.notice_duration) _g.notice_item=-1;
@@ -247,6 +248,7 @@ function ln2_play_draw(_g) {
     ln2_victory_palette_draw(_g);
     ln2_final_candles_draw(_g);
     ln2_street_lights_draw(_g);
+    ln2_sewer_flame_draw(_g);
     if (_g.player.depth_y<_g.enemy.depth_y) {
         ln2_play_actor(_g,_g.player,false);ln2_projectile_draw(_g,false);ln2_play_actor(_g,_g.enemy,true);ln2_projectile_draw(_g,true);
     } else {

@@ -910,3 +910,55 @@ function ln2_street_snag_checks() {
     ln_check(_g.inventory[3]!=0,"both toilet chains combine into nunchakus");
     show_debug_message("LN2_STREET_SNAGS_PASS: pots, bottle, traffic/bikes, wrench manhole, both toilet chains and return, saves");
 }
+
+function ln2_sewer_flame_room(_room) {
+    var _rooms=[0,1,3,5,10,11,13];
+    for(var _i=0;_i<array_length(_rooms);_i++) if (_rooms[_i]==_room) return _i;
+    return -1;
+}
+
+/// Original $8683: six-tick cadence, three panel frames, clocks at $03e9/$03ea.
+function ln2_sewer_flame_tick(_g,_tick) {
+    if (_g.level!=3 || ((_tick-_g.inventory[17])&255)<6) return;
+    _g.inventory[17]=_tick;
+    if (ln2_sewer_flame_room(_g.room_id)<0) return;
+    var _phase=(_g.inventory[18]+1)&255;
+    _g.inventory[18]=_phase>=3?0:_phase;
+}
+
+function ln2_sewer_flame_draw(_g) {
+    if (_g.level!=3) return;
+    var _room=ln2_sewer_flame_room(_g.room_id);
+    if (_room>=0) draw_sprite(spr_ln2_sewer_flames,_room*3+clamp(_g.inventory[18],0,2),0,0);
+}
+
+function ln2_sewer_flame_checks() {
+    var _g=new LN2Play(3),_rooms=[0,1,3,5,10,11,13];
+    var _xy=[[96,48],[200,32],[112,48],[24,64],[200,8],[208,48],[144,24]];
+    _g.inventory[17]=250;_g.inventory[18]=0;
+    ln2_sewer_flame_tick(_g,255);ln_check(_g.inventory[18]==0,"flames do not advance before six ticks");
+    ln2_sewer_flame_tick(_g,0);ln_check(_g.inventory[18]==1 && _g.inventory[17]==0,"flame clock wraps correctly");
+    _g=ln_save_restore(json_parse(json_stringify(ln_save_capture(_g))));
+    ln2_sewer_flame_tick(_g,6);ln_check(_g.inventory[18]==2,"saved flame phase resumes");
+    ln2_sewer_flame_tick(_g,12);ln_check(_g.inventory[18]==0,"three frames loop");
+    var _surface=surface_create(240,144);
+    for(var _i=0;_i<array_length(_rooms);_i++) {
+        ln2_play_enter(_g,_rooms[_i]);var _hashes=[];
+        for(var _phase=0;_phase<3;_phase++) {
+            _g.inventory[18]=_phase;
+            surface_set_target(_surface);draw_clear(c_black);draw_sprite(_g.scene,_g.scene_frame,0,0);
+            ln2_sewer_flame_draw(_g);surface_reset_target();
+            var _hash=0;for(var _pixel=0;_pixel<64;_pixel++)
+                _hash+=surface_getpixel(_surface,_xy[_i][0]+(_pixel mod 8),_xy[_i][1]+(_pixel div 8))*(_pixel+1);
+            array_push(_hashes,_hash);
+            if (_rooms[_i]==5) surface_save(_surface,"ln2-sewer-flame-"+string(_phase)+".png");
+        }
+        ln_check(_hashes[0]!=_hashes[1] && _hashes[1]!=_hashes[2] && _hashes[0]!=_hashes[2],"three distinct rendered flame frames in room "+string(_rooms[_i]));
+    }
+    surface_free(_surface);
+    ln2_play_enter(_g,2);_g.inventory[17]=0;_g.inventory[18]=1;ln2_sewer_flame_tick(_g,6);
+    ln_check(_g.inventory[17]==6 && _g.inventory[18]==1,"unlisted rooms update clock without flame phase");
+    ln2_play_enter(_g,5);_g.inventory[20]=255;ln2_refresh_scene(_g);
+    ln_check(_g.scene==spr_ln2_sewer_grate_states && _g.scene_frame==1,"flames preserve open grate background");
+    show_debug_message("LN2_SEWER_FLAMES_PASS: seven rooms, 21 rendered frames, six-tick cadence, wrap, save phase, open grate");
+}
