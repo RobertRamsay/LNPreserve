@@ -3307,229 +3307,6 @@
       "variants": [
         "spr_ln2_level3_room_14"
       ]
-    },
-    {
-      "authored": true,
-      "boundaries": [
-        [
-          0,
-          91,
-          34,
-          83,
-          68,
-          0
-        ],
-        [
-          34,
-          83,
-          66,
-          91,
-          4,
-          0
-        ],
-        [
-          66,
-          91,
-          130,
-          75,
-          68,
-          0
-        ],
-        [
-          130,
-          75,
-          254,
-          106,
-          4,
-          0
-        ],
-        [
-          0,
-          138,
-          68,
-          121,
-          69,
-          60
-        ],
-        [
-          36,
-          113,
-          68,
-          121,
-          5,
-          60
-        ],
-        [
-          36,
-          113,
-          132,
-          89,
-          69,
-          60
-        ],
-        [
-          132,
-          89,
-          196,
-          105,
-          5,
-          60
-        ],
-        [
-          162,
-          113,
-          196,
-          105,
-          69,
-          60
-        ],
-        [
-          162,
-          113,
-          254,
-          136,
-          5,
-          60
-        ],
-        [
-          20,
-          91,
-          34,
-          88,
-          69,
-          189
-        ],
-        [
-          214,
-          99,
-          226,
-          102,
-          5,
-          190
-        ]
-      ],
-      "depth_sprite": "spr_ln2_sewer_gallery_depth",
-      "enemy": {
-        "action": 0,
-        "action_mirror": 0,
-        "action_state": 0,
-        "action_tick": 239,
-        "active": 0,
-        "actor_blocked": 0,
-        "attack_count": 0,
-        "boundary_history1": 255,
-        "boundary_history2": 255,
-        "boundary_hit": 255,
-        "combat_state": 0,
-        "costume": 12,
-        "countdown": 0,
-        "decision_tick": 0,
-        "depth_y": 0,
-        "duration": 0,
-        "edge_blocked": 0,
-        "facing": 5,
-        "flags": 16,
-        "fraction_x": 0,
-        "fraction_y": 0,
-        "frame": 255,
-        "heading": 0,
-        "health": 44,
-        "hit_side": 0,
-        "knockouts": 0,
-        "last_boundary": 255,
-        "last_side": 0,
-        "mode": 1,
-        "origin_x": 179,
-        "origin_y": 18,
-        "patrol_x": 0,
-        "previous_combat": 0,
-        "projectile_active": 0,
-        "react_random": 0,
-        "react_tick": 0,
-        "recovery_time": 20497,
-        "retreat_trait": 4,
-        "separation_y": 6,
-        "speed": 2,
-        "target_x": 0,
-        "target_y": 0,
-        "traits": 66,
-        "turn_tick": 0,
-        "wait_duration": 255,
-        "wait_tick": 0,
-        "weapon": 3,
-        "x": 0,
-        "y": 0
-      },
-      "entries": [
-        37,
-        38
-      ],
-      "id": 15,
-      "masks": [
-        {
-          "baseline": 93,
-          "part": 25,
-          "x": 32,
-          "y": 104
-        },
-        {
-          "baseline": 93,
-          "part": 25,
-          "x": 0,
-          "y": 96
-        },
-        {
-          "baseline": 93,
-          "part": 26,
-          "x": 160,
-          "y": 96
-        },
-        {
-          "baseline": 93,
-          "part": 26,
-          "x": 192,
-          "y": 88
-        },
-        {
-          "baseline": 255,
-          "part": 34,
-          "x": 152,
-          "y": 120
-        },
-        {
-          "baseline": 255,
-          "part": 34,
-          "x": 120,
-          "y": 128
-        },
-        {
-          "baseline": 255,
-          "part": 34,
-          "x": 88,
-          "y": 136
-        }
-      ],
-      "reachable_by_perimeter_exits": true,
-      "routes": [
-        {
-          "direction": 3,
-          "entry": 37,
-          "x": 27,
-          "y": 98
-        },
-        {
-          "direction": 1,
-          "entry": 38,
-          "x": 220,
-          "y": 109
-        }
-      ],
-      "spawn_entry": 39,
-      "sprite": "spr_ln2_sewer_gallery",
-      "variant_flags": [],
-      "variants": [
-        "spr_ln2_sewer_gallery"
-      ]
     }
   ],
   "schema": 1,
@@ -3607,7 +3384,7 @@
       "line": 13,
       "name": "10-right",
       "room": 10,
-      "target": 8,
+      "target": 7,
       "x": 108,
       "y": 65
     },
@@ -3618,34 +3395,12 @@
       "line": 6,
       "name": "12-right",
       "room": 12,
-      "target": 9,
+      "target": 6,
       "x": 92,
       "y": 72
-    },
-    {
-      "entry": 39,
-      "facing": 3,
-      "id": 8,
-      "line": 10,
-      "name": "gallery-left",
-      "room": 15,
-      "target": 6,
-      "x": 27,
-      "y": 90
-    },
-    {
-      "entry": 40,
-      "facing": 5,
-      "id": 9,
-      "line": 11,
-      "name": "gallery-right",
-      "room": 15,
-      "target": 7,
-      "x": 220,
-      "y": 100
     }
   ],
-  "sewer_network_version": 1,
+  "sewer_network_version": 2,
   "shared_sprite_colours": [
     11,
     2
@@ -3732,8 +3487,6 @@
       5,
       3,
       3,
-      5,
-      3,
       5
     ],
     "entry_x": [
@@ -3775,9 +3528,7 @@
       106,
       86,
       118,
-      82,
-      37,
-      210
+      82
     ],
     "entry_y": [
       18,
@@ -3818,9 +3569,7 @@
       90,
       81,
       73,
-      80,
-      98,
-      108
+      80
     ],
     "exit_destinations": [
       0,
@@ -3861,9 +3610,7 @@
       9,
       10,
       10,
-      12,
-      15,
-      15
+      12
     ],
     "exit_thresholds": [
       255,
@@ -3896,8 +3643,6 @@
       135,
       255,
       192,
-      255,
-      255,
       255,
       255,
       255,

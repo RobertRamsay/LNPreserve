@@ -26,7 +26,7 @@ function LN2Play(_level=1) constructor {
     status={score:array_create(6,27),clock:{digits:array_create(6,27),fraction:0,running:255,blocked:0,dirty:0},health:[44,44]};
     visited_scenes={};ending_data=ln3_data_read("play/ln2/ending.json");victory=0;ending_surface=-1;
     ending_score=[];ending_time=[];final_palette_tick=player.tick;victory_palette_index=0;
-    water_data=(level==1 || level==3)?ln3_data_read(_folder+"water.json"):undefined;
+    water_data=level==1?ln3_data_read(_folder+"water.json"):undefined;
     boat_support=ln3_data_read("play/ln2/boat_support.json");
     ln2_projectile_init(self);sprite_masks=[];
     random_queue=[];random_head=0;random_pointer=data.random_pointer;random_value=data.random_value;
@@ -86,7 +86,7 @@ function ln2_play_travel(_g,_entry) {
 }
 
 function ln2_play_exit(_g) {
-    if (_g.exit_locked || (_g.level==3 && _g.room_id==15)) return;
+    if (_g.exit_locked) return;
     var _p=_g.player,_perimeter;
     if (_p.y<9) _perimeter=max(0,_p.x-2)>>2;
     else if (_p.y>=189) _perimeter=(max(0,247-_p.x)>>2)+106;
@@ -186,7 +186,6 @@ function ln2_play_tick(_g,_joy) {
     ln2_combat_event(_g,_g.enemy.action_state,true);_g.enemy.action_state=0;
     if (_g.fall_remaining>=0) return;
     if (ln2_sewer_door_tick(_g)) return;
-    if (ln2_gallery_tick(_g)) return;
     if (ln2_hole_boundary(_g)) return;
     if (ln2_hazard_boundary(_g)) return;
     if (ln2_boundary_exit(_g)) return;

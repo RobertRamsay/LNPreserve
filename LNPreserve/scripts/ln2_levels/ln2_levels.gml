@@ -912,7 +912,7 @@ function ln2_street_snag_checks() {
 }
 
 function ln2_sewer_flame_room(_room) {
-    var _rooms=[0,1,3,5,10,11,13,15];
+    var _rooms=[0,1,3,5,10,11,13];
     for(var _i=0;_i<array_length(_rooms);_i++) if (_rooms[_i]==_room) return _i;
     return -1;
 }
@@ -929,7 +929,6 @@ function ln2_sewer_flame_tick(_g,_tick) {
 function ln2_sewer_flame_draw(_g) {
     if (_g.level!=3) return;
     var _room=ln2_sewer_flame_room(_g.room_id);
-    if (_room==7) {draw_sprite(spr_ln2_gallery_flames,clamp(_g.inventory[18],0,2),0,0);return;}
     if (_room>=0) draw_sprite(spr_ln2_sewer_flames,_room*3+clamp(_g.inventory[18],0,2),0,0);
 }
 
@@ -967,17 +966,30 @@ function ln2_sewer_flame_checks() {
 /// Authored optional routes. Original source doors and progression remain intact.
 function ln2_sewer_network_prepare(_g) {
     if (_g.level!=3) return;
-    _g.water_data=ln3_data_read("play/ln2/level3/water.json");
-    if (variable_struct_exists(_g.world,"sewer_network_version")) return;
+    _g.water_data=undefined;
+    if (variable_struct_exists(_g.world,"sewer_network_version") && _g.world.sewer_network_version==2) return;
     var _fresh=ln3_data_read("play/ln2/level3/world.json");
     var _keys=["exit_destinations","exit_thresholds","entry_x","entry_y","entry_heading"];
     for(var _i=0;_i<array_length(_keys);_i++) {
         var _old=variable_struct_get(_g.world.tables,_keys[_i]),_new=variable_struct_get(_fresh.tables,_keys[_i]);
-        for(var _j=array_length(_old);_j<array_length(_new);_j++) array_push(_old,_new[_j]);
+        array_resize(_old,39);
+        for(var _j=31;_j<39;_j++) _old[_j]=_new[_j];
         variable_struct_set(_g.world.tables,_keys[_i],_old);
     }
-    array_push(_g.world.rooms,_fresh.rooms[array_length(_fresh.rooms)-1]);
-    _g.world.sewer_doors=_fresh.sewer_doors;_g.world.sewer_network_version=1;
+    _g.world.rooms=array_filter(_g.world.rooms,function(_room,_index) {return _room.id!=15;});
+    _g.world.sewer_doors=_fresh.sewer_doors;_g.world.sewer_network_version=2;
+    if (_g.room_id==15) {
+        // A save made in the withdrawn gallery returns to its entrance side.
+        var _entry=_g.last_entry==40?38:37,_p=_g.player;
+        _p.action=0;_p.action_state=0;_p.flags=0;_p.countdown=0;_p.duration=0;
+        _p.input_lock=0;_p.stopped=255;_p.fraction_x=0;_p.fraction_y=0;
+        ln2_play_travel(_g,_entry);_p.boundary_crossings=0;_p.collision=0;
+        _p.combat_state=_p.facing>>1;_p.previous_combat=_p.combat_state;_p.saved_heading=_p.heading;
+        _g.world_state.sewer_door_lock=_entry-31;
+        if (_g.player_health<=0) _g.respawn_wait=20;
+    } else if (variable_struct_exists(_g.world_state,"sewer_door_lock") && _g.world_state.sewer_door_lock>=8) {
+        _g.world_state.sewer_door_lock=-1;
+    }
 }
 
 function ln2_sewer_door_tick(_g) {
@@ -1010,33 +1022,9 @@ function ln2_sewer_door_tick(_g) {
     return false;
 }
 
-function ln2_gallery_floor(_x,_y) {
-    // Source scene 11's dogleg pavement, bounded by its actual water edges.
-    var _v=[[0,91],[34,83],[66,91],[130,75],[254,106],[254,136],
-        [162,113],[196,105],[132,89],[36,113],[68,121],[0,138]],_inside=false;
-    for(var _i=0,_j=array_length(_v)-1;_i<array_length(_v);_j=_i++) {
-        var _a=_v[_i],_b=_v[_j];
-        if ((_a[1]>_y)!=(_b[1]>_y) && _x<(_b[0]-_a[0])*(_y-_a[1])/(_b[1]-_a[1])+_a[0]) _inside=!_inside;
-    }
-    return _inside;
-}
-
-function ln2_gallery_tick(_g) {
-    if (_g.level!=3 || _g.room_id!=15) return false;
-    var _p=_g.player;
-    // End railings close the inherited perimeter exits. Jumping uses the same
-    // ground position as the original action graph; assess water on landing.
-    _p.x=clamp(_p.x,4,244);
-    if (_p.action>=256) return false;
-    if (!ln2_gallery_floor(_p.x,_p.y)) {
-        ln2_drowning_begin(_g,7,1);return true;
-    }
-    return false;
-}
-
 function ln2_sewer_network_checks() {
     var _g=new LN2Play(3),_p=_g.player,_doors=_g.world.sewer_doors;
-    ln_check(array_length(_g.world.rooms)==16 && array_length(_doors)==10,"gallery and ten endpoints present");
+    ln_check(array_length(_g.world.rooms)==15 && array_length(_doors)==8,"original rooms and eight endpoints present");
     for(var _i=0;_i<array_length(_doors);_i++) {
         var _door=_doors[_i],_target=_doors[_door.target];
         ln2_test_enter(_g,_door.entry);_g.world_state.sewer_door_lock=-1;
@@ -1064,20 +1052,6 @@ function ln2_sewer_network_checks() {
         }
         ln_check(_walked,"actual walking enters "+_door.name);
     }
-    ln2_test_enter(_g,39);_g.enemy.active=0;
-    var _path=[[27,98],[60,96],[100,88],[132,83],[164,94],[188,98],[220,109]];
-    for(var _i=0;_i<array_length(_path)-1;_i++) {
-        var _a=_path[_i],_b=_path[_i+1];
-        for(var _step=0;_step<=100;_step++) ln_check(ln2_gallery_floor(lerp(_a[0],_b[0],_step/100),lerp(_a[1],_b[1],_step/100)),"continuous gallery walkway");
-    }
-    _p.x=120;_p.y=140;_p.action=0;
-    ln_check(ln2_gallery_tick(_g) && _g.player_health==0 && _g.world_state.drowning.water,"gallery water fall");
-    repeat(400) {
-        if (_g.respawn_wait>0) break;
-        ln2_play_tick(_g,0);
-        ln_check(!array_contains([44,45,46],_p.display_frame),"water has no land corpse");
-    }
-    ln_check(_g.respawn_wait>0,"water sequence completes");
     // Simulate a pre-network save without losing its progression flags.
     ln2_test_enter(_g,0);_g.inventory[20]=255;
     var _save=ln_save_capture(_g);
@@ -1086,10 +1060,16 @@ function ln2_sewer_network_checks() {
     var _keys=["exit_destinations","exit_thresholds","entry_x","entry_y","entry_heading"];
     for(var _i=0;_i<array_length(_keys);_i++) {var _arr=variable_struct_get(_save.state.world.tables,_keys[_i]);array_resize(_arr,31);variable_struct_set(_save.state.world.tables,_keys[_i],_arr);}
     _g=ln_save_restore(_save);
-    ln_check(array_length(_g.world.rooms)==16 && _g.inventory[20]==255,"old save gains gallery without losing grate progress");
-    ln2_test_enter(_g,39);_g.inventory[18]=0;
-    var _surface=surface_create(240,144);
-    surface_set_target(_surface);draw_clear(c_black);draw_sprite(_g.scene,0,0,0);ln2_sewer_flame_draw(_g);ln2_play_actor(_g,_g.player,false);surface_reset_target();
-    surface_save(_surface,"ln2-maintenance-gallery-runtime.png");surface_free(_surface);
-    show_debug_message("LN2_SEWER_NETWORK_PASS: ten door crossings, arrivals, saves, gallery floor, water, migration");
+    ln_check(array_length(_g.world.rooms)==15 && _g.inventory[20]==255,"old save gains doors without losing grate progress");
+    for(var _side=0;_side<2;_side++) {
+        ln2_test_enter(_g,37+_side);_g.player_health=31;_g.lives_left=4;
+        var _legacy=ln_save_capture(_g);
+        _legacy.room=15;_legacy.state.room_id=15;_legacy.state.player.room_id=15;
+        _legacy.state.scene_record.id=15;_legacy.state.last_entry=39+_side;
+        _legacy.state.world.sewer_network_version=1;
+        _g=ln_save_restore(_legacy);
+        ln_check(_g.room_id==(_side==0?10:12) && _g.last_entry==37+_side,"withdrawn gallery save returns to entrance side");
+        ln_check(_g.player_health==31 && _g.lives_left==4 && _g.inventory[20]==255,"gallery save keeps progress");
+    }
+    show_debug_message("LN2_SEWER_NETWORK_PASS: eight door crossings, direct 10/12 link, arrivals, saves, migration");
 }

@@ -1,14 +1,5 @@
 {
-  "added_panels": [
-    26,
-    25,
-    81,
-    82,
-    32,
-    31
-  ],
-  "authored_room": 15,
-  "base_scene": 11,
+  "added_rooms": 0,
   "doors": [
     {
       "entry": 31,
@@ -83,7 +74,7 @@
       "line": 13,
       "name": "10-right",
       "room": 10,
-      "target": 8,
+      "target": 7,
       "x": 108,
       "y": 65
     },
@@ -94,33 +85,11 @@
       "line": 6,
       "name": "12-right",
       "room": 12,
-      "target": 9,
+      "target": 6,
       "x": 92,
       "y": 72
-    },
-    {
-      "entry": 39,
-      "facing": 3,
-      "id": 8,
-      "line": 10,
-      "name": "gallery-left",
-      "room": 15,
-      "target": 6,
-      "x": 27,
-      "y": 90
-    },
-    {
-      "entry": 40,
-      "facing": 5,
-      "id": 9,
-      "line": 11,
-      "name": "gallery-right",
-      "room": 15,
-      "target": 7,
-      "x": 220,
-      "y": 100
     }
   ],
-  "original_routes_preserved": true,
-  "source_sha256": "70c0368682b84a79c18e5ad8fda815a0a573b21a442dd17b83a9eff44952f975"
+  "original_room_count": 15,
+  "version": 2
 }
