@@ -634,10 +634,11 @@ function ln2_life_transition_draw(_g) {
     draw_set_alpha(1);draw_set_colour(c_white);
     if (_t.phase==1 || _t.phase==3) {
         var _text=_g.lives_left==0?"GAME OVER":string(_g.lives_left)+(_g.lives_left==1?" LIFE REMAINING":" LIVES LEFT");
-        var _x=640-string_length(_text)*12;
+        // Centre within the 240x144 gameplay bitmap, drawn at (160,84) at 3x scale.
+        var _x=160+240*3/2-string_length(_text)*12;
         for(var _i=1;_i<=string_length(_text);_i++) {
             var _c=ord(string_char_at(_text,_i)),_code=_c>=48 && _c<=57?_c-48+27:(_c==32?0:_c&63);
-            draw_sprite_ext(spr_ln2_message_font,_code,_x+(_i-1)*24,372,3,3,0,c_white,1);
+            draw_sprite_ext(spr_ln2_message_font,_code,_x+(_i-1)*24,84+(144*3-24)/2,3,3,0,c_white,1);
         }
     }
 }
@@ -719,3 +720,4 @@ function ln2_lives_pickup_checks() {
     ln_check(ln2_pickup_assist_input(_g,16)==0 && _p.action>=256,"outside enemy range permits pickup");
     show_debug_message("LN2_LIVES_PICKUP_PASS: falls, fades, source font, saved lives count and "+string(_collected)+" level pickups with enemy range guard");
 }
+
