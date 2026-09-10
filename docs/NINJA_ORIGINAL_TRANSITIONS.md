@@ -8,9 +8,11 @@ LN1 death routine $7875 calls $7db3, then $7d0e, clears the bitmap and deducts a
 
 LN2 $9239 calls $93af before clearing the bitmap and decrementing lives. The sprite setup recovers a red curtain with vertical stripes and a shaped yellow/grey lower edge, not an alpha fade or random dissolve. Raster routine $1d13 repeats five horizontally expanded sprites across the bitmap. $0232 advances from 29 toward 189 in two-line steps; $8fa4 retracts it in two-line steps. The patterns are at $3fb0/$3fb3, copied into sprite slots $30/$31.
 
+The lives-message routines at $8e55/$8e6c draw the text before $8e89 calls $8fa4 to lift the curtain. The following path returns to the game; this sequence does not require a second down/up cycle.
+
 ## Native implementation
 
-LN1 now uses the recovered pixel mask sequence, followed by a palette substitution shader with the original darkening table. It resumes at the entrance after the fade. LN2 replaces the alpha fade with the recovered descending/retracting curtain, retaining the lives message in the centre of the 240x144 gameplay bitmap. Both effects exclude the surrounding status panels and outer debug HUD.
+LN1 now uses the recovered pixel mask sequence, followed by a palette substitution shader with the original darkening table. It resumes at the entrance after the fade. LN2 replaces the alpha fade with the recovered descending/retracting curtain, lowering it over the game, then raising it to reveal the lives message in the centre of the 240x144 gameplay bitmap. After the message hold, gameplay resumes directly. Saves preserve progress while the curtain rises; legacy saves in the former game-reveal phase still complete normally. Both effects exclude the surrounding status panels and outer debug HUD.
 
 The mask order is recovered offline with deterministic CIA timer samples; it is not the random sequence of every possible C64 run. The pixel pass is presented over 40 native ticks; the palette phase takes 90 ticks. LN2 uses 80 ticks in each direction and retains the existing 75-tick message hold. Sprite geometry and colours are source-derived; VIC raster timing/DMA and complete original-machine frame parity are not claimed.
 

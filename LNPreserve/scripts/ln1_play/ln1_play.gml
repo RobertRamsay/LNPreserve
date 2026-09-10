@@ -373,9 +373,11 @@ function ln_ninja_transition_checks() {
     _g=new LN2Play(1);_g.life_transition={phase:0,tick:40};
     ln2_play_draw(_g);surface_save(application_surface,"ln2-original-wipe.png");
     repeat(40) ln2_play_tick(_g,0);
-    ln_check(_g.life_transition.phase==1,"LN2 original 80-step wipe reaches lives message");
+    ln_check(_g.life_transition.phase==4,"LN2 descending wipe switches to rising lives reveal");
+    repeat(80) ln2_play_tick(_g,0);
+    ln_check(_g.life_transition.phase==1,"LN2 rising curtain finishes before lives pause");
     ln2_play_draw(_g);surface_save(application_surface,"ln2-original-wipe-lives.png");
     ln2_test_finish_life_transition(_g);
-    ln_check(!is_struct(_g.life_transition),"LN2 reverse wipe returns to game");
+    ln_check(!is_struct(_g.life_transition),"LN2 lives pause returns directly to game");
     show_debug_message("LN_NINJA_TRANSITIONS_PASS: original pixel/palette and patterned wipes, bitmap bounds, saved transitions and one-life respawns");
 }

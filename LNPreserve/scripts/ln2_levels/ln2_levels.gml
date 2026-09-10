@@ -350,7 +350,8 @@ function ln2_water_boat_supported(_g) {
 
 function ln2_drowning_begin(_g,_offset,_entry) {
     var _p=_g.player;
-    _g.world_state.drowning={phase:0,saved_y:_p.y,saved_facing:_p.facing};
+    _g.world_state.drowning={phase:0,water:true,saved_y:_p.y,saved_facing:_p.facing};
+    _g.player_health=0;
     _p.boundary_crossings=0;_g.exit_locked=true;
     _p.y=(_p.y-_offset)&255;
     var _side=((_p.facing+2)&4)?3:0;
@@ -367,7 +368,15 @@ function ln2_drowning_tick(_g,_tick) {
     if (_d.phase==2 && --_d.steps>0) {
         ln2_player_special(_g,((_p.facing+2)&4)?$cd02:$ccf9);return;
     }
-    if (_d.phase==2 || _d.phase==1) {
+    if (_d.phase==1 || _d.phase==4 ||
+        (_d.phase==2 && variable_struct_exists(_d,"water") && _d.water)) {
+        // Water finishes with submersion/splash, never the land-death poses.
+        _d.phase=4;_g.player_health=0;_p.display_frame=255;_p.action_state=0;
+        _p.input_lock=255;_p.facing=_d.saved_facing;
+        if (_g.status.health[0]>0) return;
+        _g.world_state.drowning=undefined;_g.respawn_wait=20;return;
+    }
+    if (_d.phase==2) {
         _d.phase=3;_p.facing=_d.saved_facing;_p.depth_y=_p.y;_p.height_fixed=0;
         _g.player_health=0;_p.input_lock=255;_p.action_state=0;
         _p.combat_state=36+(_p.facing>>1);
@@ -402,7 +411,8 @@ function ln2_hazard_boundary(_g) {
     }
     // Island's eastern edge uses the original fixed-depth eight-step sink.
     if (_mode==43) {
-        _g.world_state.drowning={phase:2,steps:8,saved_y:_p.y,saved_facing:_p.facing};
+        _g.world_state.drowning={phase:2,water:true,steps:8,saved_y:_p.y,saved_facing:_p.facing};
+        _g.player_health=0;
         _p.depth_y=158;_p.height_fixed=255;_g.exit_locked=true;_p.boundary_crossings=0;
         ln2_player_special(_g,((_p.facing+2)&4)?$cd02:$ccf9);return true;
     }
@@ -447,12 +457,14 @@ function ln2_water_knife_checks() {
     while(is_struct(_g.world_state.drowning) && _ticks<200) {
         ln2_play_tick(_g,31);_ticks++;
         ln_check(_p.x==_x,"drowning prevents movement/fire input");
+        ln_check(_p.display_frame!=44 && _p.display_frame!=45 && _p.display_frame!=46,"river never plays land-death poses");
         if (_p.display_frame>=88 && _p.display_frame<=98) {
             if (!_seen) {ln2_play_draw(_g);surface_save(_g.stage_surface,"ln2-water-splash.png");}
             _seen=true;
         }
     }
     ln_check(_seen && _ticks<200 && _g.respawn_wait==20,"original splash completes before respawn");
+    ln_check(_p.display_frame==255 && _g.status.health[0]==0,"river splash ends submerged with empty health");
     repeat(20) ln2_play_tick(_g,0);ln2_test_finish_life_transition(_g);
     ln_check(_g.lives_left==_life-1 && _g.player_health==44,"drowning loses exactly one life and restores health");
     for(var _mode_index=0;_mode_index<5;_mode_index++) {
@@ -463,7 +475,10 @@ function ln2_water_knife_checks() {
         var _weapon=_p.selected_weapon,_item=_g.selected_item;
         ln2_controls_update(_g,0,0);
         ln_check(_p.selected_weapon==_weapon && _g.selected_item==_item,"water death locks selection inputs");
-        var _wait=0;while(is_struct(_g.world_state.drowning) && _wait++<200) ln2_play_tick(_g,31);
+        var _wait=0;while(is_struct(_g.world_state.drowning) && _wait++<200) {
+            ln2_play_tick(_g,31);
+            ln_check(_p.display_frame!=44 && _p.display_frame!=45 && _p.display_frame!=46,"all water modes exclude land-death poses");
+        }
         ln_check(_g.respawn_wait==20,"water and island sink both finish");
     }
     show_debug_message("LN2_WATER_KNIFE_PASS: 512 original boat cases, 160 knife spawns, shore/splash/respawn integration");
@@ -618,13 +633,16 @@ function ln2_fall_death_begin(_g) {
 function ln2_life_transition_tick(_g,_tick) {
     var _t=_g.life_transition;_g.player.tick=_tick;_g.player.last_tick=_tick;_t.tick++;
     if (_t.phase==0 && _t.tick>=80) {
-        _g.lives_left=max(0,_g.lives_left-1);_t.phase=1;_t.tick=0;return;
+        _g.lives_left=max(0,_g.lives_left-1);_t.phase=4;_t.tick=0;return;
     }
+    if (_t.phase==4 && _t.tick>=80) {_t.phase=1;_t.tick=0;return;}
     if (_t.phase==1 && _t.tick>=75) {
         if (_g.lives_left<=0) {_g.game_over=true;_t.phase=3;return;}
         _g.player_health=44;ln2_test_enter(_g,_g.last_entry);_g.status.health[0]=44;
-        _g.life_transition=_t;_t.phase=2;_t.tick=0;return;
+        // The raised curtain has already revealed the lives message.
+        _g.life_transition=undefined;return;
     }
+    // Older saves may still contain the previous game-reveal phase.
     if (_t.phase==2 && _t.tick>=80) _g.life_transition=undefined;
 }
 
@@ -638,7 +656,7 @@ function ln2_life_transition_draw(_g) {
     } else {
         draw_set_colour(c_black);draw_rectangle(160,84,880,516,false);draw_set_colour(c_white);
     }
-    if (_t.phase==1 || _t.phase==3) {
+    if (_t.phase==1 || _t.phase==3 || _t.phase==4) {
         var _text=_g.lives_left==0?"GAME OVER":string(_g.lives_left)+(_g.lives_left==1?" LIFE REMAINING":" LIVES LEFT");
         // Centre within the 240x144 gameplay bitmap, drawn at (160,84) at 3x scale.
         var _x=160+240*3/2-string_length(_text)*12;
@@ -646,6 +664,10 @@ function ln2_life_transition_draw(_g) {
             var _c=ord(string_char_at(_text,_i)),_code=_c>=48 && _c<=57?_c-48+27:(_c==32?0:_c&63);
             draw_sprite_ext(spr_ln2_message_font,_code,_x+(_i-1)*24,84+(144*3-24)/2,3,3,0,c_white,1);
         }
+    }
+    if (_t.phase==4) {
+        // Draw the text first so the rising curtain uncovers it.
+        draw_sprite_ext(spr_ln2_death_wipe,clamp(80-_t.tick,0,80),160,84,3,3,0,c_white,1);
     }
 }
 
@@ -695,6 +717,12 @@ function ln2_lives_pickup_checks() {
         repeat(20) ln2_play_tick(_g,0);
         ln_check(is_struct(_g.life_transition) && _g.lives_left==3,"fade begins before deducting life");
         repeat(80) ln2_play_tick(_g,0);
+        ln_check(_g.life_transition.phase==4 && _g.lives_left==2,"curtain rises over lives message after one life loss");
+        repeat(40) ln2_play_tick(_g,0);
+        _g=ln_save_restore(json_parse(json_stringify(ln_save_capture(_g))));
+        ln_check(_g.life_transition.phase==4 && _g.life_transition.tick==40,"saved rising curtain resumes in place");
+        ln2_play_draw(_g);surface_save(application_surface,"ln2-curtain-revealing-lives.png");
+        repeat(40) ln2_play_tick(_g,0);
         ln_check(_g.life_transition.phase==1 && _g.lives_left==2,"lives message shows decremented count");
         ln2_play_draw(_g);surface_save(application_surface,"ln2-lives-message.png");
         _g=ln_save_restore(json_parse(json_stringify(ln_save_capture(_g))));
