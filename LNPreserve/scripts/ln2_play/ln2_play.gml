@@ -17,7 +17,7 @@ function LN2Play(_level=1) constructor {
     final_rules=ln3_data_read("play/ln2/final_mechanisms.json");final_art=ln3_data_read("play/ln2/final_art.json");
     boss_release=ln3_data_read("play/ln2/boss_release.json");
     item_flow=ln3_data_read(_folder+"item_flow.json");
-    office_code_known=false;god_mode=false;
+    office_code_known=false;god_mode=false;one_hit_kills=false;
     keycode=array_create(4,0);array_copy(keycode,0,final_rules.initial_keycode,0,4);
     world_state.candles=array_create(5,0);world_state.final_palette_phase=0;
     keypad=undefined;pending_item=undefined;last_joy=0;
@@ -128,7 +128,7 @@ function ln2_level_load(_g,_level,_ordinary=false) {
     var _fresh=new LN2Play(_level),_names=variable_struct_get_names(_fresh);
     for (var _i=0;_i<array_length(_names);_i++) {
         var _name=_names[_i];
-        if (array_contains(["level_states","inventory","timer","stage_surface","lives_left","player_health","controls","keycode","office_code_known","god_mode","status","visited_scenes"],_name)) continue;
+        if (array_contains(["level_states","inventory","timer","stage_surface","lives_left","player_health","controls","keycode","office_code_known","god_mode","one_hit_kills","status","visited_scenes"],_name)) continue;
         variable_struct_set(_g,_name,variable_struct_get(_fresh,_name));
     }
     _g.timer.cycles_per_frame=_g.data.timer_period_cycles;
@@ -149,6 +149,7 @@ function ln2_play_tick(_g,_joy) {
     var _p=_g.player,_tick=(_p.tick+1)&255;if (_tick==0) _g.tick_epoch=(_g.tick_epoch+1)&255;
     _g.last_joy=_joy;
     _joy=ln2_burger_input(_g,_joy);
+    _joy=ln2_candle_assist_input(_g,_joy);
     ln2_status_tick(_g,_tick);
     _g.room_age++;
     if (_g.notice_item>=0 && ((_tick-_g.notice_tick)&255)>=_g.notice_duration) _g.notice_item=-1;
@@ -216,6 +217,7 @@ function ln2_play_draw(_g) {
     }
     surface_reset_target();draw_surface_ext(_g.stage_surface,160,84,3,3,0,c_white,1);
     ln2_status_draw(_g,160,84,3);
+    draw_text(600,36,"F8 One-hit kills: "+(_g.one_hit_kills?"ON":"OFF"));
     draw_text(160,36,"LAST NINJA 2 — "+string_upper(_g.title));draw_text(1000,36,"Scene "+string(_g.room_id));
     draw_text(160,700,"WASD Move    # + direction Action    Space Weapon    2 / 3 Select item");
     draw_text(160,728,"Numpad: 7 NW / 9 NE / 1 SW / 3 SE    F11 Scenes    Home Restart");

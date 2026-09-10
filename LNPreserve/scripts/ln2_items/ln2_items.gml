@@ -1,6 +1,14 @@
 /// Source item records retain their action, facing, and approach rectangles.
 function ln2_item_interact(_g,_kind) {
     var _p=_g.player;
+    if (_kind==0 && _g.level==7 && _g.room_id==1 && _g.world_state.boss_defeated &&
+        _g.selected_item==16 && (_g.inventory[16]&127)!=0 && _g.inventory[23]==0 &&
+        abs(_p.x-_g.enemy.x)<=18 && abs(_p.y-_g.enemy.y)<=14) {
+        for(var _i=0;_i<array_length(_g.world.items);_i++) {
+            var _reward=_g.world.items[_i];
+            if(_reward.id==23) {ln2_item_complete(_g,_reward,23);return;}
+        }
+    }
     for (var _i=0;_i<array_length(_g.world.items);_i++) {
         var _item=_g.world.items[_i];
         if (_item.room!=_g.room_id || _item.action!=_kind || _g.inventory[_item.id]!=0) continue;
@@ -266,4 +274,81 @@ function ln2_keypad_visual_checks() {
     ln2_play_draw(_g);surface_save(application_surface,"ln2-original-keypad.png");
     ln_check(is_struct(_g.keypad) && sprite_get_number(spr_ln2_keypad_digits)==20,"original keypad glyphs rendered");
     show_debug_message("LN2_KEYPAD_VISUAL_PASS");
+}
+
+/// Testing aid: two fire-only edges near the same unlit candle align and light it.
+function ln2_candle_assist_input(_g,_joy) {
+    if (!variable_struct_exists(_g,"candle_taps")) _g.candle_taps={previous:0,remaining:0,target:-1};
+    var _t=_g.candle_taps,_fire=_joy&16,_edge=_fire!=0 && _t.previous==0,_p=_g.player;
+    _t.previous=_fire;if(_t.remaining>0) _t.remaining--;
+    if (_g.level!=7 || _g.room_id!=1 || _g.world_state.boss_defeated ||
+        _p.input_lock!=0 || _g.respawn_wait>0 || is_struct(_g.keypad) || (_joy&15)!=0) {
+        _t.remaining=0;_t.target=-1;return _joy;
+    }
+    var _best=32*32+1,_index=-1,_x=0,_y=0,_facing=1;
+    for(var _i=0;_i<20;_i++) {
+        var _c=_i div 4;if(_g.world_state.candles[_c]>=128) continue;
+        var _r=_g.final_rules.rectangles[_i],_cx=(_r[0]+_r[2]) div 2,_cy=(_r[1]+_r[3]) div 2;
+        var _dist=sqr(_p.x-_cx)+sqr(_p.y-_cy);
+        if(_dist<_best) {_best=_dist;_index=_c;_x=_cx;_y=_cy;_facing=(_i mod 4)*2+1;}
+    }
+    if(_index<0) {_t.remaining=0;_t.target=-1;return _joy;}
+    if (_p.action>=256 && variable_struct_exists(_g,"candle_assist_active") && _g.candle_assist_active) return 0;
+    if(!_edge) return _joy;
+    if(_t.remaining==0 || _t.target!=_index) {_t.remaining=30;_t.target=_index;return 0;}
+    _t.remaining=0;_t.target=-1;
+    _p.x=_x;_p.y=_y;_p.depth_y=_y;_p.fraction_x=0;_p.fraction_y=0;
+    _p.facing=_facing;_p.heading=_facing;_p.turn_lock=0;_p.stopped=255;
+    _p.action=0;_p.action_state=0;_p.flags=0;_p.countdown=0;
+    _p.frame=16+(((_facing+2)&4)>>2);_p.display_frame=_p.frame;
+    // Play the original crouch/pickup chain; its state 11 lights the candle.
+    _g.candle_assist_active=true;
+    ln2_player_begin(_p,_g.data,20);
+    return 0;
+}
+
+function ln2_testing_aid_checks() {
+    var _g=new LN2Play(7);ln2_play_enter(_g,1);_g.inventory[18]=255;ln2_boss_release(_g);
+    ln2_damage(_g,1,true);ln_check(_g.enemy.health==43,"one-hit mode defaults off");
+    _g.one_hit_kills=true;ln2_damage(_g,1,true);
+    ln_check(_g.enemy.health==0 && _g.enemy.knockouts>=128,"one-hit mode uses normal knockout handling");
+    var _health=_g.player_health;ln2_damage(_g,1,false);ln_check(_g.player_health==_health-1,"one-hit mode does not amplify enemy damage");
+    ln2_level_load(_g,6);ln_check(_g.one_hit_kills,"one-hit preference survives level changes");
+    var _loaded=ln_save_restore(json_parse(json_stringify(ln_save_capture(_g))));ln_check(_loaded.one_hit_kills,"one-hit preference survives saves");
+    for(var _c=0;_c<5;_c++) {
+        _g=new LN2Play(7);ln2_play_enter(_g,1);_g.inventory[16]=255;
+        var _r=_g.final_rules.rectangles[_c*4];_g.player.x=(_r[0]+_r[2]) div 2+3;_g.player.y=(_r[1]+_r[3]) div 2+2;
+        ln2_candle_assist_input(_g,16);repeat(3) ln2_candle_assist_input(_g,16);
+        ln_check(_g.world_state.candles[_c]==0,"holding fire cannot light candle");
+        ln2_candle_assist_input(_g,0);ln2_candle_assist_input(_g,16);
+        repeat(35) ln2_play_tick(_g,0);
+        ln_check(_g.world_state.candles[_c]>=128,"double fire aligns and lights candle "+string(_c));
+        ln2_candle_assist_input(_g,0);ln2_candle_assist_input(_g,16);ln2_candle_assist_input(_g,0);ln2_candle_assist_input(_g,16);
+        ln_check(_g.world_state.candles[_c]>=128,"assistance never toggles a lit candle off");
+    }
+    _g=new LN2Play(7);ln2_play_enter(_g,1);_g.inventory[16]=255;_g.player.x=0;_g.player.y=0;
+    ln2_candle_assist_input(_g,16);ln2_candle_assist_input(_g,0);ln2_candle_assist_input(_g,16);
+    ln_check(_g.player.x==0 && _g.player.y==0,"distant double fire does not teleport ninja");
+    show_debug_message("LN2_TESTING_AIDS_PASS: one-hit mode, damage isolation, persistence, all five candle approaches and tap guards");
+}
+
+function ln2_candle_body_checks() {
+    for(var _c=0;_c<5;_c++) {
+        var _g=new LN2Play(7);ln2_play_enter(_g,1);_g.enemy.active=0;
+        var _r=_g.final_rules.rectangles[_c*4];_g.player.x=(_r[0]+_r[2]) div 2+10;_g.player.y=(_r[1]+_r[3]) div 2+5;
+        ln2_play_tick(_g,16);repeat(5) ln2_play_tick(_g,0);ln2_play_tick(_g,16);
+        ln_check(_g.player.action>=256 && (_g.player.display_frame==69 || _g.player.display_frame==71),"double hash starts visible crouch");
+        repeat(35) ln2_play_tick(_g,0);
+        ln_check(_g.world_state.candles[_c]>=128,"native double-fire lights candle "+string(_c));
+    }
+    var _g=new LN2Play(7);ln2_play_enter(_g,1);_g.enemy.x=118;_g.enemy.y=114;
+    _g.player.x=118;_g.player.y=114;_g.selected_item=16;_g.inventory[16]=255;
+    ln2_item_interact(_g,0);ln_check(_g.inventory[23]==0,"body interaction requires completed ritual");
+    _g.world_state.boss_defeated=true;_g.world_state.candles=array_create(5,128);
+    _g.selected_item=0;ln2_item_interact(_g,0);ln_check(_g.inventory[23]==0,"body interaction requires held orb");
+    _g.selected_item=16;ln2_item_interact(_g,0);
+    ln_check(_g.inventory[23]!=0 && _g.inventory[16]==128 && _g.scene_frame==4,"orb at body produces same completion as safe");
+    var _score=json_stringify(_g.status.score);ln2_item_interact(_g,0);
+    ln_check(json_stringify(_g.status.score)==_score,"orb completion awards once");
+    show_debug_message("LN2_CANDLE_BODY_PASS: native double-fire crouch for five candles; held orb at defeated body and completion guards");
 }

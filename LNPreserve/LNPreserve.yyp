@@ -4060,6 +4060,7 @@
     {"id":{"name":"spr_ln2_loader_level7_object_001","path":"sprites/spr_ln2_loader_level7_object_001/spr_ln2_loader_level7_object_001.yy",},},
     {"id":{"name":"spr_ln2_loader_level7_object_002","path":"sprites/spr_ln2_loader_level7_object_002/spr_ln2_loader_level7_object_002.yy",},},
     {"id":{"name":"spr_ln2_loader_level7_object_003","path":"sprites/spr_ln2_loader_level7_object_003/spr_ln2_loader_level7_object_003.yy",},},
+    {"id":{"name":"spr_ln2_orb_icon","path":"sprites/spr_ln2_orb_icon/spr_ln2_orb_icon.yy",},},
     {"id":{"name":"spr_ln2_park_switch_pressed","path":"sprites/spr_ln2_park_switch_pressed/spr_ln2_park_switch_pressed.yy",},},
     {"id":{"name":"spr_ln2_player_health","path":"sprites/spr_ln2_player_health/spr_ln2_player_health.yy",},},
     {"id":{"name":"spr_ln2_projectile_bodies","path":"sprites/spr_ln2_projectile_bodies/spr_ln2_projectile_bodies.yy",},},

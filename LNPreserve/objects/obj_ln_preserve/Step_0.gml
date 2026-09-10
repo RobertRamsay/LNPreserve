@@ -17,6 +17,7 @@ if (!selftest && ln_saves_step(self)) exit;
 elapsed_us += int64(delta_time);
 // Input is stamped at observation time, not retroactively applied to host-stall debt.
 input_state.sample((elapsed_us div 1000000) * clock.hz + ((elapsed_us mod 1000000) * clock.hz) div 1000000);
+if (play.game_number==2 && !workbench && keyboard_check_pressed(vk_f8)) play.one_hit_kills=!play.one_hit_kills;
 if (keyboard_check_pressed(vk_f12)) { workbench = !workbench; scene_test.menu = false; }
 if (keyboard_check_pressed(vk_f11)) {
     workbench = false; scene_test.menu = !scene_test.menu;

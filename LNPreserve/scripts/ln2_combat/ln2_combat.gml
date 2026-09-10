@@ -29,6 +29,7 @@ function ln2_damage(_g,_amount,_enemy) {
     }
     var _e=_g.enemy;
     if (_e.health==0) return;
+    if (_g.one_hit_kills && _amount>0) _amount=_e.health;
     _e.health=max(0,_e.health-_amount);
     if (_e.health==0) {
         ln2_score_add(_g,$25,true);
@@ -89,7 +90,7 @@ function ln2_combat_event(_g,_event,_enemy) {
         case 8:ln2_combat_attack(_g,_enemy,6);return;
         case 9:if (!_enemy) ln2_item_interact(_g,0);return;
         case 10:if (!_enemy) ln2_item_interact(_g,1);return;
-        case 11:if (!_enemy) ln2_item_interact(_g,2);return;
+        case 11:if (!_enemy) {ln2_item_interact(_g,2);_g.candle_assist_active=false;}return;
         case 13:ln2_damage(_g,44,false);return;
         case 14:ln2_combat_attack(_g,_enemy,-1);return;
         case 22:ln2_force_exit(_g,1);return;
