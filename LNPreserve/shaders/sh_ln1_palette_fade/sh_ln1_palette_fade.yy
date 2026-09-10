@@ -1,0 +1,12 @@
+{
+  "$GMShader":"",
+  "%Name":"sh_ln1_palette_fade",
+  "name":"sh_ln1_palette_fade",
+  "parent":{
+    "name":"Shaders",
+    "path":"folders/Native/Shaders.yy",
+  },
+  "resourceType":"GMShader",
+  "resourceVersion":"2.0",
+  "type":1,
+}

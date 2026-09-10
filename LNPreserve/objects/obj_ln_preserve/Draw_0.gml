@@ -1,3 +1,17 @@
+if (ninja_transitions_test) {
+    try {
+        if (!variable_instance_exists(id,"transition_render_tick")) {
+            ln_ninja_transition_checks();transition_render_tick=0;
+            transition_render_game=new LN1Play();transition_render_game.death_transition={tick:46};
+        }
+        if (transition_render_tick==1)
+            transition_render_game=ln_save_restore(json_parse(json_stringify(ln_save_capture(transition_render_game))));
+        ln1_play_draw(transition_render_game,false);
+        transition_render_tick++;
+    }
+    catch(_failure) {show_debug_message("LN_NINJA_TRANSITIONS_FAILURE: "+string(_failure));game_end();}
+    exit;
+}
 if (lives_pickup_test) {
     try {ln2_lives_pickup_checks();}
     catch(_failure) {show_debug_message("LN2_LIVES_PICKUP_FAILURE: "+string(_failure));}

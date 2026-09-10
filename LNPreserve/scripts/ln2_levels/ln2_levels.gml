@@ -616,7 +616,7 @@ function ln2_fall_death_begin(_g) {
 
 function ln2_life_transition_tick(_g,_tick) {
     var _t=_g.life_transition;_g.player.tick=_tick;_g.player.last_tick=_tick;_t.tick++;
-    if (_t.phase==0 && _t.tick>=20) {
+    if (_t.phase==0 && _t.tick>=80) {
         _g.lives_left=max(0,_g.lives_left-1);_t.phase=1;_t.tick=0;return;
     }
     if (_t.phase==1 && _t.tick>=75) {
@@ -624,14 +624,19 @@ function ln2_life_transition_tick(_g,_tick) {
         _g.player_health=44;ln2_test_enter(_g,_g.last_entry);_g.status.health[0]=44;
         _g.life_transition=_t;_t.phase=2;_t.tick=0;return;
     }
-    if (_t.phase==2 && _t.tick>=20) _g.life_transition=undefined;
+    if (_t.phase==2 && _t.tick>=80) _g.life_transition=undefined;
 }
 
 function ln2_life_transition_draw(_g) {
     if (!variable_struct_exists(_g,"life_transition") || !is_struct(_g.life_transition)) return;
-    var _t=_g.life_transition,_alpha=_t.phase==0?_t.tick/20:(_t.phase==2?1-_t.tick/20:1);
-    draw_set_alpha(clamp(_alpha,0,1));draw_set_colour(c_black);draw_rectangle(160,84,1120,684,false);
-    draw_set_alpha(1);draw_set_colour(c_white);
+    var _t=_g.life_transition;
+    // Original $93af/$1d13: expanded multicolour sprites sweep the bitmap.
+    if (_t.phase==0 || _t.phase==2) {
+        var _frame=_t.phase==0?_t.tick:80-_t.tick;
+        draw_sprite_ext(spr_ln2_death_wipe,clamp(_frame,0,80),160,84,3,3,0,c_white,1);
+    } else {
+        draw_set_colour(c_black);draw_rectangle(160,84,880,516,false);draw_set_colour(c_white);
+    }
     if (_t.phase==1 || _t.phase==3) {
         var _text=_g.lives_left==0?"GAME OVER":string(_g.lives_left)+(_g.lives_left==1?" LIFE REMAINING":" LIVES LEFT");
         // Centre within the 240x144 gameplay bitmap, drawn at (160,84) at 3x scale.
@@ -671,8 +676,8 @@ function ln2_pickup_assist_input(_g,_joy) {
 
 function ln2_test_finish_life_transition(_g) {
     var _ticks=0;
-    while(is_struct(_g.life_transition) && _g.life_transition.phase!=3 && _ticks++<140) ln2_play_tick(_g,0);
-    ln_check(_ticks<140,"life transition completes");
+    while(is_struct(_g.life_transition) && _g.life_transition.phase!=3 && _ticks++<240) ln2_play_tick(_g,0);
+    ln_check(_ticks<240,"life transition completes");
 }
 
 function ln2_lives_pickup_checks() {
@@ -687,7 +692,7 @@ function ln2_lives_pickup_checks() {
         ln_check(_death_seen && _g.respawn_wait==20,"every fatal fall cuts to death animation");
         repeat(20) ln2_play_tick(_g,0);
         ln_check(is_struct(_g.life_transition) && _g.lives_left==3,"fade begins before deducting life");
-        repeat(20) ln2_play_tick(_g,0);
+        repeat(80) ln2_play_tick(_g,0);
         ln_check(_g.life_transition.phase==1 && _g.lives_left==2,"lives message shows decremented count");
         ln2_play_draw(_g);surface_save(application_surface,"ln2-lives-message.png");
         _g=ln_save_restore(json_parse(json_stringify(ln_save_capture(_g))));

@@ -34,7 +34,7 @@ function LN1Play(_level = 1) constructor {
     room_age = 0; prayer_phase = 0;
     water_active = false; water_ticks = 0; water_cutoff = 173; water_clock = world.initial_water_clock;
     random_pointer = 0; random_value = 0;
-    stage_surface = -1;
+    stage_surface = -1;death_transition=undefined;death_transition_done=false;
     timer = new LNClock();
     // CIA1 timer interrupt drives game logic separately from the VIC video frame.
     timer.cycles_per_frame = data.timer_period_cycles;
@@ -96,6 +96,12 @@ function ln1_play_travel(_g, _entry) {
 }
 
 function ln1_play_tick(_g, _joy) {
+    if (variable_struct_exists(_g,"death_transition") && is_struct(_g.death_transition)) {
+        _g.player.tick=(_g.player.tick+1)&255;
+        if (++_g.death_transition.tick>=130) {_g.death_transition=undefined;_g.death_transition_done=true;}
+        return;
+    }
+
     var _p = _g.player, _e = _g.enemy;
     if (_g.game_over || _g.level_complete) return;
     // Original spiral cell order, one step every two native PAL ticks.
@@ -109,9 +115,13 @@ function ln1_play_tick(_g, _joy) {
     if (_g.prayer_phase > 0) { ln1_prayer_tick(_g, _joy); return; }
     if (_g.water_active) { ln1_water_tick(_g); ln1_notice_update(_g); return; }
     if (_g.death_wait > 0) {
+        if (_g.death_wait==1 && (!variable_struct_exists(_g,"death_transition_done") || !_g.death_transition_done)) {
+            _g.death_transition={tick:0};return;
+        }
         _p.tick = (_p.tick + 1) & 255; _g.death_wait--;
         ln1_notice_update(_g);
         if (_g.death_wait == 0) {
+            _g.death_transition_done=false;
             _g.lives_left--;
             if (_g.lives_left == 0 && _g.inventory[8] != 0 && _g.inventory[8] != 128) {
                 _g.lives_left++; _g.inventory[8] = 0;
@@ -279,6 +289,7 @@ function ln1_play_actor(_g, _actor, _enemy) {
 }
 
 function ln1_play_draw(_game, _paused) {
+    var _saved_view=matrix_get(matrix_view),_saved_projection=matrix_get(matrix_projection);
     draw_clear(c_black);
     var _scale = 3, _x = 160, _y = 84, _s = _game.player;
     draw_set_colour(c_white);
@@ -296,8 +307,17 @@ function ln1_play_draw(_game, _paused) {
     if (_s.y < _game.enemy.y) { ln1_play_actor(_game, _s, false); ln1_play_actor(_game, _game.enemy, true); }
     else { ln1_play_actor(_game, _game.enemy, true); ln1_play_actor(_game, _s, false); }
     ln1_projectile_draw(_game);
+    var _transition=variable_struct_exists(_game,"death_transition") && is_struct(_game.death_transition);
+    if (_transition) draw_sprite(spr_ln1_death_dissolve,min(39,_game.death_transition.tick),0,0);
     surface_reset_target();
+    matrix_set(matrix_view,_saved_view);matrix_set(matrix_projection,_saved_projection);
+    if (_transition) {
+        draw_flush();
+        shader_set(sh_ln1_palette_fade);
+        shader_set_uniform_f(shader_get_uniform(sh_ln1_palette_fade,"u_steps"),max(0,(_game.death_transition.tick-40) div 6));
+    }
     draw_surface_ext(_game.stage_surface,_x,_y,_scale,_scale,0,c_white,1);
+    if (_transition) {draw_flush();shader_reset();}
     draw_sprite_ext(spr_ln1_dashboard, 0, _x, _y, _scale, _scale, 0, c_white, 1);
     // Original $65bf: the bottom inventory shows owned weapons 1..5.
     var _weapons = 0;
@@ -325,4 +345,37 @@ function ln1_play_draw(_game, _paused) {
     if (_game.prayer_phase > 0) draw_text(710, 760, "S + D  Finish prayer");
     if (_game.game_over) { draw_set_colour(c_white); draw_text(510, 54, "GAME OVER — HOME TO RESTART"); }
     if (_paused) { draw_set_colour(c_white); draw_text(594, 54, "PAUSED"); }
+}
+
+function ln1_finish_transition_check(_g) {
+    var _ticks=0;
+    while(is_struct(_g.death_transition) && _ticks++<140) ln1_play_tick(_g,0);
+    ln_check(_ticks<140,"LN1 pixel/palette transition finishes");
+    if (_g.death_transition_done) ln1_play_tick(_g,0);
+}
+
+function ln_ninja_transition_checks() {
+    var _g=new LN1Play(),_lives=_g.lives_left;_g.death_wait=1;
+    ln1_play_tick(_g,0);repeat(24) ln1_play_tick(_g,0);
+    ln_check(_g.death_transition.tick==24 && _g.lives_left==_lives,"LN1 dissolve precedes life deduction");
+    ln1_play_draw(_g,false);surface_save(application_surface,"ln1-original-dissolve.png");
+    var _restored=ln_save_restore(json_parse(json_stringify(ln_save_capture(_g))));
+    ln_check(_restored.death_transition.tick==24,"saved LN1 transition phase persists");
+    ln1_finish_transition_check(_restored);
+    ln_check(_restored.lives_left==_lives-1 && _restored.player_health==32,"restored LN1 dissolve deducts exactly one life");
+    ln_check(_g.death_transition.tick==24,"LN1 saved dissolve resumes at same step");
+    repeat(22) ln1_play_tick(_g,0);
+    ln1_play_draw(_g,false);draw_flush();surface_save(application_surface,"ln1-original-palette-fade.png");
+    ln_check(surface_getpixel(application_surface,207,555)!=c_black,"LN1 palette fade leaves built-in HUD visible");
+    ln1_finish_transition_check(_g);
+    ln_check(_g.lives_left==_lives-1 && _g.player_health==32,"LN1 transition loses one life and respawns");
+    ln_check(shader_is_compiled(sh_ln1_palette_fade),"LN1 palette shader compiles");
+    _g=new LN2Play(1);_g.life_transition={phase:0,tick:40};
+    ln2_play_draw(_g);surface_save(application_surface,"ln2-original-wipe.png");
+    repeat(40) ln2_play_tick(_g,0);
+    ln_check(_g.life_transition.phase==1,"LN2 original 80-step wipe reaches lives message");
+    ln2_play_draw(_g);surface_save(application_surface,"ln2-original-wipe-lives.png");
+    ln2_test_finish_life_transition(_g);
+    ln_check(!is_struct(_g.life_transition),"LN2 reverse wipe returns to game");
+    show_debug_message("LN_NINJA_TRANSITIONS_PASS: original pixel/palette and patterned wipes, bitmap bounds, saved transitions and one-life respawns");
 }

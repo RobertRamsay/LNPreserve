@@ -1,3 +1,5 @@
+> Transition presentation updated: see [Original transitions](NINJA_ORIGINAL_TRANSITIONS.md) for the source-derived curtain replacing the initial alpha fade.
+
 # LN2 falls, lives message and nearby pickup
 
 Fatal falling, sinking and water paths now reach the original directional death poses before respawn. Water keeps its source splash sequence. The body remains visible as health drains. Nonfatal drops that travel to another room retain that behaviour.
@@ -11,4 +13,5 @@ Changed implementation: scripts/ln2_levels, ln2_play and ln2_controls; obj_ln_pr
 Validation: compiled successfully; all 36 complete-suite groups and all 14 focused checks pass. Complete suite took 128.17 seconds, including save serialization and runtime checks, with no failed or unreached groups. New checks cover fatal falls in Park/Mansion, transition phases, save/restore, last-life game over, a source pickup in each of seven levels, and the 20/21-pixel enemy boundary. Existing checks retain original comparisons for water, gaps, fence, boat, controls and saves. Project validation: nine pass, one source-dependent skip.
 
 Manual follow-up: playtest fall cutover/fade pacing and the pickup reach around crowded or overlapping objects. Automated room coverage is separate from a complete manual playthrough. LN1 and LN3 life transitions remain future work.
+
 

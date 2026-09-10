@@ -1,3 +1,11 @@
+if (ninja_transitions_test && variable_instance_exists(id,"transition_render_tick") && transition_render_tick>=4) {
+    try {
+        surface_save(application_surface,"ln1-restored-transition.png");
+        ln_check(surface_getpixel(application_surface,1000,168)!=c_black,"restored transition retains enemy health HUD");
+        show_debug_message("LN_NINJA_TRANSITION_RENDER_PASS: restored transition drawn over successive frames");
+    } catch(_failure) {show_debug_message("LN_NINJA_TRANSITIONS_FAILURE: "+string(_failure));}
+    game_end();
+}
 // Read the final application surface after the real Draw/Draw End sequence.
 if (crt_live_test) {
     try {

@@ -72,12 +72,13 @@ function ln1_feedback_checks() {
     ln1_play_tick(_g, 0); ln_check(_p.y == 102, "sinking moves two pixels per two ticks");
     repeat (44) ln1_play_tick(_g, 0);
     ln_check(!_g.water_active && _p.display_frame == 255 && _g.death_wait == 20, "fully submerged sprite disappears before respawn delay");
-    repeat (20) ln1_play_tick(_g, 0);
+    repeat (20) ln1_play_tick(_g, 0);ln1_finish_transition_check(_g);
     ln_check(_g.lives_left == 2 && _g.player_health == 32 && _p.action == 0 && _p.flags == 0, "water respawn restores health and clears death commands");
     repeat (8) ln1_play_tick(_g, 0);
+    ln1_finish_transition_check(_g);
     ln_check(_p.display_frame < 18 && _g.death_wait == 0, "spawn does not briefly return to a death pose");
     _p.action = $5d34; _p.flags = 255; _p.action_state = 3; _p.countdown = 40; _g.death_wait = 1;
-    ln1_play_tick(_g, 0); repeat (8) ln1_play_tick(_g, 0);
+    ln1_play_tick(_g, 0);ln1_finish_transition_check(_g); repeat (8) ln1_play_tick(_g, 0);
     ln_check(_p.action < 256 && _p.action_state == 0 && _p.display_frame < 18, "ordinary death also clears stale animation state");
     show_debug_message("LN_FEEDBACK_PASS: pickup expiry, two scene-entry flashes, persistent enemy wounds/death, prayer and water/respawn regressions.");
 }

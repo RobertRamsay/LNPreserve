@@ -1,0 +1,30 @@
+{
+  "ln1_sha256": "5e89921a9b9b8fd6267bb9be6b314814febf2383db0e0346980322121cf083c9",
+  "ln2_sha256": "c470dfeabd487b0b461e27d2e325d683d62ec0da50fe1a7fdb10d7195bce4cf0",
+  "ln1_clear_blocks": 4865,
+  "ln1_mask_frames": 40,
+  "ln1_palette": [
+    0,
+    15,
+    9,
+    14,
+    11,
+    11,
+    0,
+    8,
+    9,
+    0,
+    2,
+    0,
+    11,
+    5,
+    6,
+    12
+  ],
+  "ln2_boundary": [
+    29,
+    189,
+    2
+  ],
+  "scope": "Original routines executed offline; CIA sample deterministic, VIC sprite presentation reconstructed at source pixel resolution."
+}
