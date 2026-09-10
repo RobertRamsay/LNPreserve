@@ -57,11 +57,12 @@ function ln2_status_draw(_g,_x,_y,_scale) {
     draw_sprite_ext(spr_ln2_dashboard,0,_x,_y,_scale,_scale,0,c_white,1);
     draw_sprite_ext(spr_ln2_player_health,clamp(round(_g.status.health[0]),0,44),_x+64*_scale,_y+152*_scale,_scale,_scale,0,c_white,1);
     draw_sprite_ext(spr_ln2_enemy_health,clamp(round(_g.status.health[1]),0,44),_x+16*_scale,_y+152*_scale,_scale,_scale,0,c_white,1);
-    draw_sprite_ext(spr_ln2_status_icons,clamp(_g.player.selected_weapon,0,4),_x+264*_scale,_y+24*_scale,_scale,_scale,0,c_white,1);
+    var _icons=asset_get_index("spr_ln2_level"+string(_g.level)+"_status_icons");
+    draw_sprite_ext(_icons,clamp(_g.player.selected_weapon,0,4),_x+264*_scale,_y+24*_scale,_scale,_scale,0,c_white,1);
     var _found=_g.notice_item>=0,_item=_found?_g.notice_item:_g.selected_item;
     draw_sprite_ext(spr_ln2_status_labels,real(_found),_x+248*_scale,_y+56*_scale,_scale,_scale,0,c_white,1);
     if (_item==16) draw_sprite_ext(spr_ln2_orb_icon,0,_x+264*_scale,_y+72*_scale,_scale,_scale,0,c_white,1);
-    else draw_sprite_ext(spr_ln2_status_icons,clamp(_item,0,16),_x+264*_scale,_y+72*_scale,_scale,_scale,0,c_white,1);
+    else draw_sprite_ext(_icons,clamp(_item,0,16),_x+264*_scale,_y+72*_scale,_scale,_scale,0,c_white,1);
     for (var _i=0;_i<6;_i++) {
         draw_sprite_ext(spr_ln2_status_digits,clamp(_g.status.score[_i]-27,0,9),_x+(136+8*_i)*_scale,_y+160*_scale,_scale,_scale,0,c_white,1);
         draw_sprite_ext(spr_ln2_status_digits,clamp(_g.status.clock.digits[_i]-27,0,9),_x+(128+8*(_i+(_i div 2)))*_scale,_y+176*_scale,_scale,_scale,0,c_white,1);

@@ -1,3 +1,8 @@
+if (reported_encounters_test) {
+    try {ln2_reported_encounter_checks();}
+    catch (_failure) {show_debug_message("LN2_REPORTED_ENCOUNTERS_FAILURE: "+string(_failure));}
+    game_end();exit;
+}
 try {
 if (presentation_test) {
     try {ln_crt_checks();show_debug_message("LN_CRT_PASS");}

@@ -1,3 +1,4 @@
+reported_encounters_test=false;
 gpu_set_texfilter(false);
 global.ln_crt_enabled=false;
 global.ln_crt_blur=0.15;
@@ -37,6 +38,7 @@ function_presses = [0,0,0,0];
 selftest = false;ln1_only=false;selftest_inject_failure=false;
 host_frames = 0;
 for (var _i = 1; _i <= parameter_count(); _i++) {
+    if (parameter_string(_i)=="--ln2-reported-encounters-test") reported_encounters_test=true;
     if (parameter_string(_i) == "--save-ui-test") save_ui_test=true;
     if (parameter_string(_i) == "--window-presets-test") {window_presets_test=true;global.ln_crt_enabled=true;}
     if (parameter_string(_i) == "--crt-live-test") crt_live_test=true;

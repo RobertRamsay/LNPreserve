@@ -49,6 +49,8 @@
   ],
   "ForcedPrefabProjectReferences":[],
   "IncludedFiles":[
+    {"$GMIncludedFile":"","%Name":"swarm_checks.json","CopyToMask":-1,"filePath":"datafiles/play/ln2","name":"swarm_checks.json","resourceType":"GMIncludedFile","resourceVersion":"2.0"},
+
     {"$GMIncludedFile":"","%Name":"initial_control_state.json","CopyToMask":-1,"filePath":"datafiles/actors/ln1","name":"initial_control_state.json","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
     {"$GMIncludedFile":"","%Name":"ln1_actor_part_000.png","CopyToMask":-1,"filePath":"datafiles/actors/ln1","name":"ln1_actor_part_000.png","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
     {"$GMIncludedFile":"","%Name":"ln1_actor_part_001.png","CopyToMask":-1,"filePath":"datafiles/actors/ln1","name":"ln1_actor_part_001.png","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
@@ -2181,7 +2183,15 @@
   },
   "name":"LNPreserve",
   "resources":[
-    {"id":{"name":"spr_ln1_level2_pickup_16_flash","path":"sprites/spr_ln1_level2_pickup_16_flash/spr_ln1_level2_pickup_16_flash.yy"}},
+    {"id":{"name":"spr_ln2_level1_status_icons","path":"sprites/spr_ln2_level1_status_icons/spr_ln2_level1_status_icons.yy"}},
+    {"id":{"name":"spr_ln2_level2_status_icons","path":"sprites/spr_ln2_level2_status_icons/spr_ln2_level2_status_icons.yy"}},
+    {"id":{"name":"spr_ln2_level3_status_icons","path":"sprites/spr_ln2_level3_status_icons/spr_ln2_level3_status_icons.yy"}},
+    {"id":{"name":"spr_ln2_level4_status_icons","path":"sprites/spr_ln2_level4_status_icons/spr_ln2_level4_status_icons.yy"}},
+    {"id":{"name":"spr_ln2_level5_status_icons","path":"sprites/spr_ln2_level5_status_icons/spr_ln2_level5_status_icons.yy"}},
+    {"id":{"name":"spr_ln2_level6_status_icons","path":"sprites/spr_ln2_level6_status_icons/spr_ln2_level6_status_icons.yy"}},
+    {"id":{"name":"spr_ln2_level7_status_icons","path":"sprites/spr_ln2_level7_status_icons/spr_ln2_level7_status_icons.yy"}},
+    {"id":{"name":"spr_ln2_park_boats","path":"sprites/spr_ln2_park_boats/spr_ln2_park_boats.yy"}},
+    {"id":{"name":"spr_ln2_bee_parts","path":"sprites/spr_ln2_bee_parts/spr_ln2_bee_parts.yy"}},
 
     {"id":{"name":"obj_ln_preserve","path":"objects/obj_ln_preserve/obj_ln_preserve.yy",},},
     {"id":{"name":"Room1","path":"rooms/Room1/Room1.yy",},},
@@ -2988,6 +2998,7 @@
     {"id":{"name":"spr_ln1_level2_actors","path":"sprites/spr_ln1_level2_actors/spr_ln1_level2_actors.yy",},},
     {"id":{"name":"spr_ln1_level2_pickup_12_flash","path":"sprites/spr_ln1_level2_pickup_12_flash/spr_ln1_level2_pickup_12_flash.yy",},},
     {"id":{"name":"spr_ln1_level2_pickup_12","path":"sprites/spr_ln1_level2_pickup_12/spr_ln1_level2_pickup_12.yy",},},
+    {"id":{"name":"spr_ln1_level2_pickup_16_flash","path":"sprites/spr_ln1_level2_pickup_16_flash/spr_ln1_level2_pickup_16_flash.yy",},},
     {"id":{"name":"spr_ln1_level2_pickup_16","path":"sprites/spr_ln1_level2_pickup_16/spr_ln1_level2_pickup_16.yy",},},
     {"id":{"name":"spr_ln1_level2_pickup_5","path":"sprites/spr_ln1_level2_pickup_5/spr_ln1_level2_pickup_5.yy",},},
     {"id":{"name":"spr_ln1_level2_pickup_6_flash","path":"sprites/spr_ln1_level2_pickup_6_flash/spr_ln1_level2_pickup_6_flash.yy",},},

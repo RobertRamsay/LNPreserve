@@ -1,0 +1,12 @@
+{
+  "native_original_bee_cases": 256,
+  "native_encounters": "passed",
+  "full_suite_groups": 36,
+  "full_suite": "passed",
+  "structural_tests": {
+    "passed": 9,
+    "skipped": 1
+  },
+  "manual_playthrough": "not_run",
+  "art_source": "Seven original LN2 RAM captures; hashes in ../ln2_reported_art.json"
+}

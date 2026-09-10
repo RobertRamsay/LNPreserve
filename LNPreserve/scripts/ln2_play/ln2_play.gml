@@ -188,6 +188,15 @@ function ln2_play_tick(_g,_joy) {
 function ln2_play_actor(_g,_a,_enemy) {
     if (_a.display_frame==255 || (_enemy && _a.active<128 && !_a.custom && !(_g.level==7 && _g.world_state.boss_defeated))) return;
     if (_g.projectiles[_enemy?1:0].kind!=0 && _g.victory==0) {ln2_projectile_body_draw(_g,_a,_enemy);return;}
+    if (_enemy && _a.custom && _g.level==1) {
+        if (_g.room_id==15 && _a.display_frame==105) {ln2_swarm_draw(_g);return;}
+        if ((_g.room_id==14 && _a.display_frame==103) ||
+            ((_g.room_id==16 || _g.room_id==17) && _a.display_frame==104)) {
+            var _boat=(_g.room_id==14?0:(_g.room_id==16?2:4))+real(_a.mirror);
+            ln_draw_masked_actor(spr_ln2_park_boats,_boat,_a.x,_a.y,1,1,_g.mask,0,0,240,144,max(0.001,(_a.depth_y-0.25)/255));
+            return;
+        }
+    }
     var _extra=_a.display_frame>=64,_index=_extra?-1:_a.display_frame,_frames=_g.world.actor_frames;
     var _key=_enemy && !_a.custom?string(_a.weapon)+"_"+string(_a.costume):"";
     if (_extra && _enemy && !_a.custom && variable_struct_exists(_g.world,"enemy_extra_frames") && variable_struct_exists(_g.world.enemy_extra_frames,_key))

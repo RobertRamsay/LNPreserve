@@ -93,6 +93,9 @@ function ln2_combat_event(_g,_event,_enemy) {
         case 11:if (!_enemy) {ln2_item_interact(_g,2);_g.candle_assist_active=false;}return;
         case 13:ln2_damage(_g,44,false);return;
         case 14:ln2_combat_attack(_g,_enemy,-1);return;
+        case 16:
+            if (_g.level==1 && _g.room_id==15 && _enemy) {ln2_swarm_tick(_g);return;}
+            break;
         case 22:ln2_force_exit(_g,1);return;
         case 15:case 17:case 18:case 19:case 20:case 21:case 23:
             if (_g.level==2) {

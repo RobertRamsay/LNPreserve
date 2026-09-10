@@ -252,3 +252,70 @@ function ln2_curtain_checks() {
     ln_check(_g.room_id==_arrival,"return does not replay a stale curtain crossing");
     show_debug_message("LN2_CURTAIN_PASS: 32 original trigger combinations, real walking approach, arrival and return");
 }
+
+/// Central Park event 16 ($a9ba): three jittering bees, pursuit and contact damage.
+function ln2_swarm_offsets(_g) {
+    if (!variable_struct_exists(_g.world_state,"swarm"))
+        _g.world_state.swarm={x:[56,56,56],y:[-5,-5,-5]};
+    return _g.world_state.swarm;
+}
+
+function ln2_swarm_tick(_g) {
+    var _s=ln2_swarm_offsets(_g),_e=_g.enemy,_p=_g.player;
+    for(var _i=2;_i>=0;_i--) {
+        var _v;
+        do {_v=(_s.x[_i]-50+((ln2_enemy_random(_g)&1)?1:-1))&255;} until(_v<8);
+        _s.x[_i]=50+_v;
+        do {_v=(_s.y[_i]+5+((ln2_enemy_random(_g)&1)?1:-1))&255;} until(_v<8);
+        _s.y[_i]=_v-5;
+    }
+    _e.x=(_e.x+2*sign(_p.x-_e.x))&255;
+    _e.y=(_e.y+2*sign(_p.y-_e.y))&255;
+    if (abs(_e.x-_p.x)<8 && abs(_e.y-_p.y)<10) ln2_damage(_g,1,false);
+}
+
+function ln2_swarm_draw(_g) {
+    var _s=ln2_swarm_offsets(_g),_e=_g.enemy;
+    // Source part offsets include the compositor's 48-pixel X origin and
+    // the VIC playfield border offsets (24,50). Keep the ordinary depth mask.
+    for(var _i=2;_i>=0;_i--)
+        ln_draw_masked_actor(spr_ln2_bee_parts,_i,_e.x+_s.x[_i]-72,_e.y+_s.y[_i]-50,
+            1,1,_g.mask,0,0,240,144,max(0.001,(_e.depth_y-0.25)/255));
+}
+
+function ln2_reported_encounter_checks() {
+    var _g=new LN2Play(1),_cases=ln3_data_read("play/ln2/swarm_checks.json");
+    ln2_play_enter(_g,15);
+    if (!_g.enemy.custom) throw "Bees missing from scene 15 entry";
+    for(var _i=0;_i<array_length(_cases);_i++) {
+        var _c=_cases[_i];
+        _g.player.x=_c.xy[0];_g.player.y=_c.xy[1];_g.enemy.x=_c.xy[2];_g.enemy.y=_c.xy[3];
+        _g.player_health=44;_g.world_state.swarm={x:_c.x,y:_c.y};
+        _g.random_queue=_c.random;_g.random_head=0;
+        ln2_combat_event(_g,16,true);
+        if (_g.enemy.x!=_c.result_xy[0] || _g.enemy.y!=_c.result_xy[1] ||
+            _g.player_health!=44-_c.damage || _g.random_head!=array_length(_c.random))
+            throw "Bee source movement/damage/random mismatch "+string(_i);
+        for(var _j=0;_j<3;_j++) if (_g.world_state.swarm.x[_j]!=_c.result_x[_j] ||
+            _g.world_state.swarm.y[_j]!=_c.result_y[_j]) throw "Bee source part mismatch "+string(_i);
+    }
+    for(var _l=1;_l<=7;_l++) {
+        var _icons=asset_get_index("spr_ln2_level"+string(_l)+"_status_icons");
+        if (_icons<0 || sprite_get_number(_icons)!=17) throw "Missing level HUD icons";
+    }
+    if (sprite_get_number(spr_ln2_park_boats)!=6 || sprite_get_number(spr_ln2_bee_parts)!=3)
+        throw "Missing park encounter art";
+    _g.random_queue=[];_g.random_head=0;
+    for(var _room=14;_room<=17;_room++) {
+        _g.player.x=120;_g.player.y=120;_g.player.depth_y=120;
+        _g.inventory[19]=(_room==17)?255:0;
+        ln2_play_enter(_g,_room);
+        for(var _t=0;_t<120;_t++) {
+            _g.player.tick=(_g.player.tick+1)&255;ln2_enemy_action(_g);
+            if (_g.enemy.action_state>0) {ln2_combat_event(_g,_g.enemy.action_state,true);_g.enemy.action_state=0;}
+        }
+        ln2_play_draw(_g);
+        surface_save(_g.stage_surface,"ln2-encounter-"+string(_room)+".png");
+    }
+    show_debug_message("LN2_REPORTED_ENCOUNTERS_PASS: 256 original bee cases; seven icon banks; boat art");
+}
