@@ -545,9 +545,20 @@ function ln2_fence_gap_boat_checks() {
     ln2_item_interact(_g,_item.action);ln_check(_g.inventory[19]!=0,"staff jab releases boat");
     _g=ln_save_restore(json_parse(json_stringify(ln_save_capture(_g))));_p=_g.player;
     ln_check(_g.inventory[19]!=0,"boat release survives save/load");
+    var _legacy=ln_save_capture(_g);
+    variable_struct_remove(_legacy.state.data.actions,string($c3ab));
+    variable_struct_remove(_legacy.state.data.actions,string($c3e4));
+    _g=ln_save_restore(json_parse(json_stringify(_legacy)));_p=_g.player;
+    ln_check(variable_struct_exists(_g.data.actions,string($c3ab)) && variable_struct_exists(_g.data.actions,string($c3e4)),"older saves acquire missing climb actions");
+
     var _entry=-1;for(var _i=0;_i<array_length(_g.world.tables.exit_destinations);_i++) if(_g.world.tables.exit_destinations[_i]==17) {_entry=_i;break;}
     ln2_play_travel(_g,_entry);ln2_level_effect_tick(_g,0);
     ln_check(_g.enemy.action==$cd79 && _g.special_mode==8,"arrival frame must not cancel boat spawn");
+    _legacy=ln_save_capture(_g);_legacy.state.special_mode=0;_legacy.state.enemy.action=$cd79&255;
+    _legacy.state.enemy.display_frame=255;
+    _g=ln_save_restore(json_parse(json_stringify(_legacy)));_p=_g.player;
+    ln_check(_g.special_mode==8 && _g.enemy.action==$cd79,"older cancelled-boat save resumes arrival");
+
     _ticks=0;while(_g.special_mode==8 && _ticks++<400) {
         _p.tick=(_p.tick+1)&255;ln2_enemy_action(_g);ln2_combat_event(_g,_g.enemy.action_state,true);_g.enemy.action_state=0;ln2_level_effect_tick(_g,0);
     }

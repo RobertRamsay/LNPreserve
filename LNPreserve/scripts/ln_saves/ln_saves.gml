@@ -71,6 +71,7 @@ function ln_save_restore(_save) {
     if (_save.version!=1 || _save.game<1 || _save.game>3 || _save.level<1 ||
         _save.level>(_save.game==1?6:(_save.game==2?7:5)) || !is_struct(_save.state)) throw "Incompatible save";
     var _g=_save.game==1?new LN1Play(_save.level):(_save.game==2?new LN2Play(_save.level):new LN3Play(_save.level));
+    var _fresh_ln2_actions=_save.game==2?_g.data.actions:undefined;
     var _state=ln_save_copy(_save.state),_names=variable_struct_get_names(_state);
     for (var _i=0;_i<array_length(_names);_i++) {
         var _key=_names[_i];
@@ -82,6 +83,21 @@ function ln_save_restore(_save) {
         if (variable_struct_exists(_g,_key)) variable_struct_set(_g,_key,asset_get_index(variable_struct_get(_g,_key)));
     }
     if (_g.game_number!=_save.game || _g.level!=_save.level || _g.room_id!=_save.room) throw "Invalid save identity";
+    if (_save.game==2) {
+        // Saves contain their original action graph. Add newly recovered roots
+        // without replacing saved animation records or player progression.
+        var _action_names=variable_struct_get_names(_fresh_ln2_actions);
+        for(var _j=0;_j<array_length(_action_names);_j++) {
+            var _action_name=_action_names[_j];
+            if (!variable_struct_exists(_g.data.actions,_action_name))
+                variable_struct_set(_g.data.actions,_action_name,variable_struct_get(_fresh_ln2_actions,_action_name));
+        }
+        if (_g.level==1 && _g.room_id==17 && _g.inventory[19]!=0 && _g.special_mode==0 &&
+            _g.enemy.custom && _g.enemy.display_frame==255 && _g.enemy.action==($cd79&255)) {
+            ln2_environment_action(_g,$cd79);_g.special_mode=8;_g.enemy.action_tick=_g.player.tick;
+        }
+    }
+
     var _room_ok=false;
     for (var _i=0;_g.game_number!=1 && _i<array_length(_g.world.rooms);_i++) {
         if (_g.world.rooms[_i].id==_g.room_id) {_room_ok=true;break;}
