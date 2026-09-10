@@ -25,6 +25,8 @@ function LN2Play(_level=1) constructor {
     status={score:array_create(6,27),clock:{digits:array_create(6,27),fraction:0,running:255,blocked:0,dirty:0},health:[44,44]};
     visited_scenes={};ending_data=ln3_data_read("play/ln2/ending.json");victory=0;ending_surface=-1;
     ending_score=[];ending_time=[];final_palette_tick=player.tick;victory_palette_index=0;
+    water_data=level==1?ln3_data_read(_folder+"water.json"):undefined;
+    boat_support=ln3_data_read("play/ln2/boat_support.json");
     ln2_projectile_init(self);sprite_masks=[];
     random_queue=[];random_head=0;random_pointer=data.random_pointer;random_value=data.random_value;
     timer=new LNClock();timer.cycles_per_frame=data.timer_period_cycles;stage_surface=-1;
@@ -39,6 +41,7 @@ function ln2_enemy_remember(_g) {
 }
 
 function ln2_play_enter(_g,_id) {
+    _g.world_state.drowning=undefined;
     _g.safe_scene_phase=0;_g.hole_steps=0;_g.route_descent=undefined;_g.fall_exit_slot=-1;
     _g.keypad=undefined;_g.pending_item=undefined;
     ln2_projectile_reset(_g);
@@ -148,14 +151,15 @@ function ln2_play_tick(_g,_joy) {
     if (_g.game_over || _g.level_complete) return;
     var _p=_g.player,_tick=(_p.tick+1)&255;if (_tick==0) _g.tick_epoch=(_g.tick_epoch+1)&255;
     _g.last_joy=_joy;
-    _joy=ln2_burger_input(_g,_joy);
-    _joy=ln2_candle_assist_input(_g,_joy);
+    var _drowning=variable_struct_exists(_g.world_state,"drowning") && is_struct(_g.world_state.drowning);
+    if (!_drowning) {_joy=ln2_burger_input(_g,_joy);_joy=ln2_candle_assist_input(_g,_joy);}
     ln2_status_tick(_g,_tick);
     _g.room_age++;
     if (_g.notice_item>=0 && ((_tick-_g.notice_tick)&255)>=_g.notice_duration) _g.notice_item=-1;
     if (is_struct(_g.keypad)) {_p.tick=_tick;_p.last_tick=_tick;ln2_keypad_tick(_g,_joy);return;}
     if (_g.victory!=0) {ln2_victory_tick(_g,_joy,_tick);return;}
     if (_g.level==7) ln2_final_candles_tick(_g,_tick);
+    if (variable_struct_exists(_g.world_state,"drowning") && is_struct(_g.world_state.drowning)) {ln2_drowning_tick(_g,_tick);return;}
     if (_g.respawn_wait>0) {
         _p.tick=_tick;_p.last_tick=_tick;_g.respawn_wait--;
         if (_g.respawn_wait==0) {
@@ -175,6 +179,7 @@ function ln2_play_tick(_g,_joy) {
     ln2_combat_event(_g,_g.enemy.action_state,true);_g.enemy.action_state=0;
     if (_g.fall_remaining>=0) return;
     if (ln2_hole_boundary(_g)) return;
+    if (ln2_hazard_boundary(_g)) return;
     if (ln2_boundary_exit(_g)) return;
     ln2_play_exit(_g);ln2_level_effect_tick(_g,_joy);
     ln2_projectile_motion(_g,_g.player.tick);ln2_projectile_present(_g);ln2_enemy_remember(_g);
@@ -187,6 +192,18 @@ function ln2_play_tick(_g,_joy) {
 
 function ln2_play_actor(_g,_a,_enemy) {
     if (_a.display_frame==255 || (_enemy && _a.active<128 && !_a.custom && !(_g.level==7 && _g.world_state.boss_defeated))) return;
+    if (!_enemy && variable_struct_exists(_g.world_state,"drowning") && is_struct(_g.world_state.drowning)) {
+        var _frames=_g.water_data.frames,_index=-1;
+        for(var _i=0;_i<array_length(_frames);_i++) if (_frames[_i]==_a.display_frame) {_index=_i;break;}
+        if (_index>=0) {
+            ln_draw_masked_actor(asset_get_index(_g.water_data.sprite),_index*2+real(_a.mirror),_a.x,_a.y,
+                1,1,_g.mask,0,0,240,144,max(0.001,(_a.depth_y-0.25)/255));return;
+        }
+    }
+    if (_enemy && _a.custom && _g.level==1 && _g.room_id==10 && _a.display_frame>=99 && _a.display_frame<=102) {
+        ln_draw_masked_actor(spr_ln2_juggler,(_a.display_frame-99)*2+real(_a.mirror),_a.x,_a.y,
+            1,1,_g.mask,0,0,240,144,max(0.001,(_a.depth_y-0.25)/255));return;
+    }
     if (_g.projectiles[_enemy?1:0].kind!=0 && _g.victory==0) {ln2_projectile_body_draw(_g,_a,_enemy);return;}
     if (_enemy && _a.custom && _g.level==1) {
         if (_g.room_id==15 && _a.display_frame==105) {ln2_swarm_draw(_g);return;}

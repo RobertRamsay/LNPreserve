@@ -319,3 +319,136 @@ function ln2_reported_encounter_checks() {
     }
     show_debug_message("LN2_REPORTED_ENCOUNTERS_PASS: 256 original bee cases; seven icon banks; boat art");
 }
+
+/// Original $b626: scenery knives reuse the enemy projectile slot, without melee.
+function ln2_juggler_throw(_g,_kind) {
+    var _q=_g.projectiles[1];if (_q.kind!=0) return;
+    var _state=ln2_projectile_state(_g,_g.player.tick);
+    ln2_projectile_spawn_rule(_state,_g.projectile_data,1);
+    if (_q.kind!=0) _q.kind=_kind;
+    _g.enemy.projectile_active=_q.kind;
+}
+
+/// Original $a25f: boat footprint, crossing parity and the scene 17 lip.
+function ln2_water_boat_supported(_g) {
+    var _p=_g.player,_e=_g.enemy;
+    if (!(_p.boundary_crossings&1)) {_p.boundary_crossings=0;return true;}
+    var _dx=(_g.room_id==17?_e.x+12-_p.x:_p.x+48-_e.x)&255;
+    if (_dx<56) {
+        var _i=_dx>>2,_dy=(_p.y-_e.y)&255;
+        if (_dy>=_g.boat_support.min_y[_i]) {
+            if (_dy<_g.boat_support.max_y[_i]) return true;
+            if (((_dy-8)&255)<_g.boat_support.max_y[_i] && _g.room_id==17) _p.y=(_p.y+8)&255;
+            return false;
+        }
+    }
+    _g.world_state.water_splash_flag=32;return false;
+}
+
+function ln2_drowning_begin(_g,_offset,_entry) {
+    var _p=_g.player;
+    _g.world_state.drowning={phase:0,saved_y:_p.y,saved_facing:_p.facing};
+    _g.player_health=0;_p.boundary_crossings=0;_g.exit_locked=true;
+    _p.y=(_p.y-_offset)&255;
+    var _side=((_p.facing+2)&4)?3:0;
+    ln2_player_special(_g,_g.water_data.entries[_side+_entry]);
+}
+
+function ln2_drowning_tick(_g,_tick) {
+    var _p=_g.player,_d=_g.world_state.drowning;
+    _p.tick=_tick;_p.last_tick=_tick;
+    ln2_player_action(_p,_g.data,1);
+    ln2_enemy_decide(_g);ln2_enemy_action(_g);
+    ln2_projectile_present(_g);
+    if (_p.action>=256) return;
+    if (_d.phase==2 && --_d.steps>0) {
+        ln2_player_special(_g,((_p.facing+2)&4)?$cd02:$ccf9);return;
+    }
+    if (_d.phase==0) {
+        _d.phase=1;_p.facing=(_p.facing&4)>>1;
+        ln2_player_special(_g,_g.water_data.splash);return;
+    }
+    _p.facing=_d.saved_facing;_p.y=_d.saved_y;_p.action_state=0;
+    _p.display_frame=255;_g.world_state.drowning=undefined;_g.respawn_wait=20;
+}
+
+function ln2_hazard_boundary(_g) {
+    if (_g.level!=1) return false;
+    var _p=_g.player,_mode=_p.boundary_mode&63;
+    if (!(_p.boundary_crossings&128) || (!(_p.boundary_mode&64) && _p.action>=256)) return false;
+    if (_g.level==1 && array_contains([28,32,33,34],_mode)) {
+        ln2_juggler_throw(_g,_mode==28?2:_mode-29);_p.boundary_crossings=0;return false;
+    }
+    if (_mode==30 || _mode==31) {
+        if (_g.level!=1) return false;
+        if (ln2_water_boat_supported(_g)) return false;
+        _mode=_mode==30?11:16;
+    }
+    // Island's eastern edge uses the original fixed-depth eight-step sink.
+    if (_mode==43) {
+        _g.world_state.drowning={phase:2,steps:8,saved_y:_p.y,saved_facing:_p.facing};
+        _g.player_health=0;_p.depth_y=158;_p.height_fixed=255;_g.exit_locked=true;_p.boundary_crossings=0;
+        ln2_player_special(_g,((_p.facing+2)&4)?$cd02:$ccf9);return true;
+    }
+    if (_mode==11 || _mode==16) {
+        ln2_drowning_begin(_g,_mode==11?14:7,_mode==11?0:1);return true;
+    }
+    return false;
+}
+
+function ln2_water_knife_checks() {
+    var _v=ln3_data_read("play/ln2/water_knife_checks.json"),_g=new LN2Play(1),_p=_g.player;
+    for(var _i=0;_i<array_length(_v.boat);_i++) {
+        var _c=_v.boat[_i];_g.room_id=_c.room;_p.x=_c.xy[0];_p.y=_c.xy[1];
+        _g.enemy.x=_c.xy[2];_g.enemy.y=_c.xy[3];_p.boundary_crossings=_c.flags;
+        _g.world_state.water_splash_flag=0;
+        ln_check(ln2_water_boat_supported(_g)==_c.supported && _p.y==_c.y &&
+            _p.boundary_crossings==_c.result_flags && _g.world_state.water_splash_flag==_c.splash_flag,
+            "boat footprint matches original "+string(_i));
+    }
+    for(var _i=0;_i<array_length(_v.knives);_i++) {
+        var _c=_v.knives[_i],_q=_g.projectiles[1];
+        _g.enemy.x=_c.x;_g.enemy.y=56;_g.enemy.facing=_c.facing;
+        _q.kind=_c.before[0];_q.facing=_c.before[1];_q.x=_c.before[2];_q.y=_c.before[3];_q.life=_c.before[4];_q.buffer=_c.before[5];
+        ln2_juggler_throw(_g,_c.kind);
+        ln_check(_q.kind==_c.after[0] && _q.facing==_c.after[1] && _q.x==_c.after[2] &&
+            _q.y==_c.after[3] && _q.life==_c.after[4] && _q.buffer==_c.after[5],"knife spawn matches original "+string(_i));
+    }
+    _g=new LN2Play(1);_p=_g.player;ln2_play_enter(_g,10);
+    for(var _i=0;_i<4;_i++) {
+        _g.projectiles[1].kind=0;_p.boundary_mode=[92,96,97,98][_i];_p.boundary_crossings=129;
+        ln2_hazard_boundary(_g);ln_check(_g.projectiles[1].kind==_i+2,"juggler approach launches knife");
+    }
+    _g.enemy.x=112;_g.enemy.y=56;_g.enemy.facing=3;_g.projectiles[1].kind=0;
+    _g.enemy.display_frame=100;_g.enemy.mirror=true;ln2_juggler_throw(_g,2);
+    ln2_projectile_present(_g);ln2_play_draw(_g);surface_save(_g.stage_surface,"ln2-juggler-knives.png");
+    _g=new LN2Play(1);_p=_g.player;ln2_play_enter(_g,14);
+    _g.enemy.x=240;_g.enemy.y=40;_p.x=100;_p.y=112;_p.action=0;_p.boundary_crossings=0;
+    ln2_player_boundary(_p,_g.data,100,110,100,112);
+    ln_check((_p.boundary_mode&63)==30,"real shore geometry reports water");
+    ln_check(ln2_hazard_boundary(_g),"walking off shore starts drowning");
+    var _x=_p.x,_life=_g.lives_left,_seen=false,_ticks=0;
+    while(is_struct(_g.world_state.drowning) && _ticks<200) {
+        ln2_play_tick(_g,31);_ticks++;
+        ln_check(_p.x==_x,"drowning prevents movement/fire input");
+        if (_p.display_frame>=88 && _p.display_frame<=98) {
+            if (!_seen) {ln2_play_draw(_g);surface_save(_g.stage_surface,"ln2-water-splash.png");}
+            _seen=true;
+        }
+    }
+    ln_check(_seen && _ticks<200 && _g.respawn_wait==20,"original splash completes before respawn");
+    repeat(20) ln2_play_tick(_g,0);
+    ln_check(_g.lives_left==_life-1 && _g.player_health==44,"drowning loses exactly one life and restores health");
+    for(var _mode_index=0;_mode_index<5;_mode_index++) {
+        _g=new LN2Play(1);_p=_g.player;ln2_play_enter(_g,16);
+        _p.action=0;_p.boundary_mode=[11,16,30,31,43][_mode_index];_p.boundary_crossings=129;
+        _g.enemy.x=250;_g.enemy.y=0;_p.x=100;_p.y=100;
+        ln_check(ln2_hazard_boundary(_g),"every Central Park water mode starts death when unsupported");
+        var _weapon=_p.selected_weapon,_item=_g.selected_item;
+        ln2_controls_update(_g,0,0);
+        ln_check(_p.selected_weapon==_weapon && _g.selected_item==_item,"water death locks selection inputs");
+        var _wait=0;while(is_struct(_g.world_state.drowning) && _wait++<200) ln2_play_tick(_g,31);
+        ln_check(_g.respawn_wait==20,"water and island sink both finish");
+    }
+    show_debug_message("LN2_WATER_KNIFE_PASS: 512 original boat cases, 160 knife spawns, shore/splash/respawn integration");
+}

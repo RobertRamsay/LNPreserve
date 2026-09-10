@@ -141,6 +141,7 @@ function ln2_projectile_gpu_checks() {
 }
 
 function ln2_projectile_init(_g) {
+    if (!variable_global_exists("ln2_knife_art")) global.ln2_knife_art=ln3_data_read("play/ln2/juggler_knives.json");
     if (!variable_global_exists("ln2_projectile_cache")) global.ln2_projectile_cache=array_create(7,undefined);
     if (!is_struct(global.ln2_projectile_cache[_g.level-1])) {
         var _folder="play/ln2/level"+string(_g.level)+"/";
@@ -190,11 +191,13 @@ function ln2_projectile_motion(_g,_tick) {
 function ln2_projectile_present(_g) {
     for (var _i=0;_i<2;_i++) {
         var _q=_g.projectiles[_i];if (_q.kind==0) {_q.frame=-1;continue;}
-        _q.frame=variable_struct_get(_g.projectile_art.frames,string(_q.kind))[_q.x];
+        var _knife=(_q.kind&7)>=2 && (_q.kind&7)<=5;
+        var _map=_knife?global.ln2_knife_art.maps:_g.projectile_art.frames;
+        _q.frame=variable_struct_get(_map,string(_q.kind))[_q.x];
         _q.kind^=8;_q.buffer=_q.buffer==255?0:(_q.buffer^1);
         _q.draw_x=((_q.x+4)&255)-24;_q.draw_y=((_q.y+12)&255)-50;_q.sprite_y=_q.draw_y+50;_q.enabled=_q.sprite_y;
         _q.mask_bits=ln2_sprite_mask_bits(_g.sprite_masks,_q.draw_x+24,_q.sprite_y,_q.y);
-        var _raw=global.ln2_projectile_art.frames[_q.frame].raw;
+        var _raw=(_knife?global.ln2_knife_art:global.ln2_projectile_art).frames[_q.frame].raw;
         _q.probes[_q.buffer]=(_raw[1]&_q.mask_bits[1])|(_raw[4]&_q.mask_bits[4])|(_raw[7]&_q.mask_bits[7]);
     }
     _g.enemy.projectile_active=_g.projectiles[1].kind;
@@ -202,7 +205,7 @@ function ln2_projectile_present(_g) {
 
 function ln2_projectile_draw(_g,_enemy) {
     var _q=_g.projectiles[_enemy?1:0];if (_q.kind==0 || _q.frame<0 || _q.enabled==0) return;
-    ln2_sprite_draw_bits(asset_get_index(global.ln2_projectile_art.sprite),_q.frame,_q.draw_x,_q.draw_y,_q.mask_bits);
+    ln2_sprite_draw_bits(asset_get_index(((_q.kind&7)>=2 && (_q.kind&7)<=5)?global.ln2_knife_art.sprite:global.ln2_projectile_art.sprite),_q.frame,_q.draw_x,_q.draw_y,_q.mask_bits);
 }
 
 function ln2_projectile_body_draw(_g,_a,_enemy) {

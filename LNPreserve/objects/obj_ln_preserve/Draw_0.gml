@@ -1,3 +1,8 @@
+if (water_knife_test) {
+    try {ln2_water_knife_checks();}
+    catch(_failure) {show_debug_message("LN2_WATER_KNIFE_FAILURE: "+string(_failure));}
+    game_end();exit;
+}
 if (reported_encounters_test) {
     try {ln2_reported_encounter_checks();}
     catch (_failure) {show_debug_message("LN2_REPORTED_ENCOUNTERS_FAILURE: "+string(_failure));}
