@@ -92,6 +92,10 @@ function ln_save_restore(_save) {
     // Reconnect the mutable current-room records detached by JSON copying.
     if (_g.game_number==1) {
         ln1_reverse_roll_prepare(_g.data);
+        if (_g.level==2) for(var _i=0;_i<array_length(_g.world.items);_i++) {
+            var _item=_g.world.items[_i];
+            if (_item.room==17 && _item.id==16) _item.flash_sprite="spr_ln1_level2_pickup_16_flash";
+        }
         _g.player.world_game=_g;
         _g.data.initial=_g.player;
         _g.world.rooms[_g.room_id-1].boundaries=_g.data.boundaries;

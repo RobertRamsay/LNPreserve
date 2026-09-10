@@ -29,6 +29,8 @@ def main():
     icons=[]
     for i in range(17):
         mem=base.copy();call(mem,0xb307,a=i,x=0);icons.append(screen(mem).crop((264,24,304,56)))
+    for icon in icons:
+        icon.putdata([(r,g,b,0 if (r,g,b)==(0,0,0) else a) for r,g,b,a in icon.convert('RGBA').getdata()])
     data['icons']=sprite('spr_ln2_status_icons',icons)
     labels=[screen(base).crop((248,56,312,64))]
     mem=base.copy();mem[0xa0]=1;mem[0x279]=0;call(mem,0xc1a4);labels.append(screen(mem).crop((248,56,312,64)))

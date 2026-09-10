@@ -264,6 +264,12 @@ def main():
             name='';flash_name=''
             if part:
                 decoded,_=unpack(ram,ram[0x8000+part]+256*ram[0x80c0+part])
+                if level==2 and room==17 and item==16:
+                    masked=list(ram);masked[0xa2]=room;masked[0x3ec+item]=0
+                    call(masked,source['item_enter'])
+                    # $70be flips bit 0 after publishing the completed sprite.
+                    dest=masked[0x7e0f]+256*masked[0x7e17]+(512 if not (masked[0x21c]&1) else 0)
+                    decoded=bytes(masked[dest:dest+63])
                 image=sprite_image(decoded,bool(flags&128),flags&15)
                 if flags&32:image=image.resize((24,42),Image.Resampling.NEAREST)
                 name=sprite(f'spr_ln1_level{level}_pickup_{item}',[image])

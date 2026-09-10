@@ -45,6 +45,11 @@ for (var _i = 1; _i <= parameter_count(); _i++) {
         game_end();exit;
     }
     if (parameter_string(_i) == "--ln2-keypad-visual-test") ln2_keypad_visual_only=true;
+    if (parameter_string(_i) == "--ln1-magic-test") {
+        try {ln1_magic_checks();}
+        catch (_failure) {show_debug_message("LN1_MAGIC_FAILURE: "+string(_failure));}
+        game_end();exit;
+    }
     if (parameter_string(_i) == "--xbox-test") {
         try {ln_xbox_checks();}
         catch (_failure) {show_debug_message("LN_XBOX_FAILURE: "+string(_failure));}

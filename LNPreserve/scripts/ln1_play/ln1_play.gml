@@ -104,7 +104,7 @@ function ln1_play_tick(_g, _joy) {
         _g.health_display += sign(_g.player_health - _g.health_display);
     }
     _g.room_age = min(62, _g.room_age + 1);
-    ln1_level_effect_tick(_g);
+    ln1_level_effect_tick(_g,_g.data.timer_period_cycles);
     if (_g.sequence_kind != 0) { ln1_level_sequence_tick(_g, _joy); return; }
     if (_g.prayer_phase > 0) { ln1_prayer_tick(_g, _joy); return; }
     if (_g.water_active) { ln1_water_tick(_g); ln1_notice_update(_g); return; }
@@ -139,6 +139,9 @@ function ln1_play_tick(_g, _joy) {
     _p.enemy_active = _e.active; _p.enemy_x = _e.x; _p.enemy_y = _e.y;
     _p.separation_y = _e.separation_y;
     ln1_player_update(_p, _g.data, _joy, (_p.tick + 1) & 255);
+    // Touching the magic source activates the original renewable protection.
+    if (_g.level==2 && _g.room_id==17 && _g.player_health>0 &&
+        (_g.world_state.flag_a|_g.world_state.flag_b)==0) ln1_item_interact(_g,16);
     ln1_pickup_assist_tick(_g);
     ln1_enemy_decide(_g);
     ln1_enemy_action(_g);
@@ -275,7 +278,7 @@ function ln1_play_actor(_g, _actor, _enemy) {
     ln_draw_masked_actor(_pose.sprite, _pose.frame, _actor.x, _actor.y,
         1, 1, _g.mask, 0, 0, 240, 144, max(0.001, (_actor.y - 0.25) / 255),
         _enemy ? 144 : _g.water_cutoff - 29,
-        !_enemy && _g.world_state.protection == 2);
+        !_enemy && _g.world_state.protection == 2, _enemy?-1:ln1_magic_colour(_g));
 }
 
 function ln1_play_draw(_game, _paused) {

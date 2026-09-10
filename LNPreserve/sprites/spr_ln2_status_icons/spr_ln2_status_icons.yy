@@ -41,8 +41,8 @@
   "nineSlice":null,
   "origin":0,
   "parent":{
-    "name":"ln2_game_level1",
-    "path":"folders/Graphics/ln2_game_level1.yy",
+    "name":"ln2_game_level7",
+    "path":"folders/Graphics/ln2_game_level7.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

@@ -223,10 +223,88 @@ function ln1_level_events(_g) {
 }
 
 /// Source $561f: protection and colour effects use wrapping native tick clocks.
-function ln1_level_effect_tick(_g) {
+function ln1_level_effect_tick(_g, _cycles=19656) {
     var _s=_g.world_state;
     if ((_s.flag_a|_s.flag_b)!=0) {
-        if (_s.flag_a==0) _s.flag_b=(_s.flag_b-1)&255;
-        _s.flag_a=(_s.flag_a-1)&255;
+        // $555b selects VIC raster IRQs, not the faster CIA gameplay timer.
+        if (!variable_struct_exists(_s,"magic_clock")) _s.magic_clock=0;
+        _s.magic_clock+=_cycles;
+        while (_s.magic_clock>=19656 && (_s.flag_a|_s.flag_b)!=0) {
+            _s.magic_clock-=19656;
+            if (_s.flag_a==0) _s.flag_b=(_s.flag_b-1)&255;
+            _s.flag_a=(_s.flag_a-1)&255;
+        }
     } else if (_s.protection==2 && ((_g.player.tick-_s.protection_tick)&255)>=250) _s.protection=0;
+}
+
+/// Original $5649/$6fc1 palette cycle; the two bytes are the native magic timer.
+function ln1_magic_colour(_g) {
+    if ((_g.world_state.flag_a|_g.world_state.flag_b)==0) return -1;
+    static _cycle=[0, 6, 9, 2, 11, 4, 8, 12, 14, 5, 10, 3, 15, 7, 13, 1, 13, 7, 15, 3, 10, 5, 14, 12, 8, 4, 11, 2, 9, 6, 0, 0];
+    static _colours=[make_colour_rgb(0,0,0),make_colour_rgb(255,255,255),make_colour_rgb(129,51,56),make_colour_rgb(117,206,200),make_colour_rgb(142,60,151),make_colour_rgb(86,172,77),make_colour_rgb(46,44,155),make_colour_rgb(237,241,113),make_colour_rgb(142,80,41),make_colour_rgb(85,56,0),make_colour_rgb(196,108,113),make_colour_rgb(74,74,74),make_colour_rgb(123,123,123),make_colour_rgb(169,255,159),make_colour_rgb(112,109,235),make_colour_rgb(178,178,178)];
+    return _colours[_cycle[_g.world_state.flag_a&31]];
+}
+
+function ln1_magic_checks() {
+    var _g=new LN1Play(2);ln1_play_enter(_g,17);
+    var _item=undefined;
+    for(var _i=0;_i<array_length(_g.world.items);_i++)
+        if (_g.world.items[_i].id==16 && _g.world.items[_i].room==17) _item=_g.world.items[_i];
+    ln_check(is_struct(_item),"magic source exists");
+    _g.player.x=_item.x_min;_g.player.y=_item.y_min;_g.player.facing=1;
+    _g.player.action=0;_g.player.input_lock=0;
+    ln1_play_tick(_g,0);
+    ln_check(_g.world_state.flag_b==35 && _g.inventory[16]==0,"touch activates renewable magic without fire");
+    _g.world_state.flag_a=0;_g.world_state.flag_b=35;
+    var _colours=[];
+    repeat(8960) {
+        var _before=_g.world_state.flag_a+256*_g.world_state.flag_b;
+        ln1_level_effect_tick(_g);
+        ln_check(_g.world_state.flag_a+256*_g.world_state.flag_b==_before-1,"original 16-bit magic countdown");
+        if (array_length(_colours)<32) array_push(_colours,ln1_magic_colour(_g));
+    }
+    ln_check(ln1_magic_colour(_g)==-1 && _colours[0]!=_colours[2],"magic flashes and stops exactly at expiry");
+    _g.world_state.flag_a=0;_g.world_state.flag_b=35;_g.world_state.magic_clock=0;
+    var _ticks=ceil(8960*19656/_g.data.timer_period_cycles);
+    repeat(_ticks-1) ln1_level_effect_tick(_g,_g.data.timer_period_cycles);
+    ln_check((_g.world_state.flag_a|_g.world_state.flag_b)!=0,"magic uses VIC duration, not CIA duration");
+    ln1_level_effect_tick(_g,_g.data.timer_period_cycles);
+    ln_check((_g.world_state.flag_a|_g.world_state.flag_b)==0,"magic expires on the correct elapsed cycle");
+    // Run the room's flame animation through its actual event dispatcher.
+    for(var _protected=0;_protected<2;_protected++) {
+        var _dragon=new LN1Play(2);ln1_play_enter(_dragon,24);
+        _dragon.player.x=140;_dragon.player.y=106;
+        _dragon.world_state.flag_b=_protected?35:0;
+        _dragon.enemy.action=0;ln1_level_events(_dragon);
+        ln_check(_dragon.enemy.action==$abaa,"approaching dragon starts original flame sequence");
+        var _flame=false;
+        repeat(200) {
+            _dragon.player.tick=(_dragon.player.tick+1)&255;ln1_enemy_action(_dragon);
+            if (_dragon.enemy.action_state==2) _flame=true;
+            ln1_combat_event(_dragon,_dragon.enemy.action_state,true);_dragon.enemy.action_state=0;
+        }
+        ln_check(_flame && (_dragon.player_health>0)==bool(_protected),"animated dragon fire kills only without magic");
+    }
+    // Boundary checks exercise the real flame event, with each timer byte alone.
+    for(var _state=0;_state<3;_state++) for(var _x=128;_x<133;_x++) for(var _y=98;_y<116;_y++) {
+        _g.player.x=_x;_g.player.y=_y;_g.player_health=32;_g.world_state.mode=0;
+        _g.world_state.flag_a=_state==1?1:0;_g.world_state.flag_b=_state==2?35:0;
+        ln1_combat_event(_g,2,true);
+        var _fatal=_state==0 && _x>=130 && _y>=100 && _y<114;
+        ln_check((_g.player_health==0)==_fatal,"dragon fire respects source rectangle and magic");
+    }
+    ln_check(shader_is_compiled(sh_ln_occlusion),"magic shader compiles");
+    var _surface=surface_create(16,16);surface_set_target(_surface);
+    draw_clear_alpha(c_black,0);draw_set_colour(c_black);draw_rectangle(0,0,7,7,false);
+    draw_set_colour(c_yellow);draw_rectangle(8,0,15,7,false);draw_set_colour(c_white);
+    var _sprite=sprite_create_from_surface(_surface,0,0,16,16,false,false,0,0);
+    draw_clear_alpha(c_black,0);
+    ln_draw_masked_actor(_sprite,0,0,0,1,1,-1,0,0,16,16,0.5,1000,false,c_fuchsia);
+    ln_check(surface_getpixel(_surface,3,3)==c_fuchsia && surface_getpixel(_surface,11,3)==c_yellow,
+        "magic shader recolours body but preserves face/shared colours");
+    draw_clear_alpha(c_black,0);
+    ln_draw_masked_actor(_sprite,0,0,0,1,1,-1,0,0,16,16);
+    ln_check(surface_getpixel(_surface,3,3)==c_black,"magic colour resets for other actors");
+    surface_reset_target();sprite_delete(_sprite);surface_free(_surface);
+    show_debug_message("LN1_MAGIC_PASS: touch activation, 8960 ticks, colour cycle, expiry and 270 dragon flame cases.");
 }

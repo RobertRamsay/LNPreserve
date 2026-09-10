@@ -106,7 +106,7 @@ function ln2_keypad_draw(_g) {
     if (!is_struct(_g.keypad)) return;
     // Original LN2 entry is four C64 characters in the HOLDING area.
     var _x=160+264*3,_y=84+72*3;
-    draw_set_colour(c_black);draw_rectangle(_x,_y,_x+40*3-1,_y+32*3-1,false);draw_set_colour(c_white);
+    draw_set_colour(c_black);draw_rectangle(_x,_y,_x+40*3-1,_y+8*3-1,false);draw_set_colour(c_white);
     for(var _i=0;_i<4;_i++) {
         var _frame=clamp(_g.keypad.digits[_i]-27,0,9)*2+real(_i==_g.keypad.cursor);
         draw_sprite_ext(spr_ln2_keypad_digits,_frame,_x+_i*24,_y,3,3,0,c_white,1);

@@ -1,0 +1,10 @@
+{
+  "entry_routine": 1582,
+  "item": 16,
+  "level": 2,
+  "masked_bytes": "00000000000000000000000000000000000000000000c00001c00000000000400000c00000c00000c00000c000004000000000000000000000000000000000",
+  "method": "Execute original pickup entry and foreground masking. Read published sprite pointer $025c; $70be has toggled bit 0 to select the next writable buffer.",
+  "room": 17,
+  "source_sha256": "e49278a027c6f1c575826e121e8516727e765ef8db6961a926638ac66aeee34f",
+  "sprite_buffer": 51968
+}

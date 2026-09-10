@@ -4537,7 +4537,7 @@
       "y_min": 93
     },
     {
-      "flash_sprite": "spr_ln1_pickup_2_flash",
+      "flash_sprite": "spr_ln1_level2_pickup_16_flash",
       "flashes": 2,
       "id": 16,
       "room": 17,
