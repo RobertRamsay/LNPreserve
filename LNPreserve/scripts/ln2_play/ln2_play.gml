@@ -246,9 +246,9 @@ function ln2_play_draw(_g) {
     ln2_status_draw(_g,160,84,3);
     draw_text(600,36,"F8 One-hit kills: "+(_g.one_hit_kills?"ON":"OFF"));
     draw_text(160,36,"LAST NINJA 2 — "+string_upper(_g.title));draw_text(1000,36,"Scene "+string(_g.room_id));
-    draw_text(160,700,"WASD Move    # + direction Action    Space Weapon    2 / 3 Select item");
-    draw_text(160,728,"Numpad: 7 NW / 9 NE / 1 SW / 3 SE    F11 Scenes    Home Restart");
-    draw_text(160,760,"Lives "+string(_g.lives_left)+"    1 Music    4 Pause");
+    draw_text(160,700,"WASD Move    # + direction Action    Space Weapon    F3 / F5 Select item");
+    draw_text(160,728,"Numpad 7/9/1/3 Direction    F11 Scenes    Home Restart    1/2/3 Games");
+    draw_text(160,760,"Lives "+string(_g.lives_left)+"    F1 Music    F7 Pause");
     if (_g.paused) draw_text(600,60,"PAUSED");
     if (_g.game_over) draw_text(540,60,"GAME OVER — HOME TO RESTART");
     if (_g.level_complete) draw_text(530,60,"END OF LAST NINJA 2");

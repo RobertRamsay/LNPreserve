@@ -1,1 +1,13 @@
-{"$GMScript":"v1","%Name":"ln1_level_checks","isCompatibility":false,"isDnD":false,"name":"ln1_level_checks","parent":{"name":"Scripts","path":"folders/Native/Scripts.yy"},"resourceType":"GMScript","resourceVersion":"2.0"}
+{
+  "$GMScript":"v1",
+  "%Name":"ln1_level_checks",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"ln1_level_checks",
+  "parent":{
+    "name":"Scripts",
+    "path":"folders/Native/Scripts.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

@@ -319,8 +319,8 @@ function ln1_play_draw(_game, _paused) {
         draw_set_colour(c_white);draw_text(400,560,"THE QUEST — COMPLETE");
         draw_text(400,592,"F11: choose a scene    Home: restart");
     }
-    draw_text(160, 700, "WASD  Move    # + direction  Action    Space  Weapon    1 2 3 4  Function keys");
-    draw_text(160, 728, "Numpad: 7 NW / 9 NE / 1 SW / 3 SE    F11 Scenes    Home Restart");
+    draw_text(160, 700, "WASD  Move    # + direction  Action    Space  Weapon    F1 F3 F5 F7  Functions");
+    draw_text(160, 728, "Numpad 7/9/1/3 Direction    F11 Scenes    Home Restart    1/2/3 Games");
     draw_text(160, 760, "Health " + string(_game.player_health) + "    Lives " + string(_game.lives_left));
     if (_game.prayer_phase > 0) draw_text(710, 760, "S + D  Finish prayer");
     if (_game.game_over) { draw_set_colour(c_white); draw_text(510, 54, "GAME OVER — HOME TO RESTART"); }

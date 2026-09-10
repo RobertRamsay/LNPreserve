@@ -366,6 +366,18 @@ function ln2_drowning_tick(_g,_tick) {
     if (_d.phase==2 && --_d.steps>0) {
         ln2_player_special(_g,((_p.facing+2)&4)?$cd02:$ccf9);return;
     }
+    if (_d.phase==2 && variable_struct_exists(_d,"landing_death") && _d.landing_death) {
+        _d.phase=3;_p.facing=_d.saved_facing;_p.depth_y=_p.y;_p.height_fixed=0;
+        _g.player_health=0;_p.input_lock=255;_p.action_state=0;
+        _p.combat_state=36+(_p.facing>>1);
+        ln2_player_special(_g,_g.data.enemy_falls[(_p.facing&4)?1:0]);return;
+    }
+    if (_d.phase==3) {
+        // Keep the fallen body at its landing point while the health spiral empties.
+        _p.action_state=0;
+        if (_g.status.health[0]>0) return;
+        _g.world_state.drowning=undefined;_g.respawn_wait=20;return;
+    }
     if (_d.phase==0) {
         _d.phase=1;_p.facing=(_p.facing&4)>>1;
         ln2_player_special(_g,_g.water_data.splash);return;
@@ -490,8 +502,8 @@ function ln2_park_traversal_boundary(_g) {
     if (_mode>=14 && !(_p.boundary_crossings&1)) {_p.boundary_crossings=0;return false;}
     if (_mode==8) _p.depth_y=_p.y;
     if (_mode==15 || _mode==20) {_p.depth_y=_mode==15?4:12;_p.height_fixed=255;}
-    _g.world_state.drowning={phase:2,steps:_mode>=14?7:8,saved_y:_p.y,saved_facing:_p.facing};
-    _g.player_health=0;_g.exit_locked=true;_p.boundary_crossings=0;
+    _g.world_state.drowning={phase:2,steps:_mode>=14?7:8,saved_y:_p.y,saved_facing:_p.facing,landing_death:_g.room_id==12};
+    if (_g.room_id!=12) _g.player_health=0;_g.exit_locked=true;_p.boundary_crossings=0;
     ln2_player_special(_g,((_p.facing+2)&4)?$cd02:$ccf9);return true;
 }
 
@@ -531,7 +543,7 @@ function ln2_fence_gap_boat_checks() {
         _g=new LN2Play(1);_p=_g.player;ln2_play_enter(_g,12);
         _p.x=90;_p.y=80;_p.action=0;_p.boundary_mode=[14,15,20][_mode_index];_p.boundary_crossings=129;
         var _life=_g.lives_left;ln_check(ln2_hazard_boundary(_g),"gap causes drop");
-        _ticks=0;while(is_struct(_g.world_state.drowning) && _ticks++<100) {
+        _ticks=0;while(is_struct(_g.world_state.drowning) && _ticks++<240) {
             ln2_play_tick(_g,31);if(_ticks==8) {ln2_play_draw(_g);surface_save(_g.stage_surface,"ln2-scene12-drop-"+string(_mode_index)+".png");}
         }
         repeat(20) ln2_play_tick(_g,0);
@@ -565,4 +577,31 @@ function ln2_fence_gap_boat_checks() {
     ln_check(_ticks<400 && _g.enemy.x<88 && _g.enemy.display_frame==104,"released boat enters and stops at landing");
     ln2_play_draw(_g);surface_save(_g.stage_surface,"ln2-scene17-boat-arrival.png");
     show_debug_message("LN2_FENCE_GAP_BOAT_PASS: 336 original triggers, climb/descent, gap deaths, safe crossings, saved jab-to-arrival");
+}
+
+function ln2_gap_landing_checks() {
+    for(var _facing=1;_facing<8;_facing+=2) for(var _health_index=0;_health_index<3;_health_index++) {
+        var _g=new LN2Play(1),_p=_g.player;ln2_play_enter(_g,12);
+        _p.x=90;_p.y=80;_p.depth_y=80;_p.facing=_facing;_p.action=0;
+        _g.player_health=[1,22,44][_health_index];_g.status.health[0]=_g.player_health;
+        _p.boundary_mode=14;_p.boundary_crossings=129;ln2_hazard_boundary(_g);
+        var _frames=[],_landing_y=-1,_ticks=0,_lives=_g.lives_left;
+        while(is_struct(_g.world_state.drowning) && _ticks++<240) {
+            ln2_play_tick(_g,31);
+            if (is_struct(_g.world_state.drowning) && _g.world_state.drowning.phase==3) {
+                if (_landing_y<0) _landing_y=_p.y;
+                ln_check(_p.y==_landing_y && _p.depth_y==_landing_y,"death stays on landing ground");
+                ln_check(_p.display_frame!=255,"ninja remains visible during health drain");
+                if (!array_contains(_frames,_p.display_frame)) array_push(_frames,_p.display_frame);
+                if (_p.display_frame==46 && _facing==7 && _health_index==2) {
+                    ln2_play_draw(_g);surface_save(_g.stage_surface,"ln2-chasm-landed-death.png");
+                }
+            }
+        }
+        ln_check(_ticks<240 && array_contains(_frames,44) && array_contains(_frames,45) && array_contains(_frames,46),"complete facing-correct death animation after fall");
+        ln_check(_g.status.health[0]==0 && _p.display_frame==46 && _g.respawn_wait==20,"corpse persists after health empties");
+        repeat(19) {ln2_play_tick(_g,31);ln_check(_p.display_frame==46 && _p.y==_landing_y,"corpse does not vanish during respawn delay");}
+        ln2_play_tick(_g,0);ln_check(_g.lives_left==_lives-1 && _g.player_health==44,"single life loss after visible death");
+    }
+    show_debug_message("LN2_GAP_LANDING_PASS: 12 facing/health cases; visible landing death, health drain and one-life respawn");
 }

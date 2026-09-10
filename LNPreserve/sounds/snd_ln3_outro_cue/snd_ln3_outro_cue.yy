@@ -10,7 +10,7 @@
   "compression":0,
   "compressionQuality":4,
   "conversionMode":0,
-  "duration":1.0,
+  "duration":224.75,
   "exportDir":"",
   "name":"snd_ln3_outro_cue",
   "parent":{
@@ -21,6 +21,6 @@
   "resourceType":"GMSound",
   "resourceVersion":"2.0",
   "sampleRate":44100,
-  "soundFile":"snd_ln3_outro_cue.wav",
+  "soundFile":"snd_ln3_outro_cue.mp3",
   "volume":1.0,
 }

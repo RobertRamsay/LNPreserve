@@ -10,7 +10,7 @@
   "compression":0,
   "compressionQuality":4,
   "conversionMode":0,
-  "duration":1.0,
+  "duration":178.75,
   "exportDir":"",
   "name":"snd_ln3_void_game",
   "parent":{
@@ -21,6 +21,6 @@
   "resourceType":"GMSound",
   "resourceVersion":"2.0",
   "sampleRate":44100,
-  "soundFile":"snd_ln3_void_game.wav",
+  "soundFile":"snd_ln3_void_game.mp3",
   "volume":1.0,
 }

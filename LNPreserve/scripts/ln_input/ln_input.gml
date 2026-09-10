@@ -3,7 +3,7 @@ enum LNKey { Up, Down, Left, Right, Fire, F1, F3, F5, F7, Weapon, WeaponPrev, CR
 function LNInput() constructor {
     // Windows UK keyboard: dedicated # key (OEM 7), not character code 35 (End).
     bindings = [ord("W"), ord("S"), ord("A"), ord("D"), 222,
-                ord("1"), ord("2"), ord("3"), ord("4"), vk_space, -1, -1];
+                vk_f1, vk_f3, vk_f5, vk_f7, vk_space, -1, -1];
     sampled = array_create(LNKey.Count, false);
     held = array_create(LNKey.Count, false);
     pressed = array_create(LNKey.Count, false);
@@ -126,4 +126,34 @@ function ln_xbox_checks() {
     _g.state.inventory[3]=1;ln3_weapon_select(_g.state,_g.actions,_g.input,0,2);ln_check(_g.state.pending_weapon==4,"LN3 reverse weapon wrap");
     var _connected=0;for(var _i=0;_i<gamepad_get_device_count();_i++) if(gamepad_is_connected(_i)) _connected++;
     show_debug_message("LN_XBOX_PASS: movement, deadzone, button mapping, input edges, disconnect release and reverse weapons. Connected controllers: "+string(_connected));
+}
+
+/// Number-row quick starts use fresh game state and never enter C64 key rows.
+function ln_quick_start(_host,_game) {
+    var _old=_host.play,_transport=_old.timer;
+    if (_old.game_number==2) ln2_ending_free(_old);
+    if (_old.game_number==3) ln3_ending_free(_old);
+    if (surface_exists(_old.stage_surface)) surface_free(_old.stage_surface);
+    if (variable_struct_exists(_old,"part_surface") && surface_exists(_old.part_surface)) surface_free(_old.part_surface);
+    _host.play=_game==1?new LN1Play():(_game==2?new LN2Play():new LN3Play());
+    _host.play.timer=_transport;_transport.cycles_per_frame=_host.play.data.timer_period_cycles;
+    _host.control_state_ln1=ln3_data_read("actors/ln1/initial_control_state.json");
+    _host.play.controls=_host.control_state_ln1;_host.input_state=new LNInput();
+    _host.workbench=false;_host.scene_test.menu=false;_host.scene_test.preview=false;_host.scene_test.message_us=0;
+    _host.scene_test.game=_game;
+    ln_music_play(_game,["wastelands","central_park","earth"][_game-1],false);
+}
+
+function ln_function_key_checks() {
+    var _input=new LNInput();
+    for(var _i=0;_i<4;_i++) ln_check(_input.bindings[LNKey.F1+_i]==[vk_f1,vk_f3,vk_f5,vk_f7][_i],"matching PC/C64 function key");
+    for(var _i=0;_i<array_length(_input.bindings);_i++) ln_check(!array_contains([ord("1"),ord("2"),ord("3"),ord("4")],_input.bindings[_i]),"number row does not drive C64 functions");
+    var _host={play:new LN1Play(),scene_test:{menu:true,preview:true,message_us:100,game:1},workbench:true};
+    for(var _game=1;_game<=3;_game++) {
+        ln_quick_start(_host,_game);
+        ln_check(_host.play.game_number==_game && _host.play.level==1,"quick start selects first level");
+        ln_check(_host.play.room_id==(_game==3?_host.play.data.initial.room_id:1),"quick start selects opening scene");
+        ln_check(!_host.workbench && !_host.scene_test.menu && !_host.scene_test.preview,"quick start returns to gameplay");
+    }
+    show_debug_message("LN_FUNCTION_KEYS_PASS: matching F1/F3/F5/F7 and three fresh game starts");
 }
