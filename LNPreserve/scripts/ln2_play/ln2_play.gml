@@ -1,4 +1,5 @@
 function LN2Play(_level=1) constructor {
+    life_transition=undefined;
     game_number=2;level=_level;
     var _folder="play/ln2/level"+string(level)+"/",_buffer=buffer_load(_folder+"gameplay.json");
     data=json_parse(buffer_read(_buffer,buffer_text));buffer_delete(_buffer);
@@ -41,6 +42,7 @@ function ln2_enemy_remember(_g) {
 }
 
 function ln2_play_enter(_g,_id) {
+    _g.life_transition=undefined;
     _g.world_state.drowning=undefined;_g.world_state.fence=undefined;
     _g.safe_scene_phase=0;_g.hole_steps=0;_g.route_descent=undefined;_g.fall_exit_slot=-1;
     _g.keypad=undefined;_g.pending_item=undefined;
@@ -148,11 +150,15 @@ function ln2_level_load(_g,_level,_ordinary=false) {
 }
 
 function ln2_play_tick(_g,_joy) {
+    if (variable_struct_exists(_g,"life_transition") && is_struct(_g.life_transition)) {
+        if (_g.life_transition.phase!=3) ln2_life_transition_tick(_g,(_g.player.tick+1)&255);
+        return;
+    }
     if (_g.game_over || _g.level_complete) return;
     var _p=_g.player,_tick=(_p.tick+1)&255;if (_tick==0) _g.tick_epoch=(_g.tick_epoch+1)&255;
     _g.last_joy=_joy;
     var _drowning=ln2_blocking_sequence(_g);
-    if (!_drowning) {_joy=ln2_burger_input(_g,_joy);_joy=ln2_candle_assist_input(_g,_joy);}
+    if (!_drowning) {_joy=ln2_burger_input(_g,_joy);_joy=ln2_candle_assist_input(_g,_joy);_joy=ln2_pickup_assist_input(_g,_joy);}
     ln2_status_tick(_g,_tick);
     _g.room_age++;
     if (_g.notice_item>=0 && ((_tick-_g.notice_tick)&255)>=_g.notice_duration) _g.notice_item=-1;
@@ -164,9 +170,7 @@ function ln2_play_tick(_g,_joy) {
     if (_g.respawn_wait>0) {
         _p.tick=_tick;_p.last_tick=_tick;_g.respawn_wait--;
         if (_g.respawn_wait==0) {
-            _g.lives_left--;
-            if (_g.lives_left<=0) { _g.game_over=true;return; }
-            _g.player_health=44;ln2_test_enter(_g,_g.last_entry);
+            _g.life_transition={phase:0,tick:0};
         }
         return;
     }
@@ -193,7 +197,7 @@ function ln2_play_tick(_g,_joy) {
 
 function ln2_play_actor(_g,_a,_enemy) {
     if (_a.display_frame==255 || (_enemy && _a.active<128 && !_a.custom && !(_g.level==7 && _g.world_state.boss_defeated))) return;
-    if (!_enemy && variable_struct_exists(_g.world_state,"drowning") && is_struct(_g.world_state.drowning)) {
+    if (!_enemy && is_struct(_g.water_data) && variable_struct_exists(_g.world_state,"drowning") && is_struct(_g.world_state.drowning)) {
         var _frames=_g.water_data.frames,_index=-1;
         for(var _i=0;_i<array_length(_frames);_i++) if (_frames[_i]==_a.display_frame) {_index=_i;break;}
         if (_index>=0) {
@@ -252,5 +256,5 @@ function ln2_play_draw(_g) {
     if (_g.paused) draw_text(600,60,"PAUSED");
     if (_g.game_over) draw_text(540,60,"GAME OVER — HOME TO RESTART");
     if (_g.level_complete) draw_text(530,60,"END OF LAST NINJA 2");
-    ln2_keypad_draw(_g);
+    ln2_keypad_draw(_g);ln2_life_transition_draw(_g);
 }

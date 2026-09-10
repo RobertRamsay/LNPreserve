@@ -1,3 +1,4 @@
+lives_pickup_test=false;
 gap_landing_test=false;
 fence_gap_boat_test=false;
 water_knife_test=false;
@@ -41,6 +42,7 @@ function_presses = [0,0,0,0];
 selftest = false;ln1_only=false;selftest_inject_failure=false;
 host_frames = 0;
 for (var _i = 1; _i <= parameter_count(); _i++) {
+    if(parameter_string(_i)=="--ln2-lives-pickup-test") lives_pickup_test=true;
     if(parameter_string(_i)=="--function-keys-test") {
         try {ln_function_key_checks();}
         catch(_failure) {show_debug_message("LN_FUNCTION_KEYS_FAILURE: "+string(_failure));}

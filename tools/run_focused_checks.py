@@ -3,6 +3,7 @@ from pathlib import Path
 import argparse,subprocess,json,time,sys
 ROOT=Path(__file__).resolve().parents[1]
 CASES={
+ '--ln2-lives-pickup-test':['LN2_LIVES_PICKUP_PASS'],
  '--function-keys-test':['LN_FUNCTION_KEYS_PASS'],
  '--ln2-gap-landing-test':['LN2_GAP_LANDING_PASS'],
  '--ln2-fence-gap-boat-test':['LN2_FENCE_GAP_BOAT_PASS'],

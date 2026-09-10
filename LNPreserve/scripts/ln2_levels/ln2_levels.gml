@@ -188,7 +188,7 @@ function ln2_fall_tick(_g,_tick) {
                 _p.input_lock=0;_p.boundary_crossings=0;
                 ln2_play_travel(_g,_g.scene_record.entries[_slot]);return;
             }
-            _p.input_lock=255;return;
+            ln2_fall_death_begin(_g);return;
         }
     }
     ln2_enemy_action(_g);
@@ -350,7 +350,7 @@ function ln2_water_boat_supported(_g) {
 function ln2_drowning_begin(_g,_offset,_entry) {
     var _p=_g.player;
     _g.world_state.drowning={phase:0,saved_y:_p.y,saved_facing:_p.facing};
-    _g.player_health=0;_p.boundary_crossings=0;_g.exit_locked=true;
+    _p.boundary_crossings=0;_g.exit_locked=true;
     _p.y=(_p.y-_offset)&255;
     var _side=((_p.facing+2)&4)?3:0;
     ln2_player_special(_g,_g.water_data.entries[_side+_entry]);
@@ -366,7 +366,7 @@ function ln2_drowning_tick(_g,_tick) {
     if (_d.phase==2 && --_d.steps>0) {
         ln2_player_special(_g,((_p.facing+2)&4)?$cd02:$ccf9);return;
     }
-    if (_d.phase==2 && variable_struct_exists(_d,"landing_death") && _d.landing_death) {
+    if (_d.phase==2 || _d.phase==1) {
         _d.phase=3;_p.facing=_d.saved_facing;_p.depth_y=_p.y;_p.height_fixed=0;
         _g.player_health=0;_p.input_lock=255;_p.action_state=0;
         _p.combat_state=36+(_p.facing>>1);
@@ -402,7 +402,7 @@ function ln2_hazard_boundary(_g) {
     // Island's eastern edge uses the original fixed-depth eight-step sink.
     if (_mode==43) {
         _g.world_state.drowning={phase:2,steps:8,saved_y:_p.y,saved_facing:_p.facing};
-        _g.player_health=0;_p.depth_y=158;_p.height_fixed=255;_g.exit_locked=true;_p.boundary_crossings=0;
+        _p.depth_y=158;_p.height_fixed=255;_g.exit_locked=true;_p.boundary_crossings=0;
         ln2_player_special(_g,((_p.facing+2)&4)?$cd02:$ccf9);return true;
     }
     if (_mode==11 || _mode==16) {
@@ -452,7 +452,7 @@ function ln2_water_knife_checks() {
         }
     }
     ln_check(_seen && _ticks<200 && _g.respawn_wait==20,"original splash completes before respawn");
-    repeat(20) ln2_play_tick(_g,0);
+    repeat(20) ln2_play_tick(_g,0);ln2_test_finish_life_transition(_g);
     ln_check(_g.lives_left==_life-1 && _g.player_health==44,"drowning loses exactly one life and restores health");
     for(var _mode_index=0;_mode_index<5;_mode_index++) {
         _g=new LN2Play(1);_p=_g.player;ln2_play_enter(_g,16);
@@ -503,7 +503,7 @@ function ln2_park_traversal_boundary(_g) {
     if (_mode==8) _p.depth_y=_p.y;
     if (_mode==15 || _mode==20) {_p.depth_y=_mode==15?4:12;_p.height_fixed=255;}
     _g.world_state.drowning={phase:2,steps:_mode>=14?7:8,saved_y:_p.y,saved_facing:_p.facing,landing_death:_g.room_id==12};
-    if (_g.room_id!=12) _g.player_health=0;_g.exit_locked=true;_p.boundary_crossings=0;
+    _g.exit_locked=true;_p.boundary_crossings=0;
     ln2_player_special(_g,((_p.facing+2)&4)?$cd02:$ccf9);return true;
 }
 
@@ -546,7 +546,7 @@ function ln2_fence_gap_boat_checks() {
         _ticks=0;while(is_struct(_g.world_state.drowning) && _ticks++<240) {
             ln2_play_tick(_g,31);if(_ticks==8) {ln2_play_draw(_g);surface_save(_g.stage_surface,"ln2-scene12-drop-"+string(_mode_index)+".png");}
         }
-        repeat(20) ln2_play_tick(_g,0);
+        repeat(20) ln2_play_tick(_g,0);ln2_test_finish_life_transition(_g);
         ln_check(_g.lives_left==_life-1,"gap costs one life");
         _p.action=0;_p.boundary_mode=[14,15,20][_mode_index];_p.boundary_crossings=130;
         _g.room_id=12;ln_check(!ln2_hazard_boundary(_g),"jump across both gap edges remains safe");
@@ -601,7 +601,121 @@ function ln2_gap_landing_checks() {
         ln_check(_ticks<240 && array_contains(_frames,44) && array_contains(_frames,45) && array_contains(_frames,46),"complete facing-correct death animation after fall");
         ln_check(_g.status.health[0]==0 && _p.display_frame==46 && _g.respawn_wait==20,"corpse persists after health empties");
         repeat(19) {ln2_play_tick(_g,31);ln_check(_p.display_frame==46 && _p.y==_landing_y,"corpse does not vanish during respawn delay");}
-        ln2_play_tick(_g,0);ln_check(_g.lives_left==_lives-1 && _g.player_health==44,"single life loss after visible death");
+        ln2_play_tick(_g,0);ln2_test_finish_life_transition(_g);ln_check(_g.lives_left==_lives-1 && _g.player_health==44,"single life loss after visible death");
     }
     show_debug_message("LN2_GAP_LANDING_PASS: 12 facing/health cases; visible landing death, health drain and one-life respawn");
+}
+
+function ln2_fall_death_begin(_g) {
+    var _p=_g.player;
+    _p.y=min(_p.y,180);_p.depth_y=_p.y;_p.height_fixed=0;
+    _g.world_state.drowning={phase:3,saved_y:_p.y,saved_facing:_p.facing};
+    _g.player_health=0;_g.exit_locked=true;_p.input_lock=255;_p.action_state=0;
+    ln2_player_special(_g,_g.data.enemy_falls[(_p.facing&4)?1:0]);
+}
+
+function ln2_life_transition_tick(_g,_tick) {
+    var _t=_g.life_transition;_g.player.tick=_tick;_g.player.last_tick=_tick;_t.tick++;
+    if (_t.phase==0 && _t.tick>=20) {
+        _g.lives_left=max(0,_g.lives_left-1);_t.phase=1;_t.tick=0;return;
+    }
+    if (_t.phase==1 && _t.tick>=75) {
+        if (_g.lives_left<=0) {_g.game_over=true;_t.phase=3;return;}
+        _g.player_health=44;ln2_test_enter(_g,_g.last_entry);_g.status.health[0]=44;
+        _g.life_transition=_t;_t.phase=2;_t.tick=0;return;
+    }
+    if (_t.phase==2 && _t.tick>=20) _g.life_transition=undefined;
+}
+
+function ln2_life_transition_draw(_g) {
+    if (!variable_struct_exists(_g,"life_transition") || !is_struct(_g.life_transition)) return;
+    var _t=_g.life_transition,_alpha=_t.phase==0?_t.tick/20:(_t.phase==2?1-_t.tick/20:1);
+    draw_set_alpha(clamp(_alpha,0,1));draw_set_colour(c_black);draw_rectangle(160,84,1120,684,false);
+    draw_set_alpha(1);draw_set_colour(c_white);
+    if (_t.phase==1 || _t.phase==3) {
+        var _text=_g.lives_left==0?"GAME OVER":string(_g.lives_left)+(_g.lives_left==1?" LIFE REMAINING":" LIVES LEFT");
+        var _x=640-string_length(_text)*12;
+        for(var _i=1;_i<=string_length(_text);_i++) {
+            var _c=ord(string_char_at(_text,_i)),_code=_c>=48 && _c<=57?_c-48+27:(_c==32?0:_c&63);
+            draw_sprite_ext(spr_ln2_message_font,_code,_x+(_i-1)*24,372,3,3,0,c_white,1);
+        }
+    }
+}
+
+function ln2_pickup_assist_input(_g,_joy) {
+    if (!variable_struct_exists(_g,"pickup_fire_previous")) _g.pickup_fire_previous=0;
+    var _fire=_joy&16,_edge=_fire!=0 && _g.pickup_fire_previous==0;_g.pickup_fire_previous=_fire;
+    var _p=_g.player,_e=_g.enemy;
+    if (!_edge || (_joy&15)!=0 || _p.vehicle!=0 || _p.action>=256 || _p.input_lock!=0 || _g.player_health<=0 ||
+        ln2_blocking_sequence(_g) || _g.respawn_wait>0 || is_struct(_g.keypad) || _g.victory!=0 ||
+        _g.fall_remaining>=0 || _g.hole_steps>0 || is_struct(_g.route_descent)) return _joy;
+    if (_e.active>=128 && _e.health>0 && point_distance(_p.x,_p.y,_e.x,_e.y)<=20) return _joy;
+    var _best=401,_target=undefined,_x=0,_y=0;
+    for(var _i=0;_i<array_length(_g.world.items);_i++) {
+        var _item=_g.world.items[_i];
+        if (_item.room!=_g.room_id || _item.id>=17 || _item.action>2 || _g.inventory[_item.id]!=0) continue;
+        var _tx=clamp(_p.x,_item.x_min,_item.x_max-1),_ty=clamp(_p.y,_item.y_min,_item.y_max-1);
+        var _distance=sqr(_p.x-_tx)+sqr(_p.y-_ty);
+        if (_distance<_best) {_best=_distance;_target=_item;_x=_tx;_y=_ty;}
+    }
+    if (!is_struct(_target)) return _joy;
+    _x=(_target.x_min+_target.x_max-1) div 2;_y=(_target.y_min+_target.y_max-1) div 2;
+    _p.x=_x;_p.y=_y;_p.depth_y=_y;_p.fraction_x=0;_p.fraction_y=0;
+    if (_target.facing!=0) _p.facing=_target.facing;
+    _p.heading=_p.facing;_p.stopped=255;_p.turn_lock=0;_p.action_state=0;
+    // The original pickup chain visits each object height; the matching item's
+    // event ends it at the appropriate pose through ln2_item_animation_finish.
+    ln2_player_begin(_p,_g.data,20);return 0;
+}
+
+function ln2_test_finish_life_transition(_g) {
+    var _ticks=0;
+    while(is_struct(_g.life_transition) && _g.life_transition.phase!=3 && _ticks++<140) ln2_play_tick(_g,0);
+    ln_check(_ticks<140,"life transition completes");
+}
+
+function ln2_lives_pickup_checks() {
+    for(var _level_index=0;_level_index<2;_level_index++) {
+        var _g=new LN2Play(_level_index==0?1:6),_p=_g.player;
+        _p.x=120;_p.y=110;_p.facing=3;_g.lives_left=3;_g.player_health=44;
+        ln2_fall_begin(_g,16,100);var _ticks=0,_death_seen=false;
+        while(_g.respawn_wait==0 && _ticks++<240) {
+            ln2_play_tick(_g,31);
+            if (_p.display_frame==44 || _p.display_frame==45 || _p.display_frame==46) _death_seen=true;
+        }
+        ln_check(_death_seen && _g.respawn_wait==20,"every fatal fall cuts to death animation");
+        repeat(20) ln2_play_tick(_g,0);
+        ln_check(is_struct(_g.life_transition) && _g.lives_left==3,"fade begins before deducting life");
+        repeat(20) ln2_play_tick(_g,0);
+        ln_check(_g.life_transition.phase==1 && _g.lives_left==2,"lives message shows decremented count");
+        ln2_play_draw(_g);surface_save(application_surface,"ln2-lives-message.png");
+        _g=ln_save_restore(json_parse(json_stringify(ln_save_capture(_g))));
+        ln2_test_finish_life_transition(_g);
+        ln_check(_g.lives_left==2 && _g.player_health==44 && !is_struct(_g.life_transition),"saved transition resumes without double life loss");
+    }
+    _g=new LN2Play(1);_g.lives_left=1;_g.respawn_wait=1;ln2_play_tick(_g,0);
+    ln2_test_finish_life_transition(_g);ln_check(_g.game_over && _g.lives_left==0 && _g.life_transition.phase==3,"last life displays game over");
+    var _collected=0;
+    for(var _level=1;_level<=7;_level++) {
+        _g=new LN2Play(_level);
+        for(var _i=0;_i<array_length(_g.world.items);_i++) {
+            var _item=_g.world.items[_i];if(_item.id>=17 || _item.handler!=0 || _item.action>2) continue;
+            var _entry=-1;for(var _j=0;_j<array_length(_g.world.tables.exit_destinations);_j++) if(_g.world.tables.exit_destinations[_j]==_item.room) {_entry=_j;break;}
+            ln_check(_entry>=0,"pickup fixture has valid room entrance");ln2_test_enter(_g,_entry);_p=_g.player;_g.inventory[_item.id]=0;
+            // Place the fixture on the ground beside the item, past entrance climbing.
+            _p.vehicle=0;_p.height_fixed=0;_p.x=_item.x_min-3;_p.y=_item.y_min;_p.action=0;_p.input_lock=0;_g.enemy.active=0;_g.pickup_fire_previous=0;
+            ln2_pickup_assist_input(_g,16);
+            for(var _tick=0;_tick<100 && _g.inventory[_item.id]==0;_tick++) ln2_play_tick(_g,0);
+            ln_check(_g.inventory[_item.id]!=0,"fire alone collects nearby source item in level "+string(_level)+" id "+string(_item.id)+" action "+string(_p.action)+" xy "+string(_p.x)+","+string(_p.y)+" state "+string(_p.action_state)+" vehicle "+string(_p.vehicle));_collected++;break;
+        }
+    }
+    _g=new LN2Play(1);var _item=undefined;
+    for(var _i=0;_i<array_length(_g.world.items);_i++) {var _candidate=_g.world.items[_i];if(_candidate.id<17 && _candidate.action<=2 && _candidate.handler==0) {_item=_candidate;break;}}var _entry=-1;for(var _j=0;_j<array_length(_g.world.tables.exit_destinations);_j++) if(_g.world.tables.exit_destinations[_j]==_item.room) {_entry=_j;break;}
+            ln_check(_entry>=0,"pickup fixture has valid room entrance");ln2_test_enter(_g,_entry);_p=_g.player;
+    _g.inventory[_item.id]=0;_p.vehicle=0;_p.height_fixed=0;_p.x=_item.x_min;_p.y=_item.y_min;_p.action=0;_p.input_lock=0;
+    _g.enemy.active=128;_g.enemy.health=44;_g.enemy.x=_p.x+20;_g.enemy.y=_p.y;_g.pickup_fire_previous=0;
+    ln_check(ln2_pickup_assist_input(_g,16)==16 && _p.action==0,"enemy within 20 pixels leaves fire for combat");
+    _g.enemy.x=_p.x+21;_g.pickup_fire_previous=0;
+    ln_check(ln2_pickup_assist_input(_g,16)==0 && _p.action>=256,"outside enemy range permits pickup");
+    show_debug_message("LN2_LIVES_PICKUP_PASS: falls, fades, source font, saved lives count and "+string(_collected)+" level pickups with enemy range guard");
 }

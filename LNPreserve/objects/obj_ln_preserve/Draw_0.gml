@@ -1,3 +1,8 @@
+if (lives_pickup_test) {
+    try {ln2_lives_pickup_checks();}
+    catch(_failure) {show_debug_message("LN2_LIVES_PICKUP_FAILURE: "+string(_failure));}
+    game_end();exit;
+}
 if (gap_landing_test) {
     try {ln2_gap_landing_checks();}
     catch(_failure) {show_debug_message("LN2_GAP_LANDING_FAILURE: "+string(_failure));}
