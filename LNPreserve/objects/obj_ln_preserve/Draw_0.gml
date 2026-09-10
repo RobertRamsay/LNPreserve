@@ -1,3 +1,8 @@
+if (item_use_test) {
+    try {ln2_item_use_checks();}
+    catch(_failure) {show_debug_message("LN2_ITEM_USE_FAILURE: "+string(_failure));}
+    game_end();exit;
+}
 if (street_snags_test) {
     try {ln2_street_snag_checks();}
     catch(_failure) {show_debug_message("LN2_STREET_SNAGS_FAILURE: "+string(_failure));}

@@ -1,3 +1,4 @@
+item_use_test=false;
 street_snags_test=false;
 ninja_transitions_test=false;
 lives_pickup_test=false;
@@ -44,6 +45,7 @@ function_presses = [0,0,0,0];
 selftest = false;ln1_only=false;selftest_inject_failure=false;
 host_frames = 0;
 for (var _i = 1; _i <= parameter_count(); _i++) {
+    if(parameter_string(_i)=="--ln2-item-use-test") item_use_test=true;
     if(parameter_string(_i)=="--ln2-street-snags-test") street_snags_test=true;
     if(parameter_string(_i)=="--ninja-transitions-test") ninja_transitions_test=true;
     if(parameter_string(_i)=="--ln2-lives-pickup-test") lives_pickup_test=true;

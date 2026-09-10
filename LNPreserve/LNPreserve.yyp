@@ -2187,6 +2187,8 @@
   },
   "name":"LNPreserve",
   "resources":[
+    {"id":{"name":"spr_ln2_sewer_grate_states","path":"sprites/spr_ln2_sewer_grate_states/spr_ln2_sewer_grate_states.yy"}},
+
     {"id":{"name":"spr_ln2_street_scenery","path":"sprites/spr_ln2_street_scenery/spr_ln2_street_scenery.yy"}},
     {"id":{"name":"spr_ln2_street_bottle_states","path":"sprites/spr_ln2_street_bottle_states/spr_ln2_street_bottle_states.yy"}},
     {"id":{"name":"spr_ln2_street_bottle_states_removed","path":"sprites/spr_ln2_street_bottle_states_removed/spr_ln2_street_bottle_states_removed.yy"}},

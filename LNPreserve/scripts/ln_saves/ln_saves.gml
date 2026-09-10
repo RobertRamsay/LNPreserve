@@ -126,7 +126,7 @@ function ln_save_restore(_save) {
         if (_g.inventory[16]==1) {_g.inventory[16]=0;if (_g.selected_item==16) _g.selected_item=0;}
         if (_g.room_id==1) ln2_refresh_scene(_g);
     }
-    if (_g.game_number==2 && _g.level==2) ln2_refresh_scene(_g);
+    if (_g.game_number==2 && (_g.level==2 || _g.level==3)) ln2_refresh_scene(_g);
     _g.timer.cycle=int64(_save.cycle);_g.timer.frame=_save.frame;_g.timer.credit=int64(0);
     return _g;
 }

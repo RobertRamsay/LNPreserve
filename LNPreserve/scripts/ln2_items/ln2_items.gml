@@ -141,6 +141,9 @@ function ln2_refresh_scene(_g) {
         _g.scene=asset_get_index(_bottle?"spr_ln2_street_bottle_states":"spr_ln2_street_manhole_states");
         _g.scene_frame=real(_g.inventory[_flag]!=0);
     }
+    if (_g.level==3 && _g.room_id==5) {
+        _g.scene=spr_ln2_sewer_grate_states;_g.scene_frame=real(_g.inventory[20]!=0);
+    }
     // Source item completion draws these panels immediately, not on room entry.
     if (_g.level==7 && _g.room_id==1) {
         _g.safe_scene_phase=_g.inventory[23]!=0?4:(_g.inventory[18]!=0?(_g.inventory[16]==255?3:2):(_g.inventory[17]!=0?1:0));
@@ -357,4 +360,71 @@ function ln2_candle_body_checks() {
     var _score=json_stringify(_g.status.score);ln2_item_interact(_g,0);
     ln_check(json_stringify(_g.status.score)==_score,"orb completion awards once");
     show_debug_message("LN2_CANDLE_BODY_PASS: native double-fire crouch for five candles; held orb at defeated body and completion guards");
+}
+
+/// Read-only eligibility for supported held-item mechanisms. The original
+/// handler still performs the action and checks its prerequisites on contact.
+function ln2_item_use_ready(_g,_item) {
+    var _required=-1;
+    switch (_g.level) {
+        case 1:if (_item.id==17) _required=7;break;
+        case 2:if (_item.id==19) _required=11;break;
+        case 3:
+            if (_item.id==20) _required=12;
+            if (_item.id==19) _required=10;
+            break;
+        case 4:
+            if (_item.id==17) _required=13;
+            if (_item.id==19 || (_item.id==18 && _g.inventory[19]!=0)) _required=14;
+            break;
+        case 7:if (_item.id==23 && _g.world_state.boss_defeated) _required=16;break;
+    }
+    return _required>=0 && _g.selected_item==_required && (_g.inventory[_required]&127)!=0;
+}
+
+function ln2_item_use_checks() {
+    var _cases=[[1,17,7],[2,19,11],[3,20,12],[3,19,10],[4,17,13],[4,19,14],[4,18,14],[7,23,16]];
+    var _g=undefined,_p=undefined,_level=0,_i=0,_pixel=0;
+    for(_i=0;_i<array_length(_cases);_i++) {
+        var _c=_cases[_i];if (_level!=_c[0]) {_level=_c[0];_g=new LN2Play(_level);}
+        var _item={id:_c[1]};_g.inventory[19]=255;_g.world_state.boss_defeated=true;
+        _g.inventory[_c[2]]=255;_g.selected_item=0;
+        ln_check(!ln2_item_use_ready(_g,_item),"item use requires selected tool");
+        _g.selected_item=_c[2];ln_check(ln2_item_use_ready(_g,_item),"supported held-item mechanism");
+        _g.inventory[_c[2]]=128;ln_check(!ln2_item_use_ready(_g,_item),"consumed tool cannot assist");
+    }
+    _g=new LN2Play(4);_g.inventory[14]=255;_g.inventory[19]=0;_g.selected_item=14;
+    ln_check(!ln2_item_use_ready(_g,{id:18}),"loaded-tool prerequisite retained");
+    _g=new LN2Play(7);_g.inventory[16]=255;_g.selected_item=16;
+    ln_check(!ln2_item_use_ready(_g,{id:23}),"orb return still requires defeated Shogun");
+    _g=new LN2Play(3);ln2_play_enter(_g,5);_p=_g.player;
+    var _target=undefined;
+    for(_i=0;_i<array_length(_g.world.items);_i++) if (_g.world.items[_i].id==20) {_target=_g.world.items[_i];break;}
+    _g.inventory[20]=0;_g.inventory[12]=255;_g.selected_item=12;_g.enemy.active=0;
+    _p.x=_target.x_min-5;_p.y=_target.y_min;_p.action=0;_p.input_lock=0;_p.vehicle=0;
+    ln2_refresh_scene(_g);ln_check(_g.scene_frame==0,"grate closed before use");
+    var _surface=surface_create(240,144);
+    surface_set_target(_surface);draw_sprite(_g.scene,0,0,0);surface_reset_target();
+    var _closed=[];for(_pixel=0;_pixel<240*144;_pixel++) array_push(_closed,surface_getpixel(_surface,_pixel mod 240,_pixel div 240));
+    // Directional fire and nearby combat retain their usual controls.
+    ln2_pickup_assist_input(_g,0);ln2_pickup_assist_input(_g,17);
+    ln_check(_p.action==0,"direction and fire retain manual action");
+    _g.enemy.active=128;_g.enemy.health=44;_g.enemy.x=_p.x+10;_g.enemy.y=_p.y;
+    ln2_pickup_assist_input(_g,0);ln2_pickup_assist_input(_g,16);
+    ln_check(_p.action==0,"nearby enemy retains combat priority");_g.enemy.active=0;
+    ln2_pickup_assist_input(_g,0);ln2_pickup_assist_input(_g,16);
+    ln_check(_p.action>=256,"nearby fire starts tool-use pose");
+    var _saved=ln_save_capture(_g);_g=ln_save_restore(json_parse(json_stringify(_saved)));_p=_g.player;
+    repeat(100) {if (_g.inventory[20]!=0) break;ln2_play_tick(_g,0);}
+    ln_check(_g.inventory[20]!=0 && _g.scene_frame==1,"fire-only grate action opens original panel");
+    surface_set_target(_surface);draw_sprite(_g.scene,_g.scene_frame,0,0);surface_reset_target();
+    var _changed=0;for(_pixel=0;_pixel<240*144;_pixel++) if(surface_getpixel(_surface,_pixel mod 240,_pixel div 240)!=_closed[_pixel]) _changed++;
+    ln_check(_changed==132,"grate displays all 132 recovered changed pixels");surface_free(_surface);
+    ln2_play_draw(_g);surface_save(_g.stage_surface,"ln2-sewer-grate-open.png");
+    _g=ln_save_restore(json_parse(json_stringify(ln_save_capture(_g))));_p=_g.player;
+    ln_check(_g.scene==spr_ln2_sewer_grate_states && _g.scene_frame==1,"open grate survives save restore");
+    ln2_play_enter(_g,4);ln2_play_enter(_g,5);ln_check(_g.scene_frame==1,"open grate survives revisit");
+    _p.action=0;_p.boundary_mode=41;_p.boundary_crossings=129;
+    ln_check(ln2_boundary_exit(_g) && is_struct(_g.route_descent),"open grate allows existing descent");
+    show_debug_message("LN2_ITEM_USE_PASS: eight item mechanisms, tool/prerequisite guards, combat/manual controls, original grate pixels, saves and descent");
 }
