@@ -32,7 +32,7 @@ function ln3_weapon_select(_s,_actions,_data,_raw_joy,_switch) {
     }
     if ((_s.inventory[0]|_s.inventory[1]|_s.inventory[2]|_s.inventory[3])==0) return;
     var _next=_s.player_weapon;
-    do {_next++;if (_next>=5) _next=0;} until (_next==0 || _s.inventory[_next-1]!=0);
+    do {_next+=_switch==2?-1:1;if (_next>=5) _next=0;if(_next<0) _next=4;} until (_next==0 || _s.inventory[_next-1]!=0);
     _s.pending_weapon=_next;_s.weapon_notice_timer=100;_s.notice_icon=_next==0?24:_next-1;
     var _action=18;
     for (var _i=15;_i>=0;_i--) if (_s.player_action==_data.weapon_kneel_actions[_i]) {_action=19;break;}

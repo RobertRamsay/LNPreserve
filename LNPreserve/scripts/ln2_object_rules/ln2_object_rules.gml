@@ -111,7 +111,7 @@ function ln2_keypad_draw(_g) {
         var _frame=clamp(_g.keypad.digits[_i]-27,0,9)*2+real(_i==_g.keypad.cursor);
         draw_sprite_ext(spr_ln2_keypad_digits,_frame,_x+_i*24,_y,3,3,0,c_white,1);
     }
-    draw_text(460,760,"W/S Digit    A/D Select    # Confirm");
+    draw_text(460,760,"Stick / D-pad or WASD    A / # Confirm");
 }
 
 function ln2_final_state(_g,_tick) {

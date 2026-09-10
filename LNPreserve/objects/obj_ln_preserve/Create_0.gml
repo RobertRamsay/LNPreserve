@@ -45,6 +45,11 @@ for (var _i = 1; _i <= parameter_count(); _i++) {
         game_end();exit;
     }
     if (parameter_string(_i) == "--ln2-keypad-visual-test") ln2_keypad_visual_only=true;
+    if (parameter_string(_i) == "--xbox-test") {
+        try {ln_xbox_checks();}
+        catch (_failure) {show_debug_message("LN_XBOX_FAILURE: "+string(_failure));}
+        game_end();exit;
+    }
     if (parameter_string(_i) == "--ln2-candle-body-test") {
         try {ln2_candle_body_checks();}
         catch (_failure) {show_debug_message("LN2_CANDLE_BODY_FAILURE: "+string(_failure));}
@@ -216,6 +221,8 @@ tick_native = function(_from, _to, _frame) {
         if (play.game_number==2) play.control_previous=control_state_ln1.previous;
         return;
     }
+    if(input_state.pressed[LNKey.CRT]) ln_crt_toggle();
+    if(input_state.pressed[LNKey.WeaponPrev]) ln_controller_previous_weapon(play,control_state_ln1);
     if (play.game_number==2) {
         ln2_controls_update(play,_rows[0],_rows[1]);
         if (!play.paused) ln2_play_tick(play,input_state.joystick()^255);
