@@ -24,6 +24,10 @@ function ln2_item_complete(_g,_item,_id) {
         }
     }
     if (_id!=255) {
+        // Credit the burger once; the HUD eases its existing spiral toward full.
+        if (_id==8 && _g.inventory[8]==0) {
+            _g.lives_left++;_g.player_health=44;
+        }
         if (_g.inventory[_id]==0) _g.inventory[_id]=_id==4?137:255;
         if (_id<17) {_g.notice_item=_id;_g.notice_tick=_g.player.tick;_g.notice_duration=100;}
         if (_id!=8) ln2_score_add(_g,5);
@@ -147,4 +151,26 @@ function ln2_park_switch_checks() {
     _g.inventory[18]=0;ln2_refresh_scene(_g);
     ln_check(_g.scene!=spr_ln2_park_switch_pressed,"consumed switch flag restores yellow state");
     surface_free(_surface);show_debug_message("LN2_SWITCH_PASS: actual punch, yellow-to-black pixels, revisit and reset");
+}
+
+function ln2_burger_checks() {
+    var _g=new LN2Play(1);ln2_play_enter(_g,8);
+    var _p=_g.player;_p.x=200;_p.y=67;_p.facing=1;
+    _g.inventory[8]=0;_g.lives_left=2;_g.player_health=7;_g.status.health[0]=7;
+    ln2_item_interact(_g,0);
+    ln_check(_g.lives_left==3 && _g.player_health==44 && _g.inventory[8]!=0,"burger awards one life and full health");
+    ln_check(_g.status.health[0]==7,"burger preserves current spiral frame for animated refill");
+    for(var _tick=1;_tick<=74;_tick++) {
+        ln2_status_tick(_g,_tick);
+        ln_check(_g.status.health[0]==7+(_tick div 2),"burger spiral advances one frame every two ticks");
+    }
+    ln2_status_tick(_g,76);ln_check(_g.status.health[0]==44,"spiral stops at full");
+    _g.player_health=20;ln2_item_interact(_g,0);
+    ln_check(_g.lives_left==3 && _g.player_health==20,"collected burger cannot award life or healing again");
+    // Damage during the refill must remain visible instead of being healed again.
+    _g.status.health[0]=30;ln2_status_tick(_g,78);
+    ln_check(_g.status.health[0]==29 && _g.player_health==20,"spiral follows damage after pickup");
+    ln2_play_enter(_g,1);ln2_play_enter(_g,8);ln2_item_interact(_g,0);
+    ln_check(_g.lives_left==3 && _g.inventory[8]!=0,"burger stays collected on room revisit");
+    show_debug_message("LN2_BURGER_PASS: pickup, extra life, full healing, spiral refill, damage and repeat protection");
 }
