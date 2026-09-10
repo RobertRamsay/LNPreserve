@@ -104,13 +104,14 @@ function ln2_keypad_draw(_g) {
         draw_text(800,760,"CODE  "+_code);
     }
     if (!is_struct(_g.keypad)) return;
-    draw_set_colour(c_black);draw_rectangle(420,270,860,485,false);draw_set_colour(c_white);
-    draw_text(460,300,"ENTER CODE");
-    for (var _i=0;_i<4;_i++) {
-        draw_set_colour(_i==_g.keypad.cursor?c_yellow:c_white);
-        draw_text(510+_i*72,360,string(_g.keypad.digits[_i]-27));
+    // Original LN2 entry is four C64 characters in the HOLDING area.
+    var _x=160+264*3,_y=84+72*3;
+    draw_set_colour(c_black);draw_rectangle(_x,_y,_x+40*3-1,_y+32*3-1,false);draw_set_colour(c_white);
+    for(var _i=0;_i<4;_i++) {
+        var _frame=clamp(_g.keypad.digits[_i]-27,0,9)*2+real(_i==_g.keypad.cursor);
+        draw_sprite_ext(spr_ln2_keypad_digits,_frame,_x+_i*24,_y,3,3,0,c_white,1);
     }
-    draw_set_colour(c_white);draw_text(460,420,"W/S Change digit    A/D Select");draw_text(460,450,"J Next / confirm");
+    draw_text(460,760,"W/S Digit    A/D Select    # Confirm");
 }
 
 function ln2_final_state(_g,_tick) {

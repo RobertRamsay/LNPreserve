@@ -116,7 +116,9 @@ function ln2_combat_event(_g,_event,_enemy) {
             }
             if (_g.level==7) {
                 if (_event!=23) { _g.player.weapon=_g.player.selected_weapon;return; }
-                ln2_spirit_motion(_g.enemy);return;
+                // Keep the spirits aligned with the defeated body's location.
+                if (!_g.world_state.boss_defeated) ln2_spirit_motion(_g.enemy);
+                return;
             }
             if ((_g.player.boundary_crossings&1) && (_g.player.combat_state&252)!=12) {
                 _g.player.x=(_g.player.x+(_event==17?4:-4))&255;

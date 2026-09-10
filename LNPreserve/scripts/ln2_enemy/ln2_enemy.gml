@@ -189,6 +189,8 @@ function ln2_enemy_decide(_g) {
             var _elapsed=((_g.tick_epoch*256+_tick)-_e.recovery_time)&65535;
             _e.health=clamp((_elapsed>>_g.data.enemy_recovery_shift)-2,0,44);
             if (_e.health==44 && (abs(_p.x-_e.x)>=12 || abs(_p.y-_e.y)>=6)) {
+                if (_g.level==7 && _g.room_id==1 && _e.costume==2 && !_g.world_state.boss_defeated)
+                    _g.world_state.candles=array_create(5,0);
                 _e.knockouts&=127;_e.mode=7;_e.action=_g.data.enemy_recovery[(_e.facing&4)?1:0];
                 _e.flags=0;_e.countdown=0;_e.separation_y=6;
             }

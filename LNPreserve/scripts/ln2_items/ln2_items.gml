@@ -3,8 +3,7 @@ function ln2_item_interact(_g,_kind) {
     var _p=_g.player;
     for (var _i=0;_i<array_length(_g.world.items);_i++) {
         var _item=_g.world.items[_i];
-        var _test_orb=_g.level==7 && _item.id==16 && _g.inventory[16]==1;
-        if (_item.room!=_g.room_id || _item.action!=_kind || (_g.inventory[_item.id]!=0 && !_test_orb)) continue;
+        if (_item.room!=_g.room_id || _item.action!=_kind || _g.inventory[_item.id]!=0) continue;
         if (_item.facing!=0 && _item.facing!=_p.facing) continue;
         if (_p.x<_item.x_min || _p.x>=_item.x_max || _p.y<_item.y_min || _p.y>=_item.y_max) continue;
         var _id=ln2_item_handler(_g,_item);
@@ -118,7 +117,6 @@ function ln2_item_handler(_g,_item) {
 }
 
 function ln2_refresh_scene(_g) {
-    ln2_final_test_setup(_g);
     _g.scene_frame=0;
     // Scene variants are source-rendered and selected by their inventory flags.
     var _room=_g.scene_record;
@@ -131,7 +129,7 @@ function ln2_refresh_scene(_g) {
     }
     // Source item completion draws these panels immediately, not on room entry.
     if (_g.level==7 && _g.room_id==1) {
-        _g.safe_scene_phase=_g.inventory[23]!=0?4:(_g.inventory[18]!=0?(_g.inventory[16]==255?3:2):1);
+        _g.safe_scene_phase=_g.inventory[23]!=0?4:(_g.inventory[18]!=0?(_g.inventory[16]==255?3:2):(_g.inventory[17]!=0?1:0));
         _g.scene=asset_get_index("spr_ln2_safe_states");_g.scene_frame=_g.safe_scene_phase;
     }
 }
@@ -206,20 +204,11 @@ function ln2_burger_checks() {
     show_debug_message("LN2_BURGER_PASS: banked pickup, selection, double tap, held/expired fire, spiral refill and single consumption");
 }
 
-/// Temporary final-room testing aid: remove the orb grant after testing.
-function ln2_final_test_setup(_g) {
-    if (_g.level!=7 || _g.room_id!=1) return;
-    _g.inventory[17]=255; // Reveal the wall safe on arrival.
-    if (_g.inventory[16]==0 && _g.inventory[23]==0) {
-        // 1 is a loaned orb; 255 means the safe-removal interaction occurred.
-        _g.inventory[16]=1;_g.selected_item=16;_g.notice_item=-1;
-    }
-}
-
 function ln2_final_room_checks() {
     var _g=new LN2Play(7);ln2_play_enter(_g,1);
-    ln_check(_g.scene==spr_ln2_safe_states && _g.scene_frame==1,"wall safe visible on arrival");
-    ln_check(_g.inventory[16]==1 && _g.selected_item==16,"temporary orb available without skipping removal");
+    ln_check(_g.scene==spr_ln2_safe_states && _g.scene_frame==0 && _g.inventory[16]==0,"curtain covers safe and orb stays inside on arrival");
+    _g.player.x=175;_g.player.y=83;_g.player.facing=1;ln2_item_interact(_g,1);
+    ln_check(_g.scene_frame==1 && _g.inventory[17]!=0,"pulling curtain reveals safe");
     _g.player.x=175;_g.player.y=83;_g.player.facing=1;ln2_item_interact(_g,0);
     ln_check(is_struct(_g.keypad),"safe interaction opens keypad");
     _g.keypad.digits=array_create(4);array_copy(_g.keypad.digits,0,_g.keycode,0,4);
@@ -241,5 +230,5 @@ function ln2_final_room_checks() {
     var _loaded=ln_save_restore(json_parse(json_stringify(ln_save_capture(_g))));
     ln_check(_loaded.scene==spr_ln2_safe_states && _loaded.scene_frame==4 && _loaded.inventory[16]==128,"save reload preserves final safe");
     ln2_keypad_checks();
-    show_debug_message("LN2_FINAL_ROOM_PASS: visible safe, temporary orb, keypad, removal/release, five candles, orb return and save/revisit");
+    show_debug_message("LN2_FINAL_ROOM_PASS: curtain reveal, original keypad, removal/release, five candles, orb return and save/revisit");
 }
