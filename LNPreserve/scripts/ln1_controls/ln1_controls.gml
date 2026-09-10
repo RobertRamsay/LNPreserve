@@ -1,7 +1,7 @@
 /// Native LN1 selection logic from $6eac-$6f6c in the supplied CCS edition.
 /// Rows have the same active-low bits as the original keyboard scan.
 /// Dashboard drawing and SID writes are returned as requests to their adapters.
-function ln1_controls_update(_s, _row0, _row7) {
+function ln1_controls_update(_s, _row0, _row7, _changing=false) {
     var _effects = [];
     var _masks = [16,32,64,8,16];
     var _press = array_create(5,false);
@@ -17,7 +17,7 @@ function ln1_controls_update(_s, _row0, _row7) {
     }
     // F3/F5: skip inventory entries whose original byte is zero.
     for (var _direction = 0; _direction < 2; _direction++) {
-        if (_press[1+_direction]) {
+        if (_press[1+_direction] && !_changing) {
             var _found = false;
             repeat (11) {
                 _s.item = (_s.item + (_direction == 0 ? 1 : 10)) mod 11;
@@ -30,7 +30,7 @@ function ln1_controls_update(_s, _row0, _row7) {
     // F7: the original stores 0/$ff, not a host-frame pause timer.
     if (_press[3]) _s.pause = _s.pause ^ 255;
     // Space: select the next owned weapon, unless the original lock is set.
-    if (_press[4] && _s.weapon_locked == 0) {
+    if (_press[4] && _s.weapon_locked == 0 && !_changing) {
         var _found = false;
         repeat (6) {
             _s.weapon = (_s.weapon+1) mod 6;

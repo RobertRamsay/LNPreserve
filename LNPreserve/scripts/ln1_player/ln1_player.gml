@@ -37,7 +37,7 @@ function ln1_player_fire_move(_s, _d, _heading) {
 }
 
 function ln1_player_input(_s, _d, _joy) {
-    if (_s.input_lock != 0) return;
+    if (_s.input_lock != 0 || ln1_weapon_changing(_s,_d)) return;
     var _heading = _d.directions[_joy & 15];
     if ((_joy & 16) == 0) {
         _s.fire_previous = 0;
@@ -490,4 +490,48 @@ function ln1_jump_assist_checks() {
     ln_check(_tested>20,"real crossing regression covers multiple levels and platforms");
     show_debug_message("LN_JUMP_REAL_PASS: "+string(_tested)+" original-room platform approaches");
     show_debug_message("LN_JUMP_ASSIST_PASS: nearest ahead, double-fire-only, safe landing, manual controls and walls");
+}
+
+/// Identify the complete source weapon-change tracks, including saved mid-animation states.
+function ln1_weapon_changing(_p,_d) {
+    if (_p.action<256) return false;
+    for(var _side=0;_side<2;_side++) {
+        var _address=_d.action_entries[4+_side];
+        repeat(64) {
+            if (_address<256) break;
+            if (_p.action==_address) return true;
+            if (!variable_struct_exists(_d.actions,string(_address))) break;
+            _address=variable_struct_get(_d.actions,string(_address)).next;
+        }
+    }
+    return false;
+}
+
+function ln1_weapon_lock_checks() {
+    for(var _facing=1;_facing<8;_facing+=2) for(var _joy=0;_joy<32;_joy++) {
+        var _g=new LN1Play(),_base=new LN1Play();
+        var _p=_g.player,_b=_base.player;
+        _p.facing=_facing;_b.facing=_facing;
+        _p.selected_weapon=2;_b.selected_weapon=2;
+        _p.stopped=255;_b.stopped=255;
+        ln1_player_begin_action(_p,_g.data,8);ln1_player_begin_action(_b,_base.data,8);
+        var _steps=0;
+        while(ln1_weapon_changing(_p,_g.data) && _steps<100) {
+            ln1_player_update(_p,_g.data,_joy,(_p.tick+1)&255);
+            ln1_player_update(_b,_base.data,0,(_b.tick+1)&255);
+            ln1_combat_event(_g,_p.action_state,false);_p.action_state=0;
+            ln1_combat_event(_base,_b.action_state,false);_b.action_state=0;
+            ln_check(_p.action==_b.action && _p.frame==_b.frame && _p.x==_b.x && _p.y==_b.y && _p.facing==_b.facing,
+                "fire/direction cannot interrupt weapon animation");
+            _steps++;
+        }
+        ln_check(_steps>0 && _steps<100 && _p.weapon==2,"weapon change completes and unlocks");
+    }
+    var _c=ln3_data_read("actors/ln1/initial_control_state.json");
+    _c.previous=[16,32,64,8,16];_c.weapon=0;_c.item=10;
+    ln1_controls_update(_c,255^32^64,255^16,true);
+    ln_check(_c.weapon==0 && _c.item==10,"item and weapon selection blocked during change");
+    ln1_controls_update(_c,255^32^64,255^16,false);
+    ln_check(_c.weapon==0 && _c.item==10,"blocked selection presses are consumed");
+    show_debug_message("LN1_WEAPON_LOCK_PASS: 128 directional/fire cases and selection lock.");
 }

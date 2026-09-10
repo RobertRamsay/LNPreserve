@@ -190,15 +190,19 @@ function ln_saves_draw(_ui) {
         var _label=_filled?_ui.slots[_i].name:"Empty";
         var _scale=min(1,124/max(1,string_width(_label)));
         draw_text_transformed(1138,_y+4,_label,_scale,1,0);
-        if (_filled) {draw_set_colour(make_colour_rgb(150,190,170));draw_text(1138,_y+22,"LN"+string(_ui.slots[_i].game)+"  Click to load");}
+        if (_filled) {
+            draw_set_colour(make_colour_rgb(150,190,170));
+            var _hint="Click to load",_hint_scale=min(1,124/max(1,string_width(_hint)));
+            draw_text_transformed(1138,_y+22,_hint,_hint_scale,1,0);
+        }
     }
     draw_set_colour(c_white);draw_text(1136,584,"Newest at top");
     if (_ui.message_ticks>0) draw_text_ext(24,84,_ui.message,18,120);
 }
 
 /// Serialization checks run with the existing native selftest, without touching saves.
-function ln_save_checks() {
-    for (var _game=1;_game<=3;_game++) {
+function ln_save_checks(_ln1_only=false) {
+    for (var _game=1;_game<=(_ln1_only?1:3);_game++) {
         var _g=_game==1?new LN1Play(2):(_game==2?new LN2Play():new LN3Play());
         if (_game==3) {_g.state.lives=4;_g.state.player_health=7;_g.state.inventory[0]=128;}
         else {_g.lives_left=4;_g.player_health=7;_g.inventory[_game==1?11:1]=1;}

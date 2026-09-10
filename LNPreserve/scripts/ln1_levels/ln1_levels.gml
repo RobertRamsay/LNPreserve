@@ -254,7 +254,9 @@ function ln1_magic_checks() {
     _g.player.x=_item.x_min;_g.player.y=_item.y_min;_g.player.facing=1;
     _g.player.action=0;_g.player.input_lock=0;
     ln1_play_tick(_g,0);
-    ln_check(_g.world_state.flag_b==35 && _g.inventory[16]==0,"touch activates renewable magic without fire");
+    ln_check((_g.world_state.flag_a|_g.world_state.flag_b)==0,"touch alone does not activate magic");
+    ln1_player_fire_move(_g.player,_g.data,5);
+    ln_check(_g.world_state.flag_b==35 && _g.inventory[16]==0,"pickup action activates renewable magic");
     _g.world_state.flag_a=0;_g.world_state.flag_b=35;
     var _colours=[];
     repeat(8960) {
@@ -306,5 +308,5 @@ function ln1_magic_checks() {
     ln_draw_masked_actor(_sprite,0,0,0,1,1,-1,0,0,16,16);
     ln_check(surface_getpixel(_surface,3,3)==c_black,"magic colour resets for other actors");
     surface_reset_target();sprite_delete(_sprite);surface_free(_surface);
-    show_debug_message("LN1_MAGIC_PASS: touch activation, 8960 ticks, colour cycle, expiry and 270 dragon flame cases.");
+    show_debug_message("LN1_MAGIC_PASS: pickup activation, 8960 ticks, colour cycle, expiry and 270 dragon flame cases.");
 }

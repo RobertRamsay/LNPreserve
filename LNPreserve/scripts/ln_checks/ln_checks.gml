@@ -2,7 +2,13 @@ function ln_check(_condition, _message) {
     if (!_condition) throw "LNPreserve self-test failed: " + _message;
 }
 
-function ln_run_checks() {
+function ln_test_run(_name,_callback) {
+    show_debug_message("LN_TEST_START:"+_name);
+    try {_callback();show_debug_message("LN_TEST_PASS:"+_name);}
+    catch (_error) {show_debug_message("LN_TEST_FAIL:"+_name+":"+string(_error));throw _error;}
+}
+
+function ln1_core_checks() {
     var _clock = new LNClock();
     var _ticks = 0;
     var _tick = function(_start, _end, _frame) { };
@@ -63,33 +69,39 @@ function ln_run_checks() {
         }
     }
     show_debug_message("LN_CONTROLS_PASS: all 1024 previous/current key chords match original selection state and external request order. Timing not tested.");
-    ln1_player_checks();
-    ln1_enemy_checks();
-    ln1_combat_checks();
-    ln1_world_checks();
-    ln1_feedback_checks();
-    ln_scene_test_checks();
-    ln1_level_checks();
-    ln2_player_checks();
-    ln2_enemy_checks();
-    ln2_entry_checks();
-    ln2_keypad_checks();
-    ln2_projectile_checks();
-    ln3_movement_checks();
-    ln3_action_checks();
-    ln3_input_checks();
-    ln3_animation_checks();
-    ln3_mask_checks();
-    ln3_collision_checks();
-    ln3_enemy_checks();
-    ln3_combat_checks();
-    ln3_scene_checks();
-    ln3_item_checks();
-    ln3_scenery_checks();
-    ln3_special_checks();
-    ln3_world_checks();
-    ln2_world_checks();
-    show_debug_message("LN_SELFTEST_PASS: clock, input, depth and isolated player routines. Full gameplay parity is NOT established.");
+}
+
+function ln_run_checks(_ln1_only=false) {
+    ln_test_run("ln1_core_checks",ln1_core_checks);
+    ln_test_run("ln1_player_checks",ln1_player_checks);
+    ln_test_run("ln1_enemy_checks",ln1_enemy_checks);
+    ln_test_run("ln1_combat_checks",ln1_combat_checks);
+    ln_test_run("ln1_world_checks",ln1_world_checks);
+    ln_test_run("ln1_feedback_checks",ln1_feedback_checks);
+    ln_test_run("ln_scene_test_checks",ln_scene_test_checks);
+    ln_test_run("ln1_level_checks",ln1_level_checks);
+    if (_ln1_only) {show_debug_message("LN_SELFTEST_PASS: independent LN1 component checks; full playthrough not tested.");return;}
+    ln_test_run("ln2_player_checks",ln2_player_checks);
+    ln_test_run("ln2_enemy_checks",ln2_enemy_checks);
+    ln_test_run("ln2_revival_context_checks",ln2_revival_context_checks);
+    ln_test_run("ln2_entry_checks",ln2_entry_checks);
+    ln_test_run("ln2_keypad_checks",ln2_keypad_checks);
+    ln_test_run("ln2_projectile_checks",ln2_projectile_checks);
+    ln_test_run("ln3_movement_checks",ln3_movement_checks);
+    ln_test_run("ln3_action_checks",ln3_action_checks);
+    ln_test_run("ln3_input_checks",ln3_input_checks);
+    ln_test_run("ln3_animation_checks",ln3_animation_checks);
+    ln_test_run("ln3_mask_checks",ln3_mask_checks);
+    ln_test_run("ln3_collision_checks",ln3_collision_checks);
+    ln_test_run("ln3_enemy_checks",ln3_enemy_checks);
+    ln_test_run("ln3_combat_checks",ln3_combat_checks);
+    ln_test_run("ln3_scene_checks",ln3_scene_checks);
+    ln_test_run("ln3_item_checks",ln3_item_checks);
+    ln_test_run("ln3_scenery_checks",ln3_scenery_checks);
+    ln_test_run("ln3_special_checks",ln3_special_checks);
+    ln_test_run("ln3_world_checks",ln3_world_checks);
+    ln_test_run("ln2_world_checks",ln2_world_checks);
+    show_debug_message("LN_SELFTEST_PASS: combined component checks; full playthrough not tested.");
 }
 
 function ln1_world_checks() {

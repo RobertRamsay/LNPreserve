@@ -139,9 +139,6 @@ function ln1_play_tick(_g, _joy) {
     _p.enemy_active = _e.active; _p.enemy_x = _e.x; _p.enemy_y = _e.y;
     _p.separation_y = _e.separation_y;
     ln1_player_update(_p, _g.data, _joy, (_p.tick + 1) & 255);
-    // Touching the magic source activates the original renewable protection.
-    if (_g.level==2 && _g.room_id==17 && _g.player_health>0 &&
-        (_g.world_state.flag_a|_g.world_state.flag_b)==0) ln1_item_interact(_g,16);
     ln1_pickup_assist_tick(_g);
     ln1_enemy_decide(_g);
     ln1_enemy_action(_g);

@@ -68,12 +68,14 @@ if (selftest && host_frames == 4) {
     for (var _i = 0; _i < 160; _i++) { play.timer.cycle += 18433; ln1_play_tick(play, 9); }
 }
 if (selftest && host_frames >= 8) {
+    show_debug_message("LN_TEST_PASS:runtime");
     show_debug_message("LN_RUNTIME_PASS: project initialized and rendered eight host frames, including the second room and its enemy.");
     game_end();
 }
 
 } catch (_runtime_failure) {
     if (!selftest) throw _runtime_failure;
+    show_debug_message("LN_TEST_FAIL:runtime");
     show_debug_message("LN_RUNTIME_FAILURE: " + string(_runtime_failure));
     game_end();
 }

@@ -53,9 +53,14 @@ if (!workbench) {
         draw_set_colour(make_colour_rgb(125,210,171)); draw_text(160,12,scene_test.message); draw_set_colour(c_white);
     }
     if (selftest && host_frames == 2) {
-        ln_run_mask_checks(); ln1_feedback_capture(); ln_scene_test_capture(catalog); ln1_level_capture();
-        ln2_world_capture();
-        ln3_world_capture();
+        ln_test_run("mask_gpu",ln_run_mask_checks);
+        ln_test_run("ln1_feedback_capture",ln1_feedback_capture);
+        ln_test_run("scene_capture",function(){ln_scene_test_capture(catalog);});
+        ln_test_run("ln1_level_capture",ln1_level_capture);
+        if (!ln1_only) {
+            ln_test_run("ln2_world_capture",ln2_world_capture);
+            ln_test_run("ln3_world_capture",ln3_world_capture);
+        }
         ln1_play_draw(play, control_state_ln1.pause != 0);
     }
     if (selftest && host_frames == 3) {
@@ -134,6 +139,7 @@ if (selftest && host_frames == 3) {
 } catch (_runtime_failure) {
     if (!selftest) throw _runtime_failure;
     shader_reset();
+    show_debug_message("LN_TEST_FAIL:runtime");
     show_debug_message("LN_RUNTIME_FAILURE: " + string(_runtime_failure));
     game_end();
 }

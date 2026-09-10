@@ -87,7 +87,7 @@ function ln_xbox_map(_p) {
 
 function ln_controller_previous_weapon(_g,_controls) {
     if(_g.game_number==1) {
-        if(_controls.weapon_locked!=0) return;
+        if(_controls.weapon_locked!=0 || ln1_weapon_changing(_g.player,_g.data)) return;
         repeat(6) {_controls.weapon=(_controls.weapon+5) mod 6;if(_controls.weapons[_controls.weapon]&127) break;}
         _controls.action_reset=0;_g.notice_item=-1;_g.notice_duration=0;
     } else if(_g.game_number==2) {

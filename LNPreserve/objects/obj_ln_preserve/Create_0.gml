@@ -34,7 +34,7 @@ mask_enabled = true;
 test_fixture = false;
 weapon_presses = 0;
 function_presses = [0,0,0,0];
-selftest = false;
+selftest = false;ln1_only=false;
 host_frames = 0;
 for (var _i = 1; _i <= parameter_count(); _i++) {
     if (parameter_string(_i) == "--window-presets-test") {window_presets_test=true;global.ln_crt_enabled=true;}
@@ -46,7 +46,7 @@ for (var _i = 1; _i <= parameter_count(); _i++) {
     }
     if (parameter_string(_i) == "--ln2-keypad-visual-test") ln2_keypad_visual_only=true;
     if (parameter_string(_i) == "--ln1-magic-test") {
-        try {ln1_magic_checks();}
+        try {ln1_magic_checks();ln1_weapon_lock_checks();}
         catch (_failure) {show_debug_message("LN1_MAGIC_FAILURE: "+string(_failure));}
         game_end();exit;
     }
@@ -101,6 +101,7 @@ for (var _i = 1; _i <= parameter_count(); _i++) {
         catch (_failure) {show_debug_message("LN_PICKUP_FAILURE: "+string(_failure));game_end();exit;}
     }
     if (parameter_string(_i) == "--selftest") selftest = true;
+    if (parameter_string(_i) == "--ln1-selftest") {selftest=true;ln1_only=true;}
     if (parameter_string(_i) == "--ln2-hud-test") ln2_hud_only=true;
     if (parameter_string(_i) == "--ln2-switch-test") ln2_switch_only=true;
     if (parameter_string(_i) == "--ln2-spirits-test") ln2_spirits_only=true;
@@ -192,7 +193,7 @@ for (var _i = 1; _i <= parameter_count(); _i++) {
     }
 }
 if (selftest) {
-    try { ln_run_checks(); }
+    try { ln_run_checks(ln1_only); }
     catch (_failure) {
         show_debug_message("LN_SELFTEST_FAILURE: " + string(_failure));
         game_end(); exit;
@@ -206,7 +207,11 @@ control_state_ln1 = json_parse(buffer_read(_control_buffer,buffer_text));
 buffer_delete(_control_buffer);
 play.controls = control_state_ln1;
 saves = new LNSaves();
-if (selftest) ln_save_checks();
+if (selftest) {
+    try {ln_test_run("save_serialization",function(){ln_save_checks(ln1_only);});}
+    catch (_failure) {show_debug_message("LN_SELFTEST_FAILURE: "+string(_failure));game_end();exit;}
+    show_debug_message("LN_TEST_START:runtime");
+}
 ln_music_play(1, "wastelands", false);
 tick_native = function(_from, _to, _frame) {
     input_state.consume(_to);
@@ -239,7 +244,7 @@ tick_native = function(_from, _to, _frame) {
         return;
     }
     var _music_before = control_state_ln1.music;
-    ln1_control_effects = ln1_controls_update(control_state_ln1,_rows[0],_rows[1]);
+    ln1_control_effects = ln1_controls_update(control_state_ln1,_rows[0],_rows[1],ln1_weapon_changing(play.player,play.data));
     for (var _i = 0; _i < array_length(ln1_control_effects); _i++) {
         if (ln1_control_effects[_i].kind == "weapon_panel") {
             play.notice_item = -1; play.notice_label = 0; play.notice_duration = 0;
