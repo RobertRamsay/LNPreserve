@@ -5,7 +5,7 @@ function ln2_controls_update(_g,_row0,_row7) {
         var _value=(_i==4?_row7:_row0)&_masks[_i];
         _pressed[_i]=_value!=_g.control_previous[_i] && _value==0;_g.control_previous[_i]=_value;
     }
-    if (variable_struct_exists(_g,"world_state") && variable_struct_exists(_g.world_state,"drowning") && is_struct(_g.world_state.drowning)) return;
+    if (ln2_blocking_sequence(_g)) return;
     if (_pressed[0]) {
         _g.music=!_g.music;
         if (variable_global_exists("ln_music_voice") && global.ln_music_voice>=0) {

@@ -1,3 +1,8 @@
+if (fence_gap_boat_test) {
+    try {ln2_fence_gap_boat_checks();}
+    catch(_failure) {show_debug_message("LN2_FENCE_GAP_BOAT_FAILURE: "+string(_failure));}
+    game_end();exit;
+}
 if (water_knife_test) {
     try {ln2_water_knife_checks();}
     catch(_failure) {show_debug_message("LN2_WATER_KNIFE_FAILURE: "+string(_failure));}

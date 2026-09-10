@@ -111,6 +111,8 @@ function ln2_level_effect_tick(_g,_joy) {
             if (_p.x>=_e.x && ((_p.y-22)&255)<_e.y && _g.pending_entry<0) { _p.input_lock=255;_g.exit_locked=true; }
             return;
         case 8:
+            // A room transition can reach this hook before the first spawn action.
+            if (_e.action==$cd79) return;
             if (_e.x<88) { _g.special_mode=0;_e.action&=255; }return;
         case 9:
             if (_e.x<8) { _e.x=172;_e.y=90;_e.depth_y=90;_g.world_clock=_p.tick;_e.action&=255; }
@@ -374,6 +376,7 @@ function ln2_drowning_tick(_g,_tick) {
 
 function ln2_hazard_boundary(_g) {
     if (_g.level!=1) return false;
+    if (ln2_park_traversal_boundary(_g)) return true;
     var _p=_g.player,_mode=_p.boundary_mode&63;
     if (!(_p.boundary_crossings&128) || (!(_p.boundary_mode&64) && _p.action>=256)) return false;
     if (_g.level==1 && array_contains([28,32,33,34],_mode)) {
@@ -451,4 +454,104 @@ function ln2_water_knife_checks() {
         ln_check(_g.respawn_wait==20,"water and island sink both finish");
     }
     show_debug_message("LN2_WATER_KNIFE_PASS: 512 original boat cases, 160 knife spawns, shore/splash/respawn integration");
+}
+
+/// Central Park $a0ac/$a0e6: fence ascent/descent runs a blocking source action sequence.
+function ln2_fence_begin(_g,_descending) {
+    var _p=_g.player,_actions=_descending?[ $c3e4,$c3f6,$c3f6,$c40b]:[ $c3ab,$c3b0,$c3b0,$c3c5];
+    _g.world_state.fence={actions:_actions,index:0,descending:_descending,exit_locked:_g.exit_locked};
+    _g.exit_locked=true;
+    if (_descending) {_p.depth_y=_p.y;_p.height_fixed=0;}
+    ln2_player_special(_g,_actions[0]);
+}
+
+function ln2_fence_tick(_g,_tick) {
+    var _p=_g.player,_f=_g.world_state.fence;
+    _p.tick=_tick;_p.last_tick=_tick;ln2_player_action(_p,_g.data,1);
+    ln2_enemy_decide(_g);ln2_enemy_action(_g);ln2_projectile_present(_g);
+    if (_p.action>=256) return;
+    _f.index++;
+    if (_f.index<array_length(_f.actions)) {ln2_player_special(_g,_f.actions[_f.index]);return;}
+    if (!_f.descending) {_p.depth_y=152;_p.height_fixed=255;}
+    _p.boundary_crossings=0;_p.action_state=0;_p.walk_clock=0;
+    _g.exit_locked=_f.exit_locked;_g.world_state.fence=undefined;
+}
+
+function ln2_park_traversal_boundary(_g) {
+    if (_g.level!=1 || (_g.room_id!=11 && _g.room_id!=12)) return false;
+    var _p=_g.player,_mode=_p.boundary_mode&63;
+    if (!(_p.boundary_crossings&128) || (!(_p.boundary_mode&64) && _p.action>=256)) return false;
+    if (_g.room_id==11 && (_mode==10 || _mode==9)) {
+        if (_p.facing==7 && _p.weapon==0) {ln2_fence_begin(_g,_mode==9);return true;}
+        if (_mode==10) {_p.boundary_crossings=0;return false;}
+        _mode=8;
+    }
+    if (!array_contains([7,8,14,15,20],_mode)) return false;
+    if (_mode>=14 && !(_p.boundary_crossings&1)) {_p.boundary_crossings=0;return false;}
+    if (_mode==8) _p.depth_y=_p.y;
+    if (_mode==15 || _mode==20) {_p.depth_y=_mode==15?4:12;_p.height_fixed=255;}
+    _g.world_state.drowning={phase:2,steps:_mode>=14?7:8,saved_y:_p.y,saved_facing:_p.facing};
+    _g.player_health=0;_g.exit_locked=true;_p.boundary_crossings=0;
+    ln2_player_special(_g,((_p.facing+2)&4)?$cd02:$ccf9);return true;
+}
+
+function ln2_blocking_sequence(_g) {
+    if (!variable_struct_exists(_g,"world_state")) return false;
+    return (variable_struct_exists(_g.world_state,"drowning") && is_struct(_g.world_state.drowning)) ||
+        (variable_struct_exists(_g.world_state,"fence") && is_struct(_g.world_state.fence));
+}
+
+function ln2_fence_gap_boat_checks() {
+    var _cases=ln3_data_read("play/ln2/fence_gap_checks.json"),_g=new LN2Play(1),_p=_g.player;
+    for(var _i=0;_i<array_length(_cases);_i++) {
+        var _c=_cases[_i];_g.room_id=_c.mode>=14 && _c.mode!=138?12:11;
+        _p.boundary_mode=_c.mode;_p.boundary_crossings=_c.flags;_p.facing=_c.facing;_p.weapon=_c.weapon;
+        _p.action=_c.busy?256:0;_p.y=120;_p.depth_y=100;_p.height_fixed=0;
+        _g.world_state.fence=undefined;_g.world_state.drowning=undefined;_g.exit_locked=false;
+        var _handled=ln2_park_traversal_boundary(_g);
+        ln_check(_handled==(array_length(_c.calls)>0 || _c.steps>0),"original fence/gap trigger "+string(_i));
+        if (_c.steps>0) ln_check(_g.world_state.drowning.steps==_c.steps && _p.depth_y==_c.depth && _p.height_fixed==_c.fixed,"original gap depth and fall count");
+        if (array_length(_c.calls)>0) ln_check(json_stringify(_g.world_state.fence.actions)==json_stringify(_c.calls),"original climb action sequence");
+    }
+    _g=new LN2Play(1);_p=_g.player;ln2_play_enter(_g,11);
+    _p.x=110;_p.y=117;_p.depth_y=117;_p.weapon=0;_p.facing=7;_p.action=0;_p.boundary_crossings=0;
+    ln2_player_boundary(_p,_g.data,110,117,110,115);
+    ln_check(_p.boundary_mode==138 && ln2_hazard_boundary(_g),"actual fence line starts climb");
+    var _start_y=_p.y,_ticks=0;
+    while(is_struct(_g.world_state.fence) && _ticks++<250) {
+        ln2_play_tick(_g,31);
+        if (_ticks==24) {ln2_play_draw(_g);surface_save(_g.stage_surface,"ln2-scene11-climb.png");}
+    }
+    ln_check(_ticks<250 && _p.y<_start_y && _p.depth_y==152 && _p.height_fixed==255,"climb reaches raised walkway");
+    _p.boundary_mode=9;_p.boundary_crossings=129;_p.action=0;_p.facing=7;
+    ln_check(ln2_hazard_boundary(_g),"fence descent starts");
+    _ticks=0;while(is_struct(_g.world_state.fence) && _ticks++<250) ln2_play_tick(_g,0);
+    ln_check(_ticks<250 && _p.height_fixed==0,"descent restores ordinary ground depth");
+    for(var _mode_index=0;_mode_index<3;_mode_index++) {
+        _g=new LN2Play(1);_p=_g.player;ln2_play_enter(_g,12);
+        _p.x=90;_p.y=80;_p.action=0;_p.boundary_mode=[14,15,20][_mode_index];_p.boundary_crossings=129;
+        var _life=_g.lives_left;ln_check(ln2_hazard_boundary(_g),"gap causes drop");
+        _ticks=0;while(is_struct(_g.world_state.drowning) && _ticks++<100) {
+            ln2_play_tick(_g,31);if(_ticks==8) {ln2_play_draw(_g);surface_save(_g.stage_surface,"ln2-scene12-drop-"+string(_mode_index)+".png");}
+        }
+        repeat(20) ln2_play_tick(_g,0);
+        ln_check(_g.lives_left==_life-1,"gap costs one life");
+        _p.action=0;_p.boundary_mode=[14,15,20][_mode_index];_p.boundary_crossings=130;
+        _g.room_id=12;ln_check(!ln2_hazard_boundary(_g),"jump across both gap edges remains safe");
+    }
+    _g=new LN2Play(1);_p=_g.player;ln2_play_enter(_g,16);
+    var _item=undefined;for(var _i=0;_i<array_length(_g.world.items);_i++) if(_g.world.items[_i].id==19) _item=_g.world.items[_i];
+    _p.weapon=2;_p.selected_weapon=2;_p.facing=_item.facing;_p.x=_item.x_min;_p.y=_item.y_min;
+    ln2_item_interact(_g,_item.action);ln_check(_g.inventory[19]!=0,"staff jab releases boat");
+    _g=ln_save_restore(json_parse(json_stringify(ln_save_capture(_g))));_p=_g.player;
+    ln_check(_g.inventory[19]!=0,"boat release survives save/load");
+    var _entry=-1;for(var _i=0;_i<array_length(_g.world.tables.exit_destinations);_i++) if(_g.world.tables.exit_destinations[_i]==17) {_entry=_i;break;}
+    ln2_play_travel(_g,_entry);ln2_level_effect_tick(_g,0);
+    ln_check(_g.enemy.action==$cd79 && _g.special_mode==8,"arrival frame must not cancel boat spawn");
+    _ticks=0;while(_g.special_mode==8 && _ticks++<400) {
+        _p.tick=(_p.tick+1)&255;ln2_enemy_action(_g);ln2_combat_event(_g,_g.enemy.action_state,true);_g.enemy.action_state=0;ln2_level_effect_tick(_g,0);
+    }
+    ln_check(_ticks<400 && _g.enemy.x<88 && _g.enemy.display_frame==104,"released boat enters and stops at landing");
+    ln2_play_draw(_g);surface_save(_g.stage_surface,"ln2-scene17-boat-arrival.png");
+    show_debug_message("LN2_FENCE_GAP_BOAT_PASS: 336 original triggers, climb/descent, gap deaths, safe crossings, saved jab-to-arrival");
 }

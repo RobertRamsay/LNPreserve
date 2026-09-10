@@ -41,7 +41,7 @@ function ln2_enemy_remember(_g) {
 }
 
 function ln2_play_enter(_g,_id) {
-    _g.world_state.drowning=undefined;
+    _g.world_state.drowning=undefined;_g.world_state.fence=undefined;
     _g.safe_scene_phase=0;_g.hole_steps=0;_g.route_descent=undefined;_g.fall_exit_slot=-1;
     _g.keypad=undefined;_g.pending_item=undefined;
     ln2_projectile_reset(_g);
@@ -151,7 +151,7 @@ function ln2_play_tick(_g,_joy) {
     if (_g.game_over || _g.level_complete) return;
     var _p=_g.player,_tick=(_p.tick+1)&255;if (_tick==0) _g.tick_epoch=(_g.tick_epoch+1)&255;
     _g.last_joy=_joy;
-    var _drowning=variable_struct_exists(_g.world_state,"drowning") && is_struct(_g.world_state.drowning);
+    var _drowning=ln2_blocking_sequence(_g);
     if (!_drowning) {_joy=ln2_burger_input(_g,_joy);_joy=ln2_candle_assist_input(_g,_joy);}
     ln2_status_tick(_g,_tick);
     _g.room_age++;
@@ -160,6 +160,7 @@ function ln2_play_tick(_g,_joy) {
     if (_g.victory!=0) {ln2_victory_tick(_g,_joy,_tick);return;}
     if (_g.level==7) ln2_final_candles_tick(_g,_tick);
     if (variable_struct_exists(_g.world_state,"drowning") && is_struct(_g.world_state.drowning)) {ln2_drowning_tick(_g,_tick);return;}
+    if (variable_struct_exists(_g.world_state,"fence") && is_struct(_g.world_state.fence)) {ln2_fence_tick(_g,_tick);return;}
     if (_g.respawn_wait>0) {
         _p.tick=_tick;_p.last_tick=_tick;_g.respawn_wait--;
         if (_g.respawn_wait==0) {
