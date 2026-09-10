@@ -9,6 +9,21 @@ if (ln2_projectile_only) {
     catch (_failure) {show_debug_message("LN2_PROJECTILE_GPU_FAILURE: "+string(_failure));}
     game_end();exit;
 }
+if (ln2_hud_only) {
+    try {ln2_hud_checks();}
+    catch (_failure) {show_debug_message("LN2_HUD_FAILURE: "+string(_failure));}
+    game_end();exit;
+}
+if (ln2_switch_only) {
+    try {ln2_park_switch_checks();}
+    catch (_failure) {show_debug_message("LN2_SWITCH_FAILURE: "+string(_failure));}
+    game_end();exit;
+}
+if (ln2_spirits_only) {
+    try {ln2_ending_checks();ln2_final_gpu_checks();}
+    catch (_failure) {show_debug_message("LN2_SPIRITS_FAILURE: "+string(_failure));}
+    game_end();exit;
+}
 if (ln2_final_only) {
     try {ln2_final_gpu_checks();}
     catch (_failure) {show_debug_message("LN2_FINAL_GPU_FAILURE: "+string(_failure));}

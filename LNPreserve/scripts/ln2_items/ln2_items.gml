@@ -130,3 +130,21 @@ function ln2_refresh_scene(_g) {
         _g.scene=asset_get_index("spr_ln2_safe_states");_g.scene_frame=_g.safe_scene_phase;
     }
 }
+
+function ln2_park_switch_checks() {
+    var _g=new LN2Play(1);ln2_test_enter(_g,3);
+    var _p=_g.player,_surface=surface_create(240,144);
+    surface_set_target(_surface);draw_sprite(_g.scene,0,0,0);surface_reset_target();
+    ln_check(surface_getpixel(_surface,172,44)!=c_black,"unpunched switch is yellow");
+    _p.x=160;_p.y=86;_p.depth_y=86;_p.facing=1;_p.heading=1;_p.stopped=255;_p.vehicle=0;
+    _p.weapon=0;_p.selected_weapon=0;_p.fire_previous=0;_p.input_lock=0;_p.action=0;_g.enemy.active=0;
+    repeat(80) {if (_g.inventory[18]!=0) break;ln2_play_tick(_g,17);}
+    ln_check(_g.inventory[18]!=0,"actual unarmed punch activates the original switch flag");
+    surface_set_target(_surface);draw_sprite(_g.scene,0,0,0);surface_reset_target();
+    ln_check(surface_getpixel(_surface,172,44)==c_black,"punch displays original black switch panel immediately");
+    ln2_test_enter(_g,4);ln2_test_enter(_g,3);
+    ln_check(_g.scene==spr_ln2_park_switch_pressed,"activated switch remains black on revisit");
+    _g.inventory[18]=0;ln2_refresh_scene(_g);
+    ln_check(_g.scene!=spr_ln2_park_switch_pressed,"consumed switch flag restores yellow state");
+    surface_free(_surface);show_debug_message("LN2_SWITCH_PASS: actual punch, yellow-to-black pixels, revisit and reset");
+}

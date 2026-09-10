@@ -73,14 +73,14 @@ def render_room(ram,source,room,inventory=None):
     call(mem,0x140e);call(mem,source['scene_choose']);call(mem,source['item_enter'])
     return bitmap(mem)
 
-def composition(ram,source,frame,mirror,weapon=0,costume=0,enemy=False,shared=(11,2),omit_weapon=False):
+def composition(ram,source,frame,mirror,weapon=0,costume=0,enemy=False,shared=(11,2),omit_weapon=False,canvas=(96,96),origin=(48,64)):
     """Run the actual compositor offline, then assemble its four hardware parts."""
     mem=list(ram);mem[0x200:0x250]=[0]*80;mem[0x9e]=255
     mem[0x54:0x58]=[120,120,120,120];mem[0x70]=weapon;mem[0x72]=weapon
     mem[0x7d]=costume;mem[0x7f]=costume;mem[0x280:0x282]=[0,0]
     draw=source['actor_enemy' if enemy else 'actor_player']
     call(mem,draw,a=255 if mirror else 0,x=4 if enemy else 0,y=frame)
-    image=Image.new('RGBA',(96,96));slots=range(4,8) if enemy else range(4)
+    image=Image.new('RGBA',canvas);slots=range(4,8) if enemy else range(4)
     for i in reversed(list(slots)):
         if omit_weapon and i%4==3:continue
         x=mem[0x200+i]+256*mem[0x208+i];y=mem[0x210+i]
@@ -88,7 +88,7 @@ def composition(ram,source,frame,mirror,weapon=0,costume=0,enemy=False,shared=(1
         pointer=word(bytes([mem[0x169d+i],mem[0x16a5+i]]),0)
         if mem[0x218+i]&1:pointer+=512
         part=sprite_image(mem[pointer:pointer+63],bool(mem[0x238+i]),mem[0x220+i]&15,shared)
-        image.alpha_composite(part,(48+x-120-24,64+y-120-50))
+        image.alpha_composite(part,(origin[0]+x-120-24,origin[1]+y-120-50))
     return image
 
 def main(metadata_only=False):

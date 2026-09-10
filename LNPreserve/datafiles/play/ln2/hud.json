@@ -1,0 +1,9 @@
+{
+  "dashboard": "spr_ln2_dashboard",
+  "digits": "spr_ln2_status_digits",
+  "enemy_health": "spr_ln2_enemy_health",
+  "icons": "spr_ln2_status_icons",
+  "labels": "spr_ln2_status_labels",
+  "player_health": "spr_ln2_player_health",
+  "source_sha256": "c470dfeabd487b0b461e27d2e325d683d62ec0da50fe1a7fdb10d7195bce4cf0"
+}

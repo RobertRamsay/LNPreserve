@@ -120,6 +120,7 @@ function ln2_ending_checks() {
 }
 
 function ln2_ending_gpu_checks() {
+    ln2_spirits_gpu_checks();
     var _d=ln3_data_read("play/ln2/ending.json"),_o=ln3_data_read("verification/ln2_ending_gpu.json");
     var _surface=surface_create(320,200),_b=buffer_create(320*200*4,buffer_fixed,1),_count=0;
     for (var _i=0;_i<array_length(_o.vectors);_i++) {
@@ -145,4 +146,31 @@ function ln2_ending_gpu_checks() {
     _g.enemy.x=118;_g.enemy.y=114;_g.enemy.depth_y=114;_g.world_state.boss_defeated=true;_g.world_state.candles=array_create(5,128);
     ln2_ending_draw(_g);surface_save(_g.ending_surface,"lnpreserve-ln2-ending.png");ln2_ending_free(_g);
     show_debug_message("LN2_ENDING_GPU_PASS: "+string(_count)+" original game/ending bitmap samples across first and repeated palette traversals.");
+}
+
+/// Compare the complete mapped sprite, including previously clipped edges.
+function ln2_spirits_gpu_checks() {
+    var _o=ln3_data_read("verification/ln2_spirits_gpu.json"),_g=new LN2Play(7);
+    var _frames=variable_struct_get(_g.world.enemy_extra_frames,"1_2");
+    var _bank=variable_struct_get(_g.world.enemy_extra_banks,"1_2");
+    var _surface=surface_create(160,128),_b=buffer_create(160*128*4,buffer_fixed,1);
+    for (var _i=0;_i<array_length(_o.vectors);_i++) {
+        var _v=_o.vectors[_i],_index=-1;
+        for (var _j=0;_j<array_length(_frames);_j++) if (_frames[_j]==_v.frame) {_index=_j;break;}
+        ln_check(_index>=0,"spirit logical frame exists");
+        if (_v.mirror) _index+=array_length(_frames);
+        var _pose=ln_character_pose(_bank,_index,"ln2_enemy_type_2");
+        surface_set_target(_surface);draw_clear_alpha(c_black,0);draw_sprite(_pose.sprite,_pose.frame,80,96);surface_reset_target();
+        buffer_get_surface(_b,_surface,0);
+        for (var _y=0;_y<128;_y++) for (var _x=0;_x<160;_x++) {
+            var _code=string_char_at(_v.rows[_y],_x+1),_pixel=buffer_peek(_b,(_y*160+_x)*4,buffer_u32);
+            if (_code==".") ln_check(((_pixel>>24)&255)==0,"no duplicate or stray spirit pixels");
+            else {
+                var _c=string_pos(_code,"0123456789abcdef")-1,_rgb=_o.palette[_c];
+                ln_check((_pixel&$ffffff)==make_colour_rgb(_rgb[0],_rgb[1],_rgb[2]) && ((_pixel>>24)&255)==255,"complete original spirit pixel");
+            }
+        }
+    }
+    buffer_delete(_b);surface_free(_surface);
+    show_debug_message("LN2_SPIRITS_GPU_PASS: 48 full poses, 983040 pixels; "+string(_o.restored_pixels)+" formerly clipped pixels restored");
 }

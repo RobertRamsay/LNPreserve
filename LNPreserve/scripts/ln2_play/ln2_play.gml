@@ -171,6 +171,7 @@ function ln2_play_tick(_g,_joy) {
     ln2_combat_event(_g,_g.enemy.action_state,true);_g.enemy.action_state=0;
     if (_g.fall_remaining>=0) return;
     if (ln2_hole_boundary(_g)) return;
+    if (ln2_curtain_boundary(_g)) return;
     ln2_play_exit(_g);ln2_level_effect_tick(_g,_joy);
     ln2_projectile_motion(_g,_g.player.tick);ln2_projectile_present(_g);ln2_enemy_remember(_g);
     if (_g.pending_entry>=0) { var _entry=_g.pending_entry;_g.pending_entry=-1;ln2_play_travel(_g,_entry); }
@@ -210,13 +211,12 @@ function ln2_play_draw(_g) {
     } else {
         ln2_play_actor(_g,_g.enemy,true);ln2_projectile_draw(_g,true);ln2_play_actor(_g,_g.player,false);ln2_projectile_draw(_g,false);
     }
-    surface_reset_target();draw_surface_ext(_g.stage_surface,160,84,4,4,0,c_white,1);
+    surface_reset_target();draw_surface_ext(_g.stage_surface,160,84,3,3,0,c_white,1);
+    ln2_status_draw(_g,160,84,3);
     draw_text(160,36,"LAST NINJA 2 — "+string_upper(_g.title));draw_text(1000,36,"Scene "+string(_g.room_id));
-    draw_text(160,62,"Score "+ln2_status_digits(_g.status.score));
-    draw_text(160,672,"Health "+string(_g.player_health)+"   Lives "+string(_g.lives_left)+"   Enemy "+string(_g.enemy.health));
-    draw_text(700,672,_g.notice_item>=0?"FOUND   Item "+string(_g.notice_item):"Item "+string(_g.selected_item)+"   Weapon "+string(_g.player.selected_weapon));
-    draw_text(160,712,"WASD Move    # + direction Action    Space Weapon    1 2 3 4 Function keys");
-    draw_text(160,744,"Numpad: 7 NW / 9 NE / 1 SW / 3 SE    F11 Scenes    Home Restart");
+    draw_text(160,700,"WASD Move    # + direction Action    Space Weapon    2 / 3 Select item");
+    draw_text(160,728,"Numpad: 7 NW / 9 NE / 1 SW / 3 SE    F11 Scenes    Home Restart");
+    draw_text(160,760,"Lives "+string(_g.lives_left)+"    1 Music    4 Pause");
     if (_g.paused) draw_text(600,60,"PAUSED");
     if (_g.game_over) draw_text(540,60,"GAME OVER — HOME TO RESTART");
     if (_g.level_complete) draw_text(530,60,"END OF LAST NINJA 2");

@@ -96,7 +96,7 @@ function ln2_keypad_tick(_g,_joy) {
 function ln2_keypad_draw(_g) {
     if (_g.world_state.code_visible) {
         var _code="";for (var _i=0;_i<4;_i++) _code+=string(_g.keycode[_i]-27);
-        draw_text(800,630,"CODE  "+_code);
+        draw_text(800,760,"CODE  "+_code);
     }
     if (!is_struct(_g.keypad)) return;
     draw_set_colour(c_black);draw_rectangle(420,270,860,485,false);draw_set_colour(c_white);

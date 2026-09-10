@@ -13,6 +13,9 @@ window_presets_test=false;
 crt_live_frame=-1;
 crt_live_baseline=0;
 ln2_final_only=false;
+ln2_hud_only=false;
+ln2_switch_only=false;
+ln2_spirits_only=false;
 ln2_projectile_only=false;
 window_set_caption("LNPreserve | The Last Ninja");
 clock = new LNClock();
@@ -41,6 +44,11 @@ for (var _i = 1; _i <= parameter_count(); _i++) {
         catch (_failure) {show_debug_message("LN_JUMP_ASSIST_FAILURE: "+string(_failure));}
         game_end();exit;
     }
+    if (parameter_string(_i) == "--ln2-curtain-test") {
+        try {ln2_curtain_checks();}
+        catch (_failure) {show_debug_message("LN2_CURTAIN_FAILURE: "+string(_failure));}
+        game_end();exit;
+    }
     if (parameter_string(_i) == "--reverse-roll-test") {
         try {ln1_reverse_roll_checks();}
         catch (_failure) {show_debug_message("LN_REVERSE_ROLL_FAILURE: "+string(_failure));}
@@ -52,6 +60,9 @@ for (var _i = 1; _i <= parameter_count(); _i++) {
         catch (_failure) {show_debug_message("LN_PICKUP_FAILURE: "+string(_failure));game_end();exit;}
     }
     if (parameter_string(_i) == "--selftest") selftest = true;
+    if (parameter_string(_i) == "--ln2-hud-test") ln2_hud_only=true;
+    if (parameter_string(_i) == "--ln2-switch-test") ln2_switch_only=true;
+    if (parameter_string(_i) == "--ln2-spirits-test") ln2_spirits_only=true;
     if (parameter_string(_i) == "--ln2-final-gpu-only") ln2_final_only=true;
     if (parameter_string(_i) == "--ln2-projectile-gpu-only") ln2_projectile_only=true;
     if (parameter_string(_i) == "--ln2-projectiles-only") {

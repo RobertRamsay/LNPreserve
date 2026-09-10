@@ -183,3 +183,37 @@ function ln2_fall_tick(_g,_tick) {
     }
     ln2_enemy_action(_g);
 }
+
+/// Central Park curtain: original $9fd8 dispatch mode 2 -> $a056, slot 1.
+function ln2_curtain_boundary(_g) {
+    var _p=_g.player;
+    if (_g.level!=1 || (_p.boundary_mode&63)!=2 || !(_p.boundary_crossings&128) || _g.exit_locked) return false;
+    if (!(_p.boundary_mode&64) && _p.action>=256) return false;
+    if (array_length(_g.scene_record.entries)<2) return false;
+    return ln2_play_travel(_g,_g.scene_record.entries[1]);
+}
+
+function ln2_curtain_checks() {
+    for (var _flags=0;_flags<4;_flags++) for (var _busy=0;_busy<2;_busy++)
+    for (var _interrupt=0;_interrupt<2;_interrupt++) for (var _lock=0;_lock<2;_lock++) {
+        var _g=new LN2Play(1),_p=_g.player;
+        _p.boundary_crossings=(_flags&1)|((_flags&2)?128:0);
+        _p.boundary_mode=2|(_interrupt?64:0);_p.action=_busy?$c300:0;_g.exit_locked=_lock;
+        var _expected=(_flags&2)!=0 && (!_busy || _interrupt) && !_lock;
+        ln_check(ln2_curtain_boundary(_g)==_expected,"curtain crossing obeys original new-crossing/action/exit locks");
+        ln_check(_g.room_id==(_expected?2:1),"curtain uses original scene 2 entrance");
+    }
+    var _g=new LN2Play(1),_p=_g.player;
+    _g.enemy.active=0;_p.x=70;_p.y=49;_p.depth_y=49;_p.action=0;_p.input_lock=0;
+    _p.facing=1;_p.heading=1;_p.turn_lock=0;_p.fraction_x=0;_p.fraction_y=0;
+    var _joy=0;
+    for (var _i=0;_i<16;_i++) if (_g.data.directions[_i]==1) {_joy=_i;break;}
+    repeat(24) {if (_g.room_id!=1) break;ln2_play_tick(_g,_joy);}
+    ln_check(_g.room_id==2 && _g.last_entry==3,"walking through actual curtain geometry reaches scene 2 without fire");
+    ln_check(_p.x==_g.world.tables.entry_x[3] && _p.y==_g.world.tables.entry_y[3],"curtain uses recovered arrival coordinates");
+    _p.x=0;_p.y=133;ln2_play_exit(_g);
+    ln_check(_g.room_id==1 && _g.last_entry==4,"ordinary route returns from scene 2 to scene 1");
+    var _arrival=_g.room_id;ln2_play_tick(_g,0);
+    ln_check(_g.room_id==_arrival,"return does not replay a stale curtain crossing");
+    show_debug_message("LN2_CURTAIN_PASS: 32 original trigger combinations, real walking approach, arrival and return");
+}

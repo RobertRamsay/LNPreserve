@@ -50,3 +50,49 @@ function ln2_status_checks() {
     }
     show_debug_message("LN2_STATUS_PASS: 6144 original score, clock and health-display states; raster and complete score-event dispatch excluded.");
 }
+
+/// Original C64 dashboard, drawn around the 240x144 playfield at integer scale.
+function ln2_status_draw(_g,_x,_y,_scale) {
+    draw_set_colour(c_white);
+    draw_sprite_ext(spr_ln2_dashboard,0,_x,_y,_scale,_scale,0,c_white,1);
+    draw_sprite_ext(spr_ln2_player_health,clamp(round(_g.status.health[0]),0,44),_x+64*_scale,_y+152*_scale,_scale,_scale,0,c_white,1);
+    draw_sprite_ext(spr_ln2_enemy_health,clamp(round(_g.status.health[1]),0,44),_x+16*_scale,_y+152*_scale,_scale,_scale,0,c_white,1);
+    draw_sprite_ext(spr_ln2_status_icons,clamp(_g.player.selected_weapon,0,4),_x+264*_scale,_y+24*_scale,_scale,_scale,0,c_white,1);
+    var _found=_g.notice_item>=0,_item=_found?_g.notice_item:_g.selected_item;
+    draw_sprite_ext(spr_ln2_status_labels,real(_found),_x+248*_scale,_y+56*_scale,_scale,_scale,0,c_white,1);
+    draw_sprite_ext(spr_ln2_status_icons,clamp(_item,0,16),_x+264*_scale,_y+72*_scale,_scale,_scale,0,c_white,1);
+    for (var _i=0;_i<6;_i++) {
+        draw_sprite_ext(spr_ln2_status_digits,clamp(_g.status.score[_i]-27,0,9),_x+(136+8*_i)*_scale,_y+160*_scale,_scale,_scale,0,c_white,1);
+        draw_sprite_ext(spr_ln2_status_digits,clamp(_g.status.clock.digits[_i]-27,0,9),_x+(128+8*(_i+(_i div 2)))*_scale,_y+176*_scale,_scale,_scale,0,c_white,1);
+    }
+}
+
+function ln2_hud_hash(_g,_surface,_rect) {
+    surface_set_target(_surface);draw_clear(c_black);ln2_status_draw(_g,0,0,1);surface_reset_target();
+    var _sum=0.0;
+    for (var _y=_rect[1];_y<_rect[3];_y++) for (var _x=_rect[0];_x<_rect[2];_x++) _sum+=surface_getpixel(_surface,_x,_y)*(_x+3*_y+1);
+    return _sum;
+}
+
+function ln2_hud_checks() {
+    ln2_status_checks();
+    var _g=new LN2Play(1),_s=surface_create(320,200);
+    var _rects=[[64,152,104,192],[16,152,56,192],[264,24,304,56],[264,72,304,104],[248,56,312,64],[136,160,184,168],[128,176,192,184]];
+    for (var _i=0;_i<7;_i++) {
+        var _before=ln2_hud_hash(_g,_s,_rects[_i]);
+        switch (_i) {
+            case 0:_g.status.health[0]=0;break;
+            case 1:_g.status.health[1]=0;break;
+            case 2:_g.inventory[1]=255;ln2_controls_update(_g,255,239);break;
+            case 3:_g.inventory[7]=255;ln2_controls_update(_g,223,255);break;
+            case 4:_g.notice_item=7;break;
+            case 5:ln2_score_add(_g,$50);break;
+            case 6:repeat(50) ln2_status_clock(_g.status.clock,_g.status_data.clock_limits);break;
+        }
+        ln_check(ln2_hud_hash(_g,_s,_rects[_i])!=_before,"each original HUD field responds to live game state: "+string(_i));
+    }
+    surface_free(_s);
+    _g.status.health=[31,17];_g.status.score=[28,29,30,31,32,33];_g.status.clock.digits=[27,28,29,30,31,32];
+    _g.notice_item=-1;ln2_play_draw(_g);surface_save(application_surface,"lnpreserve-ln2-hud.png");
+    show_debug_message("LN2_HUD_PASS: original dashboard, health spirals, weapon/item controls, found notice, score and clock");
+}
