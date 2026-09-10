@@ -2145,6 +2145,7 @@
     {"$GMIncludedFile":"","%Name":"ln2_enemy_vectors.json","CopyToMask":-1,"filePath":"datafiles/verification","name":"ln2_enemy_vectors.json","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
     {"$GMIncludedFile":"","%Name":"ln2_entry_vectors.json","CopyToMask":-1,"filePath":"datafiles/verification","name":"ln2_entry_vectors.json","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
     {"$GMIncludedFile":"","%Name":"ln2_final_enemy_gpu.json","CopyToMask":-1,"filePath":"datafiles/verification","name":"ln2_final_enemy_gpu.json","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
+    {"$GMIncludedFile":"","%Name":"ln2_interior_routes.json","CopyToMask":-1,"filePath":"datafiles/verification","name":"ln2_interior_routes.json","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
     {"$GMIncludedFile":"","%Name":"ln2_intro_vectors.json","CopyToMask":-1,"filePath":"datafiles/verification","name":"ln2_intro_vectors.json","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
     {"$GMIncludedFile":"","%Name":"ln2_item_flow_vectors.json","CopyToMask":-1,"filePath":"datafiles/verification","name":"ln2_item_flow_vectors.json","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
     {"$GMIncludedFile":"","%Name":"ln2_keypad_vectors.json","CopyToMask":-1,"filePath":"datafiles/verification","name":"ln2_keypad_vectors.json","resourceType":"GMIncludedFile","resourceVersion":"2.0",},

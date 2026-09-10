@@ -169,7 +169,7 @@ function ln2_force_exit(_g,_slot) {
 /// The Mansion drop runs its own original two-tick fall loop, keeping the
 /// scenery actor moving while ordinary controls and combat are suspended.
 function ln2_fall_begin(_g,_distance,_depth) {
-    var _p=_g.player;_p.depth_y=_depth;_p.height_fixed=255;
+    var _p=_g.player;_p.depth_y=_depth;_p.height_fixed=255;_g.fall_exit_slot=-1;
     _g.fall_remaining=_distance;_g.fall_clock=_p.tick;_g.exit_locked=true;
 }
 
@@ -179,18 +179,53 @@ function ln2_fall_tick(_g,_tick) {
         var _step=(_elapsed<<2)&255;_p.y=(_p.y+_step)&255;_g.fall_clock=_tick;
         _p.display_frame=((_p.facing+2)&4)?83:78;_p.mirror=(_p.facing&2)!=0;
         _g.fall_remaining-=_step;
-        if (_g.fall_remaining<0 || _p.y>=189) { _g.fall_remaining=-1;_p.input_lock=255;return; }
+        if (_g.fall_remaining<0 || _p.y>=189) {
+            _g.fall_remaining=-1;
+            if (variable_struct_exists(_g,"fall_exit_slot") && _g.fall_exit_slot>=0) {
+                var _slot=_g.fall_exit_slot;_g.fall_exit_slot=-1;_g.exit_locked=false;
+                _p.input_lock=0;_p.boundary_crossings=0;
+                ln2_play_travel(_g,_g.scene_record.entries[_slot]);return;
+            }
+            _p.input_lock=255;return;
+        }
     }
     ln2_enemy_action(_g);
 }
 
-/// Central Park curtain: original $9fd8 dispatch mode 2 -> $a056, slot 1.
-function ln2_curtain_boundary(_g) {
-    var _p=_g.player;
-    if (_g.level!=1 || (_p.boundary_mode&63)!=2 || !(_p.boundary_crossings&128) || _g.exit_locked) return false;
+/// Original numbered interior exits: modes 1..4 select outgoing slots 0..3.
+function ln2_boundary_exit(_g) {
+    var _p=_g.player,_mode=_p.boundary_mode&63,_slot=-1;
+    if (!(_p.boundary_crossings&128)) return false;
+    if (_g.exit_locked && !(_g.level==6 && _mode==54)) return false;
     if (!(_p.boundary_mode&64) && _p.action>=256) return false;
-    if (array_length(_g.scene_record.entries)<2) return false;
-    return ln2_play_travel(_g,_g.scene_record.entries[1]);
+    if (_mode>=1 && _mode<=4) _slot=_mode-1;
+    else if (_g.level==1 && _mode==6 && (_p.boundary_crossings&1)) _slot=1;
+    else if ((_g.level==2 && _mode==38 && _g.inventory[19]!=0) ||
+             (_g.level==3 && _mode==41 && _g.inventory[20]!=0)) {
+        if (!(_p.boundary_crossings&1)) return false;
+        _g.route_descent={elapsed:0,slot:_g.level==2?2:1,unarmed:_g.level==3};
+        _p.depth_y=0;_g.exit_locked=true;return true;
+    } else if (_g.level==4 && _mode==48) {
+        if (_g.inventory[17]==0) {_p.input_lock=255;return false;}
+        _slot=0;
+    } else if (_g.level==6 && _mode==54) {
+        ln2_fall_begin(_g,46,48);_g.fall_exit_slot=0;return true;
+    }
+    if (_slot<0 || _slot>=array_length(_g.scene_record.entries)) return false;
+    return ln2_play_travel(_g,_g.scene_record.entries[_slot]);
+}
+
+/// Original Street/Sewers exit approach: sixteen two-pixel downward steps.
+function ln2_route_descent_tick(_g,_tick) {
+    var _p=_g.player,_route=_g.route_descent;
+    _p.tick=_tick;_p.last_tick=_tick;_route.elapsed++;
+    _p.y=(_p.y+2)&255;
+    ln2_enemy_decide(_g);ln2_enemy_action(_g);
+    if (_route.elapsed<16) return;
+    var _slot=_route.slot;
+    if (_route.unarmed) _p.weapon=0;
+    _g.route_descent=undefined;_g.exit_locked=false;
+    ln2_play_travel(_g,_g.scene_record.entries[_slot]);
 }
 
 function ln2_curtain_checks() {
@@ -200,7 +235,7 @@ function ln2_curtain_checks() {
         _p.boundary_crossings=(_flags&1)|((_flags&2)?128:0);
         _p.boundary_mode=2|(_interrupt?64:0);_p.action=_busy?$c300:0;_g.exit_locked=_lock;
         var _expected=(_flags&2)!=0 && (!_busy || _interrupt) && !_lock;
-        ln_check(ln2_curtain_boundary(_g)==_expected,"curtain crossing obeys original new-crossing/action/exit locks");
+        ln_check(ln2_boundary_exit(_g)==_expected,"curtain crossing obeys original new-crossing/action/exit locks");
         ln_check(_g.room_id==(_expected?2:1),"curtain uses original scene 2 entrance");
     }
     var _g=new LN2Play(1),_p=_g.player;

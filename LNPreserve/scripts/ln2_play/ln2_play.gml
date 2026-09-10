@@ -38,7 +38,7 @@ function ln2_enemy_remember(_g) {
 }
 
 function ln2_play_enter(_g,_id) {
-    _g.safe_scene_phase=0;_g.hole_steps=0;
+    _g.safe_scene_phase=0;_g.hole_steps=0;_g.route_descent=undefined;_g.fall_exit_slot=-1;
     _g.keypad=undefined;_g.pending_item=undefined;
     ln2_projectile_reset(_g);
     ln2_enemy_remember(_g);_g.room_id=_id;_g.player.room_id=_id;
@@ -162,6 +162,7 @@ function ln2_play_tick(_g,_joy) {
         }
         return;
     }
+    if (variable_struct_exists(_g,"route_descent") && is_struct(_g.route_descent)) {ln2_route_descent_tick(_g,_tick);return;}
     if (_g.fall_remaining>=0) { ln2_fall_tick(_g,_tick);return; }
     if (_g.hole_steps>0) { ln2_hole_tick(_g,_tick);return; }
     _p.enemy_active=_g.enemy.active;_p.enemy_x=_g.enemy.x;_p.enemy_y=_g.enemy.y;_p.separation_y=_g.enemy.separation_y;
@@ -171,7 +172,7 @@ function ln2_play_tick(_g,_joy) {
     ln2_combat_event(_g,_g.enemy.action_state,true);_g.enemy.action_state=0;
     if (_g.fall_remaining>=0) return;
     if (ln2_hole_boundary(_g)) return;
-    if (ln2_curtain_boundary(_g)) return;
+    if (ln2_boundary_exit(_g)) return;
     ln2_play_exit(_g);ln2_level_effect_tick(_g,_joy);
     ln2_projectile_motion(_g,_g.player.tick);ln2_projectile_present(_g);ln2_enemy_remember(_g);
     if (_g.pending_entry>=0) { var _entry=_g.pending_entry;_g.pending_entry=-1;ln2_play_travel(_g,_entry); }

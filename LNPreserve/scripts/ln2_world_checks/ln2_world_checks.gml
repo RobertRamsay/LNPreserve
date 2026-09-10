@@ -75,3 +75,50 @@ function ln2_world_capture() {
         if (surface_exists(_g.stage_surface)) surface_free(_g.stage_surface);
     }
 }
+
+function ln2_routes_checks() {
+    var _b=buffer_load("verification/ln2_interior_routes.json"),_v=json_parse(buffer_read(_b,buffer_text));buffer_delete(_b);
+    var _g=undefined,_level=0;
+    for(var _i=0;_i<array_length(_v.vectors);_i++) {
+        var _c=_v.vectors[_i];
+        if(_level!=_c.level || _g.level!=_c.level) {_level=_c.level;_g=new LN2Play(_level);}
+        ln2_play_enter(_g,_c.room);_g.last_entry=-1;_g.enemy.active=0;
+        var _p=_g.player;_p.x=100;_p.y=80;_p.action=_c.busy?$c300:0;
+        _p.boundary_mode=_c.mode;_p.boundary_crossings=_c.flags;_g.exit_locked=_c.locked;
+        _g.inventory[17]=_c.gate;_g.inventory[19]=_c.gate;_g.inventory[20]=_c.gate;
+        var _ends=_c.entry>=0 && _g.world.tables.exit_destinations[_c.entry]==255;
+        ln2_boundary_exit(_g);
+        for(var _t=1;_t<=64;_t++) {
+            if(!is_undefined(_g.route_descent)) ln2_route_descent_tick(_g,_t);
+            else if(_g.fall_remaining>=0) ln2_fall_tick(_g,(_g.fall_clock+2)&255);
+            else break;
+        }
+        ln_check(_ends?(_g.level==_level+1):(_g.last_entry==_c.entry),"LN2 interior case "+string(_i)+" level "+string(_level)+" mode "+string(_c.mode)+" got "+string(_g.last_entry)+" expected "+string(_c.entry));
+        if(_c.entry>=0 && !_ends) {
+            ln_check(_p.x==_g.world.tables.entry_x[_c.entry] && _p.y==_g.world.tables.entry_y[_c.entry],"interior arrival coordinates");
+        }
+    }
+    for(var _i=0;_i<array_length(_v.sensors);_i++) {
+        var _sensor=_v.sensors[_i];
+        if(_g.level!=_sensor.level) _g=new LN2Play(_sensor.level);
+        ln2_play_enter(_g,_sensor.room);var _line=_g.data.boundaries[_sensor.line],_found=false;
+        for(var _x=_line[0];_x<=_line[2] && !_found;_x++) {
+            var _y=(_line[1]+(_line[4]>=64?-1:1)*(((_x-_line[0])*(_line[4]&62)) div 16))&255;
+            for(var _dx=-4;_dx<=4 && !_found;_dx++) for(var _dy=-3;_dy<=3 && !_found;_dy++)
+            for(var _side=-1;_side<=0 && !_found;_side++) {
+                _g.player.boundary_crossings=0;_g.player.boundary_mode=0;
+                var _collision=ln2_player_boundary(_g.player,_g.data,_x,_y+_side,_x+_dx,_y+_side+_dy);
+                if((_collision==0 || (_line[5]>=128 && _g.player.hit_boundary==_sensor.line)) && (_g.player.boundary_mode&63)==_sensor.mode && (_g.player.boundary_crossings&128)) _found=true;
+            }
+        }
+        ln_check(_found,"interior sensor geometry "+string(_i)+" level "+string(_sensor.level)+" room "+string(_sensor.room));
+    }
+    show_debug_message("LN2_SENSOR_PASS: "+string(array_length(_v.sensors))+" exit detector lines trigger in full scene geometry (including blocking triggers)");
+    _g=new LN2Play(1);ln2_play_enter(_g,3);_g.exit_locked=false;_g.enemy.active=0;
+    var _p=_g.player;_p.x=94;_p.y=74;_p.depth_y=74;_p.action=0;_p.input_lock=0;
+    _p.facing=7;_p.heading=7;_p.turn_lock=0;_p.fraction_x=0;_p.fraction_y=0;
+    repeat(24) {if(_g.room_id!=3) break;ln2_play_tick(_g,5);}
+    ln_check(_g.room_id==13 && _g.last_entry==5,"actual scene 3 door walk reaches scene 13");
+    ln2_curtain_checks();ln2_world_checks();
+    show_debug_message("LN2_ROUTES_PASS: "+string(array_length(_v.vectors))+" original interior gate/destination cases; actual scene 3 to 13 door walk.");
+}

@@ -1,0 +1,142 @@
+{
+  "levels": [
+    {
+      "interior_routes": 4,
+      "level": 1,
+      "rooms": 17,
+      "sensor_modes": [
+        1,
+        2,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        14,
+        15,
+        16,
+        20,
+        28,
+        30,
+        31,
+        32,
+        33,
+        34,
+        43
+      ],
+      "sha256": "c470dfeabd487b0b461e27d2e325d683d62ec0da50fe1a7fdb10d7195bce4cf0"
+    },
+    {
+      "interior_routes": 4,
+      "level": 2,
+      "rooms": 16,
+      "sensor_modes": [
+        1,
+        2,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40
+      ],
+      "sha256": "ee15d7a0f4ddf1807f5b27ad010f0e2cae43a34bc964e9fb182d1fc5f3b9a6be"
+    },
+    {
+      "interior_routes": 8,
+      "level": 3,
+      "rooms": 15,
+      "sensor_modes": [
+        2,
+        3,
+        7,
+        14,
+        15,
+        17,
+        18,
+        22,
+        23,
+        24,
+        25,
+        26,
+        41
+      ],
+      "sha256": "70c0368682b84a79c18e5ad8fda815a0a573b21a442dd17b83a9eff44952f975"
+    },
+    {
+      "interior_routes": 3,
+      "level": 4,
+      "rooms": 15,
+      "sensor_modes": [
+        0,
+        1,
+        9,
+        10,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53
+      ],
+      "sha256": "5f15262b1211ce53b24f7127abe9f5f0f78ece6cebd3869bf1eda748851cf9c4"
+    },
+    {
+      "interior_routes": 9,
+      "level": 5,
+      "rooms": 15,
+      "sensor_modes": [
+        1,
+        2,
+        3,
+        7,
+        42,
+        43,
+        44,
+        45,
+        47,
+        48,
+        49,
+        63
+      ],
+      "sha256": "670d2f09eca3db702115edd9ce44d0025dfad256dbaf43f5f692d4a1d42ccd1f"
+    },
+    {
+      "interior_routes": 11,
+      "level": 6,
+      "rooms": 13,
+      "sensor_modes": [
+        1,
+        2,
+        3,
+        4,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57
+      ],
+      "sha256": "31b0f17eaa52f40574f6d94f529e5d4e61d86b67cd50ca2796a68a5399d78a84"
+    },
+    {
+      "interior_routes": 0,
+      "level": 7,
+      "rooms": 2,
+      "sensor_modes": [],
+      "sha256": "ccc6bd0481fbb22cc8cb44a7a1ee93f8202b4bde64cf0e08dfa4281c1644410a"
+    }
+  ],
+  "original_cases": 2496,
+  "scope": "Original interior-exit oracle. Display-only fades/descents are intercepted.\nChecks destination selection and gates, not whole-machine raster timing.\n",
+  "sensor_lines": 48
+}
