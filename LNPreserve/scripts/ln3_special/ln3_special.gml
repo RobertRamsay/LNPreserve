@@ -291,6 +291,7 @@ function ln3_status_draw(_g) {
 }
 
 function ln3_status_checks() {
+    ln3_followup_checks();
     var _v=ln3_data_read("verification/ln3_hud_vectors.json").vectors;
     for(var _i=0;_i<array_length(_v);_i++) {
         var _r=_v[_i],_fixture_state={weapon_fx_state:_r.phase,weapon_fx_request:_r.request,enemy_pending_weapon:4,inventory:array_create(30,0)};
@@ -347,4 +348,37 @@ function ln3_hud_eye_tick(_g) {
     else if ((_g.state.enemy_flash&2)!=0) _g.hud_eye_right=_g.hud_eye_phase;
     _g.hud_eye_phase=(_g.hud_eye_phase+1)&3;
     if (_g.hud_eye_phase==0) _g.state.enemy_flash=0;
+}
+
+function ln3_followup_checks() {
+    for(var _level=1;_level<=5;_level++) {
+        var _g=new LN3Play(_level),_s=_g.state;
+        _s.parts[2].colour=10;_s.player_dead=1;_s.death_wait=1;_s.logic_wait=0;
+        ln3_play_tick(_g,0);
+        for(var _part=0;_part<4;_part++) ln_check(_s.parts[_part].colour==_g.data.initial.parts[_part].colour,"LN3 respawn source colours "+string(_level));
+        _s.room_id=0;_s.enemy_health=44;_s.enemy_dead=0;_s.player_weapon=0;
+        ln3_combat_damage_enemy(_s,_g.combat);ln_check(_s.enemy_health>0,"LN3 normal damage remains default");
+        _s.enemy_health=44;_s.one_hit_kills=true;_g.one_hit_kills=true;
+        ln3_combat_damage_enemy(_s,_g.combat);ln_check(_s.enemy_health==0 && _s.enemy_dead!=0,"LN3 F8 normal defeat handling");
+        _s.room_id=13;_s.enemy_health=44;_s.enemy_dead=0;_s.boss_honour=0;_s.level_requested=false;
+        ln3_combat_damage_enemy(_s,_g.combat);ln_check(_s.enemy_health==0 && _s.level_requested,"LN3 F8 boss defeat request");
+        _s.room_id=_g.room_id;
+        var _saved=ln_save_restore(json_parse(json_stringify(ln_save_capture(_g))));
+        ln_check(_saved.one_hit_kills,"LN3 F8 save persistence");
+        if (_level<5) {ln3_level_load(_g,_level+1);ln_check(_g.one_hit_kills,"LN3 F8 level persistence");}
+    }
+    var _ln1=new LN1Play(1),_found=false;
+    _ln1.player.combat_state=20;_ln1.player.weapon=0;_ln1.player.x=100;_ln1.player.y=100;
+    _ln1.enemy.active=128;_ln1.enemy.combat_state=0;_ln1.enemy.wounds=0;
+    for(var _x=80;_x<121 && !_found;_x++) for(var _y=80;_y<121 && !_found;_y++) {
+        _ln1.enemy.x=_x;_ln1.enemy.y=_y;
+        _found=ln1_combat_hit(_ln1,false)>=0;
+    }
+    ln_check(_found,"LN1 damaging strike reached");
+    ln1_combat_event(_ln1,14,false);ln_check(_ln1.enemy.wounds<32,"LN1 normal damage remains default");
+    _ln1.enemy.combat_state=0;_ln1.enemy.wounds=0;_ln1.one_hit_kills=true;
+    ln1_combat_event(_ln1,14,false);ln_check(_ln1.enemy.wounds==32 && _ln1.room_wounds[_ln1.room_id]==32,"LN1 F8 defeat persists in room");
+    ln1_level_load(_ln1,2);ln_check(_ln1.one_hit_kills,"LN1 F8 level persistence");
+    var _loaded=ln_save_restore(json_parse(json_stringify(ln_save_capture(_ln1))));ln_check(_loaded.one_hit_kills,"LN1 F8 save persistence");
+    show_debug_message("LN3_FOLLOWUP_PASS: five-level respawn colours, LN1/LN3 one-hit defeats and preference persistence");
 }

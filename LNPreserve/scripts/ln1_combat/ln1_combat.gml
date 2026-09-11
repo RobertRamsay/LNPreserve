@@ -135,7 +135,7 @@ function ln1_combat_event(_g, _event, _enemy_event) {
         var _immune=(_g.level==4?_e.active==135:(_g.level==6?_e.active==134:_e.active==137));
         if (_hit >= 0 && (_e.combat_state & 252) != 36 && !_immune) {
             var _damage=(_g.level==6 && _e.active==136)?_g.data.boss_damage[_hit]:_g.data.enemy_damage[_hit];
-            _e.wounds = min(32, _e.wounds + _damage);
+            _e.wounds = min(32, _e.wounds + ((variable_struct_exists(_g,"one_hit_kills") && _g.one_hit_kills && _damage>0)?32:_damage));
             _g.room_wounds[_g.room_id] = _e.wounds;
             if (_e.wounds == 32) ln1_enemy_combat(_e, 36);
             ln1_combat_hurt(_g, true);

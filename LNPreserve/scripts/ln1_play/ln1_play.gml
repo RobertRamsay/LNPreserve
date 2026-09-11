@@ -1,4 +1,5 @@
 function LN1Play(_level = 1) constructor {
+    one_hit_kills=false;
     loader=undefined;
     game_number = 1;
     level = _level;
@@ -338,6 +339,7 @@ function ln1_play_draw(_game, _paused) {
     if (is_struct(_game.controls))
         draw_sprite_ext(spr_ln1_status_icon, _game.controls.item, _x+248*_scale, _y+120*_scale, _scale, _scale, 0, c_white, 1);
     draw_set_colour(make_colour_rgb(180,180,180));
+    draw_text(600,36,"F8 One-hit kills: "+(_game.one_hit_kills?"ON":"OFF"));
     draw_text(160, 36, "THE LAST NINJA — " + string_upper(_game.title));
     draw_text(930, 36, "Room " + string(_game.room_id));
     if (_game.level_complete) {

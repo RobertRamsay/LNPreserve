@@ -9,6 +9,7 @@ function ln3_room_record(_rooms,_id) {
 
 function LN3Play(_level=1) constructor {
     loader=undefined;
+    one_hit_kills=false;
     game_number=3;level=_level;var _path="play/ln3/level"+string(level)+"/";
     data=ln3_data_read(_path+"runtime.json");world=ln3_data_read(_path+"world.json");
     actions=ln3_data_read(_path+"actions.json");movement=ln3_data_read(_path+"movement.json");
@@ -136,7 +137,7 @@ function ln3_level_load(_g,_level,_ordinary=false) {
         _lives=_g.state.lives,_score=_g.state.score_digits;
     var _fresh=new LN3Play(_level),_names=variable_struct_get_names(_fresh);
     for (var _i=0;_i<array_length(_names);_i++) {
-        var _name=_names[_i];if (array_contains(["level_states","timer","stage_surface","part_surface","controls"],_name)) continue;
+        var _name=_names[_i];if (array_contains(["one_hit_kills","level_states","timer","stage_surface","part_surface","controls"],_name)) continue;
         variable_struct_set(_g,_name,variable_struct_get(_fresh,_name));
     }
     var _s=_g.state;
@@ -192,6 +193,7 @@ function ln3_play_tick(_g,_joy) {
     if (_s.weapon_notice_timer==100) _g.found_item=-1;
     ln3_enemy_recover_action(_s,_g.actions);ln3_enemy_decide(_s,_g.actions,_g.input,_g.enemies);
     ln3_enemy_attack(_s,_g.actions,_g.enemies,(_g.timer.cycle div 63)&255);
+    _s.one_hit_kills=_g.one_hit_kills;
     ln3_combat_update(_s,_g.actions,_g.combat);ln3_fall_tick(_s,_g.actions,_g.data);
     ln3_movement_setup(_s,_g.movement);ln3_movement(_s,_g.movement);
     ln3_climb_enter(_s,_g.actions,_g.runtime_scene.climbs,_joy,_g.level);
@@ -211,7 +213,7 @@ function ln3_play_tick(_g,_joy) {
         _s.lives--;_s.inventory[27]=_s.lives;
         if (_s.lives<=0) {_g.game_over=true;return;}
         _s.player_health=44;_s.inventory[26]=44;_s.player_action=255;_s.climb_flags=0;_s.climb_counter=0;
-        for (var _i=0;_i<3;_i++) _s.parts[_i].colour=_i==1?0:10;
+        for (var _i=0;_i<4;_i++) _s.parts[_i].colour=_g.data.initial.parts[_i].colour;
         ln3_play_enter(_g,_g.last_entry);
     }
     ln3_play_special(_g);
@@ -297,6 +299,7 @@ function ln3_play_draw(_g) {
     ln3_status_draw(_g);
     var _s=_g.state;
     draw_text(160,36,"LAST NINJA 3 — "+string_upper(_g.title));draw_text(1000,36,"Scene "+string(_g.room_id+1));
+    draw_text(600,36,"F8 One-hit kills: "+(_g.one_hit_kills?"ON":"OFF"));
     draw_text(160,712,"WASD Move    # + direction Action    Space Weapon    F1 F3 F5 F7 Functions");
     draw_text(160,744,"Numpad 7/9/1/3 Direction    F11 Scenes    Home Restart    1/2/3 Games");
     if (_g.paused) draw_text(600,60,"PAUSED");

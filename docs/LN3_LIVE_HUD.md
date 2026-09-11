@@ -2,7 +2,7 @@
 
 All five native LN3 levels now use a 320 x 200 game picture: the 240 x 144 playfield plus the original right and bottom status areas, displayed at 3x inside the existing window. The surrounding save/debug controls remain outside CRT coverage.
 
-The panel shows six score digits, animated player/enemy health spirals (0–44), the Bushido dragon (0–40), selected objects, timed pickup notices, weapon-change notices, the nine-stage prayer wheel, and the original portrait eye flashes. Consumed/unowned objects clear from the selected-item area. Existing gameplay inventory, score and honour logic remain authoritative. Save restoration retains the displayed meters and wheel progress; older saves inherit the new presentation fields from the constructor.
+The panel shows six score digits, animated player/enemy health spirals (0â€“44), the Bushido dragon (0â€“40), selected objects, timed pickup notices, weapon-change notices, the nine-stage prayer wheel, and the original portrait eye flashes. Consumed/unowned objects clear from the selected-item area. Existing gameplay inventory, score and honour logic remain authoritative. Save restoration retains the displayed meters and wheel progress; older saves inherit the new presentation fields from the constructor.
 
 ## Source recovery
 
@@ -17,3 +17,11 @@ Original routines: score $6eb6; selected/notice icon $6faf and label $7019; pray
 `--ln3-hud-test` independently exercises 243 original wheel-state comparisons, live meter updates, actual item-handler pickups from each level, selected/consumed item display, weapon notices, portrait flashing and saves. It captures `ln3-hud-level1.png` through `ln3-hud-level5.png` in GameMaker's local save directory. The test is included in `tools/run_focused_checks.py`.
 
 The existing original gameplay comparisons remain unchanged. Automated coverage and these controlled captures are separate from a full manual playthrough. Remaining manual checks: play each level normally, inspect wheel reveals approaching/leaving objects and enemies, check CRT at the chosen window scale, and observe the panel during boss/death transitions.
+
+## Prayer-wheel and testing follow-up
+
+Corrected the frame extractor to pass the requested phase in X to $6b19. Previously the icon advanced while the shutter was always decoded as phase zero. All 225 exported item/frame combinations are now compared pixel-for-pixel with the complete original $6ae3 dispatcher, in addition to the 243 timing/state checks.
+
+Respawning restores all four player-part colours from the level's initial source state, replacing the hard-coded pink lower-body colour. The native HUD test exercises death/respawn in all five levels.
+
+F8 now toggles one-hit kills in LN1 and LN3 as well as LN2. The default is off; the preference survives level changes and saves. LN1 uses normal wound/defeat handling. LN3 uses normal enemy death and boss-level requests. Damage from enemies and environmental hazards is unchanged. Original attack hit detection and immunity rules remain in force.

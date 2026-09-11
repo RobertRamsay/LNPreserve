@@ -25,7 +25,9 @@ function ln3_combat_damage_player(_s,_actions,_data) {
 
 function ln3_combat_damage_enemy(_s,_data) {
     var _weapon=_s.player_weapon,_damage=_data.player_damage[_weapon];
-    if (_s.room_id==13) {
+    var _instant=variable_struct_exists(_s,"one_hit_kills") && _s.one_hit_kills && _damage>0;
+    if (_instant) _damage=_s.enemy_health;
+    if (_s.room_id==13 && !_instant) {
         var _sum=(_s.boss_honour+_damage)&255;
         _s.boss_honour=_sum<26?_sum:_s.honour;
         if (_sum<26) {ln3_score_add(_s,_data,_weapon);return;}

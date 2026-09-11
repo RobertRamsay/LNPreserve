@@ -67,8 +67,14 @@ for item in range(25):
  m=Mem();m[0x31a]=item
  for step in range(9):
   m[0xf3]=step;m[1]=0x34
-  for routine in [0x6b19,0x6bc1,0x6c0f]:call(m,routine)
+  for routine in [0x6b19,0x6bc1,0x6c0f]:call(m,routine,x=step)
   m[1]=0x35;frames.append(pic(m).crop((256,0,304,48)))
+# Compare the isolated extraction against the complete original dispatcher.
+for item in range(25):
+ oracle=Mem();oracle[0xf3]=0;oracle[0x31a]=item
+ for step in range(9):
+  oracle[0xf2]=1;oracle[0x149]=0;call(oracle,0x6ae3)
+  assert pic(oracle).crop((256,0,304,48)).tobytes()==frames[item*9+step].tobytes(),(item,step)
 save('spr_ln3_hud_wheel',frames)
 m=Mem();frames=[pic(m).crop((256,56,312,64))];call(m,0x7019);frames.append(pic(m).crop((256,56,312,64)))
 save('spr_ln3_hud_notice',frames)
