@@ -1,4 +1,5 @@
 function LN2Play(_level=1) constructor {
+    loader=undefined;
     life_transition=undefined;
     game_number=2;level=_level;
     var _folder="play/ln2/level"+string(level)+"/",_buffer=buffer_load(_folder+"gameplay.json");
@@ -42,6 +43,8 @@ function ln2_enemy_remember(_g) {
 }
 
 function ln2_play_enter(_g,_id) {
+    _g.loader=undefined;
+    _g.data.sewer_recessed=_g.level==3 && _id==10;
     _g.life_transition=undefined;
     _g.world_state.drowning=undefined;_g.world_state.fence=undefined;
     _g.safe_scene_phase=0;_g.hole_steps=0;_g.route_descent=undefined;_g.fall_exit_slot=-1;
@@ -145,11 +148,17 @@ function ln2_level_load(_g,_level,_ordinary=false) {
     if (_ordinary) _g.player_health=44;
     // Fresh room creation must not overwrite the saved encounter being restored.
     _g.enemy=undefined;_g.room_id=-1;ln2_play_travel(_g,0);
-    ln_music_play(2,["central_park","street","sewers","basement","office","mansion","final_battle"][_level-1],false);
+    if (_ordinary) ln2_loader_begin(_g);
+    else ln_music_play(2,ln2_level_track(_level),false);
     return true;
 }
 
 function ln2_play_tick(_g,_joy) {
+    if (ln2_loader_tick(_g,_joy)) return;
+    if (is_struct(_g.loader) && _g.loader.fire_blocked) {
+        if (!(_joy&16)) _g.loader.fire_blocked=false;
+        _joy&=15;
+    }
     if (variable_struct_exists(_g,"life_transition") && is_struct(_g.life_transition)) {
         if (_g.life_transition.phase!=3) ln2_life_transition_tick(_g,(_g.player.tick+1)&255);
         return;
@@ -208,6 +217,10 @@ function ln2_play_actor(_g,_a,_enemy) {
                 1,1,_g.mask,0,0,240,144,max(0.001,(_a.depth_y-0.25)/255));return;
         }
     }
+    if (_enemy && _a.custom && _g.level==3 && _g.room_id==14 && _a.display_frame>=105 && _a.display_frame<=127) {
+        ln_draw_masked_actor(spr_ln2_sewer_alligator,(_a.display_frame-105)*2+real(_a.mirror),_a.x,_a.y,
+            1,1,_g.mask,0,0,240,144,max(0.001,(_a.depth_y-0.25)/255));return;
+    }
     if (_enemy && _a.custom && _g.level==3 && _g.room_id==10 && _a.display_frame>=102 && _a.display_frame<=104) {
         ln_draw_masked_actor(spr_ln2_sewer_rats,(_a.display_frame-102)*2+real(_a.mirror),_a.x,_a.y,
             1,1,_g.mask,0,0,240,144,max(0.001,(_a.y-72-0.25)/255));return;
@@ -246,6 +259,7 @@ function ln2_play_actor(_g,_a,_enemy) {
 }
 
 function ln2_play_draw(_g) {
+    if (ln2_loader_active(_g)) {draw_clear(c_black);ln2_loader_draw(_g);return;}
     draw_clear(c_black);draw_set_colour(c_white);
     if (_g.victory==2) {ln2_ending_draw(_g);return;}
     if (!surface_exists(_g.stage_surface)) _g.stage_surface=surface_create(240,144);
@@ -262,7 +276,7 @@ function ln2_play_draw(_g) {
     surface_reset_target();draw_surface_ext(_g.stage_surface,160,84,3,3,0,c_white,1);
     ln2_status_draw(_g,160,84,3);
     draw_text(600,36,"F8 One-hit kills: "+(_g.one_hit_kills?"ON":"OFF"));
-    draw_text(160,36,"LAST NINJA 2 — "+string_upper(_g.title));draw_text(1000,36,"Scene "+string(_g.room_id));
+    draw_text(160,36,"LAST NINJA 2 — "+string_upper(_g.title));draw_text(1000,36,"Scene "+string(ln2_scene_number(_g)));
     draw_text(160,700,"WASD Move    # + direction Action    Space Weapon    F3 / F5 Select item");
     draw_text(160,728,"Numpad 7/9/1/3 Direction    F11 Scenes    Home Restart    1/2/3 Games");
     draw_text(160,760,"Lives "+string(_g.lives_left)+"    F1 Music    F7 Pause");

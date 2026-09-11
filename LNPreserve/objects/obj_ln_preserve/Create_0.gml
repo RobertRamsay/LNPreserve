@@ -1,3 +1,4 @@
+ln2_followup_test=false;
 sewer_original_test=false;
 sewer_flames_test=false;
 item_use_test=false;
@@ -47,6 +48,7 @@ function_presses = [0,0,0,0];
 selftest = false;ln1_only=false;selftest_inject_failure=false;
 host_frames = 0;
 for (var _i = 1; _i <= parameter_count(); _i++) {
+    if(parameter_string(_i)=="--ln2-followup-test") ln2_followup_test=true;
     if(parameter_string(_i)=="--ln2-sewer-original-test") sewer_original_test=true;
     if(parameter_string(_i)=="--ln2-sewer-flames-test") sewer_flames_test=true;
     if(parameter_string(_i)=="--ln2-item-use-test") item_use_test=true;
@@ -267,10 +269,10 @@ tick_native = function(_from, _to, _frame) {
         return;
     }
     if(input_state.pressed[LNKey.CRT]) ln_crt_toggle();
-    if(input_state.pressed[LNKey.WeaponPrev]) ln_controller_previous_weapon(play,control_state_ln1);
+    if(input_state.pressed[LNKey.WeaponPrev] && !(play.game_number==2 && ln2_loader_active(play))) ln_controller_previous_weapon(play,control_state_ln1);
     if (play.game_number==2) {
         ln2_controls_update(play,_rows[0],_rows[1]);
-        if (!play.paused) ln2_play_tick(play,input_state.joystick()^255);
+        if (!play.paused || ln2_loader_active(play)) ln2_play_tick(play,input_state.joystick()^255);
         return;
     }
     if (play.game_number==3) {

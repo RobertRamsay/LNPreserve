@@ -69,6 +69,7 @@ function ln2_combat_attack(_g,_enemy,_interaction) {
 }
 
 function ln2_combat_event(_g,_event,_enemy) {
+    if (_enemy && _event==12 && _g.level==3 && _g.room_id==14 && _g.special_mode==7) {ln2_alligator_continue(_g);return;}
     var _a=_enemy?_g.enemy:_g.player;
     switch (_event) {
         case 0:return;

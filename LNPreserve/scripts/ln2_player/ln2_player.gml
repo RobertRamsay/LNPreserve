@@ -95,9 +95,12 @@ function ln2_player_input(_s,_d,_joy) {
 
 /// Six-byte source boundary records include the crossed line's hazard kind.
 function ln2_player_boundary(_s,_d,_old_x,_old_y,_nx,_ny,_enemy=false) {
+    var _recess=_enemy?-1:ln2_door_recess(_s,_d,_old_x,_old_y,_nx,_ny);
+    if (_recess==1) return 255;
     var _crossed=0,_collision=0;
     for (var _i=0;_i<array_length(_d.boundaries);_i++) {
         var _b=_d.boundaries[_i];
+        if (_recess==0 && _b[5]==0) continue;
         if (_old_x<_b[0] || _old_x>_b[2] || _nx<_b[0] || _nx>_b[2]) continue;
         var _sign=_b[4]>=64?-1:1;
         var _old_line=(_b[1]+_sign*(((_old_x-_b[0])*(_b[4]&62)) div 16))&255;

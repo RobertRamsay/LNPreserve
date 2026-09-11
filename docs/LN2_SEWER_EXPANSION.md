@@ -2,7 +2,7 @@
 
 The experimental doorway links and additional gallery have been withdrawn. All 15 original scenes and the original 31-entry route table are retained. The existing progression, tool gate and level exit are unchanged.
 
-Original false doors use boundary mode 24. The captured source dispatches this to $89bd, which calls $9b18 with A=2 and clears the boundary-crossing flag. Repeated contact drains health and leads into the ordinary death/life transition, rather than teleporting elsewhere. The recessed sensors can be reached from their doorway lips. False doors: scene 7 left/right, scene 9 middle/right, scene 10 left/right, scene 12 right. Scene 6's narrow opening has original mode 22 (climbing), not mode 24, and is not turned into a lethal door.
+Original false doors use boundary mode 24. The captured source dispatches this to $89bd, which calls $9b18 with A=2 and clears the boundary-crossing flag. Repeated contact drains health and leads into the ordinary death/life transition, rather than teleporting elsewhere. Scene 10 now requires contact deeper inside its openings; its early lip fallback is disabled. Other sensors retain their original contact handling. False doors: scene 7 left/right, scene 9 middle/right, scene 10 left/right, scene 12 right. Scene 6's narrow opening has original mode 22 (climbing), not mode 24, and is not turned into a lethal door.
 
 Sewer flames still animate in scenes 0, 1, 3, 5, 10, 11 and 13.
 

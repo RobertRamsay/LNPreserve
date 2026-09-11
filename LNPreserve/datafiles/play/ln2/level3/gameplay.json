@@ -1831,6 +1831,114 @@
       "next": 0,
       "state": 12
     },
+    "46088": {
+      "duration": 6,
+      "dx": 4,
+      "dy": 255,
+      "flags": 130,
+      "frame": 106,
+      "next": 46093,
+      "state": -1
+    },
+    "46093": {
+      "duration": -1,
+      "dx": 4,
+      "dy": 255,
+      "flags": 128,
+      "frame": 107,
+      "next": 46097,
+      "state": -1
+    },
+    "46097": {
+      "duration": -1,
+      "dx": 4,
+      "dy": 255,
+      "flags": 128,
+      "frame": 106,
+      "next": 46101,
+      "state": -1
+    },
+    "46101": {
+      "duration": -1,
+      "dx": 4,
+      "dy": 255,
+      "flags": 161,
+      "frame": 105,
+      "next": 0,
+      "state": 12
+    },
+    "46108": {
+      "duration": 6,
+      "dx": 252,
+      "dy": 1,
+      "flags": 130,
+      "frame": 108,
+      "next": 46113,
+      "state": -1
+    },
+    "46113": {
+      "duration": -1,
+      "dx": 252,
+      "dy": 1,
+      "flags": 128,
+      "frame": 109,
+      "next": 46117,
+      "state": -1
+    },
+    "46117": {
+      "duration": -1,
+      "dx": 252,
+      "dy": 1,
+      "flags": 128,
+      "frame": 108,
+      "next": 46121,
+      "state": -1
+    },
+    "46121": {
+      "duration": -1,
+      "dx": 252,
+      "dy": 1,
+      "flags": 161,
+      "frame": 105,
+      "next": 0,
+      "state": 12
+    },
+    "46128": {
+      "duration": 6,
+      "dx": 4,
+      "dy": 255,
+      "flags": 130,
+      "frame": 108,
+      "next": 46133,
+      "state": -1
+    },
+    "46133": {
+      "duration": -1,
+      "dx": 4,
+      "dy": 255,
+      "flags": 128,
+      "frame": 109,
+      "next": 46137,
+      "state": -1
+    },
+    "46137": {
+      "duration": -1,
+      "dx": 4,
+      "dy": 255,
+      "flags": 128,
+      "frame": 108,
+      "next": 46141,
+      "state": -1
+    },
+    "46141": {
+      "duration": -1,
+      "dx": 4,
+      "dy": 255,
+      "flags": 161,
+      "frame": 105,
+      "next": 0,
+      "state": 12
+    },
     "46148": {
       "duration": 6,
       "dx": 0,

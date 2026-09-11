@@ -141,7 +141,8 @@ function ln_quick_start(_host,_game) {
     _host.play.controls=_host.control_state_ln1;_host.input_state=new LNInput();
     _host.workbench=false;_host.scene_test.menu=false;_host.scene_test.preview=false;_host.scene_test.message_us=0;
     _host.scene_test.game=_game;
-    ln_music_play(_game,["wastelands","central_park","earth"][_game-1],false);
+    if (_game==2) ln2_loader_begin(_host.play);
+    else ln_music_play(_game,["wastelands","central_park","earth"][_game-1],false);
 }
 
 function ln_function_key_checks() {

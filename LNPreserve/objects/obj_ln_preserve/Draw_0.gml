@@ -1,3 +1,8 @@
+if (ln2_followup_test) {
+    try {ln2_followup_checks();}
+    catch(_failure) {show_debug_message("LN2_FOLLOWUP_FAILURE: "+string(_failure));}
+    game_end();exit;
+}
 if (sewer_original_test) {
     try {ln2_sewer_original_checks();}
     catch(_failure) {show_debug_message("LN2_SEWER_ORIGINAL_FAILURE: "+string(_failure));}

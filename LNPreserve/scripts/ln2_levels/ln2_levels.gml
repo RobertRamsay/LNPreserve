@@ -966,6 +966,7 @@ function ln2_sewer_flame_checks() {
 /// Retain original routes and migrate saves from the withdrawn experiments.
 function ln2_sewer_network_prepare(_g) {
     if (_g.level!=3) return;
+    _g.data.sewer_recessed=_g.room_id==10;
     _g.water_data=undefined;
     if (variable_struct_exists(_g.world,"sewer_network_version") && _g.world.sewer_network_version==3) return;
     var _fresh=ln3_data_read("play/ln2/level3/world.json");
@@ -993,7 +994,7 @@ function ln2_sewer_wrong_door(_g) {
     var _p=_g.player;
     if (_p.action>=256 || _p.input_lock!=0 || _g.player_health<=0) return;
     var _touch=(_p.boundary_crossings&128) && ((_p.boundary_mode&63)==24);
-    if (!_touch && _p.collision==255 && _p.hit_side==1 && _p.stopped==0) {
+    if (!_touch && _g.room_id!=10 && _p.collision==255 && _p.hit_side==1 && _p.stopped==0) {
         // Reach recessed original sensors from their solid front lip.
         var _doors=_g.world.sewer_wrong_doors;
         for(var _i=0;_i<array_length(_doors);_i++) {
@@ -1055,4 +1056,132 @@ function ln2_sewer_original_checks() {
     _g=ln_save_restore(_save);
     ln_check(_g.room_id==10 && _g.last_entry<31 && _g.inventory[20]==255,"shortcut save keeps position/progress and gets original respawn");
     show_debug_message("LN2_SEWER_ORIGINAL_PASS: original entrances, seven false doors, source damage, three visible rat frames, save migration");
+}
+
+function ln2_alligator_continue(_g) {
+    var _x=_g.enemy.x;
+    if (_x<60) _g.inventory[21]=255;
+    else if (_x>=142) _g.inventory[21]=0;
+    if (_x>=76 && _x<126 && ln2_enemy_random(_g)<64) _g.inventory[21]^=255;
+    var _right=_g.inventory[21]!=0,_edge=(_x+(_right?8:-8))&255;
+    var _near=_edge<_g.player.x || _edge-_g.player.x<48;
+    _g.enemy.action=_right?(_near?$b430:$b408):(_near?$b41c:$b3f4);
+}
+
+/// Only the two scene-10 door apertures are recessed; source data stays intact.
+function ln2_door_recess(_s,_d,_ox,_oy,_nx,_ny) {
+    if (!variable_struct_exists(_d,"sewer_recessed") || !_d.sewer_recessed) return -1;
+    var _centres=[76,108],_ys=[73,65];
+    for(var _i=0;_i<2;_i++) {
+        var _cx=_centres[_i],_line=_ys[_i]+2-floor((_nx-_cx)/4);
+        if (abs(_ox-_cx)>8 || abs(_nx-_cx)>6) continue;
+        if (_oy>=_line && _ny<=_line+1 && (_ny<_oy || _nx<_ox)) {
+            _s.boundary_mode=152;_s.boundary_crossings=((_s.boundary_crossings+1)&255)|128;
+            _s.hit_boundary=_i==0?9:13;_s.hit_side=1;return 1;
+        }
+        if (_oy>=_line && _ny>=_line) return 0;
+    }
+    return -1;
+}
+
+function ln2_loader_active(_g) {
+    return variable_struct_exists(_g,"loader") && is_struct(_g.loader) && _g.loader.active;
+}
+
+function ln2_level_track(_level) {
+    return ["central_park","street","sewers","basement","office","mansion","final_battle"][_level-1];
+}
+
+function ln2_loader_begin(_g) {
+    _g.loader={active:true,released:false,fire_blocked:false};_g.paused=false;
+    ln_music_play(2,ln2_level_track(_g.level),true);
+    if (!_g.music && variable_global_exists("ln_music_voice")) audio_pause_sound(global.ln_music_voice);
+}
+
+function ln2_loader_tick(_g,_joy) {
+    if (!ln2_loader_active(_g)) return false;
+    if (!(_joy&16)) _g.loader.released=true;
+    else if (_g.loader.released) {
+        _g.loader.active=false;_g.loader.fire_blocked=true;
+        _g.player.fire_previous=16;
+        ln_music_play(2,ln2_level_track(_g.level),false);
+        if (!_g.music && variable_global_exists("ln_music_voice")) audio_pause_sound(global.ln_music_voice);
+    }
+    return true;
+}
+
+function ln2_loader_draw(_g) {
+    var _sprite=asset_get_index("spr_ln2_loader_level"+string(_g.level)+"_location_00");
+    draw_set_colour(c_black);draw_rectangle(160,84,1120,684,false);draw_set_colour(c_white);
+    draw_sprite_ext(_sprite,0,280,168,3,3,0,c_white,1);
+    draw_text(160,36,"LAST NINJA 2 — "+string_upper(_g.title));
+    draw_text(1000,36,"Scene 0");
+    draw_text(160,700,"Press # or Xbox A to begin");
+}
+
+function ln2_followup_checks() {
+    var _v=ln3_data_read("verification/ln2_alligator_checks.json"),_g=new LN2Play(3);
+    ln2_play_enter(_g,14);
+    for(var _i=0;_i<array_length(_v.cases);_i++) {
+        var _c=_v.cases[_i];_g.enemy.x=_c.ex;_g.player.x=_c.px;_g.inventory[21]=_c.flag;
+        _g.random_queue=[_c.random];_g.random_head=0;_g.player.weapon=1;_g.player.selected_weapon=2;
+        ln2_combat_event(_g,12,true);
+        ln_check(_g.enemy.action==_c.action && _g.inventory[21]==_c.expected_flag && _g.random_head==_c.used,"source alligator continuation "+string(_i));
+        ln_check(_g.player.weapon==1,"alligator event does not change ninja weapon");
+    }
+    _g=new LN2Play(3);ln2_play_enter(_g,14);ln2_test_enter(_g,_g.scene_record.spawn_entry);_g.player.y=180;_g.player.x=120;
+    var _lunge=false,_moves=false,_previous=0;
+    repeat(350) {
+        ln2_play_tick(_g,0);
+        _moves=_moves || (_previous!=0 && _previous!=_g.enemy.x);_previous=_g.enemy.x;
+        if (_g.enemy.display_frame==108 || _g.enemy.display_frame==109) _lunge=true;
+    }
+    ln_check(_moves && _lunge,"alligator walks and lunges over repeated continuations");
+    var _surface=surface_create(240,144);
+    _g.enemy.x=100;_g.enemy.y=70;_g.enemy.depth_y=70;_g.enemy.display_frame=108;
+    surface_set_target(_surface);draw_clear_alpha(c_black,0);ln2_play_actor(_g,_g.enemy,true);surface_reset_target();
+    var _pixels=0;for(var _y=0;_y<144;_y++) for(var _x=0;_x<240;_x++) if ((surface_getpixel_ext(_surface,_x,_y)>>24)&255) _pixels++;
+    ln_check(_pixels>40,"lunge sprite visible");
+    surface_set_target(_surface);draw_clear(c_black);draw_sprite(_g.scene,0,0,0);ln2_play_actor(_g,_g.enemy,true);surface_reset_target();
+    surface_save(_surface,"ln2-alligator-lunge.png");surface_free(_surface);
+    ln2_test_enter(_g,0);ln2_play_enter(_g,10);
+    for(var _door=0;_door<2;_door++) {
+        var _cx=_door==0?76:108,_y=_door==0?73:65,_p=_g.player;
+        _p.action=0;_p.input_lock=0;_p.stopped=0;_g.player_health=44;_p.x=_cx;
+        _p.boundary_crossings=0;_p.collision=ln2_player_boundary(_p,_g.data,_cx,_y+9,_cx,_y+5);_p.y=_y+5;
+        ln2_sewer_wrong_door(_g);ln_check(_p.collision==0 && _g.player_health==44,"door approach is safe inside front lip");
+        _p.collision=ln2_player_boundary(_p,_g.data,_cx,_y+3,_cx,_y+1);_p.y=_y+3;
+        ln2_sewer_wrong_door(_g);ln_check(_p.collision==255 && _g.player_health==42,"damage starts at recessed doorway stop");
+    }
+    var _picker=new LNSceneTest(ln3_data_read("catalog.json"));
+    for(var _level=1;_level<=7;_level++) {
+        _g=new LN2Play(_level);
+        for(var _index=0;_index<array_length(_picker.levels);_index++) if (_picker.levels[_index].game==2 && _picker.levels[_index].number==_level) _picker.level_index=_index;
+        ln_check(ln_scene_test_open(_picker,_g,-1) && ln2_loader_active(_g) && _g.room_id==_picker.levels[_picker.level_index].scenes[0].id,"scene zero opens title before scene one");
+        var _tick=_g.player.tick,_room=_g.room_id,_health=_g.player_health;
+        repeat(4) ln2_play_tick(_g,16);
+        ln_check(ln2_loader_active(_g) && _g.player.tick==_tick,"held fire cannot skip loader or advance gameplay");
+        ln2_play_tick(_g,0);_g=ln_save_restore(ln_save_capture(_g));ln2_play_tick(_g,16);ln_check(ln2_loader_active(_g),"restored loader requires release");ln2_play_tick(_g,0);ln2_play_tick(_g,16);
+        ln_check(!ln2_loader_active(_g) && _g.room_id==_room && _g.player_health==_health && _g.player.tick==_tick,"fresh fire starts level from saved loader");
+        ln_check(ln_scene_test_open(_picker,_g,0) && !ln2_loader_active(_g) && _g.room_id==_picker.levels[_picker.level_index].scenes[0].id,"scene one selection opens gameplay directly");
+        ln_check(asset_get_index("spr_ln2_loader_level"+string(_level)+"_location_00")>=0,"loader art exists");
+        ln2_loader_begin(_g);
+        var _s=surface_create(1280,800);surface_set_target(_s);draw_clear(c_black);ln2_loader_draw(_g);surface_reset_target();surface_save(_s,"ln2-loader-"+string(_level)+".png");surface_free(_s);
+        ln_check(ln2_scene_number(_g)==0,"loader displays scene zero");
+        ln_check(ln_scene_test_open(_picker,_g,0) && !ln2_loader_active(_g) && ln2_scene_number(_g)==1,"direct loader bypass enters displayed scene one");
+        ln_check(audio_is_playing(asset_get_index("snd_ln2_"+ln2_level_track(_level)+"_game")),"direct loader bypass switches to game music");
+    }
+    show_debug_message("LN2_FOLLOWUP_PASS: 440 source alligator cases, lunge render, recessed doors, seven loaders, fire and save handling");
+}
+
+/// Display numbering matches the picker; source room IDs stay unchanged.
+function ln2_scene_number(_g) {
+    if (ln2_loader_active(_g)) return 0;
+    var _number=0;
+    for(var _i=0;_i<array_length(_g.world.rooms);_i++) {
+        if (_g.world.rooms[_i].spawn_entry<0) continue;
+        _number++;
+        if (_g.world.rooms[_i].id==_g.room_id) return _number;
+    }
+    return _g.room_id;
 }
