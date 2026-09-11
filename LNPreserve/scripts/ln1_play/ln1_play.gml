@@ -128,10 +128,6 @@ function ln1_play_tick(_g, _joy) {
         if (_g.death_wait == 0) {
             _g.death_transition_done=false;
             _g.lives_left--;
-            if (_g.lives_left == 0 && _g.inventory[8] != 0 && _g.inventory[8] != 128) {
-                _g.lives_left++; _g.inventory[8] = 0;
-                if (is_struct(_g.controls)) _g.controls.inventory[8] = 0;
-            }
             if (_g.lives_left == 0) { _g.game_over = true; return; }
             var _spawn = _g.world.entry_index[_g.last_entry];
             _p.x = _g.world.entry_x[_spawn]; _p.y = _g.world.entry_y[_spawn];
@@ -151,6 +147,7 @@ function ln1_play_tick(_g, _joy) {
         }
         return;
     }
+    _joy=ln1_apple_input(_g,_joy);
     _p.enemy_active = _e.active; _p.enemy_x = _e.x; _p.enemy_y = _e.y;
     _p.separation_y = _e.separation_y;
     ln1_player_update(_p, _g.data, _joy, (_p.tick + 1) & 255);

@@ -6,10 +6,9 @@ function ln1_level_load(_g, _level, _ordinary_exit = false) {
     _g.level_states[_g.level-1] = {wounds:_g.room_wounds, state:_g.world_state};
     var _inventory = _g.inventory, _lives = _g.lives_left, _health = _g.player_health;
     if (_ordinary_exit) {
-        // $6e36 carries the inventory, converts the extra-life pickup and clears
-        // the shuriken high bit before $6df8 restores the next level's state.
-        if (_inventory[8] != 0 && _inventory[8] != 128) _lives++;
-        _inventory[8] = 0; _inventory[14] &= 127;
+        // Carry an unused apple; it is consumed explicitly with double fire.
+        if (_inventory[8] == 128) _inventory[8] = 0;
+        _inventory[14] &= 127;
         if (_g.level == 1 && _lives == 1) _lives++;
     }
     var _fresh = new LN1Play(_level), _names = variable_struct_get_names(_fresh);

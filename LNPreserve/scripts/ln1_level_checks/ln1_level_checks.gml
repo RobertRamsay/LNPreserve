@@ -8,13 +8,24 @@ function ln1_level_checks() {
     _apple.inventory[2]=1; _apple.inventory[8]=0;
     _apple.lives_left=2; _apple.player_health=7;
     ln1_item_interact(_apple);
-    ln_check(_apple.lives_left==3 && _apple.player_health==32 && _apple.inventory[8]==128,
-        "LN1 apple grants one immediate life and full health");
+    ln_check(_apple.lives_left==2 && _apple.player_health==7 && _apple.inventory[8]==1,
+        "LN1 apple pickup banks reward");
+    _apple.controls=ln3_data_read("actors/ln1/initial_control_state.json");_apple.controls.item=8;
+    ln1_apple_input(_apple,16);repeat(22) ln1_apple_input(_apple,16);
+    ln_check(_apple.lives_left==2,"holding fire does not eat apple");
+    ln1_apple_input(_apple,0);ln1_apple_input(_apple,16);ln1_apple_input(_apple,0);ln1_apple_input(_apple,16);
+    ln_check(_apple.lives_left==3 && _apple.player_health==32 && _apple.inventory[8]==128,"double fire consumes apple once");
     ln1_item_interact(_apple);
     ln_check(_apple.lives_left==3,"LN1 credited apple cannot be collected twice");
     ln1_level_load(_apple,2,true);
     ln_check(_apple.lives_left==3 && _apple.inventory[8]==0,
         "LN1 credited apple does not grant another life at level exit");
+    var _banked=new LN1Play();_banked.inventory[8]=1;_banked.controls=ln3_data_read("actors/ln1/initial_control_state.json");
+    _banked.controls.item=8;_banked.player_health=7;_banked.lives_left=2;
+    var _loaded=ln_save_restore(json_parse(json_stringify(ln_save_capture(_banked))));
+    ln_check(_loaded.inventory[8]==1 && _loaded.controls.item==8 && _loaded.player_health==7 && _loaded.lives_left==2,"saved apple remains held without reward");
+    _loaded.controls.item=10;ln1_apple_input(_loaded,16);ln1_apple_input(_loaded,0);ln1_apple_input(_loaded,16);
+    ln_check(_loaded.inventory[8]==1 && _loaded.lives_left==2,"unselected apple is not consumed");
     var _dungeon=new LN1Play(4);
     for (var _i=0;_i<array_length(_dungeon.world.dungeon_spider_vectors);_i++) {
         var _v=_dungeon.world.dungeon_spider_vectors[_i];
@@ -90,9 +101,9 @@ function ln1_level_checks() {
     _g.inventory[13]=1;_g.inventory[14]=133;_g.player_health=7;
     _g.lives_left=2;_g.room_wounds[2]=32;
     ln1_level_load(_g,2,true);
-    ln_check(_g.player_health==32 && _g.lives_left==3 && _g.inventory[8]==0 && _g.inventory[14]==5 &&
+    ln_check(_g.player_health==32 && _g.lives_left==2 && _g.inventory[8]==1 && _g.inventory[14]==5 &&
              _g.inventory[4]==255 && _g.inventory[11]==1 && _g.inventory[13]==1,
-             "original health reset, extra-life conversion, items and weapons carry at level end");
+             "health reset, banked apple, items and weapons carry at level end");
     _g.room_wounds[3]=17;ln1_level_load(_g,1);
     ln_check(_g.room_wounds[2]==32,"first-level defeated enemy survives level browsing");
     ln1_level_load(_g,2);

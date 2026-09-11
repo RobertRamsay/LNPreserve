@@ -183,6 +183,10 @@ function ln3_transition_tick(_g) {
             _g.transition_phase=6;_g.transition_wipe=2;return;
         case 6:
             _g.transition_wipe+=2;if (_g.transition_wipe<144) return;
+            if (_g.special_sequence==5) {
+                _s.lives=max(0,_s.lives-1);_s.inventory[27]=_s.lives;
+                _g.transition_phase=8;_s.death_wait=50;return;
+            }
             _g.transition_phase=_g.special_sequence==3?7:8;_s.death_wait=_g.special_sequence==3?250:100;return;
         case 7:
             if (_s.death_wait!=0) return;
@@ -196,7 +200,14 @@ function ln3_transition_tick(_g) {
         case 10:
             if (_g.transition_y[0]!=0) return;
             _g.transition_mode=0;
-            if (_g.special_sequence==3) {
+            if (_g.special_sequence==5) {
+                _g.ordinary_death=false;
+                if (_s.lives<=0) {_g.game_over=true;_g.transition_phase=11;return;}
+                _s.player_health=44;_s.inventory[26]=44;_s.player_action=255;_s.climb_flags=0;_s.climb_counter=0;
+                _s.shared_colour1=0;_s.shared_colour2=9;
+                for (var _part=0;_part<4;_part++) _s.parts[_part].colour=_g.data.initial.parts[_part].colour;
+                ln3_play_enter(_g,_g.last_entry);
+            } else if (_g.special_sequence==3) {
                 _s.player_health=44;_s.inventory[26]=44;_s.shared_colour1=0;_s.shared_colour2=9;
                 _s.climb_flags=0;_s.climb_counter=0;_s.player_action=255;
                 ln3_play_enter(_g,ln3_room_record(_g.world.rooms,12).special_entry);
@@ -228,7 +239,13 @@ function ln3_transition_draw(_g) {
         draw_clear(c_black);
         if (_phase!=10) {
             var _frame=_g.special_sequence==4?2:(_phase==7?0:1);
-            draw_sprite(asset_get_index(_g.transition.text_sprite),_frame,0,0);
+            if (_g.special_sequence==5) {
+                var _lives=_g.state.lives;
+                var _text=_lives==0?"GAME OVER":string(_lives)+(_lives==1?" LIFE REMAINING":" LIVES REMAINING");
+                var _left=floor((240-string_length(_text)*8)/2);
+                for (var _letter=1;_letter<=string_length(_text);_letter++)
+                    draw_sprite(spr_ln3_lives_font,ord(string_char_at(_text,_letter))-32,_left+(_letter-1)*8,64);
+            } else draw_sprite(asset_get_index(_g.transition.text_sprite),_frame,0,0);
         }
     }
     if (_phase<11) for (var _i=7;_i>=0;_i--) {
@@ -291,6 +308,7 @@ function ln3_status_draw(_g) {
 }
 
 function ln3_status_checks() {
+    ln3_consumable_checks();
     ln3_followup_checks();
     var _v=ln3_data_read("verification/ln3_hud_vectors.json").vectors;
     for(var _i=0;_i<array_length(_v);_i++) {
@@ -355,6 +373,8 @@ function ln3_followup_checks() {
         var _g=new LN3Play(_level),_s=_g.state;
         _s.parts[2].colour=10;_s.player_dead=1;_s.death_wait=1;_s.logic_wait=0;
         ln3_play_tick(_g,0);
+        ln_check(_g.special_sequence==5,"LN3 ordinary death starts sword transition");
+        repeat(650) if (_g.special_sequence==5 && !_g.game_over) ln3_play_tick(_g,0);
         for(var _part=0;_part<4;_part++) ln_check(_s.parts[_part].colour==_g.data.initial.parts[_part].colour,"LN3 respawn source colours "+string(_level));
         _s.room_id=0;_s.enemy_health=44;_s.enemy_dead=0;_s.player_weapon=0;
         ln3_combat_damage_enemy(_s,_g.combat);ln_check(_s.enemy_health>0,"LN3 normal damage remains default");

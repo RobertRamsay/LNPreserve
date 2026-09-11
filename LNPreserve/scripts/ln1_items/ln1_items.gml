@@ -23,13 +23,6 @@ function ln1_item_interact(_g, _only_id=-1) {
             return;
         }
         _g.inventory[_item.id] = _item.id == 14 ? 133 : (_item.id == 15 ? 3 : 1);
-        // Requested LN1 enhancement: award the apple now, with full healing.
-        // 128 marks an already credited apple: hide it without banking a life.
-        if (_item.id == 8) {
-            _g.inventory[8] = 128;
-            _g.lives_left++;
-            _g.player_health = 32;
-        }
         if (_item.id == 9) _g.world_state.mode = 9;
         _g.notice_item = _item.id; _g.notice_tick = _p.tick;
         _g.notice_label = 1; _g.notice_duration = 150;
@@ -141,4 +134,25 @@ function ln1_pickup_assist_checks() {
     ln_check(_g.inventory[2]==1 && _g.inventory[11]==1 && _g.inventory[13]==1 &&
         _g.inventory[14]==5 && _g.inventory[15]==3 && _g.lives_left==4 && _g.player_health==32,
         "F11 Wilderness starter equipment, ammunition, lives and health");
+}
+
+// Track real press edges at PAL frequency. Holding fire never consumes an item.
+function ln_consumable_tap(_g,_joy,_eligible) {
+    if (!variable_struct_exists(_g,"food_taps")) _g.food_taps={remaining:0,previous:0};
+    var _t=_g.food_taps,_edge=(_joy&16)!=0 && _t.previous==0;
+    _t.previous=_joy&16;_t.remaining=max(0,_t.remaining-1);
+    if (!_eligible || (_joy&15)!=0) {_t.remaining=0;return false;}
+    if (!_edge) return false;
+    if (_t.remaining==0) {_t.remaining=18;return false;}
+    _t.remaining=0;return true;
+}
+
+function ln1_apple_input(_g,_joy) {
+    var _ready=is_struct(_g.controls) && _g.controls.item==8 && (_g.inventory[8]&127)!=0 &&
+        _g.player_health>0 && _g.player.input_lock==0 && _g.controls.weapon_locked==0 && !ln1_weapon_changing(_g.player,_g.data);
+    if (ln_consumable_tap(_g,_joy,_ready)) {
+        _g.inventory[8]=128;_g.controls.inventory[8]=0;_g.controls.item=10;
+        _g.notice_item=10;_g.notice_duration=0;_g.player_health=32;_g.lives_left++;
+    }
+    return _ready && (_joy&15)==0 ? 0 : _joy;
 }

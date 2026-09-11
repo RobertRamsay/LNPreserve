@@ -8,7 +8,7 @@ function ln3_room_record(_rooms,_id) {
 }
 
 function LN3Play(_level=1) constructor {
-    loader=undefined;
+    loader=undefined;pickup_assist=undefined;ordinary_death=false;
     one_hit_kills=false;
     game_number=3;level=_level;var _path="play/ln3/level"+string(level)+"/";
     data=ln3_data_read(_path+"runtime.json");world=ln3_data_read(_path+"world.json");
@@ -44,7 +44,7 @@ function ln3_enemy_remember(_g) {
 }
 
 function ln3_play_enter(_g,_entry) {
-    _g.loader=undefined;
+    _g.loader=undefined;_g.pickup_assist=undefined;_g.food_taps={remaining:0,previous:16};
     var _scene=ln3_room_record(_g.world.rooms,_entry.destination);if (!is_struct(_scene)) return false;
     ln3_enemy_remember(_g);_g.room_id=_entry.destination;_g.last_entry=_entry;_g.scene_record=_scene;_g.room_age=0;
     _g.special_sequence=0;_g.special_request=0;_g.special_colours=array_create(8,-1);
@@ -141,7 +141,7 @@ function ln3_level_load(_g,_level,_ordinary=false) {
         variable_struct_set(_g,_name,variable_struct_get(_fresh,_name));
     }
     var _s=_g.state;
-    if (_ordinary) {for (var _i=4;_i<23;_i++) _inventory[_i]=0;_health=44;}
+    if (_ordinary) {for (var _i=4;_i<23;_i++) if (_i!=21 || _inventory[21]>=128) _inventory[_i]=0;_health=44;}
     _s.inventory=_inventory;_s.player_health=_health;_s.honour=_honour;_s.lives=_lives;_s.score_digits=_score;
     _s.ammo=_inventory[28];_s.inventory[25]=_honour;_s.inventory[26]=_health;_s.inventory[27]=_lives;_s.inventory[29]=_level-1;
     var _saved=_g.level_states[_level-1];if (is_struct(_saved)) _g.room_enemies=_saved.enemies;
@@ -177,6 +177,7 @@ function ln3_play_tick(_g,_joy) {
     if (_g.level==5) ln3_void_flash_tick(_s);
     if (_g.special_sequence!=0) {ln3_special_sequence_tick(_g);return;}
     if (_s.weapon_notice_timer==0) _g.found_item=-1;
+    _joy=ln3_item_assist_input(_g,_joy);
     ln3_play_exit(_g);
     if (_s.regeneration_wait==0) {
         _s.regeneration_wait=50;
@@ -189,7 +190,8 @@ function ln3_play_tick(_g,_joy) {
     }
     if (_s.logic_wait!=0) {ln3_play_items(_g);ln3_play_special(_g);return;}
     _s.logic_wait=4;_g.logic_ticks++;
-    ln3_input_update(_s,_g.actions,_g.input,_joy,_g.weapon_switch);_g.weapon_switch=false;
+    if (!is_struct(_g.pickup_assist)) ln3_input_update(_s,_g.actions,_g.input,_joy,_g.weapon_switch);
+    _g.weapon_switch=false;
     if (_s.weapon_notice_timer==100) _g.found_item=-1;
     ln3_enemy_recover_action(_s,_g.actions);ln3_enemy_decide(_s,_g.actions,_g.input,_g.enemies);
     ln3_enemy_attack(_s,_g.actions,_g.enemies,(_g.timer.cycle div 63)&255);
@@ -210,18 +212,20 @@ function ln3_play_tick(_g,_joy) {
     if (_s.level_requested) {ln3_level_load(_g,_g.level+1,true);return;}
     ln3_play_items(_g);
     if (_s.player_dead!=0 && _s.death_wait==0) {
-        _s.lives--;_s.inventory[27]=_s.lives;
-        if (_s.lives<=0) {_g.game_over=true;return;}
-        _s.player_health=44;_s.inventory[26]=44;_s.player_action=255;_s.climb_flags=0;_s.climb_counter=0;
-        for (var _i=0;_i<4;_i++) _s.parts[_i].colour=_g.data.initial.parts[_i].colour;
-        ln3_play_enter(_g,_g.last_entry);
+        _g.ordinary_death=true;_g.pickup_assist=undefined;
+        ln3_special_start(_g,5);_s.death_wait=0;
+        return;
     }
     ln3_play_special(_g);
 }
 
 function ln3_play_items(_g) {
-    var _found=ln3_items_update(_g.state,_g.items,_g.item_records);
-    if (_found>=0) _g.found_item=_found;
+    if (is_struct(_g.pickup_assist)) {
+        if (_g.state.player_dead!=0 || _g.state.player_health<_g.pickup_assist.health) _g.pickup_assist=undefined;
+    }
+    var _found=ln3_items_update(_g.state,_g.items,_g.item_records,true);
+    if (_found>=0) {_g.found_item=_found;_g.pickup_assist=undefined;}
+    if (is_struct(_g.pickup_assist) && ++_g.pickup_assist.elapsed>80) _g.pickup_assist=undefined;
 }
 
 function ln3_controls_update(_g,_keys) {
