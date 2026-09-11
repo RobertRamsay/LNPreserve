@@ -1,4 +1,21 @@
 function ln1_level_checks() {
+    var _hidden=new LN1Play(3),_hidden_item=undefined;
+    for (var _hi=0;_hi<array_length(_hidden.world.items);_hi++) {
+        if (ln1_hidden_apple(_hidden,_hidden.world.items[_hi])) _hidden_item=_hidden.world.items[_hi];
+    }
+    ln_check(is_struct(_hidden_item),"Palace room 11 source apple exists");
+    _hidden.room_id=11;_hidden.inventory[2]=1;_hidden.inventory[8]=1;
+    _hidden.room_age=0;
+    ln_check(ln1_hidden_apple_flash(_hidden,_hidden_item),"hidden apple flashes even when another apple is held");
+    _hidden.room_age=8;
+    ln_check(!ln1_hidden_apple_flash(_hidden,_hidden_item),"hidden apple clue blinks off");
+    _hidden.room_age=62;
+    ln_check(!ln1_hidden_apple_flash(_hidden,_hidden_item),"hidden apple clue ends after entry");
+    _hidden.player.x=_hidden_item.x_min;_hidden.player.y=_hidden_item.y_min;_hidden.player.facing=1;
+    ln1_item_interact(_hidden);
+    ln_check(_hidden.inventory[8]==2,"Palace hidden apple stacks through manual pickup");
+    _hidden.room_age=0;
+    ln_check(!ln1_hidden_apple_flash(_hidden,_hidden_item),"collected hidden apple never flashes again");
     ln1_pickup_assist_checks();
     ln1_jump_assist_checks();
     ln1_reverse_roll_checks();

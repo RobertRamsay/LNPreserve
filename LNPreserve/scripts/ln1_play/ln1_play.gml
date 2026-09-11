@@ -316,6 +316,15 @@ function ln1_play_draw(_game, _paused) {
     draw_clear(c_black); draw_sprite(_game.scene, 0, 0, 0);
     for (var _i = 0; _i < array_length(_game.world.items); _i++) {
         var _item = _game.world.items[_i];
+        if (ln1_hidden_apple_flash(_game,_item)) {
+            // Paired horizontal pixels match the bitmap's multicolour grid.
+            // Actor coordinates include the sprite's 24px/50px screen offset.
+            var _hint_x=2*floor(((_item.x_min+_item.x_max)/2)/2);
+            var _hint_y=(_item.y_min+_item.y_max)/2-29;
+            draw_set_colour(c_white);
+            draw_rectangle(_hint_x-2,_hint_y-3,_hint_x-1,_hint_y+3,false);
+            draw_rectangle(_hint_x-6,_hint_y,_hint_x+3,_hint_y,false);
+        }
         if (_item.sprite != "" && _item.room == _game.room_id && ln1_item_available(_game,_item)) {
             var _flash = _game.room_age < 31 * _item.flashes;
             draw_sprite(asset_get_index(_flash ? _item.flash_sprite : _item.sprite),

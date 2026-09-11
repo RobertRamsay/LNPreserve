@@ -1,3 +1,12 @@
+// Palace room 11 has a source pickup rectangle but no visible item sprite.
+function ln1_hidden_apple(_g,_item) {
+    return _g.level==3 && _item.room==11 && _item.id==8;
+}
+function ln1_hidden_apple_flash(_g,_item) {
+    return ln1_hidden_apple(_g,_item) && _item.room==_g.room_id &&
+        ln1_item_available(_g,_item) && _g.room_age<62 && (_g.room_age mod 16)<8;
+}
+
 // Apples are counted in inventory; each world location can be harvested once.
 function ln1_apple_key(_g,_item) {
     return string(_g.level)+":"+string(_item.room)+":"+string(_item.x_min)+":"+string(_item.y_min);
@@ -56,7 +65,7 @@ function ln1_pickup_assist_start(_g) {
     for (var _i=0;_i<array_length(_g.world.items);_i++) {
         var _item=_g.world.items[_i];
         // Scripted mechanisms/scroll progression retain their original controls.
-        if (_item.room!=_g.room_id || _item.sprite=="" || !ln1_item_available(_g,_item) ||
+        if (_item.room!=_g.room_id || (_item.sprite=="" && !ln1_hidden_apple(_g,_item)) || !ln1_item_available(_g,_item) ||
             _item.id>=16 || _item.id==1 || _item.id==9 || _item.id==10) continue;
         if (_g.inventory[2]==0 && _item.id!=2 && _item.id<10) continue;
         for (var _side=0;_side<2;_side++) {
