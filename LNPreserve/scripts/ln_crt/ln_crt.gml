@@ -1,5 +1,6 @@
 /// Presentation only: source surfaces and gameplay pixels remain untouched.
 function ln_crt_surface(_surface,_x,_y,_scale,_pixel_scale=1,_region=undefined) {
+    ln_crt_tuning_init();
     var _enabled=variable_global_exists("ln_crt_enabled") && global.ln_crt_enabled && shader_is_compiled(sh_ln_crt);
     var _filter=gpu_get_texfilter();
     if (_enabled) {
@@ -15,6 +16,7 @@ function ln_crt_surface(_surface,_x,_y,_scale,_pixel_scale=1,_region=undefined) 
         shader_set_uniform_f(shader_get_uniform(sh_ln_crt,"u_blur"),global.ln_crt_blur);
         shader_set_uniform_f(shader_get_uniform(sh_ln_crt,"u_honeycomb"),global.ln_crt_honeycomb);
         shader_set_uniform_f(shader_get_uniform(sh_ln_crt,"u_scanlines"),global.ln_crt_scanlines);
+        shader_set_uniform_f(shader_get_uniform(sh_ln_crt,"u_scan_shape"),global.ln_scan_width,global.ln_scan_align,global.ln_scan_soft);
         gpu_set_texfilter(true);
     }
     draw_surface_ext(_surface,_x,_y,_scale,_scale,0,c_white,1);
@@ -54,6 +56,23 @@ function ln_crt_toggle() {
 }
 
 function ln_crt_slider_input(_mx,_my,_pressed,_held) {
+    ln_crt_tuning_init();
+    if (global.ln_crt_enabled && _pressed && _my>=716 && _my<745) {
+        for (var _preset=0;_preset<4;_preset++) if (_mx>=172+148*_preset && _mx<312+148*_preset) {
+            global.ln_scan_preset=_preset;global.ln_scan_align=0.5;
+            global.ln_scan_width=[3,3,5,5][_preset];global.ln_scan_soft=_preset==0?0:1;
+            global.ln_crt_scanlines=[0.75,0.85,0.85,1.0][_preset];global.ln_crt_drag=-1;return;
+        }
+    }
+    if (global.ln_crt_enabled && _pressed && _mx>=800 && _mx<=1100) {
+        if (abs(_my-732)<=10) global.ln_crt_drag=3;
+        if (abs(_my-776)<=10) global.ln_crt_drag=4;
+    }
+    if (global.ln_crt_enabled && _held && global.ln_crt_drag>=3) {
+        var _t=clamp((_mx-810)/280,0,1);global.ln_scan_soft=1;global.ln_scan_preset=-1;
+        if (global.ln_crt_drag==3) global.ln_scan_width=1+6*_t;else global.ln_scan_align=_t;
+        return;
+    }
     if (!global.ln_crt_enabled || !_held) {global.ln_crt_drag=-1;return;}
     if (_pressed && _mx>=1134 && _mx<=1266) {
         for (var _i=0;_i<3;_i++) {
@@ -71,6 +90,7 @@ function ln_crt_slider_input(_mx,_my,_pressed,_held) {
 
 function ln_crt_sliders_draw() {
     if (!global.ln_crt_enabled) return;
+    ln_crt_tuning_draw();
     draw_set_colour(make_colour_rgb(24,28,34));draw_rectangle(1128,650,1272,792,false);
     draw_set_colour(make_colour_rgb(150,190,215));draw_text(1136,656,"CRT SETTINGS");
     var _labels=["Pixel blur","Honeycomb","Scanlines"];
@@ -219,4 +239,30 @@ function ln_crt_checks() {
     global.ln_crt_enabled=false;
     if (surface_exists(_preview.stage_surface)) surface_free(_preview.stage_surface);
     show_debug_message("LN_CAPTURE_DIRECTORY:"+game_save_id);
+}
+
+// Temporary comparison controls live below the game picture, outside the shader.
+function ln_crt_tuning_init() {
+    if (variable_global_exists("ln_scan_width")) return;
+    global.ln_scan_width=5;global.ln_scan_align=0.5;global.ln_scan_soft=1;global.ln_scan_preset=-1;
+}
+function ln_crt_tuning_draw() {
+    ln_crt_tuning_init();
+    draw_set_colour(make_colour_rgb(24,28,34));draw_rectangle(160,690,1120,794,false);
+    draw_set_colour(make_colour_rgb(150,190,215));draw_text(172,693,"SCANLINE SAMPLES");
+    var _names=["Previous","Pixel edge","Soft 5","Deep 5"];
+    for(var _i=0;_i<4;_i++) {
+        var _x=172+148*_i;
+        draw_set_colour(global.ln_scan_preset==_i?make_colour_rgb(44,82,110):make_colour_rgb(42,48,57));
+        draw_rectangle(_x,716,_x+140,744,false);draw_set_colour(c_white);draw_text(_x+8,721,_names[_i]);
+    }
+    draw_set_colour(c_white);draw_text_transformed(172,766,"Try Soft 5. Adjust strength with the Scanlines slider.",0.85,0.85,0);
+    for(var _i=0;_i<2;_i++) {
+        var _y=732+44*_i,_value=_i==0?(global.ln_scan_width-1)/6:global.ln_scan_align;
+        var _label=_i==0?"Width "+string_format(global.ln_scan_width,1,1)+" rows":"Alignment "+string(round(global.ln_scan_align*100))+"%";
+        draw_set_colour(c_white);draw_text(810,_y-26,_label);
+        draw_set_colour(make_colour_rgb(65,73,84));draw_rectangle(810,_y-2,1090,_y+2,false);
+        draw_set_colour(make_colour_rgb(180,215,236));draw_circle(810+280*_value,_y,5,false);
+    }
+    draw_set_colour(c_white);
 }

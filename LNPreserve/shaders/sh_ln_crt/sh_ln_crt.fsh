@@ -8,6 +8,7 @@ uniform float u_time;
 uniform float u_blur;
 uniform float u_honeycomb;
 uniform float u_scanlines;
+uniform vec3 u_scan_shape; // width, edge offset, soft profile
 const float PI=3.14159265359;
 void main() {
     if (v_vTexcoord.x<u_region.x || v_vTexcoord.y<u_region.y ||
@@ -42,14 +43,19 @@ void main() {
         col=mix(blurred/total,col,0.08*(1.0-u_blur));
     }
     col*=vec3(0.985,1.0,1.035);
-    // One scanline per two native rows, with a full-strength centre pixel
+    // One scanline per native row, with a full-strength centre pixel
     // and one 40%-strength pixel on either side in the rendered picture.
-    float scanPeriod=2.0*u_pixel_scale*u_scale;
+    float scanPeriod=u_pixel_scale*u_scale;
     float scanRow=floor((uv.y-u_region.y)*u_size.y*u_scale);
-    float scanCentre=floor(0.5*u_pixel_scale*u_scale);
+    float scanCentre=mix(floor(0.5*u_pixel_scale*u_scale),u_pixel_scale*u_scale-1.0,u_scan_shape.z);
+    scanCentre+=(u_scan_shape.y-0.5)*u_pixel_scale*u_scale;
     float scanDistance=abs(mod(scanRow-scanCentre+0.5*scanPeriod,scanPeriod)-0.5*scanPeriod);
-    float scanWeight=scanDistance<0.5?1.0:(scanDistance<1.5?0.4:0.0);
-    col*=1.0-u_scanlines*0.4*scanWeight;
+    float oldWeight=scanDistance<0.5?1.0:(scanDistance<1.5?0.4:0.0);
+    float radius=max(0.5,u_scan_shape.x*0.5);
+    float sigma=max(0.25,(u_scan_shape.x-1.0)*0.30);
+    float softWeight=exp(-0.5*scanDistance*scanDistance/(sigma*sigma));
+    softWeight*=1.0-smoothstep(max(0.0,radius-0.5),radius,scanDistance);
+    col*=1.0-u_scanlines*0.4*mix(oldWeight,softWeight,u_scan_shape.z);
     // Staggered RGB phosphor dots on a hexagonal (honeycomb) lattice.
     vec2 pixel=(v_vTexcoord-u_region.xy)*u_size*u_scale;
     float row=floor(pixel.y/2.598);
