@@ -683,14 +683,15 @@ function ln2_pickup_assist_input(_g,_joy) {
         ln2_blocking_sequence(_g) || _g.respawn_wait>0 || is_struct(_g.keypad) || _g.victory!=0 ||
         _g.fall_remaining>=0 || _g.hole_steps>0 || is_struct(_g.route_descent)) return _joy;
     if (_e.active>=128 && _e.health>0 && point_distance(_p.x,_p.y,_e.x,_e.y)<=20) return _joy;
-    var _best=325,_target=undefined,_x=0,_y=0,_target_use=false;
+    var _reach=18*LN_PICKUP_ASSIST_SCALE;
+    var _best=sqr(_reach)+1,_target=undefined,_x=0,_y=0,_target_use=false;
     for(var _i=0;_i<array_length(_g.world.items);_i++) {
         var _item=_g.world.items[_i];
         var _use=ln2_item_use_ready(_g,_item);
         if (_item.room!=_g.room_id || (_item.id>=17 && !_use) || _item.action>2 || _g.inventory[_item.id]!=0) continue;
         var _tx=clamp(_p.x,_item.x_min,_item.x_max-1),_ty=clamp(_p.y,_item.y_min,_item.y_max-1);
         var _distance=sqr(_p.x-_tx)+sqr(_p.y-_ty);
-        if (_distance>324) continue; // 18-pixel assist range.
+        if (_distance>sqr(_reach)) continue; // Scale distance, then square for comparison.
         if ((_use && !_target_use) || (_use==_target_use && _distance<_best)) {
             _best=_distance;_target=_item;_x=_tx;_y=_ty;_target_use=_use;
         }

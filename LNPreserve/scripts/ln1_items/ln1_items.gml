@@ -1,3 +1,5 @@
+#macro LN_PICKUP_ASSIST_SCALE 0.2
+
 // Palace room 11 has a source pickup rectangle but no visible item sprite.
 function ln1_hidden_apple(_g,_item) {
     return _g.level==3 && _item.room==11 && _item.id==8;
@@ -75,7 +77,7 @@ function ln1_pickup_assist_start(_g) {
             for (var _x=max(0,_item.x_min+_offset);_x<min(256,_item.x_max+_offset);_x++)
             for (var _y=_item.y_min;_y<_item.y_max;_y++) {
                 var _dx=_x-_p.x,_dy=_y-_p.y,_dist=_dx*_dx+_dy*_dy;
-                if (abs(_dx)>20 || abs(_dy)>16 || _dist>=_distance) continue;
+                if (abs(_dx)>20*LN_PICKUP_ASSIST_SCALE || abs(_dy)>16*LN_PICKUP_ASSIST_SCALE || _dist>=_distance) continue;
                 var _probe={x:_p.x,y:_p.y,boundary_mode:128,boundary_crossings:0},_clear=true;
                 var _steps=max(1,ceil(max(abs(_dx),abs(_dy))));
                 for (var _step=1;_step<=_steps;_step++) {
@@ -123,7 +125,7 @@ function ln1_pickup_assist_checks() {
         ln1_play_enter(_test,_item.room);
         _test.inventory[2]=_id==2?0:1;_test.inventory[_id]=0;
         var _n=_test.player;
-        _n.x=clamp((_side?_item.x_max-1+36:_item.x_min)+(_side?19:-19),0,255);
+        _n.x=clamp((_side?_item.x_max-1+36:_item.x_min)+(_side?3:-3),0,255);
         _n.y=floor((_item.y_min+_item.y_max-1)/2);
         _n.action=0;_n.input_lock=0;_n.fire_previous=0;_n.weapon=2;_n.selected_weapon=2;
         ln1_player_update(_n,_test.data,16,(_n.tick+1)&255);
@@ -138,7 +140,7 @@ function ln1_pickup_assist_checks() {
     }
 
     var _g=new LN1Play();_g.room_id=5;_g.data.boundaries=[];
-    var _p=_g.player;_p.x=185;_p.y=60;_p.action=0;_p.input_lock=0;_p.weapon=2;_p.selected_weapon=2;
+    var _p=_g.player;_p.x=193;_p.y=60;_p.action=0;_p.input_lock=0;_p.weapon=2;_p.selected_weapon=2;
     ln_check(ln1_pickup_assist_start(_g),"nearby sack starts assisted pickup");
     ln_check(_g.inventory[2]==0,"assisted pickup waits for the reaching pose");
     repeat(20) {
@@ -149,7 +151,11 @@ function ln1_pickup_assist_checks() {
         "assisted pickup collects sack and restores weapon/input");
     _g.inventory[2]=0;_p.action=0;_p.x=20;_p.y=60;
     ln_check(!ln1_pickup_assist_start(_g),"distant pickup is not assisted");
-    _p.x=202;_p.y=50;_g.data.boundaries=[[0,53,255,53,0]];
+    _p.x=191;_p.y=60;
+    ln_check(!ln1_pickup_assist_start(_g),"five pixels horizontally exceeds reduced pickup reach");
+    _p.x=196;_p.y=50;
+    ln_check(!ln1_pickup_assist_start(_g),"four pixels vertically exceeds reduced pickup reach");
+    _p.x=202;_p.y=51;_g.data.boundaries=[[0,53,255,53,0]];
     ln_check(!ln1_pickup_assist_start(_g),"pickup assistance does not cross a blocking boundary");
     _g=new LN1Play(2);ln1_test_wilderness_kit(_g);
     ln_check(_g.inventory[2]==1 && _g.inventory[11]==1 && _g.inventory[13]==1 &&

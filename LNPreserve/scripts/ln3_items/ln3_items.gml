@@ -74,7 +74,8 @@ function ln3_item_assist_input(_g,_joy) {
     if (is_struct(_g.pickup_assist)) return 0;
     if (!_edge || !_free || _s.player_action_flags>=128) return _joy;
     if ((_s.enabled&96)!=0 && _s.enemy_dead==0 && point_distance(_s.player_x,_s.player_y,_s.enemy_x,_s.enemy_y)<=20) return _joy;
-    var _best=undefined,_distance=18*18+1;
+    var _reach=18*LN_PICKUP_ASSIST_SCALE;
+    var _best=undefined,_distance=sqr(_reach)+1;
     for (var _i=0;_i<array_length(_g.item_records);_i++) {
         var _r=_g.item_records[_i],_id=_r[0];
         if (_id==25 || _s.inventory[_id]!=0 || (_g.level==1 && _id==6 && _s.special_scene_phase<2) ||
@@ -82,7 +83,7 @@ function ln3_item_assist_input(_g,_joy) {
             (_g.level==1 && _id==3 && _s.room_id==2 && _s.ammo_pile>=128)) continue;
         var _x=clamp(_s.player_x,_r[1],_r[2]),_y=clamp(_s.player_y,_r[3],_r[4]);
         var _dx=_x-_s.player_x,_dy=_y-_s.player_y,_dist=_dx*_dx+_dy*_dy;
-        if (_dist>=_distance) continue;
+        if (_dist>sqr(_reach) || _dist>=_distance) continue;
         // Probe the complete short path with source collision and hazard handling.
         var _probe=json_parse(json_stringify(_s)),_clear=true,_steps=max(1,ceil(max(abs(_dx),abs(_dy))));
         for (var _step=1;_step<=_steps;_step++) {
@@ -144,19 +145,19 @@ function ln3_consumable_checks() {
     _g=new LN3Play();_s=_g.state;_s.enabled&=159;_g.bounds=[];
     _s.player_x=100;_s.player_y=100;_s.parts[1].x=100;_s.parts[1].y=79;_s.parts[2].x=100;_s.parts[2].y=100;
     _s.player_action=0;_s.player_action_flags=0;_s.stun=0;_s.input_block=0;_s.climb_flags=0;
-    _s.inventory[21]=0;_g.item_records=[[21,110,115,100,104]];
+    _s.inventory[21]=0;_g.item_records=[[21,103,108,100,104]];
     ln3_item_assist_input(_g,0);ln3_item_assist_input(_g,16);
-    ln_check(is_struct(_g.pickup_assist) && _s.player_x==110 && _s.inventory[21]==0,"nearby fire starts crouch with at most 18px movement");
+    ln_check(is_struct(_g.pickup_assist) && _s.player_x==103 && _s.inventory[21]==0,"nearby fire starts crouch with at most 3.6px movement");
     repeat(80) if (_s.inventory[21]==0) ln3_play_tick(_g,0);
     ln_check(_s.inventory[21]==1 && !is_struct(_g.pickup_assist),"assisted crouch actually picks up potion");
-    _s.inventory[21]=0;_s.player_x=80;_s.parts[2].x=80;_s.player_action=0;_s.player_action_flags=0;
+    _s.inventory[21]=0;_s.player_x=99;_s.parts[2].x=99;_s.player_action=0;_s.player_action_flags=0;
     ln3_item_assist_input(_g,0);ln3_item_assist_input(_g,16);
-    ln_check(!is_struct(_g.pickup_assist),"distant object receives no pickup assist");
+    ln_check(!is_struct(_g.pickup_assist),"four pixels away exceeds reduced pickup reach");
     _s.player_x=100;_s.parts[1].x=100;_s.parts[2].x=100;
     _s.enabled|=96;_s.enemy_dead=0;_s.enemy_x=105;_s.enemy_y=100;
     ln3_item_assist_input(_g,0);ln3_item_assist_input(_g,16);
     ln_check(!is_struct(_g.pickup_assist),"nearby enemy keeps fire as combat");
-    _s.enabled&=159;_g.bounds=[[104,95,106,105,4]];
+    _s.enabled&=159;_g.bounds=[[101,95,102,105,4]];
     ln3_item_assist_input(_g,0);ln3_item_assist_input(_g,16);
     ln_check(!is_struct(_g.pickup_assist) && _s.player_x==100,"pickup cannot cross wall");
     show_debug_message("LN3_CONSUMABLE_PASS");

@@ -405,6 +405,9 @@ function ln2_item_use_checks() {
     for(_i=0;_i<array_length(_g.world.items);_i++) if (_g.world.items[_i].id==20) {_target=_g.world.items[_i];break;}
     _g.inventory[20]=0;_g.inventory[12]=255;_g.selected_item=12;_g.enemy.active=0;
     _p.x=_target.x_min-5;_p.y=_target.y_min;_p.action=0;_p.input_lock=0;_p.vehicle=0;
+    ln2_pickup_assist_input(_g,0);ln2_pickup_assist_input(_g,16);
+    ln_check(_p.action==0,"five pixels away no longer assists tool use");
+    _p.x=_target.x_min-3;
     ln2_refresh_scene(_g);ln_check(_g.scene_frame==0,"grate closed before use");
     var _surface=surface_create(240,144);
     surface_set_target(_surface);draw_sprite(_g.scene,0,0,0);surface_reset_target();
@@ -539,8 +542,10 @@ function ln2_newspaper_bin_checks() {
     _range_game.player.x=158;_range_game.player.y=126;_range_game.player.vehicle=0;_range_game.player.action=0;_range_game.player.input_lock=0;
     ln2_pickup_assist_input(_range_game,0);ln2_pickup_assist_input(_range_game,16);
     ln_check(_range_game.player.action==0 && _range_game.player.y==126,"19 pixels away no longer snaps to pickup");
-    _range_game.player.y=125;ln2_pickup_assist_input(_range_game,0);ln2_pickup_assist_input(_range_game,16);
-    ln_check(_range_game.player.action>=256 && _range_game.player.y==107,"18 pixels away permits pickup assist");
+    _range_game.player.y=111;ln2_pickup_assist_input(_range_game,0);ln2_pickup_assist_input(_range_game,16);
+    ln_check(_range_game.player.action==0 && _range_game.player.y==111,"four pixels away exceeds reduced assist reach");
+    _range_game.player.y=110;ln2_pickup_assist_input(_range_game,0);ln2_pickup_assist_input(_range_game,16);
+    ln_check(_range_game.player.action>=256 && _range_game.player.y==107,"three pixels away permits reduced pickup assist");
     var _g=new LN2Play(2);_g.inventory[9]=0;_g.inventory[10]=0;ln2_play_enter(_g,6);
     var _s=surface_create(240,144);
     surface_set_target(_s);draw_clear(c_black);draw_sprite(_g.scene,0,0,0);ln2_newspaper_draw(_g);surface_reset_target();
