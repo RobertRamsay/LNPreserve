@@ -34,6 +34,7 @@ function ln2_enemy_checks() {
 }
 
 function ln2_revival_context_checks() {
+    ln2_reverse_roll_checks();
     for(var _mode_level=1;_mode_level<=7;_mode_level++) {
         var _mode_game=new LN2Play(_mode_level);
         ln_check(_mode_game.player.control_rotation==1,"every LN2 level starts with normal movement");

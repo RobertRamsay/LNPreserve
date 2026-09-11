@@ -77,6 +77,16 @@ function ln2_player_input(_s,_d,_joy) {
     }
     var _new_fire=_s.fire_previous!=16;_s.fire_previous=16;
     if (_new_fire) {
+        var _back_relative=(_heading-_s.facing)&7;
+        if (_heading<128 && _s.stopped==0 && _back_relative>=3 && _back_relative<=5 &&
+            variable_struct_exists(_d,"reverse_roll_entries") &&
+            variable_struct_exists(_s,"reverse_roll_enabled") && _s.reverse_roll_enabled) {
+            _s.heading=_heading;_s.stopped=255;
+            ln2_player_begin(_s,_d,0);
+            _s.action=_d.reverse_roll_entries[((_s.facing+2)&4)>>2];
+            _s.flags=variable_struct_get(_d.actions,string(_s.action)).flags;
+            return;
+        }
         if (_s.stopped!=0) {
             _s.frame=16+(((_s.facing+2)&4)>>2);_s.redraw=255;return;
         }
@@ -222,4 +232,61 @@ function ln2_toilet_backstop(_s,_d,_nx,_ny) {
         if (_t>=0 && _t<=1 && _u>=0 && _u<=1) return true;
     }
     return false;
+}
+
+/// Separate reverse tracks preserve the original forward roll and reference data.
+function ln2_reverse_roll_prepare(_d) {
+    _d.reverse_roll_entries=[];
+    for(var _side=0;_side<2;_side++) {
+        var _records=[],_address=_d.action_entries[_side],_duration=7;
+        while (_address>=256) {
+            var _record=variable_struct_get(_d.actions,string(_address));
+            if (_record.duration>=0) _duration=_record.duration;
+            array_push(_records,{frame:_record.frame,duration:_duration});_address=_record.next;
+        }
+        // The last record is the standing release, not a somersault pose.
+        var _count=array_length(_records)-1,_base=70000+_side*32;
+        array_push(_d.reverse_roll_entries,_base);
+        for(var _i=0;_i<=_count;_i++) {
+            var _release=_i==_count,_pose=_records[_release?_count:_count-1-_i];
+            variable_struct_set(_d.actions,string(_base+_i),{
+                frame:_pose.frame,duration:_pose.duration,flags:_release?56:(_i==0?26:28),
+                dx:0,dy:0,state:-1,next:_release?0:_base+_i+1});
+        }
+    }
+}
+
+function ln2_reverse_roll_checks() {
+    for(var _level=1;_level<=7;_level++) for(var _facing=1;_facing<8;_facing+=2) {
+        var _g=new LN2Play(_level),_p=_g.player,_d=_g.data;
+        _d.boundaries=[];_p.room_id=1;_p.vehicle=0;_p.enemy_active=0;
+        _p.x=120;_p.y=110;_p.depth_y=110;_p.fraction_x=0;_p.fraction_y=0;
+        _p.facing=_facing;_p.action=0;_p.input_lock=0;_p.stopped=255;_p.fire_previous=0;
+        _p.weapon=(_facing==1?0:2);_p.selected_weapon=_p.weapon;
+        var _back=(_facing+4)&7,_joy=0;
+        for(var _j=1;_j<16;_j++) if (_d.directions[_j]==_back) {_joy=_j;break;}
+        ln2_player_update(_p,_d,_joy,(_p.tick+1)&255);
+        var _x=_p.x,_y=_p.y,_side=((_facing+2)&4)>>2;
+        ln2_player_update(_p,_d,_joy|16,(_p.tick+1)&255);
+        ln_check(_p.action>=70000 && _p.x==_x && _p.y==_y,"backward walking plus fire starts stationary reversed landing pose");
+        var _frames=[_p.display_frame],_previous=_p.display_frame;
+        repeat(80) {
+            if (_p.action<256) break;
+            ln2_player_update(_p,_d,_joy|16,(_p.tick+1)&255);
+            if (_p.display_frame!=_previous) {array_push(_frames,_p.display_frame);_previous=_p.display_frame;}
+        }
+        var _expected=_side==0?[63,60,54,53,52,51,59,16]:[64,62,58,57,56,55,61,17];
+        ln_check(json_stringify(_frames)==json_stringify(_expected),"LN2 roll plays original poses in reverse then stands");
+        ln_check(_p.facing==_facing && _p.weapon==_p.selected_weapon && _p.action==0 && _p.stopped==255,"reverse roll preserves facing and weapon and releases control");
+        var _probe=json_parse(json_stringify(_p));_probe.x=_x;_probe.y=_y;_probe.heading=_back;
+        _probe.fraction_x=0;_probe.fraction_y=0;ln2_player_move(_probe,_d,8);
+        ln_check(sign(_p.x-_x)==sign(_probe.x-_x) && sign(_p.y-_y)==sign(_probe.y-_y),"LN2 reverse roll moves backwards");
+        _p.x=120;_p.y=110;_p.action=0;_p.stopped=0;_p.fire_previous=0;
+        var _line=sign(_probe.y-_y)>0?112:108;_d.boundaries=[[0,_line,255,_line,0,0]];
+        ln2_player_update(_p,_d,_joy|16,(_p.tick+1)&255);
+        var _save=ln_save_capture(_g),_loaded=ln_save_restore(json_parse(json_stringify(_save)));
+        repeat(80) {if (_loaded.player.action<256) break;ln2_player_update(_loaded.player,_loaded.data,0,(_loaded.player.tick+1)&255);}
+        ln_check(_loaded.player.action==0 && (_line>110?_loaded.player.y<_line:_loaded.player.y>=_line),"saved reverse roll completes and respects walls");
+    }
+    show_debug_message("LN2_REVERSE_ROLL_PASS: seven levels, four facings, reverse frames, stationary first pose, weapons, walls and saves");
 }

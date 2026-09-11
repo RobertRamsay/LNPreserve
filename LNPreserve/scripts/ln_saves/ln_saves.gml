@@ -86,6 +86,8 @@ function ln_save_restore(_save) {
     if (_save.game==2) {
         // Keep the normal movement mode even for saves made with rotated input.
         _g.player.control_rotation=1;
+        _g.player.reverse_roll_enabled=true;
+        ln2_reverse_roll_prepare(_g.data);
         ln2_sewer_network_prepare(_g);
         // Saves contain their original action graph. Add newly recovered roots
         // without replacing saved animation records or player progression.

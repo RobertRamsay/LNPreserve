@@ -6,10 +6,12 @@ function LN2Play(_level=1) constructor {
     var _folder="play/ln2/level"+string(level)+"/",_buffer=buffer_load(_folder+"gameplay.json");
     data=json_parse(buffer_read(_buffer,buffer_text));buffer_delete(_buffer);
     _buffer=buffer_load(_folder+"world.json");world=json_parse(buffer_read(_buffer,buffer_text));buffer_delete(_buffer);
+    ln2_reverse_roll_prepare(data);
     title=world.title;player=data.initial;player.display_frame=player.frame;player.mirror=false;player.previous_combat=0;
     // Original mode 2 is stored as 1: no 45-degree joystick rotation.
     // Later-level captures can contain 0; do not inherit their test orientation.
     player.control_rotation=1;
+    player.reverse_roll_enabled=true; // Native enhancement; absent from original-state replays.
     inventory=world.initial_inventory;player_health=44;lives_left=world.initial_lives;
     room_id=-1;scene_record=undefined;enemy=undefined;last_entry=world.initial_entry;room_age=0;
     room_enemies={};opened_passages={};level_states=array_create(7,undefined);
