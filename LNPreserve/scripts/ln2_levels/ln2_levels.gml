@@ -1249,13 +1249,14 @@ function ln_frontend_draw(_g) {
     draw_clear(c_black);draw_set_colour(c_white);
     if (_g.game_number==1) ln1_frontend_bitmap(_g);
     else {
-        var _font=ln3_data_read("play/ln3/ending.json"),_text=string_upper(_g.title);
-        var _x=160+(240-string_length(_text)*8)*1.5,_y=84+(144-8)*1.5;
-        for(var _i=1;_i<=string_length(_text);_i++) {
-            var _letter=string_char_at(_text,_i);
-            if (variable_struct_exists(_font.characters,_letter))
-                draw_sprite_ext(asset_get_index(_font.font_sprite),variable_struct_get(_font.characters,_letter),_x+(_i-1)*24,_y,3,3,0,c_white,1);
+        // Named Included Files are replaceable artwork, loaded once per run.
+        static _bitmaps=array_create(5,-1);
+        var _index=clamp(_g.level-1,0,4);
+        if (!sprite_exists(_bitmaps[_index])) {
+            var _names=["EARTH","WIND","WATER","FIRE","VOID"];
+            _bitmaps[_index]=sprite_add("play/ln3/frontends/"+_names[_index]+".png",1,false,false,0,0);
         }
+        if (sprite_exists(_bitmaps[_index])) draw_sprite_ext(_bitmaps[_index],0,160,84,3,3,0,c_white,1);
     }
     draw_text(160,36,"LAST NINJA "+string(_g.game_number)+" — "+string_upper(_g.title));
     draw_text(1000,36,"Scene 0");draw_text(160,700,"Press # or Xbox A to begin");

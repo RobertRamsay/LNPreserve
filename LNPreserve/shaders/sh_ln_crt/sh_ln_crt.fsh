@@ -42,7 +42,14 @@ void main() {
         col=mix(blurred/total,col,0.08*(1.0-u_blur));
     }
     col*=vec3(0.985,1.0,1.035);
-    col*=1.0-u_scanlines*0.4*(0.5-0.5*cos(2.0*PI*(uv.y-u_region.y)*u_size.y/u_pixel_scale));
+    // One scanline per two native rows, with a full-strength centre pixel
+    // and one 40%-strength pixel on either side in the rendered picture.
+    float scanPeriod=2.0*u_pixel_scale*u_scale;
+    float scanRow=floor((uv.y-u_region.y)*u_size.y*u_scale);
+    float scanCentre=floor(0.5*u_pixel_scale*u_scale);
+    float scanDistance=abs(mod(scanRow-scanCentre+0.5*scanPeriod,scanPeriod)-0.5*scanPeriod);
+    float scanWeight=scanDistance<0.5?1.0:(scanDistance<1.5?0.4:0.0);
+    col*=1.0-u_scanlines*0.4*scanWeight;
     // Staggered RGB phosphor dots on a hexagonal (honeycomb) lattice.
     vec2 pixel=(v_vTexcoord-u_region.xy)*u_size*u_scale;
     float row=floor(pixel.y/2.598);
