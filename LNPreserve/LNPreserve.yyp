@@ -2188,8 +2188,6 @@
   },
   "name":"LNPreserve",
   "resources":[
-    {"id":{"name":"spr_ln2_molotov_states","path":"sprites/spr_ln2_molotov_states/spr_ln2_molotov_states.yy"}},
-
     {"id":{"name":"obj_ln_preserve","path":"objects/obj_ln_preserve/obj_ln_preserve.yy",},},
     {"id":{"name":"Room1","path":"rooms/Room1/Room1.yy",},},
     {"id":{"name":"ln_checks","path":"scripts/ln_checks/ln_checks.yy",},},
@@ -4085,6 +4083,7 @@
     {"id":{"name":"spr_ln2_loader_level7_object_002","path":"sprites/spr_ln2_loader_level7_object_002/spr_ln2_loader_level7_object_002.yy",},},
     {"id":{"name":"spr_ln2_loader_level7_object_003","path":"sprites/spr_ln2_loader_level7_object_003/spr_ln2_loader_level7_object_003.yy",},},
     {"id":{"name":"spr_ln2_message_font","path":"sprites/spr_ln2_message_font/spr_ln2_message_font.yy",},},
+    {"id":{"name":"spr_ln2_molotov_states","path":"sprites/spr_ln2_molotov_states/spr_ln2_molotov_states.yy",},},
     {"id":{"name":"spr_ln2_orb_icon","path":"sprites/spr_ln2_orb_icon/spr_ln2_orb_icon.yy",},},
     {"id":{"name":"spr_ln2_park_boats","path":"sprites/spr_ln2_park_boats/spr_ln2_park_boats.yy",},},
     {"id":{"name":"spr_ln2_park_switch_pressed","path":"sprites/spr_ln2_park_switch_pressed/spr_ln2_park_switch_pressed.yy",},},
