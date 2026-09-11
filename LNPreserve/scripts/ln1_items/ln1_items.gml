@@ -27,7 +27,7 @@ function ln1_item_interact(_g, _only_id=-1) {
         if (_item.room != _g.room_id || !ln1_item_available(_g,_item)) continue;
         var _x = _p.x - (_p.facing >= 4 ? 36 : 0);
         if (_x < _item.x_min || _x >= _item.x_max || _p.y < _item.y_min || _p.y >= _item.y_max) continue;
-        if (_g.inventory[2] == 0 && _item.id != 2 && _item.id < 10) return;
+        if (_g.inventory[2] == 0 && _item.id != 2 && _item.id < 10) {ln1_find_sack(_g);return;}
         // The original $5940 treats these locations as mechanisms, not pickups.
         var _selected = is_struct(_g.controls) ? _g.controls.item : 10;
         if (_item.id == 1 && _selected != 6) {
@@ -69,7 +69,6 @@ function ln1_pickup_assist_start(_g) {
         // Scripted mechanisms/scroll progression retain their original controls.
         if (_item.room!=_g.room_id || (_item.sprite=="" && !ln1_hidden_apple(_g,_item)) || !ln1_item_available(_g,_item) ||
             _item.id>=16 || _item.id==1 || _item.id==9 || _item.id==10) continue;
-        if (_g.inventory[2]==0 && _item.id!=2 && _item.id<10) continue;
         for (var _side=0;_side<2;_side++) {
             // Find the nearest reachable point, including sloping boundary edges.
             // Testing only the centre or clamped point can miss a clear approach.
@@ -90,6 +89,7 @@ function ln1_pickup_assist_start(_g) {
         }
     }
     if (!is_struct(_best)) return false;
+    if (_g.inventory[2]==0 && _best.id!=2 && _best.id<10) {ln1_find_sack(_g);return true;}
     _best.weapon=_p.weapon;_best.health=_g.player_health;_best.elapsed=0;_best.collected=false;
     _best.control_lock=is_struct(_g.controls)?_g.controls.weapon_locked:0;
     _g.pickup_assist=_best;
@@ -185,4 +185,38 @@ function ln1_apple_input(_g,_joy) {
         _g.notice_item=10;_g.notice_duration=0;_g.player_health=32;_g.lives_left++;
     }
     return _ready && (_joy&15)==0 ? 0 : _joy;
+}
+
+function ln1_find_sack(_g) {
+    _g.notice_item=2;_g.notice_label=3;_g.notice_tick=_g.player.tick;_g.notice_duration=150;
+}
+
+// Compose FIND from the existing FOUND/USING bitmap glyphs, preserving their
+// exact paired pixels, shading and punctuation without introducing a new font.
+function ln1_find_label_draw(_x,_y,_scale) {
+    draw_set_colour(c_black);draw_rectangle(_x,_y,_x+64*_scale-1,_y+8*_scale-1,false);
+    draw_set_colour(c_white);
+    var _pieces=[[1,8,2,8],[1,12,8,16],[0,32,2,26],[1,36,8,30],[1,44,8,38],[1,56,2,56]];
+    for(var _i=0;_i<array_length(_pieces);_i++) {
+        var _piece=_pieces[_i];
+        draw_sprite_part_ext(spr_ln1_status_label,_piece[0],_piece[1],0,_piece[2],8,_x+_piece[3]*_scale,_y,_scale,_scale,c_white,1);
+    }
+}
+
+function ln1_find_sack_checks() {
+    var _g=new LN1Play();_g.data.boundaries=[];_g.room_id=1;
+    _g.world.items=[{id:8,room:1,x_min:100,x_max:108,y_min:100,y_max:108,sprite:"spr_ln1_pickup_8"}];
+    _g.inventory[2]=0;_g.inventory[8]=0;_g.player.x=100;_g.player.y=100;_g.player.facing=1;
+    ln1_item_interact(_g);
+    ln_check(_g.notice_label==3 && _g.notice_item==2 && _g.inventory[8]==0,"manual pickup explains missing sack without collecting");
+    _g.player.tick=(_g.notice_tick+149)&255;ln1_notice_update(_g);
+    ln_check(_g.notice_label==3,"find sack remains for three seconds");
+    _g.player.tick=(_g.notice_tick+150)&255;ln1_notice_update(_g);
+    ln_check(_g.notice_label==0 && _g.notice_item==-1,"find sack restores normal status after three seconds");
+    _g.player.x=97;_g.player.action=0;_g.player.input_lock=0;
+    ln_check(ln1_pickup_assist_start(_g) && _g.notice_label==3 && !is_struct(_g.pickup_assist) && _g.player.x==97,"nearby fire shows sack clue without moving or collecting");
+    var _saved=ln_save_restore(json_parse(json_stringify(ln_save_capture(_g))));
+    ln_check(_saved.notice_label==3 && _saved.notice_duration==150,"saved sack clue retains its timer");
+    _g.inventory[2]=1;
+    ln_check(ln1_pickup_assist_start(_g) && is_struct(_g.pickup_assist),"owning sack allows the same assisted pickup");
 }

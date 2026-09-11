@@ -392,10 +392,72 @@ function ln1_roll_landing_checks() {
 }
 
 /// Double-fire-only convenience for the recovered river/log/rock safe rectangles.
+// A perimeter landing is valid only when its existing destination is safe.
+function ln1_jump_exit_safe(_g,_x,_y) {
+    var _perimeter;
+    if (_y<9) _perimeter=max(0,_x-2)>>2;
+    else if (_y>=189) _perimeter=(max(0,247-_x)>>2)+106;
+    else if (_x>=247) _perimeter=(max(0,_y-9)>>2)+61;
+    else if (_x<2) _perimeter=(max(0,189-_y)>>2)+167;
+    else return false;
+    var _room=_g.world.rooms[_g.room_id-1],_exit=0;
+    while (_exit<4 && _perimeter>=_room.exit_thresholds[_exit]) _exit++;
+    if (_exit==4) _exit=0;
+    var _entry=_room.exits[_exit],_id=_entry>>2;
+    if (_id==0 || _id==_g.room_id || _id>array_length(_g.world.rooms)) return false;
+    var _dest=_g.world.rooms[_id-1],_kind=_dest.boundary_mode&31;
+    // Other scripted entrance hazards are not automatic jump destinations.
+    if (_dest.entrance_crossings[_entry&3]==0) return true;
+    if (_kind<16 || _kind>=20) return false;
+    if ((_dest.entrance_crossings[_entry&3]&1)==0) return true;
+    var _spawn=_g.world.entry_index[_entry],_sx=_g.world.entry_x[_spawn],_sy=_g.world.entry_y[_spawn];
+    var _safe=_g.world.safe_areas[_kind&3];
+    for(var _i=0;_i<array_length(_safe);_i++) {
+        var _r=_safe[_i];
+        if (_sx>=_r[0] && _sx<_r[1] && _sy>=_r[2] && _sy<_r[3]) return true;
+    }
+    return false;
+}
+
+function ln1_jump_active(_p) {
+    return (variable_struct_exists(_p,"jump_assist") && is_struct(_p.jump_assist)) ||
+        (_p.action>=65536 && _p.action<65600) || (_p.action>=65664 && _p.action<65728);
+}
+
+function ln1_jump_finish(_p) {
+    _p.jump_assist=undefined;_p.action=0;_p.action_state=0;_p.flags=0;_p.countdown=0;
+    _p.fraction_x=0;_p.fraction_y=0;_p.saved_heading=_p.facing;_p.heading=_p.facing;
+    _p.combat_state=_p.facing>>1;_p.stopped=255;_p.frame=((_p.facing+2)&4)*2;
+    _p.jump_tap_ticks=0;_p.jump_fire_down=true;_p.fire_previous=16;
+}
+
 function ln1_jump_assist_target(_g) {
     var _p=_g.player,_kind=_p.boundary_mode&31;
     if (_kind<16 || _kind>=20) return undefined;
-    var _areas=_g.world.safe_areas[_kind&3];
+    var _areas=array_create(0),_source_areas=_g.world.safe_areas[_kind&3];
+    for(var _i=0;_i<array_length(_source_areas);_i++) array_push(_areas,_source_areas[_i]);
+    var _platform_count=array_length(_areas);
+    // Sample both sides of the actual wet/dry boundary, four pixels inland.
+    // Path probing below rejects the water side, walls and banks behind us.
+    if (_p.boundary_crossings&1) for(var _bi=0;_bi<array_length(_g.data.boundaries);_bi++) {
+        var _b=_g.data.boundaries[_bi];if (!(_b[4]&1)) continue;
+        for(var _bx=max(2,_b[0]);_bx<=min(246,_b[2]);_bx+=4) {
+            var _line=(_b[1]+(_b[4]>=64?-1:1)*(((_bx-_b[0])*(_b[4]&62)) div 16))&255;
+            for(var _side=-1;_side<=1;_side+=2) {
+                var _by=_line+4*_side;
+                if (_by>=9 && _by<189) array_push(_areas,[_bx,_bx+1,_by,_by+1]);
+            }
+        }
+    }
+    var _bank_end=array_length(_areas);
+    for(var _ey=9;_ey<189;_ey+=4) {
+        if (ln1_jump_exit_safe(_g,1,_ey)) array_push(_areas,[1,2,_ey,_ey+1]);
+        if (ln1_jump_exit_safe(_g,247,_ey)) array_push(_areas,[247,248,_ey,_ey+1]);
+    }
+    for(var _ex=2;_ex<247;_ex+=4) {
+        if (ln1_jump_exit_safe(_g,_ex,8)) array_push(_areas,[_ex,_ex+1,8,9]);
+        if (ln1_jump_exit_safe(_g,_ex,189)) array_push(_areas,[_ex,_ex+1,189,190]);
+    }
     var _direction={x:120,y:100,facing:_p.facing,heading:_p.facing,fraction_y:0,
         boundary_mode:0,boundary_crossings:0,enemy_active:0};
     var _empty={boundaries:[],left:_g.data.left,right:_g.data.right,no_y:_g.data.no_y,
@@ -409,15 +471,16 @@ function ln1_jump_assist_target(_g) {
         var _dx=_x-_p.x,_dy=_y-_p.y,_distance=_dx*_dx+4*_dy*_dy;
         var _dot=_dx*_fx+2*_dy*_fy,_cross=_dx*_fy-2*_dy*_fx;
         if (_dot<=0 || abs(_cross)>_dot || abs(_dx)>64 || abs(_dy)>40 || _distance>=_nearest) continue;
-        var _probe={x:_p.x,y:_p.y,boundary_mode:0,boundary_crossings:0},_clear=true;
-        var _steps=max(1,ceil(max(abs(_dx),abs(_dy))));
+        var _probe={x:_p.x,y:_p.y,boundary_mode:0,boundary_crossings:_p.boundary_crossings},_clear=true;
+        var _steps=35; // Match the exact rounded positions used during flight.
         for (var _step=1;_step<=_steps;_step++) {
             var _nx=round(_p.x+_dx*_step/_steps),_ny=round(_p.y+_dy*_step/_steps);
             // Water boundaries may be crossed in flight; solid boundaries may not.
             if (ln1_player_boundary(_probe,_g.data,_nx,_ny)!=0) {_clear=false;break;}
             _probe.x=_nx;_probe.y=_ny;
         }
-        if (_clear) {_nearest=_distance;_best={x:_x,y:_y,area:_i};}
+        if (_i>=_platform_count && _i<_bank_end && (_probe.boundary_crossings&1)) _clear=false;
+        if (_clear) {_nearest=_distance;_best={x:_x,y:_y,area:_i,bank:_i>=_platform_count && _i<_bank_end,exit:_i>=_bank_end};}
     }
     return _best;
 }
@@ -436,7 +499,8 @@ function ln1_jump_assist_start(_g) {
 
 function ln1_jump_assist_tick(_p,_d,_ticks) {
     var _a=_p.jump_assist,_g=_p.world_game;
-    if (_a.room!=_g.room_id || _g.player_health<=0) {_p.jump_assist=undefined;_p.action=0;return;}
+    if (_a.room!=_g.room_id) {ln1_jump_finish(_p);ln1_player_render(_p,_p.facing&2);return;}
+    if (_g.player_health<=0) {_p.jump_assist=undefined;_p.action=0;return;}
     repeat(_ticks) {
         _a.elapsed++;
         var _t=min(1,_a.elapsed/35),_nx=round(lerp(_a.x0,_a.x1,_t)),_ny=round(lerp(_a.y0,_a.y1,_t));
@@ -485,7 +549,7 @@ function ln1_jump_assist_checks() {
     ln_check(!is_struct(ln1_jump_assist_target(_g)),"jump assistance rejects a solid wall");
     _g.data.boundaries=[];_g.world.safe_areas[0]=[[59,68,116,125]];
     ln_check(!is_struct(ln1_jump_assist_target(_g)),"jump assistance never chooses a platform behind");
-    var _tested=0;
+    var _tested=0,_banks=0,_exits=0;
     for (var _level=1;_level<=3;_level++) {
         var _real=new LN1Play(_level);
         for (var _room=1;_room<=array_length(_real.world.rooms);_room++) {
@@ -507,15 +571,27 @@ function ln1_jump_assist_checks() {
                 ln_check(is_struct(_n.jump_assist),"real river/log room double fire starts jump");
                 repeat(48) {
                     if (!is_struct(_n.jump_assist)) break;
-                    ln1_player_update(_n,_real.data,16,(_n.tick+1)&255);ln1_play_hazards(_real);
+                    ln1_player_update(_n,_real.data,16,(_n.tick+1)&255);
+                    if (_landing.exit) ln1_play_exit(_real);
+                    ln1_play_hazards(_real);
+                    if (_real.room_id!=_room) break;
                 }
-                ln_check(_n.x==_landing.x && _n.y==_landing.y && _real.player_health==32 && !_real.water_active,
-                    "assisted jump lands safely using original room boundaries and platform rectangles");
+                ln_check((_landing.exit?_real.room_id!=_room:(_n.x==_landing.x && _n.y==_landing.y)) && _real.player_health==32 && !_real.water_active,
+                    "assisted jump lands safely level="+string(_level)+" room="+string(_room)+" area="+string(_area)+" facing="+string(_face)+" target="+json_stringify(_landing)+" actual="+string(_n.x)+","+string(_n.y)+" crossing="+string(_n.boundary_crossings)+" health="+string(_real.player_health));
+                if (_landing.bank) _banks++;
+                if (_landing.exit) {
+                    ln_check(_real.room_id!=_room && !ln1_jump_active(_n) && _n.flags==0 && _n.stopped==255,"cross-scene jump arrives standing");
+                    ln1_play_hazards(_real);
+                    ln_check(!_real.water_active && _real.player_health==32,"cross-scene landing is safe at source entrance");
+                    ln1_play_enter(_real,_room);_exits++;
+                }
                 _tested++;
             }
         }
     }
     ln_check(_tested>20,"real crossing regression covers multiple levels and platforms");
+    ln_check(_banks>0 && _exits>0,"real crossings include dry banks and safe scene exits");
+    show_debug_message("LN_JUMP_BANKS: "+string(_banks)+" banks, "+string(_exits)+" exits");
     show_debug_message("LN_JUMP_REAL_PASS: "+string(_tested)+" original-room platform approaches");
     show_debug_message("LN_JUMP_ASSIST_PASS: nearest ahead, double-fire-only, safe landing, manual controls and walls");
 }

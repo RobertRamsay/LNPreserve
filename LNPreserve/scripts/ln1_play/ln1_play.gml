@@ -90,12 +90,14 @@ function ln1_play_travel(_g, _entry) {
         " entry="+string(_entry)+" target_room="+string(_entry >> 2));
     var _p = _g.player, _room_id = _entry >> 2;
     if (_room_id == 0) { ln1_level_load(_g, _g.level + 1, true); return; }
+    var _was_jumping=ln1_jump_active(_p);
     _g.last_entry = _entry;
     var _spawn = _g.world.entry_index[_entry];
     _p.x = _g.world.entry_x[_spawn]; _p.y = _g.world.entry_y[_spawn];
     _p.facing = _g.world.entry_heading[_spawn]; _p.heading = _p.facing;
     _p.frame = ((_p.facing + 2) & 4) * 2; _p.turn_lock = 255;
     ln1_play_enter(_g, _room_id);
+    if (_was_jumping) ln1_jump_finish(_p);
     ln1_player_render(_p, _g.data.mirror[_p.facing >> 1] & (1 << _p.heading));
 }
 
@@ -363,7 +365,8 @@ function ln1_play_draw(_game, _paused) {
     draw_sprite_ext(spr_ln1_weapon_inventory, _weapons, _x + 96 * _scale, _y + 152 * _scale, _scale, _scale, 0, c_white, 1);
     draw_sprite_ext(spr_ln1_player_health, clamp(floor(_game.health_display), 0, 32), _x + 8 * _scale, _y + 152 * _scale, _scale, _scale, 0, c_white, 1);
     draw_sprite_ext(spr_ln1_enemy_wounds, _game.room_wounds[_game.room_id], _x+248*_scale, _y+24*_scale, _scale, _scale, 0, c_white, 1);
-    draw_sprite_ext(spr_ln1_status_label, _game.notice_label, _x+248*_scale, _y+64*_scale, _scale, _scale, 0, c_white, 1);
+    if (_game.notice_label==3) ln1_find_label_draw(_x+248*_scale,_y+64*_scale,_scale);
+    else draw_sprite_ext(spr_ln1_status_label, _game.notice_label, _x+248*_scale, _y+64*_scale, _scale, _scale, 0, c_white, 1);
     var _icon = _game.notice_item >= 0 ? _game.notice_item : _s.selected_weapon + 10;
     draw_sprite_ext(spr_ln1_status_icon, _icon, _x+248*_scale, _y+80*_scale, _scale, _scale, 0, c_white, 1);
     if (is_struct(_game.controls))

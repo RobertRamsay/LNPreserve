@@ -1,4 +1,5 @@
 function ln1_level_checks() {
+    ln1_find_sack_checks();
     var _hidden=new LN1Play(3),_hidden_item=undefined;
     for (var _hi=0;_hi<array_length(_hidden.world.items);_hi++) {
         if (ln1_hidden_apple(_hidden,_hidden.world.items[_hi])) _hidden_item=_hidden.world.items[_hi];
