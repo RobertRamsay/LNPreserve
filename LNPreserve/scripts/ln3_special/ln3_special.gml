@@ -138,6 +138,8 @@ function ln3_special_sequence_tick(_g) {
 }
 
 function ln3_hud_tick(_g) {
+    ln3_wheel_tick(_g);
+    ln3_hud_eye_tick(_g);
     if (_g.hud_wait>0) _g.hud_wait--;
     if (_g.hud_wait==0) {
         _g.hud_player_health+=sign(_g.state.player_health-_g.hud_player_health);
@@ -243,4 +245,106 @@ function ln3_mechanism_draw(_g) {
         if (variable_struct_exists(_g.mechanisms.bolt,_key)) _frame=variable_struct_get(_g.mechanisms.bolt,_key)[_s.bolt_flash_wait];
     }
     if (_frame>=0) draw_sprite(asset_get_index(_g.mechanisms.sprite),_frame,0,0);
+}
+
+// Original LN3 $6ae3: nine wheel stages, four PAL ticks between changes.
+function ln3_wheel_tick(_g) {
+    if (!variable_struct_exists(_g,"hud_wheel_wait")) _g.hud_wheel_wait=0;
+    if (_g.hud_wheel_wait>0) _g.hud_wheel_wait--;
+    var _s=_g.state;
+    if (_s.weapon_fx_request!=0 && _g.hud_wheel_wait>0) return;
+    if (_s.weapon_fx_request!=0) {
+        _g.hud_wheel_wait=4;
+        _s.weapon_fx_state++;
+        if (_s.weapon_fx_state>=9) {_s.weapon_fx_state=0;_s.weapon_fx_request=0;}
+    }
+    if (_s.weapon_fx_state==5) _s.weapon_fx_request=_s.inventory[clamp(_s.enemy_pending_weapon,0,24)];
+}
+function ln3_status_item(_g) {
+    var _s=_g.state;
+    if (_s.weapon_notice_timer>0) {
+        if (_g.found_item>=0) return _g.found_item;
+        return _s.notice_icon>=0 && _s.notice_icon<25?_s.notice_icon:-1;
+    }
+    var _item=_s.selected_item;
+    if (_item<4 || _item>=24) return -1;
+    return _s.inventory[_item]>0 && _s.inventory[_item]<128?_item:-1;
+}
+function ln3_status_sprite(_sprite,_frame,_x,_y) {
+    draw_sprite_ext(_sprite,_frame,160+_x*3,84+_y*3,3,3,0,c_white,1);
+}
+function ln3_status_draw(_g) {
+    var _s=_g.state;draw_set_colour(c_white);
+    ln3_status_sprite(spr_ln3_hud_panel,0,0,0);
+    ln3_status_sprite(spr_ln3_hud_player,clamp(round(_g.hud_player_health),0,44),8,152);
+    ln3_status_sprite(spr_ln3_hud_enemy,clamp(round(_g.hud_enemy_health),0,44),56,152);
+    if (_g.hud_eye_left>=0) ln3_status_sprite(spr_ln3_hud_eye_flash,_g.hud_eye_left,248,176);
+    if (_g.hud_eye_right>=0) ln3_status_sprite(spr_ln3_hud_eye_flash,4+_g.hud_eye_right,288,176);
+    ln3_status_sprite(spr_ln3_hud_bushido,clamp(round(_g.hud_honour),0,40),112,176);
+    for(var _i=0;_i<6;_i++) ln3_status_sprite(spr_ln3_hud_digits,clamp(_s.score_digits[_i]&15,0,9),128+_i*8,160);
+    var _wheel=clamp(_s.enemy_pending_weapon,0,24),_phase=(_s.weapon_fx_state+8) mod 9;
+    ln3_status_sprite(spr_ln3_hud_wheel,_wheel*9+_phase,256,0);
+    ln3_status_sprite(spr_ln3_hud_notice,(_s.weapon_notice_timer>0 && _g.found_item>=0)?1:0,256,56);
+    draw_set_colour(c_black);draw_rectangle(160+264*3,84+72*3,160+296*3,84+88*3,false);draw_set_colour(c_white);
+    var _item=ln3_status_item(_g);
+    if (_item>=0 && _item<25) ln3_status_sprite(spr_ln3_hud_items,_item,264,72);
+}
+
+function ln3_status_checks() {
+    var _v=ln3_data_read("verification/ln3_hud_vectors.json").vectors;
+    for(var _i=0;_i<array_length(_v);_i++) {
+        var _r=_v[_i],_fixture_state={weapon_fx_state:_r.phase,weapon_fx_request:_r.request,enemy_pending_weapon:4,inventory:array_create(30,0)};
+        _fixture_state.inventory[4]=_r.owned;var _fixture={state:_fixture_state,hud_wheel_wait:_r.wait};ln3_wheel_tick(_fixture);
+        ln_check(_fixture_state.weapon_fx_state==_r.expected[0] && _fixture_state.weapon_fx_request==_r.expected[1] && _fixture.hud_wheel_wait==_r.expected[2],"LN3 original prayer wheel vector "+string(_i));
+    }
+    for(var _level=1;_level<=5;_level++) {
+        var _g=new LN3Play(_level),_s=_g.state;
+        _s.score_digits=[49,50,51,52,53,54];_s.player_health=22;_s.enemy_health=33;_s.honour=20;
+        repeat(100) ln3_hud_tick(_g);
+        ln_check(_g.hud_player_health==22 && _g.hud_enemy_health==33 && _g.hud_honour==20,"LN3 health and Bushido converge "+string(_level));
+        _s.enemy_flash=3;repeat(40) ln3_hud_eye_tick(_g);
+        ln_check(_s.enemy_flash==0 && _g.hud_eye_left==3,"LN3 original portrait flash completes");
+        // A real level record is passed through the original pickup handler.
+        var _picked=false;
+        for(var _room=0;_room<array_length(_g.items.rooms) && !_picked;_room++) {
+            var _records=_g.items.rooms[_room].items;
+            for(var _j=0;_j<array_length(_records) && !_picked;_j++) {
+                var _record=_records[_j],_id=_record[0];if(_id==25 || _id==6 || _id==12) continue;
+                _s.inventory[_id]=0;_s.room_id=_g.items.rooms[_room].id;_s.player_action=26;_s.parts[1].cursor=3;
+                _s.parts[2].x=_record[1];_s.parts[2].y=_record[3];_s.ammo_pile=1;
+                var _found=ln3_items_update(_s,_g.items,[_record]);
+                if (_found>=0) {_g.found_item=_found;_picked=true;ln_check(ln3_status_item(_g)==_found,"LN3 pickup icon "+string(_level));}
+            }
+        }
+        ln_check(_picked,"LN3 pickup fixture reached "+string(_level));
+        _s.inventory[4]=1;_s.selected_item=4;_s.weapon_notice_timer=0;
+        ln_check(ln3_status_item(_g)==4,"LN3 selected item shown");_s.inventory[4]=128;
+        ln_check(ln3_status_item(_g)==-1,"LN3 consumed item cleared");
+        _g.found_item=-1;_s.weapon_notice_timer=100;_s.notice_icon=2;
+        ln_check(ln3_status_item(_g)==2,"LN3 weapon change icon");
+        _s.weapon_notice_timer=0;_s.inventory[4]=1;_s.weapon_fx_state=5;_s.enemy_pending_weapon=4;
+        var _restored=ln_save_restore(json_parse(json_stringify(ln_save_capture(_g))));
+        ln_check(_restored.state.score_digits[5]==_s.score_digits[5] && _restored.state.honour==_s.honour && ln3_status_item(_restored)==4 && _restored.state.weapon_fx_state==5,"LN3 HUD save state");
+        // Draw representative live values using the native renderer.
+        var _surface=surface_create(1280,800);surface_set_target(_surface);ln3_play_draw(_g);surface_reset_target();
+        surface_save(_surface,"ln3-hud-level"+string(_level)+".png");surface_free(_surface);
+        _g.game_over=true;_s.player_health=0;var _ticks_before=_g.logic_ticks;
+        repeat(100) ln3_play_tick(_g,0);
+        ln_check(_g.hud_player_health==0 && _g.logic_ticks==_ticks_before,"LN3 game-over meter settles without advancing gameplay");
+        ln3_ending_free(_g);ln3_ending_free(_restored);
+        if(surface_exists(_g.stage_surface)) surface_free(_g.stage_surface);
+        if(surface_exists(_g.part_surface)) surface_free(_g.part_surface);
+    }
+    show_debug_message("LN3_HUD_PASS: "+string(array_length(_v))+" original wheel vectors, five-level pickups, live meters, weapon/item selection, consumed items and saves; manual playthrough pending.");
+}
+
+// Original $7b2a portrait flash, requested by the existing combat logic.
+function ln3_hud_eye_tick(_g) {
+    if (_g.hud_eye_wait>0) _g.hud_eye_wait--;
+    if (_g.hud_eye_wait!=0 || _g.state.enemy_flash==0) return;
+    _g.hud_eye_wait=10;
+    if ((_g.state.enemy_flash&1)!=0) _g.hud_eye_left=_g.hud_eye_phase;
+    else if ((_g.state.enemy_flash&2)!=0) _g.hud_eye_right=_g.hud_eye_phase;
+    _g.hud_eye_phase=(_g.hud_eye_phase+1)&3;
+    if (_g.hud_eye_phase==0) _g.state.enemy_flash=0;
 }

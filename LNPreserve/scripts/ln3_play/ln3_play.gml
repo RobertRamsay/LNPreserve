@@ -23,7 +23,7 @@ function LN3Play(_level=1) constructor {
     for (var _i=0;_i<array_length(_fields);_i++) variable_struct_set(state,_fields[_i],variable_struct_get(special.initial,_fields[_i]));
     special_sequence=0;special_step=0;special_request=0;special_colours=array_create(8,-1);
     transition=ln3_data_read("play/ln3/transition.json");transition_phase=0;transition_y=[];transition_mode=0;transition_signal=0;transition_wipe=0;ending_requested=false;
-    hud_player_health=0;hud_enemy_health=0;hud_honour=0;hud_wait=0;
+    hud_player_health=0;hud_enemy_health=0;hud_honour=0;hud_wait=0;hud_wheel_wait=0;hud_eye_wait=0;hud_eye_phase=0;hud_eye_left=-1;hud_eye_right=-1;
     ending=undefined;ending_surface=-1;
     palette=[];for (var _i=0;_i<16;_i++) palette[_i]=make_colour_rgb(data.palette[_i][0],data.palette[_i][1],data.palette[_i][2]);
     stage_surface=-1;part_surface=-1;timer=new LNClock();controls=undefined;
@@ -163,7 +163,7 @@ function ln3_play_prepare_draw(_g,_s) {
 function ln3_play_tick(_g,_joy) {
     if (ln_frontend_tick(_g,_joy)) return;
     _joy=ln_frontend_filter(_g,_joy);
-    if (_g.game_over || _g.level_complete) return;
+    if (_g.game_over || _g.level_complete) {ln3_hud_tick(_g);return;}
     if (is_struct(_g.ending)) {ln3_ending_tick(_g.ending,_joy);return;}
     var _s=_g.state;_g.room_age++;
     // The original PAL IRQ decrements byte timers and wraps its word timer.
@@ -293,11 +293,10 @@ function ln3_play_draw(_g) {
     ln3_mechanism_draw(_g);
     if (_g.special_sequence<3 || _g.transition_phase<5) for (var _order=0;_order<8;_order++) ln3_play_actor_part(_g,_g.display,_g.animation.order[_order]);
     ln3_transition_draw(_g);
-    surface_reset_target();draw_surface_ext(_g.stage_surface,160,84,4,4,0,c_white,1);
+    surface_reset_target();draw_surface_ext(_g.stage_surface,160,84,3,3,0,c_white,1);
+    ln3_status_draw(_g);
     var _s=_g.state;
-    draw_text(160,36,"LAST NINJA 3 — "+string_upper(_g.title));draw_text(1000,36,"Scene "+string(_g.room_id));
-    draw_text(160,672,"Health "+string(_s.player_health)+"   Lives "+string(_s.lives)+"   Honour "+string(_s.honour)+"   Enemy "+string(_s.enemy_health));
-    draw_text(790,672,_g.found_item>=0?"FOUND   Item "+string(_g.found_item):"Item "+string(_s.selected_item)+"   Weapon "+string(_s.player_weapon));
+    draw_text(160,36,"LAST NINJA 3 — "+string_upper(_g.title));draw_text(1000,36,"Scene "+string(_g.room_id+1));
     draw_text(160,712,"WASD Move    # + direction Action    Space Weapon    F1 F3 F5 F7 Functions");
     draw_text(160,744,"Numpad 7/9/1/3 Direction    F11 Scenes    Home Restart    1/2/3 Games");
     if (_g.paused) draw_text(600,60,"PAUSED");

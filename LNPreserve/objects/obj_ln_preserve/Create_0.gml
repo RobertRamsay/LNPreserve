@@ -1,3 +1,4 @@
+ln3_hud_test=false;
 ln2_followup_test=false;
 sewer_original_test=false;
 sewer_flames_test=false;
@@ -48,6 +49,7 @@ function_presses = [0,0,0,0];
 selftest = false;ln1_only=false;selftest_inject_failure=false;
 host_frames = 0;
 for (var _i = 1; _i <= parameter_count(); _i++) {
+    if(parameter_string(_i)=="--ln3-hud-test") ln3_hud_test=true;
     if(parameter_string(_i)=="--ln2-followup-test") ln2_followup_test=true;
     if(parameter_string(_i)=="--ln2-sewer-original-test") sewer_original_test=true;
     if(parameter_string(_i)=="--ln2-sewer-flames-test") sewer_flames_test=true;

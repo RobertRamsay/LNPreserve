@@ -1,0 +1,53 @@
+{
+  "resources": {
+    "spr_ln3_hud_bushido": {
+      "frames": 41,
+      "height": 24,
+      "width": 88
+    },
+    "spr_ln3_hud_digits": {
+      "frames": 10,
+      "height": 8,
+      "width": 8
+    },
+    "spr_ln3_hud_enemy": {
+      "frames": 45,
+      "height": 40,
+      "width": 40
+    },
+    "spr_ln3_hud_eye_flash": {
+      "frames": 8,
+      "height": 8,
+      "width": 16
+    },
+    "spr_ln3_hud_items": {
+      "frames": 25,
+      "height": 16,
+      "width": 32
+    },
+    "spr_ln3_hud_notice": {
+      "frames": 2,
+      "height": 8,
+      "width": 56
+    },
+    "spr_ln3_hud_panel": {
+      "frames": 1,
+      "height": 200,
+      "width": 320
+    },
+    "spr_ln3_hud_player": {
+      "frames": 45,
+      "height": 40,
+      "width": 40
+    },
+    "spr_ln3_hud_wheel": {
+      "frames": 225,
+      "height": 48,
+      "width": 48
+    }
+  },
+  "scope": "Original level 1 UI routines and bitmap; shared panel pending verification against later banks.",
+  "sha256": "8d48f51c802ae640a192048c2579432f853673f58e44af9a0274f767b5f4529c",
+  "source": "C64Games DMAgic disk edition, original LN3 routines",
+  "url": "https://www.c64games.de/phpseiten/spieledetail.php?filnummer=809"
+}
