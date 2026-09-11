@@ -97,11 +97,10 @@ function ln3_collision_hit(_s,_actions,_base,_x0,_x1,_y0,_y1,_type) {
     ln3_collision_slide(_s,_actions,_type);return true;
 }
 
-function ln3_collision_update(_s,_actions,_data,_bounds,_only_actor=-1) {
+function ln3_collision_update(_s,_actions,_data,_bounds) {
     for (var _pass=1;_pass>=0;_pass--) {
         _s.collision_pass=_pass;_s.collision_retried=0;_s.boundary_index=0;
         var _base=_data.actor_order[1-_pass],_skip=0;
-        if (_only_actor>=0 && _base!=_only_actor) continue;
         if (_data.level==1 && _pass==0 && _s.player_action!=34) {
             if (_s.room_id==4 && _s.climb_counter==0) _skip=10;
             if (_s.room_id==8 && _s.special_scene_phase>=2) _skip=11;

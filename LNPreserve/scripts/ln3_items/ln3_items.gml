@@ -107,7 +107,6 @@ function ln3_item_assist_input(_g,_joy) {
 
 
 function ln3_consumable_checks() {
-    ln3_walk_checks();
     var _g=new LN3Play(),_s=_g.state;
     _g.item_records=[[21,0,255,0,255]];_s.inventory[21]=0;_s.player_action=26;_s.parts[1].cursor=3;
     _s.lives=2;_s.player_health=7;ln3_play_items(_g);

@@ -44,7 +44,6 @@ function ln3_enemy_remember(_g) {
 }
 
 function ln3_play_enter(_g,_entry) {
-    _g.walk_fraction=[0,0];_g.walk_direction=-1;
     _g.loader=undefined;_g.pickup_assist=undefined;_g.food_taps={remaining:0,previous:16};
     var _scene=ln3_room_record(_g.world.rooms,_entry.destination);if (!is_struct(_scene)) return false;
     ln3_enemy_remember(_g);_g.room_id=_entry.destination;_g.last_entry=_entry;_g.scene_record=_scene;_g.room_age=0;
@@ -189,7 +188,6 @@ function ln3_play_tick(_g,_joy) {
         }
         if (_s.enemy_dead!=0 && _s.enemy_health<44) _s.enemy_health++;
     }
-    var _walk_updated=ln3_walk_tick(_g,_joy);
     if (_s.logic_wait!=0) {ln3_play_items(_g);ln3_play_special(_g);return;}
     _s.logic_wait=4;_g.logic_ticks++;
     if (!is_struct(_g.pickup_assist)) ln3_input_update(_s,_g.actions,_g.input,_joy,_g.weapon_switch);
@@ -199,9 +197,9 @@ function ln3_play_tick(_g,_joy) {
     ln3_enemy_attack(_s,_g.actions,_g.enemies,(_g.timer.cycle div 63)&255);
     _s.one_hit_kills=_g.one_hit_kills;
     ln3_combat_update(_s,_g.actions,_g.combat);ln3_fall_tick(_s,_g.actions,_g.data);
-    ln3_movement_setup(_s,_g.movement);ln3_movement(_s,_g.movement,7,0,_walk_updated);
-    if (!_walk_updated) ln3_climb_enter(_s,_g.actions,_g.runtime_scene.climbs,_joy,_g.level);
-    ln3_collision_update(_s,_g.actions,_g.collision,_g.bounds,_walk_updated?4:-1);
+    ln3_movement_setup(_s,_g.movement);ln3_movement(_s,_g.movement);
+    ln3_climb_enter(_s,_g.actions,_g.runtime_scene.climbs,_joy,_g.level);
+    ln3_collision_update(_s,_g.actions,_g.collision,_g.bounds);
     ln3_hazard_tick(_s,_g.actions,_g.data);ln3_hazard_contacts(_s,_g.data);
     ln3_enemy_patrol(_s,_g.actions,_g.input,_g.enemies);
     ln3_scenery_tick(_g);

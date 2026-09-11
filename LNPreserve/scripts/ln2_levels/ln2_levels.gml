@@ -1308,7 +1308,7 @@ function ln1_frontend_label(_text,_cy,_colour) {
 }
 function ln1_frontend_bitmap(_g) {
     // The full title canvas is 320 x 200; only the supplied eye band is displayed.
-    draw_sprite_part_ext(spr_ln1_loader_reference,0,0,16,240,76,160+40*3,84+46*3,3,3,c_white,1);
+    draw_sprite_part_ext(spr_ln1_loader_reference,0,0,16,240,72,160+40*3,84+46*3,3,3,c_white,1);
     static _colours=[make_colour_rgb(184,199,111),make_colour_rgb(86,172,77),make_colour_rgb(103,182,189),make_colour_rgb(136,57,50),make_colour_rgb(139,63,150),make_colour_rgb(120,105,196)];
     var _colour=_colours[clamp(_g.level-1,0,5)];
     ln1_frontend_label("THE",132,_colour);
