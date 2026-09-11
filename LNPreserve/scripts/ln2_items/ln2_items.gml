@@ -441,10 +441,13 @@ function ln2_molotov_prepare(_g) {
         _g.molotov.paper=max(1,_g.molotov.paper);_g.molotov.lit=true;
     }
     if (_g.level==2) {
+        var _paper={id:9,room:6,action:0,facing:1,handler:0,
+            x_min:158,x_max:167,y_min:102,y_max:108,present_panel:0,removed_panel:0,source_address:0};
         var _exists=false;
-        for(var _i=0;_i<array_length(_g.world.items);_i++) if (_g.world.items[_i].id==9) _exists=true;
-        if (!_exists) array_push(_g.world.items,{id:9,room:7,action:2,facing:0,handler:0,
-            x_min:134,x_max:145,y_min:100,y_max:109,present_panel:0,removed_panel:0,source_address:0});
+        for(var _i=0;_i<array_length(_g.world.items);_i++) if (_g.world.items[_i].id==9) {
+            _g.world.items[_i]=_paper;_exists=true;
+        }
+        if (!_exists) array_push(_g.world.items,_paper);
     }
     ln2_molotov_combine(_g);
 }
@@ -467,14 +470,20 @@ function ln2_molotov_frame(_g) {
 }
 
 function ln2_molotov_checks() {
+    ln2_newspaper_bin_checks();
     var _g=new LN2Play(2);_g.inventory[9]=0;_g.inventory[10]=255;_g.molotov.paper=0;
     ln2_molotov_combine(_g);ln_check(ln2_molotov_frame(_g)==0 && !ln2_molotov_ready(_g),"bottle alone has no wick");
     _g.inventory[9]=255;ln2_molotov_combine(_g);
     ln_check(_g.molotov.paper==1 && _g.inventory[9]==128 && ln2_molotov_frame(_g)==1,"map supplies wick once");
-    _g=new LN2Play(2);_g.inventory[9]=0;_g.inventory[10]=0;ln2_play_enter(_g,7);ln2_test_enter(_g,_g.scene_record.spawn_entry);
-    _g.enemy.active=0;_g.player.x=138;_g.player.y=104;_g.player.vehicle=0;_g.player.action=0;_g.player.input_lock=0;
+    _g=new LN2Play(2);_g.inventory[9]=0;_g.inventory[10]=0;ln2_play_enter(_g,6);ln2_test_enter(_g,_g.scene_record.spawn_entry);
+    _g.enemy.active=0;_g.player.x=156;_g.player.y=107;_g.player.vehicle=0;_g.player.action=0;_g.player.input_lock=0;
     ln2_pickup_assist_input(_g,0);ln2_pickup_assist_input(_g,16);
-    repeat(100) {if (_g.inventory[9]!=0) break;ln2_play_tick(_g,0);}
+    repeat(100) {
+        if (_g.inventory[9]!=0) break;ln2_play_tick(_g,0);
+        ln_check(_g.player.y>=102-floor((_g.player.x-148)/4),"newspaper reach stays on pavement side of wall");
+    }
+    repeat(30) ln2_play_tick(_g,0);
+    ln_check(_g.player.x>=158 && _g.player.x<167 && _g.player.y>=102 && _g.player.y<108,"newspaper pickup finishes at the pavement standing position");
     ln_check(_g.inventory[9]==255 && _g.molotov.newspaper_taken,"newspaper can be collected with fire before bottle");
     ln2_item_complete(_g,{id:10},10);
     ln_check(_g.molotov.paper==2 && _g.inventory[9]==128,"newspaper and bottle make wick");
@@ -508,4 +517,41 @@ function ln2_molotov_checks() {
         ln_check(_g.enemy.x==0 && _g.enemy.y==0,"departed motorcycle frees actor position");
     }
     show_debug_message("LN2_MOLOTOV_PASS: bare bottle, map/newspaper crafting, native flame use, animated HUD, saves and repeat motorcycles");
+}
+
+/// Scene 7 bin: two physical pixels per C64 multicolour pixel.
+/// Greys sampled from this room's bitmap: #b2b2b2 and #7b7b7b.
+function ln2_newspaper_draw(_g) {
+    if (_g.level!=2 || _g.room_id!=6 || _g.inventory[9]!=0 ||
+        _g.molotov.paper!=0 || _g.molotov.newspaper_taken) return;
+    var _rows=[[0,1,1,0],[1,1,2,0],[1,2,1,1],[1,1,2,1],[0,1,1,2],[0,1,2,0]];
+    for(var _y=0;_y<6;_y++) for(var _x=0;_x<4;_x++) {
+        var _shade=_rows[_y][_x];if (_shade==0) continue;
+        draw_set_colour(_shade==1?make_colour_rgb(178,178,178):make_colour_rgb(123,123,123));
+        draw_rectangle(162+_x*2,67+_y,164+_x*2,68+_y,false);
+    }
+    draw_set_colour(c_white);
+}
+
+function ln2_newspaper_bin_checks() {
+    var _range_game=new LN2Play(2);ln2_play_enter(_range_game,6);ln2_test_enter(_range_game,_range_game.scene_record.spawn_entry);
+    _range_game.inventory[9]=0;_range_game.inventory[10]=0;_range_game.enemy.active=0;
+    _range_game.player.x=158;_range_game.player.y=126;_range_game.player.vehicle=0;_range_game.player.action=0;_range_game.player.input_lock=0;
+    ln2_pickup_assist_input(_range_game,0);ln2_pickup_assist_input(_range_game,16);
+    ln_check(_range_game.player.action==0 && _range_game.player.y==126,"19 pixels away no longer snaps to pickup");
+    _range_game.player.y=125;ln2_pickup_assist_input(_range_game,0);ln2_pickup_assist_input(_range_game,16);
+    ln_check(_range_game.player.action>=256 && _range_game.player.y==107,"18 pixels away permits pickup assist");
+    var _g=new LN2Play(2);_g.inventory[9]=0;_g.inventory[10]=0;ln2_play_enter(_g,6);
+    var _s=surface_create(240,144);
+    surface_set_target(_s);draw_clear(c_black);draw_sprite(_g.scene,0,0,0);ln2_newspaper_draw(_g);surface_reset_target();
+    ln_check(surface_getpixel(_s,164,67)==make_colour_rgb(178,178,178),"bin newspaper uses sampled light grey");
+    ln_check(surface_getpixel(_s,164,67)==surface_getpixel(_s,165,67),"newspaper pixels have C64 double width");
+    surface_save(_s,"ln2-newspaper-bin-full.png");
+    _g.inventory[9]=255;_g.molotov.newspaper_taken=true;
+    _g=ln_save_restore(json_parse(json_stringify(ln_save_capture(_g))));
+    surface_set_target(_s);draw_clear(c_black);draw_sprite(_g.scene,0,0,0);ln2_newspaper_draw(_g);surface_reset_target();
+    ln_check(surface_getpixel(_s,164,67)==make_colour_rgb(74,74,74),"collected newspaper restores original empty bin after save");
+    surface_save(_s,"ln2-newspaper-bin-empty.png");surface_free(_s);
+    for(var _i=0;_i<array_length(_g.world.items);_i++) if (_g.world.items[_i].id==9)
+        ln_check(_g.world.items[_i].room==6 && _g.world.items[_i].action==0,"paper pickup and restored saves use the bin");
 }

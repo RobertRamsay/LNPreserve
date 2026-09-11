@@ -268,6 +268,7 @@ function ln2_play_draw(_g) {
     ln2_victory_palette_draw(_g);
     ln2_final_candles_draw(_g);
     ln2_street_lights_draw(_g);
+    ln2_newspaper_draw(_g);
     ln2_sewer_flame_draw(_g);
     if (_g.player.depth_y<_g.enemy.depth_y) {
         ln2_play_actor(_g,_g.player,false);ln2_projectile_draw(_g,false);ln2_play_actor(_g,_g.enemy,true);ln2_projectile_draw(_g,true);

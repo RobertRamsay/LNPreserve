@@ -8,7 +8,11 @@ The bottle is plain until combined automatically with available paper. Picking u
 
 ## Newspaper artwork placement
 
-Use **Street Scene 8 (source room 7)**, near the burger, for a discarded newspaper. The pickup rectangle is **X 134–144, Y 100–108**, in the original 240×144 playfield; a visual at about **(138,100)** fits the approach. It uses the floor pickup action and the existing nearby-fire assist. World artwork is intentionally pending Robert's addition; the existing paper/map inventory icon is reused. Do not bake a permanent paper image into the background without a collected variant: availability is inventory[9]==0, and collection sets molotov.newspaper_taken. The pickup is appended at runtime by ln2_molotov_prepare, including on old-save restore.
+Use **Street Scene 7 (source room 6)**, in the bin beside the red street fixture and shop doorway. The pickup rectangle is **X 158–166, Y 102–107**, facing northeast, using the higher reaching pickup pose. Nearby fire performs the pickup when combat is not taking priority. The standing rectangle sits on the pavement side of the original sloping wall; the reach no longer pulls the ninja behind that boundary.
+
+The newspaper is drawn at **(162,67)** as a small folded piece protruding above the bin rim. Its multicolour cells are two physical pixels wide and use the bitmap's sampled light grey (#b2b2b2) and mid grey (#7b7b7b). It draws only while available; after collection, the original bitmap supplies the exact empty bin. No background pixels are permanently overwritten. Existing saves with the former Scene 8 pickup are migrated to this bin while preserving collection/crafting state.
+
+Native checks verify the grey pixels, double width, actual fire pickup, and the empty-bin state after save/load. Captures: ln2-newspaper-bin-full.png and ln2-newspaper-bin-empty.png. Build and targeted follow-up checks passed after this location/art change.
 
 ## Lighting and UI
 
@@ -18,4 +22,4 @@ spr_ln2_molotov_states frames: 0 plain, 1 white wick, 2–4 red wick with flame.
 
 Changed runtime scripts: ln2_items, ln2_levels, ln2_play, ln2_projectiles, ln2_status and ln_saves. LNPreserve.yyp registers the new sprite; evidence/ln2_molotov_art.json records its source pixels. The follow-up native test now covers crafting in both orders, actual newspaper pickup and flame use, HUD animation, save/level persistence, rejection without paper, real crossings and repeated bikes. Existing source comparisons remain separate from the requested paper-crafting design change.
 
-Manual playtesting and the newspaper world artwork remain outstanding. Automated coverage is not a complete manual playthrough.
+Manual playtesting remains outstanding; newspaper world artwork is now implemented. Automated coverage is not a complete manual playthrough.
