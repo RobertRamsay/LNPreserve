@@ -23,6 +23,8 @@ function ln2_item_interact(_g,_kind) {
 }
 
 function ln2_item_complete(_g,_item,_id) {
+    if (_g.level==5 && _g.room_id==9 && _item.id==20 && _id==20 && _g.inventory[20]==0)
+        _g.world_state.office_grate_tick=0;
     if (_g.level==7 && _g.room_id==1 && _id!=255) {
         switch (_item.id) {
             case 17:_g.safe_scene_phase=1;break;
@@ -377,6 +379,9 @@ function ln2_candle_body_checks() {
 /// Read-only eligibility for supported held-item mechanisms. The original
 /// handler still performs the action and checks its prerequisites on contact.
 function ln2_item_use_ready(_g,_item) {
+    if (_g.level==6 && _g.room_id==8 && _item.id==24) return true;
+    if (_g.level==5 && _g.room_id==14 && _item.id==19 && _g.special_mode==10 && _g.special_flag==0)
+        return abs(_g.enemy.x-_g.player.x)<8 && _g.enemy.custom;
     var _required=-1;
     switch (_g.level) {
         case 1:if (_item.id==17) _required=7;break;
@@ -568,4 +573,24 @@ function ln2_newspaper_bin_checks() {
     surface_save(_s,"ln2-newspaper-bin-empty.png");surface_free(_s);
     for(var _i=0;_i<array_length(_g.world.items);_i++) if (_g.world.items[_i].id==9)
         ln_check(_g.world.items[_i].room==6 && _g.world.items[_i].action==0,"paper pickup and restored saves use the bin");
+}
+
+/// Raise the original 24x48 grate strip one source pixel per game tick.
+function ln2_office_grate_tick(_g) {
+    if (_g.level==5 && _g.room_id==9 && variable_struct_exists(_g.world_state,"office_grate_tick"))
+        _g.world_state.office_grate_tick=min(48,_g.world_state.office_grate_tick+1);
+}
+
+function ln2_scene_bitmap_draw(_g) {
+    if (_g.level!=5 || _g.room_id!=9 || !variable_struct_exists(_g.world_state,"office_grate_tick") ||
+        _g.world_state.office_grate_tick>=48 || _g.inventory[20]==0) {
+        draw_sprite(_g.scene,_g.scene_frame,0,0);return;
+    }
+    var _rise=floor(_g.world_state.office_grate_tick),_sprite=spr_ln2_panel_5_9_20;
+    draw_sprite(_sprite,0,0,0);
+    // Reveal the original open doorway below the moving gate.
+    if (_rise>0) draw_sprite_part(_sprite,1,84,88-_rise,24,_rise,84,88-_rise);
+    // Clip the rising top at the bitmap edge rather than stretching the bars.
+    var _clip=max(0,_rise-40);
+    draw_sprite_part(_sprite,0,84,40+_clip,24,48-_clip,84,max(0,40-_rise));
 }

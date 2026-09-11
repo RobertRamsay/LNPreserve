@@ -343,11 +343,25 @@ function ln2_later_level_checks() {
     ln_check(_before!=_after,"computer digits change FOUND region pixels");surface_save(_surface,"ln2-office-code-found.png");surface_free(_surface);
 
     var _g=new LN2Play(4);ln2_play_enter(_g,8);var _p=_g.player;
-    _p.x=84;_p.y=125;_p.facing=1;_p.heading=1;_p.action=0;_p.vehicle=0;_p.input_lock=0;_p.boundary_crossings=0;
+    _p.x=84;_p.y=125;_p.facing=3;_p.heading=3;_p.action=0;_p.vehicle=0;_p.input_lock=0;_p.boundary_crossings=0;
     ln2_basement_jump_input(_g,0);ln2_basement_jump_input(_g,16);
     ln_check(!variable_struct_exists(_g,"crate_jump") || !is_struct(_g.crate_jump),"one fire cannot start automatic crate jump");
     ln2_basement_jump_input(_g,0);ln2_basement_jump_input(_g,16);
     ln_check(is_struct(_g.crate_jump),"double fire finds crate ahead");
+    ln_check(_g.crate_jump.tx==132 && _g.crate_jump.ty==133,"left crate jumps only to neighbouring lower crate");
+    var _route_checks=[[88,93,3,2],[132,109,5,1],[84,125,3,3],
+        [132,133,7,1],[84,125,1,2],[132,109,7,5]];
+    for(var _route_i=0;_route_i<array_length(_route_checks);_route_i++) {
+        var _route=_route_checks[_route_i];
+        ln_check(ln2_basement_jump_target(_route[0],_route[1],_route[2])==_route[3],"each pictured perpendicular jump works both ways");
+    }
+    for(var _face=1;_face<=7;_face+=2) {
+        var _first=ln2_basement_jump_target(88,93,_face),_second=ln2_basement_jump_target(132,109,_face);
+        ln_check(_first!=1 && _first!=3,"first crate cannot skip either intermediate crate");
+        ln_check(_second!=3,"second crate cannot skip the lower-left crate");
+    }
+    ln_check(ln2_basement_jump_target(132,109,3)==-1,"wrong facing on second crate does nothing");
+    ln_check(ln2_basement_jump_target(108,125,3)==-1,"gap itself is not a takeoff support");
     var _tx=_g.crate_jump.tx,_ty=_g.crate_jump.ty,_ticks=0;
     _g=ln_save_restore(ln_save_capture(_g));_p=_g.player;
     while(is_struct(_g.crate_jump) && _ticks++<250) ln2_basement_jump_tick(_g,_ticks&255);
@@ -357,5 +371,68 @@ function ln2_later_level_checks() {
     _g.selected_item=14;_g.notice_item=-1;_g.inventory[19]=0;var _s=surface_create(320,200);
     var _red=ln2_hud_hash(_g,_s,[264,72,304,104]);_g.inventory[19]=255;
     ln_check(ln2_hud_hash(_g,_s,[264,72,304,104])!=_red,"drugged drumstick changes HUD colour");surface_free(_s);
+    var _g=new LN2Play(5);ln2_play_enter(_g,14);var _p=_g.player;
+    _p.x=160;_p.y=62;_p.depth_y=62;_p.facing=1;_p.heading=1;_p.action=0;_p.input_lock=0;_p.vehicle=0;
+    _g.enemy.x=160;_g.enemy.y=50;_g.enemy.action=0;_g.enemy.custom=true;_g.enemy.display_frame=102;
+    _g.inventory[19]=0;_g.special_flag=0;
+    ln2_pickup_assist_input(_g,0);ln2_pickup_assist_input(_g,16);
+    ln_check(_p.action>=256,"single fire near helicopter starts original grab chain");
+    var _ticks=0;while(_g.special_flag==0 && _ticks++<100) ln2_play_tick(_g,0);
+    ln_check(_ticks<100 && _g.special_flag==255,"assisted grab attaches ninja to helicopter ladder");
+    _g=new LN2Play(5);ln2_play_enter(_g,14);_p=_g.player;
+    _p.x=160;_p.y=62;_p.facing=1;_g.enemy.x=160;ln2_item_interact(_g,0);
+    ln_check(_g.special_flag==255,"manual source grab action still attaches");
+    var _sprites=[spr_ln2_basement_trolley,spr_ln2_office_fan];
+    var _s=surface_create(192,160);
+    for(var _n=0;_n<array_length(_sprites);_n++) {
+        surface_set_target(_s);draw_clear(c_black);draw_sprite(_sprites[_n],0,96,112);surface_reset_target();
+        var _red=0,_grey=0;
+        for(var _yy=0;_yy<160;_yy++) for(var _xx=0;_xx<192;_xx++) {
+            var _colour=surface_getpixel(_s,_xx,_yy);
+            if(_colour==make_colour_rgb(129,51,56)) _red++;
+            if(_colour==make_colour_rgb(123,123,123)) _grey++;
+        }
+        ln_check(_red==0 && _grey>0,"scenery uses original medium grey instead of character red");
+    }
+    surface_free(_s);
+    _g=new LN2Play(6);_g.enemy.x=160;_g.enemy.y=120;_g.enemy.custom=true;_g.enemy.display_frame=99;
+    ln2_play_draw(_g);surface_save(_g.stage_surface,"ln2-complete-helicopter.png");
+    show_debug_message("LN2_SCENERY_GRAB_PASS: original trolley/fan grey palettes, full helicopter asset and automatic/manual ladder grabs");
+    var _g=new LN2Play(5);ln2_play_enter(_g,9);var _gate=undefined;
+    for(var _i=0;_i<array_length(_g.world.items);_i++) if(_g.world.items[_i].room==9 && _g.world.items[_i].id==20) _gate=_g.world.items[_i];
+    _g.inventory[20]=0;ln2_item_complete(_g,_gate,20);
+    ln_check(_g.world_state.office_grate_tick==0,"grate begins closed on successful use");
+    repeat(24) ln2_office_grate_tick(_g);
+    _g=ln_save_restore(ln_save_capture(_g));
+    ln_check(_g.world_state.office_grate_tick==24,"part-raised grate survives save restore");
+    var _s=surface_create(240,144);surface_set_target(_s);ln2_scene_bitmap_draw(_g);surface_reset_target();
+    surface_save(_s,"ln2-office-grate-half-raised.png");
+    repeat(24) ln2_office_grate_tick(_g);
+    ln_check(_g.world_state.office_grate_tick==48,"grate completes gradual rise");
+    surface_set_target(_s);ln2_scene_bitmap_draw(_g);surface_reset_target();
+    var _expected=surface_create(240,144);surface_set_target(_expected);draw_sprite(spr_ln2_panel_5_9_20,1,0,0);surface_reset_target();
+    for(var _yy=0;_yy<88;_yy++) for(var _xx=84;_xx<108;_xx++)
+        ln_check(surface_getpixel(_s,_xx,_yy)==surface_getpixel(_expected,_xx,_yy),"raised grate matches original final pixels");
+    surface_free(_s);surface_free(_expected);
+    show_debug_message("LN2_GRATE_RISE_PASS: gradual rise, mid-animation save and original final bitmap");
+    var _g=new LN2Play(6);ln2_play_enter(_g,3);var _p=_g.player;
+    _g.inventory[18]=0;_g.inventory[22]=0;_g.inventory[23]=0;_g.inventory[24]=0;
+    _p.action=0;_p.boundary_crossings=0;
+    ln2_player_boundary(_p,_g.data,100,130,100,132);ln2_hazard_boundary(_g);
+    ln_check(_g.inventory[18]==255,"actual scene-four stair sensor triggers alarm");
+    ln2_mansion_alarm_tick(_g,11);ln_check(_g.inventory[23]==0,"alarm holds original twelve-tick cadence");
+    ln2_mansion_alarm_tick(_g,12);ln_check(_g.inventory[23]==1,"alarm lamp switches at original interval");
+    _g=ln_save_restore(ln_save_capture(_g));ln_check(_g.inventory[18]==255 && _g.inventory[23]==1,"alarm phase and triggered state survive saves");
+    ln2_play_draw(_g);surface_save(_g.stage_surface,"ln2-mansion-alarm-on.png");
+    ln2_play_enter(_g,8);var _button=undefined;
+    for(var _i=0;_i<array_length(_g.world.items);_i++) if(_g.world.items[_i].id==24) _button=_g.world.items[_i];
+    ln2_item_complete(_g,_button,ln2_item_handler(_g,_button));
+    ln_check(_g.inventory[18]==128 && _g.inventory[24]==255,"scene-nine reset clears active alarm while retaining original triggered bit");
+    for(var _tick=15;_tick<=60;_tick+=3) ln2_mansion_alarm_tick(_g,_tick);
+    ln_check(_g.inventory[24]==239,"reset finishes sixteen fast lamp changes");
+    var _phase=_g.inventory[23];ln2_mansion_alarm_tick(_g,100);ln_check(_g.inventory[23]==_phase,"reset stops ongoing alarm flashing");
+    _g.player.action=0;_g.player.boundary_mode=47;_g.player.boundary_crossings=129;ln2_hazard_boundary(_g);
+    ln_check(_g.inventory[18]==128,"reset prevents sensor retriggering");
+    show_debug_message("LN2_MANSION_ALARM_PASS: source stair boundary, lamp timing, saves and reset button");
     show_debug_message("LN2_LATER_LEVEL_PASS: six ladders, thirteen fall modes, four persistent panels and computer HUD pixels");
 }

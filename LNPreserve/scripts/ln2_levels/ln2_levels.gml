@@ -690,7 +690,7 @@ function ln2_pickup_assist_input(_g,_joy) {
     if (!_edge || (_joy&15)!=0 || _p.vehicle!=0 || _p.action>=256 || _p.input_lock!=0 || _g.player_health<=0 ||
         ln2_blocking_sequence(_g) || _g.respawn_wait>0 || is_struct(_g.keypad) || _g.victory!=0 ||
         _g.fall_remaining>=0 || _g.hole_steps>0 || is_struct(_g.route_descent)) return _joy;
-    if (_e.active>=128 && _e.health>0 && point_distance(_p.x,_p.y,_e.x,_e.y)<=20) return _joy;
+    if (_e.active>=128 && !_e.custom && _e.health>0 && point_distance(_p.x,_p.y,_e.x,_e.y)<=20) return _joy;
     var _reach=18*LN_PICKUP_ASSIST_SCALE;
     var _best=sqr(_reach)+1,_target=undefined,_x=0,_y=0,_target_use=false;
     for(var _i=0;_i<array_length(_g.world.items);_i++) {
@@ -1411,13 +1411,11 @@ function ln2_basement_jump_input(_g,_joy) {
     if (_p.action>=256) return _joy;
     if (_t.remaining==0) {_t.remaining=30;return 0;}
     _t.remaining=0;
-    var _targets=[[60,94],[84,125],[132,109],[132,133],[168,155]],_target=-1,_best=4097;
-    var _group=_p.facing>>1,_mask=1<<_p.facing;
-    var _vx=real((_g.data.right[_group]&_mask)!=0)-real((_g.data.left[_group]&_mask)!=0);
-    var _vy=real((_g.data.down[_group]&_mask)!=0)-real((_g.data.up[_group]&_mask)!=0);
-    for(var _i=0;_i<array_length(_targets);_i++) {
-        var _dx=_targets[_i][0]-_p.x,_dy=_targets[_i][1]-_p.y,_distance=sqr(_dx)+sqr(_dy);
-        if (_distance<64 || _distance>=_best || _dx*_vx+_dy*_vy<=0) continue;
+    var _targets=[[60,94],[84,125],[132,109],[132,133],[168,155],[88,93]];
+    var _target=ln2_basement_jump_target(_p.x,_p.y,_p.facing);
+    if (_target<0) return 0;
+    for(var _i=_target;_i<=_target;_i++) {
+        var _distance=sqr(_targets[_i][0]-_p.x)+sqr(_targets[_i][1]-_p.y);
         // Never assist through a solid wall; hazard lines are traversable in flight.
         var _probe=json_parse(json_stringify(_p)),_blocked=false,_ox=_p.x,_oy=_p.y;
         for(var _step=1;_step<=32;_step++) {
@@ -1425,7 +1423,7 @@ function ln2_basement_jump_input(_g,_joy) {
             if (ln2_player_boundary(_probe,_g.data,_ox,_oy,_nx,_ny)!=0) {_blocked=true;break;}
             _ox=_nx;_oy=_ny;
         }
-        if (!_blocked) {_best=_distance;_target=_i;}
+        if (_blocked) return 0;
     }
     if (_target<0) return 0;
     var _address=_g.data.action_entries[(((_p.facing+2)&4)>>1)>>1],_frames=[],_duration=7,_total=0;
@@ -1453,5 +1451,44 @@ function ln2_basement_jump_tick(_g,_tick) {
     if (_j.elapsed>=_j.total) {
         _p.x=_j.tx;_p.y=_j.ty;_p.depth_y=_p.y;_p.action=0;_p.action_state=0;_p.boundary_mode=0;_p.boundary_crossings=0;
         _p.stopped=255;_p.fire_previous=16;_g.exit_locked=_j.exit_locked;_g.crate_jump=undefined;
+    }
+}
+
+/// Pictured route: upper -> right -> lower-left -> lower-right, and reverse.
+function ln2_basement_jump_target(_x,_y,_facing) {
+    var _tops=[[60,94],[84,125],[132,109],[132,133],[168,155],[88,93]];
+    var _source=-1,_nearest=1.001;
+    for(var _n=0;_n<array_length(_tops);_n++) {
+        var _dx=abs(_x-_tops[_n][0]),_dy=abs(_y-_tops[_n][1]);
+        var _reach=(_n==1 || _n==2 || _n==3)?(_dx/16+_dy/6):max(_dx/12,_dy/7);
+        if (_reach<_nearest) {_source=_n;_nearest=_reach;}
+    }
+    // Follow the pictured zigzag, and exactly its reverse. No diagonal skips.
+    var _routes=[[0,5,1],[5,0,7],[5,2,3],[2,5,7],[2,1,5],[1,2,1],
+        [1,3,3],[3,1,7],[3,4,3],[4,3,7]];
+    for(var _n=0;_n<array_length(_routes);_n++)
+        if (_routes[_n][0]==_source && _routes[_n][2]==_facing) return _routes[_n][1];
+    return -1;
+}
+
+/// Mansion $9c32: alarm lamp cycle and the reset button's short fast cycle.
+function ln2_mansion_alarm_tick(_g,_tick) {
+    if (_g.level!=6) return;
+    var _elapsed=(_tick-_g.inventory[22])&255;
+    if (_g.inventory[24]>=240) {
+        if (_elapsed<3) return;
+        _g.inventory[24]--;
+    } else {
+        if (!(_g.inventory[18]&127) || _elapsed<12) return;
+    }
+    _g.inventory[22]=_tick;
+    if (array_contains([2,3,7,8,9],_g.room_id)) _g.inventory[23]^=1;
+}
+
+function ln2_mansion_alarm_draw(_g) {
+    if (_g.level!=6 || (_g.inventory[18]==0 && _g.inventory[24]==0)) return;
+    var _rooms=[2,3,7,8,9];
+    for(var _i=0;_i<array_length(_rooms);_i++) if(_rooms[_i]==_g.room_id) {
+        draw_sprite(spr_ln2_mansion_alarm,_i*2+(_g.inventory[23]&1),0,0);return;
     }
 }

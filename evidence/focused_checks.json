@@ -1,4 +1,16 @@
 {
+  "--ln2-safe-code-test": {
+    "status": "passed",
+    "exit_code": 0,
+    "markers": {
+      "LN2_LATER_LEVEL_PASS": true,
+      "LN2_SAFE_CODE_PASS": true
+    },
+    "error": null,
+    "log": "D:\\POLYTRICITY\\LNPreserve\\build\\later-checks.log",
+    "elapsed_seconds": 4.84,
+    "retest_note": "Passed after repairing test-only HUD capture surface; remaining 21 focused cases passed in the preceding run."
+  },
   "--ln3-hud-test": {
     "status": "passed",
     "exit_code": 0,
@@ -7,7 +19,7 @@
     },
     "error": null,
     "log": "D:\\POLYTRICITY\\LNPreserve\\build\\ln3-hud-test.log",
-    "elapsed_seconds": 6.11
+    "elapsed_seconds": 11.44
   },
   "--ln2-followup-test": {
     "status": "passed",
@@ -17,7 +29,7 @@
     },
     "error": null,
     "log": "D:\\POLYTRICITY\\LNPreserve\\build\\ln2-followup-test.log",
-    "elapsed_seconds": 11.33
+    "elapsed_seconds": 11.28
   },
   "--ln2-sewer-original-test": {
     "status": "passed",
@@ -27,7 +39,7 @@
     },
     "error": null,
     "log": "D:\\POLYTRICITY\\LNPreserve\\build\\ln2-sewer-original-test.log",
-    "elapsed_seconds": 7.64
+    "elapsed_seconds": 6.83
   },
   "--ln2-sewer-flames-test": {
     "status": "passed",
@@ -37,17 +49,17 @@
     },
     "error": null,
     "log": "D:\\POLYTRICITY\\LNPreserve\\build\\ln2-sewer-flames-test.log",
-    "elapsed_seconds": 1.33
+    "elapsed_seconds": 1.31
   },
   "--ln2-item-use-test": {
-    "status": "failed",
+    "status": "passed",
     "exit_code": 0,
     "markers": {
-      "LN2_ITEM_USE_PASS": false
+      "LN2_ITEM_USE_PASS": true
     },
     "error": null,
     "log": "D:\\POLYTRICITY\\LNPreserve\\build\\ln2-item-use-test.log",
-    "elapsed_seconds": 2.64
+    "elapsed_seconds": 5.25
   },
   "--ln2-street-snags-test": {
     "status": "passed",
@@ -68,7 +80,7 @@
     },
     "error": null,
     "log": "D:\\POLYTRICITY\\LNPreserve\\build\\ninja-transitions-test.log",
-    "elapsed_seconds": 1.77
+    "elapsed_seconds": 1.75
   },
   "--ln2-lives-pickup-test": {
     "status": "passed",
@@ -78,7 +90,7 @@
     },
     "error": null,
     "log": "D:\\POLYTRICITY\\LNPreserve\\build\\ln2-lives-pickup-test.log",
-    "elapsed_seconds": 2.58
+    "elapsed_seconds": 2.78
   },
   "--function-keys-test": {
     "status": "passed",
@@ -88,7 +100,7 @@
     },
     "error": null,
     "log": "D:\\POLYTRICITY\\LNPreserve\\build\\function-keys-test.log",
-    "elapsed_seconds": 0.91
+    "elapsed_seconds": 0.97
   },
   "--ln2-gap-landing-test": {
     "status": "passed",
@@ -98,7 +110,7 @@
     },
     "error": null,
     "log": "D:\\POLYTRICITY\\LNPreserve\\build\\ln2-gap-landing-test.log",
-    "elapsed_seconds": 1.69
+    "elapsed_seconds": 1.72
   },
   "--ln2-fence-gap-boat-test": {
     "status": "passed",
@@ -118,7 +130,7 @@
     },
     "error": null,
     "log": "D:\\POLYTRICITY\\LNPreserve\\build\\ln2-water-knife-test.log",
-    "elapsed_seconds": 1.45
+    "elapsed_seconds": 1.72
   },
   "--ln2-reported-encounters-test": {
     "status": "passed",
@@ -128,7 +140,7 @@
     },
     "error": null,
     "log": "D:\\POLYTRICITY\\LNPreserve\\build\\ln2-reported-encounters-test.log",
-    "elapsed_seconds": 1.25
+    "elapsed_seconds": 1.53
   },
   "--ln1-magic-test": {
     "status": "passed",
@@ -139,7 +151,7 @@
     },
     "error": null,
     "log": "D:\\POLYTRICITY\\LNPreserve\\build\\ln1-magic-test.log",
-    "elapsed_seconds": 2.86
+    "elapsed_seconds": 3.05
   },
   "--pickup-crt-test": {
     "status": "passed",
@@ -150,7 +162,7 @@
     },
     "error": null,
     "log": "D:\\POLYTRICITY\\LNPreserve\\build\\pickup-crt-test.log",
-    "elapsed_seconds": 1.47
+    "elapsed_seconds": 1.64
   },
   "--jump-assist-test": {
     "status": "passed",
@@ -160,7 +172,7 @@
     },
     "error": null,
     "log": "D:\\POLYTRICITY\\LNPreserve\\build\\jump-assist-test.log",
-    "elapsed_seconds": 1.0
+    "elapsed_seconds": 2.36
   },
   "--reverse-roll-test": {
     "status": "passed",
@@ -170,7 +182,7 @@
     },
     "error": null,
     "log": "D:\\POLYTRICITY\\LNPreserve\\build\\reverse-roll-test.log",
-    "elapsed_seconds": 0.89
+    "elapsed_seconds": 0.92
   },
   "--crt-live-test": {
     "status": "passed",
@@ -180,7 +192,7 @@
     },
     "error": null,
     "log": "D:\\POLYTRICITY\\LNPreserve\\build\\crt-live-test.log",
-    "elapsed_seconds": 1.28
+    "elapsed_seconds": 1.36
   },
   "--window-presets-test": {
     "status": "passed",
@@ -190,7 +202,7 @@
     },
     "error": null,
     "log": "D:\\POLYTRICITY\\LNPreserve\\build\\window-presets-test.log",
-    "elapsed_seconds": 1.67
+    "elapsed_seconds": 1.78
   },
   "--xbox-test": {
     "status": "passed",
@@ -200,7 +212,7 @@
     },
     "error": null,
     "log": "D:\\POLYTRICITY\\LNPreserve\\build\\xbox-test.log",
-    "elapsed_seconds": 0.75
+    "elapsed_seconds": 0.92
   },
   "--save-ui-test": {
     "status": "passed",
@@ -210,6 +222,6 @@
     },
     "error": null,
     "log": "D:\\POLYTRICITY\\LNPreserve\\build\\save-ui-test.log",
-    "elapsed_seconds": 1.81
+    "elapsed_seconds": 1.74
   }
 }

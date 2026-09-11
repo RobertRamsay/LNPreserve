@@ -1,0 +1,16 @@
+{
+  "status": "passed",
+  "targeted_markers": [
+    "LN2_SCENERY_GRAB_PASS",
+    "LN2_GRATE_RISE_PASS",
+    "LN2_MANSION_ALARM_PASS",
+    "LN2_LATER_LEVEL_PASS",
+    "LN2_SAFE_CODE_PASS"
+  ],
+  "log": "build/later-checks.log",
+  "structural": {
+    "passed": 9,
+    "skipped": 1
+  },
+  "manual_playthrough": false
+}

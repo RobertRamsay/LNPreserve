@@ -1,0 +1,17 @@
+{
+  "damage_multiplier": 4,
+  "normal_period": 12,
+  "reset_period": 3,
+  "reset_retains_damage_flag": true,
+  "rooms": [
+    2,
+    3,
+    7,
+    8,
+    9
+  ],
+  "source_damage": 42827,
+  "source_reset": 48458,
+  "source_sensor": 40433,
+  "source_tick": 39986
+}

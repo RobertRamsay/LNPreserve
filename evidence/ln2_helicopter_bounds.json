@@ -1,0 +1,74 @@
+[
+  {
+    "bounds": [
+      75,
+      62,
+      147,
+      96
+    ],
+    "level": 5,
+    "mirror": false,
+    "origin": [
+      96,
+      112
+    ],
+    "shared": [
+      11,
+      15
+    ]
+  },
+  {
+    "bounds": [
+      37,
+      62,
+      109,
+      96
+    ],
+    "level": 5,
+    "mirror": true,
+    "origin": [
+      96,
+      112
+    ],
+    "shared": [
+      11,
+      15
+    ]
+  },
+  {
+    "bounds": [
+      45,
+      32,
+      117,
+      66
+    ],
+    "level": 6,
+    "mirror": false,
+    "origin": [
+      96,
+      112
+    ],
+    "shared": [
+      11,
+      2
+    ]
+  },
+  {
+    "bounds": [
+      67,
+      32,
+      139,
+      66
+    ],
+    "level": 6,
+    "mirror": true,
+    "origin": [
+      96,
+      112
+    ],
+    "shared": [
+      11,
+      2
+    ]
+  }
+]

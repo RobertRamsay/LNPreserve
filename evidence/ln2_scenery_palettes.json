@@ -1,0 +1,26 @@
+[
+  {
+    "frames": [
+      99
+    ],
+    "level": 4,
+    "shared": [
+      11,
+      12
+    ],
+    "sprite": "spr_ln2_basement_trolley"
+  },
+  {
+    "frames": [
+      99,
+      100,
+      101
+    ],
+    "level": 5,
+    "shared": [
+      11,
+      12
+    ],
+    "sprite": "spr_ln2_office_fan"
+  }
+]
