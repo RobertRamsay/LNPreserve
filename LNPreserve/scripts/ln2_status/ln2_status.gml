@@ -59,9 +59,16 @@ function ln2_status_draw(_g,_x,_y,_scale) {
     draw_sprite_ext(spr_ln2_enemy_health,clamp(round(_g.status.health[1]),0,44),_x+16*_scale,_y+152*_scale,_scale,_scale,0,c_white,1);
     var _icons=asset_get_index("spr_ln2_level"+string(_g.level)+"_status_icons");
     draw_sprite_ext(_icons,clamp(_g.player.selected_weapon,0,4),_x+264*_scale,_y+24*_scale,_scale,_scale,0,c_white,1);
-    var _found=_g.notice_item>=0,_item=_found?_g.notice_item:_g.selected_item;
+    var _code_visible=_g.level==5 && _g.room_id==3 && _g.world_state.code_visible;
+    var _found=_code_visible || _g.notice_item>=0,_item=_g.notice_item>=0?_g.notice_item:_g.selected_item;
     draw_sprite_ext(spr_ln2_status_labels,real(_found),_x+248*_scale,_y+56*_scale,_scale,_scale,0,c_white,1);
-    if (_item==10) draw_sprite_ext(spr_ln2_molotov_states,ln2_molotov_frame(_g),_x+264*_scale,_y+72*_scale,_scale,_scale,0,c_white,1);
+    if (_code_visible) {
+        for(var _digit=0;_digit<4;_digit++)
+            draw_sprite_ext(spr_ln2_keypad_digits,clamp(_g.keycode[_digit]-27,0,9)*2,
+                _x+(264+8*_digit)*_scale,_y+72*_scale,_scale,_scale,0,c_white,1);
+    }
+    else if (_item==10) draw_sprite_ext(spr_ln2_molotov_states,ln2_molotov_frame(_g),_x+264*_scale,_y+72*_scale,_scale,_scale,0,c_white,1);
+    else if (_item==14 && _g.level==4 && _g.inventory[19]!=0) draw_sprite_ext(spr_ln2_drugged_drumstick,0,_x+264*_scale,_y+72*_scale,_scale,_scale,0,c_white,1);
     else if (_item==16) draw_sprite_ext(spr_ln2_orb_icon,0,_x+264*_scale,_y+72*_scale,_scale,_scale,0,c_white,1);
     else draw_sprite_ext(_icons,clamp(_item,0,16),_x+264*_scale,_y+72*_scale,_scale,_scale,0,c_white,1);
     for (var _i=0;_i<6;_i++) {

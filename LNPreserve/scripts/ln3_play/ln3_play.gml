@@ -20,6 +20,7 @@ function LN3Play(_level=1) constructor {
     scenery=ln3_data_read(_path+"scenery_animation.json");
     special=ln3_data_read(_path+"special.json");mechanisms=ln3_data_read("play/ln3/mechanisms.json");
     state=json_parse(json_stringify(data.initial));title=world.title;room_id=-1;scene_record=undefined;
+    state.reverse_roll_enabled=true;state.reverse_roll=undefined;
     var _fields=variable_struct_get_names(special.initial);
     for (var _i=0;_i<array_length(_fields);_i++) variable_struct_set(state,_fields[_i],variable_struct_get(special.initial,_fields[_i]));
     special_sequence=0;special_step=0;special_request=0;special_colours=array_create(8,-1);

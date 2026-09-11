@@ -309,6 +309,7 @@ function ln3_status_draw(_g) {
 
 function ln3_status_checks() {
     ln3_consumable_checks();
+    ln3_reverse_roll_checks();
     ln3_followup_checks();
     var _v=ln3_data_read("verification/ln3_hud_vectors.json").vectors;
     for(var _i=0;_i<array_length(_v);_i++) {

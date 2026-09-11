@@ -175,7 +175,7 @@ function ln2_force_exit(_g,_slot) {
 /// scenery actor moving while ordinary controls and combat are suspended.
 function ln2_fall_begin(_g,_distance,_depth) {
     var _p=_g.player;_p.depth_y=_depth;_p.height_fixed=255;_g.fall_exit_slot=-1;
-    _g.fall_remaining=_distance;_g.fall_clock=_p.tick;_g.exit_locked=true;
+    _g.fall_remaining=_distance;_g.fall_clock=_p.tick;_g.exit_locked=true;_g.fall_safe_landing=false;
 }
 
 function ln2_fall_tick(_g,_tick) {
@@ -190,6 +190,9 @@ function ln2_fall_tick(_g,_tick) {
                 var _slot=_g.fall_exit_slot;_g.fall_exit_slot=-1;_g.exit_locked=false;
                 _p.input_lock=0;_p.boundary_crossings=0;
                 ln2_play_travel(_g,_g.scene_record.entries[_slot]);return;
+            }
+            if (variable_struct_exists(_g,"fall_safe_landing") && _g.fall_safe_landing) {
+                _g.fall_safe_landing=false;_g.exit_locked=false;_p.input_lock=0;_p.boundary_crossings=0;return;
             }
             ln2_fall_death_begin(_g);return;
         }
@@ -369,7 +372,7 @@ function ln2_drowning_tick(_g,_tick) {
     ln2_projectile_present(_g);
     if (_p.action>=256) return;
     if (_d.phase==2 && --_d.steps>0) {
-        ln2_player_special(_g,((_p.facing+2)&4)?$cd02:$ccf9);return;
+        ln2_player_special(_g,variable_struct_exists(_g.data,"source_sink")?_g.data.source_sink[((_p.facing+2)&4)?1:0]:(((_p.facing+2)&4)?$cd02:$ccf9));return;
     }
     if (_d.phase==1 || _d.phase==4 ||
         (_d.phase==2 && variable_struct_exists(_d,"water") && _d.water)) {
@@ -400,6 +403,7 @@ function ln2_drowning_tick(_g,_tick) {
 }
 
 function ln2_hazard_boundary(_g) {
+    if (_g.level>=4 && _g.level<=6) return ln2_later_boundary(_g);
     if (_g.level==2) return ln2_street_traffic_boundary(_g);
     if (_g.level!=1) return false;
     if (ln2_park_traversal_boundary(_g)) return true;
@@ -504,7 +508,9 @@ function ln2_fence_tick(_g,_tick) {
     if (_p.action>=256) return;
     _f.index++;
     if (_f.index<array_length(_f.actions)) {ln2_player_special(_g,_f.actions[_f.index]);return;}
-    if (!_f.descending) {_p.depth_y=152;_p.height_fixed=255;}
+    if (variable_struct_exists(_f,"source_ladder")) {
+        _p.depth_y=_f.descending?_p.y:152;_p.height_fixed=_f.descending?0:255;
+    } else if (!_f.descending) {_p.depth_y=152;_p.height_fixed=255;}
     _p.boundary_crossings=0;_p.action_state=0;_p.walk_clock=0;
     _g.exit_locked=_f.exit_locked;_g.world_state.fence=undefined;
 }
@@ -529,7 +535,9 @@ function ln2_park_traversal_boundary(_g) {
 
 function ln2_blocking_sequence(_g) {
     if (!variable_struct_exists(_g,"world_state")) return false;
-    return (variable_struct_exists(_g.world_state,"drowning") && is_struct(_g.world_state.drowning)) ||
+    return (variable_struct_exists(_g,"crate_jump") && is_struct(_g.crate_jump)) ||
+        (variable_struct_exists(_g,"fall_remaining") && _g.fall_remaining>=0) ||
+        (variable_struct_exists(_g.world_state,"drowning") && is_struct(_g.world_state.drowning)) ||
         (variable_struct_exists(_g.world_state,"fence") && is_struct(_g.world_state.fence));
 }
 
@@ -1315,4 +1323,135 @@ function ln1_frontend_bitmap(_g) {
     ln1_frontend_label("THE",132,_colour);
     ln1_frontend_label(string_upper(_g.title),148,_colour);
     draw_set_colour(c_white);
+}
+
+/// Recovered Basement/Office ladder actions and later-level boundary dispatch.
+function ln2_source_ladder_begin(_g,_actions,_descending) {
+    _g.world_state.fence={actions:_actions,index:0,descending:_descending,exit_locked:_g.exit_locked,source_ladder:true};
+    _g.exit_locked=true;
+    if (_g.level==4) {_g.player.height_fixed=255;if (_descending) _g.player.depth_y=158;}
+    ln2_player_special(_g,_actions[0]);
+}
+
+function ln2_later_boundary(_g) {
+    var _p=_g.player,_mode=_p.boundary_mode&63;
+    if (!(_p.boundary_crossings&128) || (!(_p.boundary_mode&64) && _p.action>=256)) return false;
+    if (_g.level==4) {
+        if (_mode==9 || _mode==10) {
+            if (_p.facing==7 && _p.weapon==0) {
+                ln2_source_ladder_begin(_g,_mode==9?[ $bd71,$bd7e,$bd7e,$bd7e,$bd93]:[ $bd33,$bd38,$bd38,$bd38,$bd4d],_mode==9);return true;
+            }
+            if (_mode==10) {_p.boundary_crossings=0;return false;}
+            _mode=46;
+        }
+        if (_mode>=49 && _mode<=53) {
+            if (!(_p.boundary_crossings&1)) return false;
+            ln2_fall_begin(_g,30,4+8*(_mode-49));return true;
+        }
+        if (_mode==46) {
+            _p.depth_y=158;_p.height_fixed=255;
+            _g.world_state.drowning={phase:2,steps:8,saved_y:_p.y,saved_facing:_p.facing,landing_death:true};
+            _g.exit_locked=true;_p.boundary_crossings=0;
+            ln2_player_special(_g,_g.data.source_sink[((_p.facing+2)&4)?1:0]);return true;
+        }
+        if (_mode==47 && (_p.boundary_crossings&1)) {ln2_fall_death_begin(_g);return true;}
+    }
+    if (_g.level==5) {
+        if (_mode>=42 && _mode<=45) {
+            var _descending=(_mode&1)!=0,_facing=_mode>=44?1:7;
+            if (_p.facing==_facing && _p.weapon==0) {
+                ln2_source_ladder_begin(_g,_descending?[ $bbe2,$bbf4,$bc09]:[ $bba9,$bbae,$bbae,$bbae,$bbae,$bbae,$bbae,$bbae],_descending);return true;
+            }
+            if (!_descending) {_p.boundary_crossings=0;return false;}
+            _mode=7;_p.depth_y=_p.y;
+        }
+        if (_mode==7) {
+            _g.world_state.drowning={phase:2,steps:8,saved_y:_p.y,saved_facing:_p.facing,landing_death:true};
+            _g.exit_locked=true;_p.boundary_crossings=0;
+            ln2_player_special(_g,_g.data.source_sink[((_p.facing+2)&4)?1:0]);return true;
+        }
+        if (_mode==47) {ln2_fall_begin(_g,48,2);return true;}
+        if (_mode==48 && (_p.boundary_crossings&1)) {ln2_fall_begin(_g,max(0,189-_p.y),_p.depth_y);return true;}
+        if (_mode==49 && !(_p.boundary_crossings&1) && _p.input_lock==0) _g.exit_locked=false;
+    }
+    if (_g.level==6) {
+        switch (_mode) {
+            case 47:if (_g.inventory[24]==0) _g.inventory[18]=255;return false;
+            case 48:ln2_fall_begin(_g,31,4);return true;
+            case 49:ln2_fall_begin(_g,48,4);return true;
+            case 50:if (_p.boundary_crossings&1) {ln2_fall_begin(_g,48,128);return true;}return false;
+            case 51:ln2_fall_begin(_g,255,224);return true;
+            case 52:ln2_fall_begin(_g,40,80);return true;
+            case 53:ln2_fall_begin(_g,30,64);return true;
+            case 55:
+                ln2_fall_begin(_g,_p.x>=112?24:64,_p.x>=112?80:4);
+                _g.fall_safe_landing=_p.x>=112;return true;
+            case 56:
+                _p.combat_state=12;_p.depth_y=4;_p.height_fixed=255;
+                if (_p.weapon==0 && _p.facing!=3 && _p.facing!=5 && _g.selected_item==15) {
+                    ln2_player_special(_g,$c0ab);_p.boundary_crossings=0;return true;
+                }
+                ln2_fall_begin(_g,48,4);return true;
+            case 57:ln2_fall_death_begin(_g);return true;
+        }
+    }
+    return false;
+}
+
+
+/// Scene 9 crate tops and banks, in the source boundary coordinate system.
+function ln2_basement_jump_input(_g,_joy) {
+    if (variable_struct_exists(_g,"crate_jump") && is_struct(_g.crate_jump)) return 0;
+    if (!variable_struct_exists(_g,"crate_taps")) _g.crate_taps={previous:0,remaining:0};
+    var _t=_g.crate_taps,_p=_g.player,_fire=_joy&16,_edge=_fire!=0 && _t.previous==0;
+    _t.previous=_fire;_t.remaining=max(0,_t.remaining-1);
+    if (_g.level!=4 || _g.room_id!=8 || (_joy&15)!=0 || _p.input_lock!=0 || _p.vehicle!=0 ||
+        _g.fall_remaining>=0 || _g.respawn_wait>0 || ln2_blocking_sequence(_g)) {_t.remaining=0;return _joy;}
+    if (!_edge) return _joy;
+    if (_p.action>=256) return _joy;
+    if (_t.remaining==0) {_t.remaining=30;return 0;}
+    _t.remaining=0;
+    var _targets=[[60,94],[84,125],[132,109],[132,133],[168,155]],_target=-1,_best=4097;
+    var _group=_p.facing>>1,_mask=1<<_p.facing;
+    var _vx=real((_g.data.right[_group]&_mask)!=0)-real((_g.data.left[_group]&_mask)!=0);
+    var _vy=real((_g.data.down[_group]&_mask)!=0)-real((_g.data.up[_group]&_mask)!=0);
+    for(var _i=0;_i<array_length(_targets);_i++) {
+        var _dx=_targets[_i][0]-_p.x,_dy=_targets[_i][1]-_p.y,_distance=sqr(_dx)+sqr(_dy);
+        if (_distance<64 || _distance>=_best || _dx*_vx+_dy*_vy<=0) continue;
+        // Never assist through a solid wall; hazard lines are traversable in flight.
+        var _probe=json_parse(json_stringify(_p)),_blocked=false,_ox=_p.x,_oy=_p.y;
+        for(var _step=1;_step<=32;_step++) {
+            var _nx=round(lerp(_p.x,_targets[_i][0],_step/32)),_ny=round(lerp(_p.y,_targets[_i][1],_step/32));
+            if (ln2_player_boundary(_probe,_g.data,_ox,_oy,_nx,_ny)!=0) {_blocked=true;break;}
+            _ox=_nx;_oy=_ny;
+        }
+        if (!_blocked) {_best=_distance;_target=_i;}
+    }
+    if (_target<0) return 0;
+    var _address=_g.data.action_entries[(((_p.facing+2)&4)>>1)>>1],_frames=[],_duration=7,_total=0;
+    while(_address>=256) {
+        var _a=variable_struct_get(_g.data.actions,string(_address));
+        if (_a.duration>=0) _duration=_a.duration;
+        array_push(_frames,{frame:_a.frame,duration:_duration,flags:_a.flags});_total+=_duration;_address=_a.next;
+    }
+    _g.crate_jump={x:_p.x,y:_p.y,tx:_targets[_target][0],ty:_targets[_target][1],elapsed:0,total:_total,frames:_frames,exit_locked:_g.exit_locked};
+    _g.exit_locked=true;_p.stopped=255;_p.action=0;_p.boundary_crossings=0;return 0;
+}
+
+function ln2_basement_jump_tick(_g,_tick) {
+    var _j=_g.crate_jump,_p=_g.player;_p.tick=_tick;_p.last_tick=_tick;
+    var _last=_j.frames[array_length(_j.frames)-1],_flight=max(1,_j.total-_last.duration);
+    _j.elapsed++;var _fraction=min(1,_j.elapsed/_flight);
+    _p.x=round(lerp(_j.x,_j.tx,_fraction));_p.y=round(lerp(_j.y,_j.ty,_fraction));
+    _p.depth_y=_p.y;_p.fraction_x=0;_p.fraction_y=0;
+    var _remaining=_j.elapsed;
+    for(var _i=0;_i<array_length(_j.frames);_i++) {
+        var _f=_j.frames[_i];if (_remaining<=_f.duration) {_p.frame=_f.frame;ln2_player_render(_p,(_f.flags&16)?(_p.facing&2):(_f.flags&64));break;}
+        _remaining-=_f.duration;
+    }
+    ln2_enemy_action(_g);
+    if (_j.elapsed>=_j.total) {
+        _p.x=_j.tx;_p.y=_j.ty;_p.depth_y=_p.y;_p.action=0;_p.action_state=0;_p.boundary_mode=0;_p.boundary_crossings=0;
+        _p.stopped=255;_p.fire_previous=16;_g.exit_locked=_j.exit_locked;_g.crate_jump=undefined;
+    }
 }

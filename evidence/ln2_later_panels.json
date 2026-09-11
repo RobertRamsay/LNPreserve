@@ -1,0 +1,37 @@
+[
+  {
+    "changed_pixels": 574,
+    "flag": 17,
+    "level": 4,
+    "panel": 47778,
+    "room": 14
+  },
+  {
+    "changed_pixels": 736,
+    "flag": 17,
+    "level": 5,
+    "panel": 47391,
+    "room": 5
+  },
+  {
+    "changed_pixels": 1528,
+    "flag": 20,
+    "level": 5,
+    "panel": 47399,
+    "room": 9
+  },
+  {
+    "changed_pixels": 706,
+    "flag": 19,
+    "level": 6,
+    "panel": 48469,
+    "room": 9
+  },
+  {
+    "changed_pixels": 0,
+    "flag": 20,
+    "level": 6,
+    "panel": 48482,
+    "room": 9
+  }
+]

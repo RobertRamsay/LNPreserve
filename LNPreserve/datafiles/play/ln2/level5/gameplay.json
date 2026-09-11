@@ -1390,6 +1390,24 @@
       "next": 0,
       "state": -1
     },
+    "48041": {
+      "duration": 6,
+      "dx": 0,
+      "dy": 0,
+      "flags": 26,
+      "frame": 73,
+      "next": 48044,
+      "state": -1
+    },
+    "48044": {
+      "duration": -1,
+      "dx": 0,
+      "dy": 0,
+      "flags": 24,
+      "frame": 74,
+      "next": 48046,
+      "state": -1
+    },
     "48046": {
       "duration": 6,
       "dx": 0,
@@ -1505,6 +1523,42 @@
       "flags": 60,
       "frame": 0,
       "next": 0,
+      "state": -1
+    },
+    "48098": {
+      "duration": 3,
+      "dx": 0,
+      "dy": 8,
+      "flags": 154,
+      "frame": 75,
+      "next": 48103,
+      "state": -1
+    },
+    "48103": {
+      "duration": 3,
+      "dx": 0,
+      "dy": 8,
+      "flags": 154,
+      "frame": 75,
+      "next": 48108,
+      "state": -1
+    },
+    "48108": {
+      "duration": -1,
+      "dx": 0,
+      "dy": 8,
+      "flags": 152,
+      "frame": 75,
+      "next": 48112,
+      "state": -1
+    },
+    "48112": {
+      "duration": -1,
+      "dx": 0,
+      "dy": 8,
+      "flags": 152,
+      "frame": 75,
+      "next": 48116,
       "state": -1
     },
     "48116": {
@@ -54474,6 +54528,10 @@
     28
   ],
   "sewer_actor_reset": [],
+  "source_sink": [
+    50423,
+    50432
+  ],
   "speed_x": [
     256,
     128,

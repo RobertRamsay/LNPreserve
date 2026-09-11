@@ -9,6 +9,8 @@ function ln3_action_state_init(_s,_actions,_movement) {
 
 function ln3_action_set(_s,_data,_action,_enemy=false) {
     var _base=_enemy?4:0,_old=_enemy?_s.enemy_action:_s.player_action;
+    if (!_enemy && variable_struct_exists(_s,"reverse_roll") && is_struct(_s.reverse_roll) && _action!=_s.reverse_roll.action)
+        _s.reverse_roll=undefined;
     var _def=_data.actions[_action];
     if (_old!=_action) {
         for (var _i=0;_i<3;_i++) {

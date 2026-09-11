@@ -99,10 +99,6 @@ function ln2_keypad_tick(_g,_joy) {
 }
 
 function ln2_keypad_draw(_g) {
-    if (_g.world_state.code_visible) {
-        var _code="";for (var _i=0;_i<4;_i++) _code+=string(_g.keycode[_i]-27);
-        draw_text(800,760,"CODE  "+_code);
-    }
     if (!is_struct(_g.keypad)) return;
     // Original LN2 entry is four C64 characters in the HOLDING area.
     var _x=160+264*3,_y=84+72*3;
@@ -278,6 +274,7 @@ function ln2_final_gpu_checks() {
 }
 
 function ln2_safe_code_checks() {
+    ln2_later_level_checks();
     var _g=new LN2Play(5);ln2_play_enter(_g,3);
     _g.keycode=[31,35,29,33]; // 4826: distinguish carried data from defaults.
     _g.player.x=205;_g.player.y=130;_g.player.facing=1;
@@ -307,4 +304,58 @@ function ln2_safe_code_checks() {
     if(file_exists(_path)) file_delete(_path);if(file_exists(_path+".bak")) file_delete(_path+".bak");
     ln2_keypad_checks();
     show_debug_message("LN2_SAFE_CODE_PASS: computer scoring, office code across levels/disk saves, real code and unconditional zero alternate");
+}
+
+function ln2_later_level_checks() {
+    for(var _level=4;_level<=5;_level++) {
+        var _modes=_level==4?[10,9]:[42,43,44,45];
+        for(var _i=0;_i<array_length(_modes);_i++) {
+            var _g=new LN2Play(_level);ln2_play_enter(_g,_level==4?1:6);var _p=_g.player;
+            _g.enemy.active=0;_p.x=138;_p.y=130;_p.action=0;_p.facing=_modes[_i]>=44?1:7;_p.weapon=0;
+            _p.boundary_mode=_modes[_i];_p.boundary_crossings=129;
+            ln_check(ln2_hazard_boundary(_g) && is_struct(_g.world_state.fence),"source ladder trigger "+string(_level)+":"+string(_modes[_i]));
+            var _start=_p.y,_ticks=0;
+            while(is_struct(_g.world_state.fence) && _ticks++<500) ln2_fence_tick(_g,_ticks&255);
+            ln_check(_ticks<500 && _p.y!=_start,"source ladder sequence completes with vertical movement");
+            ln_check(_g.exit_locked==false && _p.boundary_crossings==0,"ladder releases controls and crossing state");
+        }
+    }
+    var _cases=[[4,8,49],[4,8,50],[4,8,51],[4,8,52],[4,8,53],[5,10,47],[5,10,48],[6,1,48],[6,1,49],[6,1,50],[6,1,51],[6,1,52],[6,1,53]];
+    for(var _i=0;_i<array_length(_cases);_i++) {
+        var _c=_cases[_i],_g=new LN2Play(_c[0]);ln2_play_enter(_g,_c[1]);var _p=_g.player;
+        _p.action=0;_p.boundary_mode=_c[2];_p.boundary_crossings=129;_p.y=100;_g.enemy.active=0;
+        ln_check(ln2_hazard_boundary(_g) && _g.fall_remaining>=0,"later level edge starts fall");
+        var _ticks=0;while(_g.fall_remaining>=0 && _ticks++<100) ln2_fall_tick(_g,_ticks&255);
+        ln_check(_ticks<100 && is_struct(_g.world_state.drowning) && _g.world_state.drowning.phase==3,"fall reaches visible land death");
+    }
+    var _panels=[[4,14,17],[5,5,17],[5,9,20],[6,9,19]];
+    for(var _i=0;_i<array_length(_panels);_i++) {
+        var _c=_panels[_i],_g=new LN2Play(_c[0]);ln2_play_enter(_g,_c[1]);
+        _g.inventory[_c[2]]=0;ln2_refresh_scene(_g);ln_check(_g.scene_frame==0,"mechanism starts closed");
+        _g.inventory[_c[2]]=255;ln2_refresh_scene(_g);ln_check(_g.scene_frame==1,"mechanism displays original open panel");
+        _g=ln_save_restore(ln_save_capture(_g));ln_check(_g.scene_frame==1,"open panel survives restore");
+        ln2_play_draw(_g);surface_save(_g.stage_surface,"ln2-panel-"+string(_c[0])+"-"+string(_c[1])+".png");
+    }
+    var _g=new LN2Play(5);ln2_play_enter(_g,3);_g.keycode=[31,35,29,33];
+    var _surface=surface_create(320,200);_g.world_state.code_visible=false;
+    var _before=ln2_hud_hash(_g,_surface,[264,72,296,80]);_g.world_state.code_visible=true;
+    var _after=ln2_hud_hash(_g,_surface,[264,72,296,80]);
+    ln_check(_before!=_after,"computer digits change FOUND region pixels");surface_save(_surface,"ln2-office-code-found.png");surface_free(_surface);
+
+    var _g=new LN2Play(4);ln2_play_enter(_g,8);var _p=_g.player;
+    _p.x=84;_p.y=125;_p.facing=1;_p.heading=1;_p.action=0;_p.vehicle=0;_p.input_lock=0;_p.boundary_crossings=0;
+    ln2_basement_jump_input(_g,0);ln2_basement_jump_input(_g,16);
+    ln_check(!variable_struct_exists(_g,"crate_jump") || !is_struct(_g.crate_jump),"one fire cannot start automatic crate jump");
+    ln2_basement_jump_input(_g,0);ln2_basement_jump_input(_g,16);
+    ln_check(is_struct(_g.crate_jump),"double fire finds crate ahead");
+    var _tx=_g.crate_jump.tx,_ty=_g.crate_jump.ty,_ticks=0;
+    _g=ln_save_restore(ln_save_capture(_g));_p=_g.player;
+    while(is_struct(_g.crate_jump) && _ticks++<250) ln2_basement_jump_tick(_g,_ticks&255);
+    ln_check(_ticks<250 && _p.x==_tx && _p.y==_ty && _p.action<256,"saved automatic jump lands standing on support");
+    _g=new LN2Play(4);ln2_play_enter(_g,8);_p=_g.player;_p.x=84;_p.y=125;_p.action=0;
+    ln_check(ln2_basement_jump_input(_g,17)==17,"directional fire remains manual");
+    _g.selected_item=14;_g.notice_item=-1;_g.inventory[19]=0;var _s=surface_create(320,200);
+    var _red=ln2_hud_hash(_g,_s,[264,72,304,104]);_g.inventory[19]=255;
+    ln_check(ln2_hud_hash(_g,_s,[264,72,304,104])!=_red,"drugged drumstick changes HUD colour");surface_free(_s);
+    show_debug_message("LN2_LATER_LEVEL_PASS: six ladders, thirteen fall modes, four persistent panels and computer HUD pixels");
 }

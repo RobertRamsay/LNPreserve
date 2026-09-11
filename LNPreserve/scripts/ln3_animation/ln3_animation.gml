@@ -86,11 +86,15 @@ function ln3_animation_update(_s,_data) {
         if (!(_s.enabled&_mask)) continue;
         var _seq=_data.sequences[_p.animation],_length=array_length(_seq.frames);
         if (_p.cursor>=_length) _p.cursor=_seq.loop?0:_length-1;
-        _p.frame=_seq.frames[_p.cursor];
+        var _timeline_cursor=_p.cursor;
+        var _reverse=_i<3 && variable_struct_exists(_s,"reverse_roll") && is_struct(_s.reverse_roll) &&
+            _s.player_action==_s.reverse_roll.action;
+        _p.frame=_seq.frames[_reverse?_length-1-_timeline_cursor:_timeline_cursor];
         if (_p.cursor+1>=_length) {
             if (_i==1) _s.player_action_flags=1;
             if (_i==5) _s.enemy_action_flags=5;
         }
+        if (_reverse) _p.cursor=_length-1-_timeline_cursor;
         ln3_animation_head(_s,_data,_i);ln3_animation_offset(_s,_data,_i);ln3_animation_visibility(_s,_i);
         if (_i==1) {ln3_animation_weapon(_s,_data,false);ln3_animation_throw(_s,_data,false);}
         if (_i==5 && !(_data.hazard_actor_exempt && _s.parts[4].animation==138)) {
@@ -99,6 +103,7 @@ function ln3_animation_update(_s,_data) {
         _s.draw_frames[_i]=_p.frame;_s.draw_x[_i]=_p.x;_s.draw_y[_i]=_p.y;
         _s.draw_colours[_i]=_p.colour;_s.draw_mirror[_i]=(_s.mirror&_mask)!=0;
         _s.drawn_mask|=_mask;
+        if (_reverse) _p.cursor=_timeline_cursor;
         if (_p.animation==115 || (_i!=3 && _i!=7)) _p.cursor=(_p.cursor+1)&255;
     }
     _s.draw_buffer^=1;

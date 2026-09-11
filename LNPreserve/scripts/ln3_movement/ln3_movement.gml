@@ -6,6 +6,11 @@ function ln3_movement_setup(_s,_data) {
         var _v=_data.motion[_p.move_mode&127];
         _p.direction=variable_struct_exists(_s,"motion_directions")?_s.motion_directions[_p.move_mode&127]:_v.direction;
         _p.dx=_v.dx;_p.dy=_v.dy;
+        if (_i<3 && variable_struct_exists(_s,"reverse_roll") && is_struct(_s.reverse_roll) &&
+            _s.player_action==_s.reverse_roll.action) {
+            // Hold the reversed landing pose for its first normal animation tick.
+            _p.direction=_s.parts[1].cursor==0?0:_s.reverse_roll.direction;
+        }
     }
 }
 

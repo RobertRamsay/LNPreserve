@@ -147,6 +147,15 @@ function ln2_refresh_scene(_g) {
     if (_g.level==3 && _g.room_id==5) {
         _g.scene=spr_ln2_sewer_grate_states;_g.scene_frame=real(_g.inventory[20]!=0);
     }
+    var _panel_flag=-1;
+    if (_g.level==4 && _g.room_id==14) _panel_flag=17;
+    if (_g.level==5 && _g.room_id==5) _panel_flag=17;
+    if (_g.level==5 && _g.room_id==9) _panel_flag=20;
+    if (_g.level==6 && _g.room_id==9) _panel_flag=_g.inventory[20]!=0?20:19;
+    if (_panel_flag>=0) {
+        _g.scene=asset_get_index("spr_ln2_panel_"+string(_g.level)+"_"+string(_g.room_id)+"_"+string(_panel_flag));
+        _g.scene_frame=real(_g.inventory[_panel_flag]!=0);
+    }
     // Source item completion draws these panels immediately, not on room entry.
     if (_g.level==7 && _g.room_id==1) {
         _g.safe_scene_phase=_g.inventory[23]!=0?4:(_g.inventory[18]!=0?(_g.inventory[16]==255?3:2):(_g.inventory[17]!=0?1:0));
