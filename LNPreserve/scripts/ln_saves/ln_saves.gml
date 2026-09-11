@@ -84,6 +84,8 @@ function ln_save_restore(_save) {
     }
     if (_g.game_number!=_save.game || _g.level!=_save.level || _g.room_id!=_save.room) throw "Invalid save identity";
     if (_save.game==2) {
+        // Keep the normal movement mode even for saves made with rotated input.
+        _g.player.control_rotation=1;
         ln2_sewer_network_prepare(_g);
         // Saves contain their original action graph. Add newly recovered roots
         // without replacing saved animation records or player progression.

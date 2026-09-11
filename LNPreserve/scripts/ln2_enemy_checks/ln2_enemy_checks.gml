@@ -34,6 +34,17 @@ function ln2_enemy_checks() {
 }
 
 function ln2_revival_context_checks() {
+    for(var _mode_level=1;_mode_level<=7;_mode_level++) {
+        var _mode_game=new LN2Play(_mode_level);
+        ln_check(_mode_game.player.control_rotation==1,"every LN2 level starts with normal movement");
+        _mode_game.player.control_rotation=0;
+        var _mode_save=ln_save_capture(_mode_game),_mode_loaded=ln_save_restore(json_parse(json_stringify(_mode_save)));
+        ln_check(_mode_loaded.player.control_rotation==1 && _mode_loaded.room_id==_mode_game.room_id,"old rotated saves load with normal movement without changing room");
+        if (_mode_level<7) {
+            ln2_level_load(_mode_loaded,_mode_level+1);
+            ln_check(_mode_loaded.player.control_rotation==1,"level changes preserve normal movement");
+        }
+    }
     for(var _level=6;_level<=7;_level++) for(var _room=1;_room<=2;_room++)
     for(var _costume=0;_costume<=2;_costume+=2) for(var _defeated=0;_defeated<2;_defeated++) {
         var _g=new LN2Play(_level),_e=_g.enemy;
