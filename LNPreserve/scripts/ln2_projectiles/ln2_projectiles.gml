@@ -164,7 +164,7 @@ function ln2_projectile_reset(_g) {
 
 function ln2_projectile_state(_g,_tick) {
     return {tick:_tick,previous:_g.projectile_clock,weapon:_g.player.weapon,selected_weapon:_g.player.selected_weapon,
-        selected_item:_g.selected_item,ammo:_g.inventory[4],object_flag:_g.inventory[19],
+        selected_item:_g.selected_item,ammo:_g.inventory[4],object_flag:real(_g.molotov.lit),
         actor_x:[_g.player.x,_g.enemy.x],actor_y:[_g.player.y,_g.enemy.y],facing:[_g.player.facing,_g.enemy.facing],
         combat:[_g.player.combat_state,_g.enemy.combat_state],enemy_active:_g.enemy.active,projectiles:_g.projectiles};
 }

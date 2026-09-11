@@ -82,7 +82,7 @@ function ln2_entry_hook(_g) {
 function ln2_level_effect_tick(_g,_joy) {
     var _p=_g.player,_e=_g.enemy;
     if (_g.level==2 && _e.custom && _e.frame==114 && (_e.x>240 || _e.action<256)) {
-        _e.action=0;_e.y=0;_e.display_frame=255;
+        _e.action=0;_e.x=0;_e.y=0;_e.display_frame=255;
     }
     switch (_g.special_mode) {
         case 0:return;
@@ -804,6 +804,7 @@ function ln2_street_traffic_boundary(_g) {
     if (_mode<35 || _mode>37) return false;
     var _danger=_mode==36?_g.inventory[18]!=0:_g.inventory[18]==0;
     if (_danger && _e.y==0) {
+        _e.x=0;_e.fraction_x=0;_e.fraction_y=0;
         ln2_environment_action(_g,_mode==35?$c8ce:(_mode==36?$c8ec:$c8f8));
         ln2_damage(_g,44,false);
     }
@@ -1120,6 +1121,8 @@ function ln2_loader_draw(_g) {
 }
 
 function ln2_followup_checks() {
+    ln2_road_probe();
+    ln2_molotov_checks();
     var _v=ln3_data_read("verification/ln2_alligator_checks.json"),_g=new LN2Play(3);
     ln2_play_enter(_g,14);
     for(var _i=0;_i<array_length(_v.cases);_i++) {
@@ -1184,4 +1187,25 @@ function ln2_scene_number(_g) {
         if (_g.world.rooms[_i].id==_g.room_id) return _number;
     }
     return _g.room_id;
+}
+
+function ln2_road_probe() {
+    for(var _ri=0;_ri<3;_ri++) {
+        var _room=[1,4,8][_ri];
+        for(var _signal=0;_signal<2;_signal++) {
+            var _hit=false,_seen=false;
+            for(var _joy=1;_joy<=15;_joy++) {
+                var _g=new LN2Play(2);ln2_play_enter(_g,_room);ln2_test_enter(_g,_g.scene_record.spawn_entry);
+                var _p=_g.player;_p.vehicle=0;_p.action=0;_p.input_lock=0;_g.inventory[18]=_signal*255;
+                _p.x=_ri==1?210:40;_p.y=_ri==0?130:(_ri==1?127:134);_p.depth_y=_p.y;
+                repeat(22) {
+                    ln2_play_tick(_g,_joy);
+                    if (_g.enemy.custom && _g.enemy.display_frame==114) _seen=true;
+                    if (_g.player_health==0) _hit=true;
+                }
+            }
+            ln_check(_hit==(_ri==1?(_signal==1):(_signal==0)) && _seen==_hit,"real walking summons visible bike only against lights");
+            show_debug_message("ROAD_PROBE room="+string(_room)+" signal="+string(_signal)+" hit="+string(_hit)+" seen="+string(_seen));
+        }
+    }
 }

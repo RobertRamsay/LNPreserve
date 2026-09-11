@@ -36,6 +36,8 @@ function ln2_item_complete(_g,_item,_id) {
         if (_id<17) {_g.notice_item=_id;_g.notice_tick=_g.player.tick;_g.notice_duration=100;}
         if (_id!=8) ln2_score_add(_g,5);
     }
+    if (_g.level==2 && _item.id==9) _g.molotov.newspaper_taken=true;
+    ln2_molotov_combine(_g);
     ln2_refresh_scene(_g);
     ln2_item_animation_finish(_g.player,_g.item_flow);
 }
@@ -72,7 +74,8 @@ function ln2_item_handler(_g,_item) {
         case 3:
             if (_id==20) return _selected==12?_id:-1;
             if (_id==19) {
-                if (_selected!=10) return -1;
+                if (_selected!=10 || !ln2_molotov_ready(_g)) return -1;
+                _g.molotov.lit=true;
                 _g.inventory[19]=255;_g.inventory[10]=0;return 10;
             }
             break;
@@ -371,7 +374,7 @@ function ln2_item_use_ready(_g,_item) {
         case 2:if (_item.id==19) _required=11;break;
         case 3:
             if (_item.id==20) _required=12;
-            if (_item.id==19) _required=10;
+            if (_item.id==19 && ln2_molotov_ready(_g)) _required=10;
             break;
         case 4:
             if (_item.id==17) _required=13;
@@ -387,7 +390,7 @@ function ln2_item_use_checks() {
     var _g=undefined,_p=undefined,_level=0,_i=0,_pixel=0;
     for(_i=0;_i<array_length(_cases);_i++) {
         var _c=_cases[_i];if (_level!=_c[0]) {_level=_c[0];_g=new LN2Play(_level);}
-        var _item={id:_c[1]};_g.inventory[19]=255;_g.world_state.boss_defeated=true;
+        var _item={id:_c[1]};_g.molotov.paper=1;_g.inventory[19]=255;_g.world_state.boss_defeated=true;
         _g.inventory[_c[2]]=255;_g.selected_item=0;
         ln_check(!ln2_item_use_ready(_g,_item),"item use requires selected tool");
         _g.selected_item=_c[2];ln_check(ln2_item_use_ready(_g,_item),"supported held-item mechanism");
@@ -427,4 +430,82 @@ function ln2_item_use_checks() {
     _p.action=0;_p.boundary_mode=41;_p.boundary_crossings=129;
     ln_check(ln2_boundary_exit(_g) && is_struct(_g.route_descent),"open grate allows existing descent");
     show_debug_message("LN2_ITEM_USE_PASS: eight item mechanisms, tool/prerequisite guards, combat/manual controls, original grate pixels, saves and descent");
+}
+
+/// Paper source: 0 none, 1 Central Park map, 2 Street newspaper.
+function ln2_molotov_prepare(_g) {
+    if (!variable_struct_exists(_g,"molotov") || !is_struct(_g.molotov))
+        _g.molotov={paper:0,lit:false,newspaper_taken:false};
+    // Older saves already lit at the Sewer flame keep their completed action.
+    if (_g.level==3 && _g.inventory[19]!=0 && (_g.inventory[10]&127)!=0) {
+        _g.molotov.paper=max(1,_g.molotov.paper);_g.molotov.lit=true;
+    }
+    if (_g.level==2) {
+        var _exists=false;
+        for(var _i=0;_i<array_length(_g.world.items);_i++) if (_g.world.items[_i].id==9) _exists=true;
+        if (!_exists) array_push(_g.world.items,{id:9,room:7,action:2,facing:0,handler:0,
+            x_min:134,x_max:145,y_min:100,y_max:109,present_panel:0,removed_panel:0,source_address:0});
+    }
+    ln2_molotov_combine(_g);
+}
+
+function ln2_molotov_combine(_g) {
+    if ((_g.inventory[10]&127)==0 || _g.molotov.paper!=0 || (_g.inventory[9]&127)==0) return;
+    _g.molotov.paper=_g.molotov.newspaper_taken?2:1;
+    _g.inventory[9]=128; // Used paper stays collected, but is no longer selectable.
+    if (_g.selected_item==9) _g.selected_item=10;
+}
+
+function ln2_molotov_ready(_g) {
+    ln2_molotov_combine(_g);
+    return (_g.inventory[10]&127)!=0 && _g.molotov.paper!=0;
+}
+
+function ln2_molotov_frame(_g) {
+    if (_g.molotov.lit) return 2+((_g.player.tick div 6) mod 3);
+    return real(_g.molotov.paper!=0);
+}
+
+function ln2_molotov_checks() {
+    var _g=new LN2Play(2);_g.inventory[9]=0;_g.inventory[10]=255;_g.molotov.paper=0;
+    ln2_molotov_combine(_g);ln_check(ln2_molotov_frame(_g)==0 && !ln2_molotov_ready(_g),"bottle alone has no wick");
+    _g.inventory[9]=255;ln2_molotov_combine(_g);
+    ln_check(_g.molotov.paper==1 && _g.inventory[9]==128 && ln2_molotov_frame(_g)==1,"map supplies wick once");
+    _g=new LN2Play(2);_g.inventory[9]=0;_g.inventory[10]=0;ln2_play_enter(_g,7);ln2_test_enter(_g,_g.scene_record.spawn_entry);
+    _g.enemy.active=0;_g.player.x=138;_g.player.y=104;_g.player.vehicle=0;_g.player.action=0;_g.player.input_lock=0;
+    ln2_pickup_assist_input(_g,0);ln2_pickup_assist_input(_g,16);
+    repeat(100) {if (_g.inventory[9]!=0) break;ln2_play_tick(_g,0);}
+    ln_check(_g.inventory[9]==255 && _g.molotov.newspaper_taken,"newspaper can be collected with fire before bottle");
+    ln2_item_complete(_g,{id:10},10);
+    ln_check(_g.molotov.paper==2 && _g.inventory[9]==128,"newspaper and bottle make wick");
+    ln2_level_load(_g,3,true);_g.loader=undefined;
+    _g=ln_save_restore(json_parse(json_stringify(ln_save_capture(_g))));
+    ln_check(_g.molotov.paper==2 && !_g.molotov.lit,"paper persists into Sewers and saves");
+    ln2_play_enter(_g,13);ln2_test_enter(_g,_g.scene_record.spawn_entry);
+    _g.enemy.active=0;_g.selected_item=10;_g.inventory[19]=0;_g.player.x=138;_g.player.y=62;
+    _g.player.action=0;_g.player.input_lock=0;_g.player.vehicle=0;
+    ln2_pickup_assist_input(_g,0);ln2_pickup_assist_input(_g,16);
+    repeat(100) {if (_g.molotov.lit) break;ln2_play_tick(_g,0);}
+    ln_check(_g.molotov.lit && _g.inventory[19]==255 && (_g.inventory[10]&127)!=0,"held prepared bottle lights at original flame with fire action");
+    var _surface=surface_create(320,200),_hashes=[];
+    _g.notice_item=-1;_g.selected_item=10;
+    for(var _phase=0;_phase<3;_phase++) {_g.player.tick=_phase*6;array_push(_hashes,ln2_hud_hash(_g,_surface,[264,72,304,104]));}
+    ln_check(_hashes[0]!=_hashes[1] && _hashes[1]!=_hashes[2],"lit bottle animates in the actual HUD");
+    surface_free(_surface);
+    _g=ln_save_restore(json_parse(json_stringify(ln_save_capture(_g))));
+    ln_check(_g.molotov.lit && ln2_projectile_state(_g,0).object_flag!=0,"lit state persists and selects flaming projectile");
+    _g.molotov.paper=0;_g.molotov.lit=false;_g.inventory[9]=0;_g.inventory[19]=0;
+    var _item=undefined;for(var _i=0;_i<array_length(_g.world.items);_i++) if (_g.world.items[_i].id==19) _item=_g.world.items[_i];
+    ln_check(ln2_item_handler(_g,_item)==-1 && !ln2_item_use_ready(_g,_item),"bare bottle cannot light");
+    // A second bike must start at the same edge, not the previous exit X.
+    _g=new LN2Play(2);ln2_play_enter(_g,1);
+    for(var _repeat=0;_repeat<2;_repeat++) {
+        _g.player_health=44;_g.player.input_lock=0;_g.player.action=0;_g.player.boundary_crossings=129;_g.player.boundary_mode=99;_g.inventory[18]=0;
+        ln2_street_traffic_boundary(_g);
+        repeat(16) {_g.player.tick=(_g.player.tick+1)&255;ln2_enemy_action(_g);}
+        ln_check(_g.enemy.display_frame==114 && _g.enemy.x>32 && _g.enemy.x<160,"repeat motorcycle enters from correct edge");
+        repeat(90) {_g.player.tick=(_g.player.tick+1)&255;ln2_enemy_action(_g);ln2_level_effect_tick(_g,0);}
+        ln_check(_g.enemy.x==0 && _g.enemy.y==0,"departed motorcycle frees actor position");
+    }
+    show_debug_message("LN2_MOLOTOV_PASS: bare bottle, map/newspaper crafting, native flame use, animated HUD, saves and repeat motorcycles");
 }

@@ -1,0 +1,53 @@
+{
+  "base": "spr_ln2_level2_status_icons frame 10",
+  "flames": "spr_ln2_sewer_flames frames 18-20",
+  "states": [
+    "bottle",
+    "wick",
+    "lit0",
+    "lit1",
+    "lit2"
+  ],
+  "wick_pixels": [
+    [
+      24,
+      1
+    ],
+    [
+      25,
+      1
+    ],
+    [
+      26,
+      1
+    ],
+    [
+      27,
+      1
+    ],
+    [
+      28,
+      2
+    ],
+    [
+      29,
+      2
+    ],
+    [
+      28,
+      3
+    ],
+    [
+      29,
+      3
+    ],
+    [
+      28,
+      4
+    ],
+    [
+      29,
+      4
+    ]
+  ]
+}

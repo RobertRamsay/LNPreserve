@@ -1,5 +1,6 @@
 function LN2Play(_level=1) constructor {
     loader=undefined;
+    molotov={paper:0,lit:false,newspaper_taken:false};
     life_transition=undefined;
     game_number=2;level=_level;
     var _folder="play/ln2/level"+string(level)+"/",_buffer=buffer_load(_folder+"gameplay.json");
@@ -72,7 +73,7 @@ function ln2_play_enter(_g,_id) {
             _e.action=0;_e.display_frame=46;_e.mirror=(_e.facing&4)==0;
         }
     }
-    ln2_entry_hook(_g);ln2_refresh_scene(_g);
+    ln2_molotov_prepare(_g);ln2_entry_hook(_g);ln2_refresh_scene(_g);
     var _key=string(_g.level)+":"+string(_id);
     if (!variable_struct_exists(_g.visited_scenes,_key)) {variable_struct_set(_g.visited_scenes,_key,true);ln2_score_add(_g,$15);}
 }
@@ -136,7 +137,7 @@ function ln2_level_load(_g,_level,_ordinary=false) {
     var _fresh=new LN2Play(_level),_names=variable_struct_get_names(_fresh);
     for (var _i=0;_i<array_length(_names);_i++) {
         var _name=_names[_i];
-        if (array_contains(["level_states","inventory","timer","stage_surface","lives_left","player_health","controls","keycode","office_code_known","god_mode","one_hit_kills","status","visited_scenes"],_name)) continue;
+        if (array_contains(["molotov","level_states","inventory","timer","stage_surface","lives_left","player_health","controls","keycode","office_code_known","god_mode","one_hit_kills","status","visited_scenes"],_name)) continue;
         variable_struct_set(_g,_name,variable_struct_get(_fresh,_name));
     }
     _g.timer.cycles_per_frame=_g.data.timer_period_cycles;

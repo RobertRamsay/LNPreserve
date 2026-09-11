@@ -61,7 +61,8 @@ function ln2_status_draw(_g,_x,_y,_scale) {
     draw_sprite_ext(_icons,clamp(_g.player.selected_weapon,0,4),_x+264*_scale,_y+24*_scale,_scale,_scale,0,c_white,1);
     var _found=_g.notice_item>=0,_item=_found?_g.notice_item:_g.selected_item;
     draw_sprite_ext(spr_ln2_status_labels,real(_found),_x+248*_scale,_y+56*_scale,_scale,_scale,0,c_white,1);
-    if (_item==16) draw_sprite_ext(spr_ln2_orb_icon,0,_x+264*_scale,_y+72*_scale,_scale,_scale,0,c_white,1);
+    if (_item==10) draw_sprite_ext(spr_ln2_molotov_states,ln2_molotov_frame(_g),_x+264*_scale,_y+72*_scale,_scale,_scale,0,c_white,1);
+    else if (_item==16) draw_sprite_ext(spr_ln2_orb_icon,0,_x+264*_scale,_y+72*_scale,_scale,_scale,0,c_white,1);
     else draw_sprite_ext(_icons,clamp(_item,0,16),_x+264*_scale,_y+72*_scale,_scale,_scale,0,c_white,1);
     for (var _i=0;_i<6;_i++) {
         draw_sprite_ext(spr_ln2_status_digits,clamp(_g.status.score[_i]-27,0,9),_x+(136+8*_i)*_scale,_y+160*_scale,_scale,_scale,0,c_white,1);
