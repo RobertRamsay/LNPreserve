@@ -129,7 +129,7 @@ function ln_save_restore(_save) {
     }
     if (_g.game_number==2 && (_g.level==2 || _g.level==3)) ln2_refresh_scene(_g);
     if (_g.game_number==2) ln2_molotov_prepare(_g);
-    if (_g.game_number==2 && ln2_loader_active(_g)) _g.loader.released=false;
+    if (ln2_loader_active(_g)) _g.loader.released=false;
     _g.timer.cycle=int64(_save.cycle);_g.timer.frame=_save.frame;_g.timer.credit=int64(0);
     return _g;
 }
@@ -190,7 +190,7 @@ function ln_saves_step(_host) {
         var _level=_host.scene_test.levels;
         for (var _i=0;_i<array_length(_level);_i++) {
             if (_level[_i].game==_fresh.game_number && _level[_i].number==_fresh.level) {
-                ln_music_play(_fresh.game_number,string_replace_all(string_lower(_level[_i].title)," ","_"),_fresh.game_number==2 && ln2_loader_active(_fresh));break;
+                ln_music_play(_fresh.game_number,string_replace_all(string_lower(_level[_i].title)," ","_"),_fresh.game_number!=3 && ln2_loader_active(_fresh));break;
             }
         }
         _ui.message="Loaded "+_ui.slots[_slot].name;_ui.message_ticks=180;

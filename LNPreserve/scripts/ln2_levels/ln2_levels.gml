@@ -1121,6 +1121,7 @@ function ln2_loader_draw(_g) {
 }
 
 function ln2_followup_checks() {
+    ln_trilogy_frontend_checks();
     ln2_road_probe();
     ln2_molotov_checks();
     var _v=ln3_data_read("verification/ln2_alligator_checks.json"),_g=new LN2Play(3);
@@ -1208,4 +1209,78 @@ function ln2_road_probe() {
             show_debug_message("ROAD_PROBE room="+string(_room)+" signal="+string(_signal)+" hit="+string(_hit)+" seen="+string(_seen));
         }
     }
+}
+
+function ln_frontend_music(_g,_intro) {
+    ln_music_play(_g.game_number,string_replace_all(string_lower(_g.title)," ","_"),_intro && _g.game_number!=3);
+    var _muted=_g.game_number==1?(is_struct(_g.controls) && !_g.controls.music):!_g.music;
+    if (_muted && variable_global_exists("ln_music_voice")) audio_pause_sound(global.ln_music_voice);
+}
+function ln_frontend_begin(_g) {
+    if (_g.game_number==2) {ln2_loader_begin(_g);return;}
+    _g.loader={active:true,released:false,fire_blocked:false};
+    if (_g.game_number==1) {if (is_struct(_g.controls)) _g.controls.pause=0;}
+    else _g.paused=false;
+    ln_frontend_music(_g,true);
+}
+function ln_frontend_tick(_g,_joy) {
+    if (!ln2_loader_active(_g)) return false;
+    if (!(_joy&16)) _g.loader.released=true;
+    else if (_g.loader.released) {
+        _g.loader.active=false;_g.loader.fire_blocked=true;
+        // LN3 uses the same track on both sides, so keep it playing seamlessly.
+        if (_g.game_number!=3) ln_frontend_music(_g,false);
+    }
+    return true;
+}
+function ln_frontend_filter(_g,_joy) {
+    if (is_struct(_g.loader) && _g.loader.fire_blocked) {
+        if (!(_joy&16)) _g.loader.fire_blocked=false;
+        return _joy&15;
+    }
+    return _joy;
+}
+function ln_frontend_selected(_g,_entered,_intro,_was_loader) {
+    if (_entered && _intro) ln_frontend_begin(_g);
+    else if (_entered && _was_loader) ln_frontend_music(_g,false);
+    return _entered;
+}
+function ln_frontend_draw(_g) {
+    draw_clear(c_black);draw_set_colour(c_white);
+    var _name="spr_ln1_loader_eyes",_sprite=asset_get_index(_name);
+    if (_g.game_number==1 && _sprite>=0) draw_sprite_ext(_sprite,_g.level-1,160,84,3,3,0,c_white,1);
+    else {
+        var _font=ln3_data_read("play/ln3/ending.json"),_text=string_upper(_g.title);
+        var _x=160+(240-string_length(_text)*8)*1.5,_y=84+(144-8)*1.5;
+        for(var _i=1;_i<=string_length(_text);_i++) {
+            var _letter=string_char_at(_text,_i);
+            if (variable_struct_exists(_font.characters,_letter))
+                draw_sprite_ext(asset_get_index(_font.font_sprite),variable_struct_get(_font.characters,_letter),_x+(_i-1)*24,_y,3,3,0,c_white,1);
+        }
+    }
+    draw_text(160,36,"LAST NINJA "+string(_g.game_number)+" — "+string_upper(_g.title));
+    draw_text(1000,36,"Scene 0");draw_text(160,700,"Press # or Xbox A to begin");
+}
+
+function ln_trilogy_frontend_checks() {
+    var _picker=new LNSceneTest(ln3_data_read("catalog.json"));
+    for(var _i=0;_i<array_length(_picker.levels);_i++) {
+        var _level=_picker.levels[_i];if (_level.game==2) continue;
+        _picker.level_index=_i;
+        var _g=_level.game==1?new LN1Play(_level.number):new LN3Play(_level.number);
+        ln_check(ln_scene_test_open(_picker,_g,-1) && ln2_loader_active(_g),"LN1/LN3 selectable Scene 0");
+        var _before=json_stringify(_g.game_number==1?[_g.player.tick,_g.player.x,_g.player.y,_g.player_health]:_g.state),_room=_g.room_id;
+        repeat(3) {if (_g.game_number==1) ln1_play_tick(_g,16);else ln3_play_tick(_g,16);}
+        ln_check(json_stringify(_g.game_number==1?[_g.player.tick,_g.player.x,_g.player.y,_g.player_health]:_g.state)==_before && ln2_loader_active(_g),"intro freezes gameplay and held fire");
+        var _s=surface_create(1280,800);surface_set_target(_s);ln_frontend_draw(_g);surface_reset_target();surface_save(_s,"ln"+string(_g.game_number)+"-frontend-"+string(_g.level)+".png");surface_free(_s);
+        _g=ln_save_restore(json_parse(json_stringify(ln_save_capture(_g))));
+        ln_frontend_tick(_g,16);ln_check(ln2_loader_active(_g),"saved title requires a released fire button");
+        ln_frontend_tick(_g,0);var _voice=global.ln_music_voice;ln_frontend_tick(_g,16);
+        ln_check(!ln2_loader_active(_g) && _g.room_id==_room,"fresh fire starts prepared room");
+        if (_g.game_number==3) ln_check(global.ln_music_voice==_voice,"LN3 music continues seamlessly");
+        ln_check(ln_frontend_filter(_g,16)==0 && ln_frontend_filter(_g,0)==0 && ln_frontend_filter(_g,16)==16,"dismissal press cannot become an attack");
+        ln_scene_test_open(_picker,_g,-1);ln_scene_test_open(_picker,_g,0);
+        ln_check(!ln2_loader_active(_g),"direct gameplay selection bypasses title");
+    }
+    show_debug_message("LN_TRILOGY_FRONTEND_PASS: eleven LN1/LN3 title entries, frozen gameplay, fresh fire, saves and music");
 }

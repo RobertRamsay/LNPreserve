@@ -26,7 +26,8 @@ function ln1_level_load(_g, _level, _ordinary_exit = false) {
     ln1_play_enter(_g,_g.last_entry>>2);
     ln1_level_sync_controls(_g);
     if (_ordinary_exit && is_struct(_g.controls)) _g.controls.item = 10;
-    ln_music_play(1,["wastelands","wilderness","palace_gardens","dungeons","palace","inner_sanctum"][_level-1],false);
+    if (_ordinary_exit) ln_frontend_begin(_g);
+    else ln_frontend_music(_g,false);
     return true;
 }
 

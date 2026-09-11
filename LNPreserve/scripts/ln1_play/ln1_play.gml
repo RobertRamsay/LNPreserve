@@ -1,4 +1,5 @@
 function LN1Play(_level = 1) constructor {
+    loader=undefined;
     game_number = 1;
     level = _level;
     title = ["Wastelands","Wilderness","Palace Gardens","Dungeons","Palace","Inner Sanctum"][_level-1];
@@ -44,6 +45,7 @@ function LN1Play(_level = 1) constructor {
 }
 
 function ln1_play_enter(_g, _room_id) {
+    _g.loader=undefined;
     _g.room_id = _room_id;
     // The spider and dog pursuit modes belong to their encounter rooms.  Do
     // not apply their handlers to an ordinary enemy after walking back out.
@@ -96,6 +98,8 @@ function ln1_play_travel(_g, _entry) {
 }
 
 function ln1_play_tick(_g, _joy) {
+    if (ln_frontend_tick(_g,_joy)) return;
+    _joy=ln_frontend_filter(_g,_joy);
     if (variable_struct_exists(_g,"death_transition") && is_struct(_g.death_transition)) {
         _g.player.tick=(_g.player.tick+1)&255;
         if (++_g.death_transition.tick>=130) {_g.death_transition=undefined;_g.death_transition_done=true;}
@@ -289,6 +293,7 @@ function ln1_play_actor(_g, _actor, _enemy) {
 }
 
 function ln1_play_draw(_game, _paused) {
+    if (ln2_loader_active(_game)) {ln_frontend_draw(_game);return;}
     var _saved_view=matrix_get(matrix_view),_saved_projection=matrix_get(matrix_projection);
     draw_clear(c_black);
     var _scale = 3, _x = 160, _y = 84, _s = _game.player;

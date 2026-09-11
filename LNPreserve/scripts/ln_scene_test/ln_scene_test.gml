@@ -95,11 +95,11 @@ function ln_scene_test_message(_t, _text) { _t.message = _text; _t.message_us = 
 
 function ln_scene_test_open(_t, _g, _scene_index) {
     var _level = _t.levels[_t.level_index];
-    var _intro=_level.game==2 && _scene_index==-1;
+    var _intro=_scene_index==-1;
     if ((!_intro && _scene_index < 0) || _scene_index >= array_length(_level.scenes)) return false;
     _t.scene_index = _scene_index; _t.menu = false; _t.preview = !_level.playable;
     if (_level.playable) {
-        var _was_loader=_g.game_number==2 && ln2_loader_active(_g);
+        var _was_loader=ln2_loader_active(_g);
         var _new_level=_g.game_number!=_level.game || _g.level!=_level.number;
         ln_game_select(_g,_level.game,_level.number);
         if (_new_level) {
@@ -110,7 +110,7 @@ function ln_scene_test_open(_t, _g, _scene_index) {
             else {_g.state.player_health=44;_g.state.inventory[26]=44;}
         }
         var _room = _level.scenes[_intro ? 0 : _scene_index].id;
-        if (_level.game==3) return ln3_test_enter(_g,_room);
+        if (_level.game==3) return ln_frontend_selected(_g,ln3_test_enter(_g,_room),_intro,_was_loader && !_new_level);
         if (_level.game==2) {
             for (var _i=0;_i<array_length(_g.world.rooms);_i++)
                 if (_g.world.rooms[_i].id==_room) {
@@ -124,7 +124,7 @@ function ln_scene_test_open(_t, _g, _scene_index) {
                 }
             return false;
         }
-        return ln1_test_enter(_g, _g.navigation.rooms[_room-1].spawn_entry);
+        return ln_frontend_selected(_g,ln1_test_enter(_g, _g.navigation.rooms[_room-1].spawn_entry),_intro,_was_loader && !_new_level);
     }
     return true;
 }
@@ -157,7 +157,7 @@ function ln_scene_test_step(_t, _g) {
             _row++;
         }
         var _scenes = _t.levels[_t.level_index].scenes;
-        var _offset=_t.levels[_t.level_index].game==2?1:0;
+        var _offset=1;
         for (var _i = -_offset; _i < array_length(_scenes); _i++) {
             var _slot=_i+_offset;
             var _x = 480 + (_slot mod 7)*88, _y = 266 + (_slot div 7)*64;
@@ -214,7 +214,7 @@ function ln_scene_test_draw(_t) {
         }
         draw_set_colour(_level.playable ? make_colour_rgb(125,210,171) : make_colour_rgb(245,190,100));
         draw_text(480,224,"Playable prototype — movement, objects and combat");
-        var _offset=_level.game==2?1:0;
+        var _offset=1;
         for (var _i = -_offset; _i < array_length(_level.scenes); _i++) {
             var _slot=_i+_offset;
             ln_scene_test_button(480+(_slot mod 7)*88,266+(_slot div 7)*64,76,48,string(_i+1),_t.scene_index==_i);

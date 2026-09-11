@@ -239,6 +239,9 @@ var _control_buffer = buffer_load("actors/ln1/initial_control_state.json");
 control_state_ln1 = json_parse(buffer_read(_control_buffer,buffer_text));
 buffer_delete(_control_buffer);
 play.controls = control_state_ln1;
+var _start_title=true;
+for(var _arg=1;_arg<=parameter_count();_arg++) if (string_pos("--",parameter_string(_arg))==1) _start_title=false;
+if (_start_title) ln_frontend_begin(play);
 saves = new LNSaves();
 if (save_ui_test) {
     // In-memory display fixtures only: never add, restore or overwrite a save.
@@ -269,6 +272,10 @@ tick_native = function(_from, _to, _frame) {
         return;
     }
     if(input_state.pressed[LNKey.CRT]) ln_crt_toggle();
+    if (ln2_loader_active(play) && play.game_number!=2) {
+        control_state_ln1.previous=[_rows[0]&16,_rows[0]&32,_rows[0]&64,_rows[0]&8,_rows[1]&16];
+        ln_frontend_tick(play,input_state.joystick()^255);return;
+    }
     if(input_state.pressed[LNKey.WeaponPrev] && !(play.game_number==2 && ln2_loader_active(play))) ln_controller_previous_weapon(play,control_state_ln1);
     if (play.game_number==2) {
         ln2_controls_update(play,_rows[0],_rows[1]);

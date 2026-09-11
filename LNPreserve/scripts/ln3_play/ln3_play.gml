@@ -8,6 +8,7 @@ function ln3_room_record(_rooms,_id) {
 }
 
 function LN3Play(_level=1) constructor {
+    loader=undefined;
     game_number=3;level=_level;var _path="play/ln3/level"+string(level)+"/";
     data=ln3_data_read(_path+"runtime.json");world=ln3_data_read(_path+"world.json");
     actions=ln3_data_read(_path+"actions.json");movement=ln3_data_read(_path+"movement.json");
@@ -42,6 +43,7 @@ function ln3_enemy_remember(_g) {
 }
 
 function ln3_play_enter(_g,_entry) {
+    _g.loader=undefined;
     var _scene=ln3_room_record(_g.world.rooms,_entry.destination);if (!is_struct(_scene)) return false;
     ln3_enemy_remember(_g);_g.room_id=_entry.destination;_g.last_entry=_entry;_g.scene_record=_scene;_g.room_age=0;
     _g.special_sequence=0;_g.special_request=0;_g.special_colours=array_create(8,-1);
@@ -143,7 +145,7 @@ function ln3_level_load(_g,_level,_ordinary=false) {
     _s.ammo=_inventory[28];_s.inventory[25]=_honour;_s.inventory[26]=_health;_s.inventory[27]=_lives;_s.inventory[29]=_level-1;
     var _saved=_g.level_states[_level-1];if (is_struct(_saved)) _g.room_enemies=_saved.enemies;
     _g.room_id=-1;ln3_play_enter(_g,_g.last_entry);
-    ln_music_play(3,string_lower(_g.title),false);return true;
+    if (_ordinary) ln_frontend_begin(_g);else ln_frontend_music(_g,false);return true;
 }
 
 function ln3_play_prepare_draw(_g,_s) {
@@ -159,6 +161,8 @@ function ln3_play_prepare_draw(_g,_s) {
 }
 
 function ln3_play_tick(_g,_joy) {
+    if (ln_frontend_tick(_g,_joy)) return;
+    _joy=ln_frontend_filter(_g,_joy);
     if (_g.game_over || _g.level_complete) return;
     if (is_struct(_g.ending)) {ln3_ending_tick(_g.ending,_joy);return;}
     var _s=_g.state;_g.room_age++;
@@ -273,6 +277,7 @@ function ln3_play_actor_part(_g,_d,_i) {
 }
 
 function ln3_play_draw(_g) {
+    if (ln2_loader_active(_g)) {ln_frontend_draw(_g);return;}
     if (is_struct(_g.ending)) {
         ln3_ending_draw(_g);
         if (_g.ending.finished) {
