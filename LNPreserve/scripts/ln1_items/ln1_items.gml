@@ -1,10 +1,19 @@
+// Apples are counted in inventory; each world location can be harvested once.
+function ln1_apple_key(_g,_item) {
+    return string(_g.level)+":"+string(_item.room)+":"+string(_item.x_min)+":"+string(_item.y_min);
+}
+function ln1_item_available(_g,_item) {
+    if (_item.id!=8) return _g.inventory[_item.id]==0;
+    return !variable_struct_exists(_g.apple_pickups,ln1_apple_key(_g,_item));
+}
+
 /// Source $5940: item interaction occurs at the action's input boundary.
 function ln1_item_interact(_g, _only_id=-1) {
     var _p = _g.player;
     for (var _i = 0; _i < array_length(_g.world.items); _i++) {
         var _item = _g.world.items[_i];
         if (_only_id>=0 && _item.id!=_only_id) continue;
-        if (_item.room != _g.room_id || _g.inventory[_item.id] != 0) continue;
+        if (_item.room != _g.room_id || !ln1_item_available(_g,_item)) continue;
         var _x = _p.x - (_p.facing >= 4 ? 36 : 0);
         if (_x < _item.x_min || _x >= _item.x_max || _p.y < _item.y_min || _p.y >= _item.y_max) continue;
         if (_g.inventory[2] == 0 && _item.id != 2 && _item.id < 10) return;
@@ -22,7 +31,10 @@ function ln1_item_interact(_g, _only_id=-1) {
             _g.notice_item=10;_g.notice_tick=_p.tick;_g.notice_label=1;_g.notice_duration=150;
             return;
         }
-        _g.inventory[_item.id] = _item.id == 14 ? 133 : (_item.id == 15 ? 3 : 1);
+        if (_item.id==8) {
+            variable_struct_set(_g.apple_pickups,ln1_apple_key(_g,_item),true);
+            _g.inventory[8]=(_g.inventory[8]&127)+1;
+        } else _g.inventory[_item.id] = _item.id == 14 ? 133 : (_item.id == 15 ? 3 : 1);
         if (_item.id == 9) _g.world_state.mode = 9;
         _g.notice_item = _item.id; _g.notice_tick = _p.tick;
         _g.notice_label = 1; _g.notice_duration = 150;
@@ -44,7 +56,7 @@ function ln1_pickup_assist_start(_g) {
     for (var _i=0;_i<array_length(_g.world.items);_i++) {
         var _item=_g.world.items[_i];
         // Scripted mechanisms/scroll progression retain their original controls.
-        if (_item.room!=_g.room_id || _item.sprite=="" || _g.inventory[_item.id]!=0 ||
+        if (_item.room!=_g.room_id || _item.sprite=="" || !ln1_item_available(_g,_item) ||
             _item.id>=16 || _item.id==1 || _item.id==9 || _item.id==10) continue;
         if (_g.inventory[2]==0 && _item.id!=2 && _item.id<10) continue;
         for (var _side=0;_side<2;_side++) {
@@ -151,7 +163,10 @@ function ln1_apple_input(_g,_joy) {
     var _ready=is_struct(_g.controls) && _g.controls.item==8 && (_g.inventory[8]&127)!=0 &&
         _g.player_health>0 && _g.player.input_lock==0 && _g.controls.weapon_locked==0 && !ln1_weapon_changing(_g.player,_g.data);
     if (ln_consumable_tap(_g,_joy,_ready)) {
-        _g.inventory[8]=128;_g.controls.inventory[8]=0;_g.controls.item=10;
+        var _remaining=(_g.inventory[8]&127)-1;
+        _g.inventory[8]=_remaining>0?_remaining:128;
+        _g.controls.inventory[8]=max(0,_remaining);
+        if (_remaining==0) _g.controls.item=10;
         _g.notice_item=10;_g.notice_duration=0;_g.player_health=32;_g.lives_left++;
     }
     return _ready && (_joy&15)==0 ? 0 : _joy;

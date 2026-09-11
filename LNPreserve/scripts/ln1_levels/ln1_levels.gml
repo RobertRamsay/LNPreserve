@@ -14,7 +14,7 @@ function ln1_level_load(_g, _level, _ordinary_exit = false) {
     var _fresh = new LN1Play(_level), _names = variable_struct_get_names(_fresh);
     for (var _i=0;_i<array_length(_names);_i++) {
         var _name = _names[_i];
-        if (_name == "one_hit_kills" || _name == "level_states" || _name == "stage_surface" || _name == "timer" ||
+        if (_name == "apple_pickups" || _name == "one_hit_kills" || _name == "level_states" || _name == "stage_surface" || _name == "timer" ||
             _name == "controls" || _name == "inventory" || _name == "lives_left") continue;
         variable_struct_set(_g,_name,variable_struct_get(_fresh,_name));
     }

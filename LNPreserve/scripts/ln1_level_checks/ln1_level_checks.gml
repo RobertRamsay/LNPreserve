@@ -20,6 +20,22 @@ function ln1_level_checks() {
     ln1_level_load(_apple,2,true);
     ln_check(_apple.lives_left==3 && _apple.inventory[8]==0,
         "LN1 credited apple does not grant another life at level exit");
+    var _stack=new LN1Play();_stack.inventory[2]=1;
+    _stack.world.items=[{id:8,room:1,x_min:0,x_max:20,y_min:0,y_max:20}];
+    _stack.player.x=10;_stack.player.y=10;_stack.player.facing=0;
+    ln1_item_interact(_stack);ln1_item_interact(_stack);
+    ln_check(_stack.inventory[8]==1,"same apple cannot be harvested twice");
+    ln1_level_load(_stack,2,true);
+    _stack.world.items=[{id:8,room:_stack.room_id,x_min:0,x_max:20,y_min:0,y_max:20}];
+    _stack.player.x=10;_stack.player.y=10;_stack.player.facing=0;
+    ln1_item_interact(_stack);
+    ln_check(_stack.inventory[8]==2,"apple carried into next level does not hide its apple");
+    _stack=ln_save_restore(json_parse(json_stringify(ln_save_capture(_stack))));
+    ln_check(_stack.inventory[8]==2 && !ln1_item_available(_stack,_stack.world.items[0]),"saved apple count and collected locations persist");
+    _stack.controls=ln3_data_read("actors/ln1/initial_control_state.json");_stack.controls.item=8;
+    var _stack_lives=_stack.lives_left;
+    ln1_apple_input(_stack,16);ln1_apple_input(_stack,0);ln1_apple_input(_stack,16);
+    ln_check(_stack.inventory[8]==1 && _stack.controls.item==8 && _stack.lives_left==_stack_lives+1,"double fire consumes only one stacked apple");
     var _banked=new LN1Play();_banked.inventory[8]=1;_banked.controls=ln3_data_read("actors/ln1/initial_control_state.json");
     _banked.controls.item=8;_banked.player_health=7;_banked.lives_left=2;
     var _loaded=ln_save_restore(json_parse(json_stringify(ln_save_capture(_banked))));

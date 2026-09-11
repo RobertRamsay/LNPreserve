@@ -144,6 +144,21 @@ function ln1_player_boundary(_s, _d, _nx, _ny) {
     return _collision;
 }
 
+function ln1_roll_over_body(_s,_d) {
+    if (!variable_struct_exists(_s,"world_game") || !is_struct(_s.world_game)) return false;
+    var _enemy=_s.world_game.enemy;
+    // Defeat uses mode 7 and the narrowed prone collision footprint. Ordinary
+    // hit reactions also use combat state 36, so that state alone is insufficient.
+    if (_enemy.mode!=7 || _enemy.separation_y>4) return false;
+    if (!variable_struct_exists(_d,"forward_roll_entries")) return false;
+    for (var _side=0;_side<2;_side++) {
+        var _forward=_d.forward_roll_entries[_side],_reverse=_d.reverse_roll_entries[_side];
+        if ((_s.action>=_forward && _s.action<_forward+32) ||
+            (_s.action>=_reverse && _s.action<_reverse+32)) return true;
+    }
+    return false;
+}
+
 function ln1_player_move(_s, _d, _ticks) {
     var _group = _s.facing >> 1, _mask = 1 << _s.heading;
     _s.unconsumed = _ticks;
@@ -162,7 +177,7 @@ function ln1_player_move(_s, _d, _ticks) {
         }
         _s.collision = ln1_player_boundary(_s, _d, _nx, _ny);
         if (_s.collision != 0) return;
-        if (_s.enemy_active >= 128 && abs(_s.enemy_x - _nx) < 12 && abs(_s.enemy_y - _ny) < _s.separation_y) {
+        if (_s.enemy_active >= 128 && !ln1_roll_over_body(_s,_d) && abs(_s.enemy_x - _nx) < 12 && abs(_s.enemy_y - _ny) < _s.separation_y) {
             _s.collision = 127;
             return;
         }
@@ -335,6 +350,19 @@ function ln1_reverse_roll_checks() {
         ln_check(_line>100?_p.y<_line:_p.y>=_line,"backward roll respects walls");
     }
     ln1_roll_landing_checks();
+    var _body_game=new LN1Play(),_body_player=_body_game.player,_body_data=_body_game.data;
+    _body_data.boundaries=[];
+    _body_game.enemy.mode=7;_body_game.enemy.separation_y=4;
+    _body_player.enemy_active=128;_body_player.separation_y=4;
+    _body_player.facing=1;_body_player.heading=1;
+    for (var _case=0;_case<4;_case++) {
+        _body_player.x=120;_body_player.y=100;_body_player.fraction_y=0;
+        _body_player.enemy_x=120;_body_player.enemy_y=100;
+        _body_player.action=_case==0?0:(_case==2?_body_data.reverse_roll_entries[0]:_body_data.forward_roll_entries[0]);
+        _body_game.enemy.mode=_case==3?0:7;
+        ln1_player_move(_body_player,_body_data,2);
+        ln_check((_body_player.collision==127)==(_case==0 || _case==3),"only somersaults pass defeated bodies; walking and standing enemies block");
+    }
     show_debug_message("LN_REVERSE_ROLL_PASS: reverse poses, facing, weapons, backward movement and walls");
 }
 

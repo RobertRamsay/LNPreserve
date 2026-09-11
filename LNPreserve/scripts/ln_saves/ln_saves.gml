@@ -108,6 +108,14 @@ function ln_save_restore(_save) {
     if (!_room_ok) throw "Invalid saved room";
     // Reconnect the mutable current-room records detached by JSON copying.
     if (_g.game_number==1) {
+        // Older saves only recorded possession, so conservatively retain the
+        // collected state of apples in that saved level (including spent apples).
+        if (!variable_struct_exists(_state,"apple_pickups") && _g.inventory[8]!=0) {
+            for (var _a=0;_a<array_length(_g.world.items);_a++) {
+                var _apple=_g.world.items[_a];
+                if (_apple.id==8) variable_struct_set(_g.apple_pickups,ln1_apple_key(_g,_apple),true);
+            }
+        }
         ln1_reverse_roll_prepare(_g.data);
         if (_g.level==2) for(var _i=0;_i<array_length(_g.world.items);_i++) {
             var _item=_g.world.items[_i];

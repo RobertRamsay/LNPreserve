@@ -36,6 +36,7 @@ function LN1Play(_level = 1) constructor {
     room_age = 0; prayer_phase = 0;
     water_active = false; water_ticks = 0; water_cutoff = 173; water_clock = world.initial_water_clock;
     random_pointer = 0; random_value = 0;
+    apple_pickups={};
     stage_surface = -1;death_transition=undefined;death_transition_done=false;
     timer = new LNClock();
     // CIA1 timer interrupt drives game logic separately from the VIC video frame.
@@ -103,7 +104,7 @@ function ln1_play_tick(_g, _joy) {
     _joy=ln_frontend_filter(_g,_joy);
     if (variable_struct_exists(_g,"death_transition") && is_struct(_g.death_transition)) {
         _g.player.tick=(_g.player.tick+1)&255;
-        if (++_g.death_transition.tick>=130) {_g.death_transition=undefined;_g.death_transition_done=true;}
+        if (++_g.death_transition.tick>=244) {_g.death_transition=undefined;_g.death_transition_done=true;}
         return;
     }
 
@@ -290,6 +291,20 @@ function ln1_play_actor(_g, _actor, _enemy) {
         !_enemy && _g.world_state.protection == 2, _enemy?-1:ln1_magic_colour(_g));
 }
 
+// Discrete Pepto colours; independent of the scene's original palette dissolve.
+function ln1_lives_colour(_tick) {
+    var _t=_tick-130;
+    if (_t<8) return c_black;
+    if (_t<16) return make_colour_rgb(53,40,121);
+    if (_t<24) return make_colour_rgb(108,94,181);
+    if (_t<32) return make_colour_rgb(154,210,132);
+    if (_t<82) return c_white;
+    if (_t<90) return make_colour_rgb(184,199,111);
+    if (_t<98) return make_colour_rgb(154,103,89);
+    if (_t<106) return make_colour_rgb(67,57,0);
+    return c_black;
+}
+
 function ln1_play_draw(_game, _paused) {
     if (ln2_loader_active(_game)) {ln_frontend_draw(_game);return;}
     var _saved_view=matrix_get(matrix_view),_saved_projection=matrix_get(matrix_projection);
@@ -301,7 +316,7 @@ function ln1_play_draw(_game, _paused) {
     draw_clear(c_black); draw_sprite(_game.scene, 0, 0, 0);
     for (var _i = 0; _i < array_length(_game.world.items); _i++) {
         var _item = _game.world.items[_i];
-        if (_item.sprite != "" && _item.room == _game.room_id && _game.inventory[_item.id] == 0) {
+        if (_item.sprite != "" && _item.room == _game.room_id && ln1_item_available(_game,_item)) {
             var _flash = _game.room_age < 31 * _item.flashes;
             draw_sprite(asset_get_index(_flash ? _item.flash_sprite : _item.sprite),
                 _flash ? (_game.room_age mod 31) : 0, _item.x, _item.y);
@@ -311,16 +326,25 @@ function ln1_play_draw(_game, _paused) {
     else { ln1_play_actor(_game, _game.enemy, true); ln1_play_actor(_game, _s, false); }
     ln1_projectile_draw(_game);
     var _transition=variable_struct_exists(_game,"death_transition") && is_struct(_game.death_transition);
-    if (_transition) draw_sprite(spr_ln1_death_dissolve,min(39,_game.death_transition.tick),0,0);
+    var _lives_message=_transition && _game.death_transition.tick>=130;
+    if (_lives_message) {
+        draw_clear(c_black);
+        draw_set_colour(ln1_lives_colour(_game.death_transition.tick));
+        var _label="LIVES REMAINING",_number=string(max(0,_game.lives_left-1));
+        var _height=string_height(_label),_top=(144-2*_height-6)/2;
+        draw_text((240-string_width(_label))/2,_top,_label);
+        draw_text((240-string_width(_number))/2,_top+_height+6,_number);
+        draw_set_colour(c_white);
+    } else if (_transition) draw_sprite(spr_ln1_death_dissolve,min(39,_game.death_transition.tick),0,0);
     surface_reset_target();
     matrix_set(matrix_view,_saved_view);matrix_set(matrix_projection,_saved_projection);
-    if (_transition) {
+    if (_transition && !_lives_message) {
         draw_flush();
         shader_set(sh_ln1_palette_fade);
         shader_set_uniform_f(shader_get_uniform(sh_ln1_palette_fade,"u_steps"),max(0,(_game.death_transition.tick-40) div 6));
     }
     draw_surface_ext(_game.stage_surface,_x,_y,_scale,_scale,0,c_white,1);
-    if (_transition) {draw_flush();shader_reset();}
+    if (_transition && !_lives_message) {draw_flush();shader_reset();}
     draw_sprite_ext(spr_ln1_dashboard, 0, _x, _y, _scale, _scale, 0, c_white, 1);
     // Original $65bf: the bottom inventory shows owned weapons 1..5.
     var _weapons = 0;
@@ -335,6 +359,10 @@ function ln1_play_draw(_game, _paused) {
     draw_sprite_ext(spr_ln1_status_icon, _icon, _x+248*_scale, _y+80*_scale, _scale, _scale, 0, c_white, 1);
     if (is_struct(_game.controls))
         draw_sprite_ext(spr_ln1_status_icon, _game.controls.item, _x+248*_scale, _y+120*_scale, _scale, _scale, 0, c_white, 1);
+    if (is_struct(_game.controls) && _game.controls.item==8 && (_game.inventory[8]&127)>1) {
+        draw_set_colour(c_white);
+        draw_text(_x+296*_scale,_y+132*_scale,"x"+string(_game.inventory[8]&127));
+    }
     draw_set_colour(make_colour_rgb(180,180,180));
     draw_text(600,36,"F8 One-hit kills: "+(_game.one_hit_kills?"ON":"OFF"));
     draw_text(160, 36, "THE LAST NINJA — " + string_upper(_game.title));
@@ -353,8 +381,8 @@ function ln1_play_draw(_game, _paused) {
 
 function ln1_finish_transition_check(_g) {
     var _ticks=0;
-    while(is_struct(_g.death_transition) && _ticks++<140) ln1_play_tick(_g,0);
-    ln_check(_ticks<140,"LN1 pixel/palette transition finishes");
+    while(is_struct(_g.death_transition) && _ticks++<260) ln1_play_tick(_g,0);
+    ln_check(_ticks<260,"LN1 pixel/palette transition finishes");
     if (_g.death_transition_done) ln1_play_tick(_g,0);
 }
 
@@ -371,6 +399,12 @@ function ln_ninja_transition_checks() {
     repeat(22) ln1_play_tick(_g,0);
     ln1_play_draw(_g,false);draw_flush();surface_save(application_surface,"ln1-original-palette-fade.png");
     ln_check(surface_getpixel(application_surface,207,555)!=c_black,"LN1 palette fade leaves built-in HUD visible");
+    while (_g.death_transition.tick<170) ln1_play_tick(_g,0);
+    ln_check(ln1_lives_colour(130)==c_black && ln1_lives_colour(170)==c_white && ln1_lives_colour(243)==c_black,"LN1 lives colours reach white and return to black");
+    ln1_play_draw(_g,false);draw_flush();surface_save(application_surface,"ln1-lives-remaining.png");
+    var _message_save=ln_save_restore(json_parse(json_stringify(ln_save_capture(_g))));
+    ln1_finish_transition_check(_message_save);
+    ln_check(_message_save.lives_left==_lives-1,"saving during lives message deducts once");
     ln1_finish_transition_check(_g);
     ln_check(_g.lives_left==_lives-1 && _g.player_health==32,"LN1 transition loses one life and respawns");
     ln_check(shader_is_compiled(sh_ln1_palette_fade),"LN1 palette shader compiles");
