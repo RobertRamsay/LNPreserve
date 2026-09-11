@@ -124,7 +124,13 @@ function ln3_consumable_checks() {
     // Render the actual transition, including the original font, in its playfield.
     _g=new LN3Play();_s=_g.state;_s.lives=4;_s.player_dead=1;_s.death_wait=0;_s.logic_wait=0;
     ln3_play_tick(_g,0);
-    repeat(500) if (_g.transition_phase!=8) ln3_play_tick(_g,0);
+    repeat(500) if (_g.transition_phase!=8) {
+        ln3_play_tick(_g,0);
+        if (_g.transition_phase==6 && array_contains([16,48,80,112],_g.transition_wipe)) {
+            var _capture=surface_create(1280,800);surface_set_target(_capture);ln3_play_draw(_g);surface_reset_target();
+            surface_save(_capture,"ln3-sword-descent-"+string(_g.transition_wipe)+".png");surface_free(_capture);
+        }
+    }
     ln_check(_g.transition_phase==8 && _s.lives==3,"lives message reached after sword descends");
     var _surface=surface_create(240,144);surface_set_target(_surface);ln3_transition_draw(_g);surface_reset_target();
     surface_save(_surface,"ln3-lives-transition.png");surface_free(_surface);

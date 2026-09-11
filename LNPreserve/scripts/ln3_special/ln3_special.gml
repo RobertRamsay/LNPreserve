@@ -230,9 +230,9 @@ function ln3_transition_draw(_g) {
     var _phase=_g.transition_phase;
     if (_phase==6) {
         draw_set_colour(c_black);
-        for (var _pair=0;_pair<_g.transition_wipe div 2;_pair++) {
-            var _row=(_pair div 4)*8+6-(_pair mod 4)*2;draw_rectangle(0,_row,240,_row+2,false);
-        }
+        // $70d7 erases rows 0,1 then 2,3, continuously from the top.
+        // Reversing each eight-row block exposes flickering strips below the blade.
+        draw_rectangle(0,0,240,_g.transition_wipe,false);
         draw_set_colour(c_white);
     }
     if (_phase>=7) {

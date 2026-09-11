@@ -24,3 +24,11 @@ Automated checks and rendered captures are not a full manual playthrough. Playte
 - Evidence: `runtime_checks.json` (36 passed), `focused_checks.json` (21 passed), `ln1_runtime_checks.json` (14 passed).
 
 GameMaker compilation passed. Full suite passed before the final held-fire edge guard; all 21 focused checks and the independent 14-group LN1 suite were rerun after that final change and passed. Structural validation: 9 passed, 1 skipped because optional original disk fixtures are unavailable. Source comparison vectors remain intact. Rendered lives-message capture inspected. No manual full-game playthrough was performed. No commit or push made.
+
+## Sword wipe and lives-font correction
+
+The prior wipe reversed each eight-row block, causing strips to appear below the descending sword. A trace of original $70d7 confirms 4,320 writes in continuous top-to-bottom row order; rendering now follows that order. All eight sword components were compared pixel-for-pixel with the original capture and matched.
+
+The glyph export inherited an unsuitable $01 memory-bank value from the capture. It now sets $35 so the source renderer can switch to $34 for font reads and restore I/O for colour-RAM writes. Palette assertions verify screen byte $a8 and colour RAM 7: light red/pink, orange, and yellow, replacing the erroneous dark grey.
+
+Validation: GameMaker build passed; LN3 HUD/consumable/respawn/save regressions passed, including 243 original wheel vectors. Inspected native descent and lives-message captures. Source wipe trace saved in evidence/ln3_death_wipe.json. Full manual playthrough remains outstanding.
