@@ -278,3 +278,31 @@ function ln_crt_tuning_draw() {
     }
     draw_set_colour(c_white);
 }
+
+
+/// Presentation-only fullscreen keeps the normal window geometry for returning.
+function ln_cinematic_restore(_host) {
+    var _saved=_host.cinematic_window;
+    if (!is_struct(_saved)) return;
+    window_set_fullscreen(false);
+    window_set_size(_saved.width,_saved.height);
+    window_set_position(_saved.x,_saved.y);
+    window_set_cursor(_saved.cursor);
+    _host.cinematic_window=undefined;
+}
+
+function ln_cinematic_step(_host) {
+    if (!variable_instance_exists(_host,"cinematic_window")) _host.cinematic_window=undefined;
+    var _movie=_host.play.game_number==3 && (is_struct(_host.play.intro) || is_struct(_host.play.ending));
+    if (!_movie) {ln_cinematic_restore(_host);return;}
+    if (keyboard_check_pressed(vk_f9)) {
+        if (is_struct(_host.cinematic_window)) ln_cinematic_restore(_host);
+        else if (!window_get_fullscreen()) {
+            _host.cinematic_window={x:window_get_x(),y:window_get_y(),width:window_get_width(),height:window_get_height(),cursor:window_get_cursor()};
+            window_enable_borderless_fullscreen(true);
+            window_set_fullscreen(true);
+        } else window_set_fullscreen(false);
+    }
+    if (is_struct(_host.cinematic_window))
+        window_set_cursor(_host.scene_test.menu || _host.workbench?_host.cinematic_window.cursor:cr_none);
+}
