@@ -175,6 +175,8 @@ function ln_save_add(_ui,_g) {
 }
 
 function ln_saves_step(_host) {
+    // Full-screen movies have no save buttons; hidden slots must not intercept clicks.
+    if (_host.play.game_number==3 && (is_struct(_host.play.intro) || is_struct(_host.play.ending)) && !_host.scene_test.menu) return false;
     var _ui=_host.saves;
     if (_ui.message_ticks>0) _ui.message_ticks--;
     if (_host.workbench || _host.scene_test.menu || _host.scene_test.preview) return false;
@@ -193,6 +195,7 @@ function ln_saves_step(_host) {
             }
         }
         if (_old.game_number==3 && is_struct(_old.ending) && surface_exists(_old.ending.scroll_surface)) surface_free(_old.ending.scroll_surface);
+        if (_old.game_number==3) ln3_intro_free(_old);
         _fresh.timer.cycles_per_frame=_fresh.data.timer_period_cycles;
         _host.play=_fresh;
         if (is_struct(_fresh.controls)) _host.control_state_ln1=_fresh.controls;

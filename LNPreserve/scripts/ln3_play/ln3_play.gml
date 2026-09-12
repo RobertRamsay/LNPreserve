@@ -26,7 +26,7 @@ function LN3Play(_level=1) constructor {
     special_sequence=0;special_step=0;special_request=0;special_colours=array_create(8,-1);
     transition=ln3_data_read("play/ln3/transition.json");transition_phase=0;transition_y=[];transition_mode=0;transition_signal=0;transition_wipe=0;ending_requested=false;
     hud_player_health=0;hud_enemy_health=0;hud_honour=0;hud_wait=0;hud_wheel_wait=0;hud_eye_wait=0;hud_eye_phase=0;hud_eye_left=-1;hud_eye_right=-1;
-    ending=undefined;ending_surface=-1;
+    intro=undefined;ending=undefined;ending_surface=-1;
     palette=[];for (var _i=0;_i<16;_i++) palette[_i]=make_colour_rgb(data.palette[_i][0],data.palette[_i][1],data.palette[_i][2]);
     stage_surface=-1;part_surface=-1;timer=new LNClock();controls=undefined;
     paused=false;music=true;game_over=false;level_complete=false;level_states=array_create(5,undefined);
@@ -45,6 +45,7 @@ function ln3_enemy_remember(_g) {
 }
 
 function ln3_play_enter(_g,_entry) {
+    ln3_intro_free(_g);
     _g.loader=undefined;_g.pickup_assist=undefined;_g.food_taps={remaining:0,previous:16};
     var _scene=ln3_room_record(_g.world.rooms,_entry.destination);if (!is_struct(_scene)) return false;
     ln3_enemy_remember(_g);_g.room_id=_entry.destination;_g.last_entry=_entry;_g.scene_record=_scene;_g.room_age=0;
@@ -163,6 +164,7 @@ function ln3_play_prepare_draw(_g,_s) {
 }
 
 function ln3_play_tick(_g,_joy) {
+    if (ln3_intro_tick(_g,_joy)) return;
     if (ln_frontend_tick(_g,_joy)) return;
     _joy=ln_frontend_filter(_g,_joy);
     if (_g.game_over || _g.level_complete) {ln3_hud_tick(_g);return;}
@@ -284,6 +286,7 @@ function ln3_play_actor_part(_g,_d,_i) {
 }
 
 function ln3_play_draw(_g) {
+    if (is_struct(_g.intro)) {ln3_intro_draw(_g);return;}
     if (ln2_loader_active(_g)) {ln_frontend_draw(_g);return;}
     if (is_struct(_g.ending)) {
         ln3_ending_draw(_g);

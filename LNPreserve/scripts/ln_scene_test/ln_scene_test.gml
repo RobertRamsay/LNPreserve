@@ -148,13 +148,19 @@ function ln_scene_test_step(_t, _g) {
                 return;
             }
         }
-        var _row = 0;
+        var _row = _t.game==3?1:0;
         for (var _i = 0; _i < array_length(_t.levels); _i++) {
             if (_t.levels[_i].game != _t.game) continue;
             if (point_in_rectangle(_mx,_my,160,218+_row*54,442,264+_row*54)) {
                 _t.level_index = _i; _t.scene_index = 0; return;
             }
             _row++;
+        }
+        if (_t.game==3 && point_in_rectangle(_mx,_my,160,218,442,264)) {
+            ln3_presentation_open(_t,_g,true);return;
+        }
+        if (_t.game==3 && point_in_rectangle(_mx,_my,160,542,442,588)) {
+            ln3_presentation_open(_t,_g,false);return;
         }
         var _scenes = _t.levels[_t.level_index].scenes;
         var _offset=1;
@@ -206,11 +212,15 @@ function ln_scene_test_draw(_t) {
         for (var _game = 1; _game <= 3; _game++)
             ln_scene_test_button(160+(_game-1)*320,116,304,44,"Last Ninja " + string(_game),_t.game==_game);
         draw_set_colour(c_white); draw_text(160,186,"LEVEL"); draw_text(480,186,"SCENE");
-        var _row = 0;
+        var _row = _t.game==3?1:0;
         for (var _i = 0; _i < array_length(_t.levels); _i++) {
             if (_t.levels[_i].game != _t.game) continue;
             ln_scene_test_button(160,218+_row*54,282,46,string(_t.levels[_i].number)+"  "+_t.levels[_i].title,_t.level_index==_i);
             _row++;
+        }
+        if (_t.game==3) {
+            ln_scene_test_button(160,218,282,46,"INTRO",false);
+            ln_scene_test_button(160,542,282,46,"OUTRO",false);
         }
         draw_set_colour(_level.playable ? make_colour_rgb(125,210,171) : make_colour_rgb(245,190,100));
         draw_text(480,224,"Playable prototype — movement, objects and combat");

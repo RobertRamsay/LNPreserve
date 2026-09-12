@@ -1,3 +1,8 @@
+if (ln3_presentation_test) {
+    try {ln3_presentation_checks(catalog);}
+    catch(_failure) {show_debug_message("LN3_PRESENTATION_FAILURE: "+string(_failure));}
+    game_end();exit;
+}
 if (ln3_hud_test) {
     try {ln3_status_checks();}
     catch(_failure) {show_debug_message("LN3_HUD_FAILURE: "+string(_failure));}
@@ -111,6 +116,7 @@ if (ln3_only) {
 if (!workbench) {
     if (scene_test.menu || scene_test.preview) { ln_scene_test_draw(scene_test); exit; }
     if (play.game_number==1) ln1_play_draw(play, control_state_ln1.pause != 0);else if (play.game_number==2) ln2_play_draw(play);else ln3_play_draw(play);
+    if (play.game_number==3 && (is_struct(play.intro) || is_struct(play.ending))) exit;
     if(input_state.pad_device>=0 && !scene_test.menu && !scene_test.preview) {
         draw_set_colour(c_black);draw_rectangle(160,694,1119,749,false);draw_set_colour(c_white);
         draw_text(160,700,"Xbox: Stick / D-pad Move    A Action    LT / RT Weapon    LB / RB Item");

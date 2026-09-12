@@ -32,6 +32,7 @@ function ln3_special_checks() {
     }
     ln3_transition_checks();
     ln3_ending_checks();
+    ln3_intro_checks();
     show_debug_message("LN3_SPECIAL_PASS: "+string(array_length(_o.vectors))+" original mechanism states and special sequence requests; full interrupt timing excluded.");
 }
 

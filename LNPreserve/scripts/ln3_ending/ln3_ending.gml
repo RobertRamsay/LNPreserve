@@ -6,6 +6,7 @@ function LN3Ending() constructor {
 }
 
 function ln3_ending_free(_g) {
+    ln3_intro_free(_g);
     if (variable_struct_exists(_g,"ending") && is_struct(_g.ending) && surface_exists(_g.ending.scroll_surface)) surface_free(_g.ending.scroll_surface);
     if (variable_struct_exists(_g,"ending_surface") && surface_exists(_g.ending_surface)) surface_free(_g.ending_surface);
     _g.ending=undefined;_g.ending_surface=-1;
@@ -130,4 +131,124 @@ function ln3_ending_gpu_checks() {
     }
     buffer_delete(_b);surface_free(_surface);surface_free(_e.scroll_surface);
     show_debug_message("LN3_ENDING_GPU_PASS: "+string(_count)+" original ending scroll pixels rendered from editable font PNGs.");
+}
+
+/// Original intro display frames, recovered offline. No emulator runs in-game.
+function ln3_intro_free(_g) {
+    if (!variable_struct_exists(_g,"intro") || !is_struct(_g.intro)) return;
+    var _p=_g.intro;
+    if (buffer_exists(_p.stream)) buffer_delete(_p.stream);
+    if (buffer_exists(_p.pixels)) buffer_delete(_p.pixels);
+    if (surface_exists(_p.surface)) surface_free(_p.surface);
+    _g.intro=undefined;
+}
+
+function LN3Intro() constructor {
+    stream=buffer_load("play/ln3/intro.bin");
+    if (buffer_read(stream,buffer_u32)!=$33494e4c) throw "Invalid LN3 intro data";
+    count=buffer_read(stream,buffer_u32);tick=0;previous_fire=true;
+    pixels=buffer_create(320*200*4,buffer_fixed,1);
+    buffer_fill(pixels,0,buffer_u32,$ff000000,320*200*4);
+    surface=-1;dirty=true;
+}
+
+function ln3_intro_frame(_p) {
+    if (_p.tick>=_p.count) return;
+    var _runs=buffer_read(_p.stream,buffer_u16);
+    repeat(_runs) {
+        var _start=buffer_read(_p.stream,buffer_u16)*4,_bytes=buffer_read(_p.stream,buffer_u16)*4;
+        var _offset=buffer_tell(_p.stream);
+        buffer_copy(_p.stream,_offset,_bytes,_p.pixels,_start);
+        buffer_seek(_p.stream,buffer_seek_relative,_bytes);
+    }
+    _p.tick++;if (_runs>0) _p.dirty=true;
+}
+
+function ln3_presentation_music(_g,_intro) {
+    if (variable_global_exists("ln_music_voice") && global.ln_music_voice>=0) audio_stop_sound(global.ln_music_voice);
+    var _asset=asset_get_index(_intro?"snd_ln3_intro_cue":"snd_ln3_outro_cue");
+    global.ln_music_voice=audio_play_sound(_asset,0,true);
+    if (!_g.music) audio_pause_sound(global.ln_music_voice);
+}
+
+function ln3_presentation_open(_t,_g,_intro) {
+    var _music=_g.music;
+    ln_game_select(_g,3,_intro?1:5);ln3_ending_free(_g);
+    _g.music=_music;_g.loader=undefined;_g.paused=false;
+    _g.game_over=false;_g.level_complete=false;
+    if (_intro) _g.intro=new LN3Intro();else _g.ending=new LN3Ending();
+    ln3_presentation_music(_g,_intro);
+    _t.game=3;_t.menu=false;_t.preview=false;
+    for (var _i=0;_i<array_length(_t.levels);_i++) {
+        if (_t.levels[_i].game==3 && _t.levels[_i].number==_g.level) {_t.level_index=_i;break;}
+    }
+    _t.scene_index=0;
+}
+
+function ln3_intro_tick(_g,_joy) {
+    if (!is_struct(_g.intro)) return false;
+    var _p=_g.intro,_fire=(_joy&16)!=0,_pressed=_fire&&!_p.previous_fire;
+    _p.previous_fire=_fire;
+    if (_pressed || _p.tick>=_p.count) {
+        ln3_intro_free(_g);ln3_test_enter(_g,_g.data.initial.room_id);
+        ln_frontend_begin(_g);return true;
+    }
+    ln3_intro_frame(_p);return true;
+}
+
+function ln3_intro_draw(_g) {
+    var _p=_g.intro;
+    if (!surface_exists(_p.surface)) {_p.surface=surface_create(320,200);_p.dirty=true;}
+    if (_p.dirty) {buffer_set_surface(_p.pixels,_p.surface,0);_p.dirty=false;}
+    draw_clear(c_black);draw_set_colour(c_white);
+    draw_surface_ext(_p.surface,0,0,4,4,0,c_white,1);
+}
+
+function ln3_intro_checks() {
+    var _p=new LN3Intro(),_meta=ln3_data_read("play/ln3/intro.json"),_index=0;
+    while (_p.tick<_p.count) {
+        ln3_intro_frame(_p);
+        if (_index<array_length(_meta.checks) && _p.tick==_meta.checks[_index].tick) {
+            ln_check(buffer_md5(_p.pixels,0,320*200*4)==_meta.checks[_index].md5,"LN3 original intro pixels "+string(_p.tick));
+            _index++;
+        }
+    }
+    ln_check(_index==array_length(_meta.checks) && buffer_tell(_p.stream)==buffer_get_size(_p.stream),"LN3 complete intro stream consumed");
+    var _holder={intro:_p};ln3_intro_free(_holder);
+    var _g=new LN3Play(1);_g.intro=new LN3Intro();
+    ln3_intro_tick(_g,16);ln_check(is_struct(_g.intro),"held fire cannot skip intro on entry");
+    ln3_intro_tick(_g,0);ln3_intro_tick(_g,16);
+    ln_check(!is_struct(_g.intro) && ln2_loader_active(_g) && _g.level==1,"fresh fire opens Earth frontend");
+    _g.intro=new LN3Intro();ln3_test_enter(_g,_g.data.initial.room_id);
+    ln_check(!is_struct(_g.intro),"scene selection frees intro buffers");
+    ln3_ending_free(_g);
+    show_debug_message("LN3_INTRO_PASS: complete source capture, input release and cleanup");
+}
+
+
+function ln3_presentation_checks(_catalog) {
+    ln3_intro_checks();
+    var _t=new LNSceneTest(_catalog),_g=new LN1Play();
+    _g.music=false;ln3_presentation_open(_t,_g,true);
+    ln_check(_g.game_number==3 && _g.level==1 && is_struct(_g.intro) && !_t.menu && !_g.music,"intro selection from LN1, muted");
+    repeat(2201) ln3_intro_frame(_g.intro);
+    ln3_intro_draw(_g);surface_save(_g.intro.surface,"ln3-intro-preview.png");
+    var _b=buffer_create(320*200*4,buffer_fixed,1);
+    buffer_get_surface(_b,_g.intro.surface,0);
+    ln_check(buffer_md5(_b,0,320*200*4)==buffer_md5(_g.intro.pixels,0,320*200*4),"intro GPU upload matches original RGBA pixels");
+    buffer_delete(_b);
+    var _stream=_g.intro.stream;
+    ln3_presentation_open(_t,_g,false);
+    ln_check(!buffer_exists(_stream) && is_struct(_g.ending) && _g.level==5,"outro replaces and frees intro");
+    repeat(300) ln3_ending_tick(_g.ending,0);ln3_ending_draw(_g);
+    surface_save(_g.ending_surface,"ln3-outro-preview.png");
+    _t.menu=true;
+    var _menu_surface=surface_create(1280,800);
+    surface_set_target(_menu_surface);ln_scene_test_draw(_t);surface_reset_target();
+    surface_save(_menu_surface,"ln3-presentation-menu.png");surface_free(_menu_surface);
+    ln_scene_test_open(_t,_g,0);
+    ln_check(!is_struct(_g.ending) && !is_struct(_g.intro),"normal scene selection closes presentation");
+    ln3_ending_free(_g);
+    show_debug_message("LN3_PRESENTATION_PASS: intro, outro, GPU pixels, selector and resource cleanup");
+    show_debug_message("LN_CAPTURE_DIRECTORY:"+game_save_id);
 }

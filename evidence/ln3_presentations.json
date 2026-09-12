@@ -1,0 +1,21 @@
+{
+  "status": "passed",
+  "build": "passed",
+  "focused_checks": "passed",
+  "full_suite_groups": 36,
+  "full_suite": "passed before final hidden-save-slot guard; focused presentation suite rerun after final rebuild",
+  "structural_checks": {
+    "passed": 9,
+    "skipped": 1
+  },
+  "intro": {
+    "pal_frames": 10684,
+    "unique_frames": 1230,
+    "all_frames_verified_offline": true,
+    "gpu_pixel_check": "passed"
+  },
+  "manual_playthrough": "not_run",
+  "manual_music_sync": "not_checked",
+  "preview_directory": "C:/Users/Robert/AppData/Local/LNPreserve",
+  "intro_sha256": "58b0f58bb743ce1ec14e57f521c507fb24c92759ec91a3b65254d88b84b91761"
+}

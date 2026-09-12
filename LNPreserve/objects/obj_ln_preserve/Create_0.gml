@@ -1,3 +1,4 @@
+ln3_presentation_test=false;
 ln3_hud_test=false;
 ln2_followup_test=false;
 sewer_original_test=false;
@@ -131,6 +132,7 @@ for (var _i = 1; _i <= parameter_count(); _i++) {
         try {ln1_pickup_assist_checks();show_debug_message("LN_PICKUP_PASS");}
         catch (_failure) {show_debug_message("LN_PICKUP_FAILURE: "+string(_failure));game_end();exit;}
     }
+    if (parameter_string(_i) == "--ln3-presentation-checks") ln3_presentation_test=true;
     if (parameter_string(_i) == "--selftest") selftest = true;
     if (parameter_string(_i) == "--selftest-fail-early") selftest_inject_failure=true;
     if (parameter_string(_i) == "--ln1-selftest") {selftest=true;ln1_only=true;}

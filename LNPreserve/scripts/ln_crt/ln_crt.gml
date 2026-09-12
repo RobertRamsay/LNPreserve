@@ -28,7 +28,7 @@ function ln_crt_game_region(_host) {
     if (_host.workbench || _host.scene_test.menu || _host.scene_test.preview) return undefined;
     if (_host.play.game_number==1) return [160,84,1120,684];
     if ((_host.play.game_number==2 && _host.play.victory==2) ||
-        (_host.play.game_number==3 && is_struct(_host.play.ending))) return [0,0,1280,800];
+        (_host.play.game_number==3 && (is_struct(_host.play.ending) || is_struct(_host.play.intro)))) return [0,0,1280,800];
     if (_host.play.game_number==2) return [160,84,1120,684];
     return [160,84,1120,684];
 }
@@ -46,7 +46,7 @@ function ln_crt_present(_host) {
     if (!surface_exists(_host.crt_surface)) return;
     // Separate output avoids reading from the surface currently being rendered.
     surface_set_target(_host.crt_surface);
-    ln_crt_surface(application_surface,0,0,1,(_host.play.game_number==1 || (_host.play.game_number==2 && _host.play.victory!=2) || (_host.play.game_number==3 && !is_struct(_host.play.ending)))?3:4,_region);
+    ln_crt_surface(application_surface,0,0,1,(_host.play.game_number==1 || (_host.play.game_number==2 && _host.play.victory!=2) || (_host.play.game_number==3 && !(is_struct(_host.play.ending) || is_struct(_host.play.intro))))?3:4,_region);
     surface_reset_target();
     draw_surface_part(_host.crt_surface,_region[0],_region[1],_region[2]-_region[0],_region[3]-_region[1],_region[0],_region[1]);
 }

@@ -1,0 +1,101 @@
+{
+  "checks": [
+    {
+      "md5": "1902ff81a1cc9f3e7a6b9f403fdad3fd",
+      "tick": 1
+    },
+    {
+      "md5": "efff2bdb9748a5abbb310be9128ad89e",
+      "tick": 501
+    },
+    {
+      "md5": "7c9403085c311ddce17be36170ffc9cb",
+      "tick": 1001
+    },
+    {
+      "md5": "63d16a2d1cca212aaecb6b19e748a940",
+      "tick": 1501
+    },
+    {
+      "md5": "1902ff81a1cc9f3e7a6b9f403fdad3fd",
+      "tick": 2001
+    },
+    {
+      "md5": "56b58a79826ba1cd796b0394f6d94bb8",
+      "tick": 2501
+    },
+    {
+      "md5": "22c0c6eaf9ce2e0605641b16e4ce7ae7",
+      "tick": 3001
+    },
+    {
+      "md5": "81d12f40f8d904ad5b1a24802486d46f",
+      "tick": 3501
+    },
+    {
+      "md5": "f41a694c9ef7b90e6dcbb5f60a3d25e5",
+      "tick": 4001
+    },
+    {
+      "md5": "6c6df5dac7f30702da68438d75954f4a",
+      "tick": 4501
+    },
+    {
+      "md5": "bde710ca9a1ac6d7e8e56817543107a9",
+      "tick": 5001
+    },
+    {
+      "md5": "90cec3cbc4f2c93f5fc70ffb6bca4b3e",
+      "tick": 5501
+    },
+    {
+      "md5": "90cec3cbc4f2c93f5fc70ffb6bca4b3e",
+      "tick": 6001
+    },
+    {
+      "md5": "aa78f5335537bf03a70fe720dc1160d0",
+      "tick": 6501
+    },
+    {
+      "md5": "7b55c36c97c6c071c06ee4ba2b1a6cd8",
+      "tick": 7001
+    },
+    {
+      "md5": "fb47a37ca881d5d5927e2e02f09275bb",
+      "tick": 7501
+    },
+    {
+      "md5": "a03abc99faa1c23990d6d08df37e8e2c",
+      "tick": 8001
+    },
+    {
+      "md5": "14b2182a8e42f924b3cc28e3cba3111d",
+      "tick": 8501
+    },
+    {
+      "md5": "a4fca2b52b3a4e3f2708828102ac57ea",
+      "tick": 9001
+    },
+    {
+      "md5": "d90bae152d5dacd1f2743d539b691974",
+      "tick": 9501
+    },
+    {
+      "md5": "1902ff81a1cc9f3e7a6b9f403fdad3fd",
+      "tick": 10001
+    },
+    {
+      "md5": "fef20a60c9d4a58a3d5041387a61959b",
+      "tick": 10501
+    },
+    {
+      "md5": "b5b190ad7a8d798c8a043d8c368824ba",
+      "tick": 10684
+    }
+  ],
+  "format": "LNI3 little endian: magic u32, ticks u32; each tick: run count u16, then pixel offset u16, pixel count u16, RGBA bytes. Initial image opaque black. Captured VIC palette indices mapped to project Pepto palette.",
+  "source": "Last_Ninja_3_(MSR).d81, original INTRO, entry $0400 to exit $10c5; PAL IRQ $0ef3 display samples",
+  "source_sha256": "f065bd1f2a4ad2a2cb55a28fc3bf503cef5a9d4a25e22057036e08d0ae976f64",
+  "ticks": 10684,
+  "unique_frames": 1230
+}
