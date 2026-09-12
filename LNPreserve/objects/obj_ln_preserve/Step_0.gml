@@ -46,6 +46,7 @@ if (!selftest) for(var _game_key=1;_game_key<=3;_game_key++)
 if (_quick_game>0) ln_quick_start(self,_quick_game);
 play.timer.advance(delta_time, tick_native);
 if (!workbench) ln_scene_test_step(scene_test, play);
+ln3_intro_audio_sync(play,workbench || scene_test.menu || scene_test.preview);
 if (workbench) {
 var _datasets = array_length(catalog.datasets);
 if (keyboard_check_pressed(ord("Q"))) { dataset_index = (dataset_index + _datasets - 1) mod _datasets; asset_index = 0; }

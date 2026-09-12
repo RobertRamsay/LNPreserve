@@ -31,3 +31,17 @@ and selector previews in GameMaker's save directory. Intro stream checks are als
 part of the full ln3_special selftest group. Offline export compares every decoded
 frame with its original indexed display sample. Music alignment and the complete
 viewing experience still merit manual playtesting; this is not a full playthrough.
+
+## Original intro audio cues
+
+The intro now starts silently. Original driver initialization calls select:
+- PAL tick 72: snd_ln3_subtune_01_unmapped_cue ($a600, A=0).
+- PAL tick 624: snd_ln3_subtune_02_unmapped_cue ($a600, A=1).
+- PAL tick 3681: snd_ln3_intro_cue ($b200, A=0).
+
+Source volume bytes supply the opening cue's fade to silence and the main theme's
+final fade. These three recordings play once at their cues. F11 and pause freeze
+picture and audio together; mute changes volume while keeping the cue position.
+The capture helper now saves audio-trace.json as well as image samples; the exporter
+uses ln3_intro_audio_source.py to reproduce all 33 cue/fade events. Manual listening
+is still useful to check the supplied recordings themselves for leading silence.

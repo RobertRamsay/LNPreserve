@@ -1,4 +1,172 @@
 {
+  "audio": [
+    {
+      "asset": "snd_ln3_subtune_01_unmapped_cue",
+      "gain": 1,
+      "tick": 72
+    },
+    {
+      "asset": "",
+      "gain": 0.9333333333333333,
+      "tick": 328
+    },
+    {
+      "asset": "",
+      "gain": 0.8666666666666667,
+      "tick": 335
+    },
+    {
+      "asset": "",
+      "gain": 0.8,
+      "tick": 342
+    },
+    {
+      "asset": "",
+      "gain": 0.7333333333333333,
+      "tick": 349
+    },
+    {
+      "asset": "",
+      "gain": 0.6666666666666666,
+      "tick": 356
+    },
+    {
+      "asset": "",
+      "gain": 0.6,
+      "tick": 363
+    },
+    {
+      "asset": "",
+      "gain": 0.5333333333333333,
+      "tick": 370
+    },
+    {
+      "asset": "",
+      "gain": 0.4666666666666667,
+      "tick": 377
+    },
+    {
+      "asset": "",
+      "gain": 0.4,
+      "tick": 384
+    },
+    {
+      "asset": "",
+      "gain": 0.3333333333333333,
+      "tick": 391
+    },
+    {
+      "asset": "",
+      "gain": 0.26666666666666666,
+      "tick": 398
+    },
+    {
+      "asset": "",
+      "gain": 0.2,
+      "tick": 405
+    },
+    {
+      "asset": "",
+      "gain": 0.13333333333333333,
+      "tick": 412
+    },
+    {
+      "asset": "",
+      "gain": 0.06666666666666667,
+      "tick": 419
+    },
+    {
+      "asset": "",
+      "gain": 0.0,
+      "tick": 426
+    },
+    {
+      "asset": "snd_ln3_subtune_02_unmapped_cue",
+      "gain": 1,
+      "tick": 624
+    },
+    {
+      "asset": "snd_ln3_intro_cue",
+      "gain": 1,
+      "tick": 3681
+    },
+    {
+      "asset": "",
+      "gain": 0.9333333333333333,
+      "tick": 10606
+    },
+    {
+      "asset": "",
+      "gain": 0.8666666666666667,
+      "tick": 10608
+    },
+    {
+      "asset": "",
+      "gain": 0.8,
+      "tick": 10610
+    },
+    {
+      "asset": "",
+      "gain": 0.7333333333333333,
+      "tick": 10612
+    },
+    {
+      "asset": "",
+      "gain": 0.6666666666666666,
+      "tick": 10614
+    },
+    {
+      "asset": "",
+      "gain": 0.6,
+      "tick": 10616
+    },
+    {
+      "asset": "",
+      "gain": 0.5333333333333333,
+      "tick": 10618
+    },
+    {
+      "asset": "",
+      "gain": 0.4666666666666667,
+      "tick": 10620
+    },
+    {
+      "asset": "",
+      "gain": 0.4,
+      "tick": 10622
+    },
+    {
+      "asset": "",
+      "gain": 0.3333333333333333,
+      "tick": 10624
+    },
+    {
+      "asset": "",
+      "gain": 0.26666666666666666,
+      "tick": 10626
+    },
+    {
+      "asset": "",
+      "gain": 0.2,
+      "tick": 10628
+    },
+    {
+      "asset": "",
+      "gain": 0.13333333333333333,
+      "tick": 10630
+    },
+    {
+      "asset": "",
+      "gain": 0.06666666666666667,
+      "tick": 10632
+    },
+    {
+      "asset": "",
+      "gain": 0.0,
+      "tick": 10634
+    }
+  ],
+  "audio_source": "Original $a600 (A=0/1), $b200 (A=0), volume bytes $69/$66 at captured PAL boundaries.",
   "checks": [
     {
       "md5": "1902ff81a1cc9f3e7a6b9f403fdad3fd",

@@ -137,6 +137,7 @@ function ln3_ending_gpu_checks() {
 function ln3_intro_free(_g) {
     if (!variable_struct_exists(_g,"intro") || !is_struct(_g.intro)) return;
     var _p=_g.intro;
+    if (_p.voice>=0) audio_stop_sound(_p.voice);
     if (buffer_exists(_p.stream)) buffer_delete(_p.stream);
     if (buffer_exists(_p.pixels)) buffer_delete(_p.pixels);
     if (surface_exists(_p.surface)) surface_free(_p.surface);
@@ -150,6 +151,7 @@ function LN3Intro() constructor {
     pixels=buffer_create(320*200*4,buffer_fixed,1);
     buffer_fill(pixels,0,buffer_u32,$ff000000,320*200*4);
     surface=-1;dirty=true;
+    audio=ln3_data_read("play/ln3/intro.json").audio;audio_index=0;voice=-1;gain=0;cue="";
 }
 
 function ln3_intro_frame(_p) {
@@ -166,13 +168,16 @@ function ln3_intro_frame(_p) {
 
 function ln3_presentation_music(_g,_intro) {
     if (variable_global_exists("ln_music_voice") && global.ln_music_voice>=0) audio_stop_sound(global.ln_music_voice);
-    var _asset=asset_get_index(_intro?"snd_ln3_intro_cue":"snd_ln3_outro_cue");
+    global.ln_music_voice=-1;
+    if (_intro) return; // Original intro begins silently; its PAL cues start the audio.
+    var _asset=asset_get_index("snd_ln3_outro_cue");
     global.ln_music_voice=audio_play_sound(_asset,0,true);
     if (!_g.music) audio_pause_sound(global.ln_music_voice);
 }
 
 function ln3_presentation_open(_t,_g,_intro) {
-    var _music=_g.music;
+    // LN1 keeps its original 0/$ff music byte in controls, not on Play.
+    var _music=_g.game_number==1?(!is_struct(_g.controls) || _g.controls.music!=0):_g.music;
     ln_game_select(_g,3,_intro?1:5);ln3_ending_free(_g);
     _g.music=_music;_g.loader=undefined;_g.paused=false;
     _g.game_over=false;_g.level_complete=false;
@@ -193,7 +198,7 @@ function ln3_intro_tick(_g,_joy) {
         ln3_intro_free(_g);ln3_test_enter(_g,_g.data.initial.room_id);
         ln_frontend_begin(_g);return true;
     }
-    ln3_intro_frame(_p);return true;
+    ln3_intro_audio_tick(_g);ln3_intro_frame(_p);return true;
 }
 
 function ln3_intro_draw(_g) {
@@ -227,9 +232,28 @@ function ln3_intro_checks() {
 
 
 function ln3_presentation_checks(_catalog) {
+    ln3_intro_audio_checks();
     ln3_intro_checks();
+    for (var _game=1;_game<=3;_game++) for (var _enabled=0;_enabled<=1;_enabled++) for (var _intro=0;_intro<=1;_intro++) {
+        var _source=_game==1?new LN1Play():(_game==2?new LN2Play():new LN3Play());
+        if (_game==1) {
+            ln_check(!variable_struct_exists(_source,"music"),"LN1 fixture has no synthetic music field");
+            _source.controls=ln3_data_read("actors/ln1/initial_control_state.json");
+            _source.controls.music=_enabled?255:0;
+        } else _source.music=bool(_enabled);
+        var _picker=new LNSceneTest(_catalog);
+        ln3_presentation_open(_picker,_source,bool(_intro));
+        ln_check(_source.game_number==3 && _source.music==bool(_enabled),"presentation retains music from game "+string(_game));
+        ln_check(_intro?is_struct(_source.intro):is_struct(_source.ending),"both presentation entries open from game "+string(_game));
+        ln3_ending_free(_source);
+    }
+    var _bare=new LN1Play(),_bare_picker=new LNSceneTest(_catalog);
+    ln3_presentation_open(_bare_picker,_bare,true);
+    ln_check(_bare.music && is_struct(_bare.intro),"LN1 without connected controls uses music-on default");
+    ln3_ending_free(_bare);
     var _t=new LNSceneTest(_catalog),_g=new LN1Play();
-    _g.music=false;ln3_presentation_open(_t,_g,true);
+    _g.controls=ln3_data_read("actors/ln1/initial_control_state.json");
+    _g.controls.music=0;ln3_presentation_open(_t,_g,true);
     ln_check(_g.game_number==3 && _g.level==1 && is_struct(_g.intro) && !_t.menu && !_g.music,"intro selection from LN1, muted");
     repeat(2201) ln3_intro_frame(_g.intro);
     ln3_intro_draw(_g);surface_save(_g.intro.surface,"ln3-intro-preview.png");
@@ -251,4 +275,60 @@ function ln3_presentation_checks(_catalog) {
     ln3_ending_free(_g);
     show_debug_message("LN3_PRESENTATION_PASS: intro, outro, GPU pixels, selector and resource cleanup");
     show_debug_message("LN_CAPTURE_DIRECTORY:"+game_save_id);
+}
+
+
+/// Cue changes and stepped fades observed at the same PAL boundaries as the film.
+function ln3_intro_audio_tick(_g) {
+    var _p=_g.intro;
+    while (_p.audio_index<array_length(_p.audio) && _p.audio[_p.audio_index].tick<=_p.tick) {
+        var _event=_p.audio[_p.audio_index++];
+        if (_event.asset!="") {
+            if (_p.voice>=0) audio_stop_sound(_p.voice);
+            _p.cue=_event.asset;
+            _p.voice=audio_play_sound(asset_get_index(_p.cue),0,false);
+            global.ln_music_voice=_p.voice;
+        }
+        _p.gain=_event.gain;
+        if (_p.gain==0 && _p.voice>=0) {
+            audio_stop_sound(_p.voice);_p.voice=-1;global.ln_music_voice=-1;
+        }
+    }
+    ln3_intro_audio_sync(_g,false);
+}
+
+function ln3_intro_audio_sync(_g,_blocked) {
+    if (_g.game_number!=3 || !is_struct(_g.intro)) return;
+    var _p=_g.intro;if (_p.voice<0) return;
+    // Muting keeps time with the film. Pausing or browsing F11 freezes both.
+    audio_sound_gain(_p.voice,_g.music?_p.gain:0,0);
+    if (_blocked || _g.paused) {
+        if (!audio_is_paused(_p.voice)) audio_pause_sound(_p.voice);
+    } else if (audio_is_paused(_p.voice)) audio_resume_sound(_p.voice);
+}
+
+function ln3_intro_audio_checks() {
+    var _g=new LN3Play();_g.intro=new LN3Intro();_g.music=true;
+    ln3_presentation_music(_g,true);
+    ln_check(global.ln_music_voice==-1,"intro opens without playing the main song");
+    var _times=[71,72,328,426,623,624,3680,3681,10606,10634];
+    var _cues=["","snd_ln3_subtune_01_unmapped_cue","snd_ln3_subtune_01_unmapped_cue","snd_ln3_subtune_01_unmapped_cue",
+        "snd_ln3_subtune_01_unmapped_cue","snd_ln3_subtune_02_unmapped_cue","snd_ln3_subtune_02_unmapped_cue",
+        "snd_ln3_intro_cue","snd_ln3_intro_cue","snd_ln3_intro_cue"];
+    for (var _i=0;_i<array_length(_times);_i++) {
+        _g.intro.tick=_times[_i];ln3_intro_audio_tick(_g);
+        ln_check(_g.intro.cue==_cues[_i],"source audio cue at PAL tick "+string(_times[_i]));
+        if (_times[_i]==426 || _times[_i]==623 || _times[_i]==10634) ln_check(_g.intro.voice==-1,"source silence after fade");
+        if (_times[_i]==328 || _times[_i]==10606) ln_check(abs(_g.intro.gain-14/15)<0.0001,"original volume fade step");
+        if (_times[_i]==624) {
+            var _voice=_g.intro.voice;
+            ln3_intro_audio_sync(_g,true);ln_check(audio_is_paused(_voice),"F11 pauses intro cue");
+            ln3_intro_audio_sync(_g,false);ln_check(!audio_is_paused(_voice),"F11 close resumes intro cue");
+            _g.music=false;ln3_intro_audio_sync(_g,false);
+            ln_check(!audio_is_paused(_voice) && audio_sound_get_gain(_voice)==0,"mute preserves cue timeline");
+            _g.music=true;ln3_intro_audio_sync(_g,false);
+        }
+    }
+    ln3_intro_free(_g);
+    show_debug_message("LN3_INTRO_AUDIO_PASS: all three source cues, fades, F11 pause and mute");
 }

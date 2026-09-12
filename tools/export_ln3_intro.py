@@ -31,6 +31,9 @@ dest=project/'datafiles/play/ln3/intro.bin';dest.write_bytes(out)
 meta=dict(ticks=len(timeline),unique_frames=len(raw)//64000,source='Last_Ninja_3_(MSR).d81, original INTRO, entry $0400 to exit $10c5; PAL IRQ $0ef3 display samples',
  source_sha256=hashlib.sha256(Path(sys.argv[2]).read_bytes()).hexdigest(),
  format='LNI3 little endian: magic u32, ticks u32; each tick: run count u16, then pixel offset u16, pixel count u16, RGBA bytes. Initial image opaque black. Captured VIC palette indices mapped to project Pepto palette.',checks=checks)
+from ln3_intro_audio_source import audio_events
+meta['audio']=audio_events(json.loads((src/'audio-trace.json').read_text()))
+meta['audio_source']='Original $a600 (A=0/1), $b200 (A=0), volume bytes $69/$66 at captured PAL boundaries.'
 b.write_json(project/'datafiles/play/ln3/intro.json',meta)
 yyp=project/'LNPreserve.yyp';p=b.read_json(yyp)
 for name in ['intro.bin','intro.json']:

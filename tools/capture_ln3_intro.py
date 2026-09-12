@@ -16,10 +16,14 @@ with v.Reference(Path(sys.argv[1])) as ref:
   if ref.memory(0x400,0x405)==bytes.fromhex('78 a9 7f a2 2f a0'):break
  name=str(out/'start.vsf').encode();ref.command(0x41,bytes([0,0,len(name)])+name)
  print('Original intro start recovered',flush=True)
- frames=[];ids={};timeline=[]
- for tick in range(16000):
-  hit=ref.until_any([0xef3,0x10c5])
+ frames=[];ids={};timeline=[];events=[];volumes=[]
+ while len(timeline)<16000:
+  tick=len(timeline)
+  hit=ref.until_any([0xef3,0xa600,0xb200,0x10c5])
   if hit==0x10c5:break
+  if hit!=0xef3:
+   events.append(dict(tick=tick,entry=hex(hit),a=ref.registers()["A"]));continue
+  volumes.append(list(ref.memory(0x66,0x70)))
   b=ref.command(0x84,b'\x01\x00');fl,w,h,x,y,iw,ih,bpp=struct.unpack_from('<I6HB',b)
   raw=b[fl:fl+w*h]
   im=Image.frombytes('P',(w,h),raw).crop((x,y,x+iw,y+ih))
@@ -34,4 +38,5 @@ with v.Reference(Path(sys.argv[1])) as ref:
  else:raise RuntimeError('Intro did not complete')
  (out/'frames.bin').write_bytes(b''.join(frames))
  (out/'timeline.json').write_text(json.dumps(timeline))
+ (out/'audio-trace.json').write_text(json.dumps(dict(events=events,volumes=volumes,ticks=len(timeline))))
  print('Complete',len(timeline),'ticks',len(frames),'unique frames',flush=True)
