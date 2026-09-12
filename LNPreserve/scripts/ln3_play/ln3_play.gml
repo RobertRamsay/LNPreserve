@@ -45,6 +45,7 @@ function ln3_enemy_remember(_g) {
 }
 
 function ln3_play_enter(_g,_entry) {
+    ln_rewind_boundary();
     ln3_intro_free(_g);
     _g.loader=undefined;_g.pickup_assist=undefined;_g.food_taps={remaining:0,previous:16};
     var _scene=ln3_room_record(_g.world.rooms,_entry.destination);if (!is_struct(_scene)) return false;

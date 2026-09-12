@@ -49,6 +49,7 @@ function ln2_enemy_remember(_g) {
 }
 
 function ln2_play_enter(_g,_id) {
+    ln_rewind_boundary();
     _g.loader=undefined;
     _g.data.sewer_recessed=_g.level==3 && _id==10;
     _g.life_transition=undefined;

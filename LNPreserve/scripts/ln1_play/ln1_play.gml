@@ -47,6 +47,7 @@ function LN1Play(_level = 1) constructor {
 }
 
 function ln1_play_enter(_g, _room_id) {
+    ln_rewind_boundary();
     _g.loader=undefined;
     _g.room_id = _room_id;
     // The spider and dog pursuit modes belong to their encounter rooms.  Do

@@ -1,3 +1,4 @@
+rewind_test=false;
 ln3_presentation_test=false;
 ln3_hud_test=false;
 ln2_followup_test=false;
@@ -133,6 +134,7 @@ for (var _i = 1; _i <= parameter_count(); _i++) {
         catch (_failure) {show_debug_message("LN_PICKUP_FAILURE: "+string(_failure));game_end();exit;}
     }
     if (parameter_string(_i) == "--ln3-presentation-checks") ln3_presentation_test=true;
+    if (parameter_string(_i) == "--rewind-checks") rewind_test=true;
     if (parameter_string(_i) == "--selftest") selftest = true;
     if (parameter_string(_i) == "--selftest-fail-early") selftest_inject_failure=true;
     if (parameter_string(_i) == "--ln1-selftest") {selftest=true;ln1_only=true;}
@@ -239,6 +241,7 @@ if (selftest) {
 workbench = false;
 scene_test = new LNSceneTest(catalog);
 play = new LN1Play();
+rewind=new LNRewind();
 var _control_buffer = buffer_load("actors/ln1/initial_control_state.json");
 control_state_ln1 = json_parse(buffer_read(_control_buffer,buffer_text));
 buffer_delete(_control_buffer);

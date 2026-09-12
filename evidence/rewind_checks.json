@@ -1,0 +1,126 @@
+{
+  "status": "passed",
+  "samples": [
+    {
+      "game": 1,
+      "level": 1,
+      "capture_us": 5061,
+      "compressed_bytes": 12758
+    },
+    {
+      "game": 1,
+      "level": 2,
+      "capture_us": 5692,
+      "compressed_bytes": 13681
+    },
+    {
+      "game": 1,
+      "level": 3,
+      "capture_us": 5334,
+      "compressed_bytes": 13247
+    },
+    {
+      "game": 1,
+      "level": 4,
+      "capture_us": 13413,
+      "compressed_bytes": 24815
+    },
+    {
+      "game": 1,
+      "level": 5,
+      "capture_us": 4541,
+      "compressed_bytes": 12137
+    },
+    {
+      "game": 1,
+      "level": 6,
+      "capture_us": 5197,
+      "compressed_bytes": 12635
+    },
+    {
+      "game": 2,
+      "level": 1,
+      "capture_us": 6039,
+      "compressed_bytes": 9407
+    },
+    {
+      "game": 2,
+      "level": 2,
+      "capture_us": 5734,
+      "compressed_bytes": 8472
+    },
+    {
+      "game": 2,
+      "level": 3,
+      "capture_us": 3203,
+      "compressed_bytes": 6182
+    },
+    {
+      "game": 2,
+      "level": 4,
+      "capture_us": 6768,
+      "compressed_bytes": 10443
+    },
+    {
+      "game": 2,
+      "level": 5,
+      "capture_us": 5840,
+      "compressed_bytes": 9344
+    },
+    {
+      "game": 2,
+      "level": 6,
+      "capture_us": 6797,
+      "compressed_bytes": 8863
+    },
+    {
+      "game": 2,
+      "level": 7,
+      "capture_us": 3026,
+      "compressed_bytes": 4061
+    },
+    {
+      "game": 3,
+      "level": 1,
+      "capture_us": 10887,
+      "compressed_bytes": 17669
+    },
+    {
+      "game": 3,
+      "level": 2,
+      "capture_us": 9446,
+      "compressed_bytes": 14650
+    },
+    {
+      "game": 3,
+      "level": 3,
+      "capture_us": 9233,
+      "compressed_bytes": 16056
+    },
+    {
+      "game": 3,
+      "level": 4,
+      "capture_us": 19014,
+      "compressed_bytes": 17800
+    },
+    {
+      "game": 3,
+      "level": 5,
+      "capture_us": 9345,
+      "compressed_bytes": 14031
+    }
+  ],
+  "level_count": 18,
+  "checks": [
+    "whole mutable state restored",
+    "future-only fields removed",
+    "identical subsequent input produces identical full state",
+    "100-snapshot history limit",
+    "Left Arrow hold/release",
+    "abandoned future discarded",
+    "menu suspension",
+    "scene/load/loader reset"
+  ],
+  "manual_playthrough": "not_run",
+  "coverage": "18 level-start state/replay checks; not exhaustive room or puzzle coverage"
+}

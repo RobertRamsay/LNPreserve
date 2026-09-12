@@ -19,7 +19,8 @@ if (crt_live_test) {
     if (crt_live_frame==1 || crt_live_frame==2) ln_crt_toggle();
     exit;
 }
-if (presentation_test) exit;
+if (presentation_test || rewind_test) exit;
+if (!selftest && ln_rewind_step(self)) exit;
 if (!selftest && !workbench && !scene_test.preview) ln_crt_step(ln_crt_controls_visible(self),!scene_test.menu);
 if (!selftest && ln_saves_step(self)) exit;
 elapsed_us += int64(delta_time);
@@ -64,6 +65,7 @@ if (_count > 0) {
     if (keyboard_check_pressed(vk_right)) asset_index = (asset_index + 1) mod _count;
 }
 }
+if (!selftest) ln_rewind_record(self);
 host_frames++;
 if (selftest && host_frames == 4) {
     for (var _i = 0; _i < 160; _i++) { play.timer.cycle += 18433; ln1_play_tick(play, 9); }

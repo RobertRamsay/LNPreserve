@@ -1,3 +1,7 @@
+if (rewind_test) {
+    try {ln_rewind_checks();} catch(_failure) {show_debug_message("LN_REWIND_FAILURE: "+string(_failure));}
+    game_end();exit;
+}
 if (ln3_presentation_test) {
     try {ln3_presentation_checks(catalog);}
     catch(_failure) {show_debug_message("LN3_PRESENTATION_FAILURE: "+string(_failure));}
