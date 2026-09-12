@@ -55,16 +55,17 @@ function ln_crt_toggle() {
     if (shader_is_compiled(sh_ln_crt)) global.ln_crt_enabled=!global.ln_crt_enabled;
 }
 
-function ln_crt_slider_input(_mx,_my,_pressed,_held) {
+function ln_crt_slider_input(_mx,_my,_pressed,_held,_tuning=true) {
+    if (!_tuning && global.ln_crt_drag>=3) global.ln_crt_drag=-1;
     ln_crt_tuning_init();
-    if (global.ln_crt_enabled && _pressed && _my>=716 && _my<745) {
+    if (_tuning && global.ln_crt_enabled && _pressed && _my>=716 && _my<745) {
         for (var _preset=0;_preset<4;_preset++) if (_mx>=172+148*_preset && _mx<312+148*_preset) {
             global.ln_scan_preset=_preset;global.ln_scan_align=0.5;
             global.ln_scan_width=[3,3,5,5][_preset];global.ln_scan_soft=_preset==0?0:1;
             global.ln_crt_scanlines=[0.75,0.85,0.85,1.0][_preset];global.ln_crt_drag=-1;return;
         }
     }
-    if (global.ln_crt_enabled && _pressed && _mx>=800 && _mx<=1100) {
+    if (_tuning && global.ln_crt_enabled && _pressed && _mx>=800 && _mx<=1100) {
         if (abs(_my-732)<=10) global.ln_crt_drag=3;
         if (abs(_my-776)<=10) global.ln_crt_drag=4;
     }
@@ -88,9 +89,9 @@ function ln_crt_slider_input(_mx,_my,_pressed,_held) {
     }
 }
 
-function ln_crt_sliders_draw() {
+function ln_crt_sliders_draw(_tuning=true) {
     if (!global.ln_crt_enabled) return;
-    ln_crt_tuning_draw();
+    if (_tuning) ln_crt_tuning_draw();
     draw_set_colour(make_colour_rgb(24,28,34));draw_rectangle(1128,650,1272,792,false);
     draw_set_colour(make_colour_rgb(150,190,215));draw_text(1136,656,"CRT SETTINGS");
     var _labels=["Pixel blur","Honeycomb","Scanlines"];
@@ -119,7 +120,7 @@ function ln_window_preset(_factor) {
     window_center();
 }
 
-function ln_window_buttons() {
+function ln_window_buttons(_tips=true) {
     draw_set_colour(make_colour_rgb(24,28,34));draw_rectangle(1128,602,1272,648,false);
     draw_set_colour(make_colour_rgb(150,190,215));
     draw_text(1136,604,string(window_get_width())+"x"+string(window_get_height()));
@@ -130,7 +131,7 @@ function ln_window_buttons() {
             (_i==1 && window_get_width()==2560 && window_get_height()==1600);
         draw_set_colour(_selected?make_colour_rgb(44,82,110):make_colour_rgb(42,48,57));draw_rectangle(_x,624,_x+42,644,false);
         draw_set_colour(_hover?c_white:make_colour_rgb(180,215,236));draw_text(_x+8,626,_labels[_i]);
-        if (_hover) {
+        if (_hover && _tips) {
             var _tip=_i==0?"1280 x 800":(_i==1?"2560 x 1600":"Largest whole-pixel size that fits");
             draw_set_colour(c_white);draw_text(1120-string_width(_tip),626,_tip);
         }
@@ -138,7 +139,18 @@ function ln_window_buttons() {
     draw_set_colour(c_white);
 }
 
-function ln_crt_step() {
+function ln_crt_controls_visible(_host) {
+    if (_host.workbench || _host.scene_test.preview) return false;
+    if (_host.scene_test.menu) return true;
+    return _host.play.game_number!=3 || (!is_struct(_host.play.intro) && !is_struct(_host.play.ending));
+}
+
+function ln_crt_step(_show_controls=true,_tuning=true) {
+    if (!_show_controls) {
+        global.ln_crt_drag=-1;
+        if (keyboard_check_pressed(vk_f10)) ln_crt_toggle();
+        return;
+    }
     if (mouse_check_button_pressed(mb_left) && mouse_y>=624 && mouse_y<645) {
         for (var _i=0;_i<3;_i++) {
             var _x=1132+46*_i;
@@ -149,7 +161,7 @@ function ln_crt_step() {
         mouse_x>=1128 && mouse_x<1272 && mouse_y>=36 && mouse_y<72)) {
         ln_crt_toggle();
     }
-    ln_crt_slider_input(mouse_x,mouse_y,mouse_check_button_pressed(mb_left),mouse_check_button(mb_left));
+    ln_crt_slider_input(mouse_x,mouse_y,mouse_check_button_pressed(mb_left),mouse_check_button(mb_left),_tuning);
 }
 
 function ln_crt_button() {
