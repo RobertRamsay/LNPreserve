@@ -315,6 +315,7 @@ function ln1_play_draw(_game, _paused) {
     var _scale = 3, _x = 160, _y = 84, _s = _game.player;
     draw_set_colour(c_white);
     if (!surface_exists(_game.stage_surface)) _game.stage_surface = surface_create(240,144);
+    if(global.ln_paint.active) ln_paint_prepare();
     surface_set_target(_game.stage_surface);
     draw_clear(c_black); draw_sprite(_game.scene, 0, 0, 0);
     for (var _i = 0; _i < array_length(_game.world.items); _i++) {
@@ -348,6 +349,7 @@ function ln1_play_draw(_game, _paused) {
         draw_text((240-string_width(_number))/2,_top+_height+6,_number);
         draw_set_colour(c_white);
     } else if (_transition) draw_sprite(spr_ln1_death_dissolve,min(39,_game.death_transition.tick),0,0);
+    if(global.ln_paint.active) {draw_set_colour(c_white);draw_surface(global.ln_paint.surface,0,0);}
     surface_reset_target();
     matrix_set(matrix_view,_saved_view);matrix_set(matrix_projection,_saved_projection);
     if (_transition && !_lives_message) {

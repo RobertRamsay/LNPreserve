@@ -30,3 +30,5 @@ forward replay checks across all 18 levels, plus history/input boundary checks.
 Results: evidence/rewind_checks.json. These automated checks are not a manual
 playthrough or exhaustive puzzle coverage. Snapshot recording and reverse playback
 still need the user's playtest, particularly during combat, pickups and deaths.
+
+Xbox: hold the right thumbstick button (R3) to rewind; release to resume.

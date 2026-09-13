@@ -6,3 +6,7 @@ if (variable_instance_exists(id, "play") && play.game_number==2) ln2_ending_free
 if (surface_exists(crt_surface)) surface_free(crt_surface);
 
 if (variable_instance_exists(id,"rewind")) ln_rewind_clear(rewind);
+
+ln_crt_preferences_flush(true);
+
+ln_paint_free();

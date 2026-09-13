@@ -1,0 +1,1211 @@
+{
+  "timing": "6502 instruction cycles / PAL 985248 Hz; VIC stalls and interrupts not verified",
+  "rooms": [
+    {
+      "level": 1,
+      "room": 1,
+      "cycles": 121852,
+      "seconds": 0.124,
+      "frames": 7,
+      "final_pixels_equal": true,
+      "bytes": 70004
+    },
+    {
+      "level": 1,
+      "room": 2,
+      "cycles": 130866,
+      "seconds": 0.133,
+      "frames": 7,
+      "final_pixels_equal": true,
+      "bytes": 68147
+    },
+    {
+      "level": 1,
+      "room": 3,
+      "cycles": 208218,
+      "seconds": 0.211,
+      "frames": 11,
+      "final_pixels_equal": true,
+      "bytes": 77318
+    },
+    {
+      "level": 1,
+      "room": 4,
+      "cycles": 276942,
+      "seconds": 0.281,
+      "frames": 15,
+      "final_pixels_equal": true,
+      "bytes": 81665
+    },
+    {
+      "level": 1,
+      "room": 5,
+      "cycles": 418656,
+      "seconds": 0.425,
+      "frames": 22,
+      "final_pixels_equal": true,
+      "bytes": 84095
+    },
+    {
+      "level": 1,
+      "room": 6,
+      "cycles": 544302,
+      "seconds": 0.552,
+      "frames": 28,
+      "final_pixels_equal": true,
+      "bytes": 93581
+    },
+    {
+      "level": 1,
+      "room": 7,
+      "cycles": 422378,
+      "seconds": 0.429,
+      "frames": 22,
+      "final_pixels_equal": true,
+      "bytes": 82703
+    },
+    {
+      "level": 1,
+      "room": 8,
+      "cycles": 503875,
+      "seconds": 0.511,
+      "frames": 26,
+      "final_pixels_equal": true,
+      "bytes": 84278
+    },
+    {
+      "level": 1,
+      "room": 9,
+      "cycles": 862353,
+      "seconds": 0.875,
+      "frames": 44,
+      "final_pixels_equal": true,
+      "bytes": 98861
+    },
+    {
+      "level": 1,
+      "room": 10,
+      "cycles": 370140,
+      "seconds": 0.376,
+      "frames": 19,
+      "final_pixels_equal": true,
+      "bytes": 82373
+    },
+    {
+      "level": 1,
+      "room": 11,
+      "cycles": 404956,
+      "seconds": 0.411,
+      "frames": 21,
+      "final_pixels_equal": true,
+      "bytes": 84863
+    },
+    {
+      "level": 1,
+      "room": 12,
+      "cycles": 441331,
+      "seconds": 0.448,
+      "frames": 23,
+      "final_pixels_equal": true,
+      "bytes": 88781
+    },
+    {
+      "level": 1,
+      "room": 13,
+      "cycles": 401432,
+      "seconds": 0.407,
+      "frames": 21,
+      "final_pixels_equal": true,
+      "bytes": 89273
+    },
+    {
+      "level": 1,
+      "room": 14,
+      "cycles": 225632,
+      "seconds": 0.229,
+      "frames": 12,
+      "final_pixels_equal": true,
+      "bytes": 79811
+    },
+    {
+      "level": 1,
+      "room": 15,
+      "cycles": 893696,
+      "seconds": 0.907,
+      "frames": 46,
+      "final_pixels_equal": true,
+      "bytes": 103958
+    },
+    {
+      "level": 1,
+      "room": 16,
+      "cycles": 599495,
+      "seconds": 0.608,
+      "frames": 31,
+      "final_pixels_equal": true,
+      "bytes": 91430
+    },
+    {
+      "level": 1,
+      "room": 17,
+      "cycles": 544302,
+      "seconds": 0.552,
+      "frames": 28,
+      "final_pixels_equal": true,
+      "bytes": 93581
+    },
+    {
+      "level": 1,
+      "room": 18,
+      "cycles": 287406,
+      "seconds": 0.292,
+      "frames": 15,
+      "final_pixels_equal": true,
+      "bytes": 83126
+    },
+    {
+      "level": 1,
+      "room": 19,
+      "cycles": 215027,
+      "seconds": 0.218,
+      "frames": 11,
+      "final_pixels_equal": true,
+      "bytes": 77978
+    },
+    {
+      "level": 1,
+      "room": 20,
+      "cycles": 591038,
+      "seconds": 0.6,
+      "frames": 30,
+      "final_pixels_equal": true,
+      "bytes": 91751
+    },
+    {
+      "level": 1,
+      "room": 21,
+      "cycles": 553883,
+      "seconds": 0.562,
+      "frames": 26,
+      "final_pixels_equal": true,
+      "bytes": 83114
+    },
+    {
+      "level": 1,
+      "room": 22,
+      "cycles": 522980,
+      "seconds": 0.531,
+      "frames": 27,
+      "final_pixels_equal": true,
+      "bytes": 87593
+    },
+    {
+      "level": 1,
+      "room": 23,
+      "cycles": 506003,
+      "seconds": 0.514,
+      "frames": 26,
+      "final_pixels_equal": true,
+      "bytes": 90317
+    },
+    {
+      "level": 1,
+      "room": 24,
+      "cycles": 232315,
+      "seconds": 0.236,
+      "frames": 12,
+      "final_pixels_equal": true,
+      "bytes": 75257
+    },
+    {
+      "level": 1,
+      "room": 25,
+      "cycles": 436970,
+      "seconds": 0.444,
+      "frames": 22,
+      "final_pixels_equal": true,
+      "bytes": 86264
+    },
+    {
+      "level": 2,
+      "room": 1,
+      "cycles": 463576,
+      "seconds": 0.471,
+      "frames": 23,
+      "final_pixels_equal": true,
+      "bytes": 93407
+    },
+    {
+      "level": 2,
+      "room": 2,
+      "cycles": 664684,
+      "seconds": 0.675,
+      "frames": 34,
+      "final_pixels_equal": true,
+      "bytes": 97160
+    },
+    {
+      "level": 2,
+      "room": 3,
+      "cycles": 370230,
+      "seconds": 0.376,
+      "frames": 19,
+      "final_pixels_equal": true,
+      "bytes": 84866
+    },
+    {
+      "level": 2,
+      "room": 4,
+      "cycles": 1282220,
+      "seconds": 1.301,
+      "frames": 66,
+      "final_pixels_equal": true,
+      "bytes": 111500
+    },
+    {
+      "level": 2,
+      "room": 5,
+      "cycles": 1158684,
+      "seconds": 1.176,
+      "frames": 59,
+      "final_pixels_equal": true,
+      "bytes": 116942
+    },
+    {
+      "level": 2,
+      "room": 6,
+      "cycles": 1476063,
+      "seconds": 1.498,
+      "frames": 76,
+      "final_pixels_equal": true,
+      "bytes": 131102
+    },
+    {
+      "level": 2,
+      "room": 7,
+      "cycles": 1059525,
+      "seconds": 1.075,
+      "frames": 54,
+      "final_pixels_equal": true,
+      "bytes": 109634
+    },
+    {
+      "level": 2,
+      "room": 8,
+      "cycles": 1187691,
+      "seconds": 1.205,
+      "frames": 61,
+      "final_pixels_equal": true,
+      "bytes": 119930
+    },
+    {
+      "level": 2,
+      "room": 9,
+      "cycles": 1536728,
+      "seconds": 1.56,
+      "frames": 79,
+      "final_pixels_equal": true,
+      "bytes": 123773
+    },
+    {
+      "level": 2,
+      "room": 10,
+      "cycles": 367432,
+      "seconds": 0.373,
+      "frames": 19,
+      "final_pixels_equal": true,
+      "bytes": 87605
+    },
+    {
+      "level": 2,
+      "room": 11,
+      "cycles": 380601,
+      "seconds": 0.386,
+      "frames": 20,
+      "final_pixels_equal": true,
+      "bytes": 83771
+    },
+    {
+      "level": 2,
+      "room": 12,
+      "cycles": 382803,
+      "seconds": 0.389,
+      "frames": 20,
+      "final_pixels_equal": true,
+      "bytes": 86765
+    },
+    {
+      "level": 2,
+      "room": 13,
+      "cycles": 621141,
+      "seconds": 0.63,
+      "frames": 32,
+      "final_pixels_equal": true,
+      "bytes": 88532
+    },
+    {
+      "level": 2,
+      "room": 14,
+      "cycles": 736674,
+      "seconds": 0.748,
+      "frames": 38,
+      "final_pixels_equal": true,
+      "bytes": 95867
+    },
+    {
+      "level": 2,
+      "room": 15,
+      "cycles": 704996,
+      "seconds": 0.716,
+      "frames": 36,
+      "final_pixels_equal": true,
+      "bytes": 96629
+    },
+    {
+      "level": 2,
+      "room": 16,
+      "cycles": 349691,
+      "seconds": 0.355,
+      "frames": 18,
+      "final_pixels_equal": true,
+      "bytes": 83963
+    },
+    {
+      "level": 2,
+      "room": 17,
+      "cycles": 446334,
+      "seconds": 0.453,
+      "frames": 23,
+      "final_pixels_equal": true,
+      "bytes": 83339
+    },
+    {
+      "level": 2,
+      "room": 18,
+      "cycles": 913456,
+      "seconds": 0.927,
+      "frames": 47,
+      "final_pixels_equal": true,
+      "bytes": 105557
+    },
+    {
+      "level": 2,
+      "room": 19,
+      "cycles": 635768,
+      "seconds": 0.645,
+      "frames": 33,
+      "final_pixels_equal": true,
+      "bytes": 89255
+    },
+    {
+      "level": 2,
+      "room": 20,
+      "cycles": 460061,
+      "seconds": 0.467,
+      "frames": 24,
+      "final_pixels_equal": true,
+      "bytes": 84353
+    },
+    {
+      "level": 2,
+      "room": 21,
+      "cycles": 403873,
+      "seconds": 0.41,
+      "frames": 21,
+      "final_pixels_equal": true,
+      "bytes": 85409
+    },
+    {
+      "level": 2,
+      "room": 22,
+      "cycles": 593934,
+      "seconds": 0.603,
+      "frames": 31,
+      "final_pixels_equal": true,
+      "bytes": 91772
+    },
+    {
+      "level": 2,
+      "room": 23,
+      "cycles": 741601,
+      "seconds": 0.753,
+      "frames": 38,
+      "final_pixels_equal": true,
+      "bytes": 100007
+    },
+    {
+      "level": 2,
+      "room": 24,
+      "cycles": 436935,
+      "seconds": 0.443,
+      "frames": 22,
+      "final_pixels_equal": true,
+      "bytes": 87539
+    },
+    {
+      "level": 2,
+      "room": 25,
+      "cycles": 806429,
+      "seconds": 0.819,
+      "frames": 42,
+      "final_pixels_equal": true,
+      "bytes": 93854
+    },
+    {
+      "level": 2,
+      "room": 26,
+      "cycles": 806429,
+      "seconds": 0.819,
+      "frames": 42,
+      "final_pixels_equal": true,
+      "bytes": 93854
+    },
+    {
+      "level": 2,
+      "room": 27,
+      "cycles": 806429,
+      "seconds": 0.819,
+      "frames": 42,
+      "final_pixels_equal": true,
+      "bytes": 93854
+    },
+    {
+      "level": 3,
+      "room": 1,
+      "cycles": 464978,
+      "seconds": 0.472,
+      "frames": 24,
+      "final_pixels_equal": true,
+      "bytes": 78929
+    },
+    {
+      "level": 3,
+      "room": 2,
+      "cycles": 482546,
+      "seconds": 0.49,
+      "frames": 25,
+      "final_pixels_equal": true,
+      "bytes": 86186
+    },
+    {
+      "level": 3,
+      "room": 3,
+      "cycles": 441800,
+      "seconds": 0.448,
+      "frames": 23,
+      "final_pixels_equal": true,
+      "bytes": 82262
+    },
+    {
+      "level": 3,
+      "room": 4,
+      "cycles": 779551,
+      "seconds": 0.791,
+      "frames": 40,
+      "final_pixels_equal": true,
+      "bytes": 93869
+    },
+    {
+      "level": 3,
+      "room": 5,
+      "cycles": 364689,
+      "seconds": 0.37,
+      "frames": 19,
+      "final_pixels_equal": true,
+      "bytes": 81866
+    },
+    {
+      "level": 3,
+      "room": 6,
+      "cycles": 906228,
+      "seconds": 0.92,
+      "frames": 46,
+      "final_pixels_equal": true,
+      "bytes": 104678
+    },
+    {
+      "level": 3,
+      "room": 7,
+      "cycles": 617313,
+      "seconds": 0.627,
+      "frames": 32,
+      "final_pixels_equal": true,
+      "bytes": 84281
+    },
+    {
+      "level": 3,
+      "room": 8,
+      "cycles": 452124,
+      "seconds": 0.459,
+      "frames": 23,
+      "final_pixels_equal": true,
+      "bytes": 90704
+    },
+    {
+      "level": 3,
+      "room": 9,
+      "cycles": 696636,
+      "seconds": 0.707,
+      "frames": 36,
+      "final_pixels_equal": true,
+      "bytes": 93140
+    },
+    {
+      "level": 3,
+      "room": 10,
+      "cycles": 859846,
+      "seconds": 0.873,
+      "frames": 44,
+      "final_pixels_equal": true,
+      "bytes": 97883
+    },
+    {
+      "level": 3,
+      "room": 11,
+      "cycles": 799787,
+      "seconds": 0.812,
+      "frames": 41,
+      "final_pixels_equal": true,
+      "bytes": 88316
+    },
+    {
+      "level": 3,
+      "room": 12,
+      "cycles": 452281,
+      "seconds": 0.459,
+      "frames": 23,
+      "final_pixels_equal": true,
+      "bytes": 86783
+    },
+    {
+      "level": 3,
+      "room": 13,
+      "cycles": 962051,
+      "seconds": 0.976,
+      "frames": 49,
+      "final_pixels_equal": true,
+      "bytes": 103475
+    },
+    {
+      "level": 3,
+      "room": 14,
+      "cycles": 497678,
+      "seconds": 0.505,
+      "frames": 26,
+      "final_pixels_equal": true,
+      "bytes": 85187
+    },
+    {
+      "level": 3,
+      "room": 15,
+      "cycles": 955713,
+      "seconds": 0.97,
+      "frames": 49,
+      "final_pixels_equal": true,
+      "bytes": 92411
+    },
+    {
+      "level": 3,
+      "room": 16,
+      "cycles": 534988,
+      "seconds": 0.543,
+      "frames": 28,
+      "final_pixels_equal": true,
+      "bytes": 85538
+    },
+    {
+      "level": 3,
+      "room": 17,
+      "cycles": 780640,
+      "seconds": 0.792,
+      "frames": 40,
+      "final_pixels_equal": true,
+      "bytes": 93350
+    },
+    {
+      "level": 3,
+      "room": 18,
+      "cycles": 756710,
+      "seconds": 0.768,
+      "frames": 39,
+      "final_pixels_equal": true,
+      "bytes": 93086
+    },
+    {
+      "level": 3,
+      "room": 19,
+      "cycles": 732431,
+      "seconds": 0.743,
+      "frames": 38,
+      "final_pixels_equal": true,
+      "bytes": 93560
+    },
+    {
+      "level": 3,
+      "room": 20,
+      "cycles": 576833,
+      "seconds": 0.585,
+      "frames": 30,
+      "final_pixels_equal": true,
+      "bytes": 89618
+    },
+    {
+      "level": 3,
+      "room": 21,
+      "cycles": 702141,
+      "seconds": 0.713,
+      "frames": 36,
+      "final_pixels_equal": true,
+      "bytes": 93110
+    },
+    {
+      "level": 3,
+      "room": 22,
+      "cycles": 848082,
+      "seconds": 0.861,
+      "frames": 44,
+      "final_pixels_equal": true,
+      "bytes": 99428
+    },
+    {
+      "level": 3,
+      "room": 23,
+      "cycles": 502185,
+      "seconds": 0.51,
+      "frames": 26,
+      "final_pixels_equal": true,
+      "bytes": 94328
+    },
+    {
+      "level": 3,
+      "room": 24,
+      "cycles": 948608,
+      "seconds": 0.963,
+      "frames": 49,
+      "final_pixels_equal": true,
+      "bytes": 99971
+    },
+    {
+      "level": 3,
+      "room": 25,
+      "cycles": 1204922,
+      "seconds": 1.223,
+      "frames": 62,
+      "final_pixels_equal": true,
+      "bytes": 106574
+    },
+    {
+      "level": 4,
+      "room": 1,
+      "cycles": 511417,
+      "seconds": 0.519,
+      "frames": 27,
+      "final_pixels_equal": true,
+      "bytes": 89054
+    },
+    {
+      "level": 4,
+      "room": 2,
+      "cycles": 574369,
+      "seconds": 0.583,
+      "frames": 30,
+      "final_pixels_equal": true,
+      "bytes": 90092
+    },
+    {
+      "level": 4,
+      "room": 3,
+      "cycles": 786026,
+      "seconds": 0.798,
+      "frames": 40,
+      "final_pixels_equal": true,
+      "bytes": 92591
+    },
+    {
+      "level": 4,
+      "room": 4,
+      "cycles": 632297,
+      "seconds": 0.642,
+      "frames": 33,
+      "final_pixels_equal": true,
+      "bytes": 89063
+    },
+    {
+      "level": 4,
+      "room": 5,
+      "cycles": 690450,
+      "seconds": 0.701,
+      "frames": 36,
+      "final_pixels_equal": true,
+      "bytes": 93770
+    },
+    {
+      "level": 4,
+      "room": 6,
+      "cycles": 869882,
+      "seconds": 0.883,
+      "frames": 45,
+      "final_pixels_equal": true,
+      "bytes": 94934
+    },
+    {
+      "level": 4,
+      "room": 7,
+      "cycles": 994944,
+      "seconds": 1.01,
+      "frames": 51,
+      "final_pixels_equal": true,
+      "bytes": 96500
+    },
+    {
+      "level": 4,
+      "room": 8,
+      "cycles": 680157,
+      "seconds": 0.69,
+      "frames": 35,
+      "final_pixels_equal": true,
+      "bytes": 89306
+    },
+    {
+      "level": 4,
+      "room": 9,
+      "cycles": 681559,
+      "seconds": 0.692,
+      "frames": 35,
+      "final_pixels_equal": true,
+      "bytes": 87287
+    },
+    {
+      "level": 4,
+      "room": 10,
+      "cycles": 712034,
+      "seconds": 0.723,
+      "frames": 37,
+      "final_pixels_equal": true,
+      "bytes": 86588
+    },
+    {
+      "level": 4,
+      "room": 11,
+      "cycles": 769720,
+      "seconds": 0.781,
+      "frames": 40,
+      "final_pixels_equal": true,
+      "bytes": 91049
+    },
+    {
+      "level": 4,
+      "room": 12,
+      "cycles": 857067,
+      "seconds": 0.87,
+      "frames": 44,
+      "final_pixels_equal": true,
+      "bytes": 100400
+    },
+    {
+      "level": 4,
+      "room": 13,
+      "cycles": 912257,
+      "seconds": 0.926,
+      "frames": 47,
+      "final_pixels_equal": true,
+      "bytes": 97841
+    },
+    {
+      "level": 4,
+      "room": 14,
+      "cycles": 943714,
+      "seconds": 0.958,
+      "frames": 48,
+      "final_pixels_equal": true,
+      "bytes": 100133
+    },
+    {
+      "level": 4,
+      "room": 15,
+      "cycles": 776770,
+      "seconds": 0.788,
+      "frames": 39,
+      "final_pixels_equal": true,
+      "bytes": 96764
+    },
+    {
+      "level": 4,
+      "room": 16,
+      "cycles": 790138,
+      "seconds": 0.802,
+      "frames": 41,
+      "final_pixels_equal": true,
+      "bytes": 98048
+    },
+    {
+      "level": 4,
+      "room": 17,
+      "cycles": 1006406,
+      "seconds": 1.021,
+      "frames": 52,
+      "final_pixels_equal": true,
+      "bytes": 103391
+    },
+    {
+      "level": 4,
+      "room": 18,
+      "cycles": 926400,
+      "seconds": 0.94,
+      "frames": 47,
+      "final_pixels_equal": true,
+      "bytes": 94952
+    },
+    {
+      "level": 4,
+      "room": 19,
+      "cycles": 862785,
+      "seconds": 0.876,
+      "frames": 44,
+      "final_pixels_equal": true,
+      "bytes": 100703
+    },
+    {
+      "level": 4,
+      "room": 20,
+      "cycles": 789475,
+      "seconds": 0.801,
+      "frames": 41,
+      "final_pixels_equal": true,
+      "bytes": 93077
+    },
+    {
+      "level": 4,
+      "room": 21,
+      "cycles": 933131,
+      "seconds": 0.947,
+      "frames": 48,
+      "final_pixels_equal": true,
+      "bytes": 97865
+    },
+    {
+      "level": 4,
+      "room": 22,
+      "cycles": 607880,
+      "seconds": 0.617,
+      "frames": 31,
+      "final_pixels_equal": true,
+      "bytes": 92969
+    },
+    {
+      "level": 4,
+      "room": 23,
+      "cycles": 923049,
+      "seconds": 0.937,
+      "frames": 47,
+      "final_pixels_equal": true,
+      "bytes": 93476
+    },
+    {
+      "level": 4,
+      "room": 24,
+      "cycles": 734557,
+      "seconds": 0.746,
+      "frames": 38,
+      "final_pixels_equal": true,
+      "bytes": 89501
+    },
+    {
+      "level": 4,
+      "room": 25,
+      "cycles": 693796,
+      "seconds": 0.704,
+      "frames": 36,
+      "final_pixels_equal": true,
+      "bytes": 93899
+    },
+    {
+      "level": 4,
+      "room": 26,
+      "cycles": 734557,
+      "seconds": 0.746,
+      "frames": 38,
+      "final_pixels_equal": true,
+      "bytes": 89501
+    },
+    {
+      "level": 4,
+      "room": 27,
+      "cycles": 693796,
+      "seconds": 0.704,
+      "frames": 36,
+      "final_pixels_equal": true,
+      "bytes": 93899
+    },
+    {
+      "level": 5,
+      "room": 1,
+      "cycles": 732841,
+      "seconds": 0.744,
+      "frames": 38,
+      "final_pixels_equal": true,
+      "bytes": 99113
+    },
+    {
+      "level": 5,
+      "room": 2,
+      "cycles": 535236,
+      "seconds": 0.543,
+      "frames": 28,
+      "final_pixels_equal": true,
+      "bytes": 93878
+    },
+    {
+      "level": 5,
+      "room": 3,
+      "cycles": 531456,
+      "seconds": 0.539,
+      "frames": 28,
+      "final_pixels_equal": true,
+      "bytes": 97274
+    },
+    {
+      "level": 5,
+      "room": 4,
+      "cycles": 580482,
+      "seconds": 0.589,
+      "frames": 30,
+      "final_pixels_equal": true,
+      "bytes": 98195
+    },
+    {
+      "level": 5,
+      "room": 5,
+      "cycles": 548572,
+      "seconds": 0.557,
+      "frames": 28,
+      "final_pixels_equal": true,
+      "bytes": 97910
+    },
+    {
+      "level": 5,
+      "room": 6,
+      "cycles": 563948,
+      "seconds": 0.572,
+      "frames": 29,
+      "final_pixels_equal": true,
+      "bytes": 96836
+    },
+    {
+      "level": 5,
+      "room": 7,
+      "cycles": 1023891,
+      "seconds": 1.039,
+      "frames": 53,
+      "final_pixels_equal": true,
+      "bytes": 112211
+    },
+    {
+      "level": 5,
+      "room": 8,
+      "cycles": 481051,
+      "seconds": 0.488,
+      "frames": 25,
+      "final_pixels_equal": true,
+      "bytes": 87983
+    },
+    {
+      "level": 5,
+      "room": 9,
+      "cycles": 525847,
+      "seconds": 0.534,
+      "frames": 24,
+      "final_pixels_equal": true,
+      "bytes": 86009
+    },
+    {
+      "level": 5,
+      "room": 10,
+      "cycles": 460315,
+      "seconds": 0.467,
+      "frames": 24,
+      "final_pixels_equal": true,
+      "bytes": 88214
+    },
+    {
+      "level": 5,
+      "room": 11,
+      "cycles": 602148,
+      "seconds": 0.611,
+      "frames": 31,
+      "final_pixels_equal": true,
+      "bytes": 88328
+    },
+    {
+      "level": 5,
+      "room": 12,
+      "cycles": 409397,
+      "seconds": 0.416,
+      "frames": 21,
+      "final_pixels_equal": true,
+      "bytes": 83405
+    },
+    {
+      "level": 5,
+      "room": 13,
+      "cycles": 534551,
+      "seconds": 0.543,
+      "frames": 28,
+      "final_pixels_equal": true,
+      "bytes": 92645
+    },
+    {
+      "level": 5,
+      "room": 14,
+      "cycles": 718719,
+      "seconds": 0.729,
+      "frames": 33,
+      "final_pixels_equal": true,
+      "bytes": 96137
+    },
+    {
+      "level": 5,
+      "room": 15,
+      "cycles": 353056,
+      "seconds": 0.358,
+      "frames": 18,
+      "final_pixels_equal": true,
+      "bytes": 82202
+    },
+    {
+      "level": 6,
+      "room": 1,
+      "cycles": 333800,
+      "seconds": 0.339,
+      "frames": 17,
+      "final_pixels_equal": true,
+      "bytes": 92234
+    },
+    {
+      "level": 6,
+      "room": 2,
+      "cycles": 393753,
+      "seconds": 0.4,
+      "frames": 21,
+      "final_pixels_equal": true,
+      "bytes": 89549
+    },
+    {
+      "level": 6,
+      "room": 3,
+      "cycles": 441939,
+      "seconds": 0.449,
+      "frames": 21,
+      "final_pixels_equal": true,
+      "bytes": 81917
+    },
+    {
+      "level": 6,
+      "room": 4,
+      "cycles": 322821,
+      "seconds": 0.328,
+      "frames": 17,
+      "final_pixels_equal": true,
+      "bytes": 87881
+    },
+    {
+      "level": 6,
+      "room": 5,
+      "cycles": 494163,
+      "seconds": 0.502,
+      "frames": 24,
+      "final_pixels_equal": true,
+      "bytes": 86366
+    },
+    {
+      "level": 6,
+      "room": 6,
+      "cycles": 327196,
+      "seconds": 0.332,
+      "frames": 17,
+      "final_pixels_equal": true,
+      "bytes": 89153
+    },
+    {
+      "level": 6,
+      "room": 7,
+      "cycles": 451616,
+      "seconds": 0.458,
+      "frames": 22,
+      "final_pixels_equal": true,
+      "bytes": 91013
+    },
+    {
+      "level": 6,
+      "room": 8,
+      "cycles": 407922,
+      "seconds": 0.414,
+      "frames": 21,
+      "final_pixels_equal": true,
+      "bytes": 93998
+    },
+    {
+      "level": 6,
+      "room": 9,
+      "cycles": 568847,
+      "seconds": 0.577,
+      "frames": 28,
+      "final_pixels_equal": true,
+      "bytes": 92267
+    },
+    {
+      "level": 6,
+      "room": 10,
+      "cycles": 393952,
+      "seconds": 0.4,
+      "frames": 21,
+      "final_pixels_equal": true,
+      "bytes": 87086
+    },
+    {
+      "level": 6,
+      "room": 11,
+      "cycles": 325356,
+      "seconds": 0.33,
+      "frames": 17,
+      "final_pixels_equal": true,
+      "bytes": 86156
+    },
+    {
+      "level": 6,
+      "room": 12,
+      "cycles": 366461,
+      "seconds": 0.372,
+      "frames": 19,
+      "final_pixels_equal": true,
+      "bytes": 89276
+    },
+    {
+      "level": 6,
+      "room": 13,
+      "cycles": 373766,
+      "seconds": 0.379,
+      "frames": 20,
+      "final_pixels_equal": true,
+      "bytes": 87635
+    },
+    {
+      "level": 6,
+      "room": 14,
+      "cycles": 494183,
+      "seconds": 0.502,
+      "frames": 25,
+      "final_pixels_equal": true,
+      "bytes": 90299
+    },
+    {
+      "level": 6,
+      "room": 15,
+      "cycles": 448826,
+      "seconds": 0.456,
+      "frames": 22,
+      "final_pixels_equal": true,
+      "bytes": 87515
+    }
+  ]
+}

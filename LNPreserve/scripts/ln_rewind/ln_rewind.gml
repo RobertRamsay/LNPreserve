@@ -101,7 +101,19 @@ function ln_rewind_sync(_host) {
     return true;
 }
 function ln_rewind_step(_host,_held=undefined) {
-    if (is_undefined(_held)) _held=keyboard_check(vk_left);
+    if(global.ln_paint.active) return false;
+    if (is_undefined(_held)) {
+        _held=keyboard_check(vk_left);
+        // Poll directly: normal input sampling pauses while rewinding.
+        var _pad=_host.input_state.pad_device;
+        if(_pad<0 || !gamepad_is_connected(_pad)) {
+            _pad=-1;
+            for(var _slot=0;_slot<gamepad_get_device_count();_slot++) {
+                if(gamepad_is_connected(_slot)) {_pad=_slot;break;}
+            }
+        }
+        if(_pad>=0) _held=_held || gamepad_button_check(_pad,gp_stickr);
+    }
     if (!ln_rewind_sync(_host)) return false;
     var _r=_host.rewind;
     if (_host.workbench || _host.scene_test.menu || _host.scene_test.preview || !_held) {
@@ -121,6 +133,7 @@ function ln_rewind_step(_host,_held=undefined) {
     return true;
 }
 function ln_rewind_record(_host) {
+    if(global.ln_paint.active) return;
     if (!ln_rewind_sync(_host) || _host.workbench || _host.scene_test.menu || _host.scene_test.preview) return;
     var _r=_host.rewind,_g=_host.play;
     if (_r.active || (_r.last_cycle>=0 && _g.timer.cycle-_r.last_cycle<_g.timer.hz/10)) return;

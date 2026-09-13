@@ -1,3 +1,7 @@
+if(painting_test) {
+    try {ln_paint_checks();} catch(_error) {global.ln_preferences_enabled=false;show_debug_message("LN_PAINT_FAILURE: "+string(_error));}
+    game_end();exit;
+}
 if (rewind_test) {
     try {ln_rewind_checks();} catch(_failure) {show_debug_message("LN_REWIND_FAILURE: "+string(_failure));}
     game_end();exit;

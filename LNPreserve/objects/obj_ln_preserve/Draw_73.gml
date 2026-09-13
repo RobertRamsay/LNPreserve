@@ -1,5 +1,6 @@
 if (!presentation_test) {
     ln_crt_present(self);
+    if(scene_test.menu) ln_paint_slider();
     if (rewind.active) {draw_set_colour(c_white);draw_text(160,12,"REWIND");}
     if (ln_crt_controls_visible(self)) {
         ln_crt_sliders_draw(!scene_test.menu);ln_window_buttons(!scene_test.menu);

@@ -1,3 +1,4 @@
+painting_test=false;
 rewind_test=false;
 ln3_presentation_test=false;
 ln3_hud_test=false;
@@ -18,6 +19,16 @@ global.ln_crt_blur=0.15;
 global.ln_crt_honeycomb=0.35;
 global.ln_crt_scanlines=0.20;
 global.ln_crt_drag=-1;
+global.ln_paint={key:"",active:false,buffer:-1,surface:-1,time:0,duration:0,cursor:8};
+global.ln_paint_speed=1;global.ln_paint_drag=false;
+global.ln_paint_palette=[0, 16777215, 3683201, 13160053, 9911438, 5090390, 10169390, 7467501, 2707598, 14421, 7433412, 4868682, 8092539, 10485673, 15428976, 11711154];
+global.ln_preferences_enabled=true;
+for(var _pref_arg=1;_pref_arg<=parameter_count();_pref_arg++) {
+    if(string_pos("--",parameter_string(_pref_arg))==1) global.ln_preferences_enabled=false;
+}
+ln_crt_tuning_init();
+if(global.ln_preferences_enabled) ln_crt_preferences_read();
+global.ln_preferences_saved=ln_crt_preferences_signature();
 crt_surface=-1;
 global.ln_test_no_enemy_damage=false;
 ln3_only=false;
@@ -51,6 +62,7 @@ function_presses = [0,0,0,0];
 selftest = false;ln1_only=false;selftest_inject_failure=false;
 host_frames = 0;
 for (var _i = 1; _i <= parameter_count(); _i++) {
+    if(parameter_string(_i)=="--ln1-paint-test") painting_test=true;
     if(parameter_string(_i)=="--ln3-hud-test") ln3_hud_test=true;
     if(parameter_string(_i)=="--ln2-followup-test") ln2_followup_test=true;
     if(parameter_string(_i)=="--ln2-sewer-original-test") sewer_original_test=true;
@@ -282,6 +294,10 @@ tick_native = function(_from, _to, _frame) {
     if (ln2_loader_active(play) && play.game_number!=2) {
         control_state_ln1.previous=[_rows[0]&16,_rows[0]&32,_rows[0]&64,_rows[0]&8,_rows[1]&16];
         ln_frontend_tick(play,input_state.joystick()^255);return;
+    }
+    if(ln_paint_tick(play)) {
+        control_state_ln1.previous=[_rows[0]&16,_rows[0]&32,_rows[0]&64,_rows[0]&8,_rows[1]&16];
+        return;
     }
     if(input_state.pressed[LNKey.WeaponPrev] && !(play.game_number==2 && ln2_loader_active(play))) ln_controller_previous_weapon(play,control_state_ln1);
     if (play.game_number==2) {

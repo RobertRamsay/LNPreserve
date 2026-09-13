@@ -177,6 +177,7 @@ function ln_crt_button() {
 
 /// GPU readback: switch off is pixel-identical and the effect preserves its input.
 function ln_crt_checks() {
+    ln_crt_preferences_checks();
     ln_check(shader_is_compiled(sh_ln_crt),"CRT shader compiled on the active GPU");
     var _saved=[global.ln_crt_blur,global.ln_crt_honeycomb,global.ln_crt_scanlines];
     global.ln_crt_enabled=true;
@@ -305,4 +306,69 @@ function ln_cinematic_step(_host) {
     }
     if (is_struct(_host.cinematic_window))
         window_set_cursor(_host.scene_test.menu || _host.workbench?_host.cinematic_window.cursor:cr_none);
+}
+
+
+// User preferences are independent of gameplay saves and rewind snapshots.
+function ln_crt_preference_fields() {
+    return ["ln_crt_enabled","ln_crt_blur","ln_crt_honeycomb","ln_crt_scanlines",
+        "ln_scan_width","ln_scan_align","ln_scan_soft","ln_scan_preset"];
+}
+function ln_crt_preferences_read(_file="LNPreserve.ini") {
+    ln_crt_tuning_init();
+    var _fields=ln_crt_preference_fields();
+    var _defaults=[0,0.15,0.35,0.20,5,0.5,1,-1];
+    var _low=[0,0,0,0,1,0,0,-1],_high=[1,1,1,1,7,1,1,3];
+    ini_open(_file);
+    for(var _i=0;_i<array_length(_fields);_i++) {
+        var _value=ini_read_real("CRT",_fields[_i],_defaults[_i]);
+        if(is_nan(_value) || is_infinity(_value)) _value=_defaults[_i];
+        _value=clamp(_value,_low[_i],_high[_i]);
+        if(_i==0) _value=(_value>=0.5);
+        if(_i==7) _value=round(_value);
+        variable_global_set(_fields[_i],_value);
+    }
+    var _speed=ini_read_real("ScenePainting","speed",1);
+    global.ln_paint_speed=(is_nan(_speed) || is_infinity(_speed))?1:clamp(_speed,0.25,4);
+    ini_close();
+}
+function ln_crt_preferences_signature() {
+    var _fields=ln_crt_preference_fields(),_values=[];
+    for(var _i=0;_i<array_length(_fields);_i++) array_push(_values,variable_global_get(_fields[_i]));
+    array_push(_values,global.ln_paint_speed);
+    return json_stringify(_values);
+}
+function ln_crt_preferences_write(_file="LNPreserve.ini") {
+    var _fields=ln_crt_preference_fields();
+    ini_open(_file);
+    for(var _i=0;_i<array_length(_fields);_i++) ini_write_real("CRT",_fields[_i],real(variable_global_get(_fields[_i])));
+    ini_write_real("ScenePainting","speed",global.ln_paint_speed);
+    ini_close();
+}
+function ln_crt_preferences_flush(_force=false) {
+    if(!variable_global_exists("ln_preferences_enabled") || !global.ln_preferences_enabled) return;
+    if(!_force && mouse_check_button(mb_left)) return;
+    var _signature=ln_crt_preferences_signature();
+    if(_signature==global.ln_preferences_saved) return;
+    ln_crt_preferences_write();global.ln_preferences_saved=_signature;
+}
+function ln_crt_preferences_checks() {
+    ln_crt_tuning_init();
+    var _saved=json_parse(ln_crt_preferences_signature()),_fields=ln_crt_preference_fields();
+    var _file="crt_preferences_test_"+string(get_timer())+".ini";
+    ln_crt_preferences_read(_file);
+    ln_check(!global.ln_crt_enabled && global.ln_crt_blur==0.15,"CRT missing INI uses defaults");
+    var _expected=[true,0.23,0.67,0.81,4.25,0.73,0.42,2];
+    for(var _i=0;_i<8;_i++) variable_global_set(_fields[_i],_expected[_i]);
+    ln_crt_preferences_write(_file);
+    for(var _i=0;_i<8;_i++) variable_global_set(_fields[_i],0);
+    ln_crt_preferences_read(_file);
+    for(var _i=0;_i<8;_i++) ln_check(abs(real(variable_global_get(_fields[_i]))-real(_expected[_i]))<=0.00001,"CRT INI round trip "+_fields[_i]+" got="+string(variable_global_get(_fields[_i]))+" expected="+string(_expected[_i]));
+    global.ln_crt_enabled=false;ln_crt_preferences_write(_file);global.ln_crt_enabled=true;
+    ln_crt_preferences_read(_file);ln_check(!global.ln_crt_enabled,"CRT off persists with tuning intact");
+    ini_open(_file);ini_write_real("CRT","ln_scan_width",99);ini_write_real("CRT","ln_crt_blur",-2);ini_close();
+    ln_crt_preferences_read(_file);ln_check(global.ln_scan_width==7 && global.ln_crt_blur==0,"CRT INI clamps invalid ranges");
+    file_delete(_file);
+    for(var _i=0;_i<8;_i++) variable_global_set(_fields[_i],_saved[_i]);
+    show_debug_message("LN_CRT_PREFERENCES_PASS");
 }
