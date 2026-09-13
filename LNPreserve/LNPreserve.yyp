@@ -49,6 +49,8 @@
   ],
   "ForcedPrefabProjectReferences":[],
   "IncludedFiles":[
+    {"$GMIncludedFile":"","%Name":"backgrounds.json","CopyToMask":-1,"filePath":"datafiles/play/ln1/painting","name":"backgrounds.json","resourceType":"GMIncludedFile","resourceVersion":"2.0"},
+
     {"$GMIncludedFile":"","%Name":"initial_control_state.json","CopyToMask":-1,"filePath":"datafiles/actors/ln1","name":"initial_control_state.json","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
     {"$GMIncludedFile":"","%Name":"ln1_actor_part_000.png","CopyToMask":-1,"filePath":"datafiles/actors/ln1","name":"ln1_actor_part_000.png","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
     {"$GMIncludedFile":"","%Name":"ln1_actor_part_001.png","CopyToMask":-1,"filePath":"datafiles/actors/ln1","name":"ln1_actor_part_001.png","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
@@ -2136,7 +2138,6 @@
     {"$GMIncludedFile":"","%Name":"6-7.bin","CopyToMask":-1,"filePath":"datafiles/play/ln1/painting","name":"6-7.bin","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
     {"$GMIncludedFile":"","%Name":"6-8.bin","CopyToMask":-1,"filePath":"datafiles/play/ln1/painting","name":"6-8.bin","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
     {"$GMIncludedFile":"","%Name":"6-9.bin","CopyToMask":-1,"filePath":"datafiles/play/ln1/painting","name":"6-9.bin","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
-    {"$GMIncludedFile":"","%Name":"backgrounds.json","CopyToMask":-1,"filePath":"datafiles/play/ln1/painting","name":"backgrounds.json","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
     {"$GMIncludedFile":"","%Name":"projectiles.json","CopyToMask":-1,"filePath":"datafiles/play/ln1","name":"projectiles.json","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
     {"$GMIncludedFile":"","%Name":"world.json","CopyToMask":-1,"filePath":"datafiles/play/ln1","name":"world.json","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
     {"$GMIncludedFile":"","%Name":"boat_support.json","CopyToMask":-1,"filePath":"datafiles/play/ln2","name":"boat_support.json","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
