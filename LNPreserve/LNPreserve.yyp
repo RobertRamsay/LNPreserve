@@ -5092,6 +5092,7 @@
     {"id":{"name":"spr_ln3_transition_parts","path":"sprites/spr_ln3_transition_parts/spr_ln3_transition_parts.yy",},},
     {"id":{"name":"spr_ln3_transition_text","path":"sprites/spr_ln3_transition_text/spr_ln3_transition_text.yy",},},
     {"id":{"name":"spr_LNHDbkg","path":"sprites/spr_LNHDbkg/spr_LNHDbkg.yy",},},
+    {"id":{"name":"spr_UI_button","path":"sprites/spr_UI_button/spr_UI_button.yy",},},
   ],
   "resourceType":"GMProject",
   "resourceVersion":"2.0",

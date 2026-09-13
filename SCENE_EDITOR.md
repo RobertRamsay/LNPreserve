@@ -20,9 +20,7 @@ game's ninja pose in the preview. Flip X mirrors a part.
 
 Build preview starts with the room's background colour, then draws the list.
 The speed buttons use the same saved 0.1x–4x setting as F11 scene painting.
-Modified builds use 80 ms per leaf part at 1x; this is an editor preview cadence,
-not a claim about the Commodore's instruction timing. Original mode retains the
-existing source-recorded construction timing.
+Build preview and in-game room entry use the source-recorded construction order and duration, scaled by the shared build-speed setting.
 
 ## Depth
 
@@ -152,3 +150,14 @@ Overrides are saved with the custom scene and participate in Undo/Redo. The edit
 The top toolbar’s **Editor (F6)** button opens the editor using the same path as F6. **Back to game F6** in the editor returns without restarting the game, preserves edits and resumes music as F6 does. Fullscreen remains in the outer top toolbar; duplicate inner fullscreen buttons have been removed.
 
 The outer size/fullscreen controls are compact and aligned with the right edge of the tool. **Game/Levels (F11)** beside Editor opens the existing selection menu; its label changes to **Back to game (F11)** while that menu is open.
+
+
+Completed edited scenes now preserve native bitmap pixels wherever source colour and visible-part ownership are unchanged. Adding an overlay therefore affects only its visible pixels; depth-only edits do not alter scenery colour. The raw source reconstruction remains available for build-up playback. Edited/revealed regions still use reconstructed source assets.
+
+
+In-game edited-room entry uses the original recorded build-up order and duration, with the same speed slider. The completed custom bitmap is cached once and takes over when that sequence ends; additions appear in that final handover. The editor’s Build preview uses the same recording and speed setting, including the initial plain background and final edited bitmap.
+
+
+Selected parts have **Up 10**, **Down 10**, **Top (back)** and **Bottom (front)** controls below the depth settings. Moves stop at the list ends, keep the selected part visible, and each count as one Undo/Redo action. They change draw order without changing depth settings. Ninja occlusion uses inherited masks or explicit part depth; it is not inferred from list order.
+
+Opening the editor or changing room resets the preview ninja to the room entry used by F11 and enables the Ninja preview. Existing scene edits/history and the running game are preserved; right-drag still moves the preview ninja afterwards.
