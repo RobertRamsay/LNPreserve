@@ -1,3 +1,4 @@
+if(startup_active) exit;
 draw_set_font(font_jansina);
 if(editor_test) {
     try {ln_edit_checks();} catch(_error) {show_debug_message("LN_EDITOR_FAILURE: "+string(_error));}

@@ -1,3 +1,12 @@
+if(startup_test) {
+    if(startup_frame==1 || startup_frame==30 || startup_frame==95) surface_save(application_surface,"tool-startup-"+string(startup_frame)+".png");
+    if(startup_frame>=110) {
+        ln_check(!startup_active && startup_sound_started,"startup finishes through Begin and sound is cued");
+        show_debug_message("LN_TOOL_STARTUP_PASS");game_end();
+    }
+    exit;
+}
+if(startup_active) exit;
 if (ninja_transitions_test && variable_instance_exists(id,"transition_render_tick") && transition_render_tick>=4) {
     try {
         surface_save(application_surface,"ln1-restored-transition.png");

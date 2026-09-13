@@ -1,6 +1,6 @@
 {
   "$GMFont":"",
-  "%Name":"font_jansina",
+  "%Name":"font_jansina_big",
   "AntiAlias":1,
   "applyKerning":0,
   "ascender":15,
@@ -116,7 +116,7 @@
   "last":0,
   "lineHeight":19,
   "maintainGms1Font":false,
-  "name":"font_jansina",
+  "name":"font_jansina_big",
   "parent":{
     "name":"LNPreserve",
     "path":"LNPreserve.yyp",

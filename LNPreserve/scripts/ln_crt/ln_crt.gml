@@ -451,6 +451,7 @@ function ln_tool_present(_host) {
     shader_reset();gpu_set_blendmode(bm_normal);gpu_set_ztestenable(false);gpu_set_zwriteenable(false);
     draw_clear(c_black);draw_set_colour(c_white);draw_set_alpha(1);
     if(_t.background) draw_sprite_stretched(spr_LNHDbkg,0,0,0,1920,1080);
+    if(_host.startup_active) {ln_startup_draw(_host);draw_flush();return;}
     if(ln_tool_ui_visible()) draw_surface(_t.surface,320,140);
     else {_rect=ln_tool_rect(_host);draw_surface_part(_t.surface,_rect[0],_rect[1],_rect[2],_rect[3],(1920-_rect[2])/2,(1080-_rect[3])/2);}
     draw_flush();
@@ -501,4 +502,40 @@ function ln_tool_ui_visible() {return global.ln_editor.open || global.ln_tool.ui
 function ln_tool_menu_pressed() {
     return global.ln_tool.active && ln_tool_ui_visible() && !global.ln_editor.open &&
         mouse_check_button_pressed(mb_left) && mouse_x>=940 && mouse_x<1178 && mouse_y>=96 && mouse_y<124;
+}
+
+function ln_startup_step(_host) {
+    _host.startup_time+=_host.startup_test?1/60:min(delta_time/1000000,0.05);
+    if(_host.startup_test) _host.startup_frame++;
+    if(!_host.startup_sound_started && _host.startup_time>=0.15) {
+        _host.startup_sound_started=true;_host.startup_sound=audio_play_sound(sfx_sword,10,false);
+    }
+    if(keyboard_check_pressed(vk_f9)) ln_fullscreen_toggle(_host);
+    if(_host.startup_time>=1.05 && mouse_check_button_pressed(mb_left) && mouse_x>=750 && mouse_x<1170 && mouse_y>=640 && mouse_y<704) ln_startup_finish(_host);
+    if(_host.startup_test && _host.startup_frame==110) ln_startup_finish(_host);
+}
+function ln_startup_finish(_host) {
+    _host.startup_active=false;
+    if(_host.startup_music>=0 && audio_is_paused(_host.startup_music)) audio_resume_sound(_host.startup_music);
+    _host.input_state=new LNInput();
+}
+function ln_startup_draw(_host) {
+    // Startup owns the complete 1920x1080 canvas, independent of UI/B preferences.
+    draw_sprite_stretched(spr_LNHDbkg,0,0,0,1920,1080);
+    draw_set_colour(c_black);draw_set_alpha(0.56);draw_rectangle(0,0,1920,1080,false);draw_set_alpha(1);
+    var _t=_host.startup_time;
+    if(_t>=0.15 && _t<1.05) {
+        var _u=clamp((_t-0.15)/0.9,0,1),_ease=_u*_u*(3-2*_u);
+        draw_sprite_ext(spr_sword,0,1740,lerp(100,1190,_ease),1,1,lerp(-22,18,_ease),c_white,1);
+    }
+    if(_t>=1.05) {
+        var _alpha=clamp((_t-1.05)/0.25,0,1);
+        draw_set_font(font_jansina);draw_set_halign(fa_center);draw_set_valign(fa_middle);draw_set_colour(c_white);draw_set_alpha(_alpha);
+        draw_text_transformed(960,430,"LAST NINJA REVISITED",3,3,0);
+        draw_text_transformed(960,525,"PLAYER  -  EDITOR  -  V "+_host.startup_version,1.6,1.6,0);
+        draw_set_alpha(1);ln_ui_button_background(750,640,420,64,true);
+        draw_set_colour(c_white);draw_text_transformed(960,672,"CLICK TO BEGIN",1.5,1.5,0);
+        draw_set_halign(fa_left);draw_set_valign(fa_top);
+    }
+    draw_set_alpha(1);draw_set_colour(c_white);
 }

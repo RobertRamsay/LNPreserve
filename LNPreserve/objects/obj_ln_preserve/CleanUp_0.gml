@@ -13,3 +13,5 @@ ln_paint_free();
 ln_edit_free_cache();ln_edit_free_preview();
 
 ln_tool_free();
+
+if(variable_instance_exists(id,"startup_sound") && startup_sound>=0) audio_stop_sound(startup_sound);

@@ -163,3 +163,7 @@ Selected parts have **Up 10**, **Down 10**, **Top (back)** and **Bottom (front)*
 Opening the editor or changing room resets the preview ninja to the room entry used by F11 and enables the Ninja preview. Existing scene edits/history and the running game are preserved; right-drag still moves the preview ninja afterwards.
 
 Buttons use the supplied `spr_UI_button` artwork sliced into nine regions. Borders/corners are scaled to four logical pixels; centres stretch to the existing button dimensions. Active buttons are brighter, and labels/hit areas retain their existing sizes.
+
+The selected asset preview is centred inside `spr_assetPanel` (204 × 204 logical pixels), with its aspect ratio preserved inside a padded 112 × 112 opening. The part controls occupy the neighbouring column.
+
+Tool startup plays `spr_sword` around its supplied handle origin with `sfx_sword`, then displays LAST NINJA REVISITED, PLAYER - EDITOR and the configured release version (currently 1.0.0.0). Click to Begin enters the tool and resumes its music. F9 remains available on the title screen.

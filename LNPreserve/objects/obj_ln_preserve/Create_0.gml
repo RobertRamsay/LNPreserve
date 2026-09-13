@@ -336,3 +336,14 @@ fullscreen_test=false;fullscreen_frame=0;fullscreen_original=[window_get_width()
 for(var _fullscreen_arg=1;_fullscreen_arg<=parameter_count();_fullscreen_arg++) if(parameter_string(_fullscreen_arg)=="--fullscreen-test") fullscreen_test=true;
 
 if(global.ln_tool.active) ln_window_preset(0);
+
+// Tool startup is bypassed by automation; a dedicated flag exercises it.
+startup_test=false;startup_frame=0;
+for(var _startup_arg=1;_startup_arg<=parameter_count();_startup_arg++) if(parameter_string(_startup_arg)=="--tool-startup-test") startup_test=true;
+startup_active=global.ln_preferences_enabled || startup_test;startup_time=0;startup_sound=-1;startup_sound_started=false;startup_music=-1;
+startup_version="1.0.0.0"; // Matches options/windows option_windows_version.
+if(startup_active && variable_global_exists("ln_music_voice") && audio_is_playing(global.ln_music_voice) && !audio_is_paused(global.ln_music_voice)) {
+    startup_music=global.ln_music_voice;audio_pause_sound(startup_music);
+}
+
+if(startup_test) {global.ln_tool.active=true;ln_window_preset(0);}

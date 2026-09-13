@@ -2493,6 +2493,7 @@
   },
   "name":"LNPreserve",
   "resources":[
+    {"id":{"name":"font_jansina_big","path":"fonts/font_jansina_big/font_jansina_big.yy",},},
     {"id":{"name":"font_jansina","path":"fonts/font_jansina/font_jansina.yy",},},
     {"id":{"name":"obj_ln_preserve","path":"objects/obj_ln_preserve/obj_ln_preserve.yy",},},
     {"id":{"name":"Room1","path":"rooms/Room1/Room1.yy",},},

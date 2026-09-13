@@ -1,3 +1,4 @@
+if(startup_active) {ln_startup_step(self);exit;}
 ln_tool_step(self);
 if(global.ln_tool.layout_test) {
     global.ln_tool.frame++;

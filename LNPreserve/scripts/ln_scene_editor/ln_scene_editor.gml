@@ -272,7 +272,7 @@ function ln_edit_step(_host) {
      _s=_e.scene;if(!is_struct(_s)) return true;
     if(_e.depth_edit) {
         if(keyboard_check_pressed(vk_escape)) {_e.depth_edit=false;return true;}
-        if(keyboard_check_pressed(vk_enter) || (mouse_check_button_pressed(mb_left) && !ln_edit_inside(1162,630,84,28))) {
+        if(keyboard_check_pressed(vk_enter) || (mouse_check_button_pressed(mb_left) && !ln_edit_inside(846,666,178,28))) {
             ln_edit_depth_accept(keyboard_string);_e.depth_edit=false;return true;
         }
         return true;
@@ -314,10 +314,10 @@ function ln_edit_step(_host) {
          _p=_s.parts[_e.part];
         if(ln_edit_hit(760,548,65,28)) _changed=ln_edit_move_part(_e.part-1) || _changed;
         if(ln_edit_hit(832,548,65,28)) _changed=ln_edit_move_part(_e.part+1) || _changed;
-        if(ln_edit_hit(760,674,112,28)) _changed=ln_edit_move_part(_e.part-10) || _changed;
-        if(ln_edit_hit(880,674,144,28)) _changed=ln_edit_move_part(_e.part+10) || _changed;
-        if(ln_edit_hit(760,710,112,28)) _changed=ln_edit_move_part(0) || _changed;
-        if(ln_edit_hit(880,710,144,28)) _changed=ln_edit_move_part(array_length(_s.parts)-1) || _changed;
+        if(ln_edit_hit(760,704,112,28)) _changed=ln_edit_move_part(_e.part-10) || _changed;
+        if(ln_edit_hit(880,704,144,28)) _changed=ln_edit_move_part(_e.part+10) || _changed;
+        if(ln_edit_hit(760,740,112,28)) _changed=ln_edit_move_part(0) || _changed;
+        if(ln_edit_hit(880,740,144,28)) _changed=ln_edit_move_part(array_length(_s.parts)-1) || _changed;
         if(ln_edit_hit(904,548,80,28) || keyboard_check_pressed(vk_delete)) {array_delete(_s.parts,_e.part,1);_e.part=min(_e.part,array_length(_s.parts)-1);_changed=true;}
         else {
              _step=keyboard_check(vk_shift)?8:1;
@@ -325,12 +325,12 @@ function ln_edit_step(_host) {
             if(keyboard_check_pressed(vk_right)) {_p.x+=2*_step;_changed=true;}
             if(keyboard_check_pressed(vk_up)) {_p.y-=_step;_changed=true;}
             if(keyboard_check_pressed(vk_down)) {_p.y+=_step;_changed=true;}
-            if(ln_edit_hit(760,630,115,28)) {_p.flip=!_p.flip;_changed=true;}
-            if(ln_edit_hit(888,630,180,28)) {if(_p.mode==0 && variable_struct_exists(_p,"depth_override") && _p.depth_override) {_p.depth_override=false;} else {_p.mode=(_p.mode+1) mod 3;_p.depth_override=true;}_changed=true;}
-            _held=mouse_check_button(mb_left)?(ln_edit_inside(1080,630,35,28)?-1:(ln_edit_inside(1122,630,35,28)?1:0)):0;
+            if(ln_edit_hit(760,630,92,28)) {_p.flip=!_p.flip;_changed=true;}
+            if(ln_edit_hit(860,630,164,28)) {if(_p.mode==0 && variable_struct_exists(_p,"depth_override") && _p.depth_override) {_p.depth_override=false;} else {_p.mode=(_p.mode+1) mod 3;_p.depth_override=true;}_changed=true;}
+            _held=mouse_check_button(mb_left)?(ln_edit_inside(760,666,35,28)?-1:(ln_edit_inside(803,666,35,28)?1:0)):0;
             _delta=ln_edit_depth_repeat(_held,mouse_check_button_pressed(mb_left),delta_time);
             if(_delta!=0) {_next_depth=clamp(_p.depth+_delta,0,144);if(_next_depth!=_p.depth || _p.mode!=1) {_p.mode=1;_p.depth_override=true;_p.depth=_next_depth;_e.show_depth=true;_changed=true;}}
-            if(ln_edit_hit(1162,630,84,28)) {_e.depth_edit=true;_e.depth_hold_dir=0;keyboard_string="";_e.drag=false;return true;}
+            if(ln_edit_hit(846,666,178,28)) {_e.depth_edit=true;_e.depth_hold_dir=0;keyboard_string="";_e.drag=false;return true;}
             _p.x=clamp(_p.x,-512,512);_p.y=clamp(_p.y,-512,512);
         }
     }
@@ -383,10 +383,10 @@ function ln_edit_draw() {
         draw_set_colour(c_yellow);draw_rectangle(clamp(24+_p.x*3,24,744),clamp(140+_p.y*3,140,572),clamp(24+(_p.x+_o.width)*3,24,744),clamp(140+(_p.y+_o.height)*3,140,572),true);
         if(_e.show_depth) {draw_set_colour(c_aqua);draw_line(24,140+_p.depth*3,744,140+_p.depth*3);}
         draw_set_colour(c_white);draw_text(760,594,"Part "+string(_e.part+1)+"  x "+string(_p.x)+" y "+string(_p.y));
-        ln_edit_button(760,674,112,"Up 10");ln_edit_button(880,674,144,"Down 10");
-        ln_edit_button(760,710,112,"Top (back)");ln_edit_button(880,710,144,"Bottom (front)");
-        ln_edit_button(760,630,115,"Flip X",_p.flip);ln_edit_button(888,630,180,(_p.mode==0 && (!variable_struct_exists(_p,"depth_override") || !_p.depth_override))?"Inherited":["Ground","Depth","Always front"][_p.mode]);
-        ln_edit_button(1080,630,35,"-");ln_edit_button(1122,630,35,"+");ln_edit_button(1162,630,84,_e.depth_edit?(keyboard_string+"|"):string(_p.depth),_e.depth_edit);
+        ln_edit_button(760,704,112,"Up 10");ln_edit_button(880,704,144,"Down 10");
+        ln_edit_button(760,740,112,"Top (back)");ln_edit_button(880,740,144,"Bottom (front)");
+        ln_edit_button(760,630,92,"Flip X",_p.flip);ln_edit_button(860,630,164,(_p.mode==0 && (!variable_struct_exists(_p,"depth_override") || !_p.depth_override))?"Inherited":["Ground","Depth","Always front"][_p.mode]);
+        ln_edit_button(760,666,35,"-");ln_edit_button(803,666,35,"+");ln_edit_button(846,666,178,_e.depth_edit?(keyboard_string+"|"):string(_p.depth),_e.depth_edit);
     }
     ln_edit_button(24,18,180,"Modified: "+(_e.enabled?"ON":"OFF"),_e.enabled);ln_edit_button(216,18,112,"Save file");ln_edit_button(340,18,112,"Load file");ln_edit_button(464,18,112,"Undo (^Z)");ln_edit_button(588,18,152,"Build preview");
     ln_edit_button(752,18,132,"Recover");ln_edit_button(850,62,112,"Redo (^Y)");
@@ -403,7 +403,16 @@ function ln_edit_draw() {
          _j=_e.scroll+_i;if(_j<array_length(_s.parts)) {draw_set_colour(_e.part==_j?c_yellow:c_white);draw_text(760,140+_i*22,string(_j+1)+"  Asset "+string(_s.parts[_j].asset));}
          _a=_e.asset_scroll+_i;if(_a<array_length(_assets)) { _o=variable_struct_get(_d.objects,_assets[_a]);draw_set_colour(_e.asset==_a?c_yellow:c_white);draw_text(1038,140+_i*22,_assets[_a]+"  "+string(_o.width)+"x"+string(_o.height));ln_edit_thumbnail(real(_assets[_a]),1000,140+_i*22,32,20);}
     }
-    if(array_length(_assets)>0) ln_edit_thumbnail(real(_assets[_e.asset]),1030,675,190,75);
+    if(array_length(_assets)>0) {
+        var _panel_x=1040,_panel_y=582,_panel_size=204;
+        draw_sprite_ext(spr_assetPanel,0,_panel_x+_panel_size/2,_panel_y+_panel_size/2,_panel_size/600,_panel_size/600,0,c_white,1);
+        // Artwork opening is approximately source x/y 120..480. Leave padding.
+        var _preview_id=real(_assets[_e.asset]);
+        var _preview_o=variable_struct_get(_d.objects,string(_preview_id));
+        var _inner=112,_fit=min(_inner/_preview_o.width,_inner/_preview_o.height);
+        ln_edit_thumbnail(_preview_id,_panel_x+(_panel_size-_preview_o.width*_fit)/2,
+            _panel_y+(_panel_size-_preview_o.height*_fit)/2,_inner,_inner);
+    }
     ln_edit_button(760,548,65,"Up");ln_edit_button(832,548,65,"Down");ln_edit_button(904,548,80,"Remove");ln_edit_button(1000,548,245,"Add selected asset");
     draw_set_colour(c_white);draw_text(24,646,"Alt-click: select part. Drag/arrows: move. Right-drag: ninja. Shift: larger steps.");
     draw_text(24,670,"Depth line = ground contact. Enter a number to override inherited masking.");
