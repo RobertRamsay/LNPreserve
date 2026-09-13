@@ -298,13 +298,19 @@ function ln3_play_draw(_g) {
         return;
     }
     draw_clear(c_black);draw_set_colour(c_white);
+    ln_paint_sync(_g);
+    var _paint_view=matrix_get(matrix_view),_paint_projection=matrix_get(matrix_projection);
+    if(global.ln_paint.active) ln_paint_prepare();
     if (!surface_exists(_g.stage_surface)) _g.stage_surface=surface_create(240,144);
     surface_set_target(_g.stage_surface);draw_clear(c_black);draw_sprite(asset_get_index(_g.scene_record.sprite),0,0,0);
     if (_g.scenery_frame>=0) draw_sprite(asset_get_index(_g.scenery_mechanism?_g.mechanisms.sprite:_g.scenery.sprite),_g.scenery_frame,0,0);
     ln3_mechanism_draw(_g);
     if (_g.special_sequence<3 || _g.transition_phase<5) for (var _order=0;_order<8;_order++) ln3_play_actor_part(_g,_g.display,_g.animation.order[_order]);
     ln3_transition_draw(_g);
-    surface_reset_target();draw_surface_ext(_g.stage_surface,160,84,3,3,0,c_white,1);
+    if(global.ln_paint.active) {draw_set_colour(c_white);draw_surface(global.ln_paint.surface,0,0);}
+    surface_reset_target();
+    matrix_set(matrix_view,_paint_view);matrix_set(matrix_projection,_paint_projection);
+    draw_surface_ext(_g.stage_surface,160,84,3,3,0,c_white,1);
     ln3_status_draw(_g);
     var _s=_g.state;
     draw_text(160,36,"LAST NINJA 3 — "+string_upper(_g.title));draw_text(1000,36,"Scene "+string(_g.room_id+1));

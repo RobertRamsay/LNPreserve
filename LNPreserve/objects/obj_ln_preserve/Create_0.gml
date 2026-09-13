@@ -297,6 +297,7 @@ tick_native = function(_from, _to, _frame) {
     }
     if(ln_paint_tick(play)) {
         control_state_ln1.previous=[_rows[0]&16,_rows[0]&32,_rows[0]&64,_rows[0]&8,_rows[1]&16];
+        if(play.game_number==2) play.control_previous=control_state_ln1.previous;
         return;
     }
     if(input_state.pressed[LNKey.WeaponPrev] && !(play.game_number==2 && ln2_loader_active(play))) ln_controller_previous_weapon(play,control_state_ln1);

@@ -281,6 +281,9 @@ function ln2_play_draw(_g) {
     if (ln2_loader_active(_g)) {draw_clear(c_black);ln2_loader_draw(_g);return;}
     draw_clear(c_black);draw_set_colour(c_white);
     if (_g.victory==2) {ln2_ending_draw(_g);return;}
+    ln_paint_sync(_g);
+    var _paint_view=matrix_get(matrix_view),_paint_projection=matrix_get(matrix_projection);
+    if(global.ln_paint.active) ln_paint_prepare();
     if (!surface_exists(_g.stage_surface)) _g.stage_surface=surface_create(240,144);
     surface_set_target(_g.stage_surface);draw_clear(c_black);ln2_scene_bitmap_draw(_g);
     ln2_mansion_alarm_draw(_g);
@@ -294,7 +297,10 @@ function ln2_play_draw(_g) {
     } else {
         ln2_play_actor(_g,_g.enemy,true);ln2_projectile_draw(_g,true);ln2_play_actor(_g,_g.player,false);ln2_projectile_draw(_g,false);
     }
-    surface_reset_target();draw_surface_ext(_g.stage_surface,160,84,3,3,0,c_white,1);
+    if(global.ln_paint.active) {draw_set_colour(c_white);draw_surface(global.ln_paint.surface,0,0);}
+    surface_reset_target();
+    matrix_set(matrix_view,_paint_view);matrix_set(matrix_projection,_paint_projection);
+    draw_surface_ext(_g.stage_surface,160,84,3,3,0,c_white,1);
     ln2_status_draw(_g,160,84,3);
     draw_text(600,36,"F8 One-hit kills: "+(_g.one_hit_kills?"ON":"OFF"));
     draw_text(160,36,"LAST NINJA 2 — "+string_upper(_g.title));draw_text(1000,36,"Scene "+string(ln2_scene_number(_g)));

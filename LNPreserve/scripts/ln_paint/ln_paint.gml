@@ -6,20 +6,32 @@ function ln_paint_free() {
     if(surface_exists(_p.surface)) surface_free(_p.surface);
     _p.buffer=-1;_p.surface=-1;_p.active=false;
 }
+function ln_paint_supported(_g) {
+    if(!global.ln_preferences_enabled || !array_contains([1,2,3],_g.game_number) || ln2_loader_active(_g)) return false;
+    if(_g.game_number==2 && variable_struct_exists(_g,"victory") && _g.victory==2) return false;
+    if(_g.game_number==3) {
+        if(variable_struct_exists(_g,"intro") && is_struct(_g.intro)) return false;
+        if(variable_struct_exists(_g,"ending") && is_struct(_g.ending)) return false;
+    }
+    return true;
+}
 function ln_paint_sync(_g) {
-    if(!global.ln_preferences_enabled || _g.game_number!=1) {ln_paint_free();return false;}
+    if(!ln_paint_supported(_g)) {ln_paint_free();return false;}
     var _p=global.ln_paint;
-    var _key=string(_g.level)+"-"+string(_g.room_id)+":"+string(global.ln_rewind_epoch);
+    var _key=string(_g.game_number)+":"+string(_g.level)+"-"+string(_g.room_id)+":"+string(global.ln_rewind_epoch);
     if(_key!=_p.key) {
         ln_paint_free();_p.key=_key;_p.time=0;_p.cursor=8;_p.presented=false;
-        var _file="play/ln1/painting/"+string(_g.level)+"-"+string(_g.room_id)+".bin";
+        var _folder="play/ln"+string(_g.game_number)+"/painting/";
+        var _file=_folder+string(_g.level)+"-"+string(_g.room_id)+".bin";
         if(!file_exists(_file)) return false;
         _p.buffer=buffer_load(_file);_p.duration=buffer_peek(_p.buffer,0,buffer_u32)/985248;
-        if(!variable_global_exists("ln_paint_backgrounds")) {
-            var _bg_buffer=buffer_load("play/ln1/painting/backgrounds.json");
-            global.ln_paint_backgrounds=json_parse(buffer_read(_bg_buffer,buffer_text));buffer_delete(_bg_buffer);
+        var _cache="ln_paint_backgrounds_"+string(_g.game_number);
+        if(!variable_global_exists(_cache)) {
+            var _bg_buffer=buffer_load(_folder+"backgrounds.json");
+            variable_global_set(_cache,json_parse(buffer_read(_bg_buffer,buffer_text)));buffer_delete(_bg_buffer);
         }
-        _p.background=global.ln_paint_palette[global.ln_paint_backgrounds[_g.level-1][_g.room_id-1]];
+        var _backgrounds=variable_global_get(_cache),_index=_g.room_id-(_g.game_number==1?1:0);
+        _p.background=global.ln_paint_palette[_backgrounds[_g.level-1][_index]];
         _p.active=true;
     }
     return _p.active;
@@ -69,7 +81,7 @@ function ln_paint_slider(_input=false) {
         if(mouse_check_button_pressed(mb_left) && mouse_x>=860 && mouse_x<=1130 && mouse_y>=606 && mouse_y<=625) global.ln_paint_speed=1;
         return;
     }
-    draw_set_colour(c_white);draw_text(862,548,"LN1 SCENE PAINTING");
+    draw_set_colour(c_white);draw_text(862,548,"SCENE PAINTING");
     draw_text(862,566,"Speed "+string_format(global.ln_paint_speed,1,2)+"x");
     draw_set_colour(make_colour_rgb(75,85,96));draw_rectangle(870,585,1110,589,false);
     draw_set_colour(make_colour_rgb(140,206,233));draw_circle(870+240*(global.ln_paint_speed-0.1)/3.9,587,5,false);
@@ -115,7 +127,42 @@ function ln_paint_checks() {
     ln_check(!ln_paint_tick(_g) && !_p.active && _p.buffer<0,"Painting finishes and frees resources");
     ln_check(!ln_paint_tick(_g),"Completed room does not restart painting");
     global.ln_rewind_epoch++;ln_check(ln_paint_tick(_g),"Room re-entry repaints");
-    _g.game_number=2;ln_check(!ln_paint_tick(_g) && !_p.active,"Other games release painting");
+    _g.loader={active:true};ln_check(!ln_paint_tick(_g) && !_p.active,"Loader releases painting");
+    ln_paint_trilogy_checks();
     global.ln_preferences_enabled=false;global.ln_paint_speed=1;
     show_debug_message("LN_PAINT_PASS");
+}
+
+function ln_paint_trilogy_checks() {
+    var _checked=0;
+    for(var _game=2;_game<=3;_game++) for(var _level=1;_level<=(_game==2?7:5);_level++) {
+        var _g={game_number:_game,level:_level,room_id:(_game==2 && _level==1)?1:0,timer:new LNClock()};
+        global.ln_rewind_epoch++;ln_check(ln_paint_sync(_g),"Room paint starts for LN"+string(_game)+" level "+string(_level));
+        var _p=global.ln_paint;
+        repeat(5) ln_paint_tick(_g);
+        ln_check(_p.time==0,"Entry draw precedes all painting ticks");ln_paint_prepare();
+        var _pixels=buffer_create(240*144*4,buffer_fixed,1);buffer_get_surface(_pixels,_p.surface,0);
+        for(var _i=0;_i<240*144;_i++) ln_check((buffer_peek(_pixels,_i*4,buffer_u32)&$ffffff)==_p.background,"Source background fills bitmap");
+        var _expected=array_create(17280,0);buffer_seek(_p.buffer,buffer_seek_start,8);
+        while(buffer_tell(_p.buffer)<buffer_get_size(_p.buffer)) {
+            buffer_read(_p.buffer,buffer_u32);var _count=buffer_read(_p.buffer,buffer_u16);
+            repeat(_count) {var _pixel=buffer_read(_p.buffer,buffer_u16);_expected[_pixel]=buffer_read(_p.buffer,buffer_u8);}
+        }
+        _p.time=_p.duration;ln_paint_prepare();buffer_get_surface(_pixels,_p.surface,0);
+        for(var _i=0;_i<17280;_i++) ln_check((buffer_peek(_pixels,_i*8,buffer_u32)&$ffffff)==global.ln_paint_palette[_expected[_i]],"LN"+string(_game)+" level "+string(_level)+" final pixel "+string(_i));
+        surface_save(_p.surface,"ln"+string(_game)+"-painting-level"+string(_level)+".png");
+        // GPU surface loss must reproduce the same completed painting from patches.
+        surface_free(_p.surface);ln_paint_prepare();buffer_get_surface(_pixels,_p.surface,0);
+        for(var _i=0;_i<17280;_i++) ln_check((buffer_peek(_pixels,_i*8,buffer_u32)&$ffffff)==global.ln_paint_palette[_expected[_i]],"Paint survives GPU surface loss");
+        buffer_delete(_pixels);ln_check(!ln_paint_tick(_g),"Painting hands back to gameplay");
+        ln_check(!ln_paint_sync(_g),"Finished room does not repaint");
+        _g.loader={active:true};ln_check(!ln_paint_sync(_g),"Loader remains outside painting");
+        _g.loader=undefined;
+        if(_game==3) {
+            _g.intro={};ln_check(!ln_paint_sync(_g),"LN3 intro remains outside painting");
+            _g.intro=undefined;_g.ending={};ln_check(!ln_paint_sync(_g),"LN3 outro remains outside painting");
+        } else {_g.victory=2;ln_check(!ln_paint_sync(_g),"LN2 ending remains outside painting");}
+        _checked++;
+    }
+    show_debug_message("LN_PAINT_TRILOGY_PASS: "+string(_checked)+" LN2/LN3 level backgrounds, final GPU pixels, surface loss and presentation exclusions");
 }
