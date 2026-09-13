@@ -146,4 +146,9 @@ Overrides are saved with the custom scene and participate in Undo/Redo. The edit
 
 
 ### Selected part pulse
-`pulseSelected?` (on by default) highlights the selected placed part once per second: original colour → white → original colour over 0.1 seconds total. The pulse follows its visible pixel shape, preserving transparent holes and parts drawn over it. It is editor-only, works with editor CRT, and does not change saved room artwork or depth. Click the toggle below the preview to disable it.
+`pulseSelected?` (on by default) highlights the selected placed part once every 1.6 seconds: original colour → white → original colour over 0.4 seconds total. The pulse follows its visible pixel shape, preserving transparent holes and parts drawn over it. It is editor-only, works with editor CRT, and does not change saved room artwork or depth. Click the toggle below the preview to disable it.
+
+
+The top toolbar’s **Editor (F6)** button opens the editor using the same path as F6. **Back to game F6** in the editor returns without restarting the game, preserves edits and resumes music as F6 does. Fullscreen remains in the outer top toolbar; duplicate inner fullscreen buttons have been removed.
+
+The outer size/fullscreen controls are compact and aligned with the right edge of the tool. **Game/Levels (F11)** beside Editor opens the existing selection menu; its label changes to **Back to game (F11)** while that menu is open.

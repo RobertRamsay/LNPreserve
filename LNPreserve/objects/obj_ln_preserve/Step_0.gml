@@ -47,7 +47,7 @@ elapsed_us += int64(delta_time);
 input_state.sample((elapsed_us div 1000000) * clock.hz + ((elapsed_us mod 1000000) * clock.hz) div 1000000);
 if (!workbench && keyboard_check_pressed(vk_f8)) play.one_hit_kills=!play.one_hit_kills;
 if (keyboard_check_pressed(vk_f12)) { workbench = !workbench; scene_test.menu = false; }
-if (keyboard_check_pressed(vk_f11)) {
+if (keyboard_check_pressed(vk_f11) || ln_tool_menu_pressed()) {
     workbench = false; scene_test.menu = !scene_test.menu;
     if (scene_test.menu && !scene_test.preview) {
         scene_test.game = play.game_number;

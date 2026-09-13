@@ -1,6 +1,6 @@
 /// Versioned, opt-in scene overrides. No original assets or room logic are edited.
 function LNSceneEditor() constructor {
-    open=false;enabled=false;scenes={};datasets={};scene=undefined;preview=undefined;
+    open=false;toggle_requested=false;enabled=false;scenes={};datasets={};scene=undefined;preview=undefined;
     game=1;level=1;room_id=1;part=-1;asset=0;scroll=0;asset_scroll=0;
     dirty=false;message="F6 closes the editor";undo=[];redo=[];revision=0;cache=undefined;context=false;
     probe_x=120;probe_y=100;show_ninja=true;show_depth=false;reference=false;build=-1;
@@ -245,18 +245,19 @@ function ln_edit_button(_x,_y,_w,_label,_on=false) {
 function ln_edit_step(_host) {
     var _e,_s,_file,_i,_g,_max,_level,_d,_ids,_index,_assets,_before,_changed,_id,_o,_p,_swap,_step,_dx,_dy,_held,_delta,_next_depth;
      _e=global.ln_editor;
-    if(keyboard_check_pressed(vk_f6)) {
+    if(keyboard_check_pressed(vk_f6) || _e.toggle_requested || (_e.open && ln_edit_hit(1110,62,160,28))) {
+        _e.toggle_requested=false;
         ln_edit_finish_drag();_e.open=!_e.open;ln_paint_free();_e.depth_edit=false;_e.depth_hold_dir=0;ln_edit_music(_host,_e.open);
         if(_e.open) window_set_cursor(cr_default);
         if(_e.open && !is_struct(_e.scene)) ln_edit_select(_host.play.game_number,_host.play.level,_host.play.room_id);
         if(!_e.open) {_host.input_state=new LNInput();_e.context=false;if(_e.dirty) ln_edit_save("modified-scenes.autosave.json");return true;}
     }
     if(!_e.open) return false;
-    _e.pulse_time_us=(_e.pulse_time_us+delta_time) mod 1000000;
+    _e.pulse_time_us=(_e.pulse_time_us+delta_time) mod 1600000;
     if(!mouse_check_button(mb_left)) ln_edit_finish_drag();
     ln_crt_preferences_flush();
     if(keyboard_check_pressed(vk_f10) || ln_edit_hit(1110,18,160,28)) ln_edit_crt_toggle();
-    if(keyboard_check_pressed(vk_f9) || ln_edit_hit(1110,62,160,28)) ln_fullscreen_toggle(_host);
+    if(keyboard_check_pressed(vk_f9)) ln_fullscreen_toggle(_host);
      _s=_e.scene;if(!is_struct(_s)) return true;
     if(_e.depth_edit) {
         if(keyboard_check_pressed(vk_escape)) {_e.depth_edit=false;return true;}
@@ -372,7 +373,7 @@ function ln_edit_draw() {
     ln_edit_button(24,18,180,"Modified: "+(_e.enabled?"ON":"OFF"),_e.enabled);ln_edit_button(216,18,112,"Save file");ln_edit_button(340,18,112,"Load file");ln_edit_button(464,18,112,"Undo (^Z)");ln_edit_button(588,18,152,"Build preview");
     ln_edit_button(752,18,132,"Recover");ln_edit_button(850,62,112,"Redo (^Y)");
     ln_edit_button(1110,18,160,"Editor CRT "+(_e.crt_enabled?"ON":"OFF")+" F10",_e.crt_enabled);
-    ln_edit_button(1110,62,160,"Fullscreen F9",window_get_fullscreen());
+    ln_edit_button(1110,62,160,"Back to game F6");
     ln_edit_button(900,18,30,"-");draw_set_colour(c_white);draw_text(938,24,string_format(global.ln_paint_speed,1,1)+"x build");ln_edit_button(1060,18,30,"+");
     for( _i=0;_i<3;_i++) ln_edit_button(24+_i*110,62,102,"Ninja "+string(_i+1),_e.game==_i+1);
     ln_edit_button(370,62,30,"<");draw_set_colour(c_white);draw_text(412,68,"Level "+string(_e.level));ln_edit_button(570,62,30,">");
@@ -596,6 +597,7 @@ function ln_edit_interaction_checks() {
     ln_check(ln_edit_pick_part(_c,7,7)==1,"Alt-click selects top visible part");
     ln_check(ln_edit_pick_part(_c,4,4)==0,"Alt-click selects lower exposed part");
     ln_check(ln_edit_pick_part(_c,0,0)==-1,"Alt-click background selects nothing");
+    ln_edit_pulse_checks(_c);
     _s.parts=[_s.parts[1],_s.parts[0]];_s.parts[1].x=40;
     _e.reference=true;
     ln_check(ln_edit_pick_part(_c,4,4)==1,"Original view maps a source part after moving/reordering");
@@ -848,11 +850,11 @@ function ln_edit_test_depth_fill(_depth) {
 }
 
 // Editor-only highlight: use existing visible-pixel ownership, not a rectangle
-// or a rebuilt texture. One 100 ms white pulse per second (50 ms each way).
+// or a rebuilt texture. One 400 ms white pulse per 1.6 seconds (200 ms each way).
 function ln_edit_selected_pulse(_cache) {
     var _e=global.ln_editor;
-    if(!_e.pulse_selected || _e.pulse_time_us>=100000 || _e.part<0 || _e.part>=array_length(_e.scene.parts)) return;
-    var _alpha=sin(pi*_e.pulse_time_us/100000);
+    if(!_e.pulse_selected || _e.pulse_time_us>=400000 || _e.part<0 || _e.part>=array_length(_e.scene.parts)) return;
+    var _alpha=sin(pi*_e.pulse_time_us/400000);
     if(_alpha<=0) return;
     var _index=_e.part,_part=_e.scene.parts[_index];
     if(_e.reference) {
@@ -874,8 +876,36 @@ function ln_edit_selected_pulse(_cache) {
             if(_cache.owners[_y*240+_x]!=_index) {_x++;continue;}
             var _start=_x;
             while(_x<_right && _cache.owners[_y*240+_x]==_index) _x++;
-            draw_rectangle(_start,_y,_x-1,_y,false);
+            // Explicit area: a filled rectangle with identical Y endpoints
+            // can collapse to zero-area triangles on the GPU.
+            draw_primitive_begin(pr_trianglelist);
+            draw_vertex(_start,_y);draw_vertex(_x,_y);draw_vertex(_start,_y+1);
+            draw_vertex(_x,_y);draw_vertex(_x,_y+1);draw_vertex(_start,_y+1);
+            draw_primitive_end();
         }
     }
     draw_set_alpha(_old_alpha);draw_set_colour(_old_colour);
+}
+
+function ln_edit_pulse_checks(_cache) {
+    var _e=global.ln_editor,_part=_e.part,_time=_e.pulse_time_us,_enabled=_e.pulse_selected;
+    var _v=matrix_get(matrix_view),_p=matrix_get(matrix_projection);
+    var _surface=surface_create(240,144),_camera=camera_create_view(0,0,240,144);
+    _e.part=0;_e.pulse_selected=true;
+    surface_set_target(_surface);camera_apply(_camera);
+    _e.pulse_time_us=200000;draw_clear(c_black);ln_edit_selected_pulse(_cache);draw_flush();
+    ln_check(surface_getpixel(_surface,4,4)==c_white,"selected pulse peak is visible white");
+    ln_check(surface_getpixel(_surface,6,6)==c_black && surface_getpixel(_surface,0,0)==c_black,"pulse preserves overlapping parts and empty background");
+    _e.pulse_time_us=100000;draw_clear(c_black);ln_edit_selected_pulse(_cache);draw_flush();
+    var _rising=surface_getpixel(_surface,4,4);
+    ln_check(_rising!=c_black && _rising!=c_white,"pulse fades towards white");
+    _e.pulse_time_us=300000;draw_clear(c_black);ln_edit_selected_pulse(_cache);draw_flush();
+    ln_check(abs(colour_get_red(surface_getpixel(_surface,4,4))-colour_get_red(_rising))<=1,"pulse fades back symmetrically");
+    _e.pulse_time_us=400000;draw_clear(c_black);ln_edit_selected_pulse(_cache);draw_flush();
+    ln_check(surface_getpixel(_surface,4,4)==c_black,"pulse ends after 0.4 seconds");
+    _e.pulse_time_us=200000;_e.pulse_selected=false;ln_edit_selected_pulse(_cache);draw_flush();
+    ln_check(surface_getpixel(_surface,4,4)==c_black,"pulse toggle disables highlight");
+    surface_reset_target();matrix_set(matrix_view,_v);matrix_set(matrix_projection,_p);
+    surface_free(_surface);camera_destroy(_camera);
+    _e.part=_part;_e.pulse_time_us=_time;_e.pulse_selected=_enabled;
 }

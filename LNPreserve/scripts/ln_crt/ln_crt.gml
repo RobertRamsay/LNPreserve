@@ -139,7 +139,6 @@ function ln_window_preset(_factor) {
 }
 
 function ln_window_buttons(_tips=true) {
-    ln_edit_button(1128,4,144,"Fullscreen F9",window_get_fullscreen());
     draw_set_colour(make_colour_rgb(24,28,34));draw_rectangle(1128,602,1272,648,false);
     draw_set_colour(make_colour_rgb(150,190,215));
     draw_text(1136,604,string(window_get_width())+"x"+string(window_get_height()));
@@ -339,7 +338,7 @@ function ln_fullscreen_toggle(_host) {
 }
 function ln_cinematic_step(_host) {
     if(!variable_instance_exists(_host,"cinematic_window")) _host.cinematic_window=undefined;
-    if(keyboard_check_pressed(vk_f9) || (ln_crt_controls_visible(_host) && mouse_check_button_pressed(mb_left) && ln_tool_mouse_x()>=1128 && ln_tool_mouse_x()<1272 && ln_tool_mouse_y()>=4 && ln_tool_mouse_y()<32)) ln_fullscreen_toggle(_host);
+    if(keyboard_check_pressed(vk_f9)) ln_fullscreen_toggle(_host);
     if(is_struct(_host.cinematic_window)) {
         var _movie=_host.play.game_number==3 && (is_struct(_host.play.intro) || is_struct(_host.play.ending));
         window_set_cursor(_movie && !_host.scene_test.menu && !_host.workbench?cr_none:_host.cinematic_window.cursor);
@@ -464,17 +463,20 @@ function ln_tool_present(_host) {
     draw_set_font(font_jansina);draw_set_halign(fa_left);draw_set_valign(fa_top);
     ln_edit_button(320,96,160,global.ln_editor.open?"UI ON (editor)":"UI ON (U)",true);
     ln_edit_button(492,96,240,"Background "+(_t.background?"ON":"OFF")+" (B)",_t.background);draw_flush();
-    ln_edit_button(1100,96,60,"1x");ln_edit_button(1168,96,60,"2x");ln_edit_button(1236,96,60,"Fit");
-    ln_edit_button(1310,96,210,"Fullscreen (F9)",window_get_fullscreen());draw_flush();
+    if(!global.ln_editor.open) ln_edit_button(748,96,180,"Editor (F6)");
+    if(!global.ln_editor.open) ln_edit_button(940,96,238,_host.scene_test.menu?"Back to game (F11)":"Game/Levels (F11)",_host.scene_test.menu);
+    ln_edit_button(1256,96,48,"1x");ln_edit_button(1312,96,48,"2x");ln_edit_button(1368,96,48,"Fit");
+    ln_edit_button(1424,96,176,"Fullscreen (F9)",window_get_fullscreen());draw_flush();
 }
 function ln_tool_step(_host) {
     var _t=global.ln_tool,_click=mouse_check_button_pressed(mb_left),_typing=global.ln_editor.open && global.ln_editor.depth_edit;
     if(!_t.active) return;
     if(ln_tool_ui_visible() && _click && mouse_y>=96 && mouse_y<124) {
-        if(mouse_x>=1100 && mouse_x<1160) ln_window_preset(1);
-        if(mouse_x>=1168 && mouse_x<1228) ln_window_preset(2);
-        if(mouse_x>=1236 && mouse_x<1296) ln_window_preset(0);
-        if(mouse_x>=1310 && mouse_x<1520) ln_fullscreen_toggle(_host);
+        if(!global.ln_editor.open && mouse_x>=748 && mouse_x<928) global.ln_editor.toggle_requested=true;
+        if(mouse_x>=1256 && mouse_x<1304) ln_window_preset(1);
+        if(mouse_x>=1312 && mouse_x<1360) ln_window_preset(2);
+        if(mouse_x>=1368 && mouse_x<1416) ln_window_preset(0);
+        if(mouse_x>=1424 && mouse_x<1600) ln_fullscreen_toggle(_host);
     }
     if(!_typing && !global.ln_editor.open && (keyboard_check_pressed(ord("U")) || (ln_tool_ui_visible() && _click && mouse_x>=320 && mouse_x<480 && mouse_y>=96 && mouse_y<124))) _t.ui=!_t.ui;
     if(!_typing && (keyboard_check_pressed(ord("B")) || (ln_tool_ui_visible() && _click && mouse_x>=492 && mouse_x<732 && mouse_y>=96 && mouse_y<124))) _t.background=!_t.background;
@@ -499,3 +501,8 @@ function ln_tool_free() {
 }
 
 function ln_tool_ui_visible() {return global.ln_editor.open || global.ln_tool.ui;}
+
+function ln_tool_menu_pressed() {
+    return global.ln_tool.active && ln_tool_ui_visible() && !global.ln_editor.open &&
+        mouse_check_button_pressed(mb_left) && mouse_x>=940 && mouse_x<1178 && mouse_y>=96 && mouse_y<124;
+}
