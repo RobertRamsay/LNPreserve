@@ -21,9 +21,13 @@ void main() {
     if (v_world.y >= u_clip_bottom) discard;
     vec2 p = (v_world - u_scene.xy) / u_scene.zw;
     if (p.x >= 0.0 && p.y >= 0.0 && p.x < 1.0 && p.y < 1.0) {
-        if(u_editor_threshold<1.1) colour.a*=1.0-step(u_editor_threshold,texture2D(u_editor_depth,p).a);
         vec2 uv = mix(u_mask_uv.xy, u_mask_uv.zw, p);
-        colour.a *= 1.0 - step(u_mask_threshold, texture2D(u_mask, uv).a);
+        float hidden = step(u_mask_threshold, texture2D(u_mask, uv).a);
+        if(u_editor_threshold<1.1) {
+            vec4 authored=texture2D(u_editor_depth,p);
+            if(authored.r>0.5) hidden=step(u_editor_threshold,authored.a);
+        }
+        colour.a *= 1.0-hidden;
     }
     gl_FragColor = colour;
 }

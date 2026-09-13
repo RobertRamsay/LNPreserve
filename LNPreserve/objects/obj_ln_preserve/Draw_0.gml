@@ -127,6 +127,10 @@ if (ln3_only) {
     catch (_failure) {show_debug_message("LN3_GPU_FAILURE: "+string(_failure));}
     game_end();exit;
 }
+if(global.ln_tool.active && !ln_tool_ui_visible() && (workbench || scene_test.menu || scene_test.preview)) {
+    if(play.game_number==1) ln1_play_draw(play,control_state_ln1.pause!=0);else if(play.game_number==2) ln2_play_draw(play);else ln3_play_draw(play);
+    exit;
+}
 if (!workbench) {
     if (scene_test.menu || scene_test.preview) { ln_scene_test_draw(scene_test); exit; }
     if (play.game_number==1) ln1_play_draw(play, control_state_ln1.pause != 0);else if (play.game_number==2) ln2_play_draw(play);else ln3_play_draw(play);

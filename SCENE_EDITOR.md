@@ -26,16 +26,17 @@ existing source-recorded construction timing.
 
 ## Depth
 
-Draw order controls scenery composition. Each part separately has Ground,
+Draw order controls scenery composition. Each part separately has Inherited, Ground,
 Depth or Always front mode. In Depth mode the +/- controls set its ground-contact
 line; the ninja passes behind its opaque pixels while above that line and in
 front below it. Depth line displays the selected line in the preview.
 
-Imported parts initially use Ground. Original depth masks are not automatically
-decomposed into part masks. Assign depth to props in the editor and use the ninja
-preview to check them. Original room depth is always enabled; it is a status label, not a toggle. The editor combines native masking with explicitly authored foreground depths. LN3 native masks are regenerated at the ninja preview position. Untouched rooms show the preserved bitmap; edited rooms show their rebuilt composition. The runtime uses the edited mask for LN1/LN2 actors and
-LN3 character fragments. This is manual authoring support, not an automatic
-scene-depth solver.
+Imported parts inherit original masking. A per-part override replaces native
+masking on that part's visible pixels in both preview and play. Ground clears
+occlusion; Inherited restores the original behavior. LN3 native masks are
+regenerated at the ninja position. Untouched rooms show the preserved bitmap;
+edited rooms show their rebuilt composition. Original masks are not automatically
+decomposed into separately movable part masks.
 
 ## Files and Modified mode
 
@@ -84,7 +85,7 @@ does not establish pixel-for-pixel source parity or correct depth in every room.
 
 ## Editor comfort controls
 
-- Original depth is always enabled. Edited scenes retain native masking and add authored prop depth; no depth-mode toggle is required.
+- Original depth is inherited per part and can be overridden. There is no global original-depth switch or status label.
 - Added assets are selected and scrolled into view at the bottom of the parts list.
   New parts use an opaque-pixel overlay so native source priority cells cannot silently hide them;
   transparent pixels remain transparent. Their depth starts at their base, and is editable.
@@ -125,7 +126,7 @@ scale that fits, or reduces below 1x on a smaller desktop. F9 still toggles full
 
 U / UI toggles outer controls; the game retains its built-in HUD, and the editor
 shows its centered scene preview. B / Background toggles the supplied artwork.
-A compact visibility/size toolbar remains accessible. Both visibility preferences
+When gameplay UI is off, every button is hidden; press U to restore it. F6 always shows the full editor UI, and returning to play preserves its prior UI setting. Both visibility preferences
 persist in the Tool section of LNPreserve.ini. Depth-number entry ignores U/B.
 
 Ctrl+Z undoes and Ctrl+Y redoes in the editor; Undo and Redo buttons are also present.
@@ -136,3 +137,9 @@ to the current room and is not stored in the custom scene pack.
 editor histories and Test room in all three games, CRT, presets, fullscreen and
 save panel. Component fixtures keep legacy source coordinates; the dedicated
 layout fixture exercises the actual centered compositor and visibility states.
+
+
+### Per-part depth overrides
+Imported parts inherit the exact native masking until their depth is edited. The original-depth status has been removed. Typing a depth (even the displayed value) or using + / - selects Depth automatically. The mode button cycles Inherited → Depth → Always front → Ground → Inherited. Ground explicitly clears native occlusion on the part's visible pixels; Depth replaces it with the chosen ground-contact line. Other pixels retain native masking. The displayed initial number is the part's base, not a claim that the original per-pixel mask is a single flat line.
+
+Overrides are saved with the custom scene and participate in Undo/Redo. The editor and Test room use the same replacement rule for all three games. Original masks outside visible overridden part pixels are retained; this is not a reconstruction of the original masks as independently movable objects.

@@ -65,13 +65,17 @@ if(global.ln_tool.layout_test) {
     try {
         ln_check(surface_get_width(application_surface)==1920 && surface_get_height(application_surface)==1080,"16:9 presentation surface");
         if(global.ln_tool.frame mod 2==0) {
-            ln_check(surface_getpixel(application_surface,493,97)==(global.ln_tool.background?make_colour_rgb(45,95,110):make_colour_rgb(43,48,57)),"background shortcut button remains visible");
+            if(ln_tool_ui_visible()) ln_check(surface_getpixel(application_surface,493,97)==(global.ln_tool.background?make_colour_rgb(45,95,110):make_colour_rgb(43,48,57)),"background shortcut button remains visible");
             surface_save(application_surface,"tool-layout-"+string(global.ln_tool.frame)+".png");
             if(global.ln_tool.frame==2) tool_background_pixel=surface_getpixel(application_surface,1800,500);
             if(global.ln_tool.frame==4) ln_check(surface_getpixel(application_surface,1800,500)==tool_background_pixel,"UI hiding preserves background");
-            if(global.ln_tool.frame==6) ln_check(surface_getpixel(application_surface,1800,500)==c_black,"background toggle clears artwork");
+            if(global.ln_tool.frame==6) {
+                ln_check(surface_getpixel(application_surface,1800,500)==c_black,"background toggle clears artwork");
+                for(var _toolbar_x=320;_toolbar_x<1520;_toolbar_x+=8) for(var _toolbar_y=96;_toolbar_y<124;_toolbar_y+=4)
+                    ln_check(surface_getpixel(application_surface,_toolbar_x,_toolbar_y)==c_black,"UI off hides every toolbar button");
+            }
             if(global.ln_tool.frame==8) ln_check(surface_getpixel(application_surface,350,290)==surface_getpixel(global.ln_tool.surface,30,150),"editor canvas survives widescreen composition");
-            if(global.ln_tool.frame==10) {show_debug_message("LN_TOOL_LAYOUT_PASS: 1920x1080 game/editor UI and background visibility");game_end();}
+            if(global.ln_tool.frame==10) {ln_check(!global.ln_tool.ui && ln_tool_ui_visible(),"F6 forces UI visible without changing gameplay preference");ln_check(surface_getpixel(application_surface,350,290)==surface_getpixel(global.ln_tool.surface,30,150),"F6 keeps full editor layout when gameplay UI is off");show_debug_message("LN_TOOL_LAYOUT_PASS: 1920x1080 game/editor UI and background visibility");game_end();}
         }
     } catch(_layout_failure) {show_debug_message("LN_TOOL_LAYOUT_FAILURE: "+string(_layout_failure));game_end();}
 }

@@ -277,7 +277,7 @@ function ln3_play_actor_part(_g,_d,_i) {
     for (var _y=0;_y<21;_y++) {
         var _start=-1;
         for (var _x=0;_x<=24;_x++) {
-            var _hidden=_x<24 && ((global.ln_editor.context ? ln_modified_hidden(_d.draw_x[_i]-24+_x*((_d.expand_x&(1<<_i))?2:1),_d.draw_y[_i]-50+_y*((_d.expand_y&(1<<_i))?2:1),_d.parts[_i<4?2:6].y) : ((_mask[_y*3+(_x div 8)]&(128>>(_x&7)))==0 || (global.ln_editor.native_preview && ln_modified_hidden(_d.draw_x[_i]-24+_x*((_d.expand_x&(1<<_i))?2:1),_d.draw_y[_i]-50+_y*((_d.expand_y&(1<<_i))?2:1),_d.parts[_i<4?2:6].y)))) || (_i<4 && _d.draw_y[_i]+_y>=_d.waterline+21));
+            var _hidden=_x<24 && (ln_modified_hidden(_d.draw_x[_i]-24+_x*((_d.expand_x&(1<<_i))?2:1),_d.draw_y[_i]-50+_y*((_d.expand_y&(1<<_i))?2:1),_d.parts[_i<4?2:6].y,(_mask[_y*3+(_x div 8)]&(128>>(_x&7)))==0) || (_i<4 && _d.draw_y[_i]+_y>=_d.waterline+21));
             if (_hidden && _start<0) _start=_x;
             if (!_hidden && _start>=0) {draw_rectangle(_start,_y,_x,_y+1,false);_start=-1;}
         }

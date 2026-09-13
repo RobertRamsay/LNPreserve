@@ -128,6 +128,7 @@ function ln_edit_validate(_pack) {
                 !is_real(_p.depth) || is_nan(_p.depth) || _p.depth<0 || _p.depth>144 ||
                 !array_contains([0,1,2],_p.mode) || (!is_bool(_p.flip) && !array_contains([0,1],_p.flip)) ||
                 !is_array(_p.recolour) || array_length(_p.recolour)>3) return false;
+            if(variable_struct_exists(_p,"depth_override") && !is_bool(_p.depth_override)) return false;
             for( _k=0;_k<array_length(_p.recolour);_k++) if(!is_real(_p.recolour[_k]) || _p.recolour[_k]<0 || _p.recolour[_k]>255 || is_nan(_p.recolour[_k]) || floor(_p.recolour[_k])!=_p.recolour[_k]) return false;
         }
     }
@@ -159,7 +160,7 @@ function ln_edit_load(_file) {
     } catch(_error) {if(_b>=0) buffer_delete(_b);global.ln_editor.message="Could not load custom file; existing edits kept";return false;}
 }
 function ln_edit_build(_scene,_limit=-1,_variant="edit") {
-    var _e,_key,_d,_colours,_depth,_attributes,_n,_i,_p,_o,_cw,_y,_x,_dx,_dy,_sx,_cell,_code,_attr,_dest,_old,_blend,_palette,_c,_j,_pixel,_surface,_mask_surface,_b,_mask,_owners,_overlay,_decoded,_at,_incremental,_left,_top,_right,_bottom,_start_x,_end_x,_start_y,_end_y,_reuse,_depth_surface;
+    var _e,_key,_d,_colours,_depth,_attributes,_n,_i,_p,_o,_cw,_y,_x,_dx,_dy,_sx,_cell,_code,_attr,_dest,_old,_blend,_palette,_c,_j,_pixel,_surface,_mask_surface,_b,_mask,_owners,_overlay,_decoded,_at,_incremental,_left,_top,_right,_bottom,_start_x,_end_x,_start_y,_end_y,_reuse,_depth_surface,_overrides;
      _e=global.ln_editor; _key=ln_edit_key(_scene.game,_scene.level,_scene.room)+":"+string(_e.revision)+":"+string(_limit)+":"+_variant;
     if(is_struct(_e.cache) && _e.cache.key==_key && surface_exists(_e.cache.surface)) return _e.cache;
     _incremental=_variant=="preview" && is_array(_e.dirty_rect) && is_struct(_e.cache) && _e.cache.variant==_variant && surface_exists(_e.cache.surface);
@@ -169,8 +170,9 @@ function ln_edit_build(_scene,_limit=-1,_variant="edit") {
     if(!_incremental) ln_edit_free_cache();
      _d=ln_edit_data(_scene.game,_scene.level); _colours=_incremental?_e.cache.colours:array_create(240*144,global.ln_paint_palette[_scene.background]);
      _owners=_incremental?_e.cache.owners:array_create(240*144,-1);_depth=_incremental?_e.cache.depth:array_create(240*144,0); _attributes=array_create(30*18,0); _n=array_length(_scene.parts);
+    _overrides=_incremental?_e.cache.overrides:array_create(240*144,false);
     if(_incremental) for(_y=_top;_y<_bottom;_y++) for(_x=_left;_x<_right;_x++) {
-        _pixel=_y*240+_x;_colours[_pixel]=global.ln_paint_palette[_scene.background];_owners[_pixel]=-1;_depth[_pixel]=0;
+        _pixel=_y*240+_x;_colours[_pixel]=global.ln_paint_palette[_scene.background];_owners[_pixel]=-1;_depth[_pixel]=0;_overrides[_pixel]=false;
     }
     if(_limit>=0) _n=min(_n,_limit);
     for( _i=0;_i<_n;_i++) {
@@ -187,6 +189,7 @@ function ln_edit_build(_scene,_limit=-1,_variant="edit") {
              _blend=_overlay || (_old>31 && _attr>31 && (_attr&16)!=0);
             if(!_blend || _code!=0) {
                  _pixel=_dy*240+_dx;_owners[_pixel]=_code==0?-1:_i;_colours[_pixel]=_decoded.colours[_at];
+                _overrides[_pixel]=_code!=0 && (_p.mode!=0 || (variable_struct_exists(_p,"depth_override") && _p.depth_override));
                 _depth[_pixel]=(_code==0 || _p.mode==0)?0:(_p.mode==2?255:clamp(round(_p.depth)+29,1,254));
             }
             if(!_overlay && (_x mod 8)==7 && (_y mod 8)==7) _attributes[_dest]=_blend?(_attr|_old):_attr;
@@ -196,19 +199,19 @@ function ln_edit_build(_scene,_limit=-1,_variant="edit") {
     for( _i=0;_i<240*144;_i++) buffer_poke(_b,_i*4,buffer_u32,_colours[_i]|$ff000000);
     buffer_set_surface(_b,_surface,0);
     _mask=-1;
-    if(_variant=="preview") {
+    if(_variant=="preview" || _variant=="edit") {
         if(!surface_exists(_depth_surface)) _depth_surface=surface_create(240,144);
-        for(_i=0;_i<240*144;_i++) buffer_poke(_b,_i*4,buffer_u32,$ffffff|(_depth[_i]<<24));
+        for(_i=0;_i<240*144;_i++) buffer_poke(_b,_i*4,buffer_u32,(_overrides[_i]?$ffffff:0)|(_depth[_i]<<24));
         buffer_set_surface(_b,_depth_surface,0);
     }
     if(_variant=="edit") {
     _mask_surface=surface_create(240,144);
-    for( _i=0;_i<240*144;_i++) buffer_poke(_b,_i*4,buffer_u32,$ffffff|(_depth[_i]<<24));
+    for( _i=0;_i<240*144;_i++) buffer_poke(_b,_i*4,buffer_u32,(_overrides[_i]?$ffffff:0)|(_depth[_i]<<24));
     buffer_set_surface(_b,_mask_surface,0);
      _mask=sprite_create_from_surface(_mask_surface,0,0,240,144,false,false,0,0);surface_free(_mask_surface);
     }
     buffer_delete(_b);_e.dirty_rect=undefined;
-    _e.cache={key:_key,variant:_variant,surface:_surface,mask:_mask,depth_surface:_depth_surface,depth:_depth,owners:_owners,colours:_colours};return _e.cache;
+    _e.cache={key:_key,variant:_variant,surface:_surface,mask:_mask,depth_surface:_depth_surface,depth:_depth,overrides:_overrides,owners:_owners,colours:_colours};return _e.cache;
 }
 function ln_modified_room(_g) {
     var _e,_key;
@@ -225,11 +228,12 @@ function ln_modified_begin(_g) {
      _b=ln_modified_paint_sync(_g);
     ln_edit_build(_s,is_struct(_b) && _b.active?floor(_b.part):-1);_e.context=true;return true;
 }
-function ln_modified_hidden(_x,_y,_foot) {
+function ln_modified_hidden(_x,_y,_foot,_original=false) {
     var _e;
      _e=global.ln_editor;
-    if((!_e.context && !_e.native_preview) || !is_struct(_e.cache)) return false;
-    _x=floor(_x);_y=floor(_y);if(_x<0 || _x>=240 || _y<0 || _y>=144) return false;
+    if((!_e.context && !_e.native_preview) || !is_struct(_e.cache)) return _original;
+    _x=floor(_x);_y=floor(_y);if(_x<0 || _x>=240 || _y<0 || _y>=144) return _original;
+    if(variable_struct_exists(_e.cache,"overrides") && !_e.cache.overrides[_y*240+_x]) return _original;
     return _e.cache.depth[_y*240+_x]>_foot;
 }
 function ln_edit_hit(_x,_y,_w,_h) {return mouse_check_button_pressed(mb_left) && ln_tool_mouse_x()>=_x && ln_tool_mouse_x()<_x+_w && ln_tool_mouse_y()>=_y && ln_tool_mouse_y()<_y+_h;}
@@ -303,10 +307,10 @@ function ln_edit_step(_host) {
             if(keyboard_check_pressed(vk_up)) {_p.y-=_step;_changed=true;}
             if(keyboard_check_pressed(vk_down)) {_p.y+=_step;_changed=true;}
             if(ln_edit_hit(760,630,115,28)) {_p.flip=!_p.flip;_changed=true;}
-            if(ln_edit_hit(888,630,180,28)) {_p.mode=(_p.mode+1) mod 3;_changed=true;}
+            if(ln_edit_hit(888,630,180,28)) {if(_p.mode==0 && variable_struct_exists(_p,"depth_override") && _p.depth_override) {_p.depth_override=false;} else {_p.mode=(_p.mode+1) mod 3;_p.depth_override=true;}_changed=true;}
             _held=mouse_check_button(mb_left)?(ln_edit_inside(1080,630,35,28)?-1:(ln_edit_inside(1122,630,35,28)?1:0)):0;
             _delta=ln_edit_depth_repeat(_held,mouse_check_button_pressed(mb_left),delta_time);
-            if(_delta!=0) {_next_depth=clamp(_p.depth+_delta,0,144);if(_next_depth!=_p.depth) {_p.depth=_next_depth;_e.show_depth=true;_changed=true;}}
+            if(_delta!=0) {_next_depth=clamp(_p.depth+_delta,0,144);if(_next_depth!=_p.depth || _p.mode!=1) {_p.mode=1;_p.depth_override=true;_p.depth=_next_depth;_e.show_depth=true;_changed=true;}}
             if(ln_edit_hit(1162,630,84,28)) {_e.depth_edit=true;_e.depth_hold_dir=0;keyboard_string="";_e.drag=false;return true;}
             _p.x=clamp(_p.x,-512,512);_p.y=clamp(_p.y,-512,512);
         }
@@ -358,7 +362,7 @@ function ln_edit_draw() {
         draw_set_colour(c_yellow);draw_rectangle(clamp(24+_p.x*3,24,744),clamp(140+_p.y*3,140,572),clamp(24+(_p.x+_o.width)*3,24,744),clamp(140+(_p.y+_o.height)*3,140,572),true);
         if(_e.show_depth) {draw_set_colour(c_aqua);draw_line(24,140+_p.depth*3,744,140+_p.depth*3);}
         draw_set_colour(c_white);draw_text(760,594,"Part "+string(_e.part+1)+"  x "+string(_p.x)+" y "+string(_p.y));
-        ln_edit_button(760,630,115,"Flip X",_p.flip);ln_edit_button(888,630,180,["Ground","Depth","Always front"][_p.mode]);
+        ln_edit_button(760,630,115,"Flip X",_p.flip);ln_edit_button(888,630,180,(_p.mode==0 && (!variable_struct_exists(_p,"depth_override") || !_p.depth_override))?"Inherited":["Ground","Depth","Always front"][_p.mode]);
         ln_edit_button(1080,630,35,"-");ln_edit_button(1122,630,35,"+");ln_edit_button(1162,630,84,_e.depth_edit?(keyboard_string+"|"):string(_p.depth),_e.depth_edit);
     }
     ln_edit_button(24,18,180,"Modified: "+(_e.enabled?"ON":"OFF"),_e.enabled);ln_edit_button(216,18,112,"Save file");ln_edit_button(340,18,112,"Load file");ln_edit_button(464,18,112,"Undo (^Z)");ln_edit_button(588,18,152,"Build preview");
@@ -369,7 +373,7 @@ function ln_edit_draw() {
     for( _i=0;_i<3;_i++) ln_edit_button(24+_i*110,62,102,"Ninja "+string(_i+1),_e.game==_i+1);
     ln_edit_button(370,62,30,"<");draw_set_colour(c_white);draw_text(412,68,"Level "+string(_e.level));ln_edit_button(570,62,30,">");
     ln_edit_button(620,62,30,"<");draw_set_colour(c_white);draw_text(662,68,"Room "+string(_e.room_id)+" (ID)");ln_edit_button(810,62,30,">");
-    ln_edit_button(24,594,140,"Ninja",_e.show_ninja);ln_edit_button(176,594,140,"Depth line",_e.show_depth);draw_set_colour(make_colour_rgb(150,210,220));draw_text(328,600,"Original depth: ON");ln_edit_button(490,594,140,"Test room");
+    ln_edit_button(24,594,140,"Ninja",_e.show_ninja);ln_edit_button(176,594,140,"Depth line",_e.show_depth);ln_edit_button(490,594,140,"Test room");
     draw_set_colour(c_white);draw_text(760,110,"PARTS (draw order)");draw_text(1000,110,"ASSETS (this level)");
      _d=ln_edit_data(_e.game,_e.level); _assets=variable_struct_get_names(_d.objects);array_sort(_assets,function(a,b){return real(a)-real(b);});
     for( _i=0;_i<18;_i++) {
@@ -379,9 +383,9 @@ function ln_edit_draw() {
     if(array_length(_assets)>0) ln_edit_thumbnail(real(_assets[_e.asset]),1030,675,190,75);
     ln_edit_button(760,548,65,"Up");ln_edit_button(832,548,65,"Down");ln_edit_button(904,548,80,"Remove");ln_edit_button(1000,548,245,"Add selected asset");
     draw_set_colour(c_white);draw_text(24,646,"Alt-click: select part. Drag/arrows: move. Right-drag: ninja. Shift: larger steps.");
-    draw_text(24,670,"Depth line = ground contact. Imported parts start as Ground; assign depth to props.");
+    draw_text(24,670,"Depth line = ground contact. Enter a number to override inherited masking.");
     draw_text(24,702,"Visual editing only: original collision paths, pickups and exits stay in place.");
-    draw_text(24,726,"Original depth is always active. Edited props retain their own depth settings.");
+    draw_text(24,726,"Parts inherit original masking until overridden. Ground clears it; Inherited restores it.");
     draw_set_colour(make_colour_rgb(150,210,220));draw_text(24,760,(_e.dirty?"Unsaved changes | ":"")+_e.message+" | F6 return");
 }
 
@@ -421,6 +425,7 @@ function ln_edit_checks() {
     _e.context=true;
     ln_check(ln_modified_hidden(2,3,98) && !ln_modified_hidden(2,3,100),"depth line separates front and behind");
     ln_check(ln_modified_hidden(4,4,200) && !ln_modified_hidden(0,0,20),"always-front and ground mask");
+    ln_check(!ln_modified_hidden(2,3,100,true) && ln_modified_hidden(0,0,100,true),"authored depth replaces native while untouched pixels inherit");
     _s.parts=[_s.parts[1],_s.parts[0]];_e.revision++;_c=ln_edit_build(_s);
     ln_check(surface_getpixel(_c.surface,4,4)==c_white,"reorder changes visible pixels");
     array_delete(_s.parts,1,1);_e.revision++;_c=ln_edit_build(_s);
@@ -594,7 +599,7 @@ function ln_edit_interaction_checks() {
     for(_game=1;_game<=3;_game++) {
         _epoch=global.ln_rewind_epoch;_room=ln_edit_rooms(_game,1)[1];ln_edit_select(_game,1,_room);_g=_e.preview;
         ln_check(_g.room_id==_room && global.ln_rewind_epoch==_epoch,"preview enters selected room without touching live rewind");
-        _e.reference=false;_e.probe_x=120;_e.probe_y=100;_e.show_ninja=false;ln_edit_draw();
+        _e.reference=false;_e.show_depth=false;_e.probe_x=120;_e.probe_y=100;_e.show_ninja=false;ln_edit_draw();
         _baseline=ln_edit_screen_buffer();
         // Make native masking unambiguously open, then unambiguously closed.
         if(_game<3) {_mask=_g.mask;_g.mask=-1;}
@@ -602,12 +607,21 @@ function ln_edit_interaction_checks() {
         _state=_game==3?json_stringify(_g.state):"";
         _e.show_ninja=true;ln_edit_draw();_visible=ln_edit_screen_buffer();
         ln_check(ln_edit_canvas_difference(_baseline,_visible)>0,"original background does not cover preview ninja");
+        // Authored depth must also hide actors in rooms with no native mask.
+        ln_edit_test_depth_fill(255);ln_edit_draw();_hidden=ln_edit_screen_buffer();
+        ln_check(ln_edit_canvas_difference(_baseline,_hidden)==0,"authored foreground hides ninja in all three games");buffer_delete(_hidden);
+        ln_edit_test_depth_fill(0);ln_edit_draw();_hidden=ln_edit_screen_buffer();
+        ln_check(ln_edit_canvas_difference(_visible,_hidden)==0,"lowered authored depth reveals ninja in all three games");buffer_delete(_hidden);
+        ln_edit_free_cache();ln_edit_draw();
         if(_game<3) {
             _original=surface_create(240,144);surface_set_target(_original);draw_clear_alpha(c_white,1);surface_reset_target();
             _g.mask=sprite_create_from_surface(_original,0,0,240,144,false,false,0,0);surface_free(_original);
             ln_edit_draw();_hidden=ln_edit_screen_buffer();
             ln_check(ln_edit_canvas_difference(_baseline,_hidden)==0,"original preview uses original actor depth mask");
-            buffer_delete(_hidden);sprite_delete(_g.mask);_g.mask=_mask;
+            buffer_delete(_hidden);
+            ln_edit_test_depth_fill(0);ln_edit_draw();_hidden=ln_edit_screen_buffer();
+            ln_check(ln_edit_canvas_difference(_visible,_hidden)==0,"ground override replaces fully closed native GPU mask");buffer_delete(_hidden);
+            ln_edit_free_cache();sprite_delete(_g.mask);_g.mask=_mask;
         } else {
             _original=json_stringify(_g.display.draw_x);ln_edit_draw();
             ln_check(json_stringify(_g.display.draw_x)==_original,"LN3 stationary preview does not drift");
@@ -658,8 +672,8 @@ function ln_edit_depth_accept(_text) {
     if(_text=="" || _e.part<0 || _e.part>=array_length(_e.scene.parts)) return false;
     if(string_digits(_text)!=_text || string_length(_text)>6) {_e.message="Depth must be a whole number, 0 to 144";return false;}
     _p=_e.scene.parts[_e.part];_value=clamp(real(_text),0,144);
-    if(_value==_p.depth) return false;
-    _before=json_stringify(_e.scene);_p.depth=_value;_e.show_depth=true;ln_edit_changed(_before);return true;
+    if(_value==_p.depth && _p.mode==1) return false;
+    _before=json_stringify(_e.scene);_p.mode=1;_p.depth_override=true;_p.depth=_value;_e.show_depth=true;ln_edit_changed(_before);return true;
 }
 function ln_edit_music(_host,_pause) {
     var _e=global.ln_editor,_voices=[],_i,_voice;
@@ -690,6 +704,9 @@ function ln_edit_control_checks(_host) {
     for(_i=0;_i<10;_i++) _slow+=ln_edit_depth_repeat(1,false,100000);
     for(_i=0;_i<10;_i++) _fast+=ln_edit_depth_repeat(1,false,100000);
     ln_check(_fast>_slow && ln_edit_depth_repeat(0,false,0)==0,"depth hold accelerates and stops on release");
+    _e.scene.parts[_count].mode=0;_e.scene.parts[_count].depth_override=false;
+    ln_edit_depth_accept(string(_e.scene.parts[_count].depth));
+    ln_check(_e.scene.parts[_count].mode==1 && _e.scene.parts[_count].depth_override,"entering unchanged inherited number activates override");
     ln_edit_depth_accept("123");ln_check(_e.scene.parts[_count].depth==123,"direct depth entry");
     ln_edit_depth_accept("999");ln_check(_e.scene.parts[_count].depth==144,"depth entry clamps at scene height");
     ln_edit_depth_accept("oops");ln_check(_e.scene.parts[_count].depth==144,"invalid depth entry leaves value intact");
@@ -814,4 +831,14 @@ function ln_edit_test_room_checks(_host) {
         ln_check(variable_global_exists("ln_music_voice") && global.ln_music_voice>=0 && (audio_is_playing(global.ln_music_voice) || audio_is_paused(global.ln_music_voice)),"Test room loads level music respecting mute");
     }
     show_debug_message("LN_EDITOR_TEST_ROOM_PASS: selected edited room and level music for all three games");
+}
+
+// Test-only uniform override isolates GPU precedence from source asset coverage.
+function ln_edit_test_depth_fill(_depth) {
+    var _c=global.ln_editor.cache,_b=buffer_create(240*144*4,buffer_fixed,1);
+    for(var _i=0;_i<240*144;_i++) {
+        _c.overrides[_i]=true;_c.depth[_i]=_depth;
+        buffer_poke(_b,_i*4,buffer_u32,$ffffff|(_depth<<24));
+    }
+    buffer_set_surface(_b,_c.depth_surface,0);buffer_delete(_b);
 }

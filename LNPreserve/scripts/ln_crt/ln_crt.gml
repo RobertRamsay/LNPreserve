@@ -444,7 +444,7 @@ function ln_tool_clear(_game=true) {
 }
 function ln_tool_rect(_host) {
     if(global.ln_editor.open) return [24,140,720,432];
-    if(_host.workbench || _host.scene_test.menu || _host.scene_test.preview) return [0,0,1280,800];
+    if(ln_tool_ui_visible() && (_host.workbench || _host.scene_test.menu || _host.scene_test.preview)) return [0,0,1280,800];
     var _region=ln_crt_game_region(_host);
     return is_array(_region)?[_region[0],_region[1],_region[2]-_region[0],_region[3]-_region[1]]:[0,0,1280,800];
 }
@@ -456,12 +456,13 @@ function ln_tool_present(_host) {
     shader_reset();gpu_set_blendmode(bm_normal);gpu_set_ztestenable(false);gpu_set_zwriteenable(false);
     draw_clear(c_black);draw_set_colour(c_white);draw_set_alpha(1);
     if(_t.background) draw_sprite_stretched(spr_LNHDbkg,0,0,0,1920,1080);
-    if(_t.ui) draw_surface(_t.surface,320,140);
+    if(ln_tool_ui_visible()) draw_surface(_t.surface,320,140);
     else {_rect=ln_tool_rect(_host);draw_surface_part(_t.surface,_rect[0],_rect[1],_rect[2],_rect[3],(1920-_rect[2])/2,(1080-_rect[3])/2);}
     draw_flush();
-    // Visibility buttons remain reachable when the other controls are hidden.
+    if(!ln_tool_ui_visible()) return;
+    // F6 always shows the editor; U controls gameplay UI only.
     draw_set_font(font_jansina);draw_set_halign(fa_left);draw_set_valign(fa_top);
-    ln_edit_button(320,96,160,"UI "+(_t.ui?"ON":"OFF")+" (U)",_t.ui);
+    ln_edit_button(320,96,160,global.ln_editor.open?"UI ON (editor)":"UI ON (U)",true);
     ln_edit_button(492,96,240,"Background "+(_t.background?"ON":"OFF")+" (B)",_t.background);draw_flush();
     ln_edit_button(1100,96,60,"1x");ln_edit_button(1168,96,60,"2x");ln_edit_button(1236,96,60,"Fit");
     ln_edit_button(1310,96,210,"Fullscreen (F9)",window_get_fullscreen());draw_flush();
@@ -469,25 +470,25 @@ function ln_tool_present(_host) {
 function ln_tool_step(_host) {
     var _t=global.ln_tool,_click=mouse_check_button_pressed(mb_left),_typing=global.ln_editor.open && global.ln_editor.depth_edit;
     if(!_t.active) return;
-    if(_click && mouse_y>=96 && mouse_y<124) {
+    if(ln_tool_ui_visible() && _click && mouse_y>=96 && mouse_y<124) {
         if(mouse_x>=1100 && mouse_x<1160) ln_window_preset(1);
         if(mouse_x>=1168 && mouse_x<1228) ln_window_preset(2);
         if(mouse_x>=1236 && mouse_x<1296) ln_window_preset(0);
         if(mouse_x>=1310 && mouse_x<1520) ln_fullscreen_toggle(_host);
     }
-    if(!_typing && (keyboard_check_pressed(ord("U")) || (_click && mouse_x>=320 && mouse_x<480 && mouse_y>=96 && mouse_y<124))) _t.ui=!_t.ui;
-    if(!_typing && (keyboard_check_pressed(ord("B")) || (_click && mouse_x>=492 && mouse_x<732 && mouse_y>=96 && mouse_y<124))) _t.background=!_t.background;
+    if(!_typing && !global.ln_editor.open && (keyboard_check_pressed(ord("U")) || (ln_tool_ui_visible() && _click && mouse_x>=320 && mouse_x<480 && mouse_y>=96 && mouse_y<124))) _t.ui=!_t.ui;
+    if(!_typing && (keyboard_check_pressed(ord("B")) || (ln_tool_ui_visible() && _click && mouse_x>=492 && mouse_x<732 && mouse_y>=96 && mouse_y<124))) _t.background=!_t.background;
     ln_crt_preferences_flush();
 }
 function ln_tool_mouse_x() {
     if(!global.ln_tool.active) return mouse_x;
-    if(global.ln_tool.ui) return mouse_x-320;
+    if(ln_tool_ui_visible()) return mouse_x-320;
     if(global.ln_editor.open && mouse_x>=600 && mouse_x<1320 && mouse_y>=324 && mouse_y<756) return mouse_x-576;
     return -10000;
 }
 function ln_tool_mouse_y() {
     if(!global.ln_tool.active) return mouse_y;
-    if(global.ln_tool.ui) return mouse_y-140;
+    if(ln_tool_ui_visible()) return mouse_y-140;
     if(global.ln_editor.open && mouse_x>=600 && mouse_x<1320 && mouse_y>=324 && mouse_y<756) return mouse_y-184;
     return -10000;
 }
@@ -496,3 +497,5 @@ function ln_tool_free() {
     if(_t.camera>=0) camera_destroy(_t.camera);
     if(_t.output_camera>=0) camera_destroy(_t.output_camera);
 }
+
+function ln_tool_ui_visible() {return global.ln_editor.open || global.ln_tool.ui;}

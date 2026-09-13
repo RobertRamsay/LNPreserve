@@ -31,19 +31,19 @@ function ln_character_pose(_bank, _frame, _type = "") {
 
 function ln_draw_masked_actor(_sprite, _frame, _x, _y, _xscale, _yscale,
                               _mask_sprite, _scene_x, _scene_y, _scene_width, _scene_height, _threshold = 0.5, _clip_bottom = 1000000, _red_dye = false, _magic_colour = -1) {
-    if(variable_global_exists("ln_editor") && global.ln_editor.context && is_struct(global.ln_editor.cache)) _mask_sprite=global.ln_editor.cache.mask;
     if (!shader_is_compiled(sh_ln_occlusion)) {
         draw_sprite_ext(_sprite, _frame, _x, _y, _xscale, _yscale, 0, c_white, 1);
         return;
     }
+    var _authored_threshold=_threshold;
     // An unmasked room must still display palette effects. Alpha cannot reach 2.
     if (_mask_sprite < 0) { _mask_sprite=_sprite; _threshold=2; }
     var _uv = sprite_get_uvs(_mask_sprite, 0);
     shader_set(sh_ln_occlusion);
     // Reset per draw so a dyed player cannot recolour enemies or other games.
-    var _editor=global.ln_editor,_extra=_editor.native_preview && is_struct(_editor.cache) && variable_struct_exists(_editor.cache,"depth_surface") && surface_exists(_editor.cache.depth_surface);
+    var _editor=global.ln_editor,_extra=(_editor.native_preview || _editor.context) && is_struct(_editor.cache) && variable_struct_exists(_editor.cache,"depth_surface") && surface_exists(_editor.cache.depth_surface);
     texture_set_stage(shader_get_sampler_index(sh_ln_occlusion,"u_editor_depth"),_extra?surface_get_texture(_editor.cache.depth_surface):sprite_get_texture(_mask_sprite,0));
-    shader_set_uniform_f(shader_get_uniform(sh_ln_occlusion,"u_editor_threshold"),_extra?(_editor.probe_y+29.5)/255:2);
+    shader_set_uniform_f(shader_get_uniform(sh_ln_occlusion,"u_editor_threshold"),_extra?_authored_threshold:2);
     shader_set_uniform_f(shader_get_uniform(sh_ln_occlusion, "u_red_dye"), real(_red_dye));
     shader_set_uniform_f(shader_get_uniform(sh_ln_occlusion,"u_magic_colour"),
         _magic_colour<0?-1:colour_get_red(_magic_colour)/255,

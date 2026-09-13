@@ -28,4 +28,4 @@ window checks pass. Visual tuning on the user's monitor is still subjective.
 
 In F6, Editor CRT / F10 independently toggles the scene preview (saved under the Editor INI section). F9 / Fullscreen now works throughout the project, restoring the previous window geometry when switched off.
 
-The 16:9 tool background and outer controls remain outside the CRT. U hides the outer controls, B toggles the artwork; their buttons and size controls remain accessible above the content.
+The 16:9 tool background and outer controls remain outside the CRT. U hides the outer controls, B toggles the artwork; all buttons disappear when UI is off; press U to restore them. F6 always shows the editor UI.
