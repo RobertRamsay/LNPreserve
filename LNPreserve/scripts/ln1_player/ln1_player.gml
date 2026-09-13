@@ -480,7 +480,7 @@ function ln1_jump_assist_target(_g) {
             _probe.x=_nx;_probe.y=_ny;
         }
         if (_i>=_platform_count && _i<_bank_end && (_probe.boundary_crossings&1)) _clear=false;
-        if (_clear) {_nearest=_distance;_best={x:_x,y:_y,area:_i,bank:_i>=_platform_count && _i<_bank_end,exit:_i>=_bank_end};}
+        if (_clear) {_nearest=_distance;_best={x:_x,y:_y,area:_i,bank:_i>=_platform_count && _i<_bank_end,is_exit:_i>=_bank_end};}
     }
     return _best;
 }
@@ -572,14 +572,14 @@ function ln1_jump_assist_checks() {
                 repeat(48) {
                     if (!is_struct(_n.jump_assist)) break;
                     ln1_player_update(_n,_real.data,16,(_n.tick+1)&255);
-                    if (_landing.exit) ln1_play_exit(_real);
+                    if (_landing.is_exit) ln1_play_exit(_real);
                     ln1_play_hazards(_real);
                     if (_real.room_id!=_room) break;
                 }
-                ln_check((_landing.exit?_real.room_id!=_room:(_n.x==_landing.x && _n.y==_landing.y)) && _real.player_health==32 && !_real.water_active,
+                ln_check((_landing.is_exit?_real.room_id!=_room:(_n.x==_landing.x && _n.y==_landing.y)) && _real.player_health==32 && !_real.water_active,
                     "assisted jump lands safely level="+string(_level)+" room="+string(_room)+" area="+string(_area)+" facing="+string(_face)+" target="+json_stringify(_landing)+" actual="+string(_n.x)+","+string(_n.y)+" crossing="+string(_n.boundary_crossings)+" health="+string(_real.player_health));
                 if (_landing.bank) _banks++;
-                if (_landing.exit) {
+                if (_landing.is_exit) {
                     ln_check(_real.room_id!=_room && !ln1_jump_active(_n) && _n.flags==0 && _n.stopped==255,"cross-scene jump arrives standing");
                     ln1_play_hazards(_real);
                     ln_check(!_real.water_active && _real.player_health==32,"cross-scene landing is safe at source entrance");
