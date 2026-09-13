@@ -7,7 +7,7 @@ CRT applies to the completed composition. Painting is presentation state only:
 it is excluded from rewind history and saved games. Room entry/respawn starts a
 new painting; other games release it. F11 pauses painting while the menu is open.
 
-F11 has a speed slider, 0.25x–4x, plus a reset to 1x. Speed is remembered in
+F11 has a speed slider, 0.1x–4x, plus a reset to 1x. Speed is remembered in
 LNPreserve.ini under [ScenePainting], key speed. Default: 1x.
 
 ## Timing qualification
@@ -31,3 +31,5 @@ cleanup, room re-entry and switching games. Test output: LN_PAINT_PASS.
 Regenerate using tools/export_ln1_painting.py --common <unpacked-64K-RAM>
 --levels <Integrator-LN1-PRG-folder>. Original captures and PRGs are private local
 references and are not included in the game project.
+
+The first displayed frame is the original room background colour. Painting is synchronised before room drawing and cannot advance until this blank frame is presented.

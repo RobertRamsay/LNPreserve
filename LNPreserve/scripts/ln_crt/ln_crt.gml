@@ -329,7 +329,7 @@ function ln_crt_preferences_read(_file="LNPreserve.ini") {
         variable_global_set(_fields[_i],_value);
     }
     var _speed=ini_read_real("ScenePainting","speed",1);
-    global.ln_paint_speed=(is_nan(_speed) || is_infinity(_speed))?1:clamp(_speed,0.25,4);
+    global.ln_paint_speed=(is_nan(_speed) || is_infinity(_speed))?1:clamp(_speed,0.1,4);
     ini_close();
 }
 function ln_crt_preferences_signature() {

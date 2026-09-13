@@ -6,18 +6,29 @@ function ln_paint_free() {
     if(surface_exists(_p.surface)) surface_free(_p.surface);
     _p.buffer=-1;_p.surface=-1;_p.active=false;
 }
-function ln_paint_tick(_g) {
+function ln_paint_sync(_g) {
     if(!global.ln_preferences_enabled || _g.game_number!=1) {ln_paint_free();return false;}
     var _p=global.ln_paint;
     var _key=string(_g.level)+"-"+string(_g.room_id)+":"+string(global.ln_rewind_epoch);
     if(_key!=_p.key) {
-        ln_paint_free();_p.key=_key;_p.time=0;_p.cursor=8;
+        ln_paint_free();_p.key=_key;_p.time=0;_p.cursor=8;_p.presented=false;
         var _file="play/ln1/painting/"+string(_g.level)+"-"+string(_g.room_id)+".bin";
         if(!file_exists(_file)) return false;
         _p.buffer=buffer_load(_file);_p.duration=buffer_peek(_p.buffer,0,buffer_u32)/985248;
+        if(!variable_global_exists("ln_paint_backgrounds")) {
+            var _bg_buffer=buffer_load("play/ln1/painting/backgrounds.json");
+            global.ln_paint_backgrounds=json_parse(buffer_read(_bg_buffer,buffer_text));buffer_delete(_bg_buffer);
+        }
+        _p.background=global.ln_paint_palette[global.ln_paint_backgrounds[_g.level-1][_g.room_id-1]];
         _p.active=true;
     }
-    if(!_p.active) return false;
+    return _p.active;
+}
+function ln_paint_tick(_g) {
+    if(!ln_paint_sync(_g)) return false;
+    var _p=global.ln_paint;
+    // At least one actual draw must show the plain background, even during catch-up ticks.
+    if(!_p.presented) return true;
     _p.time+=global.ln_paint_speed*_g.timer.cycles_per_frame/_g.timer.hz;
     if(_p.time>=_p.duration) {ln_paint_free();return false;}
     return true;
@@ -27,8 +38,9 @@ function ln_paint_prepare() {
     // Rebuild from recorded patches after GPU surface loss.
     if(!surface_exists(_p.surface)) {
         _p.surface=surface_create(240,144);_p.cursor=8;
-        surface_set_target(_p.surface);draw_clear(c_black);surface_reset_target();
+        surface_set_target(_p.surface);draw_clear(_p.background);surface_reset_target();
     }
+    if(!_p.presented) {_p.presented=true;return;}
     surface_set_target(_p.surface);
     var _view=matrix_get(matrix_view),_projection=matrix_get(matrix_projection);
     var _camera=camera_create_view(0,0,240,144);camera_apply(_camera);
@@ -53,14 +65,14 @@ function ln_paint_slider(_input=false) {
     if(_input) {
         if(mouse_check_button_pressed(mb_left) && mouse_x>=860 && mouse_x<=1130 && abs(mouse_y-587)<=12) global.ln_paint_drag=true;
         if(!mouse_check_button(mb_left)) global.ln_paint_drag=false;
-        if(global.ln_paint_drag) global.ln_paint_speed=round((0.25+3.75*clamp((mouse_x-870)/240,0,1))*20)/20;
+        if(global.ln_paint_drag) global.ln_paint_speed=round((0.1+3.9*clamp((mouse_x-870)/240,0,1))*20)/20;
         if(mouse_check_button_pressed(mb_left) && mouse_x>=860 && mouse_x<=1130 && mouse_y>=606 && mouse_y<=625) global.ln_paint_speed=1;
         return;
     }
     draw_set_colour(c_white);draw_text(862,548,"LN1 SCENE PAINTING");
     draw_text(862,566,"Speed "+string_format(global.ln_paint_speed,1,2)+"x");
     draw_set_colour(make_colour_rgb(75,85,96));draw_rectangle(870,585,1110,589,false);
-    draw_set_colour(make_colour_rgb(140,206,233));draw_circle(870+240*(global.ln_paint_speed-0.25)/3.75,587,5,false);
+    draw_set_colour(make_colour_rgb(140,206,233));draw_circle(870+240*(global.ln_paint_speed-0.1)/3.9,587,5,false);
     draw_set_colour(c_white);draw_text(862,608,"Reset to original baseline: 1x");
 }
 
@@ -68,7 +80,15 @@ function ln_paint_checks() {
     global.ln_preferences_enabled=true;global.ln_paint_speed=1;
     var _g={game_number:1,level:1,room_id:1,timer:new LNClock()};
     ln_check(ln_paint_tick(_g),"Painting starts on room entry");
-    var _p=global.ln_paint,_one=_p.time;
+    var _p=global.ln_paint;
+    repeat(8) ln_paint_tick(_g);
+    ln_check(_p.time==0 && !_p.presented,"Catch-up ticks cannot skip entry background");
+    ln_paint_prepare();
+    var _blank=buffer_create(240*144*4,buffer_fixed,1);buffer_get_surface(_blank,_p.surface,0);
+    for(var _pixel=0;_pixel<240*144;_pixel++) ln_check((buffer_peek(_blank,_pixel*4,buffer_u32)&$ffffff)==_p.background,"First frame is solid source background");
+    buffer_delete(_blank);
+    ln_check(_p.background==global.ln_paint_palette[13],"Wastelands starts light green");
+    ln_paint_tick(_g);var _one=_p.time;
     global.ln_paint_speed=2;ln_paint_tick(_g);
     ln_check(abs(_p.time-3*_one)<=0.00001,"Painting speed multiplier");
     var _expected=array_create(17280,0),_buffer=_p.buffer;

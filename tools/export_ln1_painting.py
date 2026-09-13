@@ -13,7 +13,7 @@ from py65.devices.mpu6502 import MPU
 import numpy as np
 from decode_graphics import PALETTE
 out=r/'LNPreserve/datafiles/play/ln1/painting';out.mkdir(exist_ok=True)
-report=[];files=[]
+report=[];files=[];backgrounds=[]
 ys,xs=np.indices((144,120));cells=ys//8*40+(xs*2)//8
 def pixels(mem):
  m=np.asarray(mem,dtype=np.uint8);code=(m[0xe000+cells*8+ys%8]>>(6-(xs%4)*2))&3
@@ -24,6 +24,7 @@ for level in range(1,7):
  raw=(args.levels/f'int-level{level}-tape.prg').read_bytes();base=int.from_bytes(raw[:2],'little');ram[base:base+len(raw)-2]=raw[2:]
  ram[0xa:0xe]=bytes([ram[0x800],ram[0x801],ram[0x800],(ram[0x801]+1)&255])
  world=json.loads((r/'LNPreserve/datafiles/play/ln1'/('world.json' if level==1 else f'level{level}/world.json')).read_text())
+ backgrounds.append([ram[0x80c+room*5]&15 for room in range(1,len(world['rooms'])+1)])
  for room in range(1,len(world['rooms'])+1):
   mem=list(ram);mem[0xa2]=room;call(mem,0x5452)
   # Clear the visible bitmap/attributes before reproducing the native construction.
@@ -51,6 +52,7 @@ for level in range(1,7):
   path=out/f'{level}-{room}.bin';path.write_bytes(struct.pack('<II',cpu.processorCycles,len(frames))+b''.join(frames));files.append(path)
   report.append(dict(level=level,room=room,cycles=cpu.processorCycles,seconds=round(cpu.processorCycles/985248,3),frames=len(frames),final_pixels_equal=True,bytes=path.stat().st_size))
  print('Exported level',level,flush=True)
+bg=out/'backgrounds.json';bg.write_text(json.dumps(backgrounds));files.append(bg)
 register_project({},files)
 (r/'evidence/ln1_painting.json').write_text(json.dumps(dict(timing='6502 instruction cycles / PAL 985248 Hz; VIC stalls and interrupts not verified',rooms=report),indent=2))
 print('ROOMS',len(report),'BYTES',sum(x['bytes'] for x in report),flush=True)

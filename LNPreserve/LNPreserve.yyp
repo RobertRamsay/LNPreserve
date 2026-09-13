@@ -49,6 +49,8 @@
   ],
   "ForcedPrefabProjectReferences":[],
   "IncludedFiles":[
+    {"$GMIncludedFile":"","%Name":"backgrounds.json","CopyToMask":-1,"filePath":"datafiles/play/ln1/painting","name":"backgrounds.json","resourceType":"GMIncludedFile","resourceVersion":"2.0"},
+
     {"$GMIncludedFile":"","%Name":"initial_control_state.json","CopyToMask":-1,"filePath":"datafiles/actors/ln1","name":"initial_control_state.json","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
     {"$GMIncludedFile":"","%Name":"ln1_actor_part_000.png","CopyToMask":-1,"filePath":"datafiles/actors/ln1","name":"ln1_actor_part_000.png","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
     {"$GMIncludedFile":"","%Name":"ln1_actor_part_001.png","CopyToMask":-1,"filePath":"datafiles/actors/ln1","name":"ln1_actor_part_001.png","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
