@@ -5091,6 +5091,7 @@
     {"id":{"name":"spr_ln3_scenery_animation","path":"sprites/spr_ln3_scenery_animation/spr_ln3_scenery_animation.yy",},},
     {"id":{"name":"spr_ln3_transition_parts","path":"sprites/spr_ln3_transition_parts/spr_ln3_transition_parts.yy",},},
     {"id":{"name":"spr_ln3_transition_text","path":"sprites/spr_ln3_transition_text/spr_ln3_transition_text.yy",},},
+    {"id":{"name":"spr_LNHDbkg","path":"sprites/spr_LNHDbkg/spr_LNHDbkg.yy",},},
   ],
   "resourceType":"GMProject",
   "resourceVersion":"2.0",

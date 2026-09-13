@@ -9,6 +9,22 @@ uniform float u_blur;
 uniform float u_honeycomb;
 uniform float u_scanlines;
 uniform vec3 u_scan_shape; // width, edge offset, soft profile
+uniform vec2 u_phosphor; // treatment (0 classic / 1 phosphor), spacing in native rows
+// Independent Gaussian RGB phosphor reconstruction, inspired by Cathode's
+// shadow-mask appearance (nimitz, Shadertoy 4lXcDH). No source code copied.
+vec3 phosphorLight(vec2 q) {
+    vec2 cell=floor(q);
+    vec3 light=vec3(0.0);
+    for(int y=-1;y<=1;y++) for(int x=-1;x<=1;x++) {
+        vec2 centre=cell+vec2(float(x),float(y))+0.5;
+        centre.x+=mod(centre.y-0.5,2.0)*0.5;
+        vec2 delta=q-centre;
+        vec3 dx=vec3(delta.x+0.24,delta.x,delta.x-0.24);
+        vec3 dy=vec3(delta.y-0.10,delta.y+0.10,delta.y-0.10);
+        light+=exp(-(dx*dx/0.115+dy*dy/0.065))*1.20;
+    }
+    return light;
+}
 const float PI=3.14159265359;
 void main() {
     if (v_vTexcoord.x<u_region.x || v_vTexcoord.y<u_region.y ||
@@ -64,7 +80,10 @@ void main() {
     float dotlight=1.0-smoothstep(0.65,1.5,length(dotpos));
     float channel=mod(floor(cx),3.0);
     vec3 mask=channel<0.5?vec3(1.0,0.78,0.78):(channel<1.5?vec3(0.78,1.0,0.78):vec3(0.78,0.78,1.0));
-    col*=mix(vec3(1.0),mix(vec3(0.84),mask*1.10,dotlight),u_honeycomb);
+    if(u_phosphor.x>0.5) {
+        vec2 q=pixel/max(1.0,u_phosphor.y*u_pixel_scale*u_scale);
+        col*=mix(vec3(1.0),phosphorLight(q),u_honeycomb);
+    } else col*=mix(vec3(1.0),mix(vec3(0.84),mask*1.10,dotlight),u_honeycomb);
     col*=1.025-0.035*dot(p,p);
     gl_FragColor=vec4(clamp(col,0.0,1.0),1.0)*v_vColour;
 }

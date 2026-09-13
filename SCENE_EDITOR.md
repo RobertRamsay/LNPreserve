@@ -12,7 +12,7 @@ The browser includes 293 existing room records across all 18 levels. An empty
 source panel opens as an empty canvas; this is not proof that every original
 runtime room has been faithfully reconstructed.
 
-Select a part in the list. Up/Down changes its draw order; Remove/Delete removes
+Alt-click a visible part on the canvas to select it and highlight its asset in the browser, or select a part in the list. Background pixels select nothing. Picking does not move a part. Up/Down changes its draw order; Remove/Delete removes
 it. Choose an asset from the thumbnail list and click Add selected asset.
 Left-drag the selected part, or use arrows (two bitmap pixels horizontally,
 one vertically). Shift makes larger steps. Right-drag positions the actual
@@ -33,7 +33,7 @@ front below it. Depth line displays the selected line in the preview.
 
 Imported parts initially use Ground. Original depth masks are not automatically
 decomposed into part masks. Assign depth to props in the editor and use the ninja
-preview to check them. The runtime uses the edited mask for LN1/LN2 actors and
+preview to check them. Original room depth is always enabled; it is a status label, not a toggle. The editor combines native masking with explicitly authored foreground depths. LN3 native masks are regenerated at the ninja preview position. Untouched rooms show the preserved bitmap; edited rooms show their rebuilt composition. The runtime uses the edited mask for LN1/LN2 actors and
 LN3 character fragments. This is manual authoring support, not an automatic
 scene-depth solver.
 
@@ -46,7 +46,7 @@ files leave the current pack intact. Up to 30 changes in the current room can
 be undone. Save before loading a different pack if you want to retain both.
 
 Edits are also backed up to `modified-scenes.autosave.json` in GameMaker's save
-directory (normally `%LOCALAPPDATA%/LNPreserve`). Recover loads that backup.
+directory (normally `%LOCALAPPDATA%/LNPreserve`). Recover loads that backup, replacing the current editor pack with the latest autosaved scenes. It does not undo Git changes or reset the original game. Use Save file first if you want to keep the current pack separately.
 The original source files and PNG assets are never rewritten.
 
 Use room enables the current room override. Modified ON applies saved overrides
@@ -56,7 +56,7 @@ another room for a gameplay test. Modified defaults OFF at application startup;
 load a custom pack and enable it to play it in a later session.
 
 Modified backgrounds are built from source assets and cached in a surface.
-The original PNG is still used by Reference and to isolate changed pixels in
+The original PNG is still used for untouched room previews and to isolate changed pixels in
 legacy full-room mechanism/animation frames. Those delta pixels are overlaid
 at their original positions; the original full-room frame cannot overwrite
 the custom background. Those mechanisms are not yet editable part-list items.
@@ -65,7 +65,8 @@ the custom background. Those mechanisms are not yet editable part-list items.
 
 - Source colour/attribute merging is diagnostic and can differ from the original
   C64 result. Nested-panel mirroring and unresolved source records are not yet
-  fully recovered. Reference shows the preserved room for comparison.
+  fully recovered. Native depth masks stay at their original coordinates; moving
+  a source prop does not relocate those inherited masks automatically.
 - This is a visual editor. Collision boundaries, routes, hazards, item positions,
   enemy placement and interactions retain their original coordinates. Moving a
   wall or floor visually does not move its gameplay boundary.
@@ -82,3 +83,36 @@ for the independent editor checks. It writes `evidence/scene_editor_checks.json`
 Run the existing `tools/run_checks.py --runner <Runner.exe>` for gameplay regressions.
 Automated room import coverage is separate from a full manual playthrough and
 does not establish pixel-for-pixel source parity or correct depth in every room.
+
+
+## Editor comfort controls
+
+- Original depth is always enabled. Edited scenes retain native masking and add authored prop depth; no depth-mode toggle is required.
+- Added assets are selected and scrolled into view at the bottom of the parts list.
+  New parts use an opaque-pixel overlay so native source priority cells cannot silently hide them;
+  transparent pixels remain transparent. Their depth starts at their base, and is editable.
+- Hold depth minus/plus to repeat; repetition accelerates after about a second.
+  Click the depth number to type a whole number, Enter to apply, Escape to cancel (0–144).
+- Music pauses on entering F6 and resumes on leaving; music already paused stays paused.
+- JANSINA UI font is now 14 points, with its cached glyph atlas rebuilt from the installed font.
+
+
+## Preview speed, CRT and fullscreen
+
+Dragging caches decoded asset pixels and redraws only the affected destination cells.
+The preview surface and camera are reused. Preview masks upload directly as textures;
+they do not create sprite readbacks. Each completed drag produces one undo entry,
+and autosave waits until the drag is finished.
+
+Editor CRT has a separate ON/OFF button and F10 shortcut. It shares CRT tuning with
+the game but saves its own state under `[Editor] crt_enabled` in LNPreserve.ini.
+Only the scene preview is filtered: selection outlines, depth guides and editor
+panels remain sharp. The gameplay CRT toggle is unchanged by entering or leaving.
+
+F9 or the Fullscreen button toggles borderless fullscreen in the game or editor.
+Toggling back restores the previous window size and position. Fullscreen now
+continues across scene, intro/outro and editor changes until explicitly toggled off.
+
+The drag regression compares full colour, visible-part ownership and depth arrays
+for 18 partial/full rebuilds across all three games. Its timing is a synthetic
+sample, not a guaranteed frame rate for every room or asset size.

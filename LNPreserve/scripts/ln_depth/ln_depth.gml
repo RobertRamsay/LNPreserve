@@ -41,6 +41,9 @@ function ln_draw_masked_actor(_sprite, _frame, _x, _y, _xscale, _yscale,
     var _uv = sprite_get_uvs(_mask_sprite, 0);
     shader_set(sh_ln_occlusion);
     // Reset per draw so a dyed player cannot recolour enemies or other games.
+    var _editor=global.ln_editor,_extra=_editor.native_preview && is_struct(_editor.cache) && variable_struct_exists(_editor.cache,"depth_surface") && surface_exists(_editor.cache.depth_surface);
+    texture_set_stage(shader_get_sampler_index(sh_ln_occlusion,"u_editor_depth"),_extra?surface_get_texture(_editor.cache.depth_surface):sprite_get_texture(_mask_sprite,0));
+    shader_set_uniform_f(shader_get_uniform(sh_ln_occlusion,"u_editor_threshold"),_extra?(_editor.probe_y+29.5)/255:2);
     shader_set_uniform_f(shader_get_uniform(sh_ln_occlusion, "u_red_dye"), real(_red_dye));
     shader_set_uniform_f(shader_get_uniform(sh_ln_occlusion,"u_magic_colour"),
         _magic_colour<0?-1:colour_get_red(_magic_colour)/255,

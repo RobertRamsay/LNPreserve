@@ -223,7 +223,7 @@ function ln_scene_test_draw(_t) {
             ln_scene_test_button(160,542,282,46,"OUTRO",false);
         }
         draw_set_colour(_level.playable ? make_colour_rgb(125,210,171) : make_colour_rgb(245,190,100));
-        draw_text(480,224,"Playable prototype — movement, objects and combat");
+        draw_text(480,224,"Playable prototype - movement, objects and combat");
         var _offset=1;
         for (var _i = -_offset; _i < array_length(_level.scenes); _i++) {
             var _slot=_i+_offset;
@@ -237,10 +237,10 @@ function ln_scene_test_draw(_t) {
         draw_text(480,700,"Collected items and enemy wounds persist; hazards stay active.");
     } else {
         var _scene = _level.scenes[_t.scene_index];
-        draw_text(160,48,"LAST NINJA " + string(_level.game) + " — " + _level.title + " — Scene " + string(_t.scene_index+1));
+        draw_text(160,48,"LAST NINJA " + string(_level.game) + " - " + _level.title + " - Scene " + string(_t.scene_index+1));
         draw_sprite_ext(_scene.sprite,0,280,164,3,3,0,c_white,1);
         draw_set_colour(make_colour_rgb(245,190,100));
-        draw_text(160,642,"SCENERY PREVIEW — movement, collision, objects and combat are not connected for this level.");
+        draw_text(160,642,"SCENERY PREVIEW - movement, collision, objects and combat are not connected for this level.");
         draw_set_colour(c_white); draw_text(160,680,"Page Up / Page Down: previous / next preview    F11: choose scene    Escape: return to gameplay");
         if (_t.message_us > 0) draw_text(160,730,_t.message);
     }

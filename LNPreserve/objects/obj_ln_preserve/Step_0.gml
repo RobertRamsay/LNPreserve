@@ -1,3 +1,9 @@
+if(fullscreen_test) {
+    fullscreen_frame++;
+    if(fullscreen_frame==1 || fullscreen_frame==4 || fullscreen_frame==7 || fullscreen_frame==10) ln_fullscreen_toggle(self);
+    if(fullscreen_frame==6) {global.ln_editor.open=true;ln_edit_select(1,1,1);}
+    exit;
+}
 if (save_ui_test) {
     save_ui_frame++;
     if (save_ui_frame mod 3==0) {

@@ -1124,7 +1124,7 @@ function ln2_loader_draw(_g) {
     var _sprite=asset_get_index("spr_ln2_loader_level"+string(_g.level)+"_location_00");
     draw_set_colour(c_black);draw_rectangle(160,84,1120,684,false);draw_set_colour(c_white);
     draw_sprite_ext(_sprite,0,280,168,3,3,0,c_white,1);
-    draw_text(160,36,"LAST NINJA 2 — "+string_upper(_g.title));
+    draw_text(160,36,"LAST NINJA 2 - "+string_upper(_g.title));
     draw_text(1000,36,"Scene 0");
     draw_text(160,700,"Press # or Xbox A to begin");
 }
@@ -1267,7 +1267,7 @@ function ln_frontend_draw(_g) {
         }
         if (sprite_exists(_bitmaps[_index])) draw_sprite_ext(_bitmaps[_index],0,160,84,3,3,0,c_white,1);
     }
-    draw_text(160,36,"LAST NINJA "+string(_g.game_number)+" — "+string_upper(_g.title));
+    draw_text(160,36,"LAST NINJA "+string(_g.game_number)+" - "+string_upper(_g.title));
     draw_text(1000,36,"Scene 0");draw_text(160,700,"Press # or Xbox A to begin");
 }
 

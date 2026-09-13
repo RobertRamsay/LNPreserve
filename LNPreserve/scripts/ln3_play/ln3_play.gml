@@ -277,7 +277,7 @@ function ln3_play_actor_part(_g,_d,_i) {
     for (var _y=0;_y<21;_y++) {
         var _start=-1;
         for (var _x=0;_x<=24;_x++) {
-            var _hidden=_x<24 && ((global.ln_editor.context ? ln_modified_hidden(_d.draw_x[_i]-24+_x*((_d.expand_x&(1<<_i))?2:1),_d.draw_y[_i]-50+_y*((_d.expand_y&(1<<_i))?2:1),_d.parts[_i<4?2:6].y) : (_mask[_y*3+(_x div 8)]&(128>>(_x&7)))==0) || (_i<4 && _d.draw_y[_i]+_y>=_d.waterline+21));
+            var _hidden=_x<24 && ((global.ln_editor.context ? ln_modified_hidden(_d.draw_x[_i]-24+_x*((_d.expand_x&(1<<_i))?2:1),_d.draw_y[_i]-50+_y*((_d.expand_y&(1<<_i))?2:1),_d.parts[_i<4?2:6].y) : ((_mask[_y*3+(_x div 8)]&(128>>(_x&7)))==0 || (global.ln_editor.native_preview && ln_modified_hidden(_d.draw_x[_i]-24+_x*((_d.expand_x&(1<<_i))?2:1),_d.draw_y[_i]-50+_y*((_d.expand_y&(1<<_i))?2:1),_d.parts[_i<4?2:6].y)))) || (_i<4 && _d.draw_y[_i]+_y>=_d.waterline+21));
             if (_hidden && _start<0) _start=_x;
             if (!_hidden && _start>=0) {draw_rectangle(_start,_y,_x,_y+1,false);_start=-1;}
         }
@@ -323,11 +323,11 @@ function ln3_play_draw(_g) {
     draw_surface_ext(_g.stage_surface,160,84,3,3,0,c_white,1);
     ln3_status_draw(_g);
     var _s=_g.state;
-    draw_text(160,36,"LAST NINJA 3 — "+string_upper(_g.title));draw_text(1000,36,"Scene "+string(_g.room_id+1));
+    draw_text(160,36,"LAST NINJA 3 - "+string_upper(_g.title));draw_text(1000,36,"Scene "+string(_g.room_id+1));
     draw_text(600,36,"F8 One-hit kills: "+(_g.one_hit_kills?"ON":"OFF"));
     draw_text(160,712,"WASD Move    # + direction Action    Space Weapon    F1 F3 F5 F7 Functions");
     draw_text(160,744,"Numpad 7/9/1/3 Direction    F11 Scenes    Home Restart    1/2/3 Games");
     if (_g.paused) draw_text(600,60,"PAUSED");
-    if (_g.game_over) draw_text(520,60,"GAME OVER — HOME TO RESTART");
+    if (_g.game_over) draw_text(520,60,"GAME OVER - HOME TO RESTART");
     if (_g.level_complete) draw_text(540,60,"END OF LAST NINJA 3");
 }

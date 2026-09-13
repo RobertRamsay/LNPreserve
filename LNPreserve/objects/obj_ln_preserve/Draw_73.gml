@@ -1,3 +1,4 @@
+draw_set_font(font_jansina);
 if(global.ln_editor.open || editor_test) exit;
 if (!presentation_test) {
     ln_crt_present(self);

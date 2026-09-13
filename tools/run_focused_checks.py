@@ -23,6 +23,7 @@ CASES={
  '--reverse-roll-test':['LN_REVERSE_ROLL_PASS'],
  '--crt-live-test':['LN_CRT_LIVE_PASS'],
  '--window-presets-test':['LN_WINDOW_PRESETS_PASS'],
+ '--fullscreen-test':['LN_FULLSCREEN_PASS'],
  '--xbox-test':['LN_XBOX_PASS'],
  '--save-ui-test':['LN_SAVE_UI_PASS'],
 }

@@ -1,7 +1,7 @@
 /// Presentation only: source surfaces and gameplay pixels remain untouched.
-function ln_crt_surface(_surface,_x,_y,_scale,_pixel_scale=1,_region=undefined) {
+function ln_crt_surface(_surface,_x,_y,_scale,_pixel_scale=1,_region=undefined,_enabled_override=undefined) {
     ln_crt_tuning_init();
-    var _enabled=variable_global_exists("ln_crt_enabled") && global.ln_crt_enabled && shader_is_compiled(sh_ln_crt);
+    var _enabled=(is_undefined(_enabled_override)?(variable_global_exists("ln_crt_enabled") && global.ln_crt_enabled):_enabled_override) && shader_is_compiled(sh_ln_crt);
     var _filter=gpu_get_texfilter();
     if (_enabled) {
         shader_set(sh_ln_crt);
@@ -17,6 +17,7 @@ function ln_crt_surface(_surface,_x,_y,_scale,_pixel_scale=1,_region=undefined) 
         shader_set_uniform_f(shader_get_uniform(sh_ln_crt,"u_honeycomb"),global.ln_crt_honeycomb);
         shader_set_uniform_f(shader_get_uniform(sh_ln_crt,"u_scanlines"),global.ln_crt_scanlines);
         shader_set_uniform_f(shader_get_uniform(sh_ln_crt,"u_scan_shape"),global.ln_scan_width,global.ln_scan_align,global.ln_scan_soft);
+        shader_set_uniform_f(shader_get_uniform(sh_ln_crt,"u_phosphor"),global.ln_crt_phosphor,global.ln_crt_pitch);
         gpu_set_texfilter(true);
     }
     draw_surface_ext(_surface,_x,_y,_scale,_scale,0,c_white,1);
@@ -58,6 +59,13 @@ function ln_crt_toggle() {
 function ln_crt_slider_input(_mx,_my,_pressed,_held,_tuning=true) {
     if (!_tuning && global.ln_crt_drag>=3) global.ln_crt_drag=-1;
     ln_crt_tuning_init();
+    if(_tuning && global.ln_crt_enabled && _pressed && _my>=756 && _my<787 && _mx>=172 && _mx<388) {
+        global.ln_crt_phosphor=_mx<280?1:0;global.ln_crt_drag=-1;return;
+    }
+    if(_tuning && global.ln_crt_enabled && _pressed && _mx>=480 && _mx<=770 && abs(_my-776)<=10) global.ln_crt_drag=5;
+    if(_tuning && global.ln_crt_enabled && _held && global.ln_crt_drag==5) {
+        global.ln_crt_pitch=0.5+1.5*clamp((_mx-490)/270,0,1);return;
+    }
     if (_tuning && global.ln_crt_enabled && _pressed && _my>=716 && _my<745) {
         for (var _preset=0;_preset<4;_preset++) if (_mx>=172+148*_preset && _mx<312+148*_preset) {
             global.ln_scan_preset=_preset;global.ln_scan_align=0.5;
@@ -94,7 +102,7 @@ function ln_crt_sliders_draw(_tuning=true) {
     if (_tuning) ln_crt_tuning_draw();
     draw_set_colour(make_colour_rgb(24,28,34));draw_rectangle(1128,650,1272,792,false);
     draw_set_colour(make_colour_rgb(150,190,215));draw_text(1136,656,"CRT SETTINGS");
-    var _labels=["Pixel blur","Honeycomb","Scanlines"];
+    var _labels=["Pixel blur",global.ln_crt_phosphor>0.5?"Phosphors":"Honeycomb","Scanlines"];
     var _values=[global.ln_crt_blur,global.ln_crt_honeycomb,global.ln_crt_scanlines];
     for (var _i=0;_i<3;_i++) {
         var _y=698+38*_i,_x=1140+118*_values[_i];
@@ -121,6 +129,7 @@ function ln_window_preset(_factor) {
 }
 
 function ln_window_buttons(_tips=true) {
+    ln_edit_button(1128,4,144,"Fullscreen F9",window_get_fullscreen());
     draw_set_colour(make_colour_rgb(24,28,34));draw_rectangle(1128,602,1272,648,false);
     draw_set_colour(make_colour_rgb(150,190,215));
     draw_text(1136,604,string(window_get_width())+"x"+string(window_get_height()));
@@ -227,6 +236,17 @@ function ln_crt_checks() {
         else ln_check(abs(_sum-_baseline)>10000,"each CRT slider changes rendered pixels");
     }
     global.ln_crt_blur=_saved[0];global.ln_crt_honeycomb=_saved[1];global.ln_crt_scanlines=_saved[2];
+    var _style_saved=global.ln_crt_phosphor,_pitch_saved=global.ln_crt_pitch,_strength=global.ln_crt_honeycomb,_hashes=[];
+    global.ln_crt_honeycomb=0.8;
+    for(var _variant=0;_variant<3;_variant++) {
+        global.ln_crt_phosphor=_variant==0?0:1;global.ln_crt_pitch=_variant==2?1.7:1;
+        surface_set_target(_output);ln_crt_surface(_source,0,0,3);surface_reset_target();
+        var _hash=0.0;
+        for(var _py=60;_py<210;_py+=3) for(var _px=60;_px<210;_px+=7) _hash+=surface_getpixel(_output,_px,_py);
+        array_push(_hashes,_hash);surface_save(_output,"crt-phosphor-sample-"+string(_variant)+".png");
+    }
+    ln_check(_hashes[0]!=_hashes[1] && _hashes[1]!=_hashes[2],"phosphor style and spacing independently affect GPU output");
+    global.ln_crt_phosphor=_style_saved;global.ln_crt_pitch=_pitch_saved;global.ln_crt_honeycomb=_strength;
     global.ln_crt_enabled=false;
     surface_free(_source);surface_free(_output);
     var _preview=new LN1Play();ln1_play_enter(_preview,5);
@@ -256,20 +276,28 @@ function ln_crt_checks() {
 
 // Temporary comparison controls live below the game picture, outside the shader.
 function ln_crt_tuning_init() {
+    if (!variable_global_exists("ln_crt_phosphor")) {global.ln_crt_phosphor=1;global.ln_crt_pitch=1;}
     if (variable_global_exists("ln_scan_width")) return;
     global.ln_scan_width=5;global.ln_scan_align=0.5;global.ln_scan_soft=1;global.ln_scan_preset=-1;
 }
 function ln_crt_tuning_draw() {
     ln_crt_tuning_init();
     draw_set_colour(make_colour_rgb(24,28,34));draw_rectangle(160,690,1120,794,false);
-    draw_set_colour(make_colour_rgb(150,190,215));draw_text(172,693,"SCANLINE SAMPLES");
+    draw_set_colour(make_colour_rgb(150,190,215));draw_text(172,693,"CRT / SCANLINE SAMPLES");
     var _names=["Previous","Pixel edge","Soft 5","Deep 5"];
     for(var _i=0;_i<4;_i++) {
         var _x=172+148*_i;
         draw_set_colour(global.ln_scan_preset==_i?make_colour_rgb(44,82,110):make_colour_rgb(42,48,57));
         draw_rectangle(_x,716,_x+140,744,false);draw_set_colour(c_white);draw_text(_x+8,721,_names[_i]);
     }
-    draw_set_colour(c_white);draw_text_transformed(172,766,"Try Soft 5. Adjust strength with the Scanlines slider.",0.85,0.85,0);
+    for(var _style=0;_style<2;_style++) {
+        draw_set_colour(global.ln_crt_phosphor==1-_style?make_colour_rgb(44,82,110):make_colour_rgb(42,48,57));
+        draw_rectangle(172+108*_style,756,276+108*_style,786,false);
+        draw_set_colour(c_white);draw_text(180+108*_style,761,_style==0?"Phosphor":"Classic");
+    }
+    draw_set_colour(c_white);draw_text_transformed(400,750,"Spacing "+string_format(global.ln_crt_pitch,1,2)+"x",0.85,0.85,0);
+    draw_set_colour(make_colour_rgb(65,73,84));draw_rectangle(490,774,760,778,false);
+    draw_set_colour(make_colour_rgb(180,215,236));draw_circle(490+270*(global.ln_crt_pitch-0.5)/1.5,776,5,false);
     for(var _i=0;_i<2;_i++) {
         var _y=732+44*_i,_value=_i==0?(global.ln_scan_width-1)/6:global.ln_scan_align;
         var _label=_i==0?"Width "+string_format(global.ln_scan_width,1,1)+" rows":"Alignment "+string(round(global.ln_scan_align*100))+"%";
@@ -292,50 +320,50 @@ function ln_cinematic_restore(_host) {
     _host.cinematic_window=undefined;
 }
 
-function ln_cinematic_step(_host) {
-    if (!variable_instance_exists(_host,"cinematic_window")) _host.cinematic_window=undefined;
-    var _movie=_host.play.game_number==3 && (is_struct(_host.play.intro) || is_struct(_host.play.ending));
-    if (!_movie) {ln_cinematic_restore(_host);return;}
-    if (keyboard_check_pressed(vk_f9)) {
-        if (is_struct(_host.cinematic_window)) ln_cinematic_restore(_host);
-        else if (!window_get_fullscreen()) {
-            _host.cinematic_window={x:window_get_x(),y:window_get_y(),width:window_get_width(),height:window_get_height(),cursor:window_get_cursor()};
-            window_enable_borderless_fullscreen(true);
-            window_set_fullscreen(true);
-        } else window_set_fullscreen(false);
-    }
-    if (is_struct(_host.cinematic_window))
-        window_set_cursor(_host.scene_test.menu || _host.workbench?_host.cinematic_window.cursor:cr_none);
+function ln_fullscreen_toggle(_host) {
+    if(!variable_instance_exists(_host,"cinematic_window")) _host.cinematic_window=undefined;
+    if(is_struct(_host.cinematic_window)) {ln_cinematic_restore(_host);return;}
+    if(window_get_fullscreen()) {window_set_fullscreen(false);return;}
+    _host.cinematic_window={x:window_get_x(),y:window_get_y(),width:window_get_width(),height:window_get_height(),cursor:window_get_cursor()};
+    window_enable_borderless_fullscreen(true);window_set_fullscreen(true);
 }
-
+function ln_cinematic_step(_host) {
+    if(!variable_instance_exists(_host,"cinematic_window")) _host.cinematic_window=undefined;
+    if(keyboard_check_pressed(vk_f9) || (ln_crt_controls_visible(_host) && mouse_check_button_pressed(mb_left) && mouse_x>=1128 && mouse_x<1272 && mouse_y>=4 && mouse_y<32)) ln_fullscreen_toggle(_host);
+    if(is_struct(_host.cinematic_window)) {
+        var _movie=_host.play.game_number==3 && (is_struct(_host.play.intro) || is_struct(_host.play.ending));
+        window_set_cursor(_movie && !_host.scene_test.menu && !_host.workbench?cr_none:_host.cinematic_window.cursor);
+    }
+}
 
 // User preferences are independent of gameplay saves and rewind snapshots.
 function ln_crt_preference_fields() {
     return ["ln_crt_enabled","ln_crt_blur","ln_crt_honeycomb","ln_crt_scanlines",
-        "ln_scan_width","ln_scan_align","ln_scan_soft","ln_scan_preset"];
+        "ln_scan_width","ln_scan_align","ln_scan_soft","ln_scan_preset","ln_crt_phosphor","ln_crt_pitch"];
 }
 function ln_crt_preferences_read(_file="LNPreserve.ini") {
     ln_crt_tuning_init();
     var _fields=ln_crt_preference_fields();
-    var _defaults=[0,0.15,0.35,0.20,5,0.5,1,-1];
-    var _low=[0,0,0,0,1,0,0,-1],_high=[1,1,1,1,7,1,1,3];
+    var _defaults=[0,0.15,0.35,0.20,5,0.5,1,-1,1,1];
+    var _low=[0,0,0,0,1,0,0,-1,0,0.5],_high=[1,1,1,1,7,1,1,3,1,2];
     ini_open(_file);
     for(var _i=0;_i<array_length(_fields);_i++) {
         var _value=ini_read_real("CRT",_fields[_i],_defaults[_i]);
         if(is_nan(_value) || is_infinity(_value)) _value=_defaults[_i];
         _value=clamp(_value,_low[_i],_high[_i]);
         if(_i==0) _value=(_value>=0.5);
-        if(_i==7) _value=round(_value);
+        if(_i==7 || _i==8) _value=round(_value);
         variable_global_set(_fields[_i],_value);
     }
     var _speed=ini_read_real("ScenePainting","speed",1);
     global.ln_paint_speed=(is_nan(_speed) || is_infinity(_speed))?1:clamp(_speed,0.1,4);
+    global.ln_editor.crt_enabled=ini_read_real("Editor","crt_enabled",0)>=0.5;
     ini_close();
 }
 function ln_crt_preferences_signature() {
     var _fields=ln_crt_preference_fields(),_values=[];
     for(var _i=0;_i<array_length(_fields);_i++) array_push(_values,variable_global_get(_fields[_i]));
-    array_push(_values,global.ln_paint_speed);
+    array_push(_values,global.ln_paint_speed);array_push(_values,global.ln_editor.crt_enabled);
     return json_stringify(_values);
 }
 function ln_crt_preferences_write(_file="LNPreserve.ini") {
@@ -343,6 +371,7 @@ function ln_crt_preferences_write(_file="LNPreserve.ini") {
     ini_open(_file);
     for(var _i=0;_i<array_length(_fields);_i++) ini_write_real("CRT",_fields[_i],real(variable_global_get(_fields[_i])));
     ini_write_real("ScenePainting","speed",global.ln_paint_speed);
+    ini_write_real("Editor","crt_enabled",real(global.ln_editor.crt_enabled));
     ini_close();
 }
 function ln_crt_preferences_flush(_force=false) {
@@ -358,17 +387,18 @@ function ln_crt_preferences_checks() {
     var _file="crt_preferences_test_"+string(get_timer())+".ini";
     ln_crt_preferences_read(_file);
     ln_check(!global.ln_crt_enabled && global.ln_crt_blur==0.15,"CRT missing INI uses defaults");
-    var _expected=[true,0.23,0.67,0.81,4.25,0.73,0.42,2];
-    for(var _i=0;_i<8;_i++) variable_global_set(_fields[_i],_expected[_i]);
+    var _expected=[true,0.23,0.67,0.81,4.25,0.73,0.42,2,1,1.37];
+    for(var _i=0;_i<array_length(_fields);_i++) variable_global_set(_fields[_i],_expected[_i]);
     ln_crt_preferences_write(_file);
-    for(var _i=0;_i<8;_i++) variable_global_set(_fields[_i],0);
+    for(var _i=0;_i<array_length(_fields);_i++) variable_global_set(_fields[_i],0);
     ln_crt_preferences_read(_file);
-    for(var _i=0;_i<8;_i++) ln_check(abs(real(variable_global_get(_fields[_i]))-real(_expected[_i]))<=0.00001,"CRT INI round trip "+_fields[_i]+" got="+string(variable_global_get(_fields[_i]))+" expected="+string(_expected[_i]));
+    for(var _i=0;_i<array_length(_fields);_i++) ln_check(abs(real(variable_global_get(_fields[_i]))-real(_expected[_i]))<=0.00001,"CRT INI round trip "+_fields[_i]+" got="+string(variable_global_get(_fields[_i]))+" expected="+string(_expected[_i]));
     global.ln_crt_enabled=false;ln_crt_preferences_write(_file);global.ln_crt_enabled=true;
     ln_crt_preferences_read(_file);ln_check(!global.ln_crt_enabled,"CRT off persists with tuning intact");
     ini_open(_file);ini_write_real("CRT","ln_scan_width",99);ini_write_real("CRT","ln_crt_blur",-2);ini_close();
     ln_crt_preferences_read(_file);ln_check(global.ln_scan_width==7 && global.ln_crt_blur==0,"CRT INI clamps invalid ranges");
     file_delete(_file);
-    for(var _i=0;_i<8;_i++) variable_global_set(_fields[_i],_saved[_i]);
+    for(var _i=0;_i<array_length(_fields);_i++) variable_global_set(_fields[_i],_saved[_i]);
+    global.ln_editor.crt_enabled=_saved[array_length(_fields)+1];
     show_debug_message("LN_CRT_PREFERENCES_PASS");
 }

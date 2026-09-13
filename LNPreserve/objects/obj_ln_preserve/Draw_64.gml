@@ -52,3 +52,11 @@ if (save_ui_test && save_ui_frame mod 3==2) {
         if (_case==3) {show_debug_message("LN_SAVE_UI_PASS: three game labels and empty slots, both sizes, CRT off/on; in-memory fixtures only.");game_end();}
     } catch (_failure) {show_debug_message("LN_SAVE_UI_FAILURE:"+string(_failure));game_end();}
 }
+
+if(fullscreen_test) {
+    try {
+        if(fullscreen_frame==3 || fullscreen_frame==9) ln_check(window_get_fullscreen(),"fullscreen available in game and editor");
+        if(fullscreen_frame==5 || fullscreen_frame==12) ln_check(!window_get_fullscreen() && window_get_width()==fullscreen_original[0] && window_get_height()==fullscreen_original[1],"fullscreen restores prior window dimensions");
+        if(fullscreen_frame==12) {show_debug_message("LN_FULLSCREEN_PASS: game/editor borderless toggle and window restoration");game_end();}
+    } catch(_fullscreen_failure) {show_debug_message("LN_FULLSCREEN_FAILURE: "+string(_fullscreen_failure));game_end();}
+}

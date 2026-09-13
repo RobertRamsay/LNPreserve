@@ -1,0 +1,50 @@
+{
+  "scene-editor-test": {
+    "status": "passed",
+    "markers": [
+      "LN_EDITOR_INTERACTION_PASS: visible-pixel selection, source mapping, selected-room original masks and stable movable ninja previews",
+      "LN_EDITOR_CONTROLS_PASS: add/select, depth repeat/entry, music pause/resume",
+      "LN_EDITOR_PASS: 293 room imports, 25695 parts; composition/depth, save/load validation, mode isolation and three game previews"
+    ],
+    "log": "build/updated-scene-editor-test.log"
+  },
+  "pickup-crt-test": {
+    "status": "passed",
+    "markers": [
+      "LN_PICKUP_PASS",
+      "LN_CRT_PREFERENCES_PASS",
+      "LN_CRT_PASS"
+    ],
+    "log": "build/updated-pickup-crt-test.log"
+  },
+  "crt-live-test": {
+    "status": "passed",
+    "markers": [
+      "LN_CRT_LIVE_PASS: final rendered screen OFF / ON / OFF"
+    ],
+    "log": "build/updated-crt-live-test.log"
+  },
+  "save-ui-test": {
+    "status": "passed",
+    "markers": [
+      "LN_SAVE_UI_CASE_PASS:0",
+      "LN_SAVE_UI_CASE_PASS:1",
+      "LN_SAVE_UI_CASE_PASS:2",
+      "LN_SAVE_UI_CASE_PASS:3",
+      "LN_SAVE_UI_PASS: three game labels and empty slots, both sizes, CRT off/on; in-memory fixtures only."
+    ],
+    "log": "build/updated-save-ui-test.log"
+  },
+  "window-presets-test": {
+    "status": "passed",
+    "markers": [
+      "LN_WINDOW_SIZE_PASS: 1280x800",
+      "Resizing window...LN_WINDOW_SIZE_PASS: 2560x1600",
+      "LN_WINDOW_SIZE_PASS: 2560x1600",
+      "LN_WINDOW_PRESETS_PASS"
+    ],
+    "log": "build/updated-window-presets-test.log"
+  },
+  "manual_playthrough": "not_run",
+  "reference_shader_pixel_parity": "not_claimed"
+}
