@@ -143,3 +143,7 @@ layout fixture exercises the actual centered compositor and visibility states.
 Imported parts inherit the exact native masking until their depth is edited. The original-depth status has been removed. Typing a depth (even the displayed value) or using + / - selects Depth automatically. The mode button cycles Inherited → Depth → Always front → Ground → Inherited. Ground explicitly clears native occlusion on the part's visible pixels; Depth replaces it with the chosen ground-contact line. Other pixels retain native masking. The displayed initial number is the part's base, not a claim that the original per-pixel mask is a single flat line.
 
 Overrides are saved with the custom scene and participate in Undo/Redo. The editor and Test room use the same replacement rule for all three games. Original masks outside visible overridden part pixels are retained; this is not a reconstruction of the original masks as independently movable objects.
+
+
+### Selected part pulse
+`pulseSelected?` (on by default) highlights the selected placed part once per second: original colour → white → original colour over 0.1 seconds total. The pulse follows its visible pixel shape, preserving transparent holes and parts drawn over it. It is editor-only, works with editor CRT, and does not change saved room artwork or depth. Click the toggle below the preview to disable it.
