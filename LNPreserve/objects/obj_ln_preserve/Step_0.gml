@@ -21,7 +21,7 @@ if (crt_live_test) {
 }
 if (presentation_test || rewind_test || painting_test) exit;
 ln_crt_preferences_flush();
-if(play.game_number!=1) ln_paint_free();
+if(!ln_paint_supported(play)) ln_paint_free();
 if(scene_test.menu) ln_paint_slider(true);
 if (!selftest && ln_rewind_step(self)) exit;
 if (!selftest && !workbench && !scene_test.preview) ln_crt_step(ln_crt_controls_visible(self),!scene_test.menu);
