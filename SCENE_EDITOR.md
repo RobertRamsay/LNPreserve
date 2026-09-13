@@ -167,3 +167,5 @@ Buttons use the supplied `spr_UI_button` artwork sliced into nine regions. Borde
 The selected asset preview is centred inside `spr_assetPanel` (204 × 204 logical pixels), with its aspect ratio preserved inside a padded 112 × 112 opening. The part controls occupy the neighbouring column.
 
 Tool startup plays `spr_sword` around its supplied handle origin with `sfx_sword`, then displays LAST NINJA REVISITED, PLAYER - EDITOR and the configured release version (currently 1.0.0.0). Click to Begin enters the tool and resumes its music. F9 remains available on the title screen.
+
+The startup title and Begin label use `font_jansina_big` at native size; other text uses the updated `font_jansina`. The sword handle is shifted 200 canvas pixels left. Its exponential velocity rises from 1× to 2× over the swing, with six historical poses behind it at descending opacity.

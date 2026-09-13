@@ -525,16 +525,27 @@ function ln_startup_draw(_host) {
     draw_set_colour(c_black);draw_set_alpha(0.56);draw_rectangle(0,0,1920,1080,false);draw_set_alpha(1);
     var _t=_host.startup_time;
     if(_t>=0.15 && _t<1.05) {
-        var _u=clamp((_t-0.15)/0.9,0,1),_ease=_u*_u*(3-2*_u);
-        draw_sprite_ext(spr_sword,0,1740,lerp(100,1190,_ease),1,1,lerp(-22,18,_ease),c_white,1);
+        // Integrating exponential velocity gives 1x at the start, 2x at
+        // the end, relative to the old 0.9-second traversal speed.
+        var _duration=0.9*ln(2),_elapsed=_t-0.15;
+        // Six historical poses, oldest/faintest first, behind the crisp sword.
+        for(var _trail=6;_trail>=0;_trail--) {
+            var _sample=_elapsed-_trail*0.014;
+            if(_sample<0 || _sample>_duration) continue;
+            var _progress=power(2,_sample/_duration)-1;
+            var _opacity=_trail==0?1:0.28*(7-_trail)/6;
+            draw_sprite_ext(spr_sword,0,1540,lerp(100,1190,_progress),1,1,
+                lerp(-22,18,_progress),c_white,_opacity);
+        }
     }
     if(_t>=1.05) {
         var _alpha=clamp((_t-1.05)/0.25,0,1);
         draw_set_font(font_jansina);draw_set_halign(fa_center);draw_set_valign(fa_middle);draw_set_colour(c_white);draw_set_alpha(_alpha);
-        draw_text_transformed(960,430,"LAST NINJA REVISITED",3,3,0);
-        draw_text_transformed(960,525,"PLAYER  -  EDITOR  -  V "+_host.startup_version,1.6,1.6,0);
+        draw_set_font(font_jansina_big);draw_text(960,430,"LAST NINJA REVISITED");
+        draw_set_font(font_jansina);draw_text(960,525,"PLAYER  -  EDITOR  -  V "+_host.startup_version);
         draw_set_alpha(1);ln_ui_button_background(750,640,420,64,true);
-        draw_set_colour(c_white);draw_text_transformed(960,672,"CLICK TO BEGIN",1.5,1.5,0);
+        draw_set_colour(c_white);draw_set_font(font_jansina_big);draw_text(960,672,"CLICK TO BEGIN");
+        draw_set_font(font_jansina);
         draw_set_halign(fa_left);draw_set_valign(fa_top);
     }
     draw_set_alpha(1);draw_set_colour(c_white);
