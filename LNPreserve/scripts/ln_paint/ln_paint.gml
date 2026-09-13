@@ -77,10 +77,10 @@ function ln_paint_prepare() {
 }
 function ln_paint_slider(_input=false) {
     if(_input) {
-        if(mouse_check_button_pressed(mb_left) && mouse_x>=860 && mouse_x<=1130 && abs(mouse_y-587)<=12) global.ln_paint_drag=true;
+        if(mouse_check_button_pressed(mb_left) && ln_tool_mouse_x()>=860 && ln_tool_mouse_x()<=1130 && abs(ln_tool_mouse_y()-587)<=12) global.ln_paint_drag=true;
         if(!mouse_check_button(mb_left)) global.ln_paint_drag=false;
-        if(global.ln_paint_drag) global.ln_paint_speed=round((0.1+3.9*clamp((mouse_x-870)/240,0,1))*20)/20;
-        if(mouse_check_button_pressed(mb_left) && mouse_x>=860 && mouse_x<=1130 && mouse_y>=606 && mouse_y<=625) global.ln_paint_speed=1;
+        if(global.ln_paint_drag) global.ln_paint_speed=round((0.1+3.9*clamp((ln_tool_mouse_x()-870)/240,0,1))*20)/20;
+        if(mouse_check_button_pressed(mb_left) && ln_tool_mouse_x()>=860 && ln_tool_mouse_x()<=1130 && ln_tool_mouse_y()>=606 && ln_tool_mouse_y()<=625) global.ln_paint_speed=1;
         return;
     }
     draw_set_colour(c_white);draw_text(862,548,"SCENE PAINTING");

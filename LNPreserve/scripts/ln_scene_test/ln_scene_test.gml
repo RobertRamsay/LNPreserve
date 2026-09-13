@@ -138,7 +138,7 @@ function ln_scene_test_step(_t, _g) {
     }
     if (_t.menu) {
         if (!mouse_check_button_pressed(mb_left)) return;
-        var _mx = mouse_x, _my = mouse_y;
+        var _mx = ln_tool_mouse_x(), _my = ln_tool_mouse_y();
         for (var _game = 1; _game <= 3; _game++) {
             if (point_in_rectangle(_mx,_my,160+(_game-1)*320,116,464+(_game-1)*320,160)) {
                 _t.game = _game;
@@ -205,7 +205,7 @@ function ln_scene_test_button(_x,_y,_w,_h,_label,_selected) {
 
 function ln_scene_test_draw(_t) {
     var _level = _t.levels[_t.level_index];
-    draw_clear(make_colour_rgb(20,23,28)); draw_set_colour(c_white);
+    ln_tool_clear(false); draw_set_colour(c_white);
     if (_t.menu) {
         draw_text(160,54,"SCENE TESTING");
         draw_text(160,82,"Choose a game, level and scene. Escape closes this menu.");

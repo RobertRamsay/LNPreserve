@@ -1,5 +1,5 @@
 draw_set_font(font_jansina);
-if(global.ln_editor.open || editor_test) exit;
+if(!(global.ln_editor.open || editor_test)) {
 if (!presentation_test) {
     ln_crt_present(self);
     if(scene_test.menu) {ln_paint_slider();draw_set_colour(c_white);draw_text(862,648,"F6 Scene editor");}
@@ -9,3 +9,6 @@ if (!presentation_test) {
         if (scene_test.menu) ln_crt_button();
     }
 }
+
+}
+ln_tool_present(self);

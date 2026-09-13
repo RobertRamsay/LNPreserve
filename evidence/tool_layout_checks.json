@@ -1,0 +1,68 @@
+{
+  "status": "passed",
+  "checks": {
+    "--tool-layout-test": {
+      "status": "passed",
+      "log": "build\\widescreen-tool-layout-test.log",
+      "markers": [
+        "LN_TOOL_LAYOUT_PASS: 1920x1080 game/editor UI and background visibility"
+      ]
+    },
+    "--scene-editor-test": {
+      "status": "passed",
+      "log": "build\\widescreen-scene-editor-test.log",
+      "markers": [
+        "LN_EDITOR_INTERACTION_PASS: visible-pixel selection, source mapping, selected-room original masks and stable movable ninja previews",
+        "LN_EDITOR_CONTROLS_PASS: add/select, depth repeat/entry, music pause/resume",
+        "LN_EDITOR_OPTIMIZATION_PASS: 18 partial/full comparisons; partial us=308212 full us=1854467; independent CRT and undo",
+        "LN_EDITOR_TEST_ROOM_PASS: selected edited room and level music for all three games",
+        "LN_EDITOR_PASS: 293 room imports, 25695 parts; composition/depth, save/load validation, mode isolation and three game previews"
+      ]
+    },
+    "--pickup-crt-test": {
+      "status": "passed",
+      "log": "build\\widescreen-pickup-crt-test.log",
+      "markers": [
+        "LN_PICKUP_PASS",
+        "LN_CRT_PREFERENCES_PASS",
+        "LN_CRT_PASS"
+      ]
+    },
+    "--crt-live-test": {
+      "status": "passed",
+      "log": "build\\widescreen-crt-live-test.log",
+      "markers": [
+        "LN_CRT_LIVE_PASS: final rendered screen OFF / ON / OFF"
+      ]
+    },
+    "--window-presets-test": {
+      "status": "passed",
+      "log": "build\\widescreen-window-presets-test.log",
+      "markers": [
+        "LN_WINDOW_SIZE_PASS: 1920x1080",
+        "Resizing fullscreen window...LN_WINDOW_SIZE_PASS: 3840x2160",
+        "Resizing window...LN_WINDOW_SIZE_PASS: 1920x1080",
+        "LN_WINDOW_PRESETS_PASS"
+      ]
+    },
+    "--fullscreen-test": {
+      "status": "passed",
+      "log": "build\\widescreen-fullscreen-test.log",
+      "markers": [
+        "Resizing fullscreen window...Resizing fullscreen window...LN_FULLSCREEN_PASS: game/editor borderless toggle and window restoration"
+      ]
+    },
+    "--save-ui-test": {
+      "status": "passed",
+      "log": "build\\widescreen-save-ui-test.log",
+      "markers": [
+        "LN_SAVE_UI_CASE_PASS:0",
+        "LN_SAVE_UI_CASE_PASS:1",
+        "Resizing fullscreen window...LN_SAVE_UI_CASE_PASS:2",
+        "LN_SAVE_UI_CASE_PASS:3",
+        "LN_SAVE_UI_PASS: three game labels and empty slots, both sizes, CRT off/on; in-memory fixtures only."
+      ]
+    }
+  },
+  "manual_playthrough": "not_run"
+}

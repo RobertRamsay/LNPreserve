@@ -1,3 +1,12 @@
+ln_tool_step(self);
+if(global.ln_tool.layout_test) {
+    global.ln_tool.frame++;
+    if(global.ln_tool.frame==3) global.ln_tool.ui=false;
+    if(global.ln_tool.frame==5) global.ln_tool.background=false;
+    if(global.ln_tool.frame==7) {global.ln_editor.open=true;ln_edit_select(1,1,1);global.ln_tool.ui=true;global.ln_tool.background=true;}
+    if(global.ln_tool.frame==9) global.ln_tool.ui=false;
+    exit;
+}
 if(fullscreen_test) {
     fullscreen_frame++;
     if(fullscreen_frame==1 || fullscreen_frame==4 || fullscreen_frame==7 || fullscreen_frame==10) ln_fullscreen_toggle(self);
@@ -8,7 +17,7 @@ if (save_ui_test) {
     save_ui_frame++;
     if (save_ui_frame mod 3==0) {
         var _case=save_ui_frame div 3;global.ln_crt_enabled=bool(_case&1);
-        var _factor=_case<2?1:2;window_set_size(1280*_factor,800*_factor);
+        var _factor=_case<2?1:2;ln_window_preset(_factor);
     }
     exit;
 }

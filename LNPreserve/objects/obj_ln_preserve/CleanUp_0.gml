@@ -11,3 +11,5 @@ ln_crt_preferences_flush(true);
 
 ln_paint_free();
 ln_edit_free_cache();ln_edit_free_preview();
+
+ln_tool_free();

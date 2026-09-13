@@ -279,8 +279,8 @@ function ln2_play_actor(_g,_a,_enemy) {
 
 function ln2_play_draw(_g) {
     global.ln_editor.context=false;
-    if (ln2_loader_active(_g)) {draw_clear(c_black);ln2_loader_draw(_g);return;}
-    draw_clear(c_black);draw_set_colour(c_white);
+    if (ln2_loader_active(_g)) {ln_tool_clear();ln2_loader_draw(_g);return;}
+    ln_tool_clear();draw_set_colour(c_white);
     if (_g.victory==2) {ln2_ending_draw(_g);return;}
     ln_paint_sync(_g);
     var _paint_view=matrix_get(matrix_view),_paint_projection=matrix_get(matrix_projection);

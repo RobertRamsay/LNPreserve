@@ -313,7 +313,7 @@ function ln1_play_draw(_game, _paused) {
     if (ln2_loader_active(_game)) {ln_frontend_draw(_game);return;}
     ln_paint_sync(_game);
     var _saved_view=matrix_get(matrix_view),_saved_projection=matrix_get(matrix_projection);
-    draw_clear(c_black);
+    ln_tool_clear();
     var _scale = 3, _x = 160, _y = 84, _s = _game.player;
     draw_set_colour(c_white);
     if (!surface_exists(_game.stage_surface)) _game.stage_surface = surface_create(240,144);

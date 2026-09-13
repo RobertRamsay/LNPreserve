@@ -1,6 +1,7 @@
 draw_set_font(font_jansina);
 editor_test=false;
 global.ln_editor=new LNSceneEditor();
+ln_tool_init();
 painting_test=false;
 rewind_test=false;
 ln3_presentation_test=false;
@@ -333,3 +334,5 @@ tick_native = function(_from, _to, _frame) {
 
 fullscreen_test=false;fullscreen_frame=0;fullscreen_original=[window_get_width(),window_get_height()];
 for(var _fullscreen_arg=1;_fullscreen_arg<=parameter_count();_fullscreen_arg++) if(parameter_string(_fullscreen_arg)=="--fullscreen-test") fullscreen_test=true;
+
+if(global.ln_tool.active) ln_window_preset(0);

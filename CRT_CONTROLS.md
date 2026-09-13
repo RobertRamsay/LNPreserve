@@ -23,7 +23,9 @@ it is not an exact reconstruction of the original shader's source-pixel accumula
 
 Validation: native GPU checks exercise Classic/Phosphor and spacing differences,
 all existing sliders, region exclusion, filled corners, toggle off restoration,
-texture preservation, and INI round trips. Live output and 1280×800 / 2560×1600
+texture preservation, and INI round trips. Live output and 1920×1080 / 3840×2160
 window checks pass. Visual tuning on the user's monitor is still subjective.
 
 In F6, Editor CRT / F10 independently toggles the scene preview (saved under the Editor INI section). F9 / Fullscreen now works throughout the project, restoring the previous window geometry when switched off.
+
+The 16:9 tool background and outer controls remain outside the CRT. U hides the outer controls, B toggles the artwork; their buttons and size controls remain accessible above the content.

@@ -298,7 +298,7 @@ function ln3_play_draw(_g) {
         }
         return;
     }
-    draw_clear(c_black);draw_set_colour(c_white);
+    ln_tool_clear();draw_set_colour(c_white);
     ln_paint_sync(_g);
     var _paint_view=matrix_get(matrix_view),_paint_projection=matrix_get(matrix_projection);
     if(global.ln_paint.active) ln_paint_prepare();

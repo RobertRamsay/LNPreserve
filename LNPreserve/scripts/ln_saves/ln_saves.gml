@@ -183,9 +183,9 @@ function ln_saves_step(_host) {
     if (keyboard_check(vk_control) && keyboard_check_pressed(ord("S"))) {
         ln_save_add(_ui,_host.play);return true;
     }
-    if (!mouse_check_button_pressed(mb_left) || mouse_x<1128 || mouse_x>=1272) return false;
-    var _slot=floor((mouse_y-116)/46);
-    if (mouse_y<116 || _slot<0 || _slot>=array_length(_ui.slots)) return false;
+    if (!mouse_check_button_pressed(mb_left) || ln_tool_mouse_x()<1128 || ln_tool_mouse_x()>=1272) return false;
+    var _slot=floor((ln_tool_mouse_y()-116)/46);
+    if (ln_tool_mouse_y()<116 || _slot<0 || _slot>=array_length(_ui.slots)) return false;
     try {
         var _fresh=ln_save_restore(ln_save_read(_ui.slots[_slot].path)),_old=_host.play;
         for (var _i=0;_i<3;_i++) {
@@ -219,7 +219,7 @@ function ln_saves_draw(_ui) {
     draw_set_colour(c_white);draw_text(1136,92,"SAVES  Ctrl+S");
     for (var _i=0;_i<10;_i++) {
         var _y=116+46*_i,_filled=_i<array_length(_ui.slots);
-        var _hover=mouse_x>=1128 && mouse_x<1272 && mouse_y>=_y && mouse_y<_y+46;
+        var _hover=ln_tool_mouse_x()>=1128 && ln_tool_mouse_x()<1272 && ln_tool_mouse_y()>=_y && ln_tool_mouse_y()<_y+46;
         draw_set_colour(_hover && _filled?make_colour_rgb(53,74,82):make_colour_rgb(32,37,44));
         draw_rectangle(1132,_y,1268,_y+42,false);
         draw_set_colour(_filled?c_white:make_colour_rgb(130,138,146));

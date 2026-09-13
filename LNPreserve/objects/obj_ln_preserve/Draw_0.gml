@@ -159,7 +159,7 @@ if (!workbench) {
     if (selftest && host_frames == 6) screen_save("lnpreserve-encounter.png");
     exit;
 }
-draw_clear(make_colour_rgb(20,23,28));
+ln_tool_clear(false);
 draw_set_colour(make_colour_rgb(125,210,171));
 draw_text(32,24,"LN PRESERVE");
 draw_set_colour(c_white);

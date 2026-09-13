@@ -49,10 +49,7 @@ Edits are also backed up to `modified-scenes.autosave.json` in GameMaker's save
 directory (normally `%LOCALAPPDATA%/LNPreserve`). Recover loads that backup, replacing the current editor pack with the latest autosaved scenes. It does not undo Git changes or reset the original game. Use Save file first if you want to keep the current pack separately.
 The original source files and PNG assets are never rewritten.
 
-Use room enables the current room override. Modified ON applies saved overrides
-when playing those matching rooms; other rooms use their original rendering.
-Selecting a room in the editor does not teleport the live game. Use F11 to enter
-another room for a gameplay test. Modified defaults OFF at application startup;
+Test room enables the current edited room and starts it through normal F11 scene selection, closes the editor, and plays its level music (respecting mute). F6 returns to the retained edits. Rooms without a playable spawn remain in the editor with an explanation. Modified ON applies saved overrides when playing matching rooms; other rooms keep their original rendering. Merely browsing rooms in the editor does not teleport the live game. Modified defaults OFF at application startup;
 load a custom pack and enable it to play it in a later session.
 
 Modified backgrounds are built from source assets and cached in a surface.
@@ -116,3 +113,26 @@ continues across scene, intro/outro and editor changes until explicitly toggled 
 The drag regression compares full colour, visible-part ownership and depth arrays
 for 18 partial/full rebuilds across all three games. Its timing is a synthetic
 sample, not a guaranteed frame rate for every room or asset size.
+
+
+## Widescreen tool and history
+
+The project presents a 1920 × 1080 canvas using `spr_LNHDbkg` as the optional
+background. The preserved tool content is centered without stretching its pixels.
+1x is 1920 × 1080; 2x is 3840 × 2160. An exact-display preset uses borderless
+fullscreen to avoid clipping by Windows borders. Fit chooses the largest whole
+scale that fits, or reduces below 1x on a smaller desktop. F9 still toggles fullscreen.
+
+U / UI toggles outer controls; the game retains its built-in HUD, and the editor
+shows its centered scene preview. B / Background toggles the supplied artwork.
+A compact visibility/size toolbar remains accessible. Both visibility preferences
+persist in the Tool section of LNPreserve.ini. Depth-number entry ignores U/B.
+
+Ctrl+Z undoes and Ctrl+Y redoes in the editor; Undo and Redo buttons are also present.
+Each drag is one action. A new edit discards the redo branch. History stays local
+to the current room and is not stored in the custom scene pack.
+
+`tools/check_tool_layout.py --runner <Runner.exe>` checks the widescreen presentation,
+editor histories and Test room in all three games, CRT, presets, fullscreen and
+save panel. Component fixtures keep legacy source coordinates; the dedicated
+layout fixture exercises the actual centered compositor and visibility states.

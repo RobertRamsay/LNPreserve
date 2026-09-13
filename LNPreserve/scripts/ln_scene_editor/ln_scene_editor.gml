@@ -2,7 +2,7 @@
 function LNSceneEditor() constructor {
     open=false;enabled=false;scenes={};datasets={};scene=undefined;preview=undefined;
     game=1;level=1;room_id=1;part=-1;asset=0;scroll=0;asset_scroll=0;
-    dirty=false;message="F6 closes the editor";undo=[];revision=0;cache=undefined;context=false;
+    dirty=false;message="F6 closes the editor";undo=[];redo=[];revision=0;cache=undefined;context=false;
     probe_x=120;probe_y=100;show_ninja=true;show_depth=false;reference=false;build=-1;
     depth_edit=false;depth_hold_dir=0;depth_hold_age=0;depth_hold_next=350000;paused_voices=[];
     pending_pick=undefined;source_scene=undefined;decoded={};drag_before=undefined;dirty_rect=undefined;
@@ -80,7 +80,7 @@ function ln_edit_select(_game,_level,_room) {
     _e.game=_game;_e.level=_level;_e.room_id=_room;_e.source_scene=_source;_e.pending_pick=undefined;
      _key=ln_edit_key(_game,_level,_room);
     _e.scene=variable_struct_exists(_e.scenes,_key)?json_parse(json_stringify(variable_struct_get(_e.scenes,_key))):_source;
-    _e.part=-1;_e.scroll=0;_e.asset=0;_e.asset_scroll=0;_e.undo=[];_e.build=-1;_e.reference=!variable_struct_exists(_e.scenes,_key);_e.depth_edit=false;_e.depth_hold_dir=0;
+    _e.part=-1;_e.scroll=0;_e.asset=0;_e.asset_scroll=0;_e.undo=[];_e.redo=[];_e.build=-1;_e.reference=!variable_struct_exists(_e.scenes,_key);_e.depth_edit=false;_e.depth_hold_dir=0;
     ln_edit_free_cache();ln_edit_free_preview();
     // Preview constructors must not reset the running game's rewind epoch.
      _epoch=global.ln_rewind_epoch;
@@ -99,7 +99,7 @@ function ln_edit_changed(_before) {
         if(!is_string(_e.drag_before)) _e.drag_before=_before;
         _e.revision++;_e.dirty=true;_e.build=-1;_e.reference=false;return;
     }
-    array_push(_e.undo,_before);if(array_length(_e.undo)>30) array_delete(_e.undo,0,1);
+    _e.redo=[];array_push(_e.undo,_before);if(array_length(_e.undo)>30) array_delete(_e.undo,0,1);
     variable_struct_set(_e.scenes,ln_edit_key(_e.game,_e.level,_e.room_id),json_parse(json_stringify(_e.scene)));
     _e.revision++;_e.dirty=true;_e.autosave_us=1000000;_e.build=-1;_e.reference=false;ln_edit_free_cache();
 }
@@ -232,7 +232,7 @@ function ln_modified_hidden(_x,_y,_foot) {
     _x=floor(_x);_y=floor(_y);if(_x<0 || _x>=240 || _y<0 || _y>=144) return false;
     return _e.cache.depth[_y*240+_x]>_foot;
 }
-function ln_edit_hit(_x,_y,_w,_h) {return mouse_check_button_pressed(mb_left) && mouse_x>=_x && mouse_x<_x+_w && mouse_y>=_y && mouse_y<_y+_h;}
+function ln_edit_hit(_x,_y,_w,_h) {return mouse_check_button_pressed(mb_left) && ln_tool_mouse_x()>=_x && ln_tool_mouse_x()<_x+_w && ln_tool_mouse_y()>=_y && ln_tool_mouse_y()<_y+_h;}
 function ln_edit_button(_x,_y,_w,_label,_on=false) {
     draw_set_colour(_on?make_colour_rgb(45,95,110):make_colour_rgb(43,48,57));draw_rectangle(_x,_y,_x+_w,_y+28,false);
     draw_set_colour(c_white);draw_text(_x+6,_y+5,_label);
@@ -264,26 +264,24 @@ function ln_edit_step(_host) {
     if(ln_edit_hit(216,18,112,28)) { _file=get_save_filename("JSON files|*.json","modified-scenes.json");if(ln_edit_save(_file)) _e.dirty=false;}
     if(ln_edit_hit(340,18,112,28)) { _file=get_open_filename("JSON files|*.json","");if(ln_edit_load(_file)) ln_edit_select(_e.game,_e.level,_e.room_id);}
     if(ln_edit_hit(752,18,132,28)) {if(ln_edit_load("modified-scenes.autosave.json")) ln_edit_select(_e.game,_e.level,_e.room_id);}
-    if(ln_edit_hit(464,18,112,28) && array_length(_e.undo)>0) {
-        _e.scene=json_parse(array_pop(_e.undo));variable_struct_set(_e.scenes,ln_edit_key(_e.game,_e.level,_e.room_id),json_parse(json_stringify(_e.scene)));_e.revision++;_e.dirty=true;ln_edit_free_cache();_e.autosave_us=1000000;return true;
-    }
+    if(ln_edit_hit(464,18,112,28) || (keyboard_check(vk_control) && keyboard_check_pressed(ord("Z")))) {ln_edit_history(false);return true;}
+    if(ln_edit_hit(850,62,112,28) || (keyboard_check(vk_control) && keyboard_check_pressed(ord("Y")))) {ln_edit_history(true);return true;}
     if(ln_edit_hit(588,18,152,28)) {_e.reference=false;_e.build=0;_e.build_presented=false;ln_edit_free_cache();}
     if(_e.build>=0 && _e.build_presented) {_e.build+=delta_time/80000*global.ln_paint_speed;if(_e.build>=array_length(_s.parts)) _e.build=-1;}
     for( _i=0;_i<3;_i++) if(ln_edit_hit(24+_i*110,62,102,28)) { _g=_i+1;ln_edit_select(_g,1,ln_edit_rooms(_g,1)[0]);return true;}
     if(ln_edit_hit(900,18,30,28)) global.ln_paint_speed=max(0.1,round((global.ln_paint_speed-0.1)*10)/10);
     if(ln_edit_hit(1060,18,30,28)) global.ln_paint_speed=min(4,round((global.ln_paint_speed+0.1)*10)/10);
      _max=_e.game==1?6:(_e.game==2?7:5);
-    if(ln_edit_hit(370,62,30,28) || ln_edit_hit(570,62,30,28)) { _level=clamp(_e.level+(mouse_x<400?-1:1),1,_max); _d=ln_edit_data(_e.game,_level);ln_edit_select(_e.game,_level,ln_edit_rooms(_e.game,_level)[0]);return true;}
+    if(ln_edit_hit(370,62,30,28) || ln_edit_hit(570,62,30,28)) { _level=clamp(_e.level+(ln_tool_mouse_x()<400?-1:1),1,_max); _d=ln_edit_data(_e.game,_level);ln_edit_select(_e.game,_level,ln_edit_rooms(_e.game,_level)[0]);return true;}
      _d=ln_edit_data(_e.game,_e.level); _ids=ln_edit_rooms(_e.game,_e.level);
-    if(ln_edit_hit(620,62,30,28) || ln_edit_hit(810,62,30,28)) { _index=0;while(_index<array_length(_ids)-1 && _ids[_index]!=_e.room_id) _index++;_index=clamp(_index+(mouse_x<650?-1:1),0,array_length(_ids)-1);ln_edit_select(_e.game,_e.level,_ids[_index]);return true;}
+    if(ln_edit_hit(620,62,30,28) || ln_edit_hit(810,62,30,28)) { _index=0;while(_index<array_length(_ids)-1 && _ids[_index]!=_e.room_id) _index++;_index=clamp(_index+(ln_tool_mouse_x()<650?-1:1),0,array_length(_ids)-1);ln_edit_select(_e.game,_e.level,_ids[_index]);return true;}
     if(ln_edit_hit(24,594,140,28)) _e.show_ninja=!_e.show_ninja;
     if(ln_edit_hit(176,594,140,28)) _e.show_depth=!_e.show_depth;
-    if(ln_edit_hit(490,594,140,28)) {
-        variable_struct_set(_e.scenes,ln_edit_key(_e.game,_e.level,_e.room_id),json_parse(json_stringify(_s)));_e.enabled=true;_e.dirty=true;_e.revision++;ln_edit_free_cache();_e.autosave_us=1000000;_e.message="Room enabled in Modified mode. F6 returns to play.";
-    }
+    if(ln_edit_hit(490,594,140,28)) {ln_edit_test_room(_host);return true;}
+
      _assets=variable_struct_get_names(_d.objects);array_sort(_assets,function(a,b){return real(a)-real(b);});
-    if(mouse_wheel_up()) {if(mouse_x<990) _e.scroll=max(0,_e.scroll-3);else _e.asset_scroll=max(0,_e.asset_scroll-3);}
-    if(mouse_wheel_down()) {if(mouse_x<990) _e.scroll=min(max(0,array_length(_s.parts)-18),_e.scroll+3);else _e.asset_scroll=min(max(0,array_length(_assets)-18),_e.asset_scroll+3);}
+    if(mouse_wheel_up()) {if(ln_tool_mouse_x()<990) _e.scroll=max(0,_e.scroll-3);else _e.asset_scroll=max(0,_e.asset_scroll-3);}
+    if(mouse_wheel_down()) {if(ln_tool_mouse_x()<990) _e.scroll=min(max(0,array_length(_s.parts)-18),_e.scroll+3);else _e.asset_scroll=min(max(0,array_length(_assets)-18),_e.asset_scroll+3);}
     for( _i=0;_i<18;_i++) {
         if(ln_edit_hit(760,140+_i*22,225,22) && _e.scroll+_i<array_length(_s.parts)) _e.part=_e.scroll+_i;
         if(ln_edit_hit(1000,140+_i*22,250,22) && _e.asset_scroll+_i<array_length(_assets)) _e.asset=_e.asset_scroll+_i;
@@ -314,16 +312,16 @@ function ln_edit_step(_host) {
         }
     }
     // Right-drag moves the ninja; left-drag moves the selected scenery part.
-    if(mouse_x>=24 && mouse_x<744 && mouse_y>=140 && mouse_y<572) {
-        if(mouse_check_button(mb_right)) {_e.probe_x=clamp((mouse_x-24)/3,0,239);_e.probe_y=clamp((mouse_y-140)/3,0,143);}
+    if(ln_tool_mouse_x()>=24 && ln_tool_mouse_x()<744 && ln_tool_mouse_y()>=140 && ln_tool_mouse_y()<572) {
+        if(mouse_check_button(mb_right)) {_e.probe_x=clamp((ln_tool_mouse_x()-24)/3,0,239);_e.probe_y=clamp((ln_tool_mouse_y()-140)/3,0,143);}
         if(mouse_check_button_pressed(mb_left) && keyboard_check(vk_alt)) {
-            _e.pending_pick=[floor((mouse_x-24)/3),floor((mouse_y-140)/3)];_e.drag=false;return true;
+            _e.pending_pick=[floor((ln_tool_mouse_x()-24)/3),floor((ln_tool_mouse_y()-140)/3)];_e.drag=false;return true;
         }
-        if(mouse_check_button_pressed(mb_left)) {_e.drag=true;_e.last_mouse_x=mouse_x;_e.last_mouse_y=mouse_y;}
+        if(mouse_check_button_pressed(mb_left)) {_e.drag=true;_e.last_mouse_x=ln_tool_mouse_x();_e.last_mouse_y=ln_tool_mouse_y();}
     }
     if(!mouse_check_button(mb_left)) _e.drag=false;
     if(_e.drag && _e.part>=0 && _e.part<array_length(_s.parts)) {
-         _dx=round((mouse_x-_e.last_mouse_x)/6)*2; _dy=round((mouse_y-_e.last_mouse_y)/3);
+         _dx=round((ln_tool_mouse_x()-_e.last_mouse_x)/6)*2; _dy=round((ln_tool_mouse_y()-_e.last_mouse_y)/3);
         if(_dx!=0 || _dy!=0) {ln_edit_move_bounds(_s.parts[_e.part],_dx,_dy);_s.parts[_e.part].x=clamp(_s.parts[_e.part].x+_dx,-512,512);_s.parts[_e.part].y=clamp(_s.parts[_e.part].y+_dy,-512,512);_e.last_mouse_x+=_dx*3;_e.last_mouse_y+=_dy*3;_changed=true;}
     }
     if(_changed) ln_edit_changed(_before);
@@ -333,7 +331,7 @@ function ln_edit_draw() {
     var _e,_s,_view,_projection,_cache,_surface,_camera,_g,_d,_dx,_dy,_i,_sprite,_r,_record,_p,_o,_assets,_j,_a;
      _e=global.ln_editor; _s=_e.scene;if(!is_struct(_s)) return;
     draw_set_font(font_jansina);draw_set_halign(fa_left);draw_set_valign(fa_top);
-    draw_clear(make_colour_rgb(20,23,28));draw_set_colour(c_white);
+    ln_tool_clear(false);draw_set_colour(c_white);
     if(_e.build>=0) _e.build_presented=true;
      _view=matrix_get(matrix_view); _projection=matrix_get(matrix_projection);
      _cache=ln_edit_build(_e.reference?_e.source_scene:_s,_e.build<0?-1:floor(_e.build),_e.reference?"source":"preview");
@@ -363,15 +361,15 @@ function ln_edit_draw() {
         ln_edit_button(760,630,115,"Flip X",_p.flip);ln_edit_button(888,630,180,["Ground","Depth","Always front"][_p.mode]);
         ln_edit_button(1080,630,35,"-");ln_edit_button(1122,630,35,"+");ln_edit_button(1162,630,84,_e.depth_edit?(keyboard_string+"|"):string(_p.depth),_e.depth_edit);
     }
-    ln_edit_button(24,18,180,"Modified: "+(_e.enabled?"ON":"OFF"),_e.enabled);ln_edit_button(216,18,112,"Save file");ln_edit_button(340,18,112,"Load file");ln_edit_button(464,18,112,"Undo");ln_edit_button(588,18,152,"Build preview");
-    ln_edit_button(752,18,132,"Recover");
+    ln_edit_button(24,18,180,"Modified: "+(_e.enabled?"ON":"OFF"),_e.enabled);ln_edit_button(216,18,112,"Save file");ln_edit_button(340,18,112,"Load file");ln_edit_button(464,18,112,"Undo (^Z)");ln_edit_button(588,18,152,"Build preview");
+    ln_edit_button(752,18,132,"Recover");ln_edit_button(850,62,112,"Redo (^Y)");
     ln_edit_button(1110,18,160,"Editor CRT "+(_e.crt_enabled?"ON":"OFF")+" F10",_e.crt_enabled);
     ln_edit_button(1110,62,160,"Fullscreen F9",window_get_fullscreen());
     ln_edit_button(900,18,30,"-");draw_set_colour(c_white);draw_text(938,24,string_format(global.ln_paint_speed,1,1)+"x build");ln_edit_button(1060,18,30,"+");
     for( _i=0;_i<3;_i++) ln_edit_button(24+_i*110,62,102,"Ninja "+string(_i+1),_e.game==_i+1);
     ln_edit_button(370,62,30,"<");draw_set_colour(c_white);draw_text(412,68,"Level "+string(_e.level));ln_edit_button(570,62,30,">");
     ln_edit_button(620,62,30,"<");draw_set_colour(c_white);draw_text(662,68,"Room "+string(_e.room_id)+" (ID)");ln_edit_button(810,62,30,">");
-    ln_edit_button(24,594,140,"Ninja",_e.show_ninja);ln_edit_button(176,594,140,"Depth line",_e.show_depth);draw_set_colour(make_colour_rgb(150,210,220));draw_text(328,600,"Original depth: ON");ln_edit_button(490,594,140,"Use room");
+    ln_edit_button(24,594,140,"Ninja",_e.show_ninja);ln_edit_button(176,594,140,"Depth line",_e.show_depth);draw_set_colour(make_colour_rgb(150,210,220));draw_text(328,600,"Original depth: ON");ln_edit_button(490,594,140,"Test room");
     draw_set_colour(c_white);draw_text(760,110,"PARTS (draw order)");draw_text(1000,110,"ASSETS (this level)");
      _d=ln_edit_data(_e.game,_e.level); _assets=variable_struct_get_names(_d.objects);array_sort(_assets,function(a,b){return real(a)-real(b);});
     for( _i=0;_i<18;_i++) {
@@ -456,6 +454,7 @@ function ln_edit_checks() {
     ln_edit_interaction_checks();
     ln_edit_control_checks(self);
     ln_edit_optimization_checks(self);
+    ln_edit_test_room_checks(self);
     show_debug_message("LN_EDITOR_PASS: "+string(_rooms)+" room imports, "+string(_parts)+" parts; composition/depth, save/load validation, mode isolation and three game previews");
 }
 
@@ -636,7 +635,7 @@ function ln_edit_canvas_difference(_a,_b) {
     return _count;
 }
 
-function ln_edit_inside(_x,_y,_w,_h) {return mouse_x>=_x && mouse_x<_x+_w && mouse_y>=_y && mouse_y<_y+_h;}
+function ln_edit_inside(_x,_y,_w,_h) {return ln_tool_mouse_x()>=_x && ln_tool_mouse_x()<_x+_w && ln_tool_mouse_y()>=_y && ln_tool_mouse_y()<_y+_h;}
 function ln_edit_add_asset(_id) {
     var _e=global.ln_editor,_s=_e.scene,_o=variable_struct_get(ln_edit_data(_e.game,_e.level).objects,string(_id));
     array_push(_s.parts,{asset:_id,x:80,y:48,flip:false,recolour:[],mode:1,depth:clamp(48+_o.height,0,144),overlay:true});
@@ -749,6 +748,12 @@ function ln_edit_optimization_checks(_host) {
         }
         ln_check(array_length(_e.undo)==_undo,"drag does not copy undo history each frame");ln_edit_finish_drag();
         ln_check(array_length(_e.undo)==_undo+1 && ln_rewind_equal(json_parse(_e.undo[_undo]),json_parse(_before)),"one complete undo snapshot per drag");
+        _expected=json_stringify(_e.scene);
+        ln_check(ln_edit_history(false) && ln_rewind_equal(_e.scene,json_parse(_before)),"undo restores entire drag");
+        ln_check(ln_edit_history(true) && ln_rewind_equal(_e.scene,json_parse(_expected)),"redo restores entire drag");
+        ln_edit_history(false);_before=json_stringify(_e.scene);_e.scene.parts[0].x+=2;ln_edit_changed(_before);
+        ln_check(array_length(_e.redo)==0 && !ln_edit_history(true),"new edits invalidate redo branch");
+
     }
     _game_crt=global.ln_crt_enabled;_editor_crt=_e.crt_enabled;_persist=global.ln_preferences_enabled;global.ln_preferences_enabled=false;
     global.ln_crt_enabled=false;_e.crt_enabled=false;ln_edit_draw();_off=ln_edit_screen_buffer();
@@ -760,4 +765,53 @@ function ln_edit_optimization_checks(_host) {
     ln_check(_e.crt_enabled && !global.ln_crt_enabled,"editor and gameplay CRT preferences remain independent");file_delete(_file);
     global.ln_crt_enabled=_game_crt;_e.crt_enabled=_editor_crt;global.ln_preferences_enabled=_persist;
     show_debug_message("LN_EDITOR_OPTIMIZATION_PASS: 18 partial/full comparisons; partial us="+string(_partial)+" full us="+string(_full)+"; independent CRT and undo");
+}
+
+function ln_edit_history(_redo) {
+    var _e=global.ln_editor,_current,_next;
+    ln_edit_finish_drag();
+    if(_redo?array_length(_e.redo)==0:array_length(_e.undo)==0) return false;
+    _current=json_stringify(_e.scene);
+    if(_redo) {_next=array_pop(_e.redo);array_push(_e.undo,_current);}
+    else {_next=array_pop(_e.undo);array_push(_e.redo,_current);}
+    _e.scene=json_parse(_next);_e.part=min(_e.part,array_length(_e.scene.parts)-1);
+    _e.scroll=clamp(_e.scroll,0,max(0,array_length(_e.scene.parts)-18));
+    variable_struct_set(_e.scenes,ln_edit_key(_e.game,_e.level,_e.room_id),json_parse(_next));
+    _e.revision++;_e.dirty=true;_e.reference=false;_e.build=-1;_e.autosave_us=1000000;ln_edit_free_cache();
+    _e.message=_redo?"Redo applied":"Undo applied";return true;
+}
+
+function ln_edit_test_room(_host) {
+    var _e=global.ln_editor,_t=_host.scene_test,_level=-1,_scene=-1,_i,_j;
+    ln_edit_finish_drag();
+    for(_i=0;_i<array_length(_t.levels);_i++) {
+        if(_t.levels[_i].game!=_e.game || _t.levels[_i].number!=_e.level) continue;
+        _level=_i;
+        for(_j=0;_j<array_length(_t.levels[_i].scenes);_j++) if(_t.levels[_i].scenes[_j].id==_e.room_id) {_scene=_j;break;}
+        break;
+    }
+    if(_level<0 || _scene<0) {_e.message="This source room has no playable entry";return false;}
+    variable_struct_set(_e.scenes,ln_edit_key(_e.game,_e.level,_e.room_id),json_parse(json_stringify(_e.scene)));
+    _e.enabled=true;_e.dirty=true;_e.revision++;_e.autosave_us=1000000;_e.playback=undefined;ln_edit_free_cache();
+    _t.level_index=_level;_t.game=_e.game;
+    ln_edit_music(_host,false);
+    if(!ln_scene_test_open(_t,_host.play,_scene)) {ln_edit_music(_host,true);_e.message="Room entry failed; edits kept";return false;}
+    _e.open=false;_e.context=false;_e.depth_edit=false;_host.workbench=false;_host.input_state=new LNInput();
+    // Start the room's normal track, including same-level tests after editor pause.
+    ln_frontend_music(_host.play,false);
+    if(global.ln_preferences_enabled) ln_edit_save("modified-scenes.autosave.json");
+    ln_scene_test_message(_t,"Testing edited room - F6 returns to the editor");return true;
+}
+
+function ln_edit_test_room_checks(_host) {
+    var _e=global.ln_editor,_game,_room,_scene;
+    for(_game=1;_game<=3;_game++) {
+        _room=ln_edit_rooms(_game,1)[1];ln_edit_select(_game,1,_room);_e.open=true;
+        _e.scene.parts[0].x+=2;_scene=json_stringify(_e.scene);
+        ln_check(ln_edit_test_room(_host),"Test room enters playable room");
+        ln_check(!_e.open && !_host.workbench && !_host.scene_test.menu && !_host.scene_test.preview && _host.play.game_number==_game && _host.play.room_id==_room,"Test room uses selected game and room in play mode");
+        ln_check(ln_rewind_equal(ln_modified_room(_host.play),json_parse(_scene)) && ln_rewind_equal(_e.scene,json_parse(_scene)),"Test room retains edited scene for gameplay and editor return");
+        ln_check(variable_global_exists("ln_music_voice") && global.ln_music_voice>=0 && (audio_is_playing(global.ln_music_voice) || audio_is_paused(global.ln_music_voice)),"Test room loads level music respecting mute");
+    }
+    show_debug_message("LN_EDITOR_TEST_ROOM_PASS: selected edited room and level music for all three games");
 }
