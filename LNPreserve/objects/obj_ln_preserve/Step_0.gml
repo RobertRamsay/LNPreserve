@@ -19,7 +19,8 @@ if (crt_live_test) {
     if (crt_live_frame==1 || crt_live_frame==2) ln_crt_toggle();
     exit;
 }
-if (presentation_test || rewind_test || painting_test) exit;
+if (presentation_test || rewind_test || painting_test || editor_test) exit;
+if (!selftest && ln_edit_step(self)) exit;
 ln_crt_preferences_flush();
 if(!ln_paint_supported(play)) ln_paint_free();
 if(scene_test.menu) ln_paint_slider(true);

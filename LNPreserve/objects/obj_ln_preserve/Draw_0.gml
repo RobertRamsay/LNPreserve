@@ -1,3 +1,8 @@
+if(editor_test) {
+    try {ln_edit_checks();} catch(_error) {show_debug_message("LN_EDITOR_FAILURE: "+string(_error));}
+    game_end();exit;
+}
+if(global.ln_editor.open) {ln_edit_draw();exit;}
 if(painting_test) {
     try {ln_paint_checks();} catch(_error) {global.ln_preferences_enabled=false;show_debug_message("LN_PAINT_FAILURE: "+string(_error));}
     game_end();exit;

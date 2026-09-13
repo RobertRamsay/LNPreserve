@@ -309,6 +309,7 @@ function ln1_lives_colour(_tick) {
 }
 
 function ln1_play_draw(_game, _paused) {
+    global.ln_editor.context=false;
     if (ln2_loader_active(_game)) {ln_frontend_draw(_game);return;}
     ln_paint_sync(_game);
     var _saved_view=matrix_get(matrix_view),_saved_projection=matrix_get(matrix_projection);
@@ -317,8 +318,10 @@ function ln1_play_draw(_game, _paused) {
     draw_set_colour(c_white);
     if (!surface_exists(_game.stage_surface)) _game.stage_surface = surface_create(240,144);
     if(global.ln_paint.active) ln_paint_prepare();
+    var _modified=ln_modified_begin(_game);
     surface_set_target(_game.stage_surface);
-    draw_clear(c_black); draw_sprite(_game.scene, 0, 0, 0);
+    draw_clear(c_black);
+    if(_modified) draw_surface(global.ln_editor.cache.surface,0,0);else draw_sprite(_game.scene,0,0,0);
     for (var _i = 0; _i < array_length(_game.world.items); _i++) {
         var _item = _game.world.items[_i];
         if (ln1_hidden_apple_flash(_game,_item)) {
@@ -351,6 +354,7 @@ function ln1_play_draw(_game, _paused) {
         draw_set_colour(c_white);
     } else if (_transition) draw_sprite(spr_ln1_death_dissolve,min(39,_game.death_transition.tick),0,0);
     if(global.ln_paint.active) {draw_set_colour(c_white);draw_surface(global.ln_paint.surface,0,0);}
+    ln_modified_paint_cover();global.ln_editor.context=false;
     surface_reset_target();
     matrix_set(matrix_view,_saved_view);matrix_set(matrix_projection,_saved_projection);
     if (_transition && !_lives_message) {

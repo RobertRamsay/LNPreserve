@@ -277,7 +277,7 @@ function ln3_play_actor_part(_g,_d,_i) {
     for (var _y=0;_y<21;_y++) {
         var _start=-1;
         for (var _x=0;_x<=24;_x++) {
-            var _hidden=_x<24 && ((_mask[_y*3+(_x div 8)]&(128>>(_x&7)))==0 || (_i<4 && _d.draw_y[_i]+_y>=_d.waterline+21));
+            var _hidden=_x<24 && ((global.ln_editor.context ? ln_modified_hidden(_d.draw_x[_i]-24+_x*((_d.expand_x&(1<<_i))?2:1),_d.draw_y[_i]-50+_y*((_d.expand_y&(1<<_i))?2:1),_d.parts[_i<4?2:6].y) : (_mask[_y*3+(_x div 8)]&(128>>(_x&7)))==0) || (_i<4 && _d.draw_y[_i]+_y>=_d.waterline+21));
             if (_hidden && _start<0) _start=_x;
             if (!_hidden && _start>=0) {draw_rectangle(_start,_y,_x,_y+1,false);_start=-1;}
         }
@@ -287,6 +287,7 @@ function ln3_play_actor_part(_g,_d,_i) {
 }
 
 function ln3_play_draw(_g) {
+    global.ln_editor.context=false;
     if (is_struct(_g.intro)) {ln3_intro_draw(_g);return;}
     if (ln2_loader_active(_g)) {ln_frontend_draw(_g);return;}
     if (is_struct(_g.ending)) {
@@ -302,12 +303,21 @@ function ln3_play_draw(_g) {
     var _paint_view=matrix_get(matrix_view),_paint_projection=matrix_get(matrix_projection);
     if(global.ln_paint.active) ln_paint_prepare();
     if (!surface_exists(_g.stage_surface)) _g.stage_surface=surface_create(240,144);
-    surface_set_target(_g.stage_surface);draw_clear(c_black);draw_sprite(asset_get_index(_g.scene_record.sprite),0,0,0);
-    if (_g.scenery_frame>=0) draw_sprite(asset_get_index(_g.scenery_mechanism?_g.mechanisms.sprite:_g.scenery.sprite),_g.scenery_frame,0,0);
+    var _modified=ln_modified_begin(_g);
+    surface_set_target(_g.stage_surface);draw_clear(c_black);
+    if(_modified) draw_surface(global.ln_editor.cache.surface,0,0);else draw_sprite(asset_get_index(_g.scene_record.sprite),0,0,0);
+    if (_g.scenery_frame>=0) {
+        if(_modified) ln_modified_delta_start(asset_get_index(_g.scene_record.sprite));
+        draw_sprite(asset_get_index(_g.scenery_mechanism?_g.mechanisms.sprite:_g.scenery.sprite),_g.scenery_frame,0,0);
+        if(_modified) shader_reset();
+    }
+    if(_modified) ln_modified_delta_start(asset_get_index(_g.scene_record.sprite));
     ln3_mechanism_draw(_g);
+    if(_modified) shader_reset();
     if (_g.special_sequence<3 || _g.transition_phase<5) for (var _order=0;_order<8;_order++) ln3_play_actor_part(_g,_g.display,_g.animation.order[_order]);
     ln3_transition_draw(_g);
     if(global.ln_paint.active) {draw_set_colour(c_white);draw_surface(global.ln_paint.surface,0,0);}
+    ln_modified_paint_cover();global.ln_editor.context=false;
     surface_reset_target();
     matrix_set(matrix_view,_paint_view);matrix_set(matrix_projection,_paint_projection);
     draw_surface_ext(_g.stage_surface,160,84,3,3,0,c_white,1);

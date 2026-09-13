@@ -278,6 +278,7 @@ function ln2_play_actor(_g,_a,_enemy) {
 }
 
 function ln2_play_draw(_g) {
+    global.ln_editor.context=false;
     if (ln2_loader_active(_g)) {draw_clear(c_black);ln2_loader_draw(_g);return;}
     draw_clear(c_black);draw_set_colour(c_white);
     if (_g.victory==2) {ln2_ending_draw(_g);return;}
@@ -285,7 +286,12 @@ function ln2_play_draw(_g) {
     var _paint_view=matrix_get(matrix_view),_paint_projection=matrix_get(matrix_projection);
     if(global.ln_paint.active) ln_paint_prepare();
     if (!surface_exists(_g.stage_surface)) _g.stage_surface=surface_create(240,144);
-    surface_set_target(_g.stage_surface);draw_clear(c_black);ln2_scene_bitmap_draw(_g);
+    var _modified=ln_modified_begin(_g);
+    surface_set_target(_g.stage_surface);draw_clear(c_black);
+    if(_modified) {
+        draw_surface(global.ln_editor.cache.surface,0,0);
+        ln_modified_delta_start(asset_get_index(_g.scene_record.sprite));ln2_scene_bitmap_draw(_g);shader_reset();
+    } else ln2_scene_bitmap_draw(_g);
     ln2_mansion_alarm_draw(_g);
     ln2_victory_palette_draw(_g);
     ln2_final_candles_draw(_g);
@@ -298,6 +304,7 @@ function ln2_play_draw(_g) {
         ln2_play_actor(_g,_g.enemy,true);ln2_projectile_draw(_g,true);ln2_play_actor(_g,_g.player,false);ln2_projectile_draw(_g,false);
     }
     if(global.ln_paint.active) {draw_set_colour(c_white);draw_surface(global.ln_paint.surface,0,0);}
+    ln_modified_paint_cover();global.ln_editor.context=false;
     surface_reset_target();
     matrix_set(matrix_view,_paint_view);matrix_set(matrix_projection,_paint_projection);
     draw_surface_ext(_g.stage_surface,160,84,3,3,0,c_white,1);

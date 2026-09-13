@@ -7,6 +7,7 @@ function ln_paint_free() {
     _p.buffer=-1;_p.surface=-1;_p.active=false;
 }
 function ln_paint_supported(_g) {
+    if(is_struct(ln_modified_room(_g))) return false;
     if(!global.ln_preferences_enabled || !array_contains([1,2,3],_g.game_number) || ln2_loader_active(_g)) return false;
     if(_g.game_number==2 && variable_struct_exists(_g,"victory") && _g.victory==2) return false;
     if(_g.game_number==3) {
@@ -37,6 +38,7 @@ function ln_paint_sync(_g) {
     return _p.active;
 }
 function ln_paint_tick(_g) {
+    if(is_struct(ln_modified_room(_g))) return ln_modified_paint_tick(_g);
     if(!ln_paint_sync(_g)) return false;
     var _p=global.ln_paint;
     // At least one actual draw must show the plain background, even during catch-up ticks.

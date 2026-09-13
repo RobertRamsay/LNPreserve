@@ -10,3 +10,4 @@ if (variable_instance_exists(id,"rewind")) ln_rewind_clear(rewind);
 ln_crt_preferences_flush(true);
 
 ln_paint_free();
+ln_edit_free_cache();ln_edit_free_preview();
