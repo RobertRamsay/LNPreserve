@@ -249,7 +249,7 @@ function ln_modified_hidden(_x,_y,_foot,_original=false) {
 }
 function ln_edit_hit(_x,_y,_w,_h) {return mouse_check_button_pressed(mb_left) && ln_tool_mouse_x()>=_x && ln_tool_mouse_x()<_x+_w && ln_tool_mouse_y()>=_y && ln_tool_mouse_y()<_y+_h;}
 function ln_edit_button(_x,_y,_w,_label,_on=false) {
-    draw_set_colour(_on?make_colour_rgb(45,95,110):make_colour_rgb(43,48,57));draw_rectangle(_x,_y,_x+_w,_y+28,false);
+    ln_ui_button_background(_x,_y,_w,28,_on);
     draw_set_colour(c_white);draw_text(_x+6,_y+5,_label);
 }
 function ln_edit_step(_host) {
@@ -1048,4 +1048,19 @@ function ln_edit_build_preview_tick(_elapsed_us) {
     if(_e.build<0 || !_p.active || !_p.presented) return;
     _p.time+=_elapsed_us/1000000*global.ln_paint_speed;
     if(_p.time>=_p.duration) {ln_paint_free();_e.build=-1;}
+}
+
+// Nine-slice the supplied artwork at the existing logical button dimensions.
+// Scale the decorative corners down to four UI pixels rather than stretching them.
+function ln_ui_button_background(_x,_y,_w,_h,_selected=false) {
+    var _sw=sprite_get_width(spr_UI_button),_sh=sprite_get_height(spr_UI_button);
+    var _border=min(4,_w/2,_h/2),_tint=_selected?c_white:make_colour_rgb(175,175,175);
+    var _sx=[0,12,_sw-12],_sy=[0,12,_sh-12];
+    var _widths=[12,_sw-24,12],_heights=[12,_sh-24,12];
+    var _dx=[_x,_x+_border,_x+_w-_border],_dy=[_y,_y+_border,_y+_h-_border];
+    var _dw=[_border,_w-2*_border,_border],_dh=[_border,_h-2*_border,_border];
+    for(var _row=0;_row<3;_row++) for(var _col=0;_col<3;_col++) {
+        draw_sprite_part_ext(spr_UI_button,0,_sx[_col],_sy[_row],_widths[_col],_heights[_row],
+            _dx[_col],_dy[_row],_dw[_col]/_widths[_col],_dh[_row]/_heights[_row],_tint,1);
+    }
 }

@@ -147,7 +147,7 @@ function ln_window_buttons(_tips=true) {
         var _x=1132+46*_i,_hover=ln_tool_mouse_x()>=_x && ln_tool_mouse_x()<_x+42 && ln_tool_mouse_y()>=624 && ln_tool_mouse_y()<645;
         var _selected=(_i==0 && window_get_width()==1920 && window_get_height()==1080) ||
             (_i==1 && window_get_width()==3840 && window_get_height()==2160);
-        draw_set_colour(_selected?make_colour_rgb(44,82,110):make_colour_rgb(42,48,57));draw_rectangle(_x,624,_x+42,644,false);
+        ln_ui_button_background(_x,624,42,20,_selected);
         draw_set_colour(_hover?c_white:make_colour_rgb(180,215,236));draw_text(_x+8,626,_labels[_i]);
         if (_hover && _tips) {
             var _tip=_i==0?"1920 x 1080":(_i==1?"3840 x 2160":"Largest whole-pixel size that fits");
@@ -185,10 +185,8 @@ function ln_crt_step(_show_controls=true,_tuning=true) {
 function ln_crt_button() {
     var _available=shader_is_compiled(sh_ln_crt);
     var _hover=ln_tool_mouse_x()>=1128 && ln_tool_mouse_x()<1272 && ln_tool_mouse_y()>=36 && ln_tool_mouse_y()<72;
-    draw_set_colour(global.ln_crt_enabled?make_colour_rgb(44,82,110):make_colour_rgb(32,37,44));
-    draw_rectangle(1128,36,1272,72,false);
+    ln_ui_button_background(1128,36,144,36,global.ln_crt_enabled);
     draw_set_colour(_hover?c_white:make_colour_rgb(150,190,215));
-    draw_rectangle(1128,36,1272,72,true);
     draw_text(1136,44,_available?("CRT "+(global.ln_crt_enabled?"ON":"OFF")+"  F10"):"CRT unavailable");
     draw_set_colour(c_white);
 }
@@ -296,12 +294,10 @@ function ln_crt_tuning_draw() {
     var _names=["Previous","Pixel edge","Soft 5","Deep 5"];
     for(var _i=0;_i<4;_i++) {
         var _x=172+148*_i;
-        draw_set_colour(global.ln_scan_preset==_i?make_colour_rgb(44,82,110):make_colour_rgb(42,48,57));
-        draw_rectangle(_x,716,_x+140,744,false);draw_set_colour(c_white);draw_text(_x+8,721,_names[_i]);
+        ln_ui_button_background(_x,716,140,28,global.ln_scan_preset==_i);draw_set_colour(c_white);draw_text(_x+8,721,_names[_i]);
     }
     for(var _style=0;_style<2;_style++) {
-        draw_set_colour(global.ln_crt_phosphor==1-_style?make_colour_rgb(44,82,110):make_colour_rgb(42,48,57));
-        draw_rectangle(172+108*_style,756,276+108*_style,786,false);
+        ln_ui_button_background(172+108*_style,756,104,30,global.ln_crt_phosphor==1-_style);
         draw_set_colour(c_white);draw_text(180+108*_style,761,_style==0?"Phosphor":"Classic");
     }
     draw_set_colour(c_white);draw_text_transformed(400,750,"Spacing "+string_format(global.ln_crt_pitch,1,2)+"x",0.85,0.85,0);

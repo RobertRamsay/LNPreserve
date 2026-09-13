@@ -198,8 +198,7 @@ function ln_scene_test_step(_t, _g) {
 }
 
 function ln_scene_test_button(_x,_y,_w,_h,_label,_selected) {
-    draw_set_colour(_selected ? make_colour_rgb(45,97,80) : make_colour_rgb(42,47,55));
-    draw_rectangle(_x,_y,_x+_w,_y+_h,false);
+    ln_ui_button_background(_x,_y,_w,_h,_selected);
     draw_set_colour(c_white); draw_text(_x+12,_y+14,_label);
 }
 

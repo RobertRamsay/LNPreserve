@@ -161,3 +161,5 @@ In-game edited-room entry uses the original recorded build-up order and duration
 Selected parts have **Up 10**, **Down 10**, **Top (back)** and **Bottom (front)** controls below the depth settings. Moves stop at the list ends, keep the selected part visible, and each count as one Undo/Redo action. They change draw order without changing depth settings. Ninja occlusion uses inherited masks or explicit part depth; it is not inferred from list order.
 
 Opening the editor or changing room resets the preview ninja to the room entry used by F11 and enables the Ninja preview. Existing scene edits/history and the running game are preserved; right-drag still moves the preview ninja afterwards.
+
+Buttons use the supplied `spr_UI_button` artwork sliced into nine regions. Borders/corners are scaled to four logical pixels; centres stretch to the existing button dimensions. Active buttons are brighter, and labels/hit areas retain their existing sizes.
