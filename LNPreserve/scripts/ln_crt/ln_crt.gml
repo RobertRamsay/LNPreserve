@@ -188,7 +188,8 @@ function ln_crt_button() {
     var _available=shader_is_compiled(sh_ln_crt);
     var _hover=ln_tool_mouse_x()>=1128 && ln_tool_mouse_x()<1272 && ln_tool_mouse_y()>=36 && ln_tool_mouse_y()<72;
     ln_ui_button_background(1128,36,144,36,global.ln_crt_enabled);
-    draw_set_colour(_hover?c_white:make_colour_rgb(150,190,215));
+    var _label_colour=_hover?c_white:make_colour_rgb(150,190,215);
+    draw_set_colour(global.ln_crt_enabled?_label_colour:merge_colour(_label_colour,c_black,0.5));
     draw_text(1136,44,_available?("CRT "+(global.ln_crt_enabled?"ON":"OFF")+"  F10"):"CRT unavailable");
     draw_set_colour(c_white);
 }

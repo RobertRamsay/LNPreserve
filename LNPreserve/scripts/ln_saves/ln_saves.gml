@@ -220,7 +220,7 @@ function ln_saves_draw(_ui) {
     for (var _i=0;_i<10;_i++) {
         var _y=116+46*_i,_filled=_i<array_length(_ui.slots);
         var _hover=ln_tool_mouse_x()>=1128 && ln_tool_mouse_x()<1272 && ln_tool_mouse_y()>=_y && ln_tool_mouse_y()<_y+46;
-        ln_ui_button_background(1132,_y,136,42,_hover && _filled);
+        ln_ui_button_background(1132,_y,136,42,(_hover && _filled)?true:undefined);
         draw_set_colour(_filled?c_white:make_colour_rgb(130,138,146));
         var _label=_filled?_ui.slots[_i].name:"Empty";
         var _scale=min(1,124/max(1,string_width(_label)));

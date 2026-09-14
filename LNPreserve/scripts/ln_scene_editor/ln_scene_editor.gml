@@ -95,6 +95,7 @@ function ln_edit_select(_game,_level,_room) {
 function ln_edit_changed(_before) {
     var _e;
      _e=global.ln_editor;
+    _e.enabled=true;
     if(_e.drag) {
         if(!is_string(_e.drag_before)) _e.drag_before=_before;
         _e.revision++;_e.dirty=true;_e.build=-1;_e.reference=false;return;
@@ -249,9 +250,9 @@ function ln_modified_hidden(_x,_y,_foot,_original=false) {
     return _e.cache.depth[_y*240+_x]>_foot;
 }
 function ln_edit_hit(_x,_y,_w,_h) {return mouse_check_button_pressed(mb_left) && ln_tool_mouse_x()>=_x && ln_tool_mouse_x()<_x+_w && ln_tool_mouse_y()>=_y && ln_tool_mouse_y()<_y+_h;}
-function ln_edit_button(_x,_y,_w,_label,_on=false) {
+function ln_edit_button(_x,_y,_w,_label,_on=undefined) {
     ln_ui_button_background(_x,_y,_w,28,_on);
-    draw_set_colour(c_white);draw_text(_x+6,_y+5,_label);
+    draw_set_colour(is_undefined(_on) || _on?c_white:make_colour_rgb(128,128,128));draw_text(_x+6,_y+5,_label);draw_set_colour(c_white);
 }
 function ln_edit_step(_host) {
     var _e,_s,_file,_i,_g,_max,_level,_d,_ids,_index,_assets,_before,_changed,_id,_o,_p,_swap,_step,_dx,_dy,_held,_delta,_next_depth;
@@ -817,6 +818,7 @@ function ln_edit_history(_redo) {
     _e.scroll=clamp(_e.scroll,0,max(0,array_length(_e.scene.parts)-18));
     variable_struct_set(_e.scenes,ln_edit_key(_e.game,_e.level,_e.room_id),json_parse(_next));
     _e.revision++;_e.dirty=true;_e.reference=false;_e.build=-1;_e.autosave_us=1000000;ln_edit_free_cache();
+    _e.enabled=true;
     _e.message=_redo?"Redo applied":"Undo applied";return true;
 }
 
@@ -1064,9 +1066,9 @@ function ln_edit_build_preview_tick(_elapsed_us) {
 
 // Nine-slice the supplied artwork at the existing logical button dimensions.
 // Scale the decorative corners down to four UI pixels rather than stretching them.
-function ln_ui_button_background(_x,_y,_w,_h,_selected=false) {
+function ln_ui_button_background(_x,_y,_w,_h,_selected=undefined) {
     var _sw=sprite_get_width(spr_UI_button),_sh=sprite_get_height(spr_UI_button);
-    var _border=min(4,_w/2,_h/2),_tint=_selected?c_white:make_colour_rgb(175,175,175);
+    var _border=min(4,_w/2,_h/2),_tint=is_undefined(_selected)?make_colour_rgb(175,175,175):(_selected?c_white:make_colour_rgb(88,88,88));
     var _sx=[0,12,_sw-12],_sy=[0,12,_sh-12];
     var _widths=[12,_sw-24,12],_heights=[12,_sh-24,12];
     var _dx=[_x,_x+_border,_x+_w-_border],_dy=[_y,_y+_border,_y+_h-_border];
