@@ -3475,6 +3475,13 @@
     {"id":{"name":"spr_ln1_level6_room_14","path":"sprites/spr_ln1_level6_room_14/spr_ln1_level6_room_14.yy",},},
     {"id":{"name":"spr_ln1_level6_vision","path":"sprites/spr_ln1_level6_vision/spr_ln1_level6_vision.yy",},},
     {"id":{"name":"spr_ln1_loader_reference","path":"sprites/spr_ln1_loader_reference/spr_ln1_loader_reference.yy",},},
+    {"id":{"name":"spr_LN1_Loader1","path":"sprites/spr_LN1_Loader1/spr_LN1_Loader1.yy",},},
+    {"id":{"name":"spr_LN1_Loader2","path":"sprites/spr_LN1_Loader2/spr_LN1_Loader2.yy",},},
+    {"id":{"name":"spr_LN1_Loader3","path":"sprites/spr_LN1_Loader3/spr_LN1_Loader3.yy",},},
+    {"id":{"name":"spr_LN1_Loader4","path":"sprites/spr_LN1_Loader4/spr_LN1_Loader4.yy",},},
+    {"id":{"name":"spr_LN1_Loader5","path":"sprites/spr_LN1_Loader5/spr_LN1_Loader5.yy",},},
+    {"id":{"name":"spr_LN1_Loader6","path":"sprites/spr_LN1_Loader6/spr_LN1_Loader6.yy",},},
+    {"id":{"name":"spr_LN1_MainSplash","path":"sprites/spr_LN1_MainSplash/spr_LN1_MainSplash.yy",},},
     {"id":{"name":"spr_ln1_pickup_11_flash","path":"sprites/spr_ln1_pickup_11_flash/spr_ln1_pickup_11_flash.yy",},},
     {"id":{"name":"spr_ln1_pickup_11","path":"sprites/spr_ln1_pickup_11/spr_ln1_pickup_11.yy",},},
     {"id":{"name":"spr_ln1_pickup_13_flash","path":"sprites/spr_ln1_pickup_13_flash/spr_ln1_pickup_13_flash.yy",},},
@@ -5105,6 +5112,6 @@
   "templateType":"game",
   "TextureGroups":[
     {"$GMTextureGroup":"","%Name":"Default","autocrop":false,"border":2,"compressFormat":"bz2","customOptions":"","directory":"","groupParent":null,"isScaled":true,"loadType":"default","mipsToGenerate":0,"name":"Default","resourceType":"GMTextureGroup","resourceVersion":"2.0","targets":-1,},
-    {"$GMTextureGroup":"","%Name":"CroppedActors","autocrop":true,"border":2,"compressFormat":"bz2","customOptions":"","directory":"","groupParent":null,"isScaled":true,"loadType":"default","mipsToGenerate":0,"name":"CroppedActors","resourceType":"GMTextureGroup","resourceVersion":"2.0","targets":-1},
+    {"$GMTextureGroup":"","%Name":"CroppedActors","autocrop":true,"border":2,"compressFormat":"bz2","customOptions":"","directory":"","groupParent":null,"isScaled":true,"loadType":"default","mipsToGenerate":0,"name":"CroppedActors","resourceType":"GMTextureGroup","resourceVersion":"2.0","targets":-1,},
   ],
 }
