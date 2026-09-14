@@ -356,6 +356,8 @@ function ln1_play_draw(_game, _paused) {
     } else if (_transition) draw_sprite(spr_ln1_death_dissolve,min(39,_game.death_transition.tick),0,0);
     if(global.ln_paint.active) {draw_set_colour(c_white);draw_surface(global.ln_paint.surface,0,0);}
     ln_modified_paint_cover();global.ln_editor.context=false;
+    // Keep the completed final fade black through the deduction tick and cooldown.
+    if(_game.game_over || (_game.lives_left<=1 && _game.death_transition_done)) draw_clear(c_black);
     surface_reset_target();
     matrix_set(matrix_view,_saved_view);matrix_set(matrix_projection,_saved_projection);
     if (_transition && !_lives_message) {
@@ -396,7 +398,6 @@ function ln1_play_draw(_game, _paused) {
     draw_text(160, 728, "Numpad 7/9/1/3 Direction    F11 Scenes    Home Restart    1/2/3 Games");
     draw_text(160, 760, "Health " + string(_game.player_health) + "    Lives " + string(_game.lives_left));
     if (_game.prayer_phase > 0) draw_text(710, 760, "S + D  Finish prayer");
-    if (_game.game_over) { draw_set_colour(c_white); draw_text(510, 54, "GAME OVER"); }
     if (_paused) { draw_set_colour(c_white); draw_text(594, 54, "PAUSED"); }
 }
 
@@ -429,6 +430,18 @@ function ln_ninja_transition_checks() {
     ln1_finish_transition_check(_g);
     ln_check(_g.lives_left==_lives-1 && _g.player_health==32,"LN1 transition loses one life and respawns");
     ln_check(shader_is_compiled(sh_ln1_palette_fade),"LN1 palette shader compiles");
+    _g=new LN1Play();_g.lives_left=1;_g.death_wait=1;_g.death_transition={tick:242};
+    for(var _frame=0;_frame<260 && !ln2_loader_active(_g);_frame++) {
+        ln1_play_tick(_g,0);
+        if(ln2_loader_active(_g)) break;
+        if(_frame<4 || _frame mod 40==0) {
+            ln1_play_draw(_g,false);draw_flush();
+            for(var _y=4;_y<144;_y+=16) for(var _x=4;_x<240;_x+=16)
+                ln_check(surface_getpixel(_g.stage_surface,_x,_y)==c_black,"final LN1 fade stays black through Game Over cooldown");
+        }
+    }
+    ln_check(ln2_loader_active(_g),"final LN1 black hold returns to level splash");
+    show_debug_message("LN1_GAME_OVER_RENDER_PASS");
     _g=new LN2Play(1);_g.life_transition={phase:0,tick:40};
     ln2_play_draw(_g);surface_save(application_surface,"ln2-original-wipe.png");
     repeat(40) ln2_play_tick(_g,0);
