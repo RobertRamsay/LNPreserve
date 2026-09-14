@@ -1256,17 +1256,12 @@ function ln_frontend_selected(_g,_entered,_intro,_was_loader) {
 }
 function ln_frontend_draw(_g) {
     draw_clear(c_black);draw_set_colour(c_white);
-    if (_g.game_number==1) ln1_frontend_bitmap(_g);
-    else {
-        // Named Included Files are replaceable artwork, loaded once per run.
-        static _bitmaps=array_create(5,-1);
-        var _index=clamp(_g.level-1,0,4);
-        if (!sprite_exists(_bitmaps[_index])) {
-            var _names=["EARTH","WIND","WATER","FIRE","VOID"];
-            _bitmaps[_index]=sprite_add("play/ln3/frontends/"+_names[_index]+".png",1,false,false,0,0);
-        }
-        if (sprite_exists(_bitmaps[_index])) draw_sprite_ext(_bitmaps[_index],0,160,84,3,3,0,c_white,1);
-    }
+    var _ln1=[spr_LN1_Loader1,spr_LN1_Loader2,spr_LN1_Loader3,spr_LN1_Loader4,spr_LN1_Loader5,spr_LN1_Loader6];
+    var _ln3=[spr_LN3_LV1_Earth,spr_LN3_LV2_Wind,spr_LN3_LV3_Water,spr_LN3_LV4_Fire,spr_LN3_LV5_Void];
+    var _pictures=_g.game_number==1?_ln1:_ln3;
+    var _sprite=_pictures[clamp(_g.level-1,0,array_length(_pictures)-1)];
+    // The supplied 320x200 artwork includes its own title; no bitmap text overlay.
+    draw_sprite_ext(_sprite,0,160,84,3,3,0,c_white,1);
     draw_text(160,36,"LAST NINJA "+string(_g.game_number)+" - "+string_upper(_g.title));
     draw_text(1000,36,"Scene 0");draw_text(160,700,"Press # or Xbox A to begin");
 }
@@ -1292,37 +1287,6 @@ function ln_trilogy_frontend_checks() {
         ln_check(!ln2_loader_active(_g),"direct gameplay selection bypasses title");
     }
     show_debug_message("LN_TRILOGY_FRONTEND_PASS: eleven LN1/LN3 title entries, frozen gameplay, fresh fire, saves and music");
-}
-
-// Temporary LN1 title treatment: source eyes, paired horizontal pixels, C64 colours.
-function ln1_frontend_label(_text,_cy,_colour) {
-    static _glyphs = {"A":["0110", "1001", "1001", "1111", "1001", "1001", "1001"],"C":["0111", "1000", "1000", "1000", "1000", "1000", "0111"],"D":["1110", "1001", "1001", "1001", "1001", "1001", "1110"],"E":["1111", "1000", "1000", "1110", "1000", "1000", "1111"],"G":["0111", "1000", "1000", "1011", "1001", "1001", "0111"],"H":["1001", "1001", "1001", "1111", "1001", "1001", "1001"],"I":["111", "010", "010", "010", "010", "010", "111"],"L":["1000", "1000", "1000", "1000", "1000", "1000", "1111"],"M":["10001", "11011", "10101", "10001", "10001", "10001", "10001"],"N":["1001", "1101", "1101", "1011", "1011", "1001", "1001"],"O":["0110", "1001", "1001", "1001", "1001", "1001", "0110"],"P":["1110", "1001", "1001", "1110", "1000", "1000", "1000"],"R":["1110", "1001", "1001", "1110", "1010", "1001", "1001"],"S":["0111", "1000", "1000", "0110", "0001", "0001", "1110"],"T":["1111", "0110", "0110", "0110", "0110", "0110", "0110"],"U":["1001", "1001", "1001", "1001", "1001", "1001", "0110"],"W":["10001", "10001", "10001", "10101", "10101", "11011", "10001"]," ":["00", "00", "00", "00", "00", "00", "00"]};
-    var _width=0;
-    for(var _n=1;_n<=string_length(_text);_n++) {
-        var _glyph=variable_struct_get(_glyphs,string_char_at(_text,_n));
-        _width+=string_length(_glyph[0])*2+2;
-    }
-    var _left=160+floor((320-(_width-2))/2)*3;
-    draw_set_colour(_colour);
-    for(var _n=1;_n<=string_length(_text);_n++) {
-        var _glyph=variable_struct_get(_glyphs,string_char_at(_text,_n));
-        for(var _row=0;_row<7;_row++) for(var _col=1;_col<=string_length(_glyph[_row]);_col++) {
-            if(string_char_at(_glyph[_row],_col)=="1") {
-                var _px=_left+(_col-1)*6,_py=84+(_cy+_row)*3;
-                draw_rectangle(_px,_py,_px+6,_py+3,false);
-            }
-        }
-        _left+=(string_length(_glyph[0])*2+2)*3;
-    }
-}
-function ln1_frontend_bitmap(_g) {
-    // The full title canvas is 320 x 200; only the supplied eye band is displayed.
-    draw_sprite_part_ext(spr_ln1_loader_reference,0,0,16,240,72,160+40*3,84+46*3,3,3,c_white,1);
-    static _colours=[make_colour_rgb(184,199,111),make_colour_rgb(86,172,77),make_colour_rgb(103,182,189),make_colour_rgb(136,57,50),make_colour_rgb(139,63,150),make_colour_rgb(120,105,196)];
-    var _colour=_colours[clamp(_g.level-1,0,5)];
-    ln1_frontend_label("THE",132,_colour);
-    ln1_frontend_label(string_upper(_g.title),148,_colour);
-    draw_set_colour(c_white);
 }
 
 /// Recovered Basement/Office ladder actions and later-level boundary dispatch.

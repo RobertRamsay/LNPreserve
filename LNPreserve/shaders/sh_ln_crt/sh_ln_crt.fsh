@@ -5,6 +5,7 @@ uniform vec4 u_region;
 uniform float u_scale;
 uniform float u_pixel_scale;
 uniform float u_time;
+uniform vec2 u_tone; // exposure stops, contrast (1 is neutral)
 uniform float u_blur;
 uniform float u_honeycomb;
 uniform float u_scanlines;
@@ -85,5 +86,12 @@ void main() {
         col*=mix(vec3(1.0),phosphorLight(q),u_honeycomb);
     } else col*=mix(vec3(1.0),mix(vec3(0.84),mask*1.10,dotlight),u_honeycomb);
     col*=1.025-0.035*dot(p,p);
-    gl_FragColor=vec4(clamp(col,0.0,1.0),1.0)*v_vColour;
+    col=clamp(col*exp2(u_tone.x),0.0,1.0);
+    // Symmetric contrast around mid-grey, retaining black and white endpoints.
+    if(abs(u_tone.y-1.0)>0.00001) {
+        vec3 a=pow(col,vec3(u_tone.y));
+        vec3 b=pow(vec3(1.0)-col,vec3(u_tone.y));
+        col=a/max(a+b,vec3(0.00001));
+    }
+    gl_FragColor=vec4(col,1.0)*v_vColour;
 }

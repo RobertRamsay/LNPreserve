@@ -1,3 +1,11 @@
-# LN3 pre-game artwork
+# Legacy LN3 pre-game artwork
 
-Replace EARTH.png, WIND.png, WATER.png, FIRE.png or VOID.png with a 320 x 200 PNG of the same name, then rebuild and restart the game. These are GameMaker Included Files in play/ln3/frontends. Artwork is displayed unfiltered at 3x within the C64 screen area. Earth, Wind, Water and Fire currently contain title placeholders using the existing intro font. VOID.png is the supplied VOID_Final.png, copied byte-for-byte. Gameplay and in-game music still begin/continue on a fresh fire press.
+These Included File PNGs are retained as old artwork but are no longer loaded by the pre-game screens. Edit the sprite resources instead:
+
+- Earth: spr_LN3_LV1_Earth
+- Wind: spr_LN3_LV2_Wind
+- Water: spr_LN3_LV3_Water
+- Fire: spr_LN3_LV4_Fire
+- Void: spr_LN3_LV5_Void
+
+LN1 likewise uses spr_LN1_Loader1 through spr_LN1_Loader6. Each sprite is 320x200 and displayed at 3x. No level-title text is drawn over the bitmap. Loader music and the fresh-fire start behaviour are unchanged.
