@@ -156,7 +156,8 @@ function ln_edit_load(_file) {
          _pack=json_parse(buffer_read(_b,buffer_text));buffer_delete(_b);_b=-1;
         if(!ln_edit_validate(_pack)) {global.ln_editor.message="Invalid custom file; existing edits kept";return false;}
         global.ln_editor.scenes=_pack.scenes;global.ln_editor.revision++;ln_edit_free_cache();
-        global.ln_editor.message="Custom file loaded. Modified switch controls gameplay.";return true;
+        global.ln_editor.enabled=true;
+        global.ln_editor.message="Custom file loaded. Modified ON.";return true;
     } catch(_error) {if(_b>=0) buffer_delete(_b);global.ln_editor.message="Could not load custom file; existing edits kept";return false;}
 }
 function ln_edit_build(_scene,_limit=-1,_variant="edit") {
@@ -464,13 +465,15 @@ function ln_edit_checks() {
     ln_check(surface_getpixel(_c.surface,2,3)==global.ln_paint_palette[5],"remove reveals background");
     _e.scenes={};variable_struct_set(_e.scenes,"1:1:1",_s);
      _saved=json_stringify(_e.scenes); _file="scene-editor-check.tmp.json";
-    ln_check(ln_edit_save(_file),"write pack");_e.scenes={};
+    ln_check(ln_edit_save(_file),"write pack");_e.scenes={};_e.enabled=false;
     ln_check(ln_edit_load(_file),"load custom file: "+_e.message);
+    ln_check(_e.enabled,"successful load enables Modified");
     ln_check(ln_rewind_equal(_e.scenes,json_parse(_saved)),"custom file roundtrip");file_delete(_file);
      _bad=json_parse(json_stringify(ln_edit_pack()));variable_struct_get(_bad.scenes,"1:1:1").parts[0].asset=997;
     ln_check(!ln_edit_validate(_bad),"reject unknown asset");
      _b=buffer_create(64,buffer_grow,1);buffer_write(_b,buffer_text,"{broken");buffer_save(_b,_file);buffer_delete(_b);
-    ln_check(!ln_edit_load(_file) && ln_rewind_equal(_e.scenes,json_parse(_saved)),"invalid load preserves edits");file_delete(_file);
+    _e.enabled=false;
+    ln_check(!ln_edit_load(_file) && !_e.enabled && ln_rewind_equal(_e.scenes,json_parse(_saved)),"invalid load preserves edits and Modified state");file_delete(_file);
     _e.enabled=false;ln_check(!is_struct(ln_modified_room({game_number:1,level:1,room_id:1})),"master off preserves original");
     _e.enabled=true;ln_check(is_struct(ln_modified_room({game_number:1,level:1,room_id:1})),"master on selects saved room");
     ln_check(!is_struct(ln_modified_room({game_number:2,level:1,room_id:0})),"unmodified room untouched");

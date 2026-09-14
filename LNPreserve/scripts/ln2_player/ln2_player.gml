@@ -250,7 +250,7 @@ function ln2_reverse_roll_prepare(_d) {
         for(var _i=0;_i<=_count;_i++) {
             var _release=_i==_count,_pose=_records[_release?_count:_count-1-_i];
             variable_struct_set(_d.actions,string(_base+_i),{
-                frame:_pose.frame,duration:_pose.duration,flags:_release?56:(_i==0?26:28),
+                frame:_pose.frame,duration:_i==0?ceil(_pose.duration/2):_pose.duration,flags:_release?56:(_i==0?26:28),
                 dx:0,dy:0,state:-1,next:_release?0:_base+_i+1});
         }
     }

@@ -290,7 +290,7 @@ function ln1_reverse_roll_prepare(_d) {
             // A final standing command releases the action cleanly after landing.
             var _last=_i==_count,_pose=_records[_last?_count-1:_count-1-_i];
             variable_struct_set(_d.actions,string(_base+_i),{
-                frame:_pose.frame,duration:_pose.duration,flags:_last?56:(_i==0?26:28),
+                frame:_pose.frame,duration:_i==0?ceil(_pose.duration/2):_pose.duration,flags:_last?56:(_i==0?26:28),
                 dx:0,dy:0,state:-1,combat_data:-1,next:_last?0:_base+_i+1});
         }
         // Brief stationary forward landing: two ticks, then release control.
@@ -385,8 +385,8 @@ function ln1_roll_landing_checks() {
             } else if (_p.x!=_x || _p.y!=_y) _travel++;
             if (_p.action<256) break;
         }
-        ln_check((_reverse?_held>=7:_held==3) && _travel>0 && _p.action<256,
-            "backward landing retains its hold; forward landing releases after two ticks plus the release frame");
+        ln_check((_reverse?_held==ceil(variable_struct_get(_d.actions,string(_d.reverse_roll_entries[_side])).duration)+1:_held==3) && _travel>0 && _p.action<256,
+            "backward first pose uses the shortened hold; forward landing remains unchanged");
     }
     show_debug_message("LN_ROLL_LANDING_PASS: stationary first backward / last forward pose for every facing");
 }

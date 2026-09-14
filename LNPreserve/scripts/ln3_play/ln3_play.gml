@@ -208,6 +208,9 @@ function ln3_play_tick(_g,_joy) {
     ln3_enemy_patrol(_s,_g.actions,_g.input,_g.enemies);
     ln3_scenery_tick(_g);
     ln3_animation_update(_s,_g.animation);ln3_play_prepare_draw(_g,_s);
+    // Shorten only the initial reverse pose; later animation intervals stay native.
+    if (variable_struct_exists(_s,"reverse_roll") && is_struct(_s.reverse_roll) && _s.player_action==_s.reverse_roll.action && _s.parts[1].cursor==1)
+        _s.logic_wait=ceil(_s.logic_wait/2);
     ln3_projectile_hits(_s,_g.combat);
     if (_g.level==5) {
         var _event=ln3_void_bolt_move(_s);if (_event!=0) {ln3_special_start(_g,_event);return;}
