@@ -5096,6 +5096,7 @@
     {"id":{"name":"spr_ln3_level5_room_11","path":"sprites/spr_ln3_level5_room_11/spr_ln3_level5_room_11.yy",},},
     {"id":{"name":"spr_ln3_level5_room_12","path":"sprites/spr_ln3_level5_room_12/spr_ln3_level5_room_12.yy",},},
     {"id":{"name":"spr_ln3_lives_font","path":"sprites/spr_ln3_lives_font/spr_ln3_lives_font.yy",},},
+    {"id":{"name":"spr_LN3_LV2_Wind","path":"sprites/spr_LN3_LV2_Wind/spr_LN3_LV2_Wind.yy",},},
     {"id":{"name":"spr_ln3_mechanisms","path":"sprites/spr_ln3_mechanisms/spr_ln3_mechanisms.yy",},},
     {"id":{"name":"spr_ln3_scenery_animation","path":"sprites/spr_ln3_scenery_animation/spr_ln3_scenery_animation.yy",},},
     {"id":{"name":"spr_ln3_transition_parts","path":"sprites/spr_ln3_transition_parts/spr_ln3_transition_parts.yy",},},
