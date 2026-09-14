@@ -1,6 +1,7 @@
 if(startup_test) {
     if(startup_frame==1 || startup_frame==30 || startup_frame==95) surface_save(application_surface,"tool-startup-"+string(startup_frame)+".png");
     if(startup_frame>=110) {
+        ln_check(global.ln_tool.ui,"Begin restores UI even when previously hidden");
         ln_check(!startup_active && startup_sound_started,"startup finishes through Begin and sound is cued");
         show_debug_message("LN_TOOL_STARTUP_PASS");game_end();
     }
@@ -41,7 +42,10 @@ if (crt_live_test) {
 
 if (window_presets_test && (crt_live_frame&1)==1) {
     try {
-        var _factor=crt_live_frame==1?1:(crt_live_frame==3?2:ln_window_fit_factor(display_get_width(),display_get_height()));
+        var _factor=ln_window_preset_factor(crt_live_frame==1?1:(crt_live_frame==3?2:0),display_get_width(),display_get_height());
+        var _hd=ln_window_preset_factor(2,1920,1080);
+        ln_check(round(1920*_hd)<=1888 && round(1080*_hd)<=984,"2x fits an HD desktop including window margins");
+        ln_check(ln_window_preset_factor(2,5120,2880)==2,"2x remains available on large displays");
         ln_check(window_get_width()==round(1920*_factor) && window_get_height()==round(1080*_factor),"window preset uses exact client dimensions: "+string(window_get_width())+"x"+string(window_get_height())+" display "+string(display_get_width())+"x"+string(display_get_height()));
         ln_check(surface_get_width(application_surface)==1920 && surface_get_height(application_surface)==1080,"presets keep a stable rendering grid");
         screen_save("lnpreserve-window-"+string(_factor)+"x.png");
@@ -52,7 +56,7 @@ if (window_presets_test && (crt_live_frame&1)==1) {
 
 if (save_ui_test && save_ui_frame mod 3==2) {
     try {
-        var _case=save_ui_frame div 3,_factor=_case<2?1:2;
+        var _case=save_ui_frame div 3,_factor=ln_window_preset_factor(_case<2?1:2,display_get_width(),display_get_height());
         ln_check(window_get_width()==round(1920*_factor) && window_get_height()==round(1080*_factor),"save UI test client dimensions");
         var _hint="Click to load",_scale=min(1,124/max(1,string_width(_hint)));
         ln_check(1138+string_width(_hint)*_scale<=1268,"save hint fits inside occupied slot");

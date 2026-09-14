@@ -346,4 +346,4 @@ if(startup_active && variable_global_exists("ln_music_voice") && audio_is_playin
     startup_music=global.ln_music_voice;audio_pause_sound(startup_music);
 }
 
-if(startup_test) {global.ln_tool.active=true;ln_window_preset(0);}
+if(startup_test) {global.ln_tool.active=true;global.ln_tool.ui=false;ln_window_preset(0);}

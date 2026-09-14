@@ -124,13 +124,15 @@ function ln_window_fit_factor(_width,_height) {
     return _fit>=1?clamp(floor(_fit),1,2):max(0.1,_fit);
 }
 
+function ln_window_preset_factor(_factor,_width,_height) {
+    if(_factor==0) return ln_window_fit_factor(_width,_height);
+    // Leave room for window borders, title bar and the taskbar, like Fit.
+    return min(_factor,max(0.1,min((_width-32)/1920,(_height-96)/1080)));
+}
+
 function ln_window_preset(_factor) {
-    if(_factor==0) _factor=ln_window_fit_factor(display_get_width(),display_get_height());
+    _factor=ln_window_preset_factor(_factor,display_get_width(),display_get_height());
     var _w=round(1920*_factor),_h=round(1080*_factor);
-    if(_w==display_get_width() && _h==display_get_height()) {
-        if(!window_get_fullscreen()) ln_fullscreen_toggle(self);
-        return;
-    }
     if(window_get_fullscreen()) {
         if(variable_instance_exists(self,"cinematic_window") && is_struct(cinematic_window)) ln_cinematic_restore(self);
         else window_set_fullscreen(false);
@@ -515,6 +517,7 @@ function ln_startup_step(_host) {
     if(_host.startup_test && _host.startup_frame==110) ln_startup_finish(_host);
 }
 function ln_startup_finish(_host) {
+    global.ln_tool.ui=true;
     _host.startup_active=false;
     if(_host.startup_music>=0 && audio_is_paused(_host.startup_music)) audio_resume_sound(_host.startup_music);
     _host.input_state=new LNInput();
