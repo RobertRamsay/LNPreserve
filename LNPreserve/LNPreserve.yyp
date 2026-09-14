@@ -4235,7 +4235,6 @@
     {"id":{"name":"spr_ln2_level2_room_06","path":"sprites/spr_ln2_level2_room_06/spr_ln2_level2_room_06.yy",},},
     {"id":{"name":"spr_ln2_level2_room_07_state1","path":"sprites/spr_ln2_level2_room_07_state1/spr_ln2_level2_room_07_state1.yy",},},
     {"id":{"name":"spr_ln2_level2_room_07","path":"sprites/spr_ln2_level2_room_07/spr_ln2_level2_room_07.yy",},},
-    {"id":{"name":"spr_ln2_level2_room_08_state1","path":"sprites/spr_ln2_level2_room_08_state1/spr_ln2_level2_room_08_state1.yy",},},
     {"id":{"name":"spr_ln2_level2_room_08","path":"sprites/spr_ln2_level2_room_08/spr_ln2_level2_room_08.yy",},},
     {"id":{"name":"spr_ln2_level2_room_09","path":"sprites/spr_ln2_level2_room_09/spr_ln2_level2_room_09.yy",},},
     {"id":{"name":"spr_ln2_level2_room_10","path":"sprites/spr_ln2_level2_room_10/spr_ln2_level2_room_10.yy",},},
@@ -5106,5 +5105,6 @@
   "templateType":"game",
   "TextureGroups":[
     {"$GMTextureGroup":"","%Name":"Default","autocrop":false,"border":2,"compressFormat":"bz2","customOptions":"","directory":"","groupParent":null,"isScaled":true,"loadType":"default","mipsToGenerate":0,"name":"Default","resourceType":"GMTextureGroup","resourceVersion":"2.0","targets":-1,},
+    {"$GMTextureGroup":"","%Name":"CroppedActors","autocrop":true,"border":2,"compressFormat":"bz2","customOptions":"","directory":"","groupParent":null,"isScaled":true,"loadType":"default","mipsToGenerate":0,"name":"CroppedActors","resourceType":"GMTextureGroup","resourceVersion":"2.0","targets":-1},
   ],
 }

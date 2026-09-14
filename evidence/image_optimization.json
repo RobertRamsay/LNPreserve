@@ -1,0 +1,200 @@
+{
+  "compiled_bytes_before": 757105300,
+  "cropped_group": "CroppedActors",
+  "sprites": [
+    "spr_ln1_dungeon_uniforms",
+    "spr_char_ln2_ninja",
+    "spr_char_ln2_enemy_type_2",
+    "spr_char_ln2_enemy_type_4",
+    "spr_char_ln2_enemy_type_6",
+    "spr_char_ln1_ninja",
+    "spr_char_ln1_guards",
+    "spr_char_ln2_enemy_type_8",
+    "spr_ln2_sewer_alligator",
+    "spr_char_ln2_enemy_type_10",
+    "spr_char_ln2_enemy_type_12",
+    "spr_char_ln2_enemy_type_14",
+    "spr_ln1_actor_extra",
+    "spr_char_ln2_spirits",
+    "spr_ln1_level4_actors",
+    "spr_char_ln2_shared_enemies",
+    "spr_ln1_level6_actors",
+    "spr_ln1_level2_actors",
+    "spr_ln1_world_actors",
+    "spr_ln1_level3_actors",
+    "spr_ln1_level5_actors",
+    "spr_sword"
+  ],
+  "transparent_frame_pixels_removed": 70769171,
+  "removed_resource": "spr_ln2_level2_room_08_state1",
+  "source_images_unchanged": true,
+  "reason": "Obsolete Street room 8 bottle state replaced by spr_ln2_street_bottle_states; no code/data references. Dynamic status and panel names retained.",
+  "sprite_metadata_checks": [
+    {
+      "sprite": "spr_ln1_dungeon_uniforms",
+      "frames": 3121,
+      "dimensions_origin_collision_and_animation_unchanged": true
+    },
+    {
+      "sprite": "spr_char_ln2_ninja",
+      "frames": 683,
+      "dimensions_origin_collision_and_animation_unchanged": true
+    },
+    {
+      "sprite": "spr_char_ln2_enemy_type_2",
+      "frames": 548,
+      "dimensions_origin_collision_and_animation_unchanged": true
+    },
+    {
+      "sprite": "spr_char_ln2_enemy_type_4",
+      "frames": 460,
+      "dimensions_origin_collision_and_animation_unchanged": true
+    },
+    {
+      "sprite": "spr_char_ln2_enemy_type_6",
+      "frames": 458,
+      "dimensions_origin_collision_and_animation_unchanged": true
+    },
+    {
+      "sprite": "spr_char_ln1_ninja",
+      "frames": 393,
+      "dimensions_origin_collision_and_animation_unchanged": true
+    },
+    {
+      "sprite": "spr_char_ln1_guards",
+      "frames": 388,
+      "dimensions_origin_collision_and_animation_unchanged": true
+    },
+    {
+      "sprite": "spr_char_ln2_enemy_type_8",
+      "frames": 360,
+      "dimensions_origin_collision_and_animation_unchanged": true
+    },
+    {
+      "sprite": "spr_ln2_sewer_alligator",
+      "frames": 46,
+      "dimensions_origin_collision_and_animation_unchanged": true
+    },
+    {
+      "sprite": "spr_char_ln2_enemy_type_10",
+      "frames": 356,
+      "dimensions_origin_collision_and_animation_unchanged": true
+    },
+    {
+      "sprite": "spr_char_ln2_enemy_type_12",
+      "frames": 356,
+      "dimensions_origin_collision_and_animation_unchanged": true
+    },
+    {
+      "sprite": "spr_char_ln2_enemy_type_14",
+      "frames": 268,
+      "dimensions_origin_collision_and_animation_unchanged": true
+    },
+    {
+      "sprite": "spr_ln1_actor_extra",
+      "frames": 128,
+      "dimensions_origin_collision_and_animation_unchanged": true
+    },
+    {
+      "sprite": "spr_char_ln2_spirits",
+      "frames": 48,
+      "dimensions_origin_collision_and_animation_unchanged": true
+    },
+    {
+      "sprite": "spr_ln1_level4_actors",
+      "frames": 88,
+      "dimensions_origin_collision_and_animation_unchanged": true
+    },
+    {
+      "sprite": "spr_char_ln2_shared_enemies",
+      "frames": 88,
+      "dimensions_origin_collision_and_animation_unchanged": true
+    },
+    {
+      "sprite": "spr_ln1_level6_actors",
+      "frames": 78,
+      "dimensions_origin_collision_and_animation_unchanged": true
+    },
+    {
+      "sprite": "spr_ln1_level2_actors",
+      "frames": 56,
+      "dimensions_origin_collision_and_animation_unchanged": true
+    },
+    {
+      "sprite": "spr_ln1_world_actors",
+      "frames": 54,
+      "dimensions_origin_collision_and_animation_unchanged": true
+    },
+    {
+      "sprite": "spr_ln1_level3_actors",
+      "frames": 38,
+      "dimensions_origin_collision_and_animation_unchanged": true
+    },
+    {
+      "sprite": "spr_ln1_level5_actors",
+      "frames": 18,
+      "dimensions_origin_collision_and_animation_unchanged": true
+    },
+    {
+      "sprite": "spr_sword",
+      "frames": 1,
+      "dimensions_origin_collision_and_animation_unchanged": true
+    }
+  ],
+  "removed_files": [
+    "sprites\\spr_ln2_level2_room_08_state1\\fea811a4-c7ee-5089-9498-b32c36f5c79d.png",
+    "sprites\\spr_ln2_level2_room_08_state1\\spr_ln2_level2_room_08_state1.yy",
+    "sprites\\spr_ln2_level2_room_08_state1\\layers\\fea811a4-c7ee-5089-9498-b32c36f5c79d\\9527226b-0b5a-5bde-8faf-5e8608440d59.png"
+  ],
+  "compiled_bytes_after": 757086452,
+  "compiled_bytes_saved": 18848,
+  "validation": {
+    "build": "passed",
+    "resource_checks": {
+      "passed": 10,
+      "skipped": 1,
+      "skip_reason": "Original disk inputs are not present"
+    },
+    "runtime_groups": {
+      "ln1_core_checks": "passed",
+      "ln1_player_checks": "passed",
+      "ln1_enemy_checks": "passed",
+      "ln1_combat_checks": "passed",
+      "ln1_world_checks": "passed",
+      "ln1_feedback_checks": "passed",
+      "ln_scene_test_checks": "passed",
+      "ln1_level_checks": "passed",
+      "ln2_player_checks": "passed",
+      "ln2_enemy_checks": "passed",
+      "ln2_revival_context_checks": "passed",
+      "ln2_entry_checks": "passed",
+      "ln2_keypad_checks": "passed",
+      "ln2_projectile_checks": "passed",
+      "ln3_movement_checks": "passed",
+      "ln3_action_checks": "passed",
+      "ln3_input_checks": "passed",
+      "ln3_animation_checks": "passed",
+      "ln3_mask_checks": "passed",
+      "ln3_collision_checks": "passed",
+      "ln3_enemy_checks": "passed",
+      "ln3_combat_checks": "passed",
+      "ln3_scene_checks": "passed",
+      "ln3_item_checks": "passed",
+      "ln3_scenery_checks": "passed",
+      "ln3_special_checks": "passed",
+      "ln3_world_checks": "passed",
+      "ln2_world_checks": "passed",
+      "save_serialization": "passed",
+      "runtime": "passed",
+      "mask_gpu": "passed",
+      "ln1_feedback_capture": "passed",
+      "scene_capture": "passed",
+      "ln1_level_capture": "passed",
+      "ln2_world_capture": "passed",
+      "ln3_world_capture": "passed"
+    },
+    "ui_checks": "passed",
+    "startup": "passed",
+    "manual_playthrough": "not_run"
+  }
+}

@@ -16,7 +16,7 @@
         "LN_EDIT_PAINT_TIMING_PASS: three games retain native duration/order and one cached edit",
         "LN_EDITOR_BITMAP_PASS: native pixels preserved; added asset isolated; depth and runtime parity in three games",
         "LN_EDITOR_CONTROLS_PASS: add/select, depth repeat/entry, music pause/resume",
-        "LN_EDITOR_OPTIMIZATION_PASS: 18 partial/full comparisons; partial us=376033 full us=3069975; independent CRT and undo",
+        "LN_EDITOR_OPTIMIZATION_PASS: 18 partial/full comparisons; partial us=370700 full us=2947065; independent CRT and undo",
         "LN_EDITOR_TEST_ROOM_PASS: selected edited room and level music for all three games",
         "LN_EDITOR_PASS: 293 room imports, 25695 parts; composition/depth, save/load validation, mode isolation and three game previews"
       ]

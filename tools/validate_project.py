@@ -8,6 +8,22 @@ from build_project import read_json
 ROOT=Path(__file__).resolve().parents[1];PROJECT=ROOT/'LNPreserve'
 
 class ConversionChecks(unittest.TestCase):
+    def test_texture_crop_keeps_depth_masks_full_bounds(self):
+        project=read_json(PROJECT/'LNPreserve.yyp')
+        groups={g['name']:g for g in project['TextureGroups']}
+        resources={r['id']['name']:r['id']['path'] for r in project['resources']}
+        def inspect(value):
+            if isinstance(value,dict):
+                for key,item in value.items():
+                    if key=='depth_sprite' and isinstance(item,str) and item in resources:
+                        sprite=read_json(PROJECT/resources[item])
+                        self.assertFalse(groups[sprite['textureGroupId']['name']]['autocrop'],item)
+                    inspect(item)
+            elif isinstance(value,list):
+                for item in value:inspect(item)
+        for path in (PROJECT/'datafiles/play').rglob('world.json'):
+            inspect(read_json(path))
+
     def test_shared_character_banks_and_type_references(self):
         path=PROJECT/'datafiles/graphics/characters.json'
         if not path.exists():self.skipTest('Character consolidation not applied')

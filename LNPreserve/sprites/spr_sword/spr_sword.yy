@@ -80,10 +80,7 @@
   },
   "swatchColours":null,
   "swfPrecision":0.5,
-  "textureGroupId":{
-    "name":"Default",
-    "path":"texturegroups/Default",
-  },
+  "textureGroupId":{"name":"CroppedActors","path":"texturegroups/CroppedActors",},
   "type":0,
   "VTile":false,
   "width":1800,
