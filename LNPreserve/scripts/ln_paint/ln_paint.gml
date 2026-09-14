@@ -47,14 +47,14 @@ function ln_paint_tick(_g) {
 }
 function ln_paint_prepare() {
     var _p=global.ln_paint;if(!_p.active || _p.buffer<0) return;
+    var _view=matrix_get(matrix_view),_projection=matrix_get(matrix_projection);
     // Rebuild from recorded patches after GPU surface loss.
     if(!surface_exists(_p.surface)) {
         _p.surface=surface_create(240,144);_p.cursor=8;
         surface_set_target(_p.surface);draw_clear(_p.background);surface_reset_target();
     }
-    if(!_p.presented) {_p.presented=true;return;}
+    if(!_p.presented) {_p.presented=true;matrix_set(matrix_view,_view);matrix_set(matrix_projection,_projection);return;}
     surface_set_target(_p.surface);
-    var _view=matrix_get(matrix_view),_projection=matrix_get(matrix_projection);
     var _camera=camera_create_view(0,0,240,144);camera_apply(_camera);
     var _palette=global.ln_paint_palette;
     while(_p.cursor<buffer_get_size(_p.buffer)) {
@@ -77,14 +77,14 @@ function ln_paint_slider(_input=false) {
     if(_input) {
         if(mouse_check_button_pressed(mb_left) && ln_tool_mouse_x()>=860 && ln_tool_mouse_x()<=1130 && abs(ln_tool_mouse_y()-587)<=12) global.ln_paint_drag=true;
         if(!mouse_check_button(mb_left)) global.ln_paint_drag=false;
-        if(global.ln_paint_drag) global.ln_paint_speed=round((0.1+3.9*clamp((ln_tool_mouse_x()-870)/240,0,1))*20)/20;
+        if(global.ln_paint_drag) global.ln_paint_speed=round((0.1+4.9*clamp((ln_tool_mouse_x()-870)/240,0,1))*20)/20;
         if(mouse_check_button_pressed(mb_left) && ln_tool_mouse_x()>=860 && ln_tool_mouse_x()<=1130 && ln_tool_mouse_y()>=606 && ln_tool_mouse_y()<=625) global.ln_paint_speed=1;
         return;
     }
     draw_set_colour(c_white);draw_text(862,548,"SCENE PAINTING");
     draw_text(862,566,"Speed "+string_format(global.ln_paint_speed,1,2)+"x");
     draw_set_colour(make_colour_rgb(75,85,96));draw_rectangle(870,585,1110,589,false);
-    draw_set_colour(make_colour_rgb(140,206,233));draw_circle(870+240*(global.ln_paint_speed-0.1)/3.9,587,5,false);
+    draw_set_colour(make_colour_rgb(140,206,233));draw_circle(870+240*(global.ln_paint_speed-0.1)/4.9,587,5,false);
     draw_set_colour(c_white);draw_text(862,608,"Reset to original baseline: 1x");
 }
 

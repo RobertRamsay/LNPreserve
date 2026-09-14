@@ -1,4 +1,4 @@
-# Scene build-up editor — experimental first version
+# Scene build-up editor â€” experimental first version
 
 Press **F6** to open or close the editor. The live game pauses while it is open.
 The F11 menu also shows this shortcut. Existing local project changes are preserved.
@@ -19,7 +19,7 @@ one vertically). Shift makes larger steps. Right-drag positions the actual
 game's ninja pose in the preview. Flip X mirrors a part.
 
 Build preview starts with the room's background colour, then draws the list.
-The speed buttons use the same saved 0.1x–4x setting as F11 scene painting.
+The speed buttons use the same saved 0.1xâ€“4x setting as F11 scene painting.
 Build preview and in-game room entry use the source-recorded construction order and duration, scaled by the shared build-speed setting.
 
 ## Depth
@@ -45,7 +45,7 @@ files leave the current pack intact. Up to 30 changes in the current room can
 be undone. Save before loading a different pack if you want to retain both.
 
 Edits are also backed up to `modified-scenes.autosave.json` in GameMaker's save
-directory (normally `%LOCALAPPDATA%/LNPreserve`). Recover loads that backup, replacing the current editor pack with the latest autosaved scenes. It does not undo Git changes or reset the original game. Use Save file first if you want to keep the current pack separately.
+directory (normally `%LOCALAPPDATA%/LNPreserve`). Use Load file to open that backup. Restore all resets only the current room to its original parts, positions, ordering and depth settings. It leaves other rooms intact and can be undone with Ctrl+Z.
 The original source files and PNG assets are never rewritten.
 
 Test room enables the current edited room and starts it through normal F11 scene selection, closes the editor, and plays its level music (respecting mute). F6 returns to the retained edits. Rooms without a playable spawn remain in the editor with an explanation. Modified ON applies saved overrides when playing matching rooms; other rooms keep their original rendering. Merely browsing rooms in the editor does not teleport the live game. Modified defaults OFF at application startup;
@@ -88,7 +88,7 @@ does not establish pixel-for-pixel source parity or correct depth in every room.
   New parts use an opaque-pixel overlay so native source priority cells cannot silently hide them;
   transparent pixels remain transparent. Their depth starts at their base, and is editable.
 - Hold depth minus/plus to repeat; repetition accelerates after about a second.
-  Click the depth number to type a whole number, Enter to apply, Escape to cancel (0–144).
+  Click the depth number to type a whole number, Enter to apply, Escape to cancel (0â€“144).
 - Music pauses on entering F6 and resumes on leaving; music already paused stays paused.
 - JANSINA UI font is now 14 points, with its cached glyph atlas rebuilt from the installed font.
 
@@ -116,9 +116,9 @@ sample, not a guaranteed frame rate for every room or asset size.
 
 ## Widescreen tool and history
 
-The project presents a 1920 × 1080 canvas using `spr_LNHDbkg` as the optional
+The project presents a 1920 Ã— 1080 canvas using `spr_LNHDbkg` as the optional
 background. The preserved tool content is centered without stretching its pixels.
-1x is 1920 × 1080; 2x is 3840 × 2160. An exact-display preset uses borderless
+1x is 1920 Ã— 1080; 2x is 3840 Ã— 2160. An exact-display preset uses borderless
 fullscreen to avoid clipping by Windows borders. Fit chooses the largest whole
 scale that fits, or reduces below 1x on a smaller desktop. F9 still toggles fullscreen.
 
@@ -138,16 +138,16 @@ layout fixture exercises the actual centered compositor and visibility states.
 
 
 ### Per-part depth overrides
-Imported parts inherit the exact native masking until their depth is edited. The original-depth status has been removed. Typing a depth (even the displayed value) or using + / - selects Depth automatically. The mode button cycles Inherited → Depth → Always front → Ground → Inherited. Ground explicitly clears native occlusion on the part's visible pixels; Depth replaces it with the chosen ground-contact line. Other pixels retain native masking. The displayed initial number is the part's base, not a claim that the original per-pixel mask is a single flat line.
+Imported parts inherit the exact native masking until their depth is edited. The original-depth status has been removed. Typing a depth (even the displayed value) or using + / - selects Depth automatically. The mode button cycles Inherited â†’ Depth â†’ Always front â†’ Ground â†’ Inherited. Ground explicitly clears native occlusion on the part's visible pixels; Depth replaces it with the chosen ground-contact line. Other pixels retain native masking. The displayed initial number is the part's base, not a claim that the original per-pixel mask is a single flat line.
 
 Overrides are saved with the custom scene and participate in Undo/Redo. The editor and Test room use the same replacement rule for all three games. Original masks outside visible overridden part pixels are retained; this is not a reconstruction of the original masks as independently movable objects.
 
 
 ### Selected part pulse
-`pulseSelected?` (on by default) highlights the selected placed part once every 1.6 seconds: original colour → white → original colour over 0.4 seconds total. The pulse follows its visible pixel shape, preserving transparent holes and parts drawn over it. It is editor-only, works with editor CRT, and does not change saved room artwork or depth. Click the toggle below the preview to disable it.
+`pulseSelected?` (on by default) highlights the selected placed part once every 1.6 seconds: original colour â†’ white â†’ original colour over 0.4 seconds total. The pulse follows its visible pixel shape, preserving transparent holes and parts drawn over it. It is editor-only, works with editor CRT, and does not change saved room artwork or depth. Click the toggle below the preview to disable it.
 
 
-The top toolbar’s **Editor (F6)** button opens the editor using the same path as F6. **Back to game F6** in the editor returns without restarting the game, preserves edits and resumes music as F6 does. Fullscreen remains in the outer top toolbar; duplicate inner fullscreen buttons have been removed.
+The top toolbarâ€™s **Editor (F6)** button opens the editor using the same path as F6. **Back to game F6** in the editor returns without restarting the game, preserves edits and resumes music as F6 does. Fullscreen remains in the outer top toolbar; duplicate inner fullscreen buttons have been removed.
 
 The outer size/fullscreen controls are compact and aligned with the right edge of the tool. **Game/Levels (F11)** beside Editor opens the existing selection menu; its label changes to **Back to game (F11)** while that menu is open.
 
@@ -155,7 +155,7 @@ The outer size/fullscreen controls are compact and aligned with the right edge o
 Completed edited scenes now preserve native bitmap pixels wherever source colour and visible-part ownership are unchanged. Adding an overlay therefore affects only its visible pixels; depth-only edits do not alter scenery colour. The raw source reconstruction remains available for build-up playback. Edited/revealed regions still use reconstructed source assets.
 
 
-In-game edited-room entry uses the original recorded build-up order and duration, with the same speed slider. The completed custom bitmap is cached once and takes over when that sequence ends; additions appear in that final handover. The editor’s Build preview uses the same recording and speed setting, including the initial plain background and final edited bitmap.
+In-game edited-room entry uses the original recorded build-up order and duration, with the same speed slider. The completed custom bitmap is cached once and takes over when that sequence ends; additions appear in that final handover. The editorâ€™s Build preview uses the same recording and speed setting, including the initial plain background and final edited bitmap.
 
 
 Selected parts have **Up 10**, **Down 10**, **Top (back)** and **Bottom (front)** controls below the depth settings. Moves stop at the list ends, keep the selected part visible, and each count as one Undo/Redo action. They change draw order without changing depth settings. Ninja occlusion uses inherited masks or explicit part depth; it is not inferred from list order.
@@ -164,8 +164,18 @@ Opening the editor or changing room resets the preview ninja to the room entry u
 
 Buttons use the supplied `spr_UI_button` artwork sliced into nine regions. Borders/corners are scaled to four logical pixels; centres stretch to the existing button dimensions. Active buttons are brighter, and labels/hit areas retain their existing sizes.
 
-The selected asset preview is centred inside `spr_assetPanel` (204 × 204 logical pixels), with its aspect ratio preserved inside a padded 112 × 112 opening. The part controls occupy the neighbouring column.
+The selected asset preview is centred inside `spr_assetPanel` (204 Ã— 204 logical pixels), with its aspect ratio preserved inside a padded 112 Ã— 112 opening. The part controls occupy the neighbouring column.
 
 Tool startup plays `spr_sword` around its supplied handle origin with `sfx_sword`, then displays LAST NINJA REVISITED, PLAYER - EDITOR and the configured release version (currently 1.0.0.0). Click to Begin enters the tool and resumes its music. F9 remains available on the title screen.
 
-The startup title and Begin label use `font_jansina_big` at native size; other text uses the updated `font_jansina`. The sword handle is shifted 200 canvas pixels left. Its exponential velocity rises from 1× to 2× over the swing, with six historical poses behind it at descending opacity.
+The startup title and Begin label use `font_jansina_big` at native size; other text uses the updated `font_jansina`. The sword handle is shifted 200 canvas pixels left. Its exponential velocity rises from 1Ã— to 2Ã— over the swing, with six historical poses behind it at descending opacity.
+
+### Editor follow-up
+
+- Build preview restores the enclosing camera on its first frame and subsequent updates, keeping the full editor layout visible during painting.
+- Build speed ranges from 0.1x to 5x in the editor and F11 slider, with the same saved preference.
+- Build speed, room/level arrows and part-order step buttons repeat after 350 ms, using the depth controls' 90 ms repeat interval and 30 ms accelerated interval after 1.2 seconds.
+- Moving an original asset now treats its transparent pixels like an added asset instead of stamping its original background cells over the destination.
+- Restore all replaces Recover; it restores the current room and supports undo.
+
+Validation: editor suite passed (293 imported room records), including Wilderness room 1 tree transparency, matching incremental/full redraws, Restore all/undo and painting camera checks. User-edited room visual playtesting remains separate from automated coverage.

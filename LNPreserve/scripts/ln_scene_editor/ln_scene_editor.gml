@@ -283,18 +283,18 @@ function ln_edit_step(_host) {
     if(ln_edit_hit(24,18,180,28)) {_e.enabled=!_e.enabled;_e.playback=undefined;}
     if(ln_edit_hit(216,18,112,28)) { _file=get_save_filename("JSON files|*.json","modified-scenes.json");if(ln_edit_save(_file)) _e.dirty=false;}
     if(ln_edit_hit(340,18,112,28)) { _file=get_open_filename("JSON files|*.json","");if(ln_edit_load(_file)) ln_edit_select(_e.game,_e.level,_e.room_id);}
-    if(ln_edit_hit(752,18,132,28)) {if(ln_edit_load("modified-scenes.autosave.json")) ln_edit_select(_e.game,_e.level,_e.room_id);}
+    if(ln_edit_hit(752,18,132,28)) {ln_edit_restore_all();return true;}
     if(ln_edit_hit(464,18,112,28) || (keyboard_check(vk_control) && keyboard_check_pressed(ord("Z")))) {ln_edit_history(false);return true;}
     if(ln_edit_hit(850,62,112,28) || (keyboard_check(vk_control) && keyboard_check_pressed(ord("Y")))) {ln_edit_history(true);return true;}
     if(ln_edit_hit(588,18,152,28)) ln_edit_build_preview_start();
     if(_e.build>=0) ln_edit_build_preview_tick(delta_time);
     for( _i=0;_i<3;_i++) if(ln_edit_hit(24+_i*110,62,102,28)) { _g=_i+1;ln_edit_select(_g,1,ln_edit_rooms(_g,1)[0]);return true;}
-    if(ln_edit_hit(900,18,30,28)) global.ln_paint_speed=max(0.1,round((global.ln_paint_speed-0.1)*10)/10);
-    if(ln_edit_hit(1060,18,30,28)) global.ln_paint_speed=min(4,round((global.ln_paint_speed+0.1)*10)/10);
+    _delta=ln_edit_value_repeat(900,18,30,28);if(_delta) global.ln_paint_speed=max(0.1,round((global.ln_paint_speed-0.1*_delta)*10)/10);
+    _delta=ln_edit_value_repeat(1060,18,30,28);if(_delta) global.ln_paint_speed=min(5,round((global.ln_paint_speed+0.1*_delta)*10)/10);
      _max=_e.game==1?6:(_e.game==2?7:5);
-    if(ln_edit_hit(370,62,30,28) || ln_edit_hit(570,62,30,28)) { _level=clamp(_e.level+(ln_tool_mouse_x()<400?-1:1),1,_max); _d=ln_edit_data(_e.game,_level);ln_edit_select(_e.game,_level,ln_edit_rooms(_e.game,_level)[0]);return true;}
+    if(ln_edit_value_repeat(370,62,30,28) || ln_edit_value_repeat(570,62,30,28)) { _level=clamp(_e.level+(ln_tool_mouse_x()<400?-1:1),1,_max); _d=ln_edit_data(_e.game,_level);ln_edit_select(_e.game,_level,ln_edit_rooms(_e.game,_level)[0]);return true;}
      _d=ln_edit_data(_e.game,_e.level); _ids=ln_edit_rooms(_e.game,_e.level);
-    if(ln_edit_hit(620,62,30,28) || ln_edit_hit(810,62,30,28)) { _index=0;while(_index<array_length(_ids)-1 && _ids[_index]!=_e.room_id) _index++;_index=clamp(_index+(ln_tool_mouse_x()<650?-1:1),0,array_length(_ids)-1);ln_edit_select(_e.game,_e.level,_ids[_index]);return true;}
+    if(ln_edit_value_repeat(620,62,30,28) || ln_edit_value_repeat(810,62,30,28)) { _index=0;while(_index<array_length(_ids)-1 && _ids[_index]!=_e.room_id) _index++;_index=clamp(_index+(ln_tool_mouse_x()<650?-1:1),0,array_length(_ids)-1);ln_edit_select(_e.game,_e.level,_ids[_index]);return true;}
     if(ln_edit_hit(24,594,140,28)) _e.show_ninja=!_e.show_ninja;
     if(ln_edit_hit(176,594,140,28)) _e.show_depth=!_e.show_depth;
     if(ln_edit_hit(328,594,150,28)) {_e.pulse_selected=!_e.pulse_selected;_e.pulse_time_us=0;}
@@ -314,19 +314,19 @@ function ln_edit_step(_host) {
     }
     if(_e.part>=0 && _e.part<array_length(_s.parts)) {
          _p=_s.parts[_e.part];
-        if(ln_edit_hit(760,548,65,28)) _changed=ln_edit_move_part(_e.part-1) || _changed;
-        if(ln_edit_hit(832,548,65,28)) _changed=ln_edit_move_part(_e.part+1) || _changed;
-        if(ln_edit_hit(760,704,112,28)) _changed=ln_edit_move_part(_e.part-10) || _changed;
-        if(ln_edit_hit(880,704,144,28)) _changed=ln_edit_move_part(_e.part+10) || _changed;
+        _delta=ln_edit_value_repeat(760,548,65,28);if(_delta) _changed=ln_edit_move_part(_e.part-1*_delta) || _changed;
+        _delta=ln_edit_value_repeat(832,548,65,28);if(_delta) _changed=ln_edit_move_part(_e.part+1*_delta) || _changed;
+        _delta=ln_edit_value_repeat(760,704,112,28);if(_delta) _changed=ln_edit_move_part(_e.part-10*_delta) || _changed;
+        _delta=ln_edit_value_repeat(880,704,144,28);if(_delta) _changed=ln_edit_move_part(_e.part+10*_delta) || _changed;
         if(ln_edit_hit(760,740,112,28)) _changed=ln_edit_move_part(0) || _changed;
         if(ln_edit_hit(880,740,144,28)) _changed=ln_edit_move_part(array_length(_s.parts)-1) || _changed;
         if(ln_edit_hit(904,548,80,28) || keyboard_check_pressed(vk_delete)) {array_delete(_s.parts,_e.part,1);_e.part=min(_e.part,array_length(_s.parts)-1);_changed=true;}
         else {
              _step=keyboard_check(vk_shift)?8:1;
-            if(keyboard_check_pressed(vk_left)) {_p.x-=2*_step;_changed=true;}
-            if(keyboard_check_pressed(vk_right)) {_p.x+=2*_step;_changed=true;}
-            if(keyboard_check_pressed(vk_up)) {_p.y-=_step;_changed=true;}
-            if(keyboard_check_pressed(vk_down)) {_p.y+=_step;_changed=true;}
+            if(keyboard_check_pressed(vk_left)) {_p.x-=2*_step;_p.overlay=true;_changed=true;}
+            if(keyboard_check_pressed(vk_right)) {_p.x+=2*_step;_p.overlay=true;_changed=true;}
+            if(keyboard_check_pressed(vk_up)) {_p.y-=_step;_p.overlay=true;_changed=true;}
+            if(keyboard_check_pressed(vk_down)) {_p.y+=_step;_p.overlay=true;_changed=true;}
             if(ln_edit_hit(760,630,92,28)) {_p.flip=!_p.flip;_changed=true;}
             if(ln_edit_hit(860,630,164,28)) {if(_p.mode==0 && variable_struct_exists(_p,"depth_override") && _p.depth_override) {_p.depth_override=false;} else {_p.mode=(_p.mode+1) mod 3;_p.depth_override=true;}_changed=true;}
             _held=mouse_check_button(mb_left)?(ln_edit_inside(760,666,35,28)?-1:(ln_edit_inside(803,666,35,28)?1:0)):0;
@@ -357,8 +357,9 @@ function ln_edit_draw() {
      _e=global.ln_editor; _s=_e.scene;if(!is_struct(_s)) return;
     draw_set_font(font_jansina);draw_set_halign(fa_left);draw_set_valign(fa_top);
     ln_tool_clear(false);draw_set_colour(c_white);
+    _view=matrix_get(matrix_view); _projection=matrix_get(matrix_projection);
     if(_e.build>=0 && global.ln_paint.active) ln_paint_prepare();
-     _view=matrix_get(matrix_view); _projection=matrix_get(matrix_projection);
+    matrix_set(matrix_view,_view);matrix_set(matrix_projection,_projection);
      _cache=ln_edit_build(_e.reference?_e.source_scene:_s,-1,_e.reference?"source":"preview");
     if(is_array(_e.pending_pick)) {ln_edit_pick_part(_cache,_e.pending_pick[0],_e.pending_pick[1]);_e.pending_pick=undefined;}
     if(!surface_exists(_e.preview_surface)) _e.preview_surface=surface_create(240,144);
@@ -391,7 +392,7 @@ function ln_edit_draw() {
         ln_edit_button(760,666,35,"-");ln_edit_button(803,666,35,"+");ln_edit_button(846,666,178,_e.depth_edit?(keyboard_string+"|"):string(_p.depth),_e.depth_edit);
     }
     ln_edit_button(24,18,180,"Modified: "+(_e.enabled?"ON":"OFF"),_e.enabled);ln_edit_button(216,18,112,"Save file");ln_edit_button(340,18,112,"Load file");ln_edit_button(464,18,112,"Undo (^Z)");ln_edit_button(588,18,152,"Build preview");
-    ln_edit_button(752,18,132,"Recover");ln_edit_button(850,62,112,"Redo (^Y)");
+    ln_edit_button(752,18,132,"Restore all");ln_edit_button(850,62,112,"Redo (^Y)");
     ln_edit_button(1110,18,160,"Editor CRT "+(_e.crt_enabled?"ON":"OFF")+" F10",_e.crt_enabled);
     ln_edit_button(1110,62,160,"Back to game F6");
     ln_edit_button(900,18,30,"-");draw_set_colour(c_white);draw_text(938,24,string_format(global.ln_paint_speed,1,1)+"x build");ln_edit_button(1060,18,30,"+");
@@ -739,6 +740,7 @@ function ln_edit_control_checks(_host) {
     audio_pause_sound(_voice);ln_edit_music(_host,true);ln_edit_music(_host,false);
     ln_check(audio_is_paused(_voice),"editor preserves previously paused music");
     audio_stop_sound(_voice);global.ln_music_voice=_previous;
+    ln_edit_snag_checks();
     show_debug_message("LN_EDITOR_CONTROLS_PASS: add/select, depth repeat/entry, music pause/resume");
 }
 
@@ -759,6 +761,7 @@ function ln_edit_decode(_scene,_part,_o) {
 }
 function ln_edit_move_bounds(_part,_dx,_dy) {
     var _e=global.ln_editor,_o=variable_struct_get(ln_edit_data(_e.game,_e.level).objects,string(_part.asset));
+    _part.overlay=true;
     _e.dirty_rect=[clamp(floor(min(_part.x,_part.x+_dx)/8)*8,0,240),clamp(floor(min(_part.y,_part.y+_dy)/8)*8,0,144),
         clamp(ceil((max(_part.x,_part.x+_dx)+_o.width)/8)*8,0,240),clamp(ceil((max(_part.y,_part.y+_dy)+_o.height)/8)*8,0,144)];
 }
@@ -1007,7 +1010,10 @@ function ln_edit_paint_timing_checks() {
         var _speed=global.ln_paint_speed;global.ln_paint_speed=1;
         ln_edit_build_preview_start();ln_edit_build_preview_tick(100000);
         ln_check(global.ln_paint.duration==_duration && global.ln_paint.time==0,"editor preview uses game duration and waits for background draw");
-        ln_paint_prepare();ln_edit_build_preview_tick(10000);var _first=global.ln_paint.time;
+        var _pv=matrix_get(matrix_view),_pp=matrix_get(matrix_projection);
+        ln_paint_prepare();ln_check(ln_rewind_equal(_pv,matrix_get(matrix_view)) && ln_rewind_equal(_pp,matrix_get(matrix_projection)),"first painting frame preserves editor camera");
+        ln_edit_build_preview_tick(10000);var _first=global.ln_paint.time;
+        ln_paint_prepare();ln_check(ln_rewind_equal(_pv,matrix_get(matrix_view)) && ln_rewind_equal(_pp,matrix_get(matrix_projection)),"painting updates preserve editor camera");
         global.ln_paint_speed=2;ln_edit_build_preview_tick(10000);
         ln_check(abs(global.ln_paint.time-_first*3)<=0.00001,"editor preview uses shared build speed immediately: "+string(_first)+" to "+string(global.ln_paint.time)+"");
         global.ln_paint.time=_duration;ln_edit_build_preview_tick(0);
@@ -1083,4 +1089,54 @@ function ln_ui_button_background(_x,_y,_w,_h,_selected=undefined) {
         draw_sprite_part_ext(spr_UI_button,0,_sx[_col],_sy[_row],_widths[_col],_heights[_row],
             _dx[_col],_dy[_row],_dw[_col]/_widths[_col],_dh[_row]/_heights[_row],_tint,1);
     }
+}
+
+function ln_edit_restore_all() {
+    var _e=global.ln_editor;ln_edit_finish_drag();
+    var _before=json_stringify(_e.scene);
+    _e.scene=ln_edit_source(_e.game,_e.level,_e.room_id);
+    ln_edit_changed(_before);_e.reference=true;_e.part=-1;_e.scroll=0;
+    _e.depth_edit=false;_e.pending_pick=undefined;_e.dirty_rect=undefined;
+    ln_paint_free();ln_edit_spawn_preview();
+    _e.message="Room restored to original. Ctrl+Z to undo.";
+}
+function ln_edit_value_repeat(_x,_y,_w,_h) {
+    if(!variable_global_exists("ln_ui_repeats")) global.ln_ui_repeats={};
+    var _key=string(_x)+":"+string(_y);
+    if(!variable_struct_exists(global.ln_ui_repeats,_key)) variable_struct_set(global.ln_ui_repeats,_key,{held:false,age:0,next:350000});
+    var _state=variable_struct_get(global.ln_ui_repeats,_key);
+    return ln_ui_repeat_count(_state,mouse_check_button(mb_left) && ln_edit_inside(_x,_y,_w,_h),mouse_check_button_pressed(mb_left),delta_time);
+}
+function ln_ui_repeat_count(_state,_held,_pressed,_elapsed) {
+    if(!_held) {_state.held=false;return 0;}
+    if(_pressed || !_state.held) {_state.held=true;_state.age=0;_state.next=350000;return 1;}
+    _state.age+=min(_elapsed,250000);var _count=0;
+    while(_state.age>=_state.next && _count<16) {_count++;_state.next+=_state.next>=1200000?30000:90000;}
+    return _count;
+}
+
+function ln_edit_snag_checks() {
+    var _e=global.ln_editor,_scenes=json_stringify(_e.scenes);
+    ln_edit_select(1,2,1);var _before=ln_edit_build(_e.scene,-1,"preview").display_colours;
+    ln_edit_add_asset(73);var _part=_e.scene.parts[_e.part];_part.x=68;_part.y=101;
+    ln_edit_changed(json_stringify(_e.source_scene));
+    var _cache=ln_edit_build(_e.scene,-1,"preview"),_o=variable_struct_get(ln_edit_data(1,2).objects,"73"),_decoded=ln_edit_decode(_e.scene,_part,_o);
+    for(var _y=0;_y<144;_y++) for(var _x=0;_x<240;_x++) {
+        var _px=_x-68,_py=_y-101;
+        if(_px>=0 && _px<_o.width && _py>=0 && _py<_o.height && _decoded.codes[_py*_o.width+_px]!=0) continue;
+        ln_check(_cache.display_colours[_y*240+_x]==_before[_y*240+_x],"added tree preserves transparent pixels and surrounding room");
+    }
+    ln_edit_move_bounds(_part,-6,-3);_part.x-=6;_part.y-=3;_e.revision++;
+    var _partial=ln_edit_build(_e.scene,-1,"preview").display_colours;
+    ln_edit_free_cache();var _full=ln_edit_build(_e.scene,-1,"preview").display_colours;
+    ln_check(ln_rewind_equal(_partial,_full),"moved tree partial rebuild matches complete rebuild");
+    ln_edit_draw();draw_flush();surface_save(application_surface,"editor-tree-transparency.png");
+    var _edited=json_stringify(_e.scene);
+    ln_edit_restore_all();ln_check(ln_rewind_equal(_e.scene,ln_edit_source(1,2,1)),"Restore all resets current room");
+    ln_check(ln_edit_history(false) && json_stringify(_e.scene)==_edited,"Restore all can be undone");
+    var _state={held:false,age:0,next:350000};
+    ln_check(ln_ui_repeat_count(_state,true,true,0)==1 && ln_ui_repeat_count(_state,true,false,200000)==0 && ln_ui_repeat_count(_state,true,false,150000)==1,"value button uses depth's 350ms hold delay");
+    ln_check(ln_ui_repeat_count(_state,false,false,100000)==0,"value repeat stops on release");
+    _e.scenes=json_parse(_scenes);ln_edit_free_cache();
+    show_debug_message("LN_EDITOR_SNAGS_PASS");
 }

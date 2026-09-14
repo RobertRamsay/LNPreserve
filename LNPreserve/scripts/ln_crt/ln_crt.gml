@@ -393,7 +393,7 @@ function ln_crt_preferences_read(_file="LNPreserve.ini") {
         variable_global_set(_fields[_i],_value);
     }
     var _speed=ini_read_real("ScenePainting","speed",1);
-    global.ln_paint_speed=(is_nan(_speed) || is_infinity(_speed))?1:clamp(_speed,0.1,4);
+    global.ln_paint_speed=(is_nan(_speed) || is_infinity(_speed))?1:clamp(_speed,0.1,5);
     global.ln_tool.ui=ini_read_real("Tool","ui_visible",1)>=0.5;global.ln_tool.background=ini_read_real("Tool","background_visible",1)>=0.5;
     global.ln_editor.crt_enabled=ini_read_real("Editor","crt_enabled",0)>=0.5;
     ini_close();
