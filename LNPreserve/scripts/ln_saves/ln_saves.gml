@@ -134,7 +134,11 @@ function ln_save_restore(_save) {
             if (_g.world.rooms[_i].id==_g.room_id) {_g.world.rooms[_i]=_g.scene_record;break;}
         }
     }
-    if (_g.game_number==3) _g.state.reverse_roll_enabled=true;
+    if (_g.game_number==3) {
+        _g.state.reverse_roll_enabled=true;
+        ln3_exposed_wind_edges(_g.collision);
+        _g.bounds=ln3_room_record(_g.collision.rooms,_g.room_id).boundaries;
+    }
     if (_g.game_number==2 && _g.level==7) {
         // Migrate the temporary loaned orb from the previous test build.
         if (_g.inventory[16]==1) {_g.inventory[16]=0;if (_g.selected_item==16) _g.selected_item=0;}

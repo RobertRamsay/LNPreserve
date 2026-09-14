@@ -15,6 +15,7 @@ function LN3Play(_level=1) constructor {
     actions=ln3_data_read(_path+"actions.json");movement=ln3_data_read(_path+"movement.json");
     input=ln3_data_read(_path+"input.json");animation=ln3_data_read(_path+"animation.json");
     collision=ln3_data_read(_path+"collision.json");enemies=ln3_data_read(_path+"enemy.json");
+    ln3_exposed_wind_edges(collision);
     combat=ln3_data_read(_path+"combat.json");masks=ln3_data_read(_path+"masks.json");
     items=ln3_data_read(_path+"items.json");found_item=-1;
     scenery=ln3_data_read(_path+"scenery_animation.json");
@@ -168,7 +169,8 @@ function ln3_play_tick(_g,_joy) {
     if (ln3_intro_tick(_g,_joy)) return;
     if (ln_frontend_tick(_g,_joy)) return;
     _joy=ln_frontend_filter(_g,_joy);
-    if (_g.game_over || _g.level_complete) {ln3_hud_tick(_g);return;}
+    if (_g.game_over) {ln3_restart_splash(_g);return;}
+    if (_g.level_complete) {ln3_hud_tick(_g);return;}
     if (is_struct(_g.ending)) {ln3_ending_tick(_g.ending,_joy);return;}
     var _s=_g.state;_g.room_age++;
     // The original PAL IRQ decrements byte timers and wraps its word timer.
@@ -333,4 +335,34 @@ function ln3_play_draw(_g) {
     if (_g.paused) draw_text(600,60,"PAUSED");
     if (_g.game_over) draw_text(520,60,"GAME OVER - HOME TO RESTART");
     if (_g.level_complete) draw_text(540,60,"END OF LAST NINJA 3");
+}
+
+// Exhausted lives start a new attempt at this level, after the death wipe.
+function ln3_restart_splash(_g) {
+    ln3_ending_free(_g);
+    var _fresh=new LN3Play(_g.level),_names=variable_struct_get_names(_fresh);
+    for(var _i=0;_i<array_length(_names);_i++) {
+        var _key=_names[_i];
+        if(array_contains(["stage_surface","part_surface","timer","controls","one_hit_kills","music"],_key)) continue;
+        variable_struct_set(_g,_key,variable_struct_get(_fresh,_key));
+    }
+    global.ln_rewind_epoch++;
+    ln_frontend_begin(_g);_g.loader.fade=25;
+}
+
+// Wind scenes 1 and 4: front-facing ledges used solid records. Keep their
+// exact slopes/extents, but give them the same fall descriptor as scenes 5-7.
+// Back edges, exits and climbing windows retain their original records.
+function ln3_exposed_wind_edges(_collision) {
+    if(_collision.level!=2) return;
+    for(var _i=0;_i<array_length(_collision.rooms);_i++) {
+        var _room=_collision.rooms[_i];
+        if(_room.id!=0 && _room.id!=3) continue;
+        var _indices=_room.id==0?[2,3]:[1,2];
+        for(var _j=0;_j<array_length(_indices);_j++) {
+            var _record=_room.boundaries[_indices[_j]];
+            _record[4]|=32;_record[5]=130;
+            _room.boundaries[_indices[_j]]=_record;
+        }
+    }
 }

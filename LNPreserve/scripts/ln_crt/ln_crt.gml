@@ -269,7 +269,7 @@ function ln_crt_checks() {
     ln_check(_hashes[0]!=_hashes[1] && _hashes[1]!=_hashes[2],"phosphor style and spacing independently affect GPU output");
     global.ln_crt_phosphor=_style_saved;global.ln_crt_pitch=_pitch_saved;global.ln_crt_honeycomb=_strength;
     global.ln_crt_enabled=false;
-    var _tone_saved=[global.ln_crt_exposure,global.ln_crt_contrast],_tone_pixels=[];
+    global.ln_crt_enabled=true;var _tone_saved=[global.ln_crt_exposure,global.ln_crt_contrast],_tone_pixels=[];
     for(var _tone_case=0;_tone_case<3;_tone_case++) {
         global.ln_crt_exposure=_tone_case==1?1:0;global.ln_crt_contrast=_tone_case==2?1.5:1;
         surface_set_target(_output);ln_crt_surface(_source,0,0,3);surface_reset_target();
@@ -280,7 +280,7 @@ function ln_crt_checks() {
     ln_check(global.ln_crt_exposure==2 && global.ln_crt_drag==-1,"exposure track updates and releases");
     ln_crt_slider_input(965,776,true,true);ln_crt_slider_input(965,776,false,false);
     ln_check(global.ln_crt_contrast==0.5,"contrast track updates independently");
-    global.ln_crt_exposure=_tone_saved[0];global.ln_crt_contrast=_tone_saved[1];
+    global.ln_crt_exposure=_tone_saved[0];global.ln_crt_contrast=_tone_saved[1];global.ln_crt_enabled=false;
     surface_free(_source);surface_free(_output);
     var _preview=new LN1Play();ln1_play_enter(_preview,5);
     _preview.player.x=185;_preview.player.y=60;

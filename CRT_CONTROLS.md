@@ -29,3 +29,5 @@ window checks pass. Visual tuning on the user's monitor is still subjective.
 In F6, Editor CRT / F10 independently toggles the scene preview (saved under the Editor INI section). F9 / Fullscreen now works throughout the project, restoring the previous window geometry when switched off.
 
 The 16:9 tool background and outer controls remain outside the CRT. U hides the outer controls, B toggles the artwork; all buttons disappear when UI is off; press U to restore them. F6 always shows the editor UI.
+
+Exposure and contrast: the right side of the tuning panel has Exposure (-2 to +2 stops, default 0) and Contrast (50% to 200%, default 100%). Both are saved under CRT in LNPreserve.ini. They affect CRT-enabled rendering, including the editor preview, and leave the outer controls unchanged. Contrast preserves pure black and white. Width and Alignment use the adjacent shorter tracks.

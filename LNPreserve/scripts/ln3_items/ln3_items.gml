@@ -121,7 +121,7 @@ function ln3_consumable_checks() {
     _s.inventory[21]=1;ln3_level_load(_g,2,true);ln_check(_g.state.inventory[21]==1,"unused potion carries to next level");
     _g=new LN3Play();_s=_g.state;_s.lives=1;_s.player_dead=1;_s.death_wait=0;_s.logic_wait=0;
     ln3_play_tick(_g,0);repeat(650) if (!_g.game_over) ln3_play_tick(_g,0);
-    ln_check(_g.game_over && _s.lives==0 && _g.transition_phase==11,"final life completes sword/game-over transition once");
+    ln_check(!_g.game_over && ln2_loader_active(_g) && _g.level==1 && _g.state.lives==_g.data.initial.lives && _g.logic_ticks==0,"final life completes wipe and waits at fresh same-level splash");
     // Render the actual transition, including the original font, in its playfield.
     _g=new LN3Play();_s=_g.state;_s.lives=4;_s.player_dead=1;_s.death_wait=0;_s.logic_wait=0;
     ln3_play_tick(_g,0);

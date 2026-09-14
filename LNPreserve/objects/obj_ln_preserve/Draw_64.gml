@@ -3,6 +3,8 @@ if(startup_test) {
     if(startup_frame>=110) {
         ln_check(global.ln_tool.ui,"Begin restores UI even when previously hidden");
         ln_check(!startup_active && startup_sound_started,"startup finishes through Begin and sound is cued");
+        ln_check(ln2_loader_active(play) && audio_is_playing(snd_ln1_wastelands_loader) && !audio_is_paused(global.ln_music_voice),"opening level screen resumes Wastelands loader music");
+        ln_check(!audio_is_playing(snd_ln1_wastelands_game),"opening screen does not play in-game music");
         show_debug_message("LN_TOOL_STARTUP_PASS");game_end();
     }
     exit;

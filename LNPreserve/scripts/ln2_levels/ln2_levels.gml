@@ -1234,6 +1234,7 @@ function ln_frontend_begin(_g) {
 }
 function ln_frontend_tick(_g,_joy) {
     if (!ln2_loader_active(_g)) return false;
+    if(variable_struct_exists(_g.loader,"fade") && _g.loader.fade>0) {_g.loader.fade--;return true;}
     if (!(_joy&16)) _g.loader.released=true;
     else if (_g.loader.released) {
         _g.loader.active=false;_g.loader.fire_blocked=true;
@@ -1262,6 +1263,11 @@ function ln_frontend_draw(_g) {
     var _sprite=_pictures[clamp(_g.level-1,0,array_length(_pictures)-1)];
     // The supplied 320x200 artwork includes its own title; no bitmap text overlay.
     draw_sprite_ext(_sprite,0,160,84,3,3,0,c_white,1);
+    if(variable_struct_exists(_g.loader,"fade") && _g.loader.fade>0) {
+        draw_set_colour(c_black);draw_set_alpha(_g.loader.fade/25);draw_rectangle(160,84,1120,684,false);
+        draw_set_alpha(1);draw_set_colour(c_white);
+    }
+
     draw_text(160,36,"LAST NINJA "+string(_g.game_number)+" - "+string_upper(_g.title));
     draw_text(1000,36,"Scene 0");draw_text(160,700,"Press # or Xbox A to begin");
 }

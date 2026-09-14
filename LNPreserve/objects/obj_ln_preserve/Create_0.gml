@@ -140,6 +140,7 @@ for (var _i = 1; _i <= parameter_count(); _i++) {
         catch (_failure) {show_debug_message("LN2_CURTAIN_FAILURE: "+string(_failure));}
         game_end();exit;
     }
+    if (parameter_string(_i) == "--ln3-edge-probe") {ln3_edge_probe();game_end();exit;}
     if (parameter_string(_i) == "--reverse-roll-test") {
         try {ln1_reverse_roll_checks();}
         catch (_failure) {show_debug_message("LN_REVERSE_ROLL_FAILURE: "+string(_failure));}
@@ -265,6 +266,7 @@ buffer_delete(_control_buffer);
 play.controls = control_state_ln1;
 var _start_title=true;
 for(var _arg=1;_arg<=parameter_count();_arg++) if (string_pos("--",parameter_string(_arg))==1) _start_title=false;
+for(var _arg=1;_arg<=parameter_count();_arg++) if(parameter_string(_arg)=="--tool-startup-test") _start_title=true;
 if (_start_title) ln_frontend_begin(play);
 saves = new LNSaves();
 if (save_ui_test) {
@@ -276,7 +278,8 @@ if (selftest) {
     catch (_failure) {show_debug_message("LN_SELFTEST_FAILURE: "+string(_failure));game_end();exit;}
     show_debug_message("LN_TEST_START:runtime");
 }
-ln_music_play(1, "wastelands", false);
+// The title already selected its loader track; only bare gameplay needs this.
+if (!_start_title) ln_music_play(1, "wastelands", false);
 tick_native = function(_from, _to, _frame) {
     input_state.consume(_to);
     var _rows = ln1_control_rows(input_state);

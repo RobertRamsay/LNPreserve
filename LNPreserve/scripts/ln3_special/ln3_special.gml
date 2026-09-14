@@ -185,6 +185,7 @@ function ln3_transition_tick(_g) {
             _g.transition_wipe+=2;if (_g.transition_wipe<144) return;
             if (_g.special_sequence==5) {
                 _s.lives=max(0,_s.lives-1);_s.inventory[27]=_s.lives;
+                if(_s.lives==0) {ln3_restart_splash(_g);return;}
                 _g.transition_phase=8;_s.death_wait=50;return;
             }
             _g.transition_phase=_g.special_sequence==3?7:8;_s.death_wait=_g.special_sequence==3?250:100;return;
@@ -202,7 +203,7 @@ function ln3_transition_tick(_g) {
             _g.transition_mode=0;
             if (_g.special_sequence==5) {
                 _g.ordinary_death=false;
-                if (_s.lives<=0) {_g.game_over=true;_g.transition_phase=11;return;}
+                if (_s.lives<=0) {ln3_restart_splash(_g);return;}
                 _s.player_health=44;_s.inventory[26]=44;_s.player_action=255;_s.climb_flags=0;_s.climb_counter=0;
                 _s.shared_colour1=0;_s.shared_colour2=9;
                 for (var _part=0;_part<4;_part++) _s.parts[_part].colour=_g.data.initial.parts[_part].colour;
@@ -241,7 +242,7 @@ function ln3_transition_draw(_g) {
             var _frame=_g.special_sequence==4?2:(_phase==7?0:1);
             if (_g.special_sequence==5) {
                 var _lives=_g.state.lives;
-                var _text=_lives==0?"GAME OVER":string(_lives)+(_lives==1?" LIFE REMAINING":" LIVES REMAINING");
+                var _text=_lives<=0?"":string(_lives)+(_lives==1?" LIFE REMAINING":" LIVES REMAINING");
                 var _left=floor((240-string_length(_text)*8)/2);
                 for (var _letter=1;_letter<=string_length(_text);_letter++)
                     draw_sprite(spr_ln3_lives_font,ord(string_char_at(_text,_letter))-32,_left+(_letter-1)*8,64);
@@ -350,7 +351,7 @@ function ln3_status_checks() {
         surface_save(_surface,"ln3-hud-level"+string(_level)+".png");surface_free(_surface);
         _g.game_over=true;_s.player_health=0;var _ticks_before=_g.logic_ticks;
         repeat(100) ln3_play_tick(_g,0);
-        ln_check(_g.hud_player_health==0 && _g.logic_ticks==_ticks_before,"LN3 game-over meter settles without advancing gameplay");
+        ln_check(ln2_loader_active(_g) && !_g.game_over && _g.state.lives==_g.data.initial.lives && _g.logic_ticks==0,"LN3 legacy game-over returns to fresh level splash");
         ln3_ending_free(_g);ln3_ending_free(_restored);
         if(surface_exists(_g.stage_surface)) surface_free(_g.stage_surface);
         if(surface_exists(_g.part_surface)) surface_free(_g.part_surface);
@@ -402,4 +403,61 @@ function ln3_followup_checks() {
     ln1_level_load(_ln1,2);ln_check(_ln1.one_hit_kills,"LN1 F8 level persistence");
     var _loaded=ln_save_restore(json_parse(json_stringify(ln_save_capture(_ln1))));ln_check(_loaded.one_hit_kills,"LN1 F8 save persistence");
     show_debug_message("LN3_FOLLOWUP_PASS: five-level respawn colours, LN1/LN3 one-hit defeats and preference persistence");
+}
+
+function ln3_edge_probe() {
+    var _total=0,_miss=0;
+    for(var _level=1;_level<=5;_level++) {
+        var _g=new LN3Play(_level);
+        for(var _room=0;_room<array_length(_g.collision.rooms);_room++) {
+            var _rr=_g.collision.rooms[_room];
+            for(var _b=0;_b<array_length(_rr.boundaries);_b++) {
+                var _raw=_rr.boundaries[_b];if(!(_raw[4]&32) || !(_raw[4]&3)) continue;
+                _g=new LN3Play(_level);
+                var _x=floor((_raw[0]+_raw[2])/2),_type=(_raw[4]>>6)&3;
+                var _y=_raw[1]+real(_raw[1]<_raw[3])+ceil((_x-(_raw[0]-2))/4)*(_type==1?1:-1)+((_raw[4]&1)?-1:1);
+                ln3_play_enter(_g,{destination:_rr.id,spawn_x:_x,spawn_y:_y,facing:0,action:0});
+                var _s=_g.state;_s.enabled&=15;_s.player_health=44;_s.lives=5;_s.climb_flags=0;_s.logic_wait=0;
+                var _hit=false,_fall=false;
+                repeat(180) {
+                    ln3_play_tick(_g,0);
+                    if(_s.input_block!=0 || _s.player_action==37 || _s.player_action==38) _fall=true;
+                    if(_s.player_dead!=0 || _g.special_sequence==5) {_hit=true;break;}
+                }
+                _total++;if(!_hit) _miss++;
+                show_debug_message("EDGE_PROBE level="+string(_level)+" room="+string(_rr.id)+" boundary="+string(_b)+" flags="+string(_raw[5])+" hit="+string(_hit)+" fall="+string(_fall)+" stun="+string(_s.stun)+" action="+string(_s.player_action)+" count="+string(_s.trap_count));
+                _g.special_sequence=0;_g.game_over=false;
+            }
+        }
+    }
+    ln_check(_miss==0,"all sampled LN3 hazard records reach a death transition");
+    show_debug_message("EDGE_PROBE_DONE total="+string(_total)+" miss="+string(_miss));
+    for(var _room_case=0;_room_case<2;_room_case++) for(var _edge=0;_edge<2;_edge++) {
+        var _room_id=_room_case==0?0:3,_index=(_room_case==0?2:1)+_edge,_walked=false;
+        for(var _joy=1;_joy<16 && !_walked;_joy++) {
+            var _g=new LN3Play(2),_raw=ln3_room_record(_g.collision.rooms,_room_id).boundaries[_index];
+            var _x=floor((_raw[0]+_raw[2])/2),_line=_raw[1]+real(_raw[1]<_raw[3])+ceil((_x-(_raw[0]-2))/4)*(((_raw[4]>>6)&3)==1?1:-1);
+            ln3_play_enter(_g,{destination:_room_id,spawn_x:_x,spawn_y:_line-6,facing:0,action:0});
+            _g.state.enabled&=15;_g.state.logic_wait=0;
+            repeat(100) {ln3_play_tick(_g,_joy);if(_g.state.input_block!=0) {_walked=true;break;}}
+        }
+        ln_check(_walked,"normal walking crosses Wind scene "+string(_room_id+1)+" ledge "+string(_edge));
+    }
+    show_debug_message("LN3_WIND_EDGES_PASS: normal walking reaches four exposed ledges in scenes 1 and 4");
+
+    for(var _level=1;_level<=5;_level++) {
+        var _g=new LN3Play(_level);_g.one_hit_kills=true;_g.music=false;
+        _g.state.lives=1;_g.state.inventory[27]=1;_g.state.player_dead=1;_g.state.death_wait=0;_g.state.logic_wait=0;
+        repeat(650) {ln3_play_tick(_g,0);if(ln2_loader_active(_g)) break;}
+        ln_check(ln2_loader_active(_g) && !_g.game_over && _g.level==_level && _g.loader.fade==25,"last life returns to same-level fading splash");
+        ln_check(_g.state.lives==_g.data.initial.lives && _g.state.player_health==44 && _g.one_hit_kills && !_g.music,"new attempt resets lives/health and keeps preferences");
+        var _snapshot=ln_save_restore(json_parse(json_stringify(ln_save_capture(_g))));
+        ln_check(ln2_loader_active(_snapshot) && _snapshot.loader.fade==25,"restart splash fade survives save/load");
+        repeat(30) ln3_play_tick(_g,16);
+        ln_check(ln2_loader_active(_g),"held fire cannot skip the restart splash");
+        ln3_play_tick(_g,0);ln3_play_tick(_g,16);
+        ln_check(!ln2_loader_active(_g) && _g.state.lives>0,"fresh fire starts the new level attempt");
+    }
+    show_debug_message("LN3_LAST_LIFE_PASS: five levels, same-level splash fade, reset, held fire and saves");
+
 }
