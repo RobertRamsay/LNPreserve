@@ -422,6 +422,8 @@ function ln3_edge_probe() {
                 repeat(180) {
                     ln3_play_tick(_g,0);
                     if(_s.input_block!=0 || _s.player_action==37 || _s.player_action==38) _fall=true;
+                    if(_level==2 && (_s.player_action==37 || _s.player_action==38))
+                        ln_check((_s.enabled&3)==0 && (_s.enabled&12)!=0 && _s.waterline==173,"Wind cliff keeps falling body without splash or water clipping");
                     if(_s.player_dead!=0 || _g.special_sequence==5) {_hit=true;break;}
                 }
                 _total++;if(!_hit) _miss++;
@@ -459,5 +461,6 @@ function ln3_edge_probe() {
         ln_check(!ln2_loader_active(_g) && _g.state.lives>0,"fresh fire starts the new level attempt");
     }
     show_debug_message("LN3_LAST_LIFE_PASS: five levels, same-level splash fade, reset, held fire and saves");
+    ln12_game_over_checks();
 
 }

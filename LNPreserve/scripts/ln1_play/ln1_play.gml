@@ -103,6 +103,7 @@ function ln1_play_travel(_g, _entry) {
 }
 
 function ln1_play_tick(_g, _joy) {
+    if(ln_game_over_tick(_g)) return;
     if (ln_frontend_tick(_g,_joy)) return;
     _joy=ln_frontend_filter(_g,_joy);
     if (variable_struct_exists(_g,"death_transition") && is_struct(_g.death_transition)) {
@@ -347,7 +348,7 @@ function ln1_play_draw(_game, _paused) {
     if (_lives_message) {
         draw_clear(c_black);
         draw_set_colour(ln1_lives_colour(_game.death_transition.tick));
-        var _label="LIVES REMAINING",_number=string(max(0,_game.lives_left-1));
+        var _label=_game.lives_left<=1?"GAME OVER":"LIVES REMAINING",_number=_game.lives_left<=1?"":string(_game.lives_left-1);
         var _height=string_height(_label),_top=(144-2*_height-6)/2;
         draw_text((240-string_width(_label))/2,_top,_label);
         draw_text((240-string_width(_number))/2,_top+_height+6,_number);
@@ -395,7 +396,7 @@ function ln1_play_draw(_game, _paused) {
     draw_text(160, 728, "Numpad 7/9/1/3 Direction    F11 Scenes    Home Restart    1/2/3 Games");
     draw_text(160, 760, "Health " + string(_game.player_health) + "    Lives " + string(_game.lives_left));
     if (_game.prayer_phase > 0) draw_text(710, 760, "S + D  Finish prayer");
-    if (_game.game_over) { draw_set_colour(c_white); draw_text(510, 54, "GAME OVER - HOME TO RESTART"); }
+    if (_game.game_over) { draw_set_colour(c_white); draw_text(510, 54, "GAME OVER"); }
     if (_paused) { draw_set_colour(c_white); draw_text(594, 54, "PAUSED"); }
 }
 

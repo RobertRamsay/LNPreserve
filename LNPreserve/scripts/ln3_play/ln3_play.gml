@@ -203,6 +203,8 @@ function ln3_play_tick(_g,_joy) {
     ln3_enemy_attack(_s,_g.actions,_g.enemies,(_g.timer.cycle div 63)&255);
     _s.one_hit_kills=_g.one_hit_kills;
     ln3_combat_update(_s,_g.actions,_g.combat);ln3_fall_tick(_s,_g.actions,_g.data);
+    // Wind drops retain the native falling body, without the water splash pair.
+    if(_g.level==2 && _s.input_block!=0) {_s.enabled&=252;_s.waterline=173;}
     ln3_movement_setup(_s,_g.movement);ln3_movement(_s,_g.movement);
     ln3_climb_enter(_s,_g.actions,_g.runtime_scene.climbs,_joy,_g.level);
     ln3_collision_update(_s,_g.actions,_g.collision,_g.bounds);

@@ -161,6 +161,7 @@ function ln2_level_load(_g,_level,_ordinary=false) {
 }
 
 function ln2_play_tick(_g,_joy) {
+    if(ln_game_over_tick(_g)) return;
     if (ln2_loader_tick(_g,_joy)) return;
     if (is_struct(_g.loader) && _g.loader.fire_blocked) {
         if (!(_joy&16)) _g.loader.fire_blocked=false;
@@ -315,7 +316,7 @@ function ln2_play_draw(_g) {
     draw_text(160,728,"Numpad 7/9/1/3 Direction    F11 Scenes    Home Restart    1/2/3 Games");
     draw_text(160,760,"Lives "+string(_g.lives_left)+"    F1 Music    F7 Pause");
     if (_g.paused) draw_text(600,60,"PAUSED");
-    if (_g.game_over) draw_text(540,60,"GAME OVER - HOME TO RESTART");
+    if (_g.game_over) draw_text(540,60,"GAME OVER");
     if (_g.level_complete) draw_text(530,60,"END OF LAST NINJA 2");
     ln2_keypad_draw(_g);ln2_life_transition_draw(_g);
 }

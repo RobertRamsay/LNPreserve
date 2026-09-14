@@ -1462,3 +1462,55 @@ function ln2_mansion_alarm_draw(_g) {
         draw_sprite(spr_ln2_mansion_alarm,_i*2+(_g.inventory[23]&1),0,0);return;
     }
 }
+
+// Four seconds of native clock time; fire cannot bypass the Game Over hold.
+function ln_game_over_tick(_g) {
+    if(!_g.game_over) return false;
+    if(!variable_struct_exists(_g,"game_over_cycles")) _g.game_over_cycles=0;
+    _g.game_over_cycles+=_g.timer.cycles_per_frame;
+    if(_g.game_over_cycles<4*_g.timer.hz) return true;
+    var _fresh=_g.game_number==1?new LN1Play(_g.level):new LN2Play(_g.level);
+    var _names=variable_struct_get_names(_fresh);
+    for(var _i=0;_i<array_length(_names);_i++) {
+        var _key=_names[_i];
+        if(array_contains(["stage_surface","timer","controls","one_hit_kills","music"],_key)) continue;
+        variable_struct_set(_g,_key,variable_struct_get(_fresh,_key));
+    }
+    _g.game_over_cycles=0;
+    if(_g.game_number==1) {
+        _g.player.world_game=_g;
+        if(is_struct(_g.controls)) {
+            var _defaults=ln3_data_read("actors/ln1/initial_control_state.json"),_keys=variable_struct_get_names(_defaults);
+            for(var _j=0;_j<array_length(_keys);_j++) if(_keys[_j]!="music")
+                variable_struct_set(_g.controls,_keys[_j],variable_struct_get(_defaults,_keys[_j]));
+        }
+    }
+    global.ln_rewind_epoch++;
+    ln_frontend_begin(_g);
+    return true;
+}
+
+function ln12_game_over_checks() {
+    for(var _game=1;_game<=2;_game++) for(var _level=1;_level<=(_game==1?6:7);_level++) {
+        var _g=_game==1?new LN1Play(_level):new LN2Play(_level);
+        if(_game==1) {_g.controls=ln3_data_read("actors/ln1/initial_control_state.json");_g.controls.music=0;}
+        else {_g.music=false;_g.life_transition={phase:3,tick:0};}
+        _g.one_hit_kills=true;_g.game_over=true;_g.lives_left=0;_g.player_health=0;
+        var _ticks=ceil(4*_g.timer.hz/_g.timer.cycles_per_frame),_saved=undefined;
+        for(var _tick=1;_tick<=_ticks;_tick++) {
+            if(_game==1) ln1_play_tick(_g,16);else ln2_play_tick(_g,16);
+            if(_tick<_ticks) ln_check(_g.game_over && !ln2_loader_active(_g),"Game Over holds for four seconds despite fire");
+            if(_tick==floor(_ticks/2)) _saved=ln_save_restore(json_parse(json_stringify(ln_save_capture(_g))));
+        }
+        ln_check(!_g.game_over && ln2_loader_active(_g) && _g.level==_level && _g.lives_left>0 && _g.player_health>0 && _g.one_hit_kills,"LN1/LN2 restart current level with fresh lives and health");
+        if(_game==1) ln_check(_g.player.world_game==_g && _g.controls.music==0,"LN1 restart retains control reference and music preference");
+        else ln_check(!_g.music && !is_struct(_g.life_transition),"LN2 restart clears death transition and preserves mute");
+        repeat(_ticks-floor(_ticks/2)) {if(_game==1) ln1_play_tick(_saved,0);else ln2_play_tick(_saved,0);}
+        ln_check(ln2_loader_active(_saved),"saved Game Over resumes remaining cooldown");
+        repeat(5) {if(_game==1) ln1_play_tick(_g,16);else ln2_play_tick(_g,16);}
+        ln_check(ln2_loader_active(_g),"held fire cannot skip returned splash");
+        if(_game==1) {ln1_play_tick(_g,0);ln1_play_tick(_g,16);} else {ln2_play_tick(_g,0);ln2_play_tick(_g,16);}
+        ln_check(!ln2_loader_active(_g),"fresh fire starts returned level");
+    }
+    show_debug_message("LN12_GAME_OVER_PASS: 13 levels, four-second hold, fresh same-level splash, saves and input gating");
+}
