@@ -82,11 +82,11 @@ if(global.ln_tool.layout_test) {
         if(global.ln_tool.frame mod 2==0) {
             if(ln_tool_ui_visible()) {
                 var _button_view=matrix_get(matrix_view),_button_projection=matrix_get(matrix_projection);
-                var _button_surface=surface_create(240,28),_button_camera=camera_create_view(0,0,240,28);
+                var _button_surface=surface_create(1920,1080),_button_camera=camera_create_view(0,0,1920,1080);
                 surface_set_target(_button_surface);camera_apply(_button_camera);draw_clear(c_black);
-                ln_ui_button_background(0,0,240,28,global.ln_tool.background);draw_flush();surface_reset_target();
+                ln_ui_button_background(492,96,240,28,global.ln_tool.background);draw_flush();surface_reset_target();
                 matrix_set(matrix_view,_button_view);matrix_set(matrix_projection,_button_projection);
-                ln_check(surface_getpixel(application_surface,572,98)==surface_getpixel(_button_surface,80,2),"skinned background shortcut remains visible at toolbar position");
+                ln_check(surface_getpixel(application_surface,572,98)==surface_getpixel(_button_surface,572,98),"skinned background shortcut remains visible at toolbar position");
                 surface_free(_button_surface);camera_destroy(_button_camera);
             }
             surface_save(application_surface,"tool-layout-"+string(global.ln_tool.frame)+".png");

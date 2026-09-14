@@ -1068,7 +1068,13 @@ function ln_edit_build_preview_tick(_elapsed_us) {
 // Scale the decorative corners down to four UI pixels rather than stretching them.
 function ln_ui_button_background(_x,_y,_w,_h,_selected=undefined) {
     var _sw=sprite_get_width(spr_UI_button),_sh=sprite_get_height(spr_UI_button);
-    var _border=min(4,_w/2,_h/2),_tint=is_undefined(_selected)?make_colour_rgb(175,175,175):(_selected?c_white:make_colour_rgb(88,88,88));
+    // Inner tool controls use legacy coordinates; the top bar/start screen use the full canvas.
+    var _inside=variable_global_exists("ln_tool") && global.ln_tool.active && global.ln_tool.drawing;
+    var _mx=_inside?ln_tool_mouse_x():mouse_x,_my=_inside?ln_tool_mouse_y():mouse_y;
+    var _hover=_mx>=_x && _mx<_x+_w && _my>=_y && _my<_y+_h;
+    var _shade=_hover?255:204;
+    if(!is_undefined(_selected) && !_selected) _shade*=0.5;
+    var _border=min(4,_w/2,_h/2),_tint=make_colour_rgb(_shade,_shade,_shade);
     var _sx=[0,12,_sw-12],_sy=[0,12,_sh-12];
     var _widths=[12,_sw-24,12],_heights=[12,_sh-24,12];
     var _dx=[_x,_x+_border,_x+_w-_border],_dy=[_y,_y+_border,_y+_h-_border];
