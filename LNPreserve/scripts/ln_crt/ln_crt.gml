@@ -494,6 +494,11 @@ function ln_tool_present(_host) {
     ln_edit_button(492,96,240,"Background "+(_t.background?"ON":"OFF")+" (B)",_t.background);draw_flush();
     ln_edit_button(688,56,238,global.ln_sprites.open?"Close Sprite Viewer":"SPRITE VIEWER");
     ln_edit_button(940,56,238,global.ln_tracks.open?"Close Track Player":"TRACK PLAYER");
+    if(ln_track_message()!="") {
+        draw_set_colour(c_white);
+        draw_text(1190,43,global.ln_tracks.paused?"PAUSED: Track:":"PLAYING: Track:");
+        draw_text(1190,66,global.ln_tracks.tracks[global.ln_tracks.current].title);
+    }
     if(!global.ln_editor.open && !global.ln_tracks.open && !global.ln_sprites.open) ln_edit_button(748,96,180,"Editor (F6)");
     if(!global.ln_editor.open && !global.ln_tracks.open && !global.ln_sprites.open) ln_edit_button(940,96,238,_host.scene_test.menu?"Back to game (F11)":"Game/Levels (F11)");
     ln_edit_button(1256,96,48,"1x");ln_edit_button(1312,96,48,"2x");ln_edit_button(1368,96,48,"Fit");

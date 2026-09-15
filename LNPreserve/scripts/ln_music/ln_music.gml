@@ -72,6 +72,24 @@ function ln_track_toggle(_host) {
         _p.open=true;if(array_length(_p.queue)==0) ln_track_filter(_p);
     }
 }
+// Transfer the suspended game voices between panels without touching the audition.
+function ln_track_to_sprite() {
+    var _p=global.ln_tracks,_v=global.ln_sprites;
+    _p.open=false;_v.voices=_p.paused_voices;_p.paused_voices=[];
+    if(!is_struct(_v.catalog)) ln_sprite_filter();
+    _v.open=true;
+}
+function ln_sprite_to_track() {
+    var _p=global.ln_tracks,_v=global.ln_sprites;
+    _v.open=false;_p.paused_voices=_v.voices;_v.voices=[];
+    if(array_length(_p.queue)==0) ln_track_filter(_p);
+    _p.open=true;
+}
+function ln_track_message() {
+    var _p=global.ln_tracks;
+    if(!_p.playing || _p.current<0) return "";
+    return (_p.paused?"PAUSED: Track: ":"PLAYING: Track: ")+_p.tracks[_p.current].title;
+}
 function ln_track_step(_host) {
     var _p=global.ln_tracks;
     if(global.ln_tool.active && ln_tool_ui_visible() && mouse_check_button_pressed(mb_left) && mouse_x>=940 && mouse_x<1178 && mouse_y>=56 && mouse_y<84) {
@@ -168,5 +186,33 @@ function ln_track_checks(_host) {
     _p.game=0;_p.group=0;_p.single=false;ln_track_filter(_p);_p.current=-1;
     ln_track_toggle(_host);
     global.ln_tool.active=true;
+    ln_track_toggle(_host);
+    ln_track_viewer_checks(_host);
+    ln_track_toggle(_host);
+    ln_track_play(_p,10); // Capture the now-playing toolbar with a longer title.
     show_debug_message("LN_TRACK_PLAYER_PASS");
+}
+
+function ln_track_viewer_checks(_host) {
+    var _p=global.ln_tracks,_saved=global.ln_music_voice;
+    global.ln_music_voice=audio_play_sound(snd_ln1_wastelands_loader,0,true,0);
+    ln_track_toggle(_host);ln_track_play(_p,0);var _voice=_p.voice;
+    ln_sprite_toggle(_host);
+    ln_check(global.ln_sprites.open && !_p.open && _p.voice==_voice && audio_is_playing(_voice),"sprite viewer preserves track voice");
+    ln_check(audio_is_paused(global.ln_music_voice),"game music stays suspended during handoff");
+    ln_check(string_pos("PLAYING: Track:",ln_track_message())==1,"playing message names current track");
+    audio_pause_sound(_voice);_p.paused=true;ln_track_poll(_p);
+    ln_check(_p.voice==_voice && string_pos("PAUSED:",ln_track_message())==1,"pause preserved in viewer");
+    ln_sprite_to_track();ln_check(_p.voice==_voice && audio_is_paused(_voice),"return to track panel preserves position and pause");
+    ln_track_to_sprite();_p.paused=false;audio_stop_sound(_voice);_p.single=false;ln_track_poll(_p);
+    ln_check(_p.current==1 && _p.playing,"playlist advances while sprite viewer is open");
+    _p.single=true;audio_stop_sound(_p.voice);ln_track_poll(_p);
+    ln_check(!_p.playing && ln_track_message()=="","single ends and clears message in viewer");
+    ln_track_play(_p,0);ln_sprite_toggle(_host);
+    ln_check(!_p.playing && !audio_is_paused(global.ln_music_voice),"leaving viewer stops audition and restores game");
+    audio_pause_sound(global.ln_music_voice);ln_sprite_toggle(_host);ln_sprite_to_track();ln_track_play(_p,0);
+    ln_track_to_sprite();ln_sprite_toggle(_host);
+    ln_check(audio_is_paused(global.ln_music_voice),"already paused game music remains paused after handoffs");
+    audio_stop_sound(global.ln_music_voice);global.ln_music_voice=_saved;_p.single=false;
+    show_debug_message("LN_TRACK_VIEWER_CONTINUITY_PASS");
 }

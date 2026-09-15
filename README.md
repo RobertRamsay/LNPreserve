@@ -129,3 +129,5 @@ The **TRACK PLAYER** button above the toolbar opens a music browser from gamepla
 
 
 **SPRITE VIEWER** (beside TRACK PLAYER) previews LN1/LN2/LN3 actors without running gameplay. Select Ninja, Enemies or Misc; the upper < / > buttons browse actors/level variants, and the lower pair browse animations. Cycle animations starts unarmed, then draws, previews and puts away each weapon. Pause, repeat-current-animation (Cycle off), and Mirror help inspect poses. Closing restores the suspended game/editor. Some source sequences retain numbered labels. The catalog uses existing pixel resources and preserved animation traces; it does not edit them. Regenerate with `tools/build_sprite_viewer.py`; run `--sprite-viewer-test` for catalog/playback checks and nine category screenshots. Viewer checks are separate from manual gameplay verification.
+
+Track Player music continues when switching to Sprite Viewer, including playlist advancement and the current playback/pause position. A PLAYING/PAUSED track message appears beside its toolbar button. Returning to gameplay/editor stops the audition and restores the previous game music state.

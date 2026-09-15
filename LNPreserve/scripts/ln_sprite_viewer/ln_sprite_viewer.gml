@@ -44,11 +44,11 @@ function ln_sprite_next(_direction,_animation=false) {
 function ln_sprite_toggle(_host) {
     var _v=global.ln_sprites;
     if(_v.open) {
-        _v.open=false;
+        _v.open=false;ln_track_stop(global.ln_tracks);
         for(var _i=0;_i<array_length(_v.voices);_i++) if(audio_is_paused(_v.voices[_i])) audio_resume_sound(_v.voices[_i]);
         _v.voices=[];_host.input_state=new LNInput();
     } else {
-        if(global.ln_tracks.open) ln_track_toggle(_host);
+        if(global.ln_tracks.open) {ln_track_to_sprite();return;}
         var _voices=[];_v.voices=[];
         if(variable_global_exists("ln_music_voice")) array_push(_voices,global.ln_music_voice);
         if(_host.play.game_number==3 && is_struct(_host.play.intro)) array_push(_voices,_host.play.intro.voice);
@@ -80,7 +80,8 @@ function ln_sprite_step(_host) {
         ln_sprite_toggle(_host);return true;
     }
     if(!_v.open) return false;
-    if(_click && mouse_x>=940 && mouse_x<1178 && mouse_y>=56 && mouse_y<84) {ln_sprite_toggle(_host);return false;}
+    ln_track_poll(global.ln_tracks);
+    if(_click && mouse_x>=940 && mouse_x<1178 && mouse_y>=56 && mouse_y<84) {ln_sprite_to_track();return true;}
     if(keyboard_check_pressed(vk_escape) || ln_edit_hit(1030,20,220,28)) {ln_sprite_toggle(_host);return true;}
     if(keyboard_check_pressed(vk_f9)) ln_fullscreen_toggle(_host);
     for(var _g=1;_g<=3;_g++) if(ln_edit_hit(24+(_g-1)*160,76,150,28)) {_v.game=_g;ln_sprite_filter();}
