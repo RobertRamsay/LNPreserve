@@ -59,7 +59,7 @@ function ln2_play_enter(_g,_id) {
     ln2_projectile_reset(_g);
     ln2_enemy_remember(_g);_g.room_id=_id;_g.player.room_id=_id;
     for (var _i=0;_i<array_length(_g.world.rooms);_i++) if (_g.world.rooms[_i].id==_id) { _g.scene_record=_g.world.rooms[_i];break; }
-    var _room=_g.scene_record;_g.data.boundaries=json_parse(json_stringify(_room.boundaries));
+    var _room=_g.scene_record;_g.data.boundaries=ln_collision_runtime(_g,_room.boundaries);
     _g.sprite_masks=[];for (var _i=0;_i<array_length(_g.projectile_art.depth);_i++) if (_g.projectile_art.depth[_i].room==_id) {_g.sprite_masks=_g.projectile_art.depth[_i].masks;break;}
     _g.final_palette_tick=_g.player.tick;
     if (variable_struct_exists(_g.opened_passages,string(_id))) ln2_item_open_line(_g);

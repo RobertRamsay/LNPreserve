@@ -366,3 +366,6 @@ escape_control=new LNEscapeControl();
 escape_control.down=keyboard_check(vk_escape);escape_control.fired=escape_control.down;
 escape_controls_test=false;
 for(var _escape_arg=1;_escape_arg<=parameter_count();_escape_arg++) if(parameter_string(_escape_arg)=="--escape-controls-test") escape_controls_test=true;
+
+collision_edit_test=false;
+for(var _cearg=1;_cearg<=parameter_count();_cearg++) if(parameter_string(_cearg)=="--collision-edit-test") collision_edit_test=true;

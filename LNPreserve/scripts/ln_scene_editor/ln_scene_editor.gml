@@ -7,7 +7,7 @@ function LNSceneEditor() constructor {
     depth_edit=false;depth_hold_dir=0;depth_hold_age=0;depth_hold_next=350000;paused_voices=[];
     pending_pick=undefined;source_scene=undefined;decoded={};drag_before=undefined;dirty_rect=undefined;
     preview_surface=-1;preview_camera=-1;crt_enabled=false;native_preview=false;
-    pulse_selected=true;pulse_time_us=0;show_collisions=false;collision_shapes=[];
+    pulse_selected=true;pulse_time_us=0;show_collisions=false;collision_shapes=[];collision_edit=false;collision_index=-1;collision_scroll=0;collision_before=undefined;collision_drag_record=undefined;collision_handle=-1;collision_mouse=[0,0];
     playback=undefined;build_presented=false;selected_panel="parts";drag=false;last_mouse_x=0;last_mouse_y=0;autosave_us=0;
 }
 function ln_edit_key(_game,_level,_room) {return string(_game)+":"+string(_level)+":"+string(_room);}
@@ -78,6 +78,7 @@ function ln_edit_select(_game,_level,_room) {
     var _e,_source,_key,_epoch,_entry;
      _e=global.ln_editor; _source=ln_edit_source(_game,_level,_room);
     if(!is_struct(_source)) {_e.message="No source part list for that room";return false;}
+    _e.collision_index=-1;_e.collision_scroll=0;_e.collision_before=undefined;
     _e.game=_game;_e.level=_level;_e.room_id=_room;_e.source_scene=_source;_e.pending_pick=undefined;
      _key=ln_edit_key(_game,_level,_room);
     _e.scene=variable_struct_exists(_e.scenes,_key)?json_parse(json_stringify(variable_struct_get(_e.scenes,_key))):_source;
@@ -120,6 +121,7 @@ function ln_edit_validate(_pack) {
             _s.level<1 || _s.level>(_s.game==1?6:(_s.game==2?7:5)) || !is_real(_s.room) || is_nan(_s.room) || is_infinity(_s.room) || floor(_s.room)!=_s.room ||
             _s.room<0 || _s.room>63 || !is_real(_s.background) || is_nan(_s.background) || is_infinity(_s.background) || floor(_s.background)!=_s.background || _s.background<0 || _s.background>15 ||
             !is_array(_s.parts) || array_length(_s.parts)>1024 || _keys[_i]!=ln_edit_key(_s.game,_s.level,_s.room)) return false;
+        if(!ln_collision_validate(_s)) return false;
          _d=ln_edit_data(_s.game,_s.level);
         for( _j=0;_j<array_length(_s.parts);_j++) {
              _p=_s.parts[_j];if(!is_struct(_p)) return false;
@@ -260,7 +262,7 @@ function ln_edit_step(_host) {
      _e=global.ln_editor;
     if(keyboard_check_pressed(vk_f6) || _e.toggle_requested || (_e.open && ln_edit_hit(1110,62,160,28))) {
         _e.toggle_requested=false;
-        ln_edit_finish_drag();_e.open=!_e.open;ln_paint_free();_e.depth_edit=false;_e.depth_hold_dir=0;ln_edit_music(_host,_e.open);
+        ln_collision_finish_drag();ln_edit_finish_drag();_e.open=!_e.open;ln_paint_free();_e.depth_edit=false;_e.depth_hold_dir=0;ln_edit_music(_host,_e.open);
         if(_e.open) window_set_cursor(cr_default);
         if(_e.open && !is_struct(_e.scene)) ln_edit_select(_host.play.game_number,_host.play.level,_host.play.room_id);
         else if(_e.open) ln_edit_spawn_preview();
@@ -268,7 +270,7 @@ function ln_edit_step(_host) {
     }
     if(!_e.open) return false;
     _e.pulse_time_us=(_e.pulse_time_us+delta_time) mod 1600000;
-    if(!mouse_check_button(mb_left)) ln_edit_finish_drag();
+    if(!mouse_check_button(mb_left)) {ln_collision_finish_drag();ln_edit_finish_drag();}
     ln_crt_preferences_flush();
     if(keyboard_check_pressed(vk_f10) || ln_edit_hit(1110,18,160,28)) ln_edit_crt_toggle();
     if(keyboard_check_pressed(vk_f9)) ln_fullscreen_toggle(_host);
@@ -280,7 +282,7 @@ function ln_edit_step(_host) {
         }
         return true;
     }
-    if(!_e.drag && _e.autosave_us>0) {_e.autosave_us-=delta_time;if(_e.autosave_us<=0) ln_edit_save("modified-scenes.autosave.json");}
+    if(!_e.drag && !is_string(_e.collision_before) && _e.autosave_us>0) {_e.autosave_us-=delta_time;if(_e.autosave_us<=0) ln_edit_save("modified-scenes.autosave.json");}
     if(ln_edit_hit(24,18,180,28)) {_e.enabled=!_e.enabled;_e.playback=undefined;}
     if(ln_edit_hit(216,18,112,28)) { _file=get_save_filename("JSON files|*.json","modified-scenes.json");if(ln_edit_save(_file)) _e.dirty=false;}
     if(ln_edit_hit(340,18,112,28)) { _file=get_open_filename("JSON files|*.json","");if(ln_edit_load(_file)) ln_edit_select(_e.game,_e.level,_e.room_id);}
@@ -296,12 +298,14 @@ function ln_edit_step(_host) {
     if(ln_edit_value_repeat(370,62,30,28) || ln_edit_value_repeat(570,62,30,28)) { _level=clamp(_e.level+(ln_tool_mouse_x()<400?-1:1),1,_max); _d=ln_edit_data(_e.game,_level);ln_edit_select(_e.game,_level,ln_edit_rooms(_e.game,_level)[0]);return true;}
      _d=ln_edit_data(_e.game,_e.level); _ids=ln_edit_rooms(_e.game,_e.level);
     if(ln_edit_value_repeat(620,62,30,28) || ln_edit_value_repeat(810,62,30,28)) { _index=0;while(_index<array_length(_ids)-1 && _ids[_index]!=_e.room_id) _index++;_index=clamp(_index+(ln_tool_mouse_x()<650?-1:1),0,array_length(_ids)-1);ln_edit_select(_e.game,_e.level,_ids[_index]);return true;}
-    if(ln_edit_hit(24,104,180,28)) _e.show_collisions=!_e.show_collisions;
+    if(ln_edit_hit(460,104,180,28)) {ln_collision_finish_drag();_e.collision_edit=!_e.collision_edit;_e.show_collisions=true;_e.part=-1;}
+    if(ln_edit_hit(24,104,180,28) && !_e.collision_edit) _e.show_collisions=!_e.show_collisions;
     if(ln_edit_hit(24,594,140,28)) _e.show_ninja=!_e.show_ninja;
     if(ln_edit_hit(176,594,140,28)) _e.show_depth=!_e.show_depth;
     if(ln_edit_hit(328,594,150,28)) {_e.pulse_selected=!_e.pulse_selected;_e.pulse_time_us=0;}
     if(ln_edit_hit(490,594,140,28)) {ln_edit_test_room(_host);return true;}
 
+    if(_e.collision_edit) return ln_collision_edit_step();
      _assets=variable_struct_get_names(_d.objects);array_sort(_assets,function(a,b){return real(a)-real(b);});
     if(mouse_wheel_up()) {if(ln_tool_mouse_x()<990) _e.scroll=max(0,_e.scroll-3);else _e.asset_scroll=max(0,_e.asset_scroll-3);}
     if(mouse_wheel_down()) {if(ln_tool_mouse_x()<990) _e.scroll=min(max(0,array_length(_s.parts)-18),_e.scroll+3);else _e.asset_scroll=min(max(0,array_length(_assets)-18),_e.asset_scroll+3);}
@@ -314,7 +318,7 @@ function ln_edit_step(_host) {
          _id=real(_assets[_e.asset]); _o=variable_struct_get(_d.objects,string(_id));
         ln_edit_add_asset(_id);_changed=true;
     }
-    if(_e.part>=0 && _e.part<array_length(_s.parts)) {
+    if(!_e.collision_edit && _e.part>=0 && _e.part<array_length(_s.parts)) {
          _p=_s.parts[_e.part];
         _delta=ln_edit_value_repeat(760,548,65,28);if(_delta) _changed=ln_edit_move_part(_e.part-1*_delta) || _changed;
         _delta=ln_edit_value_repeat(832,548,65,28);if(_delta) _changed=ln_edit_move_part(_e.part+1*_delta) || _changed;
@@ -382,9 +386,10 @@ function ln_edit_draw() {
     if(_e.show_ninja && _e.build<0 && is_struct(_e.preview)) ln_edit_preview_actor();
     _e.native_preview=false;
     if(_e.show_collisions) ln_edit_collision_draw();
+    if(_e.collision_edit) ln_collision_edit_handles();
     _e.context=false;surface_reset_target();matrix_set(matrix_view,_view);matrix_set(matrix_projection,_projection);
     draw_set_colour(c_white);ln_crt_surface(_surface,24,140,3,1,undefined,_e.crt_enabled);
-    if(_e.part>=0 && _e.part<array_length(_s.parts)) {
+    if(!_e.collision_edit && _e.part>=0 && _e.part<array_length(_s.parts)) {
          _p=_s.parts[_e.part]; _o=variable_struct_get(ln_edit_data(_e.game,_e.level).objects,string(_p.asset));
         draw_set_colour(c_yellow);draw_rectangle(clamp(24+_p.x*3,24,744),clamp(140+_p.y*3,140,572),clamp(24+(_p.x+_o.width)*3,24,744),clamp(140+(_p.y+_o.height)*3,140,572),true);
         if(_e.show_depth) {draw_set_colour(c_aqua);draw_line(24,140+_p.depth*3,744,140+_p.depth*3);}
@@ -404,7 +409,9 @@ function ln_edit_draw() {
     ln_edit_button(620,62,30,"<");draw_set_colour(c_white);draw_text(662,68,"Room "+string(_e.room_id)+" (ID)");ln_edit_button(810,62,30,">");
     ln_edit_button(24,594,140,"Ninja",_e.show_ninja);ln_edit_button(176,594,140,"Depth line",_e.show_depth);ln_edit_button(328,594,150,"pulseSelected?",_e.pulse_selected);ln_edit_button(490,594,140,"Test room");
     ln_edit_button(24,104,180,"Collision overlay",_e.show_collisions);
-    if(_e.show_collisions) {draw_set_colour(c_white);draw_text(216,110,string(array_length(_e.collision_shapes))+" boundaries | read-only");}
+    ln_edit_button(460,104,180,"Edit collisions",_e.collision_edit);
+    if(_e.show_collisions) {draw_set_colour(c_white);draw_text(216,110,string(array_length(_e.collision_shapes))+(_e.collision_edit?" boundaries":" boundaries | read-only"));}
+    if(_e.collision_edit) {ln_collision_edit_panel();return;}
     draw_set_colour(c_white);draw_text(760,110,"PARTS (draw order)");draw_text(1000,110,"ASSETS (this level)");
      _d=ln_edit_data(_e.game,_e.level); _assets=variable_struct_get_names(_d.objects);array_sort(_assets,function(a,b){return real(a)-real(b);});
     for( _i=0;_i<18;_i++) {
@@ -825,7 +832,7 @@ function ln_edit_optimization_checks(_host) {
 
 function ln_edit_history(_redo) {
     var _e=global.ln_editor,_current,_next;
-    ln_edit_finish_drag();
+    ln_collision_finish_drag();ln_edit_finish_drag();
     if(_redo?array_length(_e.redo)==0:array_length(_e.undo)==0) return false;
     _current=json_stringify(_e.scene);
     if(_redo) {_next=array_pop(_e.redo);array_push(_e.undo,_current);}
@@ -835,12 +842,13 @@ function ln_edit_history(_redo) {
     variable_struct_set(_e.scenes,ln_edit_key(_e.game,_e.level,_e.room_id),json_parse(_next));
     _e.revision++;_e.dirty=true;_e.reference=false;_e.build=-1;_e.autosave_us=1000000;ln_edit_free_cache();
     _e.enabled=true;
+    ln_edit_collision_refresh();
     _e.message=_redo?"Redo applied":"Undo applied";return true;
 }
 
 function ln_edit_test_room(_host) {
     var _e=global.ln_editor,_t=_host.scene_test,_level=-1,_scene=-1,_i,_j;
-    ln_edit_finish_drag();
+    ln_collision_finish_drag();ln_edit_finish_drag();
     for(_i=0;_i<array_length(_t.levels);_i++) {
         if(_t.levels[_i].game!=_e.game || _t.levels[_i].number!=_e.level) continue;
         _level=_i;
@@ -1110,7 +1118,7 @@ function ln_edit_restore_all() {
     _e.scene=ln_edit_source(_e.game,_e.level,_e.room_id);
     ln_edit_changed(_before);_e.reference=true;_e.part=-1;_e.scroll=0;
     _e.depth_edit=false;_e.pending_pick=undefined;_e.dirty_rect=undefined;
-    ln_paint_free();ln_edit_spawn_preview();
+    ln_paint_free();ln_edit_spawn_preview();ln_edit_collision_refresh();
     _e.message="Room restored to original. Ctrl+Z to undo.";
 }
 function ln_edit_value_repeat(_x,_y,_w,_h) {
@@ -1186,7 +1194,8 @@ function ln_edit_collision_geometry(_game,_bounds) {
 }
 function ln_edit_collision_refresh() {
     var _e=global.ln_editor,_g=_e.preview;
-    _e.collision_shapes=ln_edit_collision_geometry(_e.game,_e.game==3?_g.bounds:_g.data.boundaries);
+    var _base=ln_collision_source(_e.scene);
+    _e.collision_shapes=ln_edit_collision_geometry(_e.game,ln_collision_merge(_e.game,_base,_e.scene));
 }
 function ln_edit_collision_draw() {
     var _e=global.ln_editor,_alpha=draw_get_alpha(),_colour=draw_get_colour();
@@ -1242,4 +1251,259 @@ function ln_edit_collision_checks() {
     }
     _e.show_collisions=false;
     show_debug_message("LN_COLLISION_OVERLAY_PASS: "+string(_rooms)+" rooms / "+string(_records)+" boundary records across 18 levels");
+}
+
+function ln_collision_solid(_game,_record) {return (_record[4]&(_game==3?32:1))==0;}
+function ln_collision_source(_scene) {
+    var _e=global.ln_editor,_key="collision:"+string(_scene.game)+":"+string(_scene.level);
+    if(!variable_struct_exists(_e.datasets,_key)) {
+        var _path="play/ln"+string(_scene.game)+"/"+((_scene.game==1 && _scene.level==1)?"":"level"+string(_scene.level)+"/");
+        var _data=ln3_data_read(_path+(_scene.game==3?"collision.json":"world.json"));
+        if(_scene.game==3) ln3_exposed_wind_edges(_data);
+        variable_struct_set(_e.datasets,_key,_data);
+    }
+    return ln3_room_record(variable_struct_get(_e.datasets,_key).rooms,_scene.room).boundaries;
+}
+function ln_collision_pack(_scene) {
+    if(!variable_struct_exists(_scene,"collisions")) _scene.collisions={edits:[],added:[]};
+    return _scene.collisions;
+}
+function ln_collision_merge(_game,_bounds,_scene) {
+    var _out=json_parse(json_stringify(_bounds));
+    if(!is_struct(_scene) || !variable_struct_exists(_scene,"collisions")) return _out;
+    var _pack=_scene.collisions;
+    for(var _i=0;_i<array_length(_pack.edits);_i++) {
+        var _edit=_pack.edits[_i],_idx=_edit.index;
+        if(_idx>=array_length(_out) || !ln_collision_solid(_game,_out[_idx])) continue;
+        if(_edit.removed) {
+            // Preserve slots and byte lengths for original scripted references.
+            var _off=array_create(array_length(_out[_idx]),0);_off[0]=255;_off[2]=0;_out[_idx]=_off;
+        } else _out[_idx]=json_parse(json_stringify(_edit.record));
+    }
+    for(var _i=0;_i<array_length(_pack.added);_i++) array_push(_out,json_parse(json_stringify(_pack.added[_i])));
+    return _out;
+}
+function ln_collision_runtime(_g,_bounds) {return ln_collision_merge(_g.game_number,_bounds,ln_modified_room(_g));}
+function ln_collision_record_valid(_game,_record,_original=undefined) {
+    if(!is_array(_record) || array_length(_record)!=(_game==2?6:(_game==3 && is_array(_original)?array_length(_original):5))) return false;
+    for(var _i=0;_i<array_length(_record);_i++) if(!(is_real(_record[_i]) || is_int32(_record[_i]) || is_int64(_record[_i])) || is_nan(_record[_i]) || is_infinity(_record[_i]) || _record[_i]!=floor(_record[_i]) || _record[_i]<0 || _record[_i]>255) return false;
+    if(!ln_collision_solid(_game,_record) || _record[0]>=_record[2]) return false;
+    if(_game<3 && (_record[4]>126 || (_record[4]&1))) return false;
+    if(_game==3 && !is_array(_original) && (_record[4]&48)!=0) return false;
+    if(is_array(_original)) {
+        if(!ln_collision_solid(_game,_original)) return false;
+        if(_game==3 && _record[4]!=_original[4]) return false;
+        for(var _i=5;_i<array_length(_record);_i++) if(_record[_i]!=_original[_i]) return false;
+    } else if(_game==2 && _record[5]!=0) return false;
+    return true;
+}
+function ln_collision_validate(_scene) {
+    if(!variable_struct_exists(_scene,"collisions")) return true;
+    var _pack=_scene.collisions;
+    if(!is_struct(_pack) || !variable_struct_exists(_pack,"edits") || !variable_struct_exists(_pack,"added") || !is_array(_pack.edits) || !is_array(_pack.added) || array_length(_pack.added)>64) return false;
+    var _base=ln_collision_source(_scene),_seen=[];
+    if(array_length(_pack.edits)>array_length(_base)) return false;
+    for(var _i=0;_i<array_length(_pack.edits);_i++) {
+        var _v=_pack.edits[_i];
+        if(!is_struct(_v) || !variable_struct_exists(_v,"index") || !variable_struct_exists(_v,"removed") || !variable_struct_exists(_v,"record")) return false;
+        if(!(is_real(_v.index) || is_int32(_v.index) || is_int64(_v.index)) || is_nan(_v.index) || _v.index!=floor(_v.index) || _v.index<0 || _v.index>=array_length(_base) || array_contains(_seen,_v.index) || !is_bool(_v.removed)) return false;
+        if(!ln_collision_record_valid(_scene.game,_v.record,_base[_v.index])) return false;
+        array_push(_seen,_v.index);
+    }
+    for(var _i=0;_i<array_length(_pack.added);_i++) if(!ln_collision_record_valid(_scene.game,_pack.added[_i])) return false;
+    return true;
+}
+function ln_collision_entries() {
+    var _e=global.ln_editor,_base=ln_collision_source(_e.scene),_records=ln_collision_merge(_e.game,_base,_e.scene),_out=[];
+    for(var _i=0;_i<array_length(_records);_i++) {
+        var _r=_records[_i];if(_r[0]>_r[2]) continue;
+        array_push(_out,{index:_i,record:_r,locked:!ln_collision_solid(_e.game,_r)});
+    }
+    return _out;
+}
+function ln_collision_store(_idx,_record,_remove=false) {
+    var _e=global.ln_editor,_base=ln_collision_source(_e.scene),_pack=ln_collision_pack(_e.scene);
+    if(_idx<array_length(_base)) {
+        if(!ln_collision_solid(_e.game,_base[_idx])) return false;
+        var _v={index:_idx,record:_record,removed:_remove};
+        for(var _i=0;_i<array_length(_pack.edits);_i++) if(_pack.edits[_i].index==_idx) {_pack.edits[_i]=_v;return true;}
+        array_push(_pack.edits,_v);
+    } else {
+        var _at=_idx-array_length(_base);
+        if(_remove) array_delete(_pack.added,_at,1);else _pack.added[_at]=_record;
+    }
+    return true;
+}
+function ln_collision_selected() {
+    var _e=global.ln_editor,_entries=ln_collision_entries();
+    for(var _i=0;_i<array_length(_entries);_i++) if(_entries[_i].index==_e.collision_index) return _entries[_i];
+    return undefined;
+}
+function ln_collision_handles(_game,_r) {
+    var _ox=_game==3?24:0,_oy=_game==3?29:8;
+    var _y=_game==3?_r[3]:(_r[1]+(_r[4]>=64?-1:1)*(((_r[2]-_r[0])*(_r[4]&62)) div 16))&255;
+    return [[_r[0]-_ox,_r[1]-_oy],[_r[2]-_ox,_y-_oy]];
+}
+function ln_collision_reshape(_game,_r,_handle,_dx,_dy) {
+    var _n=json_parse(json_stringify(_r)),_ox=_game==3?24:0,_oy=_game==3?29:8;
+    if(_dx==0 && _dy==0) return _n;
+    if(_handle<0) {
+        _dx=clamp(_dx,min(0,_ox-_r[0]),max(0,min(255,239+_ox)-_r[2]));
+        _dy=clamp(_dy,min(0,_oy-min(_r[1],_r[3])),max(0,143+_oy-max(_r[1],_r[3])));
+        _n[0]+=_dx;_n[2]+=_dx;_n[1]+=_dy;_n[3]+=_dy;
+    } else {
+        var _at=_handle*2;
+        _n[_at]=clamp(_r[_at]+_dx,_handle==0?min(_ox,_r[0]):_r[0]+1,_handle==0?_r[2]-1:max(_r[2],min(255,239+_ox)));
+        _n[_at+1]=clamp(_r[_at+1]+_dy,min(_oy,_r[_at+1]),max(143+_oy,_r[_at+1]));
+        if(_game<3) {
+            var _slope=clamp(round(abs(_n[3]-_n[1])*8/(_n[2]-_n[0]))*2,0,62);
+            var _sign=_n[3]<_n[1]?-1:1;_n[4]=_slope+(_sign<0?64:0);
+            _n[3]=(_n[1]+_sign*(((_n[2]-_n[0])*_slope) div 16))&255;
+        }
+    }
+    return _n;
+}
+function ln_collision_add(_copy=undefined) {
+    var _e=global.ln_editor,_before=json_stringify(_e.scene),_pack=ln_collision_pack(_e.scene);
+    if(array_length(_pack.added)>=64) return;
+    var _r=is_struct(_copy)?json_parse(json_stringify(_copy.record)):(_e.game==1?[80,80,144,80,0]:(_e.game==2?[80,80,144,80,0,0]:[104,80,168,110,15]));
+    if(is_struct(_copy)) {
+        if(_copy.locked) return;
+        // Copy shape/directions, omitting unused trigger descriptor bytes.
+        if(_e.game==3) _r=[_r[0],_r[1],_r[2],_r[3],_r[4]&207];
+        _r=ln_collision_reshape(_e.game,_r,-1,4,4);
+    }
+    array_push(_pack.added,_r);_e.collision_index=array_length(ln_collision_source(_e.scene))+array_length(_pack.added)-1;
+    _e.collision_scroll=max(0,array_length(ln_collision_entries())-18);
+    ln_edit_changed(_before);ln_edit_collision_refresh();
+}
+function ln_collision_finish_drag() {
+    var _e=global.ln_editor;
+    if(!is_string(_e.collision_before)) return;
+    var _before=_e.collision_before;_e.collision_before=undefined;
+    if(json_stringify(_e.scene)!=_before) ln_edit_changed(_before);
+    ln_edit_collision_refresh();
+}
+function ln_collision_edit_step() {
+    var _e=global.ln_editor,_entries=ln_collision_entries(),_selected=ln_collision_selected();
+    if(mouse_wheel_up()) _e.collision_scroll=max(0,_e.collision_scroll-3);
+    if(mouse_wheel_down()) _e.collision_scroll=min(max(0,array_length(_entries)-18),_e.collision_scroll+3);
+    for(var _i=0;_i<18;_i++) if(_i+_e.collision_scroll<array_length(_entries) && ln_edit_hit(760,140+22*_i,480,22)) {_e.collision_index=_entries[_i+_e.collision_scroll].index;return true;}
+    if(ln_edit_hit(760,548,144,28)) {ln_collision_add();return true;}
+    if(ln_edit_hit(916,548,144,28) && is_struct(_selected) && !_selected.locked) {ln_collision_add(_selected);return true;}
+    if(is_struct(_selected) && !_selected.locked && (ln_edit_hit(1072,548,144,28) || keyboard_check_pressed(vk_delete))) {
+        var _before=json_stringify(_e.scene);ln_collision_store(_selected.index,_selected.record,true);_e.collision_index=-1;ln_edit_changed(_before);ln_edit_collision_refresh();return true;
+    }
+    var _mx=(ln_tool_mouse_x()-24)/3,_my=(ln_tool_mouse_y()-140)/3;
+    if(_mx>=0 && _mx<240 && _my>=0 && _my<144) {
+        if(mouse_check_button(mb_right)) {_e.probe_x=_mx;_e.probe_y=_my-(_e.game<3?21:0);}
+        if(mouse_check_button_pressed(mb_left)) {
+            var _best=6,_hit=undefined,_handle=-1;
+            for(var _i=0;_i<array_length(_entries);_i++) {
+                var _entry=_entries[_i],_h=ln_collision_handles(_e.game,_entry.record);
+                for(var _j=0;_j<2;_j++) {
+                    var _dist=point_distance(_mx,_my,_h[_j][0],_h[_j][1]);
+                    if(_dist<_best) {_best=_dist;_hit=_entry;_handle=_j;}
+                }
+                var _shape=ln_edit_collision_geometry(_e.game,[_entry.record])[0];
+                for(var _j=0;_j<array_length(_shape.points);_j++) {
+                    var _p=_shape.points[_j],_dist=point_distance(_mx,_my,_p[0],_p[1]);
+                    if(_dist<_best && _best>2) {_best=_dist;_hit=_entry;_handle=-1;}
+                }
+                if(_e.game==3 && _mx>=min(_h[0][0],_h[1][0]) && _mx<=max(_h[0][0],_h[1][0]) && _my>=min(_h[0][1],_h[1][1]) && _my<=max(_h[0][1],_h[1][1]) && _best==6) {_hit=_entry;_handle=-1;}
+            }
+            if(is_struct(_hit)) {
+                _e.collision_index=_hit.index;
+                if(!_hit.locked) {_e.collision_before=json_stringify(_e.scene);_e.collision_drag_record=_hit.record;_e.collision_handle=_handle;_e.collision_mouse=[_mx,_my];}
+            }
+        }
+    }
+    if(is_string(_e.collision_before) && mouse_check_button(mb_left)) {
+        var _r=ln_collision_reshape(_e.game,_e.collision_drag_record,_e.collision_handle,round(_mx-_e.collision_mouse[0]),round(_my-_e.collision_mouse[1]));
+        ln_collision_store(_e.collision_index,_r);ln_edit_collision_refresh();
+    }
+    if(is_struct(_selected) && !_selected.locked && !is_string(_e.collision_before)) {
+        var _dx=real(keyboard_check_pressed(vk_right))-real(keyboard_check_pressed(vk_left));
+        var _dy=real(keyboard_check_pressed(vk_down))-real(keyboard_check_pressed(vk_up));
+        if(_dx || _dy) {
+            var _step=keyboard_check(vk_shift)?8:1,_before=json_stringify(_e.scene);
+            ln_collision_store(_selected.index,ln_collision_reshape(_e.game,_selected.record,-1,_dx*_step,_dy*_step));ln_edit_changed(_before);ln_edit_collision_refresh();
+        }
+    }
+    return true;
+}
+function ln_collision_edit_handles() {
+    var _e=global.ln_editor,_v=ln_collision_selected();if(!is_struct(_v)) return;
+    var _h=ln_collision_handles(_e.game,_v.record);draw_set_colour(_v.locked?c_orange:c_yellow);
+    for(var _i=0;_i<2;_i++) draw_rectangle(_h[_i][0]-2,_h[_i][1]-2,_h[_i][0]+2,_h[_i][1]+2,true);
+    draw_set_colour(c_white);
+}
+function ln_collision_edit_panel() {
+    var _e=global.ln_editor,_entries=ln_collision_entries(),_selected=ln_collision_selected();
+    draw_set_colour(c_white);draw_text(760,110,"COLLISIONS (amber rules are locked)");
+    for(var _i=0;_i<18 && _i+_e.collision_scroll<array_length(_entries);_i++) {
+        var _v=_entries[_i+_e.collision_scroll];
+        draw_set_colour(_v.index==_e.collision_index?c_yellow:(_v.locked?c_orange:c_white));
+        draw_text(760,140+22*_i,string(_v.index+1)+"  "+(_v.locked?"Hazard / conditional - LOCKED":(_e.game==3?"Solid area":"Solid line")));
+    }
+    ln_edit_button(760,548,144,_e.game==3?"Add solid area":"Add solid line");ln_edit_button(916,548,144,"Duplicate");ln_edit_button(1072,548,144,"Delete");
+    draw_set_colour(c_white);
+    if(is_struct(_selected)) {
+        var _h=ln_collision_handles(_e.game,_selected.record);
+        draw_text(760,602,"Start: "+string(_h[0][0])+", "+string(_h[0][1])+"   End: "+string(_h[1][0])+", "+string(_h[1][1]));
+        draw_text(760,632,_selected.locked?"Trigger / hazard record: read-only":"Drag handles to reshape; drag line/area to move.");
+        draw_text(760,660,"Original slope and direction rules apply.");
+    }
+    draw_text(24,646,"Select a line/area or choose it in the list. Yellow boxes are handles.");
+    draw_text(24,670,"Arrows: move selection. Shift: larger steps. Ctrl+Z / Ctrl+Y: undo / redo.");
+    draw_text(24,702,"Solid collisions only. Amber hazards and trigger rules stay locked.");
+    draw_text(24,726,"Save file includes collisions. Test room uses edits with Modified ON.");
+    draw_set_colour(make_colour_rgb(150,210,220));draw_text(24,760,(_e.dirty?"Unsaved changes | ":"")+_e.message);
+}
+function ln_collision_edit_checks() {
+    var _e=global.ln_editor;
+    for(var _game=1;_game<=3;_game++) {
+        var _level=_game==3?2:1;ln_edit_select(_game,_level,ln_edit_rooms(_game,_level)[0]);
+        var _base=ln_collision_source(_e.scene),_source=json_stringify(_base),_original=json_stringify(_e.scene);
+        _e.collision_edit=true;_e.show_collisions=true;ln_collision_add();
+        var _v=ln_collision_selected();ln_check(is_struct(_v) && !_v.locked,"new collision selected");
+        var _saved=json_stringify(_e.scene);
+        ln_check(ln_edit_validate({format:"LNPreserve-scenes",version:1,scenes:_e.scenes}),"collision file validates in all three games");
+        ln_check(ln_edit_history(false) && json_stringify(_e.scene)==_original,"collision add undo");
+        ln_check(ln_edit_history(true) && json_stringify(_e.scene)==_saved,"collision add redo");
+        var _r=ln_collision_reshape(_game,_v.record,1,8,4),_before=json_stringify(_e.scene);
+        ln_collision_store(_v.index,_r);ln_edit_changed(_before);ln_edit_collision_refresh();
+        ln_check(ln_collision_record_valid(_game,_r) && _r[2]>_v.record[2],"endpoint reshaping retains valid solid record: "+json_stringify(_r)+" before "+json_stringify(_v.record)+" valid "+string(ln_collision_record_valid(_game,_r)));
+        var _runtime=ln_collision_runtime(_e.preview,_base);
+        ln_check(array_length(_runtime)==array_length(_base)+1 && ln_rewind_equal(_runtime[array_length(_base)],_r),"Modified runtime receives edited solid");
+        _e.enabled=false;ln_check(ln_rewind_equal(ln_collision_runtime(_e.preview,_base),_base),"Modified OFF uses original boundaries");_e.enabled=true;
+        var _file="collision-edit-test.json";ln_edit_save(_file);_saved=json_stringify(_e.scene);
+        ln_check(ln_edit_load(_file),"collision save/load round trip");file_delete(_file);
+        ln_edit_select(_game,_level,_e.room_id);ln_check(ln_rewind_equal(_e.scene,json_parse(_saved)),"saved collisions survive room selection");
+        ln_check(ln_rewind_equal(_game==3?_e.preview.bounds:_e.preview.data.boundaries,ln_collision_merge(_game,_base,_e.scene)),"room entry applies saved collisions");
+        var _entries=ln_collision_entries(),_solid=undefined;
+        for(var _i=0;_i<array_length(_entries);_i++) if(!_entries[_i].locked && _entries[_i].index<array_length(_base) && _entries[_i].record[0]<_entries[_i].record[2]) {_solid=_entries[_i];break;}
+        ln_check(is_struct(_solid),"original solid available");
+        _before=json_stringify(_e.scene);ln_collision_store(_solid.index,_solid.record,true);ln_edit_changed(_before);
+        _runtime=ln_collision_runtime(_e.preview,_base);
+        ln_check(array_length(_runtime)==array_length(_base)+1 && _runtime[_solid.index][0]>_runtime[_solid.index][2],"deleted solid retains an inactive slot");
+        for(var _i=0;_i<array_length(_base);_i++) if(!ln_collision_solid(_game,_base[_i])) {
+            ln_check(ln_rewind_equal(_runtime[_i],_base[_i]),"trigger index and bytes preserved");
+            var _bad=json_parse(json_stringify(_e.scene));array_push(ln_collision_pack(_bad).edits,{index:_i,removed:true,record:_base[_i]});
+            ln_check(!ln_collision_validate(_bad),"loading trigger edits rejected");
+            ln_check(!ln_collision_store(_i,_base[_i],true),"UI cannot delete trigger");
+        }
+        ln_check(json_stringify(_base)==_source,"original source collision records immutable");
+        ln_edit_collision_refresh();_e.collision_index=array_length(_base);ln_edit_draw();surface_save(application_surface,"collision-editor-"+string(_game)+".png");
+        ln_edit_restore_all();ln_check(!variable_struct_exists(_e.scene,"collisions"),"Restore all clears collision edits");
+        ln_check(ln_edit_history(false) && variable_struct_exists(_e.scene,"collisions"),"restore collisions can be undone");
+        _e.scenes={};_e.enabled=false;
+    }
+    // Native line crossing responds to edited geometry, not only its overlay.
+    var _actor={x:100,y:79,boundary_mode:0,boundary_crossings:0};
+    ln_check(ln1_player_boundary(_actor,{boundaries:[[80,80,144,80,0]]},100,81)==255,"LN1 added solid blocks movement");
+    _actor={x:100,y:79,boundary_mode:0,boundary_crossings:0};
+    ln_check(ln1_player_boundary(_actor,{boundaries:[[80,90,144,90,0]]},100,81)==0,"LN1 moved solid clears old position");
+    _e.collision_edit=false;_e.show_collisions=false;
+    show_debug_message("LN_COLLISION_EDIT_PASS: solid edits, protected triggers, save/load, undo/redo, runtime entry and restore across three games");
 }

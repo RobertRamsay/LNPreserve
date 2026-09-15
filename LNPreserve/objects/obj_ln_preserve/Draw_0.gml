@@ -1,3 +1,4 @@
+if(collision_edit_test) {try {ln_collision_edit_checks();} catch(_err) {show_debug_message("LN_COLLISION_EDIT_FAILURE: "+string(_err));} game_end();exit;}
 if(startup_active) exit;
 if(global.ln_sprites.open) {ln_sprite_draw();exit;}
 if(global.ln_tracks.open) {ln_track_draw();exit;}

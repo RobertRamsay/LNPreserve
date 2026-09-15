@@ -67,7 +67,7 @@ function ln3_play_enter(_g,_entry) {
     ln3_action_set(_s,_g.actions,_entry.action);
     _g.runtime_scene=ln3_room_record(_g.data.rooms,_g.room_id);
     _g.item_records=ln3_room_record(_g.items.rooms,_g.room_id).items;
-    _g.bounds=ln3_room_record(_g.collision.rooms,_g.room_id).boundaries;
+    _g.bounds=ln_collision_runtime(_g,ln3_room_record(_g.collision.rooms,_g.room_id).boundaries);
     _g.mask_shapes=ln3_room_record(_g.masks.rooms,_g.room_id).shapes;
     _g.scenery_record=ln3_room_record(_g.scenery.rooms,_g.room_id);_g.scenery_frame=-1;_g.scenery_repeating=false;_g.scenery_mechanism=false;
     ln3_enemy_enter(_s,_g.actions,_g.data,_g.runtime_scene);

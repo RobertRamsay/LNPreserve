@@ -3,6 +3,7 @@ from pathlib import Path
 import argparse,subprocess,json,time,sys
 ROOT=Path(__file__).resolve().parents[1]
 CASES={
+ '--collision-edit-test':['LN_COLLISION_EDIT_PASS'],
  '--escape-controls-test':['LN_ESCAPE_CONTROLS_PASS'],
  '--window-preferences-test':['LN_WINDOW_PREFERENCES_PASS'],
  '--sprite-viewer-test':['LN_SPRITE_VIEWER_PASS'],

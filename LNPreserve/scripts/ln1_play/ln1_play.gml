@@ -55,7 +55,7 @@ function ln1_play_enter(_g, _room_id) {
     if ((_g.level == 4 && _room_id != 20 && (_g.world_state.mode == 4 || _g.world_state.mode == 6)) ||
         (_g.level == 6 && _room_id != 11 && _g.world_state.mode == 7)) _g.world_state.mode = 0;
     var _room = _g.world.rooms[_room_id - 1];
-    _g.data.boundaries = _room.boundaries;
+    _g.data.boundaries = ln_collision_runtime(_g,_room.boundaries);
     _g.scene = asset_get_index(_room.sprite);
     _g.mask = asset_get_index(_room.depth_sprite);
     _g.player.boundary_mode = _room.boundary_mode;
