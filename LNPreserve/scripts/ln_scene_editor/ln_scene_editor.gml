@@ -1155,7 +1155,8 @@ function ln_edit_snag_checks() {
 }
 
 // Read-only geometry derived from the same records used by movement collision.
-// LN1/2 Y is screen-relative; LN3 additionally includes the 24px left border.
+// LN1/2 actor Y anchors a 42px composite: ground is Y + 42 - 50 = Y - 8.
+// LN3 anchors its 21px lower sprite instead: Y + 21 - 50 = Y - 29; X - 24.
 function ln_edit_collision_geometry(_game,_bounds) {
     var _out=[];
     for(var _i=0;_i<array_length(_bounds);_i++) {
@@ -1164,7 +1165,7 @@ function ln_edit_collision_geometry(_game,_bounds) {
             _kind=(_b[4]&1)?1:0;
             for(var _x=_b[0];_x<=_b[2];_x++) {
                 var _y=(_b[1]+(_b[4]>=64?-1:1)*(((_x-_b[0])*(_b[4]&62)) div 16))&255;
-                array_push(_points,[_x,_y-29]);
+                array_push(_points,[_x,_y-8]);
             }
         } else {
             _kind=(_b[4]&32)?1:0;
@@ -1207,8 +1208,9 @@ function ln_edit_collision_draw() {
     // The editor's probe corresponds to the player position used by collision.
     if(_e.show_ninja) {
         draw_set_colour(c_white);draw_set_alpha(1);
-        draw_line(_e.probe_x-3,_e.probe_y,_e.probe_x+3,_e.probe_y);
-        draw_line(_e.probe_x,_e.probe_y-3,_e.probe_x,_e.probe_y+3);
+        var _ground_y=_e.probe_y+(_e.game<3?21:0);
+        draw_line(_e.probe_x-3,_ground_y,_e.probe_x+3,_ground_y);
+        draw_line(_e.probe_x,_ground_y-3,_e.probe_x,_ground_y+3);
     }
     draw_set_colour(_colour);draw_set_alpha(_alpha);
 }
@@ -1225,11 +1227,12 @@ function ln_edit_collision_checks() {
         }
     }
     var _test=ln_edit_collision_geometry(1,[[10,60,12,60,16],[10,60,12,60,80]]);
-    ln_check(_test[0].points[2][1]==33 && _test[1].points[2][1]==29,"overlay follows signed fixed-point slopes and screen Y offset");
+    ln_check(_test[0].points[2][1]==54 && _test[1].points[2][1]==50,"overlay follows signed fixed-point slopes and screen Y offset");
     _test=ln_edit_collision_geometry(3,[[40,80,60,60,33,130]]);
     ln_check(_test[0].rect[0]==14 && _test[0].rect[1]==31 && _test[0].rect[2]==38 && _test[0].rect[3]==51 && _test[0].kind==1,"LN3 effective area includes collision margins and bitmap offset");
     for(var _game=1;_game<=3;_game++) {
-        ln_edit_select(_game,_game==1?2:(_game==2?2:2),ln_edit_rooms(_game,2)[0]);
+        var _preview_level=_game==1?1:2;
+        ln_edit_select(_game,_preview_level,ln_edit_rooms(_game,_preview_level)[0]);
         var _scene=json_stringify(_e.scene),_dirty=_e.dirty,_revision=_e.revision;
         _e.show_collisions=false;ln_edit_draw();var _off=ln_edit_screen_buffer();
         _e.show_collisions=true;ln_edit_draw();var _on=ln_edit_screen_buffer();
