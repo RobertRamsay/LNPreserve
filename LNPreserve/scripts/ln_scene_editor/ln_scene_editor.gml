@@ -7,7 +7,7 @@ function LNSceneEditor() constructor {
     depth_edit=false;depth_hold_dir=0;depth_hold_age=0;depth_hold_next=350000;paused_voices=[];
     pending_pick=undefined;source_scene=undefined;decoded={};drag_before=undefined;dirty_rect=undefined;
     preview_surface=-1;preview_camera=-1;crt_enabled=false;native_preview=false;
-    pulse_selected=true;pulse_time_us=0;
+    pulse_selected=true;pulse_time_us=0;show_collisions=false;collision_shapes=[];
     playback=undefined;build_presented=false;selected_panel="parts";drag=false;last_mouse_x=0;last_mouse_y=0;autosave_us=0;
 }
 function ln_edit_key(_game,_level,_room) {return string(_game)+":"+string(_level)+":"+string(_room);}
@@ -88,6 +88,7 @@ function ln_edit_select(_game,_level,_room) {
      _epoch=global.ln_rewind_epoch;
     _e.preview=_game==1?new LN1Play(_level):(_game==2?new LN2Play(_level):new LN3Play(_level));
     ln_edit_spawn_preview();
+    ln_edit_collision_refresh();
     global.ln_rewind_epoch=_epoch;
     _e.message=string(array_length(_e.scene.parts))+" source parts. Assign depth to props; F6 returns to play.";
     return true;
@@ -295,6 +296,7 @@ function ln_edit_step(_host) {
     if(ln_edit_value_repeat(370,62,30,28) || ln_edit_value_repeat(570,62,30,28)) { _level=clamp(_e.level+(ln_tool_mouse_x()<400?-1:1),1,_max); _d=ln_edit_data(_e.game,_level);ln_edit_select(_e.game,_level,ln_edit_rooms(_e.game,_level)[0]);return true;}
      _d=ln_edit_data(_e.game,_e.level); _ids=ln_edit_rooms(_e.game,_e.level);
     if(ln_edit_value_repeat(620,62,30,28) || ln_edit_value_repeat(810,62,30,28)) { _index=0;while(_index<array_length(_ids)-1 && _ids[_index]!=_e.room_id) _index++;_index=clamp(_index+(ln_tool_mouse_x()<650?-1:1),0,array_length(_ids)-1);ln_edit_select(_e.game,_e.level,_ids[_index]);return true;}
+    if(ln_edit_hit(24,104,180,28)) _e.show_collisions=!_e.show_collisions;
     if(ln_edit_hit(24,594,140,28)) _e.show_ninja=!_e.show_ninja;
     if(ln_edit_hit(176,594,140,28)) _e.show_depth=!_e.show_depth;
     if(ln_edit_hit(328,594,150,28)) {_e.pulse_selected=!_e.pulse_selected;_e.pulse_time_us=0;}
@@ -379,6 +381,7 @@ function ln_edit_draw() {
     _e.native_preview=true;
     if(_e.show_ninja && _e.build<0 && is_struct(_e.preview)) ln_edit_preview_actor();
     _e.native_preview=false;
+    if(_e.show_collisions) ln_edit_collision_draw();
     _e.context=false;surface_reset_target();matrix_set(matrix_view,_view);matrix_set(matrix_projection,_projection);
     draw_set_colour(c_white);ln_crt_surface(_surface,24,140,3,1,undefined,_e.crt_enabled);
     if(_e.part>=0 && _e.part<array_length(_s.parts)) {
@@ -400,6 +403,8 @@ function ln_edit_draw() {
     ln_edit_button(370,62,30,"<");draw_set_colour(c_white);draw_text(412,68,"Level "+string(_e.level));ln_edit_button(570,62,30,">");
     ln_edit_button(620,62,30,"<");draw_set_colour(c_white);draw_text(662,68,"Room "+string(_e.room_id)+" (ID)");ln_edit_button(810,62,30,">");
     ln_edit_button(24,594,140,"Ninja",_e.show_ninja);ln_edit_button(176,594,140,"Depth line",_e.show_depth);ln_edit_button(328,594,150,"pulseSelected?",_e.pulse_selected);ln_edit_button(490,594,140,"Test room");
+    ln_edit_button(24,104,180,"Collision overlay",_e.show_collisions);
+    if(_e.show_collisions) {draw_set_colour(c_white);draw_text(216,110,string(array_length(_e.collision_shapes))+" boundaries | read-only");}
     draw_set_colour(c_white);draw_text(760,110,"PARTS (draw order)");draw_text(1000,110,"ASSETS (this level)");
      _d=ln_edit_data(_e.game,_e.level); _assets=variable_struct_get_names(_d.objects);array_sort(_assets,function(a,b){return real(a)-real(b);});
     for( _i=0;_i<18;_i++) {
@@ -417,10 +422,17 @@ function ln_edit_draw() {
             _panel_y+(_panel_size-_preview_o.height*_fit)/2,_inner,_inner);
     }
     ln_edit_button(760,548,65,"Up");ln_edit_button(832,548,65,"Down");ln_edit_button(904,548,80,"Remove");ln_edit_button(1000,548,245,"Add selected asset");
+    if(_e.show_collisions) {
+        draw_set_colour(make_colour_rgb(70,220,255));draw_text(24,646,"CYAN: solid boundary / area");
+        draw_set_colour(make_colour_rgb(255,175,45));draw_text(24,670,"AMBER: hazard / conditional boundary or area");
+        draw_set_colour(c_white);draw_text(24,702,"White cross: ninja collision position. Right-drag to move the ninja.");
+        draw_text(24,726,"Room entry rules only; scripted obstacles and exits are not shown.");
+    } else {
     draw_set_colour(c_white);draw_text(24,646,"Alt-click: select part. Drag/arrows: move. Right-drag: ninja. Shift: larger steps.");
     draw_text(24,670,"Depth line = ground contact. Enter a number to override inherited masking.");
     draw_text(24,702,"Visual editing only: original collision paths, pickups and exits stay in place.");
     draw_text(24,726,"Parts inherit original masking until overridden. Ground clears it; Inherited restores it.");
+    }
     draw_set_colour(make_colour_rgb(150,210,220));draw_text(24,760,(_e.dirty?"Unsaved changes | ":"")+_e.message+" | F6 return");
 }
 
@@ -499,6 +511,7 @@ function ln_edit_checks() {
     ln_edit_control_checks(self);
     ln_edit_optimization_checks(self);
     ln_edit_test_room_checks(self);
+    ln_edit_collision_checks();
     show_debug_message("LN_EDITOR_PASS: "+string(_rooms)+" room imports, "+string(_parts)+" parts; composition/depth, save/load validation, mode isolation and three game previews");
 }
 
@@ -1139,4 +1152,91 @@ function ln_edit_snag_checks() {
     ln_check(ln_ui_repeat_count(_state,false,false,100000)==0,"value repeat stops on release");
     _e.scenes=json_parse(_scenes);ln_edit_free_cache();
     show_debug_message("LN_EDITOR_SNAGS_PASS");
+}
+
+// Read-only geometry derived from the same records used by movement collision.
+// LN1/2 Y is screen-relative; LN3 additionally includes the 24px left border.
+function ln_edit_collision_geometry(_game,_bounds) {
+    var _out=[];
+    for(var _i=0;_i<array_length(_bounds);_i++) {
+        var _b=_bounds[_i],_points=[],_rect=undefined,_kind=0;
+        if(_game<3) {
+            _kind=(_b[4]&1)?1:0;
+            for(var _x=_b[0];_x<=_b[2];_x++) {
+                var _y=(_b[1]+(_b[4]>=64?-1:1)*(((_x-_b[0])*(_b[4]&62)) div 16))&255;
+                array_push(_points,[_x,_y-29]);
+            }
+        } else {
+            _kind=(_b[4]&32)?1:0;
+            var _x0=(_b[0]-2)&255,_x1=(_b[2]+2)&255,_y0=_b[1],_y1=_b[3];
+            if(_y0<_y1) {_y0=(_y0+1)&255;_y1=(_y1-1)&255;}
+            // Match the inclusive/exclusive rectangle test in ln3_collision_update.
+            var _lo=_y0>=_y1?_y1:_y0+1,_hi=_y0>=_y1?_y0:_y1;
+            if(_x0<=_x1 && _lo<=_hi) _rect=[_x0-24,_lo-29,_x1-24,_hi-29];
+            var _type=(_b[4]>>6)&3;
+            if(_type!=0 && (_b[4]&3)) for(var _x=_x0;_x<=_x1;_x++) {
+                var _y=(_y0+ceil((_x-_x0)/4)*(_type==1?1:-1))&255;
+                if(_y>=_lo && _y<=_hi) array_push(_points,[_x-24,_y-29]);
+            }
+        }
+        array_push(_out,{kind:_kind,points:_points,rect:_rect});
+    }
+    return _out;
+}
+function ln_edit_collision_refresh() {
+    var _e=global.ln_editor,_g=_e.preview;
+    _e.collision_shapes=ln_edit_collision_geometry(_e.game,_e.game==3?_g.bounds:_g.data.boundaries);
+}
+function ln_edit_collision_draw() {
+    var _e=global.ln_editor,_alpha=draw_get_alpha(),_colour=draw_get_colour();
+    for(var _i=0;_i<array_length(_e.collision_shapes);_i++) {
+        var _shape=_e.collision_shapes[_i];
+        draw_set_colour(_shape.kind==0?make_colour_rgb(70,220,255):make_colour_rgb(255,175,45));
+        var _r=_shape.rect;
+        if(is_array(_r) && _r[2]>=0 && _r[0]<240 && _r[3]>=0 && _r[1]<144) {
+            draw_set_alpha(.16);draw_rectangle(_r[0],_r[1],_r[2]+1,_r[3]+1,false);
+            draw_set_alpha(.85);draw_rectangle(_r[0],_r[1],_r[2],_r[3],true);
+        }
+        draw_set_alpha(1);
+        for(var _j=0;_j<array_length(_shape.points);_j++) {
+            var _p=_shape.points[_j];
+            // Pixel samples preserve C64 stepped slopes and avoid joining wrapped Y values.
+            draw_rectangle(_p[0],_p[1],_p[0]+1,_p[1]+1,false);
+        }
+    }
+    // The editor's probe corresponds to the player position used by collision.
+    if(_e.show_ninja) {
+        draw_set_colour(c_white);draw_set_alpha(1);
+        draw_line(_e.probe_x-3,_e.probe_y,_e.probe_x+3,_e.probe_y);
+        draw_line(_e.probe_x,_e.probe_y-3,_e.probe_x,_e.probe_y+3);
+    }
+    draw_set_colour(_colour);draw_set_alpha(_alpha);
+}
+function ln_edit_collision_checks() {
+    var _e=global.ln_editor,_rooms=0,_records=0;
+    for(var _game=1;_game<=3;_game++) for(var _level=1;_level<=(_game==1?6:(_game==2?7:5));_level++) {
+        var _path="play/ln"+string(_game)+"/"+((_game==1 && _level==1)?"":"level"+string(_level)+"/");
+        var _data=ln3_data_read(_path+(_game==3?"collision.json":"world.json"));
+        for(var _ri=0;_ri<array_length(_data.rooms);_ri++) {
+            var _bounds=_data.rooms[_ri].boundaries,_before=json_stringify(_bounds);
+            var _shapes=ln_edit_collision_geometry(_game,_bounds);
+            ln_check(array_length(_shapes)==array_length(_bounds) && json_stringify(_bounds)==_before,"overlay retains all records without modifying collision data");
+            _rooms++;_records+=array_length(_shapes);
+        }
+    }
+    var _test=ln_edit_collision_geometry(1,[[10,60,12,60,16],[10,60,12,60,80]]);
+    ln_check(_test[0].points[2][1]==33 && _test[1].points[2][1]==29,"overlay follows signed fixed-point slopes and screen Y offset");
+    _test=ln_edit_collision_geometry(3,[[40,80,60,60,33,130]]);
+    ln_check(_test[0].rect[0]==14 && _test[0].rect[1]==31 && _test[0].rect[2]==38 && _test[0].rect[3]==51 && _test[0].kind==1,"LN3 effective area includes collision margins and bitmap offset");
+    for(var _game=1;_game<=3;_game++) {
+        ln_edit_select(_game,_game==1?2:(_game==2?2:2),ln_edit_rooms(_game,2)[0]);
+        var _scene=json_stringify(_e.scene),_dirty=_e.dirty,_revision=_e.revision;
+        _e.show_collisions=false;ln_edit_draw();var _off=ln_edit_screen_buffer();
+        _e.show_collisions=true;ln_edit_draw();var _on=ln_edit_screen_buffer();
+        ln_check(ln_edit_canvas_difference(_off,_on)>0,"collision overlay renders within each game's room canvas");
+        ln_check(json_stringify(_e.scene)==_scene && _e.dirty==_dirty && _e.revision==_revision,"overlay does not create room edits");
+        buffer_delete(_off);buffer_delete(_on);surface_save(application_surface,"collision-overlay-"+string(_game)+".png");
+    }
+    _e.show_collisions=false;
+    show_debug_message("LN_COLLISION_OVERLAY_PASS: "+string(_rooms)+" rooms / "+string(_records)+" boundary records across 18 levels");
 }
