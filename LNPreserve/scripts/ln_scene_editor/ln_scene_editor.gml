@@ -165,7 +165,7 @@ function ln_edit_load(_file) {
     } catch(_error) {if(_b>=0) buffer_delete(_b);global.ln_editor.message="Could not load custom file; existing edits kept";return false;}
 }
 function ln_edit_build(_scene,_limit=-1,_variant="edit") {
-    var _e,_key,_d,_colours,_depth,_attributes,_n,_i,_p,_o,_cw,_y,_x,_dx,_dy,_sx,_cell,_code,_attr,_dest,_old,_blend,_palette,_c,_j,_pixel,_surface,_mask_surface,_b,_mask,_owners,_overlay,_decoded,_at,_incremental,_left,_top,_right,_bottom,_start_x,_end_x,_start_y,_end_y,_reuse,_depth_surface,_overrides,_baseline,_owner,_source_owner,_output,_display;
+    var _e,_key,_d,_colours,_depth,_attributes,_n,_i,_p,_o,_cw,_y,_x,_dx,_dy,_sx,_cell,_code,_attr,_dest,_old,_blend,_palette,_c,_j,_pixel,_surface,_mask_surface,_b,_mask,_owners,_overlay,_decoded,_at,_incremental,_left,_top,_right,_bottom,_start_x,_end_x,_start_y,_end_y,_reuse,_depth_surface,_overrides,_baseline,_owner,_source_owner,_output,_display,_edited_underlay;
      _e=global.ln_editor; _key=ln_edit_key(_scene.game,_scene.level,_scene.room)+":"+string(_e.revision)+":"+string(_limit)+":"+_variant;
     if(is_struct(_e.cache) && _e.cache.key==_key && surface_exists(_e.cache.surface)) return _e.cache;
     _baseline=(_variant!="source" && _limit<0 && variable_struct_exists(_scene,"preserve_bitmap") && _scene.preserve_bitmap)?ln_edit_bitmap_baseline(_scene):undefined;
@@ -193,8 +193,12 @@ function ln_edit_build(_scene,_limit=-1,_variant="edit") {
              _attr=_o.colour[_cell]; _dest=(_dy div 8)*30+(_dx div 8); _old=_attributes[_dest];
             if(!_overlay && _old>31 && _attr<=31) continue;
              _blend=_overlay || (_old>31 && _attr>31 && (_attr&16)!=0);
-            if(!_blend || _code!=0) {
-                 _pixel=_dy*240+_dx;_owners[_pixel]=_code==0?-1:_i;_colours[_pixel]=_decoded.colours[_at];
+            _pixel=_dy*240+_dx;_owner=_owners[_pixel];
+            // Original background pixels must not punch holes in an edited prop
+            // underneath. Keep native attribute merging independent of this alpha rule.
+            _edited_underlay=_code==0 && _owner>=0 && variable_struct_exists(_scene.parts[_owner],"overlay") && _scene.parts[_owner].overlay;
+            if((!_blend || _code!=0) && !_edited_underlay) {
+                 _owners[_pixel]=_code==0?-1:_i;_colours[_pixel]=_decoded.colours[_at];
                 _overrides[_pixel]=_code!=0 && (_p.mode!=0 || (variable_struct_exists(_p,"depth_override") && _p.depth_override));
                 _depth[_pixel]=(_code==0 || _p.mode==0)?0:(_p.mode==2?255:clamp(round(_p.depth)+29,1,254));
             }
@@ -264,8 +268,7 @@ function ln_edit_step(_host) {
         _e.toggle_requested=false;
         ln_collision_finish_drag();ln_edit_finish_drag();_e.open=!_e.open;ln_paint_free();_e.depth_edit=false;_e.depth_hold_dir=0;ln_edit_music(_host,_e.open);
         if(_e.open) window_set_cursor(cr_default);
-        if(_e.open && !is_struct(_e.scene)) ln_edit_select(_host.play.game_number,_host.play.level,_host.play.room_id);
-        else if(_e.open) ln_edit_spawn_preview();
+        if(_e.open) ln_edit_follow_game(_host.play);
         if(!_e.open) {_host.input_state=new LNInput();_e.context=false;if(_e.dirty) ln_edit_save("modified-scenes.autosave.json");return true;}
     }
     if(!_e.open) return false;
@@ -519,6 +522,8 @@ function ln_edit_checks() {
     ln_edit_optimization_checks(self);
     ln_edit_test_room_checks(self);
     ln_edit_collision_checks();
+    ln_edit_follow_game_checks();
+    ln_edit_overlap_transparency_checks();
     show_debug_message("LN_EDITOR_PASS: "+string(_rooms)+" room imports, "+string(_parts)+" parts; composition/depth, save/load validation, mode isolation and three game previews");
 }
 
@@ -1506,4 +1511,52 @@ function ln_collision_edit_checks() {
     ln_check(ln1_player_boundary(_actor,{boundaries:[[80,90,144,90,0]]},100,81)==0,"LN1 moved solid clears old position");
     _e.collision_edit=false;_e.show_collisions=false;
     show_debug_message("LN_COLLISION_EDIT_PASS: solid edits, protected triggers, save/load, undo/redo, runtime entry and restore across three games");
+}
+
+// Opening via either the toolbar or F6 follows the live room, not the last browse.
+function ln_edit_follow_game(_game) {
+    var _e=global.ln_editor;
+    if(!is_struct(_e.scene) || _e.game!=_game.game_number || _e.level!=_game.level || _e.room_id!=_game.room_id)
+        return ln_edit_select(_game.game_number,_game.level,_game.room_id);
+    // Preserve selection and undo history when already editing this exact room.
+    ln_edit_spawn_preview();ln_edit_collision_refresh();return true;
+}
+function ln_edit_follow_game_checks() {
+    var _e=global.ln_editor;
+    for(var _game=1;_game<=3;_game++) {
+        var _room=ln_edit_rooms(_game,1)[0];ln_edit_select(_game,1,_room);
+        var _before=json_stringify(_e.scene);_e.scene.parts[0].x+=2;ln_edit_changed(_before);
+        var _saved=json_stringify(_e.scene),_undo=array_length(_e.undo);
+        ln_edit_follow_game({game_number:_game,level:1,room_id:_room});
+        ln_check(array_length(_e.undo)==_undo,"same-room editor opening preserves undo");
+        var _other=ln_edit_rooms(_game,2)[1];
+        ln_edit_follow_game({game_number:_game,level:2,room_id:_other});
+        ln_check(_e.game==_game && _e.level==2 && _e.room_id==_other && _e.preview.room_id==_other,"editor follows live level and room");
+        ln_edit_follow_game({game_number:_game,level:1,room_id:_room});
+        ln_check(ln_rewind_equal(_e.scene,json_parse(_saved)),"switching away retains in-memory edits");
+    }
+    _e.scenes={};_e.enabled=false;
+    show_debug_message("LN_EDITOR_FOLLOW_GAME_PASS");
+}
+function ln_edit_overlap_transparency_checks() {
+    var _e=global.ln_editor,_saved=json_stringify(_e.scenes);
+    _e.scenes={};ln_edit_select(1,1,3);_e.reference=false;_e.show_ninja=false;
+    // Reported room: move the large boulder behind the original foreground shrub.
+    _e.scene.parts[13].x=88;_e.scene.parts[13].y=-2;_e.scene.parts[13].overlay=true;
+    var _full=json_parse(json_stringify(_e.scene)),_front=_full.parts[33];
+    var _o=variable_struct_get(ln_edit_data(1,1).objects,string(_front.asset)),_decoded=ln_edit_decode(_full,_front,_o);
+    var _prefix=json_parse(json_stringify(_full));array_resize(_prefix.parts,33);
+    ln_edit_free_cache();var _under=ln_edit_build(_prefix,-1,"preview"),_under_colours=_under.display_colours,_under_owners=_under.owners;
+    ln_edit_free_cache();var _drawn=ln_edit_build(_full,-1,"preview"),_checked=0;
+    for(var _y=0;_y<_o.height;_y++) for(var _x=0;_x<_o.width;_x++) {
+        var _px=_front.x+_x,_py=_front.y+_y,_at=_py*240+_px;
+        if(_px<0 || _px>=240 || _py<0 || _py>=144 || _decoded.codes[_y*_o.width+_x]!=0 || _under_owners[_at]!=13) continue;
+        _checked++;ln_check(_drawn.display_colours[_at]==_under_colours[_at],"foreground transparent pixels retain edited boulder before any jiggle at "+string(_px)+","+string(_py));
+    }
+    ln_check(_checked>0,"reported overlap exercises actual transparent foreground pixels");
+    var _first=json_stringify(_drawn.display_colours);
+    ln_edit_free_cache();ln_check(json_stringify(ln_edit_build(_full,-1,"preview").display_colours)==_first,"cold and cached overlap draws agree");
+    _e.scene=_full;ln_edit_draw();surface_save(application_surface,"editor-overlap-transparency.png");
+    _e.scenes=json_parse(_saved);ln_edit_free_cache();
+    show_debug_message("LN_EDITOR_OVERLAP_TRANSPARENCY_PASS: "+string(_checked)+" foreground holes preserve edited underlay");
 }
