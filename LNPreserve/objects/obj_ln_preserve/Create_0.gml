@@ -344,7 +344,11 @@ tick_native = function(_from, _to, _frame) {
 fullscreen_test=false;fullscreen_frame=0;fullscreen_original=[window_get_width(),window_get_height()];
 for(var _fullscreen_arg=1;_fullscreen_arg<=parameter_count();_fullscreen_arg++) if(parameter_string(_fullscreen_arg)=="--fullscreen-test") fullscreen_test=true;
 
-if(global.ln_tool.active) ln_window_preset(0);
+if(global.ln_tool.active) {
+    if(global.ln_preferences_enabled) ln_window_preferences_restore(self);else ln_window_preset(0);
+}
+window_preferences_test=false;window_preferences_frame=0;
+for(var _window_arg=1;_window_arg<=parameter_count();_window_arg++) if(parameter_string(_window_arg)=="--window-preferences-test") window_preferences_test=true;
 
 // Tool startup is bypassed by automation; a dedicated flag exercises it.
 startup_test=false;startup_frame=0;
@@ -356,3 +360,9 @@ if(startup_active && variable_global_exists("ln_music_voice") && audio_is_playin
 }
 
 if(startup_test) {global.ln_tool.active=true;global.ln_tool.ui=false;ln_window_preset(0);}
+
+escape_control=new LNEscapeControl();
+// Restart can happen while Escape is down; require release before another gesture.
+escape_control.down=keyboard_check(vk_escape);escape_control.fired=escape_control.down;
+escape_controls_test=false;
+for(var _escape_arg=1;_escape_arg<=parameter_count();_escape_arg++) if(parameter_string(_escape_arg)=="--escape-controls-test") escape_controls_test=true;

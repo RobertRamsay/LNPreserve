@@ -3,6 +3,8 @@ from pathlib import Path
 import argparse,subprocess,json,time,sys
 ROOT=Path(__file__).resolve().parents[1]
 CASES={
+ '--escape-controls-test':['LN_ESCAPE_CONTROLS_PASS'],
+ '--window-preferences-test':['LN_WINDOW_PREFERENCES_PASS'],
  '--sprite-viewer-test':['LN_SPRITE_VIEWER_PASS'],
  '--track-player-test':['LN_TRACK_PLAYER_PASS','LN_TRACK_VIEWER_CONTINUITY_PASS'],
  '--ln3-edge-probe':['EDGE_PROBE_DONE total=110 miss=0','LN3_WIND_EDGES_PASS','LN3_LAST_LIFE_PASS','LN12_GAME_OVER_PASS'],

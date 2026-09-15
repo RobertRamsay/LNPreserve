@@ -590,3 +590,178 @@ function ln_startup_draw(_host) {
     }
     draw_set_alpha(1);draw_set_colour(c_white);
 }
+
+// Window preferences have their own debounce; CRT changes never overwrite them.
+function ln_window_size_limit(_w,_h,_dw,_dh) {
+    var _maxw=max(240,_dw-32),_maxh=max(160,_dh-96);
+    if(is_nan(_w) || is_infinity(_w) || _w<240 || is_nan(_h) || is_infinity(_h) || _h<160) {
+        var _fit=ln_window_fit_factor(_dw,_dh);_w=round(1920*_fit);_h=round(1080*_fit);
+    }
+    var _scale=min(1,_maxw/_w,_maxh/_h);
+    return [max(1,round(_w*_scale)),max(1,round(_h*_scale))];
+}
+function ln_window_preferences_read(_file="LNPreserve.ini") {
+    ini_open(_file);
+    var _w=ini_read_real("Window","width",0),_h=ini_read_real("Window","height",0);
+    var _full=ini_read_real("Window","fullscreen",0);ini_close();
+    var _size=ln_window_size_limit(_w,_h,display_get_width(),display_get_height());
+    return {width:_size[0],height:_size[1],fullscreen:!is_nan(_full) && !is_infinity(_full) && _full>=0.5};
+}
+function ln_window_preferences_write(_state,_file="LNPreserve.ini") {
+    ini_open(_file);ini_write_real("Window","width",_state.width);ini_write_real("Window","height",_state.height);
+    ini_write_real("Window","fullscreen",real(_state.fullscreen));ini_close();
+}
+function ln_window_preferences_restore(_host,_file="LNPreserve.ini") {
+    var _state=ln_window_preferences_read(_file);
+    window_set_fullscreen(false);_host.cinematic_window=undefined;
+    window_set_size(_state.width,_state.height);window_center();
+    if(_state.fullscreen) {
+        // Keep the windowed dimensions even when fullscreen changes are asynchronous.
+        _host.cinematic_window={width:_state.width,height:_state.height,x:window_get_x(),y:window_get_y(),cursor:window_get_cursor()};
+        window_enable_borderless_fullscreen(true);window_set_fullscreen(true);
+    }
+    global.ln_window_preferences={state:_state,saved:json_stringify(_state),pending:json_stringify(_state),quiet:0};
+}
+function ln_window_preferences_capture(_host) {
+    var _full=window_get_fullscreen(),_w=window_get_width(),_h=window_get_height();
+    if(_full) {
+        if(variable_instance_exists(_host,"cinematic_window") && is_struct(_host.cinematic_window)) {
+            _w=_host.cinematic_window.width;_h=_host.cinematic_window.height;
+        } else if(variable_global_exists("ln_window_preferences")) {
+            _w=global.ln_window_preferences.state.width;_h=global.ln_window_preferences.state.height;
+        }
+    }
+    return {width:_w,height:_h,fullscreen:_full};
+}
+function ln_window_preferences_flush(_host,_force=false) {
+    if(!global.ln_preferences_enabled || !variable_global_exists("ln_window_preferences")) return;
+    var _p=global.ln_window_preferences,_state=ln_window_preferences_capture(_host);
+    if(_state.width<=0 || _state.height<=0) return;
+    var _signature=json_stringify(_state);
+    if(_signature!=_p.pending) {_p.pending=_signature;_p.quiet=0;}
+    else _p.quiet+=min(delta_time/1000000,.1);
+    _p.state=_state;
+    if(_signature==_p.saved || (!_force && (_p.quiet<.4 || mouse_check_button(mb_left)))) return;
+    ln_window_preferences_write(_state);_p.saved=_signature;
+}
+function ln_window_preferences_test_step(_host) {
+    var _phase=_host.window_preferences_frame++;
+    if(_phase==0) {
+        _host.window_preferences_file="window_preferences_test_"+string(get_timer())+".ini";
+        var _file=_host.window_preferences_file;
+        ini_open(_file);ini_write_real("CRT","keep",42);ini_close();
+        ln_window_preferences_write({width:960,height:540,fullscreen:false},_file);
+        var _round=ln_window_preferences_read(_file);
+        ln_check(_round.width==960 && _round.height==540 && !_round.fullscreen,"window INI round trip");
+        ini_open(_file);ln_check(ini_read_real("CRT","keep",0)==42,"window preferences preserve other sections");ini_close();
+        var _small=ln_window_size_limit(3840,2160,1920,1080);
+        ln_check(_small[0]<=1888 && _small[1]<=984,"large window fits smaller display");
+        var _bad=ln_window_size_limit(-1,0,1920,1080);
+        ln_check(_bad[0]>0 && _bad[1]>0 && _bad[1]<=984,"invalid dimensions use Fit");
+        ln_window_preferences_restore(_host,_file);
+    } else if(_phase==3) {
+        ln_check(!window_get_fullscreen() && window_get_width()==960 && window_get_height()==540,"startup restores window size");
+        ln_fullscreen_toggle(_host);
+    } else if(_phase==6) {
+        var _state=ln_window_preferences_capture(_host);
+        ln_check(_state.fullscreen && _state.width==960 && _state.height==540,"fullscreen capture retains windowed dimensions");
+        ln_window_preferences_write(_state,_host.window_preferences_file);
+        ln_cinematic_restore(_host);
+    } else if(_phase==9) {
+        ln_window_preferences_restore(_host,_host.window_preferences_file);
+    } else if(_phase==12) {
+        ln_check(window_get_fullscreen(),"startup restores fullscreen");ln_fullscreen_toggle(_host);
+    } else if(_phase==15) {
+        ln_check(!window_get_fullscreen() && window_get_width()==960 && window_get_height()==540,"F9 restores remembered window after fullscreen restart");
+        file_delete(_host.window_preferences_file);show_debug_message("LN_WINDOW_PREFERENCES_PASS");game_end();
+    }
+}
+
+function LNEscapeControl() constructor {
+    down=false;held=0;gap=1;armed=false;fired=false;can_die=false;
+}
+// Returns 1 for a gameplay hold, 2 for two short presses. Key repeat cannot retrigger it.
+function ln_escape_gesture(_c,_down,_dt,_eligible) {
+    if(!_down) {
+        if(_c.down) {_c.armed=!_c.fired && _c.held<.35;_c.gap=0;}
+        _c.down=false;_c.held=0;_c.fired=false;_c.gap+=_dt;
+        if(_c.gap>.35) _c.armed=false;
+        return 0;
+    }
+    if(!_c.down) {
+        _c.down=true;_c.held=0;_c.can_die=_eligible;
+        if(_c.armed && _c.gap<=.35) {_c.armed=false;_c.fired=true;return 2;}
+    }
+    _c.held+=_dt;
+    if(!_eligible) _c.can_die=false;
+    if(!_c.fired && _c.can_die && _c.held>=1) {_c.fired=true;_c.armed=false;return 1;}
+    return 0;
+}
+function ln_escape_gameplay(_host) {
+    if(_host.startup_active || _host.workbench || _host.scene_test.menu || _host.scene_test.preview ||
+        global.ln_editor.open || global.ln_tracks.open || global.ln_sprites.open) return false;
+    var _g=_host.play;
+    if(_g.game_over || _g.level_complete || is_struct(_g.loader)) return false;
+    if(variable_struct_exists(_g,"paused") && _g.paused) return false;
+    if(_g.game_number==1) return _host.control_state_ln1.pause==0 && _g.player_health>0 && _g.death_wait==0 && !is_struct(_g.death_transition);
+    if(_g.game_number==2) return _g.player_health>0 && _g.respawn_wait==0 && !is_struct(_g.life_transition) && _g.victory==0;
+    return _g.state.player_health>0 && _g.state.player_dead==0 && _g.special_sequence==0 && !is_struct(_g.intro) && !is_struct(_g.ending);
+}
+function ln_self_death(_g) {
+    // Enter native death playback; life deduction and game-over remain game-owned.
+    if(_g.game_number==1) {
+        if(_g.player_health<=0 || _g.death_wait>0) return false;
+        var _p=_g.player;
+        _g.pickup_assist=undefined;_p.jump_assist=undefined;_g.sequence_kind=0;_g.water_active=false;
+        _g.player_health=0;_p.facing=((_p.facing&4)^6)>>1;
+        _p.action=23860;_p.flags=variable_struct_get(_g.data.actions,string(_p.action)).flags;
+        _p.countdown=0;_p.saved_heading=_p.heading;_p.action_mirror=_p.facing&2;_p.input_lock=255;
+    } else if(_g.game_number==2) {
+        if(_g.player_health<=0 || _g.respawn_wait>0) return false;
+        _g.pickup_assist=undefined;_g.keypad=undefined;_g.fall_remaining=-1;
+        ln2_fall_death_begin(_g);
+    } else {
+        var _s=_g.state;if(_s.player_health<=0 || _s.player_dead!=0) return false;
+        _g.pickup_assist=undefined;_s.reverse_roll=undefined;_s.input_block=0;_s.climb_flags=0;_s.stun=0;
+        _s.player_health=0;_s.inventory[26]=0;_s.player_dead=1;_s.death_wait=50;_s.logic_wait=0;
+        ln3_action_set(_s,_g.actions,20);
+    }
+    return true;
+}
+function ln_escape_step(_host) {
+    var _event=ln_escape_gesture(_host.escape_control,keyboard_check(vk_escape),min(delta_time/1000000,.1),ln_escape_gameplay(_host));
+    if(_event==2) {
+        ln_window_preferences_flush(_host,true);ln_crt_preferences_flush(true);
+        game_restart();return true;
+    }
+    if(_event==1) ln_self_death(_host.play);
+    return false;
+}
+function ln_escape_checks() {
+    var _c=new LNEscapeControl();
+    ln_check(ln_escape_gesture(_c,true,.05,true)==0,"single press stays available to panels");
+    ln_escape_gesture(_c,false,.05,true);
+    ln_check(ln_escape_gesture(_c,true,.05,true)==2,"fast second press requests app reset");
+    repeat(30) ln_check(ln_escape_gesture(_c,true,.1,true)==0,"held second press cannot trigger death or more resets");
+    _c=new LNEscapeControl();var _deaths=0;
+    repeat(30) _deaths+=ln_escape_gesture(_c,true,.1,true)==1;
+    ln_check(_deaths==1,"one-second hold requests exactly one death");
+    ln_escape_gesture(_c,false,.01,true);
+    ln_check(ln_escape_gesture(_c,true,.05,true)==0,"hold then tap is not a reset");
+    _c=new LNEscapeControl();ln_escape_gesture(_c,true,.1,false);
+    repeat(20) ln_check(ln_escape_gesture(_c,true,.1,true)==0,"hold begun in panel cannot kill after closing it");
+    _c=new LNEscapeControl();ln_escape_gesture(_c,true,.05,true);ln_escape_gesture(_c,false,.5,true);
+    ln_check(ln_escape_gesture(_c,true,.05,true)==0,"slow taps do not reset");
+    for(var _game=1;_game<=3;_game++) {
+        var _g=_game==1?new LN1Play():(_game==2?new LN2Play():new LN3Play());
+        var _lives=_game==3?_g.state.lives:_g.lives_left;
+        ln_check(ln_self_death(_g),"self-death begins in LN"+string(_game));
+        ln_check(!ln_self_death(_g),"self-death cannot restart an active death");
+        var _ticks=0;
+        while((_game==3?_g.state.lives:_g.lives_left)==_lives && _ticks++<3000) {
+            if(_game==1) ln1_play_tick(_g,0);else if(_game==2) ln2_play_tick(_g,0);else ln3_play_tick(_g,0);
+        }
+        ln_check((_game==3?_g.state.lives:_g.lives_left)==_lives-1,"native death deducts one life in LN"+string(_game));
+    }
+    show_debug_message("LN_ESCAPE_CONTROLS_PASS");
+}

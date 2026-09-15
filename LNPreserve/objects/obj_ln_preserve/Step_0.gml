@@ -1,3 +1,7 @@
+if(escape_controls_test) {ln_escape_checks();game_end();exit;}
+if(ln_escape_step(self)) exit;
+ln_window_preferences_flush(self);
+if(window_preferences_test) {ln_window_preferences_test_step(self);exit;}
 if(startup_active) {ln_startup_step(self);exit;}
 if(sprite_viewer_test) {
     if(sprite_viewer_test_frame==0) ln_sprite_checks(self);
