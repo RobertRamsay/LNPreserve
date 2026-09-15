@@ -1,4 +1,5 @@
 if(startup_active) exit;
+if(global.ln_sprites.open) {ln_sprite_draw();exit;}
 if(global.ln_tracks.open) {ln_track_draw();exit;}
 draw_set_font(font_jansina);
 if(editor_test) {

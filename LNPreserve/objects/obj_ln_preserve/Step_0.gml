@@ -1,9 +1,19 @@
 if(startup_active) {ln_startup_step(self);exit;}
+if(sprite_viewer_test) {
+    if(sprite_viewer_test_frame==0) ln_sprite_checks(self);
+    else if(sprite_viewer_test_frame<9) {
+        global.ln_sprites.game=1+(sprite_viewer_test_frame div 3);
+        global.ln_sprites.category=sprite_viewer_test_frame mod 3;
+        ln_sprite_filter();
+    } else {game_end();exit;}
+    sprite_viewer_test_frame++;exit;
+}
 if(track_player_test) {
     if(global.ln_tracks.open) game_end();else ln_track_checks(self);
     exit;
 }
 ln_tool_step(self);
+if(!selftest && ln_sprite_step(self)) exit;
 if(!selftest && ln_track_step(self)) exit;
 if(global.ln_tool.layout_test) {
     global.ln_tool.frame++;

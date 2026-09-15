@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"ln_sprite_viewer",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"ln_sprite_viewer",
+  "parent":{
+    "name":"Scripts",
+    "path":"folders/Native/Scripts.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

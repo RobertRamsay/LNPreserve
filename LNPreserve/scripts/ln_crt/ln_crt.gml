@@ -492,9 +492,10 @@ function ln_tool_present(_host) {
     draw_set_font(font_jansina);draw_set_halign(fa_left);draw_set_valign(fa_top);
     ln_edit_button(320,96,160,global.ln_editor.open?"UI ON (editor)":"UI ON (U)",true);
     ln_edit_button(492,96,240,"Background "+(_t.background?"ON":"OFF")+" (B)",_t.background);draw_flush();
+    ln_edit_button(688,56,238,global.ln_sprites.open?"Close Sprite Viewer":"SPRITE VIEWER");
     ln_edit_button(940,56,238,global.ln_tracks.open?"Close Track Player":"TRACK PLAYER");
-    if(!global.ln_editor.open && !global.ln_tracks.open) ln_edit_button(748,96,180,"Editor (F6)");
-    if(!global.ln_editor.open && !global.ln_tracks.open) ln_edit_button(940,96,238,_host.scene_test.menu?"Back to game (F11)":"Game/Levels (F11)");
+    if(!global.ln_editor.open && !global.ln_tracks.open && !global.ln_sprites.open) ln_edit_button(748,96,180,"Editor (F6)");
+    if(!global.ln_editor.open && !global.ln_tracks.open && !global.ln_sprites.open) ln_edit_button(940,96,238,_host.scene_test.menu?"Back to game (F11)":"Game/Levels (F11)");
     ln_edit_button(1256,96,48,"1x");ln_edit_button(1312,96,48,"2x");ln_edit_button(1368,96,48,"Fit");
     ln_edit_button(1424,96,176,"Fullscreen (F9)");draw_flush();
 }
@@ -502,7 +503,7 @@ function ln_tool_step(_host) {
     var _t=global.ln_tool,_click=mouse_check_button_pressed(mb_left),_typing=global.ln_editor.open && global.ln_editor.depth_edit;
     if(!_t.active) return;
     if(ln_tool_ui_visible() && _click && mouse_y>=96 && mouse_y<124) {
-        if(!global.ln_editor.open && !global.ln_tracks.open && mouse_x>=748 && mouse_x<928) global.ln_editor.toggle_requested=true;
+        if(!global.ln_editor.open && !global.ln_tracks.open && !global.ln_sprites.open && mouse_x>=748 && mouse_x<928) global.ln_editor.toggle_requested=true;
         if(mouse_x>=1256 && mouse_x<1304) ln_window_preset(1);
         if(mouse_x>=1312 && mouse_x<1360) ln_window_preset(2);
         if(mouse_x>=1368 && mouse_x<1416) ln_window_preset(0);
@@ -530,7 +531,7 @@ function ln_tool_free() {
     if(_t.output_camera>=0) camera_destroy(_t.output_camera);
 }
 
-function ln_tool_ui_visible() {return global.ln_editor.open || global.ln_tool.ui || (variable_global_exists("ln_tracks") && global.ln_tracks.open);}
+function ln_tool_ui_visible() {return global.ln_editor.open || global.ln_tool.ui || (variable_global_exists("ln_tracks") && global.ln_tracks.open) || (variable_global_exists("ln_sprites") && global.ln_sprites.open);}
 
 function ln_tool_menu_pressed() {
     return global.ln_tool.active && ln_tool_ui_visible() && !global.ln_editor.open &&
