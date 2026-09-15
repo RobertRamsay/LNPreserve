@@ -1,5 +1,10 @@
 if(startup_active) {ln_startup_step(self);exit;}
+if(track_player_test) {
+    if(global.ln_tracks.open) game_end();else ln_track_checks(self);
+    exit;
+}
 ln_tool_step(self);
+if(!selftest && ln_track_step(self)) exit;
 if(global.ln_tool.layout_test) {
     global.ln_tool.frame++;
     if(global.ln_tool.frame==3) global.ln_tool.ui=false;

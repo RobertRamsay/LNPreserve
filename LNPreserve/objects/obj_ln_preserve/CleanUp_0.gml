@@ -12,6 +12,7 @@ ln_crt_preferences_flush(true);
 ln_paint_free();
 ln_edit_free_cache();ln_edit_free_preview();
 
+ln_track_stop(global.ln_tracks);
 ln_tool_free();
 
 if(variable_instance_exists(id,"startup_sound") && startup_sound>=0) audio_stop_sound(startup_sound);
