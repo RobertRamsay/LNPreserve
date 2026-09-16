@@ -125,6 +125,7 @@ function ln2_enemy_obstacle(_g) {
 }
 
 function ln2_enemy_decide(_g) {
+    if(!ln_enemy_native_ai(_g)) return;
     var _e=_g.enemy,_p=_g.player,_tick=_p.tick;
     if (_e.active<128) return;
     if ((_e.actor_blocked|_e.edge_blocked)!=0 || _e.boundary_hit!=255) { ln2_enemy_obstacle(_g);return; }

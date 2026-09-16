@@ -1,3 +1,4 @@
+if(enemy_editor_test) exit;
 if(collision_edit_test) exit;
 if(escape_controls_test) {ln_escape_checks();game_end();exit;}
 if(ln_escape_step(self)) exit;

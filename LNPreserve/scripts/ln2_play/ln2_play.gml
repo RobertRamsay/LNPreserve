@@ -49,6 +49,7 @@ function ln2_enemy_remember(_g) {
 }
 
 function ln2_play_enter(_g,_id) {
+    ln_enemy_room_leave(_g);
     ln_rewind_boundary();
     _g.loader=undefined;
     _g.data.sewer_recessed=_g.level==3 && _id==10;
@@ -197,6 +198,7 @@ function ln2_play_tick(_g,_joy) {
     if (variable_struct_exists(_g,"crate_jump") && is_struct(_g.crate_jump)) {ln2_basement_jump_tick(_g,_tick);return;}
     if (_g.fall_remaining>=0) { ln2_fall_tick(_g,_tick);return; }
     if (_g.hole_steps>0) { ln2_hole_tick(_g,_tick);return; }
+    ln_enemy_runtime(_g);
     _p.enemy_active=_g.enemy.active;_p.enemy_x=_g.enemy.x;_p.enemy_y=_g.enemy.y;_p.separation_y=_g.enemy.separation_y;
     _p.gate_open=_g.inventory[18];_p.gate_mode=_g.inventory[20];
     ln2_player_update(_p,_g.data,_joy,_tick);ln2_enemy_decide(_g);ln2_enemy_action(_g);
@@ -299,7 +301,8 @@ function ln2_play_draw(_g) {
     ln2_street_lights_draw(_g);
     ln2_newspaper_draw(_g);
     ln2_sewer_flame_draw(_g);
-    if (_g.player.depth_y<_g.enemy.depth_y) {
+    if(ln_enemy_draw_group(_g)) {ln2_projectile_draw(_g,false);ln2_projectile_draw(_g,true);}
+    else if (_g.player.depth_y<_g.enemy.depth_y) {
         ln2_play_actor(_g,_g.player,false);ln2_projectile_draw(_g,false);ln2_play_actor(_g,_g.enemy,true);ln2_projectile_draw(_g,true);
     } else {
         ln2_play_actor(_g,_g.enemy,true);ln2_projectile_draw(_g,true);ln2_play_actor(_g,_g.player,false);ln2_projectile_draw(_g,false);

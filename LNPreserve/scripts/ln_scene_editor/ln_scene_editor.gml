@@ -1,5 +1,6 @@
 /// Versioned, opt-in scene overrides. No original assets or room logic are edited.
 function LNSceneEditor() constructor {
+    enemy_edit=false;enemy_index=0;enemy_drag=false;enemy_waypoint=-1;enemy_catalogs={};enemy_catalog_building=false;
     test_music_restore=undefined;
     open=false;toggle_requested=false;enabled=false;scenes={};datasets={};bitmap_baselines={};scene=undefined;preview=undefined;
     game=1;level=1;room_id=1;part=-1;asset=0;scroll=0;asset_scroll=0;
@@ -80,6 +81,7 @@ function ln_edit_select(_game,_level,_room) {
      _e=global.ln_editor; _source=ln_edit_source(_game,_level,_room);
     if(!is_struct(_source)) {_e.message="No source part list for that room";return false;}
     _e.collision_index=-1;_e.collision_scroll=0;_e.collision_before=undefined;
+    _e.enemy_drag=false;_e.enemy_waypoint=-1;_e.enemy_index=0;
     _e.game=_game;_e.level=_level;_e.room_id=_room;_e.source_scene=_source;_e.pending_pick=undefined;
      _key=ln_edit_key(_game,_level,_room);
     _e.scene=variable_struct_exists(_e.scenes,_key)?json_parse(json_stringify(variable_struct_get(_e.scenes,_key))):_source;
@@ -122,7 +124,7 @@ function ln_edit_validate(_pack) {
             _s.level<1 || _s.level>(_s.game==1?6:(_s.game==2?7:5)) || !is_real(_s.room) || is_nan(_s.room) || is_infinity(_s.room) || floor(_s.room)!=_s.room ||
             _s.room<0 || _s.room>63 || !is_real(_s.background) || is_nan(_s.background) || is_infinity(_s.background) || floor(_s.background)!=_s.background || _s.background<0 || _s.background>15 ||
             !is_array(_s.parts) || array_length(_s.parts)>1024 || _keys[_i]!=ln_edit_key(_s.game,_s.level,_s.room)) return false;
-        if(!ln_collision_validate(_s)) return false;
+        if(!ln_collision_validate(_s) || !ln_enemy_validate(_s)) return false;
          _d=ln_edit_data(_s.game,_s.level);
         for( _j=0;_j<array_length(_s.parts);_j++) {
              _p=_s.parts[_j];if(!is_struct(_p)) return false;
@@ -166,10 +168,11 @@ function ln_edit_load(_file) {
     } catch(_error) {if(_b>=0) buffer_delete(_b);global.ln_editor.message="Could not load custom file; existing edits kept";return false;}
 }
 function ln_edit_build(_scene,_limit=-1,_variant="edit") {
-    var _e,_key,_d,_colours,_depth,_attributes,_n,_i,_p,_o,_cw,_y,_x,_dx,_dy,_sx,_cell,_code,_attr,_dest,_old,_blend,_palette,_c,_j,_pixel,_surface,_mask_surface,_b,_mask,_owners,_overlay,_decoded,_at,_incremental,_left,_top,_right,_bottom,_start_x,_end_x,_start_y,_end_y,_reuse,_depth_surface,_overrides,_baseline,_owner,_source_owner,_output,_display,_edited_underlay;
+    var _e,_key,_d,_colours,_depth,_attributes,_n,_i,_p,_o,_cw,_y,_x,_dx,_dy,_sx,_cell,_code,_attr,_dest,_old,_blend,_palette,_c,_j,_pixel,_surface,_mask_surface,_b,_mask,_owners,_overlay,_decoded,_at,_incremental,_left,_top,_right,_bottom,_start_x,_end_x,_start_y,_end_y,_reuse,_depth_surface,_overrides,_baseline,_owner,_source_owner,_output,_display,_edited_underlay,_edits;
      _e=global.ln_editor; _key=ln_edit_key(_scene.game,_scene.level,_scene.room)+":"+string(_e.revision)+":"+string(_limit)+":"+_variant;
     if(is_struct(_e.cache) && _e.cache.key==_key && surface_exists(_e.cache.surface)) return _e.cache;
     _baseline=(_variant!="source" && _limit<0 && variable_struct_exists(_scene,"preserve_bitmap") && _scene.preserve_bitmap)?ln_edit_bitmap_baseline(_scene):undefined;
+    _edits=is_struct(_baseline)?ln_edit_source_changes(_scene):undefined;
     _incremental=_variant=="preview" && is_array(_e.dirty_rect) && is_struct(_e.cache) && _e.cache.variant==_variant && surface_exists(_e.cache.surface);
     _left=_incremental?_e.dirty_rect[0]:0;_top=_incremental?_e.dirty_rect[1]:0;
     _right=_incremental?_e.dirty_rect[2]:240;_bottom=_incremental?_e.dirty_rect[3]:144;
@@ -213,7 +216,29 @@ function ln_edit_build(_scene,_limit=-1,_variant="edit") {
         if(is_struct(_baseline) && _scene.background==_baseline.background) {
             _owner=_owners[_i];_source_owner=-1;
             if(_owner>=0) _source_owner=variable_struct_exists(_scene.parts[_owner],"source_index")?_scene.parts[_owner].source_index:-2;
-            if(_source_owner==_baseline.owners[_i] && _output==_baseline.colours[_i]) _output=_baseline.original[_i];
+            if(!(_source_owner>=0 && _edits.changed[_source_owner]) && _source_owner==_baseline.owners[_i] && _output==_baseline.colours[_i]) _output=_baseline.original[_i];
+            // The diagnostic source palette may differ from the native bitmap.
+            // When revealing an unchanged layer, recover its local palette from
+            // visible pixels of that same layer, never from the removed prop.
+            else if(_scene.game==3 && _baseline.owners[_i]>=0 && _edits.changed[_baseline.owners[_i]] &&
+                (_source_owner<0 || !_edits.changed[_source_owner]))
+                _output=ln_edit_revealed_colour(_baseline,_source_owner,_output,_x,_y);
+        }
+        if(is_struct(_edits)) {
+            _owner=_owners[_i];_source_owner=-1;
+            if(_owner>=0 && variable_struct_exists(_scene.parts[_owner],"source_index")) _source_owner=_scene.parts[_owner].source_index;
+            // Vacated native pixels must not keep hiding actors. An unchanged
+            // visible prop still inherits its original mask where appropriate.
+            if((_edits.original[_i] || (_source_owner>=0 && _edits.changed[_source_owner])) && !_overrides[_i] && (_source_owner<0 || _edits.changed[_source_owner] || _source_owner!=_baseline.owners[_i])) {
+                _overrides[_i]=true;_depth[_i]=0;
+                if(_owner>=0) {
+                    _p=_scene.parts[_owner];
+                    if(_p.mode==0 && (_source_owner<0 || _edits.changed[_source_owner]) && !(variable_struct_exists(_p,"depth_override") && _p.depth_override)) {
+                        _o=variable_struct_get(_d.objects,string(_p.asset));
+                        _depth[_i]=clamp(round(_p.y+_o.height)+29,1,254);
+                    }
+                }
+            }
         }
         _display[_i]=_output;
     }
@@ -302,13 +327,15 @@ function ln_edit_step(_host) {
     if(ln_edit_value_repeat(370,62,30,28) || ln_edit_value_repeat(570,62,30,28)) { _level=clamp(_e.level+(ln_tool_mouse_x()<400?-1:1),1,_max); _d=ln_edit_data(_e.game,_level);ln_edit_select(_e.game,_level,ln_edit_rooms(_e.game,_level)[0]);return true;}
      _d=ln_edit_data(_e.game,_e.level); _ids=ln_edit_rooms(_e.game,_e.level);
     if(ln_edit_value_repeat(620,62,30,28) || ln_edit_value_repeat(810,62,30,28)) { _index=0;while(_index<array_length(_ids)-1 && _ids[_index]!=_e.room_id) _index++;_index=clamp(_index+(ln_tool_mouse_x()<650?-1:1),0,array_length(_ids)-1);ln_edit_select(_e.game,_e.level,_ids[_index]);return true;}
-    if(ln_edit_hit(460,104,180,28)) {ln_collision_finish_drag();_e.collision_edit=!_e.collision_edit;_e.show_collisions=true;_e.part=-1;}
+    if(ln_edit_hit(652,104,92,28)) {ln_edit_finish_drag();_e.enemy_edit=!_e.enemy_edit;_e.collision_edit=false;_e.part=-1;_e.enemy_index=0;_e.enemy_waypoint=-1;}
+    if(ln_edit_hit(460,104,180,28)) {_e.enemy_edit=false;ln_collision_finish_drag();_e.collision_edit=!_e.collision_edit;_e.show_collisions=true;_e.part=-1;}
     if(ln_edit_hit(24,104,180,28) && !_e.collision_edit) _e.show_collisions=!_e.show_collisions;
     if(ln_edit_hit(24,594,140,28)) _e.show_ninja=!_e.show_ninja;
     if(ln_edit_hit(176,594,140,28)) _e.show_depth=!_e.show_depth;
     if(ln_edit_hit(328,594,150,28)) {_e.pulse_selected=!_e.pulse_selected;_e.pulse_time_us=0;}
     if(ln_edit_hit(490,594,140,28)) {ln_edit_test_room(_host);return true;}
 
+    if(_e.enemy_edit) return ln_enemy_editor_step();
     if(_e.collision_edit) return ln_collision_edit_step();
      _assets=variable_struct_get_names(_d.objects);array_sort(_assets,function(a,b){return real(a)-real(b);});
     if(mouse_wheel_up()) {if(ln_tool_mouse_x()<990) _e.scroll=max(0,_e.scroll-3);else _e.asset_scroll=max(0,_e.asset_scroll-3);}
@@ -322,7 +349,7 @@ function ln_edit_step(_host) {
          _id=real(_assets[_e.asset]); _o=variable_struct_get(_d.objects,string(_id));
         ln_edit_add_asset(_id);_changed=true;
     }
-    if(!_e.collision_edit && _e.part>=0 && _e.part<array_length(_s.parts)) {
+    if(!_e.enemy_edit && !_e.collision_edit && _e.part>=0 && _e.part<array_length(_s.parts)) {
          _p=_s.parts[_e.part];
         _delta=ln_edit_value_repeat(760,548,65,28);if(_delta) _changed=ln_edit_move_part(_e.part-1*_delta) || _changed;
         _delta=ln_edit_value_repeat(832,548,65,28);if(_delta) _changed=ln_edit_move_part(_e.part+1*_delta) || _changed;
@@ -388,6 +415,7 @@ function ln_edit_draw() {
     _e.context=false; // Native room depth stays active for every editor preview.
     _e.native_preview=true;
     if(_e.show_ninja && _e.build<0 && is_struct(_e.preview)) ln_edit_preview_actor();
+    if(_e.enemy_edit && _e.build<0) ln_enemy_editor_overlay();
     _e.native_preview=false;
     if(_e.show_collisions) ln_edit_collision_draw();
     if(_e.collision_edit) ln_collision_edit_handles();
@@ -414,7 +442,9 @@ function ln_edit_draw() {
     ln_edit_button(24,594,140,"Ninja",_e.show_ninja);ln_edit_button(176,594,140,"Depth line",_e.show_depth);ln_edit_button(328,594,150,"pulseSelected?",_e.pulse_selected);ln_edit_button(490,594,140,"Test room");
     ln_edit_button(24,104,180,"Collision overlay",_e.show_collisions);
     ln_edit_button(460,104,180,"Edit collisions",_e.collision_edit);
+    ln_edit_button(652,104,92,"Enemies",_e.enemy_edit);
     if(_e.show_collisions) {draw_set_colour(c_white);draw_text(216,110,string(array_length(_e.collision_shapes))+(_e.collision_edit?" boundaries":" boundaries | read-only"));}
+    if(_e.enemy_edit) {ln_enemy_editor_panel();return;}
     if(_e.collision_edit) {ln_collision_edit_panel();return;}
     draw_set_colour(c_white);draw_text(760,110,"PARTS (draw order)");draw_text(1000,110,"ASSETS (this level)");
      _d=ln_edit_data(_e.game,_e.level); _assets=variable_struct_get_names(_d.objects);array_sort(_assets,function(a,b){return real(a)-real(b);});
@@ -525,6 +555,7 @@ function ln_edit_checks() {
     ln_edit_collision_checks();
     ln_edit_follow_game_checks();
     ln_edit_overlap_transparency_checks();
+    ln_edit_vacated_checks();
     show_debug_message("LN_EDITOR_PASS: "+string(_rooms)+" room imports, "+string(_parts)+" parts; composition/depth, save/load validation, mode isolation and three game previews");
 }
 
@@ -1571,4 +1602,511 @@ function ln_edit_restore_game_music(_g) {
     if(!is_undefined(_e.test_music_restore)) {
         ln_tool_music_set(_g,_e.test_music_restore);_e.test_music_restore=undefined;
     } else ln_tool_music_set(_g,ln_tool_music_enabled(_g));
+}
+
+// Locate source and destination footprints independently of the current drag.
+// This also covers deletion and edits restored from a saved file.
+function ln_edit_source_changes(_scene) {
+    var _source=ln_edit_source(_scene.game,_scene.level,_scene.room),_data=ln_edit_data(_scene.game,_scene.level);
+    var _changed=array_create(array_length(_source.parts),true),_original=array_create(240*144,false),_boxes=[];
+    for(var _i=0;_i<array_length(_scene.parts);_i++) {
+        var _p=_scene.parts[_i],_id=variable_struct_exists(_p,"source_index")?_p.source_index:-1,_same=false;
+        if(_id>=0 && _id<array_length(_source.parts)) {
+            var _old=_source.parts[_id];
+            _same=_p.asset==_old.asset && _p.x==_old.x && _p.y==_old.y && _p.flip==_old.flip && json_stringify(_p.recolour)==json_stringify(_old.recolour);
+            _changed[_id]=!_same;
+        }
+    }
+    for(var _j=0;_j<array_length(_changed);_j++) if(_changed[_j]) array_push(_boxes,_source.parts[_j]);
+    for(var _b=0;_b<array_length(_boxes);_b++) {
+        var _part=_boxes[_b],_o=variable_struct_get(_data.objects,string(_part.asset));
+        for(var _y=max(0,floor(_part.y/8)*8);_y<min(144,ceil((_part.y+_o.height)/8)*8);_y++)
+            for(var _x=max(0,floor(_part.x/8)*8);_x<min(240,ceil((_part.x+_o.width)/8)*8);_x++) _original[_y*240+_x]=true;
+    }
+    return {original:_original,changed:_changed};
+}
+
+function ln_edit_vacated_checks() {
+    var _e=global.ln_editor,_saved=json_stringify(_e.scenes);_e.scenes={};
+    for(var _game=2;_game<=3;_game++) {
+        ln_edit_select(_game,1,_game==2?1:0);_e.reference=false;_e.show_ninja=false;
+        var _indices=_game==2?[59]:[52,55],_source=json_parse(json_stringify(_e.scene));
+        for(var _j=0;_j<array_length(_indices);_j++) {
+            var _p=_e.scene.parts[_indices[_j]];_p.overlay=true;
+            _p.x=_game==2?72:156;_p.y=_game==2?55:(_j==0?75:67);
+        }
+        ln_edit_free_cache();var _c=ln_edit_build(_e.scene,-1,"preview"),_baseline=ln_edit_bitmap_baseline(_e.scene),_changes=ln_edit_source_changes(_e.scene),_cleared=0;
+        for(var _i=0;_i<240*144;_i++) {
+            var _old=_baseline.owners[_i];
+            if(_old>=0 && _changes.changed[_old] && _c.owners[_i]<0) {
+                ln_check(_c.overrides[_i] && _c.depth[_i]==0,"vacated object silhouette clears native depth");
+                _e.native_preview=true;ln_check(!ln_modified_hidden(_i mod 240,_i div 240,120,true),"native mask cannot hide ninja in vacated silhouette");_e.native_preview=false;_cleared++;
+            }
+            var _owner=_c.owners[_i],_source_owner=_owner<0?-1:_e.scene.parts[_owner].source_index;
+            if(_source_owner==_old && (_old<0 || !_changes.changed[_old]) && _c.colours[_i]==_baseline.colours[_i])
+                ln_check(_c.display_colours[_i]==_baseline.original[_i],"unchanged ground keeps native colours even inside moved prop bounds");
+
+        }
+        ln_check(_cleared>0,"reported move exercises exposed original mask pixels");
+        if(_game==3) {
+            ln_check(_c.display_colours[58*240+148]==make_colour_rgb(123,123,123) && _c.display_colours[60*240+150]==make_colour_rgb(123,123,123),"LN3 vacated trunk reveals grey path, not green background");
+        }
+        var _expected=json_stringify(_c.display_colours);ln_edit_free_cache();_e.scene=json_parse(json_stringify(_e.scene));
+        ln_check(json_stringify(ln_edit_build(_e.scene,-1,"preview").display_colours)==_expected,"saved/reloaded moved props reconstruct identically");
+        ln_edit_draw();surface_save(application_surface,"editor-vacated-ln"+string(_game)+".png");
+        _e.scene=_source;array_delete(_e.scene.parts,_indices[0],1);ln_edit_free_cache();
+        _c=ln_edit_build(_e.scene,-1,"preview");_cleared=0;
+        for(var _k=0;_k<240*144;_k++) if(_baseline.owners[_k]==_indices[0] && _c.owners[_k]<0) {
+            ln_check(_c.overrides[_k] && _c.depth[_k]==0,"removed props clear native depth");_cleared++;
+        }
+        ln_check(_cleared>0,"removed prop exposes mask pixels");
+    }
+    _e.scenes=json_parse(_saved);ln_edit_free_cache();show_debug_message("LN_EDITOR_VACATED_PASS: LN2/LN3 moved and removed props clear native pixels and depth");
+}
+
+function ln_edit_revealed_colour(_baseline,_owner,_colour,_x,_y) {
+    var _best=100000,_result=_colour;
+    for(var _dy=-16;_dy<=16;_dy++) for(var _dx=-16;_dx<=16;_dx+=2) {
+        var _distance=_dx*_dx+_dy*_dy;
+        if(_distance==0 || _distance>=_best) continue;
+        var _px=_x+_dx,_py=_y+_dy;
+        if(_px<0 || _px>=240 || _py<0 || _py>=144) continue;
+        var _at=_py*240+_px;
+        if(_baseline.owners[_at]==_owner && _baseline.colours[_at]==_colour) {
+            _best=_distance;_result=_baseline.original[_at];
+        }
+    }
+    return _result;
+}
+
+
+// Modified-mode ordinary enemies. Native scripted encounters are never replaced.
+function ln_enemy_copy(_v) {return json_parse(json_stringify(_v));}
+function ln_enemy_capture(_g) {
+    if(_g.game_number<3) return ln_enemy_copy(_g.enemy);
+    var _s=_g.state,_out={},_names=variable_struct_get_names(_s);
+    for(var _i=0;_i<array_length(_names);_i++) {
+        var _key=_names[_i];
+        if(string_pos("enemy_",_key)==1 || string_pos("patrol_",_key)==1) variable_struct_set(_out,_key,ln_enemy_copy(variable_struct_get(_s,_key)));
+    }
+    _out.parts=[ln_enemy_copy(_s.parts[4]),ln_enemy_copy(_s.parts[5]),ln_enemy_copy(_s.parts[6])];
+    _out.draw={};
+    var _drawkeys=["draw_frames","draw_x","draw_y","draw_colours","draw_mirror"];
+    for(var _k=0;_k<array_length(_drawkeys);_k++) {var _v=variable_struct_get(_s,_drawkeys[_k]);variable_struct_set(_out.draw,_drawkeys[_k],is_array(_v)?[_v[4],_v[5],_v[6]]:[-1,-1,-1]);}
+    _out.enabled=_s.enabled&112;_out.mirror=_s.mirror&112;
+    _out.multicolour=_s.multicolour&112;_out.expand_x=_s.expand_x&112;_out.expand_y=_s.expand_y&112;
+    return _out;
+}
+function ln_enemy_apply(_g,_actor) {
+    if(_g.game_number<3) {_g.enemy=ln_enemy_copy(_actor);return;}
+    var _s=_g.state,_names=variable_struct_get_names(_actor);
+    for(var _i=0;_i<array_length(_names);_i++) {
+        var _key=_names[_i];
+        if(string_pos("enemy_",_key)==1 || string_pos("patrol_",_key)==1) variable_struct_set(_s,_key,ln_enemy_copy(variable_struct_get(_actor,_key)));
+    }
+    for(var _j=0;_j<3;_j++) _s.parts[4+_j]=ln_enemy_copy(_actor.parts[_j]);
+    if(variable_struct_exists(_actor,"draw")) {var _keys=variable_struct_get_names(_actor.draw);for(var _k=0;_k<array_length(_keys);_k++) {var _v=variable_struct_get(_s,_keys[_k]);if(!is_array(_v)) _v=array_create(8,-1);var _a=variable_struct_get(_actor.draw,_keys[_k]);for(var _j=0;_j<3;_j++) _v[4+_j]=_a[_j];variable_struct_set(_s,_keys[_k],_v);}}
+    _s.enabled=(_s.enabled&143)|_actor.enabled;_s.mirror=(_s.mirror&143)|_actor.mirror;
+    _s.multicolour=(_s.multicolour&143)|_actor.multicolour;_s.expand_x=(_s.expand_x&143)|_actor.expand_x;_s.expand_y=(_s.expand_y&143)|_actor.expand_y;
+}
+function ln_enemy_position(_game,_a) {return _game<3?[_a.x,_a.y-8]:[_a.enemy_x-24,_a.enemy_y-29];}
+function ln_enemy_place(_game,_a,_x,_y,_facing) {
+    if(_game<3) {
+        _a.x=round(_x);_a.y=round(_y)+8;_a.facing=_facing;_a.heading=_facing;_a.action_mirror=_facing&2;_a.mirror=(_facing&4)==0;
+        _a.fraction_x=0;_a.fraction_y=0;_a.depth_y=_a.y;_a.patrol_x=_a.x;
+    } else {
+        var _dx=round(_x)+24-_a.enemy_x,_dy=round(_y)+29-_a.enemy_y;
+        _a.enemy_x+=_dx;_a.enemy_y+=_dy;
+        for(var _i=0;_i<3;_i++) {_a.parts[_i].x+=_dx;_a.parts[_i].y+=_dy;}
+        _a.mirror=(_facing&4)?112:0;
+        if(variable_struct_exists(_a,"draw")) for(var _j=0;_j<3;_j++) {_a.draw.draw_x[_j]+=_dx;_a.draw.draw_y[_j]+=_dy;_a.draw.draw_mirror[_j]=(_facing&4)!=0;}
+    }
+}
+function ln_enemy_catalog(_game,_level) {
+    var _e=global.ln_editor,_key=string(_game)+":"+string(_level);
+    if(variable_struct_exists(_e.enemy_catalogs,_key)) return variable_struct_get(_e.enemy_catalogs,_key);
+    _e.enemy_catalog_building=true;var _epoch=global.ln_rewind_epoch;
+    var _g=_game==1?new LN1Play(_level):(_game==2?new LN2Play(_level):new LN3Play(_level));
+    var _out={types:[],rooms:{}},_rooms=_g.world.rooms;
+    for(var _i=0;_i<array_length(_rooms);_i++) {
+        var _room=_rooms[_i],_id=_room.id,_ordinary=false,_special=false,_actor=undefined;
+        if(_game<3) {
+            if(_game==1) ln1_play_enter(_g,_id);else ln2_play_enter(_g,_id);
+            var _steps=0;
+            while((_g.enemy.active<128 || _g.enemy.display_frame>=64) && _g.enemy.action>=256 && _steps++<240) {
+                _g.player.tick=(_g.player.tick+1)&255;
+                if(_game==1) {ln1_enemy_action(_g);ln1_combat_event(_g,_g.enemy.action_state,true);}
+                else {ln2_enemy_action(_g);ln2_combat_event(_g,_g.enemy.action_state,true);}
+                _g.enemy.action_state=0;
+            }
+            _ordinary=_g.enemy.active>=128 && _g.enemy.active<132 && _g.enemy.display_frame<64 && !(_game==2 && _level==7);
+            _special=!_ordinary && (_g.enemy.active>=128 || _g.enemy.action>=256 || (_game==1?_room.enemy_script!=0:_g.enemy.custom));
+            if(_ordinary) _actor=ln_enemy_capture(_g);
+        } else {
+            var _record=ln3_room_record(_g.data.rooms,_id);
+            if(is_struct(_record) && array_length(_record.enemy)>=6) {
+                _g.state.enemy_dead=0;_g.state.enemy_health=44;
+                ln3_enemy_enter(_g.state,_g.actions,_g.data,_record);
+                _special=(_g.state.parts[4].animation==138 || _id>=13 || _level==5);
+                _ordinary=!_special;
+                if(_ordinary) {ln3_animation_update(_g.state,_g.animation);_actor=ln_enemy_capture(_g);}
+            }
+        }
+        var _entry={locked:_special,type:-1,defaults:[]};
+        if(_ordinary) {
+            var _type=array_length(_out.types),_pos=ln_enemy_position(_game,_actor);
+            var _facing=_game<3?_actor.facing:((_actor.mirror&96)?7:3);
+            if(!array_contains([1,3,5,7],_facing)) _facing=3;
+            array_push(_out.types,{label:"Guard / room "+string(_id),actor:_actor,room:_id,trace:ln_enemy_native_trace(_g,_actor)});
+            _entry.type=_type;
+            array_push(_entry.defaults,{type:_type,x:clamp(_pos[0],0,239),y:clamp(_pos[1],0,143),facing:_facing,patrol:0,route:[]});
+        }
+        variable_struct_set(_out.rooms,string(_id),_entry);
+    }
+    variable_struct_set(_e.enemy_catalogs,_key,_out);_e.enemy_catalog_building=false;global.ln_rewind_epoch=_epoch;
+    return _out;
+}
+function ln_enemy_configs(_scene) {
+    if(variable_struct_exists(_scene,"enemies")) return _scene.enemies;
+    var _cat=ln_enemy_catalog(_scene.game,_scene.level);
+    return variable_struct_exists(_cat.rooms,string(_scene.room))?variable_struct_get(_cat.rooms,string(_scene.room)).defaults:[];
+}
+function ln_enemy_validate(_scene) {
+    if(!variable_struct_exists(_scene,"enemies")) return true;
+    if(!is_array(_scene.enemies) || array_length(_scene.enemies)>8) return false;
+    var _catalog=ln_enemy_catalog(_scene.game,_scene.level);
+    if(!variable_struct_exists(_catalog.rooms,string(_scene.room)) || variable_struct_get(_catalog.rooms,string(_scene.room)).locked) return false;
+    for(var _i=0;_i<array_length(_scene.enemies);_i++) {
+        var _a=_scene.enemies[_i];if(!is_struct(_a)) return false;
+        var _keys=["type","x","y","facing","patrol","route"];
+        for(var _j=0;_j<array_length(_keys);_j++) if(!variable_struct_exists(_a,_keys[_j])) return false;
+        if(!ln_enemy_number(_a.type) || _a.type<0 || _a.type>=array_length(_catalog.types) || !ln_enemy_number(_a.x) || _a.x<0 || _a.x>239 || !ln_enemy_number(_a.y) || _a.y<0 || _a.y>143 || !array_contains([1,3,5,7],_a.facing) || !array_contains([0,1,2],_a.patrol) || !is_array(_a.route) || array_length(_a.route)>16) return false;
+        for(var _k=0;_k<array_length(_a.route);_k++) {
+            var _point=_a.route[_k];if(!is_array(_point) || array_length(_point)!=2 || !ln_enemy_number(_point[0]) || !ln_enemy_number(_point[1]) || _point[0]<0 || _point[0]>239 || _point[1]<0 || _point[1]>143) return false;
+        }
+    }
+    return true;
+}
+function ln_enemy_editor_commit(_before,_list) {
+    var _e=global.ln_editor;_e.scene.enemies=_list;ln_edit_changed(_before);
+}
+function ln_enemy_editor_step() {
+    var _e=global.ln_editor,_cat=ln_enemy_catalog(_e.game,_e.level),_info=variable_struct_get(_cat.rooms,string(_e.room_id));
+    var _list=ln_enemy_copy(ln_enemy_configs(_e.scene)),_before=json_stringify(_e.scene),_changed=false;
+    if(_info.locked) return true;
+    _e.enemy_index=clamp(_e.enemy_index,0,max(0,array_length(_list)-1));
+    for(var _i=0;_i<array_length(_list);_i++) if(ln_edit_hit(760,140+_i*30,480,28)) {_e.enemy_index=_i;_e.enemy_waypoint=-1;}
+    if(ln_edit_hit(760,400,120,28) && array_length(_list)<8 && array_length(_cat.types)>0) {
+        var _a=array_length(_list)>0?ln_enemy_copy(_list[_e.enemy_index]):{type:0,x:120,y:90,facing:3,patrol:1,route:[]};
+        _a.x=clamp(_a.x+16,0,239);array_push(_list,_a);_e.enemy_index=array_length(_list)-1;_changed=true;
+    }
+    if(ln_edit_hit(892,400,120,28) && array_length(_list)>0) {array_delete(_list,_e.enemy_index,1);_e.enemy_index=max(0,_e.enemy_index-1);_changed=true;}
+    if(ln_edit_hit(1024,400,220,28)) {
+        if(variable_struct_exists(_e.scene,"enemies")) {variable_struct_remove(_e.scene,"enemies");ln_edit_changed(_before);}return true;
+    }
+    if(array_length(_list)>0) {
+        var _p=_list[_e.enemy_index];
+        if(array_length(_cat.types)>0 && ln_edit_hit(760,446,44,28)) {_p.type=(_p.type+array_length(_cat.types)-1) mod array_length(_cat.types);_changed=true;}
+        if(array_length(_cat.types)>0 && ln_edit_hit(1200,446,44,28)) {_p.type=(_p.type+1) mod array_length(_cat.types);_changed=true;}
+        if(ln_edit_hit(760,486,145,28)) {_p.facing=(_p.facing+2)&7;_changed=true;}
+        if(ln_edit_hit(916,486,160,28)) {_p.patrol=(_p.patrol+1) mod 3;_changed=true;}
+        if(ln_edit_hit(1088,486,156,28)) {_p.route=[];_p.patrol=1;_changed=true;}
+        var _mx=round((ln_tool_mouse_x()-24)/3),_my=round((ln_tool_mouse_y()-140)/3),_inside=_mx>=0 && _mx<240 && _my>=0 && _my<144;
+        if(_inside && mouse_check_button_pressed(mb_left)) {
+            if(keyboard_check(vk_shift) && array_length(_p.route)<16) {array_push(_p.route,[_mx,_my]);_p.patrol=2;_changed=true;}
+            else {
+                _e.enemy_waypoint=-1;_e.enemy_drag=false;
+                for(var _k=0;_k<array_length(_p.route);_k++) if(point_distance(_mx,_my,_p.route[_k][0],_p.route[_k][1])<5) {_e.enemy_waypoint=_k;_e.enemy_drag=true;break;}
+                if(!_e.enemy_drag) for(var _j=array_length(_list)-1;_j>=0;_j--) if(point_distance(_mx,_my,_list[_j].x,_list[_j].y)<12) {_e.enemy_index=_j;_e.enemy_drag=true;_p=_list[_j];break;}
+                if(_e.enemy_drag) {_e.drag=true;_e.drag_before=_before;}
+            }
+        }
+        if(_e.enemy_drag && _inside && mouse_check_button(mb_left)) {
+            if(_e.enemy_waypoint>=0) {if(_p.route[_e.enemy_waypoint][0]!=_mx || _p.route[_e.enemy_waypoint][1]!=_my) {_p.route[_e.enemy_waypoint]=[_mx,_my];_changed=true;}}
+            else if(_p.x!=_mx || _p.y!=_my) {_p.x=_mx;_p.y=_my;_changed=true;}
+        }
+        if(!mouse_check_button(mb_left)) _e.enemy_drag=false;
+        var _step=keyboard_check(vk_shift)?8:1;
+        var _dx=(keyboard_check_pressed(vk_right)-keyboard_check_pressed(vk_left))*_step,_dy=(keyboard_check_pressed(vk_down)-keyboard_check_pressed(vk_up))*_step;
+        if(_dx || _dy) {_p.x=clamp(_p.x+_dx,0,239);_p.y=clamp(_p.y+_dy,0,143);_changed=true;}
+    }
+    if(_changed) ln_enemy_editor_commit(_before,_list);
+    return true;
+}
+function ln_enemy_editor_panel() {
+    var _e=global.ln_editor,_cat=ln_enemy_catalog(_e.game,_e.level),_list=ln_enemy_configs(_e.scene),_info=variable_struct_get(_cat.rooms,string(_e.room_id));
+    draw_set_colour(c_white);draw_text(760,110,"ENEMIES / one opponent engages");
+    if(_info.locked) {draw_text(760,150,"Scripted encounter / original behaviour");draw_text(24,646,"This animal or boss encounter is protected.");return;}
+    for(var _i=0;_i<array_length(_list);_i++) {
+        var _a=_list[_i];ln_edit_button(760,140+_i*30,480,string(_i+1)+"  "+(_a.type<array_length(_cat.types)?_cat.types[_a.type].label:"Unavailable type"),_i==_e.enemy_index);
+    }
+    ln_edit_button(760,400,120,"Add / copy");ln_edit_button(892,400,120,"Remove");ln_edit_button(1024,400,220,"Original enemies");
+    if(array_length(_list)>0) {
+        var _p=_list[clamp(_e.enemy_index,0,array_length(_list)-1)];
+        ln_edit_button(760,446,44,"<");ln_edit_button(1200,446,44,">");draw_text(820,451,_p.type<array_length(_cat.types)?_cat.types[_p.type].label:"Unavailable");
+        ln_edit_button(760,486,145,"Facing "+string(_p.facing));ln_edit_button(916,486,160,["Native patrol","Idle","Route"][_p.patrol]);ln_edit_button(1088,486,156,"Clear route");
+        draw_text(760,530,"Spawn: "+string(_p.x)+", "+string(_p.y)+" / "+string(array_length(_p.route))+" waypoints");
+    }
+    draw_text(24,646,"Drag a numbered spawn marker. Arrows move it; Shift makes larger steps.");
+    draw_text(24,670,"Shift-click: add patrol point. Drag points to adjust. Routes loop to spawn.");
+    draw_text(24,702,"Yellow: spawn. Cyan: route. Blue: native patrol sample (reactive).");
+    draw_text(24,726,"Ordinary guards only, from this level. Modified ON applies edits in Test room.");
+    draw_set_colour(make_colour_rgb(150,210,220));draw_text(24,760,_e.message);draw_set_colour(c_white);
+}
+function ln_enemy_editor_overlay() {
+    var _e=global.ln_editor,_cat=ln_enemy_catalog(_e.game,_e.level),_list=ln_enemy_configs(_e.scene);
+    for(var _i=0;_i<array_length(_list);_i++) {
+        var _c=_list[_i];if(_c.type>=array_length(_cat.types)) continue;
+        var _a=ln_enemy_copy(_cat.types[_c.type].actor);ln_enemy_place(_e.game,_a,_c.x,_c.y,_c.facing);
+        _a=ln_enemy_pose(_e.preview,_a,_c.facing,false);
+        ln_enemy_draw_actor(_e.preview,_a);
+        draw_set_colour(_i==_e.enemy_index?c_yellow:c_white);draw_circle(_c.x,_c.y,4,true);
+        draw_line(_c.x,_c.y,_c.x+((_c.facing&4)?-8:8),_c.y+((_c.facing==1 || _c.facing==7)?-4:4));
+        draw_set_font(-1);draw_text(_c.x+5,_c.y-9,string(_i+1));draw_set_font(font_jansina);
+        if(_c.patrol==0) {
+            var _trace=_cat.types[_c.type].trace;draw_set_colour(make_colour_rgb(100,150,200));
+            for(var _t=1;_t<array_length(_trace);_t++) draw_line(_c.x+_trace[_t-1][0],_c.y+_trace[_t-1][1],_c.x+_trace[_t][0],_c.y+_trace[_t][1]);
+        }
+        if(_c.patrol==2) {
+            var _last=[_c.x,_c.y];draw_set_colour(c_aqua);
+            for(var _j=0;_j<array_length(_c.route);_j++) {var _point=_c.route[_j];draw_line(_last[0],_last[1],_point[0],_point[1]);draw_rectangle(_point[0]-2,_point[1]-2,_point[0]+2,_point[1]+2,true);_last=_point;}
+            if(array_length(_c.route)>0) draw_line(_last[0],_last[1],_c.x,_c.y);
+        }
+    }
+    draw_set_colour(c_white);
+}
+function ln_enemy_draw_actor(_g,_actor) {
+    if(_g.game_number==1) {ln1_play_actor(_g,_actor,true);return;}
+    if(_g.game_number==2) {var _kind=_g.projectiles[1].kind;_g.projectiles[1].kind=0;ln2_play_actor(_g,_actor,true);_g.projectiles[1].kind=_kind;return;}
+    var _saved=ln_enemy_capture(_g),_display=_g.display,_masks=_g.draw_masks,_version=_g.render_version,_spill=_g.state.mask_spill,_colours=_g.special_colours;
+    ln_enemy_apply(_g,_actor);var _d=ln_enemy_copy(_g.state);ln3_play_prepare_draw(_g,_d);
+    for(var _i=0;_i<8;_i++) {var _part=_g.animation.order[_i];if(_part>=4 && _part<=6) ln3_play_actor_part(_g,_d,_part);}
+    ln_enemy_apply(_g,_saved);_g.display=_display;_g.draw_masks=_masks;_g.render_version=_version;_g.state.mask_spill=_spill;_g.special_colours=_colours;
+}
+
+function ln_enemy_number(_v) {return (is_real(_v) || is_int32(_v) || is_int64(_v)) && !is_nan(_v) && !is_infinity(_v) && floor(_v)==_v;}
+function ln_enemy_custom(_g) {return variable_struct_exists(_g,"edited_enemies") && is_struct(_g.edited_enemies);}
+function ln_enemy_flush(_g) {
+    if(!ln_enemy_custom(_g)) return;
+    var _m=_g.edited_enemies;
+    if(_m.active>=0) _m.slots[_m.active].actor=ln_enemy_capture(_g);
+}
+function ln_enemy_room_leave(_g) {
+    if(!ln_enemy_custom(_g)) return;
+    ln_enemy_flush(_g);
+    if(!variable_struct_exists(_g,"edited_enemy_rooms")) _g.edited_enemy_rooms={};
+    variable_struct_set(_g.edited_enemy_rooms,_g.edited_enemies.key,ln_enemy_copy(_g.edited_enemies));
+    _g.edited_enemies=undefined;
+}
+function ln_enemy_dead(_g,_a) {
+    if(_g.game_number==1) return _a.wounds>=32;
+    if(_g.game_number==2) return _a.health<=0 || _a.knockouts>=128;
+    return _a.enemy_dead!=0 || _a.enemy_health<=0;
+}
+function ln_enemy_runtime(_g) {
+    var _e=global.ln_editor;if(_e.enemy_catalog_building) return;
+    var _scene=ln_modified_room(_g),_key=ln_edit_key(_g.game_number,_g.level,_g.room_id);
+    if(!is_struct(_scene) || !variable_struct_exists(_scene,"enemies")) {
+        if(ln_enemy_custom(_g)) {ln_enemy_apply(_g,_g.edited_enemies.original);_g.edited_enemies=undefined;}return;
+    }
+    var _cat=ln_enemy_catalog(_g.game_number,_g.level),_info=variable_struct_get(_cat.rooms,string(_g.room_id));
+    if(_info.locked) return;
+    var _signature=json_stringify(_scene.enemies);
+    if(!ln_enemy_custom(_g) || _g.edited_enemies.key!=_key || _g.edited_enemies.signature!=_signature) {
+        var _m={key:_key,signature:_signature,slots:[],active:-1,engaged:false,original:ln_enemy_capture(_g),ticks:0,shapes:ln_edit_collision_geometry(_g.game_number,_g.game_number==3?_g.bounds:_g.data.boundaries)};
+        if(variable_struct_exists(_g,"edited_enemy_rooms") && variable_struct_exists(_g.edited_enemy_rooms,_key) && variable_struct_get(_g.edited_enemy_rooms,_key).signature==_signature) {
+            var _original=_m.original;_m=ln_enemy_copy(variable_struct_get(_g.edited_enemy_rooms,_key));_m.original=_original;
+        } else for(var _i=0;_i<array_length(_scene.enemies);_i++) {
+            var _cfg=_scene.enemies[_i];if(_cfg.type>=array_length(_cat.types)) continue;
+            var _a=ln_enemy_copy(_cat.types[_cfg.type].actor);ln_enemy_place(_g.game_number,_a,_cfg.x,_cfg.y,_cfg.facing);
+            _a=ln_enemy_pose(_g,_a,_cfg.facing,false);
+            if(_g.game_number<3) {_a.action_tick=_g.player.tick;_a.decision_tick=_g.player.tick;_a.mode=1;}
+            array_push(_m.slots,{config:ln_enemy_copy(_cfg),actor:_a,finished:false,down_ticks:0,route_index:0,x:_cfg.x,y:_cfg.y,walking:false});
+        }
+        _g.edited_enemies=_m;
+        if(_m.active>=0) ln_enemy_apply(_g,_m.slots[_m.active].actor);
+    } else ln_enemy_flush(_g);
+    var _m=_g.edited_enemies;_m.ticks++;
+    var _player=_g.game_number<3?[_g.player.x,_g.player.y-8]:[_g.state.player_x-24,_g.state.player_y-29];
+    if(_m.active>=0) {
+        var _current=_m.slots[_m.active];
+        if(ln_enemy_dead(_g,_current.actor)) {
+            _current.down_ticks++;
+            if(_current.down_ticks>=60) {_current.finished=true;_m.active=-1;}
+        }
+    }
+    var _nearest=-1,_distance=100000;
+    for(var _j=0;_j<array_length(_m.slots);_j++) if(!_m.slots[_j].finished) {
+        var _pos=ln_enemy_position(_g.game_number,_m.slots[_j].actor),_d=abs(_player[0]-_pos[0])+abs(_player[1]-_pos[1]);
+        if(_d<_distance) {_nearest=_j;_distance=_d;}
+    }
+    var _hold=false;
+    if(_m.active>=0) {var _pos=ln_enemy_position(_g.game_number,_m.slots[_m.active].actor);_hold=abs(_player[0]-_pos[0])+abs(_player[1]-_pos[1])<160 || _m.slots[_m.active].down_ticks>0;}
+    var _chosen=_hold?_m.active:_nearest;
+    if(_chosen!=_m.active) {
+        if(_g.game_number==1) _g.projectiles[1]=new LN1Projectile();
+        else if(_g.game_number==2) {_g.projectiles[1].kind=0;_g.projectiles[1].enabled=0;}
+        else {_g.state.enabled&=127;_g.state.parts[7].animation=0;_g.state.parts[7].move_mode=0;}
+        _m.active=_chosen;
+        if(_chosen>=0) {ln_enemy_apply(_g,_m.slots[_chosen].actor);if(_g.game_number<3) {_g.enemy.action_tick=_g.player.tick;_g.enemy.decision_tick=_g.player.tick;}}
+    }
+    if(_m.active>=0) {var _ap=ln_enemy_position(_g.game_number,_m.slots[_m.active].actor);_distance=abs(_player[0]-_ap[0])+abs(_player[1]-_ap[1]);}
+    _m.engaged=_m.active>=0 && (_hold && _m.engaged || _distance<112 || _m.slots[_m.active].down_ticks>0);
+    if(_m.engaged) for(var _n=0;_n<array_length(_m.slots);_n++) _m.slots[_n].walking=false;
+    if(!_m.engaged) for(var _n=0;_n<array_length(_m.slots);_n++) if(!_m.slots[_n].finished) {
+        if(_n!=_m.active && _m.slots[_n].config.patrol==0) _m.slots[_n].actor=ln_enemy_native_preview_tick(_g,_m.slots[_n].actor);
+        else ln_enemy_route_tick(_g,_m.slots[_n],_m.shapes);
+    }
+    if(_m.active<0) {
+        if(_g.game_number<3) {_g.enemy.active=0;_g.enemy.action=0;_g.enemy.display_frame=255;_g.enemy.separation_y=0;}
+        else {_g.state.enabled&=143;_g.state.enemy_health=0;_g.state.enemy_dead=1;}
+    } else if(!_m.engaged && _m.slots[_m.active].config.patrol!=0) ln_enemy_apply(_g,_m.slots[_m.active].actor);
+}
+function ln_enemy_native_ai(_g) {
+    if(!ln_enemy_custom(_g)) return true;
+    var _m=_g.edited_enemies;return _m.active>=0 && (_m.engaged || _m.slots[_m.active].config.patrol==0);
+}
+function ln_enemy_segment_cross(_a,_b,_c,_d) {
+    var _s1=(_b[0]-_a[0])*(_c[1]-_a[1])-(_b[1]-_a[1])*(_c[0]-_a[0]);
+    var _s2=(_b[0]-_a[0])*(_d[1]-_a[1])-(_b[1]-_a[1])*(_d[0]-_a[0]);
+    var _s3=(_d[0]-_c[0])*(_a[1]-_c[1])-(_d[1]-_c[1])*(_a[0]-_c[0]);
+    var _s4=(_d[0]-_c[0])*(_b[1]-_c[1])-(_d[1]-_c[1])*(_b[0]-_c[0]);
+    return _s1*_s2<=0 && _s3*_s4<=0 && (_s1!=0 || _s2!=0) && (_s3!=0 || _s4!=0);
+}
+function ln_enemy_route_clear(_a,_b,_shapes) {
+    for(var _i=0;_i<array_length(_shapes);_i++) {
+        var _s=_shapes[_i];
+        if(array_length(_s.points)>1) {
+            for(var _j=1;_j<array_length(_s.points);_j++) if(ln_enemy_segment_cross(_a,_b,_s.points[_j-1],_s.points[_j])) return false;
+        } else if(is_array(_s.rect)) {
+            var _r=_s.rect;
+            if(_b[0]>=_r[0] && _b[0]<=_r[2] && _b[1]>=_r[1] && _b[1]<=_r[3]) return false;
+        }
+    }
+    return true;
+}
+function ln_enemy_route_tick(_g,_slot,_shapes) {
+    var _cfg=_slot.config;if(_cfg.patrol!=2 || array_length(_cfg.route)==0 || _slot.down_ticks>0) return;
+    var _pos=ln_enemy_position(_g.game_number,_slot.actor);
+    if(abs(_pos[0]-_slot.x)>2 || abs(_pos[1]-_slot.y)>2) {_slot.x=_pos[0];_slot.y=_pos[1];}
+    var _target=_slot.route_index<array_length(_cfg.route)?_cfg.route[_slot.route_index]:[_cfg.x,_cfg.y];
+    var _distance=point_distance(_slot.x,_slot.y,_target[0],_target[1]);
+    if(_distance<1) {_slot.route_index=(_slot.route_index+1) mod (array_length(_cfg.route)+1);return;}
+    var _speed=_g.game_number==3?1.2:0.4,_dx=(_target[0]-_slot.x)/_distance*min(_speed,_distance),_dy=(_target[1]-_slot.y)/_distance*min(_speed,_distance);
+    var _next=[_slot.x+_dx,_slot.y+_dy];
+    if(!ln_enemy_route_clear([_slot.x,_slot.y],_next,_shapes)) {_slot.route_index=(_slot.route_index+1) mod (array_length(_cfg.route)+1);return;}
+    _slot.x=_next[0];_slot.y=_next[1];var _facing=_dx<0?(_dy<0?7:5):(_dy<0?1:3);
+    ln_enemy_place(_g.game_number,_slot.actor,_slot.x,_slot.y,_facing);
+    if(_g.game_number<3) {
+        var _old=_g.enemy;_g.enemy=_slot.actor;
+        if(!_slot.walking || !variable_struct_exists(_slot,"walk_facing") || _slot.walk_facing!=_facing) {_slot.walk_facing=_facing;if(_g.game_number==1) ln1_enemy_begin(_g.enemy,_g.data,24);else ln2_enemy_select(_g.enemy,_g.data,24);_slot.walking=true;}
+        if(_g.game_number==1) ln1_enemy_action(_g);else ln2_enemy_action(_g);
+        _slot.actor=_g.enemy;_slot.actor.action_state=0;ln_enemy_place(_g.game_number,_slot.actor,_slot.x,_slot.y,_facing);_g.enemy=_old;
+    } else {_slot.actor=ln_enemy_pose(_g,_slot.actor,_facing,true);ln_enemy_place(3,_slot.actor,_slot.x,_slot.y,_facing);}
+}
+function ln_enemy_draw_group(_g) {
+    if(!ln_enemy_custom(_g)) return false;
+    var _m=_g.edited_enemies,_order=[],_player=_g.game_number<3?_g.player.y-8:_g.state.player_y-29;
+    array_push(_order,{index:-1,y:_player});
+    for(var _i=0;_i<array_length(_m.slots);_i++) {
+        var _a=_i==_m.active?ln_enemy_capture(_g):_m.slots[_i].actor;
+        array_push(_order,{index:_i,y:ln_enemy_position(_g.game_number,_a)[1],actor:_a});
+    }
+    array_sort(_order,function(a,b){return a.y-b.y;});
+    for(var _j=0;_j<array_length(_order);_j++) {
+        var _r=_order[_j];
+        if(_r.index>=0) {if(_g.game_number==2 && _r.index==_m.active) ln2_play_actor(_g,_r.actor,true);else ln_enemy_draw_actor(_g,_r.actor);}
+        else if(_g.game_number==1) ln1_play_actor(_g,_g.player,false);
+        else if(_g.game_number==2) ln2_play_actor(_g,_g.player,false);
+        else for(var _k=0;_k<8;_k++) {var _part=_g.animation.order[_k];if(_part<4) ln3_play_actor_part(_g,_g.display,_part);}
+    }
+    if(_g.game_number==3) ln3_play_actor_part(_g,_g.display,7);
+    return true;
+}
+
+function ln_enemy_checks() {
+    var _e=global.ln_editor;_e.scenes={};_e.enabled=true;
+    for(var _game=1;_game<=3;_game++) for(var _level=1;_level<=(_game==1?6:(_game==2?7:5));_level++) {var _catalog=ln_enemy_catalog(_game,_level);ln_check(is_struct(_catalog.rooms),"all-level native enemy catalogs load");}
+    for(var _game=1;_game<=3;_game++) {
+        var _cat=ln_enemy_catalog(_game,1);show_debug_message("ENEMY_CATALOG "+string(_game)+" types="+string(array_length(_cat.types)));
+        ln_check(array_length(_cat.types)>0,"ordinary guard templates available in each game");
+        var _room=_cat.types[0].room;ln_edit_select(_game,1,_room);_e.enemy_edit=true;_e.enemy_index=0;_e.open=true;
+        var _list=ln_enemy_copy(ln_enemy_configs(_e.scene));
+        ln_check(array_length(_list)==1,"native room exposes its guard");
+        _list[0].x=100;_list[0].y=85;_list[0].patrol=1;
+        var _second=ln_enemy_copy(_list[0]);_second.x=145;array_push(_list,_second);
+        _e.scene.enemies=_list;variable_struct_set(_e.scenes,ln_edit_key(_game,1,_room),ln_enemy_copy(_e.scene));
+        ln_check(ln_enemy_validate(_e.scene),"valid multiple-enemy configuration accepted");
+        var _file="enemy-editor-check.json";ln_edit_save(_file);ln_check(ln_edit_load(_file),"enemy edits save/load");file_delete(_file);
+        ln_check(array_length(_e.scene.enemies)==2,"saved multiple guards retained");
+        var _bad=ln_enemy_copy(_e.scene);_bad.enemies[0].x=999;ln_check(!ln_enemy_validate(_bad),"out-of-room spawn rejected");
+        ln_edit_draw();surface_save(application_surface,"enemy-editor-ln"+string(_game)+".png");
+        var _g=_e.preview;
+        if(_game<3) {_g.player.x=100;_g.player.y=100;} else {_g.state.player_x=124;_g.state.player_y=114;}
+        ln_enemy_runtime(_g);
+        ln_check(ln_enemy_custom(_g) && array_length(_g.edited_enemies.slots)==2 && _g.edited_enemies.active==0 && _g.edited_enemies.engaged,"only closest guard receives combat slot");
+        var _waiting=json_stringify(_g.edited_enemies.slots[1].actor);
+        repeat(12) {if(_game==1) ln1_play_tick(_g,0);else if(_game==2) ln2_play_tick(_g,0);else ln3_play_tick(_g,0);}
+        ln_check(json_stringify(_g.edited_enemies.slots[1].actor)==_waiting,"other guard stays idle during combat");
+        ln_enemy_flush(_g);var _saved=ln_enemy_copy(_g.edited_enemies);
+        var _restored=ln_save_restore(json_parse(json_stringify(ln_save_capture(_g))));
+        ln_check(ln_rewind_equal(_saved,_restored.edited_enemies),"multi-enemy state survives actual save restore");
+        var _rewind=ln_rewind_pack(_g);_g.edited_enemies.active=-1;ln_rewind_restore(_g,_rewind);buffer_delete(_rewind.buffer);
+        ln_check(ln_rewind_equal(_saved,_g.edited_enemies),"multi-enemy state survives actual rewind restore");
+        if(_game==1) _g.enemy.wounds=32;else if(_game==2) _g.enemy.health=0;else _g.state.enemy_dead=1;
+        repeat(60) ln_enemy_runtime(_g);
+        ln_check(_g.edited_enemies.active==1 && _g.edited_enemies.slots[0].finished,"next guard engages after defeated guard cooldown");
+        ln_enemy_room_leave(_g);ln_enemy_runtime(_g);
+        ln_check(_g.edited_enemies.slots[0].finished,"room re-entry retains individual defeated enemies");
+        _e.enabled=false;ln_enemy_runtime(_g);ln_check(!ln_enemy_custom(_g),"Modified OFF leaves native engine in control");_e.enabled=true;
+        var _route={config:{x:50,y:70,patrol:2,route:[[55,70]]},actor:ln_enemy_copy(_cat.types[0].actor),x:50,y:70,route_index:0,down_ticks:0,walking:false};
+        ln_enemy_place(_game,_route.actor,50,70,3);repeat(5) ln_enemy_route_tick(_g,_route,[]);
+        ln_check(_route.x>50,"custom patrol advances without an engaged enemy");
+    }
+    ln_check(!ln_enemy_route_clear([10,10],[20,10],[{points:[[15,0],[15,20]],rect:undefined}]),"patrol cannot cross solid room boundary");
+    show_debug_message("LN_ENEMY_EDITOR_PASS: three games / two guards / single engagement / patrols / persistence");
+}
+
+// Produce an idle/walk pose without advancing the live player's state.
+function ln_enemy_pose(_g,_actor,_facing,_walk) {
+    if(_g.game_number<3) {
+        var _old=_g.enemy,_tick=_g.player.tick;_g.enemy=ln_enemy_copy(_actor);
+        if(_g.game_number==1) ln1_enemy_begin(_g.enemy,_g.data,_walk?24:0);else ln2_enemy_select(_g.enemy,_g.data,_walk?24:0);
+        _g.enemy.action_tick=(_tick-1)&255;
+        if(_g.game_number==1) ln1_enemy_action(_g);else ln2_enemy_action(_g);
+        var _out=ln_enemy_copy(_g.enemy);_g.enemy=_old;_out.action_state=0;return _out;
+    }
+    var _old=_g.state;_g.state=ln_enemy_copy(_old);ln_enemy_apply(_g,_actor);
+    var _s=_g.state;_s.joy=(_facing&4?4:8)|((_facing==1 || _facing==7)?1:2);
+    // Native actions: 39/40 are idle down/up; 41/43 walk down/up.
+    ln3_action_set(_s,_g.actions,(_walk?41:39)+((_facing==1 || _facing==7)?(_walk?2:1):0),true);
+    ln3_animation_update(_s,_g.animation);var _out=ln_enemy_capture(_g);_g.state=_old;return _out;
+}
+
+// Isolated native patrol samples; never run attacks or mutate player state.
+function ln_enemy_native_preview_tick(_g,_actor) {
+    if(_g.game_number<3) {
+        var _enemy=_g.enemy,_player=_g.player,_group=ln_enemy_custom(_g)?_g.edited_enemies:undefined;
+        _g.edited_enemies=undefined;_g.enemy=ln_enemy_copy(_actor);_g.player=ln_save_copy(_player);
+        _g.player.x=10000;_g.player.y=10000;_g.player.tick=(_actor.action_tick+1)&255;
+        if(_g.game_number==1) {ln1_enemy_decide(_g);ln1_enemy_action(_g);}else {ln2_enemy_decide(_g);ln2_enemy_action(_g);}
+        var _out=ln_enemy_copy(_g.enemy);_out.action_state=0;
+        _g.enemy=_enemy;_g.player=_player;_g.edited_enemies=_group;return _out;
+    }
+    var _old=_g.state;_g.state=ln_enemy_copy(_old);ln_enemy_apply(_g,_actor);
+    var _s=_g.state;_s.player_x=10000;_s.player_y=10000;
+    if(_s.enemy_behavior>=128) {
+        ln3_enemy_patrol(_s,_g.actions,_g.input,_g.enemies);
+        ln3_movement_setup(_s,_g.movement);ln3_movement(_s,_g.movement);ln3_animation_update(_s,_g.animation);
+    }
+    var _out=ln_enemy_capture(_g);_g.state=_old;return _out;
+}
+function ln_enemy_native_trace(_g,_actor) {
+    var _a=ln_enemy_copy(_actor),_origin=ln_enemy_position(_g.game_number,_a),_trace=[[0,0]];
+    repeat(_g.game_number==3?80:300) {
+        _a=ln_enemy_native_preview_tick(_g,_a);var _pos=ln_enemy_position(_g.game_number,_a);
+        var _point=[_pos[0]-_origin[0],_pos[1]-_origin[1]],_last=_trace[array_length(_trace)-1];
+        if(point_distance(_last[0],_last[1],_point[0],_point[1])>=2 && abs(_point[0])<80 && abs(_point[1])<60) array_push(_trace,_point);
+    }
+    return _trace;
 }

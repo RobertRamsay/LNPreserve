@@ -68,6 +68,7 @@ function ln1_enemy_attack_stance(_g) {
 }
 
 function ln1_enemy_decide(_g) {
+    if(!ln_enemy_native_ai(_g)) return;
     var _e = _g.enemy, _p = _g.player, _tick = _p.tick;
     if (_e.active < 128 || ((_tick - _e.decision_tick) & 255) < 4) return;
     _e.decision_tick = _tick;

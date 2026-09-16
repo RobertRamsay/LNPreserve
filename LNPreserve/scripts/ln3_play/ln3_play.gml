@@ -46,6 +46,7 @@ function ln3_enemy_remember(_g) {
 }
 
 function ln3_play_enter(_g,_entry) {
+    ln_enemy_room_leave(_g);
     ln_rewind_boundary();
     ln3_intro_free(_g);
     _g.loader=undefined;_g.pickup_assist=undefined;_g.food_taps={remaining:0,previous:16};
@@ -195,12 +196,13 @@ function ln3_play_tick(_g,_joy) {
         if (_s.enemy_dead!=0 && _s.enemy_health<44) _s.enemy_health++;
     }
     if (_s.logic_wait!=0) {ln3_play_items(_g);ln3_play_special(_g);return;}
+    ln_enemy_runtime(_g);
     _s.logic_wait=4;_g.logic_ticks++;
     if (!is_struct(_g.pickup_assist)) ln3_input_update(_s,_g.actions,_g.input,_joy,_g.weapon_switch);
     _g.weapon_switch=false;
     if (_s.weapon_notice_timer==100) _g.found_item=-1;
-    ln3_enemy_recover_action(_s,_g.actions);ln3_enemy_decide(_s,_g.actions,_g.input,_g.enemies);
-    ln3_enemy_attack(_s,_g.actions,_g.enemies,(_g.timer.cycle div 63)&255);
+    ln3_enemy_recover_action(_s,_g.actions);
+    if(ln_enemy_native_ai(_g)) {ln3_enemy_decide(_s,_g.actions,_g.input,_g.enemies);ln3_enemy_attack(_s,_g.actions,_g.enemies,(_g.timer.cycle div 63)&255);}
     _s.one_hit_kills=_g.one_hit_kills;
     ln3_combat_update(_s,_g.actions,_g.combat);ln3_fall_tick(_s,_g.actions,_g.data);
     // Wind drops retain the native falling body, without the water splash pair.
@@ -209,7 +211,7 @@ function ln3_play_tick(_g,_joy) {
     ln3_climb_enter(_s,_g.actions,_g.runtime_scene.climbs,_joy,_g.level);
     ln3_collision_update(_s,_g.actions,_g.collision,_g.bounds);
     ln3_hazard_tick(_s,_g.actions,_g.data);ln3_hazard_contacts(_s,_g.data);
-    ln3_enemy_patrol(_s,_g.actions,_g.input,_g.enemies);
+    if(ln_enemy_native_ai(_g)) ln3_enemy_patrol(_s,_g.actions,_g.input,_g.enemies);
     ln3_scenery_tick(_g);
     ln3_animation_update(_s,_g.animation);ln3_play_prepare_draw(_g,_s);
     // Shorten only the initial reverse pose; later animation intervals stay native.
@@ -321,7 +323,7 @@ function ln3_play_draw(_g) {
     if(_modified) ln_modified_delta_start(asset_get_index(_g.scene_record.sprite));
     ln3_mechanism_draw(_g);
     if(_modified) shader_reset();
-    if (_g.special_sequence<3 || _g.transition_phase<5) for (var _order=0;_order<8;_order++) ln3_play_actor_part(_g,_g.display,_g.animation.order[_order]);
+    if ((_g.special_sequence<3 || _g.transition_phase<5) && !ln_enemy_draw_group(_g)) for (var _order=0;_order<8;_order++) ln3_play_actor_part(_g,_g.display,_g.animation.order[_order]);
     ln3_transition_draw(_g);
     if(global.ln_paint.active) {draw_set_colour(c_white);draw_surface(global.ln_paint.surface,0,0);}
     ln_modified_paint_cover();global.ln_editor.context=false;

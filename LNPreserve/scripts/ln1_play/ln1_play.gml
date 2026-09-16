@@ -47,6 +47,7 @@ function LN1Play(_level = 1) constructor {
 }
 
 function ln1_play_enter(_g, _room_id) {
+    ln_enemy_room_leave(_g);
     ln_rewind_boundary();
     _g.loader=undefined;
     _g.room_id = _room_id;
@@ -112,6 +113,7 @@ function ln1_play_tick(_g, _joy) {
         return;
     }
 
+    ln_enemy_runtime(_g);
     var _p = _g.player, _e = _g.enemy;
     if (_g.game_over || _g.level_complete) return;
     // Original spiral cell order, one step every two native PAL ticks.
@@ -340,7 +342,8 @@ function ln1_play_draw(_game, _paused) {
                 _flash ? (_game.room_age mod 31) : 0, _item.x, _item.y);
         }
     }
-    if (_s.y < _game.enemy.y) { ln1_play_actor(_game, _s, false); ln1_play_actor(_game, _game.enemy, true); }
+    if(ln_enemy_draw_group(_game)) {}
+    else if (_s.y < _game.enemy.y) { ln1_play_actor(_game, _s, false); ln1_play_actor(_game, _game.enemy, true); }
     else { ln1_play_actor(_game, _game.enemy, true); ln1_play_actor(_game, _s, false); }
     ln1_projectile_draw(_game);
     var _transition=variable_struct_exists(_game,"death_transition") && is_struct(_game.death_transition);
