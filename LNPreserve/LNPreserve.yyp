@@ -2494,6 +2494,8 @@
   },
   "name":"LNPreserve",
   "resources":[
+    {"id":{"name":"ln_level_map","path":"scripts/ln_level_map/ln_level_map.yy",},},
+    {"id":{"name":"sh_ln_sprite_halo","path":"shaders/sh_ln_sprite_halo/sh_ln_sprite_halo.yy",},},
     {"id":{"name":"font_jansina_big","path":"fonts/font_jansina_big/font_jansina_big.yy",},},
     {"id":{"name":"font_jansina","path":"fonts/font_jansina/font_jansina.yy",},},
     {"id":{"name":"obj_ln_preserve","path":"objects/obj_ln_preserve/obj_ln_preserve.yy",},},

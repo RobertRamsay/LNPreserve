@@ -1,5 +1,6 @@
 /// Versioned, opt-in scene overrides. No original assets or room logic are edited.
 function LNSceneEditor() constructor {
+    maps={};map_undo=[];map_redo=[];map_open=false;map_room=-1;map_edge=0;map_scroll=0;
     nav_job=undefined;nav_last_nodes=0;nav_last_us=0;enemy_edit=false;enemy_index=0;enemy_drag=false;enemy_waypoint=-1;enemy_catalogs={};enemy_catalog_building=false;
     test_music_restore=undefined;
     open=false;toggle_requested=false;enabled=false;scenes={};datasets={};bitmap_baselines={};scene=undefined;preview=undefined;
@@ -109,11 +110,12 @@ function ln_edit_changed(_before) {
     variable_struct_set(_e.scenes,ln_edit_key(_e.game,_e.level,_e.room_id),json_parse(json_stringify(_e.scene)));
     _e.revision++;_e.dirty=true;_e.autosave_us=1000000;_e.build=-1;_e.reference=false;ln_edit_free_cache();
 }
-function ln_edit_pack() {return {format:"LNPreserve-scenes",version:1,scenes:global.ln_editor.scenes};}
+function ln_edit_pack() {return {format:"LNPreserve-scenes",version:1,scenes:global.ln_editor.scenes,maps:global.ln_editor.maps};}
 function ln_edit_validate(_pack) {
     var _keys,_i,_s,_required,_j,_d,_p,_fields,_k;
     if(!is_struct(_pack) || !variable_struct_exists(_pack,"format") || _pack.format!="LNPreserve-scenes" ||
         !variable_struct_exists(_pack,"version") || _pack.version!=1 || !variable_struct_exists(_pack,"scenes") || !is_struct(_pack.scenes)) return false;
+    if(variable_struct_exists(_pack,"maps") && !ln_map_validate(_pack.maps)) return false;
      _keys=variable_struct_get_names(_pack.scenes);if(array_length(_keys)>400) return false;
     for( _i=0;_i<array_length(_keys);_i++) {
          _s=variable_struct_get(_pack.scenes,_keys[_i]);
@@ -162,6 +164,7 @@ function ln_edit_load(_file) {
         _b=buffer_load(_file);if(buffer_get_size(_b)>8388608) {buffer_delete(_b);return false;}
          _pack=json_parse(buffer_read(_b,buffer_text));buffer_delete(_b);_b=-1;
         if(!ln_edit_validate(_pack)) {global.ln_editor.message="Invalid custom file; existing edits kept";return false;}
+        global.ln_editor.maps=variable_struct_exists(_pack,"maps")?_pack.maps:{};global.ln_editor.map_undo=[];global.ln_editor.map_redo=[];
         global.ln_editor.scenes=_pack.scenes;global.ln_editor.revision++;ln_edit_free_cache();
         global.ln_editor.enabled=true;
         global.ln_editor.message="Custom file loaded. Modified ON.";return true;
@@ -302,6 +305,8 @@ function ln_edit_step(_host) {
         if(!_e.open) {ln_edit_restore_game_music(_host.play);_host.input_state=new LNInput();_e.context=false;if(_e.dirty) ln_edit_save("modified-scenes.autosave.json");return true;}
     }
     if(!_e.open) return false;
+    if(ln_edit_hit(974,62,124,28) && !_e.map_open) {_e.map_open=true;_e.map_room=_e.room_id;}
+    if(ln_map_step(_host)) return true;
     _e.pulse_time_us=(_e.pulse_time_us+delta_time) mod 1600000;
     if(!mouse_check_button(mb_left)) {ln_collision_finish_drag();ln_edit_finish_drag();}
     ln_crt_preferences_flush();
@@ -395,7 +400,8 @@ function ln_edit_step(_host) {
 }
 function ln_edit_draw() {
     var _e,_s,_view,_projection,_cache,_surface,_camera,_g,_d,_dx,_dy,_i,_sprite,_r,_record,_p,_o,_assets,_j,_a;
-     _e=global.ln_editor; _s=_e.scene;if(!is_struct(_s)) return;
+     _e=global.ln_editor; if(_e.map_open) {ln_map_draw();return;}
+     _s=_e.scene;if(!is_struct(_s)) return;
     draw_set_font(font_jansina);draw_set_halign(fa_left);draw_set_valign(fa_top);
     ln_tool_clear(false);draw_set_colour(c_white);
     _view=matrix_get(matrix_view); _projection=matrix_get(matrix_projection);
@@ -438,6 +444,7 @@ function ln_edit_draw() {
     ln_edit_button(24,18,180,"Modified: "+(_e.enabled?"ON":"OFF"),_e.enabled);ln_edit_button(216,18,112,"Save file");ln_edit_button(340,18,112,"Load file");ln_edit_button(464,18,112,"Undo (^Z)");ln_edit_button(588,18,152,"Build preview");
     ln_edit_button(752,18,132,"Restore all");ln_edit_button(850,62,112,"Redo (^Y)");
     ln_edit_button(1110,18,160,"Editor CRT "+(_e.crt_enabled?"ON":"OFF")+" F10",_e.crt_enabled);
+    ln_edit_button(974,62,124,"Level map");
     ln_edit_button(1110,62,160,"Back to game F6");
     ln_edit_button(900,18,30,"-");draw_set_colour(c_white);draw_text(938,24,string_format(global.ln_paint_speed,1,1)+"x build");ln_edit_button(1060,18,30,"+");
     for( _i=0;_i<3;_i++) ln_edit_button(24+_i*110,62,102,"Ninja "+string(_i+1),_e.game==_i+1);
@@ -1557,6 +1564,7 @@ function ln_collision_edit_checks() {
 // Opening via either the toolbar or F6 follows the live room, not the last browse.
 function ln_edit_follow_game(_game) {
     var _e=global.ln_editor;
+    if(ln_map_active(_game)) {ln_edit_select(_game.game_number,_game.level,_game.room_id);_e.map_open=true;_e.map_room=_game.map_transit.route.rooms[_game.map_transit.index];return true;}
     if(!is_struct(_e.scene) || _e.game!=_game.game_number || _e.level!=_game.level || _e.room_id!=_game.room_id)
         return ln_edit_select(_game.game_number,_game.level,_game.room_id);
     // Preserve selection and undo history when already editing this exact room.

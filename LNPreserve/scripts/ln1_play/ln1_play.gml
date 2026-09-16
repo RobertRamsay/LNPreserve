@@ -1,4 +1,5 @@
 function LN1Play(_level = 1) constructor {
+    map_transit=undefined;map_bypass=false;
     one_hit_kills=false;
     loader=undefined;
     game_number = 1;
@@ -88,6 +89,7 @@ function ln1_play_exit(_g) {
 
 /// Shared destination/entrance handling for an ordinary exit and scene testing.
 function ln1_play_travel(_g, _entry) {
+    if(ln_map_intercept(_g,_entry)) return true;
     show_debug_message("LN1_TRAVEL level="+string(_g.level)+" room="+string(_g.room_id)+
         " entry="+string(_entry)+" target_room="+string(_entry >> 2));
     var _p = _g.player, _room_id = _entry >> 2;
@@ -104,6 +106,7 @@ function ln1_play_travel(_g, _entry) {
 }
 
 function ln1_play_tick(_g, _joy) {
+    if(ln_map_tick(_g,_joy)) return;
     if(ln_game_over_tick(_g)) return;
     if (ln_frontend_tick(_g,_joy)) return;
     _joy=ln_frontend_filter(_g,_joy);
@@ -166,7 +169,7 @@ function ln1_play_tick(_g, _joy) {
     ln1_level_events(_g);
     ln1_projectile_tick(_g);
     var _level_before = _g.level;
-    ln1_play_exit(_g);
+    ln1_play_exit(_g);if(ln_map_active(_g)) return;
     if (_g.level != _level_before || _g.level_complete) return;
     ln1_play_hazards(_g);
     ln1_notice_update(_g);
@@ -312,6 +315,7 @@ function ln1_lives_colour(_tick) {
 }
 
 function ln1_play_draw(_game, _paused) {
+    if(ln_map_draw_transit(_game)) return;
     global.ln_editor.context=false;
     if (ln2_loader_active(_game)) {ln_frontend_draw(_game);return;}
     ln_paint_sync(_game);

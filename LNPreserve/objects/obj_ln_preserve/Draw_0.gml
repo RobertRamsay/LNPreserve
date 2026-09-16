@@ -1,3 +1,4 @@
+if(level_map_test) {try {ln_map_checks();} catch(_error) {show_debug_message("LN_LEVEL_MAP_FAILURE: "+string(_error));} game_end();exit;}
 if(enemy_editor_test) {try {ln_enemy_checks();} catch(_error) {show_debug_message("LN_ENEMY_EDITOR_FAILURE: "+string(_error));} game_end();exit;}
 if(collision_edit_test) {try {ln_collision_edit_checks();} catch(_err) {show_debug_message("LN_COLLISION_EDIT_FAILURE: "+string(_err));} game_end();exit;}
 if(startup_active) exit;

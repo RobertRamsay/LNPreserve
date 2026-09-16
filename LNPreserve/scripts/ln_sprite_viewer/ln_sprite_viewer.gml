@@ -101,7 +101,7 @@ function ln_sprite_step(_host) {
 }
 function ln_sprite_draw() {
     var _v=global.ln_sprites;shader_reset();gpu_set_blendmode(bm_normal);gpu_set_texfilter(false);
-    draw_set_alpha(1);draw_clear(make_colour_rgb(18,20,25));draw_set_font(font_jansina);
+    draw_set_alpha(1);ln_tool_clear(false);draw_set_font(font_jansina);
     draw_set_halign(fa_left);draw_set_valign(fa_top);draw_set_colour(c_white);
     ln_edit_button(770,20,240,"CRT "+(_v.crt_enabled?"ON":"OFF")+" (F10)",_v.crt_enabled);
     draw_text(24,24,"SPRITE VIEWER");ln_edit_button(1030,20,220,"Back (Esc)");
@@ -116,14 +116,14 @@ function ln_sprite_draw() {
     var _view=matrix_get(matrix_view),_projection=matrix_get(matrix_projection);
     if(!surface_exists(_v.preview_surface)) _v.preview_surface=surface_create(1226,500);
     if(_v.preview_camera<0) _v.preview_camera=camera_create_view(0,0,1226,500);
-    surface_set_target(_v.preview_surface);camera_apply(_v.preview_camera);draw_clear(make_colour_rgb(100,105,112));
-    var _b=_v.bounds,_scale=_v.zoom;
+    surface_set_target(_v.preview_surface);camera_apply(_v.preview_camera);draw_clear_alpha(c_black,0);
+    var _b=_clip.visible_bounds,_scale=_v.zoom;
     var _cx=613,_cy=250,_parts=_clip.frames[_v.frame].parts,_flip=_v.mirror?-1:1;
     var _origin_x=round(_cx-(_b[0]+_b[2])/2*_scale*_flip),_origin_y=round(_cy-(_b[1]+_b[3])/2*_scale);
     // One standing anchor per character, shared by all its animations.
     if(variable_struct_exists(_entry,"ground_anchor")) {
         _origin_x=round(_cx-_entry.ground_anchor[0]*_scale*_flip);
-        _origin_y=round(390-_entry.ground_anchor[1]*_scale);
+        _origin_y=round(_cy+(_entry.standing_height/2-_entry.ground_anchor[1])*_scale);
     }
     for(var _i=0;_i<array_length(_parts);_i++) {
         var _p=_parts[_i],_s=ln_sprite_asset(_p[0]);if(_s<0) continue;
@@ -131,7 +131,22 @@ function ln_sprite_draw() {
             _origin_y+_p[3]*_scale,_scale*_flip*(array_length(_p)>5?_p[5]:1),_scale*(array_length(_p)>6?_p[6]:1),0,_p[4],1);
     }
     surface_reset_target();matrix_set(matrix_view,_view);matrix_set(matrix_projection,_projection);
-    draw_set_colour(c_white);ln_crt_surface(_v.preview_surface,24,160,1,_v.zoom,undefined,_v.crt_enabled);
+    // Draw only a local grey halo behind the transparent sprite picture.
+    var _radius=5*_scale;
+    var _lx=clamp(floor(_origin_x+min(_b[0]*_flip,_b[2]*_flip)*_scale-_radius-1),0,1226);
+    var _ly=clamp(floor(_origin_y+_b[1]*_scale-_radius-1),0,500);
+    var _rx=clamp(ceil(_origin_x+max(_b[0]*_flip,_b[2]*_flip)*_scale+_radius+1),0,1226);
+    var _by=clamp(ceil(_origin_y+_b[3]*_scale+_radius+1),0,500);
+    draw_set_colour(c_white);
+    if(shader_is_compiled(sh_ln_sprite_halo) && _rx>_lx && _by>_ly) {
+        shader_set(sh_ln_sprite_halo);
+        shader_set_uniform_f(shader_get_uniform(sh_ln_sprite_halo,"u_texel"),1/1226,1/500);
+        shader_set_uniform_f(shader_get_uniform(sh_ln_sprite_halo,"u_radius"),_radius);
+        var _filter=gpu_get_texfilter();gpu_set_texfilter(true);
+        draw_surface_part(_v.preview_surface,_lx,_ly,_rx-_lx,_by-_ly,24+_lx,160+_ly);
+        shader_reset();gpu_set_texfilter(_filter);
+    }
+    ln_crt_surface(_v.preview_surface,24,160,1,_v.zoom,undefined,_v.crt_enabled);
     draw_set_colour(c_white);ln_edit_button(24,688,50,"<");ln_edit_button(1200,688,50,">");
     draw_text(100,693,string(_v.animation+1)+" / "+string(array_length(_entry.clips))+"   "+_clip.name);
     ln_edit_button(24,744,160,_v.paused?"Play":"Pause");

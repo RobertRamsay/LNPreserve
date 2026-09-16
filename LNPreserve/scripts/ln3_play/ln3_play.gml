@@ -8,6 +8,7 @@ function ln3_room_record(_rooms,_id) {
 }
 
 function LN3Play(_level=1) constructor {
+    map_transit=undefined;map_bypass=false;
     loader=undefined;pickup_assist=undefined;ordinary_death=false;
     one_hit_kills=false;
     game_number=3;level=_level;var _path="play/ln3/level"+string(level)+"/";
@@ -46,6 +47,7 @@ function ln3_enemy_remember(_g) {
 }
 
 function ln3_play_enter(_g,_entry) {
+    if(ln_map_intercept(_g,_entry)) return true;
     ln_enemy_room_leave(_g);
     ln_rewind_boundary();
     ln3_intro_free(_g);
@@ -167,6 +169,7 @@ function ln3_play_prepare_draw(_g,_s) {
 }
 
 function ln3_play_tick(_g,_joy) {
+    if(ln_map_tick(_g,_joy)) return;
     if (ln3_intro_tick(_g,_joy)) return;
     if (ln_frontend_tick(_g,_joy)) return;
     _joy=ln_frontend_filter(_g,_joy);
@@ -185,7 +188,7 @@ function ln3_play_tick(_g,_joy) {
     if (_g.special_sequence!=0) {ln3_special_sequence_tick(_g);return;}
     if (_s.weapon_notice_timer==0) _g.found_item=-1;
     _joy=ln3_item_assist_input(_g,_joy);
-    ln3_play_exit(_g);
+    ln3_play_exit(_g);if(ln_map_active(_g)) return;
     if (_s.regeneration_wait==0) {
         _s.regeneration_wait=50;
         for (var _i=0;_i<13;_i++) {
@@ -313,6 +316,7 @@ function ln3_play_actor_part(_g,_d,_i) {
 }
 
 function ln3_play_draw(_g) {
+    if(ln_map_draw_transit(_g)) return;
     global.ln_editor.context=false;
     if (is_struct(_g.intro)) {ln3_intro_draw(_g);return;}
     if (ln2_loader_active(_g)) {ln_frontend_draw(_g);return;}

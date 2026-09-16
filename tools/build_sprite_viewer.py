@@ -202,9 +202,18 @@ for e in entries:
                     bounds.append((x+(box[0]-ox)*sx,y+(box[1]-oy)*sy,
                                    x+(box[2]-ox)*sx,y+(box[3]-oy)*sy))
         if bounds:
+            e['standing_height']=max(b[3] for b in bounds)-min(b[1] for b in bounds)
             e['ground_anchor']=[(min(b[0] for b in bounds)+max(b[2] for b in bounds))/2,
                                 max(b[3] for b in bounds)]
     for c in e['clips']:
+        visible=[]
+        for f in c['frames']:
+            for item in f['parts']:
+                bank,frame,x,y=item[:4];box,ox,oy=visible_bounds(bank,frame)
+                if box:
+                    sx,sy=item[5:7] if len(item)>5 else (1,1)
+                    visible.append([x+(box[0]-ox)*sx,y+(box[1]-oy)*sy,x+(box[2]-ox)*sx,y+(box[3]-oy)*sy])
+        c['visible_bounds']=[min(b[0] for b in visible),min(b[1] for b in visible),max(b[2] for b in visible),max(b[3] for b in visible)] if visible else [0,0,1,1]
         assert c['frames'],(e['name'],c['name'])
         for f in c['frames']:
             for item in f['parts']:

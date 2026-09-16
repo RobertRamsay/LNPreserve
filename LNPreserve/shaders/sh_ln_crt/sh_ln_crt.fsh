@@ -93,5 +93,5 @@ void main() {
         vec3 b=pow(vec3(1.0)-col,vec3(u_tone.y));
         col=a/max(a+b,vec3(0.00001));
     }
-    gl_FragColor=vec4(col,1.0)*v_vColour;
+    gl_FragColor=vec4(col,texture2D(gm_BaseTexture,v_vTexcoord).a)*v_vColour;
 }

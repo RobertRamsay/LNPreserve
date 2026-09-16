@@ -1,4 +1,5 @@
 function LN2Play(_level=1) constructor {
+    map_transit=undefined;map_bypass=false;
     loader=undefined;
     molotov={paper:0,lit:false,newspaper_taken:false};
     life_transition=undefined;
@@ -86,6 +87,7 @@ function ln2_play_enter(_g,_id) {
 }
 
 function ln2_play_travel(_g,_entry) {
+    if(ln_map_intercept(_g,_entry)) return true;
     var _t=_g.world.tables,_p=_g.player;
     if (_entry<0 || _entry>=array_length(_t.exit_destinations)) return false;
     if (_t.exit_destinations[_entry]==255) return ln2_level_load(_g,_g.level+1,true);
@@ -162,6 +164,7 @@ function ln2_level_load(_g,_level,_ordinary=false) {
 }
 
 function ln2_play_tick(_g,_joy) {
+    if(ln_map_tick(_g,_joy)) return;
     if(ln_game_over_tick(_g)) return;
     if (ln2_loader_tick(_g,_joy)) return;
     if (is_struct(_g.loader) && _g.loader.fire_blocked) {
@@ -209,7 +212,7 @@ function ln2_play_tick(_g,_joy) {
     if (ln2_hole_boundary(_g)) return;
     if (ln2_hazard_boundary(_g)) return;
     if (ln2_boundary_exit(_g)) return;
-    ln2_play_exit(_g);ln2_level_effect_tick(_g,_joy);
+    ln2_play_exit(_g);if(ln_map_active(_g)) return;ln2_level_effect_tick(_g,_joy);
     ln2_projectile_motion(_g,_g.player.tick);ln2_projectile_present(_g);ln2_enemy_remember(_g);
     if (_g.pending_entry>=0) { var _entry=_g.pending_entry;_g.pending_entry=-1;ln2_play_travel(_g,_entry); }
     if (_p.input_lock!=0 && _p.action<256 && _g.respawn_wait==0) {
@@ -281,6 +284,7 @@ function ln2_play_actor(_g,_a,_enemy) {
 }
 
 function ln2_play_draw(_g) {
+    if(ln_map_draw_transit(_g)) return;
     global.ln_editor.context=false;
     if (ln2_loader_active(_g)) {ln_tool_clear();ln2_loader_draw(_g);return;}
     ln_tool_clear();draw_set_colour(c_white);

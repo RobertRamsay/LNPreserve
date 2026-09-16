@@ -219,7 +219,7 @@ function ln_saves_step(_host) {
 }
 
 function ln_saves_draw(_ui) {
-    draw_set_colour(make_colour_rgb(24,28,34));draw_rectangle(1128,84,1272,620,false);
+    ln_panel_background(1128,84,144,536);
     draw_set_colour(c_white);draw_text(1136,92,"SAVES  Ctrl+S");
     for (var _i=0;_i<10;_i++) {
         var _y=116+46*_i,_filled=_i<array_length(_ui.slots);

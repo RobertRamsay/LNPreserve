@@ -1,3 +1,5 @@
+level_map_test=false;
+for(var _map_arg=1;_map_arg<=parameter_count();_map_arg++) if(parameter_string(_map_arg)=="--level-map-test") level_map_test=true;
 draw_set_font(font_jansina);
 enemy_editor_test=false;
 for(var _enemy_arg=1;_enemy_arg<=parameter_count();_enemy_arg++) if(parameter_string(_enemy_arg)=="--enemy-editor-test") enemy_editor_test=true;

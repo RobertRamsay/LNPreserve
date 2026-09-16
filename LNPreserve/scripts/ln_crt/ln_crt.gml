@@ -112,7 +112,7 @@ function ln_crt_slider_input(_mx,_my,_pressed,_held,_tuning=true) {
 function ln_crt_sliders_draw(_tuning=true) {
     if (!global.ln_crt_enabled) return;
     if (_tuning) ln_crt_tuning_draw();
-    draw_set_colour(make_colour_rgb(24,28,34));draw_rectangle(1128,650,1272,792,false);
+    ln_panel_background(1128,650,144,142);
     draw_set_colour(make_colour_rgb(150,190,215));draw_text(1136,656,"CRT SETTINGS");
     var _labels=["Pixel blur",global.ln_crt_phosphor>0.5?"Phosphors":"Honeycomb","Scanlines"];
     var _values=[global.ln_crt_blur,global.ln_crt_honeycomb,global.ln_crt_scanlines];
@@ -152,7 +152,7 @@ function ln_window_preset(_factor) {
 }
 
 function ln_window_buttons(_tips=true) {
-    draw_set_colour(make_colour_rgb(24,28,34));draw_rectangle(1128,602,1272,648,false);
+    ln_panel_background(1128,602,144,46);
     draw_set_colour(make_colour_rgb(150,190,215));
     draw_text(1136,604,string(window_get_width())+"x"+string(window_get_height()));
     var _labels=["1x","2x","Fit"];
@@ -316,7 +316,7 @@ function ln_crt_tuning_init() {
 }
 function ln_crt_tuning_draw() {
     ln_crt_tuning_init();
-    draw_set_colour(make_colour_rgb(24,28,34));draw_rectangle(160,690,1120,794,false);
+    ln_panel_background(160,690,960,104);
     draw_set_colour(make_colour_rgb(150,190,215));draw_text(172,693,"CRT / SCANLINE SAMPLES");
     var _names=["Previous","Pixel edge","Soft 5","Deep 5"];
     for(var _i=0;_i<4;_i++) {
@@ -464,9 +464,17 @@ function ln_tool_begin(_host) {
     _t.view=matrix_get(matrix_view);_t.projection=matrix_get(matrix_projection);
     surface_set_target(_t.surface);camera_apply(_t.camera);_t.drawing=true;draw_clear_alpha(c_black,0);
 }
+// Tile at native size and clip the last tile to each panel's rectangle.
+function ln_panel_background(_x,_y,_width,_height,_alpha=1) {
+    var _colour=draw_get_colour(),_old_alpha=draw_get_alpha();
+    var _w=sprite_get_width(spr_japTextile),_h=sprite_get_height(spr_japTextile);
+    draw_set_colour(c_white);draw_set_alpha(1);
+    for(var _yy=0;_yy<_height;_yy+=_h) for(var _xx=0;_xx<_width;_xx+=_w)
+        draw_sprite_part_ext(spr_japTextile,0,0,0,min(_w,_width-_xx),min(_h,_height-_yy),_x+_xx,_y+_yy,1,1,c_white,_alpha);
+    draw_set_colour(_colour);draw_set_alpha(_old_alpha);
+}
 function ln_tool_clear(_game=true) {
-    if(!global.ln_tool.drawing) {draw_clear(_game?c_black:make_colour_rgb(20,23,28));return;}
-    draw_clear_alpha(c_black,0);
+    draw_clear(c_black);ln_panel_background(0,0,1280,800);
     if(_game) {draw_set_colour(c_black);draw_rectangle(160,84,1119,683,false);draw_set_colour(c_white);}
 }
 function ln_tool_rect(_host) {

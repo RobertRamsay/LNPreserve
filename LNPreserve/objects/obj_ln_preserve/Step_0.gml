@@ -1,3 +1,4 @@
+if(level_map_test) exit;
 if(enemy_editor_test) exit;
 if(collision_edit_test) exit;
 if(escape_controls_test) {ln_escape_checks();game_end();exit;}
@@ -12,6 +13,7 @@ if(sprite_viewer_test) {
         global.ln_sprites.category=sprite_viewer_test_frame mod 3;
         ln_sprite_filter();
     } else {game_end();exit;}
+    global.ln_sprites.crt_enabled=global.ln_sprites.game==3;
     sprite_viewer_test_frame++;exit;
 }
 if(track_player_test) {
@@ -61,7 +63,7 @@ if (!selftest && ln_edit_step(self)) exit;
 ln_crt_preferences_flush();
 if(!ln_paint_supported(play)) ln_paint_free();
 if(scene_test.menu) ln_paint_slider(true);
-if (!selftest && ln_rewind_step(self)) exit;
+if (!selftest && !ln_map_active(play) && ln_rewind_step(self)) exit;
 if (!selftest && !workbench && !scene_test.preview) ln_crt_step(ln_crt_controls_visible(self),!scene_test.menu);
 if (!selftest && ln_saves_step(self)) exit;
 var _play_delta=ln_enemy_frame_time(play,delta_time);
