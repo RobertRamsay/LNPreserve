@@ -72,6 +72,7 @@ function ln1_enemy_decide(_g) {
     var _e = _g.enemy, _p = _g.player, _tick = _p.tick;
     if (_e.active < 128 || ((_tick - _e.decision_tick) & 255) < 4) return;
     _e.decision_tick = _tick;
+    if(ln_enemy_custom(_g) && ln_enemy_ln1_chase(_g)) return;
     switch (_e.mode) {
         case 0: ln1_enemy_combat(_e, 4); return;
         case 1:
@@ -164,6 +165,7 @@ function ln1_enemy_move(_g, _ticks) {
     var _group = _e.facing >> 1, _mask = 1 << _e.heading, _speed = _e.speed + 1;
     _e.unconsumed = _ticks;
     while (_e.unconsumed > 0) {
+        var _nav_fx=_e.fraction_x,_nav_fy=_e.fraction_y;
         var _fx = _e.x * 256 + _e.fraction_x, _fy = _e.y * 256 + _e.fraction_y;
         if (_d.left[_group] & _mask) _fx -= _d.speed_x[_speed];
         if (_d.right[_group] & _mask) _fx += _d.speed_x[_speed];
@@ -176,8 +178,15 @@ function ln1_enemy_move(_g, _ticks) {
         }
         _fy &= 65535; _e.fraction_y = _fy & 255;
         var _ny = _fy >> 8;
+        if(ln_enemy_custom(_g) && _g.edited_enemies.engaged && _e.mode==5 && variable_struct_exists(_e,"nav_point")) {
+            var _dx=_e.nav_point[0]-_e.x,_dy=_e.nav_point[1]-(_e.y-8),_distance=point_distance(0,0,_dx,_dy);
+            var _step=min(_d.speed_x[_speed]/256,_distance);
+            _fx=_e.x*256+_nav_fx;_fy=_e.y*256+_nav_fy;
+            if(_distance>0.1) {_fx+=_dx/_distance*_step*256;_fy+=_dy/_distance*_step*256;}
+            _nx=floor(_fx/256);_ny=floor(_fy/256);_e.fraction_x=_fx-_nx*256;_e.fraction_y=_fy-_ny*256;
+        }
         if(ln_enemy_custom(_g)) {
-            var _next=ln_enemy_slide([_e.x,_e.y-8],[_nx,_ny-8],[_p.x,_p.y-8],_g.edited_enemies.shapes);
+            var _next=ln_enemy_slide([_e.x,_e.y-8],[_nx,_ny-8],variable_struct_exists(_e,"nav_point") && _e.mode==5?_e.nav_point:[_p.x,_p.y-8],_g.edited_enemies.shapes);
             if(_next[0]!=_nx || _next[1]!=_ny-8) {
                 _e.fraction_x=0;_e.fraction_y=0;
                 if(_next[0]==_e.x && _next[1]==_e.y-8) {_e.collision=255;return;}

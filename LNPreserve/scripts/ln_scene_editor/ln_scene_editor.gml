@@ -1712,7 +1712,7 @@ function ln_enemy_apply(_g,_actor) {
 function ln_enemy_position(_game,_a) {return _game<3?[_a.x,_a.y-8]:[_a.enemy_x-24,_a.enemy_y-29];}
 function ln_enemy_place(_game,_a,_x,_y,_facing) {
     if(_game<3) {
-        _a.x=round(_x);_a.y=round(_y)+8;_a.facing=_facing;_a.heading=_facing;_a.action_mirror=_facing&2;_a.mirror=(_facing&4)==0;
+        _a.x=round(_x);_a.y=round(_y)+8;_a.facing=_facing;_a.heading=_facing;_a.action_mirror=_facing&2;
         _a.fraction_x=0;_a.fraction_y=0;_a.depth_y=_a.y;_a.patrol_x=_a.x;
     } else {
         var _dx=round(_x)+24-_a.enemy_x,_dy=round(_y)+29-_a.enemy_y;
@@ -2066,6 +2066,13 @@ function ln_enemy_checks() {
     }
     ln_check(!ln_enemy_route_clear([10,10],[20,10],[{points:[[15,0],[15,20]],rect:undefined}]),"patrol cannot cross solid room boundary");
     ln_enemy_boundary_checks();
+    var _bend=[{points:[[20,0],[20,24]],rect:undefined}];
+    var _path=ln_enemy_find_path([10,10],[30,10],_bend),_last=[10,10],_detour=false;
+    ln_check(array_length(_path)>0,"chase finds route around blocking wall");
+    for(var _i=0;_i<array_length(_path);_i++) {ln_check(ln_enemy_route_clear(_last,_path[_i],_bend),"every chase segment stays inside boundaries");if(_path[_i][1]>24) _detour=true;_last=_path[_i];}
+    ln_check(_detour,"chase temporarily moves away from ninja to go around bend");
+    var _a={x:10,y:20,facing:7,heading:7,action_mirror:0,mirror:false,fraction_x:0,fraction_y:0,depth_y:20,patrol_x:10};
+    ln_enemy_place(1,_a,11,12,7);ln_check(!_a.mirror,"position update leaves animation mirror unchanged");
     var _wall=[{points:[[11,0],[11,30]],rect:undefined}];
     var _slide=ln_enemy_slide([10,10],[12,12],[20,20],_wall);
     ln_check(_slide[0]<11 && _slide[1]>10,"guard slides along blocked edge toward target");
@@ -2127,12 +2134,20 @@ function ln_enemy_boundary_checks() {
     var _g=new LN1Play(1),_cat=ln_enemy_catalog(1,1);
     _g.enemy=ln_enemy_copy(_cat.types[0].actor);ln_enemy_place(1,_g.enemy,120,80,3);
     _g.enemy.speed=0;_g.player.x=220;_g.player.y=140;
+    var _room_shapes=ln_edit_collision_geometry(1,_g.world.rooms[0].boundaries);
+    var _path=ln_enemy_find_path([180,125],[220,65],_room_shapes),_last=[180,125],_around=false;
+    ln_check(array_length(_path)>0,"LN1 room 1 V-shaped road has a chase route");
+    for(var _i=0;_i<array_length(_path);_i++) {
+        ln_check(ln_enemy_route_clear(_last,_path[_i],_room_shapes),"LN1 room 1 chase never cuts across grass boundary");
+        if(_path[_i][0]<126) _around=true;_last=_path[_i];
+    }
+    ln_check(_around && _last[0]==220 && _last[1]==65,"LN1 room 1 chase goes around inner bend and reaches upper path");
     var _start=ln_enemy_copy(_g.enemy);ln1_enemy_move(_g,8);
     var _end=ln_enemy_copy(_g.enemy),_dx=_end.x-_start.x;
     ln_check(_end.x!=_start.x || _end.y!=_start.y,"native enemy movement test advances");
     var _mid=_dx!=0?(_start.x+_end.x)/2:(_start.y+_end.y)/2-8;
     var _points=_dx!=0?[[_mid,0],[_mid,144]]:[[0,_mid],[240,_mid]];
-    _g.enemy=ln_enemy_copy(_start);_g.edited_enemies={shapes:[{points:_points,rect:undefined}]};ln1_enemy_move(_g,8);
+    _g.enemy=ln_enemy_copy(_start);_g.edited_enemies={engaged:false,shapes:[{points:_points,rect:undefined}]};ln1_enemy_move(_g,8);
     ln_check(_dx!=0?abs(_g.enemy.x-_start.x)<abs(_dx):abs(_g.enemy.y-_start.y)<abs(_end.y-_start.y),"edited LN1 chase stops at room boundary");
     _g.edited_enemies=undefined;_g.enemy=ln_enemy_copy(_start);ln1_enemy_move(_g,8);
     ln_check(_g.enemy.x==_end.x && _g.enemy.y==_end.y,"native unmodified enemy movement unchanged");
@@ -2159,4 +2174,56 @@ function ln_enemy_slide(_from,_wanted,_target,_shapes) {
         if(_cost<_score-0.0001) {_best=_p;_score=_cost;}
     }
     return _best;
+}
+
+// A room-sized four-pixel navigation lattice. Edges use the same collision
+// geometry as movement, so diagonal links cannot cut across a road boundary.
+function ln_enemy_find_path(_start,_goal,_shapes) {
+    if(ln_enemy_route_clear(_start,_goal,_shapes)) return [_goal];
+    var _w=60,_h=36,_count=_w*_h,_parent=array_create(_count,-2),_queue=[],_head=0;
+    var _sx=clamp(round(_start[0]/4),0,59),_sy=clamp(round(_start[1]/4),0,35);
+    for(var _y=max(0,_sy-1);_y<=min(35,_sy+1);_y++) for(var _x=max(0,_sx-1);_x<=min(59,_sx+1);_x++) {
+        var _p=[_x*4,_y*4],_id=_y*60+_x;
+        if(ln_enemy_route_clear(_start,_p,_shapes)) {_parent[_id]=-1;array_push(_queue,_id);}
+    }
+    var _found=-1;
+    while(_head<array_length(_queue)) {
+        var _id=_queue[_head++],_x=_id mod 60,_y=_id div 60,_from=[_x*4,_y*4];
+        if(point_distance(_from[0],_from[1],_goal[0],_goal[1])<=6 && ln_enemy_route_clear(_from,_goal,_shapes)) {_found=_id;break;}
+        for(var _dy=-1;_dy<=1;_dy++) for(var _dx=-1;_dx<=1;_dx++) {
+            var _nx=_x+_dx,_ny=_y+_dy;if(_nx<0 || _nx>=60 || _ny<0 || _ny>=36) continue;
+            var _next=_ny*60+_nx;if(_parent[_next]!=-2) continue;
+            if(!ln_enemy_route_clear(_from,[_nx*4,_ny*4],_shapes)) continue;
+            _parent[_next]=_id;array_push(_queue,_next);
+        }
+    }
+    if(_found<0) return [];
+    var _reverse=[_goal];
+    while(_found>=0) {array_push(_reverse,[(_found mod 60)*4,(_found div 60)*4]);_found=_parent[_found];}
+    var _path=[];for(var _i=array_length(_reverse)-1;_i>=0;_i--) array_push(_path,_reverse[_i]);
+    return _path;
+}
+function ln_enemy_chase_point(_g) {
+    var _e=_g.enemy,_m=_g.edited_enemies,_from=[_e.x,_e.y-8],_goal=[_g.player.x,_g.player.y-8];
+    if(!variable_struct_exists(_e,"nav_path") || !variable_struct_exists(_e,"nav_goal") ||
+        point_distance(_goal[0],_goal[1],_e.nav_goal[0],_e.nav_goal[1])>6 || _m.ticks>=_e.nav_until) {
+        _e.nav_path=ln_enemy_find_path(_from,_goal,_m.shapes);_e.nav_goal=_goal;_e.nav_until=_m.ticks+24;
+    }
+    var _path=_e.nav_path;
+    // Select the furthest visible waypoint, avoiding stair-step facing changes.
+    for(var _i=array_length(_path)-1;_i>=0;_i--) if(ln_enemy_route_clear(_from,_path[_i],_m.shapes)) return _path[_i];
+    return _from;
+}
+function ln_enemy_ln1_chase(_g) {
+    var _e=_g.enemy,_m=_g.edited_enemies;
+    if(!_m.engaged || _e.wounds>=32 || _e.mode<1 || _e.mode>5) return false;
+    var _from=[_e.x,_e.y-8],_goal=[_g.player.x,_g.player.y-8];
+    if(abs(_g.player.x-_e.x)<20 && abs(_g.player.y-_e.y)<4 && ln_enemy_route_clear(_from,_goal,_m.shapes)) {ln1_enemy_attack_stance(_g);return true;}
+    var _point=ln_enemy_chase_point(_g);_e.nav_point=_point;
+    var _facing=ln_enemy_stable_facing(_e.facing,_point[0]-_from[0],_point[1]-_from[1],1);
+    if(_e.mode!=5 || _e.facing!=_facing) {
+        _e.facing=_facing;_e.heading=_facing;_e.speed=_e.speed_traits>>2;
+        ln1_enemy_begin(_e,_g.data,8);ln1_enemy_combat(_e,8);
+    }
+    _e.mode=5;return true;
 }
