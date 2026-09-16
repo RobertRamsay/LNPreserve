@@ -59,6 +59,8 @@ def main():
         special=[8,4,6,3,-1][level-1]
         world.update(actor_bank='spr_ln3_actor_parts',part_mapping={},costume_offsets=[0,44,88,132],
                      special_costume_scene=special,special_costume_by_animation=level==2)
+        # Reviewed Earth outline/body registration; retained on re-export.
+        if level==1:world['actor_registration']=[dict(part=4,frame=206,body_frame=70,dx=2,dy=-1)]
         raw_parts={}
         for frame in range(210):raw_parts[frame]=[original_part(ram,s,frame,0,0,m) for m in (False,True)]
         for costume in (1,2):

@@ -124,7 +124,12 @@ for level in range(1,6):
                 choices=world['part_mapping'].get(str(physical))
                 if not choices:continue
                 choice=choices[int(bool(s['draw_mirror'][i]))]
-                out.append(part(world['actor_bank'],choice['hires'],s['draw_x'][i]-ax,s['draw_y'][i]-ay,palette[s['draw_colours'][i]&15]))
+                dx=dy=0
+                if enemy and costume<3:
+                    for fix in world.get('actor_registration',[]):
+                        if i==fix['part'] and s['draw_frames'][i]==fix['frame'] and s['draw_frames'][5]==fix['body_frame']:
+                            dx=fix['dx']*(-1 if s['draw_mirror'][i] else 1);dy=fix['dy']
+                out.append(part(world['actor_bank'],choice['hires'],s['draw_x'][i]-ax+dx,s['draw_y'][i]-ay+dy,palette[s['draw_colours'][i]&15]))
             return dict(seconds=4*rt['timer_period_cycles']/985248,parts=out)
         for w in range(5):
             change_action=57 if enemy else 18

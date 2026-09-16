@@ -271,6 +271,18 @@ function ln3_part_choice(_g,_d,_i) {
     return variable_struct_get(_g.world.part_mapping,string(_physical))[_d.draw_mirror[_i]?1:0];
 }
 
+// Presentation-only registration corrections. Original animation state stays intact.
+function ln3_part_registration(_g,_d,_i) {
+    if(_i!=4 || _d.enemy_costume>=3 || !variable_struct_exists(_g.world,"actor_registration")) return [0,0];
+    var _fixes=_g.world.actor_registration;
+    for(var _n=0;_n<array_length(_fixes);_n++) {
+        var _f=_fixes[_n];
+        if(_i==_f.part && _d.draw_frames[_i]==_f.frame && _d.draw_frames[5]==_f.body_frame)
+            return [_f.dx*(_d.draw_mirror[_i]?-1:1),_f.dy];
+    }
+    return [0,0];
+}
+
 function ln3_play_actor_part(_g,_d,_i) {
     if (_d.draw_frames[_i]<0) return;
     var _choice=ln3_part_choice(_g,_d,_i);if (!is_struct(_choice)) return;
@@ -282,17 +294,22 @@ function ln3_play_actor_part(_g,_d,_i) {
         for (var _j=0;_j<3;_j++) draw_sprite_ext(_bank,_choice.multicolour[_j],0,0,1,1,0,_colours[_j],1);
     } else draw_sprite_ext(_bank,_choice.hires,0,0,1,1,0,_colour,1);
     gpu_set_blendmode_ext(bm_zero,bm_inv_src_alpha);draw_set_colour(c_white);
+    var _offset=ln3_part_registration(_g,_d,_i);
+    var _draw_x=_d.draw_x[_i]+_offset[0],_draw_y=_d.draw_y[_i]+_offset[1];
     var _mask=_g.draw_masks[_i];
+    // Sample depth at the corrected location, so the outline cannot leave a mask behind.
+    if(_offset[0]!=0 || _offset[1]!=0)
+        _mask=ln3_mask_bytes(_g.state,_g.mask_shapes,_draw_x,_draw_y,_d.parts[6].y);
     for (var _y=0;_y<21;_y++) {
         var _start=-1;
         for (var _x=0;_x<=24;_x++) {
-            var _hidden=_x<24 && (ln_modified_hidden(_d.draw_x[_i]-24+_x*((_d.expand_x&(1<<_i))?2:1),_d.draw_y[_i]-50+_y*((_d.expand_y&(1<<_i))?2:1),_d.parts[_i<4?2:6].y,(_mask[_y*3+(_x div 8)]&(128>>(_x&7)))==0) || (_i<4 && _d.draw_y[_i]+_y>=_d.waterline+21));
+            var _hidden=_x<24 && (ln_modified_hidden(_draw_x-24+_x*((_d.expand_x&(1<<_i))?2:1),_draw_y-50+_y*((_d.expand_y&(1<<_i))?2:1),_d.parts[_i<4?2:6].y,(_mask[_y*3+(_x div 8)]&(128>>(_x&7)))==0) || (_i<4 && _d.draw_y[_i]+_y>=_d.waterline+21));
             if (_hidden && _start<0) _start=_x;
             if (!_hidden && _start>=0) {draw_rectangle(_start,_y,_x,_y+1,false);_start=-1;}
         }
     }
     gpu_set_blendmode(bm_normal);surface_reset_target();
-    draw_surface_ext(_g.part_surface,_d.draw_x[_i]-24,_d.draw_y[_i]-50,(_d.expand_x&(1<<_i))?2:1,(_d.expand_y&(1<<_i))?2:1,0,c_white,1);
+    draw_surface_ext(_g.part_surface,_draw_x-24,_draw_y-50,(_d.expand_x&(1<<_i))?2:1,(_d.expand_y&(1<<_i))?2:1,0,c_white,1);
 }
 
 function ln3_play_draw(_g) {

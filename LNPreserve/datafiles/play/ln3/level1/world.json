@@ -368,6 +368,15 @@
     ]
   ],
   "actor_bank": "spr_ln3_actor_parts",
+  "actor_registration": [
+    {
+      "body_frame": 70,
+      "dx": 2,
+      "dy": -1,
+      "frame": 206,
+      "part": 4
+    }
+  ],
   "animations": [
     {
       "frames": [
