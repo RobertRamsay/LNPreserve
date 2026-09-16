@@ -290,11 +290,15 @@ function ln_edit_button(_x,_y,_w,_label,_on=undefined) {
 function ln_edit_step(_host) {
     var _e,_s,_file,_i,_g,_max,_level,_d,_ids,_index,_assets,_before,_changed,_id,_o,_p,_swap,_step,_dx,_dy,_held,_delta,_next_depth;
      _e=global.ln_editor;
+    var _test_key=(keyboard_check_pressed(ord("T")) || keyboard_check_pressed(vk_f5)) && !keyboard_check(vk_control) && !keyboard_check(vk_alt);
+    var _test_return=!_e.open && !_host.workbench && !_host.scene_test.menu && _test_key;
+    if(_test_return) _e.toggle_requested=true;
     if(keyboard_check_pressed(vk_f6) || _e.toggle_requested || (_e.open && ln_edit_hit(1110,62,160,28))) {
         _e.toggle_requested=false;
         ln_collision_finish_drag();ln_edit_finish_drag();_e.open=!_e.open;ln_paint_free();_e.depth_edit=false;_e.depth_hold_dir=0;ln_edit_music(_host,_e.open);
         if(_e.open) window_set_cursor(cr_default);
         if(_e.open) ln_edit_follow_game(_host.play);
+        if(_test_return) return true;
         if(!_e.open) {ln_edit_restore_game_music(_host.play);_host.input_state=new LNInput();_e.context=false;if(_e.dirty) ln_edit_save("modified-scenes.autosave.json");return true;}
     }
     if(!_e.open) return false;
@@ -333,7 +337,7 @@ function ln_edit_step(_host) {
     if(ln_edit_hit(24,594,140,28)) _e.show_ninja=!_e.show_ninja;
     if(ln_edit_hit(176,594,140,28)) _e.show_depth=!_e.show_depth;
     if(ln_edit_hit(328,594,150,28)) {_e.pulse_selected=!_e.pulse_selected;_e.pulse_time_us=0;}
-    if(ln_edit_hit(490,594,140,28)) {ln_edit_test_room(_host);return true;}
+    if(ln_edit_hit(490,594,175,28) || _test_key) {ln_edit_test_room(_host);return true;}
 
     if(_e.enemy_edit) return ln_enemy_editor_step();
     if(_e.collision_edit) return ln_collision_edit_step();
@@ -439,7 +443,7 @@ function ln_edit_draw() {
     for( _i=0;_i<3;_i++) ln_edit_button(24+_i*110,62,102,"Ninja "+string(_i+1),_e.game==_i+1);
     ln_edit_button(370,62,30,"<");draw_set_colour(c_white);draw_text(412,68,"Level "+string(_e.level));ln_edit_button(570,62,30,">");
     ln_edit_button(620,62,30,"<");draw_set_colour(c_white);draw_text(662,68,"Room "+string(_e.room_id)+" (ID)");ln_edit_button(810,62,30,">");
-    ln_edit_button(24,594,140,"Ninja",_e.show_ninja);ln_edit_button(176,594,140,"Depth line",_e.show_depth);ln_edit_button(328,594,150,"pulseSelected?",_e.pulse_selected);ln_edit_button(490,594,140,"Test room");
+    ln_edit_button(24,594,140,"Ninja",_e.show_ninja);ln_edit_button(176,594,140,"Depth line",_e.show_depth);ln_edit_button(328,594,150,"pulseSelected?",_e.pulse_selected);ln_edit_button(490,594,175,"Test Room (T/F5)");
     ln_edit_button(24,104,180,"Collision overlay",_e.show_collisions);
     ln_edit_button(460,104,180,"Edit collisions",_e.collision_edit);
     ln_edit_button(652,104,92,"Enemies",_e.enemy_edit);
