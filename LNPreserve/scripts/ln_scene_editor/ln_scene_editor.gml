@@ -1,5 +1,6 @@
 /// Versioned, opt-in scene overrides. No original assets or room logic are edited.
 function LNSceneEditor() constructor {
+    test_music_restore=undefined;
     open=false;toggle_requested=false;enabled=false;scenes={};datasets={};bitmap_baselines={};scene=undefined;preview=undefined;
     game=1;level=1;room_id=1;part=-1;asset=0;scroll=0;asset_scroll=0;
     dirty=false;message="F6 closes the editor";undo=[];redo=[];revision=0;cache=undefined;context=false;
@@ -269,7 +270,7 @@ function ln_edit_step(_host) {
         ln_collision_finish_drag();ln_edit_finish_drag();_e.open=!_e.open;ln_paint_free();_e.depth_edit=false;_e.depth_hold_dir=0;ln_edit_music(_host,_e.open);
         if(_e.open) window_set_cursor(cr_default);
         if(_e.open) ln_edit_follow_game(_host.play);
-        if(!_e.open) {_host.input_state=new LNInput();_e.context=false;if(_e.dirty) ln_edit_save("modified-scenes.autosave.json");return true;}
+        if(!_e.open) {ln_edit_restore_game_music(_host.play);_host.input_state=new LNInput();_e.context=false;if(_e.dirty) ln_edit_save("modified-scenes.autosave.json");return true;}
     }
     if(!_e.open) return false;
     _e.pulse_time_us=(_e.pulse_time_us+delta_time) mod 1600000;
@@ -396,7 +397,7 @@ function ln_edit_draw() {
          _p=_s.parts[_e.part]; _o=variable_struct_get(ln_edit_data(_e.game,_e.level).objects,string(_p.asset));
         draw_set_colour(c_yellow);draw_rectangle(clamp(24+_p.x*3,24,744),clamp(140+_p.y*3,140,572),clamp(24+(_p.x+_o.width)*3,24,744),clamp(140+(_p.y+_o.height)*3,140,572),true);
         if(_e.show_depth) {draw_set_colour(c_aqua);draw_line(24,140+_p.depth*3,744,140+_p.depth*3);}
-        draw_set_colour(c_white);draw_text(760,594,"Part "+string(_e.part+1)+"  x "+string(_p.x)+" y "+string(_p.y));
+        draw_set_colour(c_white);draw_text(24,626,"Part "+string(_e.part+1)+"  x "+string(_p.x)+" y "+string(_p.y));
         ln_edit_button(760,704,112,"Up 10");ln_edit_button(880,704,144,"Down 10");
         ln_edit_button(760,740,112,"Top (back)");ln_edit_button(880,740,144,"Bottom (front)");
         ln_edit_button(760,630,92,"Flip X",_p.flip);ln_edit_button(860,630,164,(_p.mode==0 && (!variable_struct_exists(_p,"depth_override") || !_p.depth_override))?"Inherited":["Ground","Depth","Always front"][_p.mode]);
@@ -422,12 +423,12 @@ function ln_edit_draw() {
          _a=_e.asset_scroll+_i;if(_a<array_length(_assets)) { _o=variable_struct_get(_d.objects,_assets[_a]);draw_set_colour(_e.asset==_a?c_yellow:c_white);draw_text(1038,140+_i*22,_assets[_a]+"  "+string(_o.width)+"x"+string(_o.height));ln_edit_thumbnail(real(_assets[_a]),1000,140+_i*22,32,20);}
     }
     if(array_length(_assets)>0) {
-        var _panel_x=1040,_panel_y=582,_panel_size=204;
+        var _panel_x=1058,_panel_y=630,_panel_size=156;
         draw_sprite_ext(spr_assetPanel,0,_panel_x+_panel_size/2,_panel_y+_panel_size/2,_panel_size/600,_panel_size/600,0,c_white,1);
         // Artwork opening is approximately source x/y 120..480. Leave padding.
         var _preview_id=real(_assets[_e.asset]);
         var _preview_o=variable_struct_get(_d.objects,string(_preview_id));
-        var _inner=112,_fit=min(_inner/_preview_o.width,_inner/_preview_o.height);
+        var _inner=86,_fit=min(_inner/_preview_o.width,_inner/_preview_o.height);
         ln_edit_thumbnail(_preview_id,_panel_x+(_panel_size-_preview_o.width*_fit)/2,
             _panel_y+(_panel_size-_preview_o.height*_fit)/2,_inner,_inner);
     }
@@ -865,9 +866,11 @@ function ln_edit_test_room(_host) {
     _e.enabled=true;_e.dirty=true;_e.revision++;_e.autosave_us=1000000;_e.playback=undefined;ln_edit_free_cache();
     _t.level_index=_level;_t.game=_e.game;
     ln_edit_music(_host,false);
+    if(is_undefined(_e.test_music_restore)) _e.test_music_restore=ln_tool_music_enabled(_host.play);
     if(!ln_scene_test_open(_t,_host.play,_scene)) {ln_edit_music(_host,true);_e.message="Room entry failed; edits kept";return false;}
     _e.open=false;_e.context=false;_e.depth_edit=false;_host.workbench=false;_host.input_state=new LNInput();
-    // Start the room's normal track, including same-level tests after editor pause.
+    // Testing is silent without changing the user's normal gameplay preference.
+    ln_tool_music_set(_host.play,false);
     ln_frontend_music(_host.play,false);
     if(global.ln_preferences_enabled) ln_edit_save("modified-scenes.autosave.json");
     ln_scene_test_message(_t,"Testing edited room - F6 returns to the editor");return true;
@@ -882,6 +885,9 @@ function ln_edit_test_room_checks(_host) {
         ln_check(!_e.open && !_host.workbench && !_host.scene_test.menu && !_host.scene_test.preview && _host.play.game_number==_game && _host.play.room_id==_room,"Test room uses selected game and room in play mode");
         ln_check(ln_rewind_equal(ln_modified_room(_host.play),json_parse(_scene)) && ln_rewind_equal(_e.scene,json_parse(_scene)),"Test room retains edited scene for gameplay and editor return");
         ln_check(variable_global_exists("ln_music_voice") && global.ln_music_voice>=0 && (audio_is_playing(global.ln_music_voice) || audio_is_paused(global.ln_music_voice)),"Test room loads level music respecting mute");
+        ln_check(!ln_tool_music_enabled(_host.play) && audio_is_paused(global.ln_music_voice),"Test room starts silent in every game");
+        var _restore=_e.test_music_restore;ln_edit_restore_game_music(_host.play);
+        ln_check(ln_tool_music_enabled(_host.play)==_restore,"Back to game restores its own music preference");
     }
     show_debug_message("LN_EDITOR_TEST_ROOM_PASS: selected edited room and level music for all three games");
 }
@@ -1559,4 +1565,10 @@ function ln_edit_overlap_transparency_checks() {
     _e.scene=_full;ln_edit_draw();surface_save(application_surface,"editor-overlap-transparency.png");
     _e.scenes=json_parse(_saved);ln_edit_free_cache();
     show_debug_message("LN_EDITOR_OVERLAP_TRANSPARENCY_PASS: "+string(_checked)+" foreground holes preserve edited underlay");
+}
+function ln_edit_restore_game_music(_g) {
+    var _e=global.ln_editor;
+    if(!is_undefined(_e.test_music_restore)) {
+        ln_tool_music_set(_g,_e.test_music_restore);_e.test_music_restore=undefined;
+    } else ln_tool_music_set(_g,ln_tool_music_enabled(_g));
 }

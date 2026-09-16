@@ -76,12 +76,12 @@ function ln_sprite_advance(_seconds) {
 }
 function ln_sprite_step(_host) {
     var _v=global.ln_sprites,_click=mouse_check_button_pressed(mb_left);
-    if(global.ln_tool.active && ln_tool_ui_visible() && _click && mouse_x>=688 && mouse_x<926 && mouse_y>=56 && mouse_y<84) {
+    if(ln_tool_media_hit(0)) {
         ln_sprite_toggle(_host);return true;
     }
     if(!_v.open) return false;
     ln_track_poll(global.ln_tracks);
-    if(_click && mouse_x>=940 && mouse_x<1178 && mouse_y>=56 && mouse_y<84) {ln_sprite_to_track();return true;}
+    if(ln_tool_media_hit(1)) {ln_sprite_to_track();return true;}
     if(keyboard_check_pressed(vk_escape) || ln_edit_hit(1030,20,220,28)) {ln_sprite_toggle(_host);return true;}
     if(keyboard_check_pressed(vk_f9)) ln_fullscreen_toggle(_host);
     for(var _g=1;_g<=3;_g++) if(ln_edit_hit(24+(_g-1)*160,76,150,28)) {_v.game=_g;ln_sprite_filter();}

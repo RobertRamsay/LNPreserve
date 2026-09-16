@@ -492,12 +492,16 @@ function ln_tool_present(_host) {
     draw_set_font(font_jansina);draw_set_halign(fa_left);draw_set_valign(fa_top);
     ln_edit_button(320,96,160,global.ln_editor.open?"USER INT. (ON)":"USER INT. (U)",true);
     ln_edit_button(492,96,240,"Background "+(_t.background?"ON":"OFF")+" (B)",_t.background);draw_flush();
-    ln_edit_button(688,56,238,global.ln_sprites.open?"Close Sprite Viewer":"SPRITE VIEWER");
-    ln_edit_button(940,56,238,global.ln_tracks.open?"Close Track Player":"TRACK PLAYER");
+    var _media=ln_tool_media_rect();
+    ln_edit_button(_media[0],_media[1],150,global.ln_sprites.open?"Close sprites":"Sprite viewer");
+    ln_edit_button(_media[0]+160,_media[1],140,global.ln_tracks.open?"Close tracks":"Track player");
+    var _music=ln_tool_music_enabled(_host.play);
+    if(global.ln_editor.open && !is_undefined(global.ln_editor.test_music_restore)) _music=global.ln_editor.test_music_restore;
+    ln_edit_button(_media[0]+310,_media[1],120,"Music "+(_music?"ON":"OFF"),_music);
     if(ln_track_message()!="") {
         draw_set_colour(c_white);
-        draw_text(1190,43,global.ln_tracks.paused?"PAUSED: Track:":"PLAYING: Track:");
-        draw_text(1190,66,global.ln_tracks.tracks[global.ln_tracks.current].title);
+        draw_text(_media[0],_media[1]+32,global.ln_tracks.paused?"PAUSED: Track:":"PLAYING: Track:");
+        draw_text(_media[0],_media[1]+54,global.ln_tracks.tracks[global.ln_tracks.current].title);
     }
     if(!global.ln_editor.open && !global.ln_tracks.open && !global.ln_sprites.open) ln_edit_button(748,96,180,"EDITOR (F6)");
     if(!global.ln_editor.open && !global.ln_tracks.open && !global.ln_sprites.open) ln_edit_button(940,96,238,_host.scene_test.menu?"Back to game (F11)":"GAME/LEVELS (F11)");
@@ -507,6 +511,11 @@ function ln_tool_present(_host) {
 function ln_tool_step(_host) {
     var _t=global.ln_tool,_click=mouse_check_button_pressed(mb_left),_typing=global.ln_editor.open && global.ln_editor.depth_edit;
     if(!_t.active) return;
+    if(ln_tool_media_hit(2)) {
+        var _e=global.ln_editor;
+        if(_e.open && !is_undefined(_e.test_music_restore)) _e.test_music_restore=!_e.test_music_restore;
+        else ln_tool_music_set(_host.play,!ln_tool_music_enabled(_host.play));
+    }
     if(ln_tool_ui_visible() && _click && mouse_y>=96 && mouse_y<124) {
         if(!global.ln_editor.open && !global.ln_tracks.open && !global.ln_sprites.open && mouse_x>=748 && mouse_x<928) global.ln_editor.toggle_requested=true;
         if(mouse_x>=1256 && mouse_x<1304) ln_window_preset(1);
@@ -764,4 +773,36 @@ function ln_escape_checks() {
         ln_check((_game==3?_g.state.lives:_g.lives_left)==_lives-1,"native death deducts one life in LN"+string(_game));
     }
     show_debug_message("LN_ESCAPE_CONTROLS_PASS");
+}
+
+// Shared drawing/hit rectangles keep the compact media row together on each screen.
+function ln_tool_media_rect() {
+
+    if(instance_exists(obj_ln_preserve) && obj_ln_preserve.scene_test.menu) return [1080,814];
+    return [1080+40,900+40];
+}
+function ln_tool_media_hit(_button) {
+    var _r=ln_tool_media_rect(),_offset=[0,160,310],_width=[150,140,120];
+    return global.ln_tool.active && ln_tool_ui_visible() && mouse_check_button_pressed(mb_left) &&
+        mouse_x>=_r[0]+_offset[_button] && mouse_x<_r[0]+_offset[_button]+_width[_button] && mouse_y>=_r[1] && mouse_y<_r[1]+28;
+}
+function ln_tool_music_enabled(_g) {
+    return _g.game_number==1?(!is_struct(_g.controls) || _g.controls.music!=0):_g.music;
+}
+function ln_tool_music_set(_g,_enabled) {
+    if(_g.game_number==1) {if(is_struct(_g.controls)) _g.controls.music=_enabled?255:0;}
+    else _g.music=_enabled;
+    if(variable_global_exists("ln_music_voice") && global.ln_music_voice>=0) {
+        if(global.ln_tracks.open) global.ln_tracks.paused_voices=ln_tool_music_resume_list(global.ln_tracks.paused_voices,_enabled && !global.ln_editor.open);
+        if(global.ln_sprites.open) global.ln_sprites.voices=ln_tool_music_resume_list(global.ln_sprites.voices,_enabled && !global.ln_editor.open);
+        if(!_enabled || global.ln_editor.open || global.ln_tracks.open || global.ln_sprites.open) audio_pause_sound(global.ln_music_voice);
+        else audio_resume_sound(global.ln_music_voice);
+    }
+}
+
+function ln_tool_music_resume_list(_voices,_enabled) {
+    var _result=[];
+    for(var _i=0;_i<array_length(_voices);_i++) if(_voices[_i]!=global.ln_music_voice) array_push(_result,_voices[_i]);
+    if(_enabled) array_push(_result,global.ln_music_voice);
+    return _result;
 }

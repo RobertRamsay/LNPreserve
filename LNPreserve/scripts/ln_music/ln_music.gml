@@ -92,7 +92,7 @@ function ln_track_message() {
 }
 function ln_track_step(_host) {
     var _p=global.ln_tracks;
-    if(global.ln_tool.active && ln_tool_ui_visible() && mouse_check_button_pressed(mb_left) && mouse_x>=940 && mouse_x<1178 && mouse_y>=56 && mouse_y<84) {
+    if(ln_tool_media_hit(1)) {
         ln_track_toggle(_host);return true;
     }
     if(!_p.open) return false;
@@ -182,6 +182,12 @@ function ln_track_checks(_host) {
     ln_track_toggle(_host);ln_check(!audio_is_paused(global.ln_music_voice),"close restores game music");
     audio_pause_sound(global.ln_music_voice);ln_track_toggle(_host);ln_track_toggle(_host);
     ln_check(audio_is_paused(global.ln_music_voice),"previously paused music stays paused");
+    var _music_before=ln_tool_music_enabled(_host.play);
+    ln_tool_music_set(_host.play,true);ln_track_toggle(_host);ln_tool_music_set(_host.play,false);ln_track_toggle(_host);
+    ln_check(audio_is_paused(global.ln_music_voice),"music OFF while panel open survives closing");
+    ln_track_toggle(_host);ln_tool_music_set(_host.play,true);ln_track_toggle(_host);
+    ln_check(!audio_is_paused(global.ln_music_voice),"music ON while panel open resumes on closing");
+    ln_tool_music_set(_host.play,_music_before);
     audio_stop_sound(global.ln_music_voice);global.ln_music_voice=_saved;
     _p.game=0;_p.group=0;_p.single=false;ln_track_filter(_p);_p.current=-1;
     ln_track_toggle(_host);
