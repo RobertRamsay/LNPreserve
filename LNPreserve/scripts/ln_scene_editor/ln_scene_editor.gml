@@ -1990,9 +1990,11 @@ function ln_enemy_route_tick(_g,_slot,_shapes) {
     var _distance=point_distance(_slot.x,_slot.y,_target[0],_target[1]);
     if(_distance<1) {_slot.route_index=(_slot.route_index+1) mod (array_length(_cfg.route)+1);return;}
     var _speed=_g.game_number==3?1.2:0.4,_dx=(_target[0]-_slot.x)/_distance*min(_speed,_distance),_dy=(_target[1]-_slot.y)/_distance*min(_speed,_distance);
-    var _next=[_slot.x+_dx,_slot.y+_dy];
-    if(!ln_enemy_route_clear([_slot.x,_slot.y],_next,_shapes)) {_slot.route_index=(_slot.route_index+1) mod (array_length(_cfg.route)+1);return;}
-    _slot.x=_next[0];_slot.y=_next[1];var _facing=_dx<0?(_dy<0?7:5):(_dy<0?1:3);
+    var _next=ln_enemy_slide([_slot.x,_slot.y],[_slot.x+_dx,_slot.y+_dy],_target,_shapes);
+    if(point_distance(_slot.x,_slot.y,_next[0],_next[1])<0.001) return;
+    var _previous=variable_struct_exists(_slot,"walk_facing")?_slot.walk_facing:_cfg.facing;
+    var _facing=ln_enemy_stable_facing(_previous,_target[0]-_slot.x,_target[1]-_slot.y,1);
+    _slot.x=_next[0];_slot.y=_next[1];
     ln_enemy_place(_g.game_number,_slot.actor,_slot.x,_slot.y,_facing);
     if(_g.game_number<3) {
         var _old=_g.enemy;_g.enemy=_slot.actor;
@@ -2058,12 +2060,19 @@ function ln_enemy_checks() {
         for(var _i=0;_i<2;_i++) {var _slot=_g.edited_enemies.slots[_i],_pos=ln_enemy_position(_game,_slot.actor);
             ln_check(abs(_pos[0]-_slot.config.x)<=1 && abs(_pos[1]-_slot.config.y)<=1 && !ln_enemy_dead(_g,_slot.actor),"room re-entry restores spawn and health");}
         _e.enabled=false;ln_enemy_runtime(_g);ln_check(!ln_enemy_custom(_g),"Modified OFF leaves native engine in control");_e.enabled=true;
-        var _route={config:{x:50,y:70,patrol:2,route:[[55,70]]},actor:ln_enemy_copy(_cat.types[0].actor),x:50,y:70,route_index:0,down_ticks:0,walking:false};
+        var _route={config:{x:50,y:70,facing:3,patrol:2,route:[[55,70]]},actor:ln_enemy_copy(_cat.types[0].actor),x:50,y:70,route_index:0,down_ticks:0,walking:false};
         ln_enemy_place(_game,_route.actor,50,70,3);repeat(5) ln_enemy_route_tick(_g,_route,[]);
         ln_check(_route.x>50,"custom patrol advances without an engaged enemy");
     }
     ln_check(!ln_enemy_route_clear([10,10],[20,10],[{points:[[15,0],[15,20]],rect:undefined}]),"patrol cannot cross solid room boundary");
     ln_enemy_boundary_checks();
+    var _wall=[{points:[[11,0],[11,30]],rect:undefined}];
+    var _slide=ln_enemy_slide([10,10],[12,12],[20,20],_wall);
+    ln_check(_slide[0]<11 && _slide[1]>10,"guard slides along blocked edge toward target");
+    ln_check(ln_enemy_route_clear([10,10],_slide,_wall),"sliding never crosses the blocking edge");
+    var _clear=ln_enemy_slide([10,10],[12,12],[20,20],[]);
+    ln_check(_clear[0]==12 && _clear[1]==12,"clear movement keeps direct approach");
+    ln_check(ln_enemy_stable_facing(7,0.2,-20,1)==7 && ln_enemy_stable_facing(7,-0.2,-20,1)==7,"axis rounding cannot flicker facing");
     show_debug_message("LN_ENEMY_EDITOR_PASS: three games / two guards / single engagement / patrols / persistence");
 }
 
@@ -2127,4 +2136,27 @@ function ln_enemy_boundary_checks() {
     ln_check(_dx!=0?abs(_g.enemy.x-_start.x)<abs(_dx):abs(_g.enemy.y-_start.y)<abs(_end.y-_start.y),"edited LN1 chase stops at room boundary");
     _g.edited_enemies=undefined;_g.enemy=ln_enemy_copy(_start);ln1_enemy_move(_g,8);
     ln_check(_g.enemy.x==_end.x && _g.enemy.y==_end.y,"native unmodified enemy movement unchanged");
+}
+
+// Retain each facing component near its axis instead of alternating poses as
+// fractional movement rounds to either side of the destination.
+function ln_enemy_stable_facing(_old,_dx,_dy,_band=4) {
+    var _left=abs(_dx)<=_band?(_old&4)!=0:_dx<0;
+    var _up=abs(_dy)<=_band?(_old==1 || _old==7):_dy<0;
+    return _left?(_up?7:5):(_up?1:3);
+}
+function ln_enemy_slide(_from,_wanted,_target,_shapes) {
+    if(_wanted[0]>=0 && _wanted[0]<=239 && _wanted[1]>=0 && _wanted[1]<=143 && ln_enemy_route_clear(_from,_wanted,_shapes)) return _wanted;
+    var _step=max(abs(_wanted[0]-_from[0]),abs(_wanted[1]-_from[1]));
+    if(_step<0.0001) return _from;
+    var _best=_from,_score=point_distance(_from[0],_from[1],_target[0],_target[1]);
+    // Axis steps allow contact to slide around the C64's stepped/sloping edges.
+    for(var _y=-1;_y<=1;_y++) for(var _x=-1;_x<=1;_x++) {
+        if(_x==0 && _y==0) continue;
+        var _p=[_from[0]+_x*_step,_from[1]+_y*_step];
+        if(_p[0]<0 || _p[0]>239 || _p[1]<0 || _p[1]>143 || !ln_enemy_route_clear(_from,_p,_shapes)) continue;
+        var _cost=point_distance(_p[0],_p[1],_target[0],_target[1]);
+        if(_cost<_score-0.0001) {_best=_p;_score=_cost;}
+    }
+    return _best;
 }

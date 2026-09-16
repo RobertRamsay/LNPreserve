@@ -37,7 +37,7 @@ function ln1_enemy_begin(_e, _d, _entry) {
 function ln1_enemy_approach(_g) {
     var _e = _g.enemy, _p = _g.player;
     _e.mode = 5;
-    _e.facing = ln1_enemy_face(_e, _p.x, _p.y);
+    _e.facing = ln_enemy_custom(_g)?ln_enemy_stable_facing(_e.facing,_p.x-_e.x,_p.y-_e.y):ln1_enemy_face(_e, _p.x, _p.y);
     _e.heading = _e.facing;
     _e.speed = _e.speed_traits >> 2;
     ln1_enemy_begin(_e, _g.data, 8);
@@ -122,6 +122,7 @@ function ln1_enemy_decide(_g) {
                 }
             }
             var _direct = ln1_enemy_face(_e, _p.x, _p.y), _facing = ln1_enemy_face(_e, _target, _p.y);
+            if(ln_enemy_custom(_g)) {_direct=ln_enemy_stable_facing(_e.facing,_p.x-_e.x,_p.y-_e.y);_facing=_direct;}
             if ((_facing ^ _direct) & 4) {
                 if (ln1_enemy_random(_g) < 16 && abs(_p.y - _e.y) < 8) { ln1_enemy_attack_stance(_g); return; }
             }
@@ -175,9 +176,13 @@ function ln1_enemy_move(_g, _ticks) {
         }
         _fy &= 65535; _e.fraction_y = _fy & 255;
         var _ny = _fy >> 8;
-        if(ln_enemy_custom(_g) && (_nx<0 || _nx>239 || _ny<8 || _ny>151 ||
-            !ln_enemy_route_clear([_e.x,_e.y-8],[_nx,_ny-8],_g.edited_enemies.shapes))) {
-            _e.collision=255;_e.fraction_x=0;_e.fraction_y=0;return;
+        if(ln_enemy_custom(_g)) {
+            var _next=ln_enemy_slide([_e.x,_e.y-8],[_nx,_ny-8],[_p.x,_p.y-8],_g.edited_enemies.shapes);
+            if(_next[0]!=_nx || _next[1]!=_ny-8) {
+                _e.fraction_x=0;_e.fraction_y=0;
+                if(_next[0]==_e.x && _next[1]==_e.y-8) {_e.collision=255;return;}
+                _nx=round(_next[0]);_ny=round(_next[1])+8;
+            }
         }
         if (_e.active >= 128 && abs(_p.x - _nx) < 12 && abs(_p.y - _ny) < _e.separation_y) {
             _e.collision = 127; return;
