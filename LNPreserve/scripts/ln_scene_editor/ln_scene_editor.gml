@@ -1,6 +1,6 @@
 /// Versioned, opt-in scene overrides. No original assets or room logic are edited.
 function LNSceneEditor() constructor {
-    enemy_edit=false;enemy_index=0;enemy_drag=false;enemy_waypoint=-1;enemy_catalogs={};enemy_catalog_building=false;
+    nav_job=undefined;nav_last_nodes=0;nav_last_us=0;enemy_edit=false;enemy_index=0;enemy_drag=false;enemy_waypoint=-1;enemy_catalogs={};enemy_catalog_building=false;
     test_music_restore=undefined;
     open=false;toggle_requested=false;enabled=false;scenes={};datasets={};bitmap_baselines={};scene=undefined;preview=undefined;
     game=1;level=1;room_id=1;part=-1;asset=0;scroll=0;asset_scroll=0;
@@ -1938,7 +1938,7 @@ function ln_enemy_runtime(_g) {
         if(_d<_distance) {_nearest=_j;_distance=_d;}
     }
     var _hold=false;
-    if(_m.active>=0) {var _pos=ln_enemy_position(_g.game_number,_m.slots[_m.active].actor);_hold=abs(_player[0]-_pos[0])+abs(_player[1]-_pos[1])<160 || _m.slots[_m.active].down_ticks>0;}
+    if(_m.active>=0) {var _pos=ln_enemy_position(_g.game_number,_m.slots[_m.active].actor);_hold=abs(_player[0]-_pos[0])+abs(_player[1]-_pos[1])<160 || _m.slots[_m.active].down_ticks>0 || (variable_struct_exists(_m.slots[_m.active].actor,"nav_return") && _m.slots[_m.active].actor.nav_return);}
     var _chosen=_hold?_m.active:_nearest;
     if(_chosen!=_m.active) {
         if(_g.game_number==1) _g.projectiles[1]=new LN1Projectile();
@@ -1974,7 +1974,12 @@ function ln_enemy_route_clear(_a,_b,_shapes) {
     for(var _i=0;_i<array_length(_shapes);_i++) {
         var _s=_shapes[_i];
         if(array_length(_s.points)>1) {
-            for(var _j=1;_j<array_length(_s.points);_j++) if(ln_enemy_segment_cross(_a,_b,_s.points[_j-1],_s.points[_j])) return false;
+            for(var _j=1;_j<array_length(_s.points);_j++) {
+                var _c=_s.points[_j-1],_d=_s.points[_j];
+                if(max(_a[0],_b[0])<min(_c[0],_d[0]) || min(_a[0],_b[0])>max(_c[0],_d[0]) ||
+                   max(_a[1],_b[1])<min(_c[1],_d[1]) || min(_a[1],_b[1])>max(_c[1],_d[1])) continue;
+                if(ln_enemy_segment_cross(_a,_b,_c,_d)) return false;
+            }
         } else if(is_array(_s.rect)) {
             var _r=_s.rect;
             if(_b[0]>=_r[0] && _b[0]<=_r[2] && _b[1]>=_r[1] && _b[1]<=_r[3]) return false;
@@ -2065,7 +2070,12 @@ function ln_enemy_checks() {
         ln_check(_route.x>50,"custom patrol advances without an engaged enemy");
     }
     ln_check(!ln_enemy_route_clear([10,10],[20,10],[{points:[[15,0],[15,20]],rect:undefined}]),"patrol cannot cross solid room boundary");
-    ln_enemy_boundary_checks();
+    ln_enemy_boundary_checks();ln_enemy_return_checks();
+    var _job=ln_enemy_search_start([10,10],[30,10],[{points:[[20,0],[20,24]],rect:undefined}]),_slices=0;
+    while(!_job.done) {ln_check(ln_enemy_search_step(_job,16,1000)<=16,"navigation has a fixed per-frame expansion cap");_slices++;ln_check(_slices<10000,"incremental search finishes");}
+    ln_check(_slices>1 && array_length(_job.path)>0,"detour search is spread across frames");
+    ln_check(ln_enemy_frame_time({edited_enemies:{}},1000000)==40000,"edited play discards long stall debt");
+    ln_check(ln_enemy_frame_time({},1000000)==1000000,"original timing remains unchanged");
     var _bend=[{points:[[20,0],[20,24]],rect:undefined}];
     var _path=ln_enemy_find_path([10,10],[30,10],_bend),_last=[10,10],_detour=false;
     ln_check(array_length(_path)>0,"chase finds route around blocking wall");
@@ -2178,52 +2188,117 @@ function ln_enemy_slide(_from,_wanted,_target,_shapes) {
 
 // A room-sized four-pixel navigation lattice. Edges use the same collision
 // geometry as movement, so diagonal links cannot cut across a road boundary.
-function ln_enemy_find_path(_start,_goal,_shapes) {
-    if(ln_enemy_route_clear(_start,_goal,_shapes)) return [_goal];
-    var _w=60,_h=36,_count=_w*_h,_parent=array_create(_count,-2),_queue=[],_head=0;
+function ln_enemy_search_start(_start,_goal,_shapes) {
+    var _job={goal:_goal,shapes:_shapes,parent:array_create(2160,-2),queue:[],head:0,done:false,path:[],expanded:0};
+    if(ln_enemy_route_clear(_start,_goal,_shapes)) {_job.done=true;_job.path=[_goal];return _job;}
     var _sx=clamp(round(_start[0]/4),0,59),_sy=clamp(round(_start[1]/4),0,35);
     for(var _y=max(0,_sy-1);_y<=min(35,_sy+1);_y++) for(var _x=max(0,_sx-1);_x<=min(59,_sx+1);_x++) {
         var _p=[_x*4,_y*4],_id=_y*60+_x;
-        if(ln_enemy_route_clear(_start,_p,_shapes)) {_parent[_id]=-1;array_push(_queue,_id);}
+        if(ln_enemy_route_clear(_start,_p,_shapes)) {_job.parent[_id]=-1;array_push(_job.queue,_id);}
     }
-    var _found=-1;
-    while(_head<array_length(_queue)) {
-        var _id=_queue[_head++],_x=_id mod 60,_y=_id div 60,_from=[_x*4,_y*4];
-        if(point_distance(_from[0],_from[1],_goal[0],_goal[1])<=6 && ln_enemy_route_clear(_from,_goal,_shapes)) {_found=_id;break;}
+    return _job;
+}
+function ln_enemy_search_step(_job,_limit=16,_budget_us=1000) {
+    var _begin=get_timer(),_nodes=0;
+    while(!_job.done && _job.head<array_length(_job.queue) && _nodes<_limit && get_timer()-_begin<_budget_us) {
+        _nodes++;_job.expanded++;
+        var _id=_job.queue[_job.head++],_x=_id mod 60,_y=_id div 60,_from=[_x*4,_y*4];
+        if(point_distance(_from[0],_from[1],_job.goal[0],_job.goal[1])<=6 && ln_enemy_route_clear(_from,_job.goal,_job.shapes)) {
+            var _reverse=[_job.goal],_found=_id;
+            while(_found>=0) {array_push(_reverse,[(_found mod 60)*4,(_found div 60)*4]);_found=_job.parent[_found];}
+            for(var _i=array_length(_reverse)-1;_i>=0;_i--) array_push(_job.path,_reverse[_i]);
+            _job.done=true;break;
+        }
         for(var _dy=-1;_dy<=1;_dy++) for(var _dx=-1;_dx<=1;_dx++) {
             var _nx=_x+_dx,_ny=_y+_dy;if(_nx<0 || _nx>=60 || _ny<0 || _ny>=36) continue;
-            var _next=_ny*60+_nx;if(_parent[_next]!=-2) continue;
-            if(!ln_enemy_route_clear(_from,[_nx*4,_ny*4],_shapes)) continue;
-            _parent[_next]=_id;array_push(_queue,_next);
+            var _next=_ny*60+_nx;if(_job.parent[_next]!=-2) continue;
+            if(!ln_enemy_route_clear(_from,[_nx*4,_ny*4],_job.shapes)) continue;
+            _job.parent[_next]=_id;array_push(_job.queue,_next);
         }
     }
-    if(_found<0) return [];
-    var _reverse=[_goal];
-    while(_found>=0) {array_push(_reverse,[(_found mod 60)*4,(_found div 60)*4]);_found=_parent[_found];}
-    var _path=[];for(var _i=array_length(_reverse)-1;_i>=0;_i--) array_push(_path,_reverse[_i]);
-    return _path;
+    if(_job.head>=array_length(_job.queue)) _job.done=true;
+    return _nodes;
 }
-function ln_enemy_chase_point(_g) {
-    var _e=_g.enemy,_m=_g.edited_enemies,_from=[_e.x,_e.y-8],_goal=[_g.player.x,_g.player.y-8];
-    if(!variable_struct_exists(_e,"nav_path") || !variable_struct_exists(_e,"nav_goal") ||
-        point_distance(_goal[0],_goal[1],_e.nav_goal[0],_e.nav_goal[1])>6 || _m.ticks>=_e.nav_until) {
-        _e.nav_path=ln_enemy_find_path(_from,_goal,_m.shapes);_e.nav_goal=_goal;_e.nav_until=_m.ticks+24;
+// Synchronous wrapper is for offline checks only. Gameplay advances a bounded
+// job once per host frame, outside native ticks and save/rewind actor snapshots.
+function ln_enemy_find_path(_start,_goal,_shapes) {
+    var _job=ln_enemy_search_start(_start,_goal,_shapes);
+    while(!_job.done) ln_enemy_search_step(_job,2160,1000000);
+    return _job.path;
+}
+function ln_enemy_nav_step(_g) {
+    var _editor=global.ln_editor,_job=_editor.nav_job;
+    _editor.nav_last_nodes=0;_editor.nav_last_us=0;
+    if(!is_struct(_job)) return;
+    if(_job.owner!=_g || !ln_enemy_custom(_g) || _job.group!=_g.edited_enemies || _job.active!=_g.edited_enemies.active) {_editor.nav_job=undefined;return;}
+    var _start=get_timer();_editor.nav_last_nodes=ln_enemy_search_step(_job,16,1000);_editor.nav_last_us=get_timer()-_start;
+    if(_job.done) {
+        _g.enemy.nav_path=_job.path;_g.enemy.nav_goal=_job.goal;_g.enemy.nav_until=_g.edited_enemies.ticks+30;
+        _editor.nav_job=undefined;
     }
-    var _path=_e.nav_path;
-    // Select the furthest visible waypoint, avoiding stair-step facing changes.
-    for(var _i=array_length(_path)-1;_i>=0;_i--) if(ln_enemy_route_clear(_from,_path[_i],_m.shapes)) return _path[_i];
+}
+function ln_enemy_chase_point(_g,_goal) {
+    var _e=_g.enemy,_m=_g.edited_enemies,_from=[_e.x,_e.y-8];
+    if(ln_enemy_route_clear(_from,_goal,_m.shapes)) {global.ln_editor.nav_job=undefined;return _goal;}
+    var _has=variable_struct_exists(_e,"nav_path"),_needs=!_has;
+    if(_has) _needs=_m.ticks>=_e.nav_until && (array_length(_e.nav_path)==0 || point_distance(_goal[0],_goal[1],_e.nav_goal[0],_e.nav_goal[1])>8);
+    var _job=global.ln_editor.nav_job;
+    if(_needs && (!is_struct(_job) || _job.owner!=_g || _job.group!=_m || _job.active!=_m.active)) {
+        _job=ln_enemy_search_start(_from,_goal,_m.shapes);_job.owner=_g;_job.group=_m;_job.active=_m.active;global.ln_editor.nav_job=_job;
+    }
+    if(_has) for(var _i=array_length(_e.nav_path)-1;_i>=0;_i--) if(ln_enemy_route_clear(_from,_e.nav_path[_i],_m.shapes)) return _e.nav_path[_i];
     return _from;
+}
+function ln_enemy_frame_time(_g,_us) {
+    return ln_enemy_custom(_g)?min(_us,40000):_us;
 }
 function ln_enemy_ln1_chase(_g) {
     var _e=_g.enemy,_m=_g.edited_enemies;
     if(!_m.engaged || _e.wounds>=32 || _e.mode<1 || _e.mode>5) return false;
-    var _from=[_e.x,_e.y-8],_goal=[_g.player.x,_g.player.y-8];
-    if(abs(_g.player.x-_e.x)<20 && abs(_g.player.y-_e.y)<4 && ln_enemy_route_clear(_from,_goal,_m.shapes)) {ln1_enemy_attack_stance(_g);return true;}
-    var _point=ln_enemy_chase_point(_g);_e.nav_point=_point;
+    var _from=[_e.x,_e.y-8],_goal=ln_enemy_return_goal(_g);
+    if(!_e.nav_return && abs(_g.player.x-_e.x)<20 && abs(_g.player.y-_e.y)<4 && ln_enemy_route_clear(_from,_goal,_m.shapes)) {ln1_enemy_attack_stance(_g);return true;}
+    var _point=ln_enemy_chase_point(_g,_goal);_e.nav_point=_point;
+    if(point_distance(_from[0],_from[1],_point[0],_point[1])<0.5) {
+        if(_e.mode!=1) {ln1_enemy_begin(_e,_g.data,0);ln1_enemy_combat(_e,0);}_e.mode=1;return true;
+    }
     var _facing=ln_enemy_stable_facing(_e.facing,_point[0]-_from[0],_point[1]-_from[1],1);
     if(_e.mode!=5 || _e.facing!=_facing) {
         _e.facing=_facing;_e.heading=_facing;_e.speed=_e.speed_traits>>2;
         ln1_enemy_begin(_e,_g.data,8);ln1_enemy_combat(_e,8);
     }
     _e.mode=5;return true;
+}
+
+// A blocked approach commits to returning home. Reconsider the player only
+// at half distance, 20% remaining, and after reaching the configured spawn.
+function ln_enemy_return_goal(_g) {
+    var _e=_g.enemy,_m=_g.edited_enemies,_cfg=_m.slots[_m.active].config;
+    var _from=[_e.x,_e.y-8],_home=[_cfg.x,_cfg.y],_player=[_g.player.x,_g.player.y-8];
+    var _remaining=point_distance(_from[0],_from[1],_home[0],_home[1]);
+    if(!variable_struct_exists(_e,"nav_return")) _e.nav_return=false;
+    var _check=false,_change=false;
+    if(_e.nav_return) {
+        if(_remaining<=_e.nav_return_distance*0.5 && !(_e.nav_return_checks&1)) {_e.nav_return_checks|=1;_check=true;}
+        if(_remaining<=_e.nav_return_distance*0.2 && !(_e.nav_return_checks&2)) {_e.nav_return_checks|=2;_check=true;}
+        if(_remaining<=1) _check=true;
+        if(_check && ln_enemy_route_clear(_from,_player,_m.shapes)) {_e.nav_return=false;_change=true;}
+    } else if(!ln_enemy_route_clear(_from,_player,_m.shapes)) {
+        _e.nav_return=true;_e.nav_return_distance=max(1,_remaining);_e.nav_return_checks=0;_change=true;
+    }
+    var _goal=_e.nav_return?_home:_player;
+    if(_change) {
+        global.ln_editor.nav_job=undefined;_e.nav_path=[];_e.nav_goal=_goal;_e.nav_until=0;
+    }
+    return _goal;
+}
+function ln_enemy_return_checks() {
+    var _g={enemy:{x:100,y:88},player:{x:130,y:88},edited_enemies:{active:0,slots:[{config:{x:20,y:80}}],shapes:[{points:[[110,0],[110,140]],rect:undefined}]}};
+    var _goal=ln_enemy_return_goal(_g);ln_check(_g.enemy.nav_return && _goal[0]==20,"blocked chase prioritises spawn");
+    _g.edited_enemies.shapes=[];_g.enemy.x=80;_goal=ln_enemy_return_goal(_g);
+    ln_check(_g.enemy.nav_return && _goal[0]==20,"clear route before halfway does not interrupt return");
+    _g.enemy.x=60;_goal=ln_enemy_return_goal(_g);ln_check(!_g.enemy.nav_return && _goal[0]==130,"halfway check resumes clear chase");
+    _g.enemy.x=100;_g.edited_enemies.shapes=[{points:[[110,0],[110,140]],rect:undefined}];ln_enemy_return_goal(_g);
+    _g.enemy.x=60;ln_enemy_return_goal(_g);ln_check(_g.enemy.nav_return && _g.enemy.nav_return_checks==1,"blocked halfway check is consumed once");
+    _g.edited_enemies.shapes=[];_g.enemy.x=50;ln_enemy_return_goal(_g);ln_check(_g.enemy.nav_return,"no repeated halfway checks");
+    _g.enemy.x=36;_goal=ln_enemy_return_goal(_g);ln_check(!_g.enemy.nav_return && _goal[0]==130,"20 percent remaining check resumes clear chase");
 }

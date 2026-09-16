@@ -64,7 +64,8 @@ if(scene_test.menu) ln_paint_slider(true);
 if (!selftest && ln_rewind_step(self)) exit;
 if (!selftest && !workbench && !scene_test.preview) ln_crt_step(ln_crt_controls_visible(self),!scene_test.menu);
 if (!selftest && ln_saves_step(self)) exit;
-elapsed_us += int64(delta_time);
+var _play_delta=ln_enemy_frame_time(play,delta_time);
+elapsed_us += int64(_play_delta);
 // Input is stamped at observation time, not retroactively applied to host-stall debt.
 input_state.sample((elapsed_us div 1000000) * clock.hz + ((elapsed_us mod 1000000) * clock.hz) div 1000000);
 if (!workbench && keyboard_check_pressed(vk_f8)) play.one_hit_kills=!play.one_hit_kills;
@@ -86,7 +87,8 @@ var _quick_game=keyboard_check_pressed(vk_home)?play.game_number:0;
 if (!selftest) for(var _game_key=1;_game_key<=3;_game_key++)
     if (keyboard_check_pressed(ord("0")+_game_key)) {_quick_game=_game_key;break;}
 if (_quick_game>0) ln_quick_start(self,_quick_game);
-play.timer.advance(delta_time, tick_native);
+ln_enemy_nav_step(play);
+play.timer.advance(_play_delta, tick_native);
 if (!workbench) ln_scene_test_step(scene_test, play);
 ln3_intro_audio_sync(play,workbench || scene_test.menu || scene_test.preview);
 ln_cinematic_step(self);
