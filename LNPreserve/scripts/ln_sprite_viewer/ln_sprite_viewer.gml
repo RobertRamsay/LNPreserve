@@ -2,6 +2,7 @@ function LNSpriteViewer() constructor {
     open=false;catalog=undefined;game=1;category=0;list=[];selected=0;
     animation=0;frame=0;elapsed=0;paused=false;cycle=true;mirror=false;
     voices=[];bounds=[0,0,1,1];assets={};
+    crt_enabled=false;zoom=3;preview_surface=-1;preview_camera=-1;
 }
 function ln_sprite_asset(_name) {
     var _v=global.ln_sprites;
@@ -84,6 +85,7 @@ function ln_sprite_step(_host) {
     if(ln_tool_media_hit(1)) {ln_sprite_to_track();return true;}
     if(keyboard_check_pressed(vk_escape) || ln_edit_hit(1030,20,220,28)) {ln_sprite_toggle(_host);return true;}
     if(keyboard_check_pressed(vk_f9)) ln_fullscreen_toggle(_host);
+    if(keyboard_check_pressed(vk_f10) || ln_edit_hit(770,20,240,28)) _v.crt_enabled=!_v.crt_enabled;
     for(var _g=1;_g<=3;_g++) if(ln_edit_hit(24+(_g-1)*160,76,150,28)) {_v.game=_g;ln_sprite_filter();}
     for(var _c=0;_c<3;_c++) if(ln_edit_hit(600+_c*190,76,180,28)) {_v.category=_c;ln_sprite_filter();}
     if(ln_edit_hit(24,116,50,28)) ln_sprite_next(-1);
@@ -93,12 +95,15 @@ function ln_sprite_step(_host) {
     if(ln_edit_hit(24,744,160,28)) _v.paused=!_v.paused;
     if(ln_edit_hit(204,744,220,28)) _v.cycle=!_v.cycle;
     if(ln_edit_hit(444,744,180,28)) _v.mirror=!_v.mirror;
+    if(ln_edit_hit(1010,744,40,28)) _v.zoom=max(1,_v.zoom-1);
+    if(ln_edit_hit(1210,744,40,28)) _v.zoom=min(6,_v.zoom+1);
     ln_sprite_advance(min(delta_time/1000000,.1));return true;
 }
 function ln_sprite_draw() {
     var _v=global.ln_sprites;shader_reset();gpu_set_blendmode(bm_normal);gpu_set_texfilter(false);
     draw_set_alpha(1);draw_clear(make_colour_rgb(18,20,25));draw_set_font(font_jansina);
     draw_set_halign(fa_left);draw_set_valign(fa_top);draw_set_colour(c_white);
+    ln_edit_button(770,20,240,"CRT "+(_v.crt_enabled?"ON":"OFF")+" (F10)",_v.crt_enabled);
     draw_text(24,24,"SPRITE VIEWER");ln_edit_button(1030,20,220,"Back (Esc)");
     for(var _g=1;_g<=3;_g++) ln_edit_button(24+(_g-1)*160,76,150,"Last Ninja "+string(_g),_v.game==_g);
     var _categories=["NINJA","ENEMIES","MISC"];
@@ -106,26 +111,42 @@ function ln_sprite_draw() {
     var _entry=_v.list[_v.selected],_clip=_entry.clips[_v.animation];
     ln_edit_button(24,116,50,"<");ln_edit_button(1200,116,50,">");
     draw_text(100,121,string(_v.selected+1)+" / "+string(array_length(_v.list))+"   "+_entry.name);
-    draw_set_colour(make_colour_rgb(100,105,112));draw_rectangle(24,160,1250,660,false);
-    var _b=_v.bounds,_scale=max(1,min(6,floor(min(1160/max(1,_b[2]-_b[0]),440/max(1,_b[3]-_b[1])))));
-    var _cx=637,_cy=410,_parts=_clip.frames[_v.frame].parts,_flip=_v.mirror?-1:1;
+    // Canvas dimensions affect centring only; zoom stays fixed across every
+    // game, asset and animation. The surface clips large poses to the viewport.
+    var _view=matrix_get(matrix_view),_projection=matrix_get(matrix_projection);
+    if(!surface_exists(_v.preview_surface)) _v.preview_surface=surface_create(1226,500);
+    if(_v.preview_camera<0) _v.preview_camera=camera_create_view(0,0,1226,500);
+    surface_set_target(_v.preview_surface);camera_apply(_v.preview_camera);draw_clear(make_colour_rgb(100,105,112));
+    var _b=_v.bounds,_scale=_v.zoom;
+    var _cx=613,_cy=250,_parts=_clip.frames[_v.frame].parts,_flip=_v.mirror?-1:1;
+    var _origin_x=round(_cx-(_b[0]+_b[2])/2*_scale*_flip),_origin_y=round(_cy-(_b[1]+_b[3])/2*_scale);
+    // One standing anchor per character, shared by all its animations.
+    if(variable_struct_exists(_entry,"ground_anchor")) {
+        _origin_x=round(_cx-_entry.ground_anchor[0]*_scale*_flip);
+        _origin_y=round(390-_entry.ground_anchor[1]*_scale);
+    }
     for(var _i=0;_i<array_length(_parts);_i++) {
         var _p=_parts[_i],_s=ln_sprite_asset(_p[0]);if(_s<0) continue;
-        draw_sprite_ext(_s,_p[1],_cx+(_p[2]-(_b[0]+_b[2])/2)*_scale*_flip,
-            _cy+(_p[3]-(_b[1]+_b[3])/2)*_scale,_scale*_flip*(array_length(_p)>5?_p[5]:1),_scale*(array_length(_p)>6?_p[6]:1),0,_p[4],1);
+        draw_sprite_ext(_s,_p[1],_origin_x+_p[2]*_scale*_flip,
+            _origin_y+_p[3]*_scale,_scale*_flip*(array_length(_p)>5?_p[5]:1),_scale*(array_length(_p)>6?_p[6]:1),0,_p[4],1);
     }
+    surface_reset_target();matrix_set(matrix_view,_view);matrix_set(matrix_projection,_projection);
+    draw_set_colour(c_white);ln_crt_surface(_v.preview_surface,24,160,1,_v.zoom,undefined,_v.crt_enabled);
     draw_set_colour(c_white);ln_edit_button(24,688,50,"<");ln_edit_button(1200,688,50,">");
     draw_text(100,693,string(_v.animation+1)+" / "+string(array_length(_entry.clips))+"   "+_clip.name);
     ln_edit_button(24,744,160,_v.paused?"Play":"Pause");
     ln_edit_button(204,744,220,"Cycle animations",_v.cycle);ln_edit_button(444,744,180,"Mirror",_v.mirror);
-    draw_text(660,749,"Frame "+string(_v.frame+1)+" / "+string(array_length(_clip.frames))+"   "+string(_scale)+"x");
+    draw_text(660,749,"Frame "+string(_v.frame+1)+" / "+string(array_length(_clip.frames)));
+    ln_edit_button(1010,744,40,"-");draw_text(1070,749,"Pixels "+string(_scale)+"x");ln_edit_button(1210,744,40,"+");
 }
 function ln_sprite_checks(_host) {
-    var _v=global.ln_sprites;ln_sprite_filter();
+    var _v=global.ln_sprites;ln_sprite_filter();_v.zoom=3;
     for(var _g=1;_g<=3;_g++) for(var _c=0;_c<3;_c++) {
         _v.game=_g;_v.category=_c;ln_sprite_filter();ln_check(array_length(_v.list)>0,"sprite category populated");
         for(var _e=0;_e<array_length(_v.list);_e++) {
             var _entry=_v.list[_e];
+            if(_g==3 && _c==1) ln_check(string_pos("Enemy 3",_entry.name)==0,"special encounter is not a humanoid costume");
+            if(_c<2) ln_check(variable_struct_exists(_entry,"ground_anchor"),"character has stable standing anchor");
             for(var _a=0;_a<array_length(_entry.clips);_a++) {
                 var _clip=_entry.clips[_a];ln_check(array_length(_clip.frames)>0,"animation has frames");
                 for(var _f=0;_f<array_length(_clip.frames);_f++) {
@@ -139,6 +160,7 @@ function ln_sprite_checks(_host) {
         }
         ln_sprite_next(-1);ln_check(_v.selected==array_length(_v.list)-1,"previous wraps");ln_sprite_next(1);
         ln_check(_v.selected==0,"next wraps");
+        ln_check(_v.zoom==3,"shared pixel scale survives asset/category/game changes");
     }
     _v.game=1;_v.category=0;ln_sprite_filter();_v.paused=true;ln_sprite_advance(1);ln_check(_v.frame==0,"pause freezes pose");
     _v.paused=false;ln_sprite_advance(.2);ln_check(_v.frame>0,"animation advances");

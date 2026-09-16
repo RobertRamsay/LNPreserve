@@ -5,6 +5,7 @@ No sprite pixels or gameplay data are changed. Regenerate after actor exports.
 from pathlib import Path
 import json,re,sys
 from functools import cache
+from PIL import Image
 ROOT=Path(__file__).resolve().parents[1]
 if not (ROOT/'LNPreserve').exists(): ROOT=Path('D:/POLYTRICITY/LNPreserve')
 P=ROOT/'LNPreserve'; D=P/'datafiles'
@@ -107,7 +108,9 @@ lookup={(v['level'],v['action'],v['weapon']):v for v in vectors}
 for level in range(1,6):
     world=read(D/f'play/ln3/level{level}/world.json');rt=read(D/f'play/ln3/level{level}/runtime.json');anim=read(D/f'play/ln3/level{level}/animation.json')
     palette=[r+g*256+b*65536 for r,g,b in rt['palette']]
-    for costume in [None]+list(range(len(world['costume_offsets']))):
+    # Slot 3 belongs to level-specific encounters, not a humanoid costume.
+    # Its unrelated graphics are assembled separately in MISC below.
+    for costume in [None,0,1,2]:
         enemy=costume is not None;clips=[]
         def assembled(v,index,weapon_part=None,hide_weapon=False):
             f=v['frames'][index];out=[];base=4 if enemy else 0
@@ -172,7 +175,30 @@ for g,n,b,ids in [
  (3,'Scenery animations','spr_ln3_scenery_animation',None),(3,'Mechanisms','spr_ln3_mechanisms',None)]:raw(g,n,b,ids)
 raw(2,'Shogun spirits','spr_char_ln2_spirits')
 entries[-1]['category']=1
+# Ground characters using the visible standing/walking pose, never canvas size.
+# Keep this anchor for every action so jumps retain their original displacement.
+@cache
+def visible_bounds(bank, frame):
+    folder=P/'sprites'/bank
+    meta=read(folder/(bank+'.yy'))
+    with Image.open(folder/(meta['frames'][frame]['name']+'.png')) as image:
+        box=image.convert('RGBA').getchannel('A').getbbox()
+    return box,meta['sequence']['xorigin'],meta['sequence']['yorigin']
+
 for e in entries:
+    if e['category'] in (0,1):
+        bounds=[]
+        for f in e['clips'][0]['frames']:
+            for item in f['parts']:
+                bank,frame,x,y=item[:4]
+                box,ox,oy=visible_bounds(bank,frame)
+                if box:
+                    sx,sy=item[5:7] if len(item)>5 else (1,1)
+                    bounds.append((x+(box[0]-ox)*sx,y+(box[1]-oy)*sy,
+                                   x+(box[2]-ox)*sx,y+(box[3]-oy)*sy))
+        if bounds:
+            e['ground_anchor']=[(min(b[0] for b in bounds)+max(b[2] for b in bounds))/2,
+                                max(b[3] for b in bounds)]
     for c in e['clips']:
         assert c['frames'],(e['name'],c['name'])
         for f in c['frames']:

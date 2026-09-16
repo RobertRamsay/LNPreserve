@@ -2623,6 +2623,7 @@
     {"id":{"name":"spr_char_ln2_spirits","path":"sprites/spr_char_ln2_spirits/spr_char_ln2_spirits.yy",},},
     {"id":{"name":"spr_depth_fixture","path":"sprites/spr_depth_fixture/spr_depth_fixture.yy",},},
     {"id":{"name":"spr_depth_probe","path":"sprites/spr_depth_probe/spr_depth_probe.yy",},},
+    {"id":{"name":"spr_japTextile","path":"sprites/spr_japTextile/spr_japTextile.yy",},},
     {"id":{"name":"spr_ln1_actor_extra","path":"sprites/spr_ln1_actor_extra/spr_ln1_actor_extra.yy",},},
     {"id":{"name":"spr_ln1_actor_part_000","path":"sprites/spr_ln1_actor_part_000/spr_ln1_actor_part_000.yy",},},
     {"id":{"name":"spr_ln1_actor_part_001","path":"sprites/spr_ln1_actor_part_001/spr_ln1_actor_part_001.yy",},},
