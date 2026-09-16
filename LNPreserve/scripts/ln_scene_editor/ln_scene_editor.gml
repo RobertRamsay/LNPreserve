@@ -2070,7 +2070,7 @@ function ln_enemy_checks() {
         ln_check(_route.x>50,"custom patrol advances without an engaged enemy");
     }
     ln_check(!ln_enemy_route_clear([10,10],[20,10],[{points:[[15,0],[15,20]],rect:undefined}]),"patrol cannot cross solid room boundary");
-    ln_enemy_boundary_checks();ln_enemy_return_checks();
+    ln_enemy_boundary_checks();ln_enemy_return_checks();ln_enemy_combat_spacing_checks();
     var _job=ln_enemy_search_start([10,10],[30,10],[{points:[[20,0],[20,24]],rect:undefined}]),_slices=0;
     while(!_job.done) {ln_check(ln_enemy_search_step(_job,16,1000)<=16,"navigation has a fixed per-frame expansion cap");_slices++;ln_check(_slices<10000,"incremental search finishes");}
     ln_check(_slices>1 && array_length(_job.path)>0,"detour search is spread across frames");
@@ -2256,7 +2256,8 @@ function ln_enemy_ln1_chase(_g) {
     var _e=_g.enemy,_m=_g.edited_enemies;
     if(!_m.engaged || _e.wounds>=32 || _e.mode<1 || _e.mode>5) return false;
     var _from=[_e.x,_e.y-8],_goal=ln_enemy_return_goal(_g);
-    if(!_e.nav_return && abs(_g.player.x-_e.x)<20 && abs(_g.player.y-_e.y)<4 && ln_enemy_route_clear(_from,_goal,_m.shapes)) {ln1_enemy_attack_stance(_g);return true;}
+    if(!_e.nav_return && abs(_g.player.x-_e.x)<=ln_enemy_ln1_standoff(_e)+2 && abs(_g.player.y-_e.y)<4 && ln_enemy_route_clear(_from,_goal,_m.shapes)) {ln1_enemy_attack_stance(_g);return true;}
+    if(!_e.nav_return) _goal=ln_enemy_ln1_combat_goal(_g,_goal);
     var _point=ln_enemy_chase_point(_g,_goal);_e.nav_point=_point;
     if(point_distance(_from[0],_from[1],_point[0],_point[1])<0.5) {
         if(_e.mode!=1) {ln1_enemy_begin(_e,_g.data,0);ln1_enemy_combat(_e,0);}_e.mode=1;return true;
@@ -2301,4 +2302,30 @@ function ln_enemy_return_checks() {
     _g.enemy.x=60;ln_enemy_return_goal(_g);ln_check(_g.enemy.nav_return && _g.enemy.nav_return_checks==1,"blocked halfway check is consumed once");
     _g.edited_enemies.shapes=[];_g.enemy.x=50;ln_enemy_return_goal(_g);ln_check(_g.enemy.nav_return,"no repeated halfway checks");
     _g.enemy.x=36;_goal=ln_enemy_return_goal(_g);ln_check(!_g.enemy.nav_return && _goal[0]==130,"20 percent remaining check resumes clear chase");
+}
+
+function ln_enemy_ln1_standoff(_enemy) {
+    return [18,22,28,24,18,18,20][clamp(_enemy.weapon,0,6)];
+}
+function ln_enemy_ln1_combat_goal(_g,_player) {
+    var _e=_g.enemy,_from=[_e.x,_e.y-8],_range=ln_enemy_ln1_standoff(_e);
+    var _side=abs(_player[0]-_e.x)<4?((_e.facing&4)?1:-1):(_e.x<_player[0]?-1:1);
+    var _goal=[clamp(_player[0]+_side*_range,0,239),_player[1]];
+    if(ln_enemy_route_clear(_from,_goal,_g.edited_enemies.shapes)) return _goal;
+    // Do not replace a safe approach with a point beyond the road edge.
+    return _player;
+}
+function ln_enemy_combat_spacing_checks() {
+    var _g=new LN1Play(1),_cat=ln_enemy_catalog(1,1);
+    _g.enemy=ln_enemy_copy(_cat.types[0].actor);_g.enemy.x=100;_g.enemy.y=88;_g.enemy.weapon=0;_g.enemy.mode=5;_g.enemy.wounds=0;
+    _g.player.x=110;_g.player.y=96;
+    _g.edited_enemies={active:0,engaged:true,ticks:0,slots:[{config:{x:100,y:80}}],shapes:[]};
+    var _goal=ln_enemy_ln1_combat_goal(_g,[_g.player.x,_g.player.y-8]);
+    ln_check(_goal[0]==92 && _goal[1]==88,"close diagonal approach backs out to fighting distance instead of body contact");
+    _g.enemy.nav_point=_goal;_g.enemy.speed=0;_g.enemy.fraction_x=0;_g.enemy.fraction_y=0;_g.enemy.separation_y=10;
+    ln1_enemy_move(_g,8);ln_check(_g.enemy.x<100,"guard can back out of existing body contact to align");
+    _g.enemy.x=92;_g.enemy.y=96;ln_enemy_ln1_chase(_g);
+    ln_check(_g.enemy.mode==6,"aligned guard immediately leaves chase for attack stance");
+    _g.enemy.weapon=2;_g.enemy.mode=5;_g.enemy.x=82;ln_enemy_ln1_chase(_g);
+    ln_check(_g.enemy.mode==6,"armed guard attacks at its weapon spacing");
 }

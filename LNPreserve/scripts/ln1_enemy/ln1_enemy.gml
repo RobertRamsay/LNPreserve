@@ -194,7 +194,9 @@ function ln1_enemy_move(_g, _ticks) {
             }
         }
         if (_e.active >= 128 && abs(_p.x - _nx) < 12 && abs(_p.y - _ny) < _e.separation_y) {
-            _e.collision = 127; return;
+            var _separating=ln_enemy_custom(_g) && _e.mode==5 && abs(_p.x-_e.x)<12 && abs(_p.y-_e.y)<_e.separation_y &&
+                (abs(_p.x-_nx)>abs(_p.x-_e.x) || abs(_p.y-_ny)>abs(_p.y-_e.y));
+            if(!_separating) {_e.collision = 127; return;}
         }
         _e.collision = 0;
         if (abs(_nx - _e.x) >= 128 || _nx < 2 || _nx >= 247 || _ny < 9 || _ny >= 189) {
