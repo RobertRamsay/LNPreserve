@@ -26,6 +26,15 @@ function ln_map_graph(_game,_level) {
             array_push(_edges,{key:string(_r.id)+":"+string(_j),source:_r.id,destination:_dest,token:_token,dx:_x<120?1:-1,dy:_y<72?1:-1});
         }
     }
+    // LN1 pads unused perimeter ranges with entry 4 (Room 1). They are
+    // not authored paths when Room 1 has no corresponding exit back.
+    // Filter the map only; original runtime travel tables remain untouched.
+    if(_game==1) for(var _i=array_length(_edges)-1;_i>=0;_i--) {
+        var _edge=_edges[_i];if(_edge.token!=4) continue;
+        var _return=false;
+        for(var _j=0;_j<array_length(_edges);_j++) if(_edges[_j].source==1 && _edges[_j].destination==_edge.source && _edge.source!=1) {_return=true;break;}
+        if(!_return) array_delete(_edges,_i,1);
+    }
     var _graph={nodes:_nodes,edges:_edges};variable_struct_set(_e.datasets,_key,_graph);return _graph;
 }
 function ln_map_edge(_graph,_key) {
@@ -69,6 +78,7 @@ function ln_map_remove(_game,_level,_id) {
     var _map=ln_map_data(_game,_level);
     if(!is_struct(ln_map_room(_map,_id))) return;
     ln_map_checkpoint();
+    if(variable_struct_exists(_map,"positions")) variable_struct_remove(_map.positions,string(_id));
     for(var _i=array_length(_map.routes)-1;_i>=0;_i--) {
         var _route=_map.routes[_i];
         for(var _j=array_length(_route.rooms)-1;_j>=0;_j--) if(_route.rooms[_j]==_id) array_delete(_route.rooms,_j,1);
@@ -108,6 +118,19 @@ function ln_map_validate(_maps) {
             }
             for(var _j=0;_j<array_length(_r.rooms);_j++) {var _id=_r.rooms[_j];if(!array_contains(_ids,_id) || array_contains(_used,_id)) return false;array_push(_used,_id);}
         }
+        if(variable_struct_exists(_m,"positions")) {
+            if(!is_struct(_m.positions)) return false;
+            var _names=variable_struct_get_names(_m.positions);
+            if(array_length(_names)>array_length(_graph.nodes)+array_length(_ids)) return false;
+            for(var _j=0;_j<array_length(_names);_j++) {
+                var _name=_names[_j],_valid=false;
+                for(var _n=0;_n<array_length(_graph.nodes);_n++) if(string(_graph.nodes[_n].id)==_name) _valid=true;
+                for(var _n=0;_n<array_length(_ids);_n++) if(string(_ids[_n])==_name) _valid=true;
+                var _p=variable_struct_get(_m.positions,_name);
+                if(!_valid || !is_array(_p) || array_length(_p)!=2) return false;
+                if(!is_real(_p[0]) || !is_real(_p[1]) || !(_p[0]>=24 && _p[0]<=1224 && _p[1]>=170 && _p[1]<=470)) return false;
+            }
+        }
         if(array_length(_used)!=array_length(_ids)) return false;
     }
     return true;
@@ -119,7 +142,7 @@ function ln_map_nodes(_graph,_map) {
     if(!variable_struct_exists(_graph,"layout_revision") || _graph.layout_revision!=_revision || array_length(_graph.layout_rects)!=array_length(_nodes)) {
         _graph.layout_rects=ln_map_flow_layout(_graph,_map,_nodes);_graph.layout_revision=_revision;
     }
-    global.ln_editor.map_rects=_graph.layout_rects;
+    global.ln_editor.map_rects=_graph.layout_rects;global.ln_editor.map_layout_map=_map;global.ln_editor.map_layout_nodes=_nodes;
     return _nodes;
 }
 function ln_map_flow_layout(_graph,_map,_nodes) {
@@ -189,7 +212,63 @@ function ln_map_flow_layout(_graph,_map,_nodes) {
     for(var _i=0;_i<_count;_i++) array_push(_rects,[24+(_cells[_i][0]-_minx+.5)*_sx-_w*.5,170+(_cells[_i][1]-_miny+1)*_sy-(_h+14)*.5,_w,_h]);
     return _rects;
 }
-function ln_map_rect(_n,_count) {return global.ln_editor.map_rects[_n];}
+function ln_map_rect(_n,_count) {
+    var _e=global.ln_editor,_r=_e.map_rects[_n],_map=_e.map_layout_map,_key=string(_e.map_layout_nodes[_n].id);
+    if(variable_struct_exists(_map,"positions") && variable_struct_exists(_map.positions,_key)) {
+        var _p=variable_struct_get(_map.positions,_key);return [clamp(_p[0],24,1224-_r[2]),clamp(_p[1],170,470-_r[3]-14),_r[2],_r[3]];
+    }
+    return _r;
+}
+function ln_map_view_init() {
+    var _e=global.ln_editor;
+    if(!variable_struct_exists(_e,"map_zoom")) {_e.map_zoom=1;_e.map_cx=624;_e.map_cy=320;_e.map_pan=undefined;_e.map_reset_hold=false;_e.map_surface=-1;}
+}
+function ln_map_mouse_x() {var _e=global.ln_editor;return _e.map_cx+(ln_tool_mouse_x()-624)/_e.map_zoom;}
+function ln_map_mouse_y() {var _e=global.ln_editor;return _e.map_cy+(ln_tool_mouse_y()-320)/_e.map_zoom;}
+function ln_map_inside() {return point_in_rectangle(ln_tool_mouse_x(),ln_tool_mouse_y(),24,170,1224,470);}
+function ln_map_view_step() {
+    ln_map_view_init();var _e=global.ln_editor;_e.map_right_click=false;
+    var _left=mouse_check_button(mb_left),_right=mouse_check_button(mb_right),_inside=ln_map_inside();
+    if(_e.map_reset_hold) {if(!_left && !_right && !mouse_check_button(mb_middle)) _e.map_reset_hold=false;return true;}
+    if(_inside && (mouse_check_button_pressed(mb_middle) || (_left && _right))) {
+        _e.map_zoom=1;_e.map_cx=624;_e.map_cy=320;_e.map_pan=undefined;_e.map_drag=undefined;_e.map_reset_hold=true;_e.map_left_room="";_e.map_right_room="";return true;
+    }
+    if(_inside && mouse_check_button_pressed(mb_right)) {
+        _e.map_pan={x:ln_tool_mouse_x(),y:ln_tool_mouse_y(),cx:_e.map_cx,cy:_e.map_cy,moved:false};return true;
+    }
+    if(is_struct(_e.map_pan)) {
+        var _p=_e.map_pan,_dx=ln_tool_mouse_x()-_p.x,_dy=ln_tool_mouse_y()-_p.y;
+        if(abs(_dx)+abs(_dy)>3) _p.moved=true;
+        if(_right) {if(_p.moved) {_e.map_cx=_p.cx-_dx/_e.map_zoom;_e.map_cy=_p.cy-_dy/_e.map_zoom;}return true;}
+        _e.map_pan=undefined;
+        if(_p.moved) {_e.map_right_room="";return true;}
+        _e.map_right_click=_inside;
+    }
+    if(_inside && (mouse_wheel_up() || mouse_wheel_down())) {
+        var _wx=ln_map_mouse_x(),_wy=ln_map_mouse_y();
+        _e.map_zoom=clamp(_e.map_zoom*(mouse_wheel_up()?1.2:1/1.2),1,8);
+        _e.map_cx=_wx-(ln_tool_mouse_x()-624)/_e.map_zoom;_e.map_cy=_wy-(ln_tool_mouse_y()-320)/_e.map_zoom;
+        if(_e.map_zoom==1) {_e.map_cx=624;_e.map_cy=320;}
+        return true;
+    }
+    return false;
+}
+function ln_map_drag_step() {
+    var _e=global.ln_editor;
+    if(!variable_struct_exists(_e,"map_drag") || !is_struct(_e.map_drag)) return false;
+    var _d=_e.map_drag;
+    if(!mouse_check_button(mb_left)) {
+        if(_d.moved) {_e.revision++;_e.autosave_us=1000000;_e.message="Map position saved in this session; Save file keeps the layout.";}
+        _e.map_drag=undefined;return true;
+    }
+    var _dx=ln_map_mouse_x()-_d.mx,_dy=ln_map_mouse_y()-_d.my;
+    if(!_d.moved && (abs(_dx)+abs(_dy))*_e.map_zoom<3) return true;
+    if(!_d.moved) {ln_map_checkpoint();_d.moved=true;_e.map_left_room="";}
+    var _map=ln_map_data(_e.game,_e.level);
+    if(!variable_struct_exists(_map,"positions")) _map.positions={};
+    variable_struct_set(_map.positions,string(_d.id),[clamp(_d.x+_dx,24,1224-_d.w),clamp(_d.y+_dy,170,470-_d.h-14)]);
+    _e.dirty=true;_e.enabled=true;return true;
+}
 function ln_map_node_index(_nodes,_id) {for(var _i=0;_i<array_length(_nodes);_i++) if(_nodes[_i].id==_id) return _i;return -1;}
 // Visible lanes and their hit targets use the same clipped endpoints.
 function ln_map_lanes(_graph,_map,_nodes) {
@@ -246,12 +325,17 @@ function ln_map_draw() {
     ln_edit_button(410,66,35,"<");draw_text(462,72,"Level "+string(_e.level));ln_edit_button(585,66,35,">");
     ln_edit_button(665,66,170,"Modified "+(_e.enabled?"ON":"OFF"),_e.enabled);
     ln_edit_button(850,66,130,"Save file");ln_edit_button(990,66,130,"Load file");
-    draw_text(24,120,"4:1 room flow | Click lane: select | Right-click lane: remove insertion | Double click room: edit");
+    draw_text(24,120,"Wheel: zoom | Right-drag: pan | Middle / both buttons: reset | Drag room: arrange | Double click: edit");
+    ln_map_view_init();
+    if(!surface_exists(_e.map_surface)) _e.map_surface=surface_create(1200,300);
+    var _view=matrix_get(matrix_view),_projection=matrix_get(matrix_projection);
+    var _camera=camera_create_view(_e.map_cx-600/_e.map_zoom,_e.map_cy-150/_e.map_zoom,1200/_e.map_zoom,300/_e.map_zoom);
+    surface_set_target(_e.map_surface);camera_apply(_camera);draw_clear_alpha(c_black,0);
     var _room_focus=variable_struct_exists(_e,"map_room_focus") && _e.map_room_focus;
     var _neighbours=_room_focus?ln_map_neighbours(_graph,_map,_e.map_room):[];
     var _lanes=ln_map_lanes(_graph,_map,_nodes);
     for(var _pass=0;_pass<2;_pass++) for(var _j=0;_j<array_length(_lanes);_j++) {
-        var _lane=_lanes[_j],_selected=_lane.edge==_e.map_edge;
+        var _lane=_lanes[_j],_selected=!_room_focus && _lane.edge==_e.map_edge;
         if(_selected!=(_pass==1)) continue;
         draw_set_colour(_selected?c_yellow:c_aqua);draw_set_alpha(_selected?1:.28);
         draw_line_width(_lane.x1,_lane.y1,_lane.x2,_lane.y2,_selected?2:1);
@@ -289,6 +373,8 @@ function ln_map_draw() {
         }
         draw_set_alpha(1);
     }
+    surface_reset_target();matrix_set(matrix_view,_view);matrix_set(matrix_projection,_projection);camera_destroy(_camera);
+    draw_set_colour(c_white);draw_set_alpha(1);draw_surface(_e.map_surface,24,170);
     ln_edit_button(24,490,165,"Edit selected room");ln_edit_button(201,490,165,"Test Room (T/F5)");
     ln_edit_button(380,490,230,"Insert blank on connection");ln_edit_button(624,490,200,"Remove selected blank");
     ln_edit_button(850,490,110,"Undo (^Z)");ln_edit_button(972,490,110,"Redo (^Y)");
@@ -305,6 +391,8 @@ function ln_map_draw() {
 function ln_map_step(_host) {
     var _e=global.ln_editor;
     if(!_e.map_open) return false;
+    if(ln_map_view_step()) return true;
+    if(ln_map_drag_step()) return true;
     if(ln_edit_hit(1040,18,210,28) || keyboard_check_pressed(vk_escape)) {_e.map_open=false;return true;}
     for(var _i=0;_i<3;_i++) if(ln_edit_hit(24+_i*120,66,110,28)) {ln_edit_select(_i+1,1,ln_edit_rooms(_i+1,1)[0]);_e.map_edge=0;_e.map_scroll=0;_e.map_room=_e.room_id;}
     var _direction=ln_edit_hit(410,66,35,28)?-1:(ln_edit_hit(585,66,35,28)?1:0);
@@ -313,13 +401,13 @@ function ln_map_step(_host) {
     if(ln_edit_hit(850,66,130,28)) {if(ln_edit_save(get_save_filename("JSON files|*.json","modified-scenes.json"))) _e.dirty=false;}
     if(ln_edit_hit(990,66,130,28)) ln_edit_load(get_open_filename("JSON files|*.json",""));
     var _graph=ln_map_graph(_e.game,_e.level),_map=ln_map_data(_e.game,_e.level),_nodes=ln_map_nodes(_graph,_map);
-    if(mouse_wheel_down()) _e.map_scroll=min(max(0,array_length(_graph.edges)-6),_e.map_scroll+3);
-    if(mouse_wheel_up()) _e.map_scroll=max(0,_e.map_scroll-3);
+    if(point_in_rectangle(ln_tool_mouse_x(),ln_tool_mouse_y(),24,536,1124,744) && mouse_wheel_down()) _e.map_scroll=min(max(0,array_length(_graph.edges)-6),_e.map_scroll+3);
+    if(point_in_rectangle(ln_tool_mouse_x(),ln_tool_mouse_y(),24,536,1124,744) && mouse_wheel_up()) _e.map_scroll=max(0,_e.map_scroll-3);
     for(var _i=0;_i<6;_i++) if(ln_edit_hit(24,564+_i*30,1100,28) && _e.map_scroll+_i<array_length(_graph.edges)) {_e.map_room_focus=false;_e.map_edge=_e.map_scroll+_i;_e.map_lane_source=-1;_e.map_lane_destination=-1;_e.map_room=_graph.edges[_e.map_edge].source;}
     var _over_room=false;
-    for(var _i=0;_i<array_length(_nodes);_i++) {
+    for(var _i=0;_i<array_length(_nodes) && ln_map_inside();_i++) {
         var _r=ln_map_rect(_i,array_length(_nodes));
-        if(ln_edit_hit(_r[0],_r[1],_r[2],_r[3]+14)) {
+        if(mouse_check_button_pressed(mb_left) && point_in_rectangle(ln_map_mouse_x(),ln_map_mouse_y(),_r[0],_r[1],_r[0]+_r[2],_r[1]+_r[3]+14)) {
             _e.map_room=_nodes[_i].id;_e.map_room_focus=true;_over_room=true;
             var _click_key=ln_map_key(_e.game,_e.level)+":"+string(_e.map_room);
             if(variable_struct_exists(_e,"map_left_room") && _e.map_left_room==_click_key && current_time-_e.map_left_time<=400) {
@@ -329,8 +417,9 @@ function ln_map_step(_host) {
                 return true;
             }
             _e.map_left_room=_click_key;_e.map_left_time=current_time;
+            _e.map_drag={id:_nodes[_i].id,mx:ln_map_mouse_x(),my:ln_map_mouse_y(),x:_r[0],y:_r[1],w:_r[2],h:_r[3],moved:false};
         }
-        if(mouse_check_button_pressed(mb_right) && point_in_rectangle(ln_tool_mouse_x(),ln_tool_mouse_y(),_r[0],_r[1],_r[0]+_r[2],_r[1]+_r[3]+14)) {
+        if(_e.map_right_click && point_in_rectangle(ln_map_mouse_x(),ln_map_mouse_y(),_r[0],_r[1],_r[0]+_r[2],_r[1]+_r[3]+14)) {
             var _id=_nodes[_i].id,_right_key=ln_map_key(_e.game,_e.level)+":"+string(_id);
             if(variable_struct_exists(_e,"map_right_room") && _e.map_right_room==_right_key && current_time-_e.map_right_time<=400) {
                 if(_id>=1000) ln_map_remove(_e.game,_e.level,_id);else _e.message="Original rooms are protected; only inserted rooms can be removed.";
@@ -339,16 +428,16 @@ function ln_map_step(_host) {
             return true;
         }
     }
-    if(!_over_room && (mouse_check_button_pressed(mb_left) || mouse_check_button_pressed(mb_right))) {
-        var _lanes=ln_map_lanes(_graph,_map,_nodes),_best=7,_chosen=-1,_chosen_lane=undefined,_chosen_t=0;
+    if(ln_map_inside() && !_over_room && (mouse_check_button_pressed(mb_left) || _e.map_right_click)) {
+        var _lanes=ln_map_lanes(_graph,_map,_nodes),_best=7/_e.map_zoom,_chosen=-1,_chosen_lane=undefined,_chosen_t=0;
         for(var _i=0;_i<array_length(_lanes);_i++) {
             var _l=_lanes[_i],_dx=_l.x2-_l.x1,_dy=_l.y2-_l.y1;
-            var _t=clamp(((ln_tool_mouse_x()-_l.x1)*_dx+(ln_tool_mouse_y()-_l.y1)*_dy)/max(.001,_dx*_dx+_dy*_dy),0,1);
-            var _dist=point_distance(ln_tool_mouse_x(),ln_tool_mouse_y(),_l.x1+_dx*_t,_l.y1+_dy*_t);
+            var _t=clamp(((ln_map_mouse_x()-_l.x1)*_dx+(ln_map_mouse_y()-_l.y1)*_dy)/max(.001,_dx*_dx+_dy*_dy),0,1);
+            var _dist=point_distance(ln_map_mouse_x(),ln_map_mouse_y(),_l.x1+_dx*_t,_l.y1+_dy*_t);
             if(_dist<_best) {_best=_dist;_chosen=_l.edge;_chosen_lane=_l;_chosen_t=_t;}
         }
         if(_chosen>=0) {
-            if(mouse_check_button_pressed(mb_right)) {ln_map_remove_lane(_e.game,_e.level,_chosen_lane,_chosen_t>=.5);return true;}
+            if(_e.map_right_click) {ln_map_remove_lane(_e.game,_e.level,_chosen_lane,_chosen_t>=.5);return true;}
             _e.map_room_focus=false;_e.map_lane_source=_chosen_lane.source;_e.map_lane_destination=_chosen_lane.destination;_e.map_edge=_chosen;_e.map_scroll=min(_chosen,max(0,array_length(_graph.edges)-6));_e.message="Lane "+ln_map_letter(_chosen)+" selected. Use Insert blank on connection.";return true;}
     }
     if(ln_edit_hit(850,490,110,28) || (keyboard_check(vk_control) && keyboard_check_pressed(ord("Z")))) ln_map_history(false);
@@ -476,6 +565,9 @@ function ln_map_checks() {
     var _levels=0,_connections=0;
     var _near=ln_map_neighbours(ln_map_graph(1,1),ln_map_data(1,1),1);
     ln_check(array_length(_near)==2 && array_contains(_near,2) && array_contains(_near,14),"LN1 room 1 highlights only outgoing rooms 2 and 14");
+    var _near9=ln_map_neighbours(ln_map_graph(1,1),ln_map_data(1,1),9);
+    ln_check(array_length(_near9)==2 && array_contains(_near9,8) && array_contains(_near9,10),"LN1 room 9 excludes padded Room 1 fallback");
+    ln_check(!is_struct(ln_map_edge(ln_map_graph(1,1),"9:2")),"fallback absent from map connection list and lanes");
     var _directed={edges:[{key:"a",source:1,destination:2},{key:"b",source:3,destination:1}]};
     var _near=ln_map_neighbours(_directed,{routes:[]},1);
     ln_check(array_length(_near)==1 && _near[0]==2,"incoming one-way connection is not an outgoing neighbour");
@@ -506,11 +598,19 @@ function ln_map_checks() {
         _e.enabled=false;ln_check(!ln_map_intercept(_g,_edge.token),"Modified OFF retains original routes");_e.enabled=true;
         _e.game=_game;_e.level=1;_e.map_room=_route.rooms[0];_e.map_edge=_chosen;_e.map_scroll=0;
         ln_map_draw();surface_save(application_surface,"level-map-"+string(_game)+".png");
+        if(_game==1) {
+            var _outside=surface_getpixel(application_surface,30,150);
+            _e.map_zoom=4;_e.map_cx=500;_e.map_cy=360;ln_map_draw();
+            ln_check(surface_getpixel(application_surface,30,150)==_outside,"zoomed map stays clipped inside its panel");
+            surface_save(application_surface,"level-map-zoom.png");
+            _e.map_zoom=1;_e.map_cx=624;_e.map_cy=320;
+        }
         ln_check(ln_map_intercept(_g,_edge.token),"test inserted room drawing");ln_map_draw_transit(_g);surface_save(application_surface,"level-map-room-"+string(_game)+".png");
         ln_map_finish(_g,_route.edge);
         if(surface_exists(_g.stage_surface)) surface_free(_g.stage_surface);
         if(_game==3 && surface_exists(_g.part_surface)) surface_free(_g.part_surface);
     }
+    ln_map_data(1,1).positions={};variable_struct_set(ln_map_data(1,1).positions,"1",[80,220]);
     var _saved=json_stringify(_e.maps),_file="level-map-check.tmp.json";
     ln_check(ln_edit_save(_file),"map saves with editor file");_e.maps={};ln_check(ln_edit_load(_file),"map loads with editor file");
     ln_check(ln_rewind_equal(json_parse(_saved),_e.maps),"map topology roundtrip");file_delete(_file);

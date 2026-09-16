@@ -17,3 +17,5 @@ ln_track_stop(global.ln_tracks);
 ln_tool_free();
 
 if(variable_instance_exists(id,"startup_sound") && startup_sound>=0) audio_stop_sound(startup_sound);
+
+if(variable_global_exists("ln_editor") && variable_struct_exists(global.ln_editor,"map_surface") && surface_exists(global.ln_editor.map_surface)) surface_free(global.ln_editor.map_surface);
