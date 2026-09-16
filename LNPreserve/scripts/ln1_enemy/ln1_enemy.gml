@@ -175,6 +175,10 @@ function ln1_enemy_move(_g, _ticks) {
         }
         _fy &= 65535; _e.fraction_y = _fy & 255;
         var _ny = _fy >> 8;
+        if(ln_enemy_custom(_g) && (_nx<0 || _nx>239 || _ny<8 || _ny>151 ||
+            !ln_enemy_route_clear([_e.x,_e.y-8],[_nx,_ny-8],_g.edited_enemies.shapes))) {
+            _e.collision=255;_e.fraction_x=0;_e.fraction_y=0;return;
+        }
         if (_e.active >= 128 && abs(_p.x - _nx) < 12 && abs(_p.y - _ny) < _e.separation_y) {
             _e.collision = 127; return;
         }

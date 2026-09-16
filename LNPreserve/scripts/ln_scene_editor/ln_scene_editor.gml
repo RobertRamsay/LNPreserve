@@ -1892,11 +1892,10 @@ function ln_enemy_flush(_g) {
     if(_m.active>=0) _m.slots[_m.active].actor=ln_enemy_capture(_g);
 }
 function ln_enemy_room_leave(_g) {
-    if(!ln_enemy_custom(_g)) return;
-    ln_enemy_flush(_g);
-    if(!variable_struct_exists(_g,"edited_enemy_rooms")) _g.edited_enemy_rooms={};
-    variable_struct_set(_g.edited_enemy_rooms,_g.edited_enemies.key,ln_enemy_copy(_g.edited_enemies));
-    _g.edited_enemies=undefined;
+    // A fresh visit starts the edited encounter from its configured spawns.
+    // Save/rewind still captures the live encounter within the current visit.
+    if(variable_struct_exists(_g,"edited_enemy_rooms")) variable_struct_remove(_g,"edited_enemy_rooms");
+    if(ln_enemy_custom(_g)) _g.edited_enemies=undefined;
 }
 function ln_enemy_dead(_g,_a) {
     if(_g.game_number==1) return _a.wounds>=32;
@@ -1914,9 +1913,7 @@ function ln_enemy_runtime(_g) {
     var _signature=json_stringify(_scene.enemies);
     if(!ln_enemy_custom(_g) || _g.edited_enemies.key!=_key || _g.edited_enemies.signature!=_signature) {
         var _m={key:_key,signature:_signature,slots:[],active:-1,engaged:false,original:ln_enemy_capture(_g),ticks:0,shapes:ln_edit_collision_geometry(_g.game_number,_g.game_number==3?_g.bounds:_g.data.boundaries)};
-        if(variable_struct_exists(_g,"edited_enemy_rooms") && variable_struct_exists(_g.edited_enemy_rooms,_key) && variable_struct_get(_g.edited_enemy_rooms,_key).signature==_signature) {
-            var _original=_m.original;_m=ln_enemy_copy(variable_struct_get(_g.edited_enemy_rooms,_key));_m.original=_original;
-        } else for(var _i=0;_i<array_length(_scene.enemies);_i++) {
+        for(var _i=0;_i<array_length(_scene.enemies);_i++) {
             var _cfg=_scene.enemies[_i];if(_cfg.type>=array_length(_cat.types)) continue;
             var _a=ln_enemy_copy(_cat.types[_cfg.type].actor);ln_enemy_place(_g.game_number,_a,_cfg.x,_cfg.y,_cfg.facing);
             _a=ln_enemy_pose(_g,_a,_cfg.facing,false);
@@ -2057,13 +2054,16 @@ function ln_enemy_checks() {
         repeat(60) ln_enemy_runtime(_g);
         ln_check(_g.edited_enemies.active==1 && _g.edited_enemies.slots[0].finished,"next guard engages after defeated guard cooldown");
         ln_enemy_room_leave(_g);ln_enemy_runtime(_g);
-        ln_check(_g.edited_enemies.slots[0].finished,"room re-entry retains individual defeated enemies");
+        ln_check(!_g.edited_enemies.slots[0].finished && _g.edited_enemies.slots[0].down_ticks==0,"room re-entry resets defeated guards");
+        for(var _i=0;_i<2;_i++) {var _slot=_g.edited_enemies.slots[_i],_pos=ln_enemy_position(_game,_slot.actor);
+            ln_check(abs(_pos[0]-_slot.config.x)<=1 && abs(_pos[1]-_slot.config.y)<=1 && !ln_enemy_dead(_g,_slot.actor),"room re-entry restores spawn and health");}
         _e.enabled=false;ln_enemy_runtime(_g);ln_check(!ln_enemy_custom(_g),"Modified OFF leaves native engine in control");_e.enabled=true;
         var _route={config:{x:50,y:70,patrol:2,route:[[55,70]]},actor:ln_enemy_copy(_cat.types[0].actor),x:50,y:70,route_index:0,down_ticks:0,walking:false};
         ln_enemy_place(_game,_route.actor,50,70,3);repeat(5) ln_enemy_route_tick(_g,_route,[]);
         ln_check(_route.x>50,"custom patrol advances without an engaged enemy");
     }
     ln_check(!ln_enemy_route_clear([10,10],[20,10],[{points:[[15,0],[15,20]],rect:undefined}]),"patrol cannot cross solid room boundary");
+    ln_enemy_boundary_checks();
     show_debug_message("LN_ENEMY_EDITOR_PASS: three games / two guards / single engagement / patrols / persistence");
 }
 
@@ -2091,6 +2091,9 @@ function ln_enemy_native_preview_tick(_g,_actor) {
         _g.player.x=10000;_g.player.y=10000;_g.player.tick=(_actor.action_tick+1)&255;
         if(_g.game_number==1) {ln1_enemy_decide(_g);ln1_enemy_action(_g);}else {ln2_enemy_decide(_g);ln2_enemy_action(_g);}
         var _out=ln_enemy_copy(_g.enemy);_out.action_state=0;
+        if(is_struct(_group) && !ln_enemy_route_clear(ln_enemy_position(_g.game_number,_actor),ln_enemy_position(_g.game_number,_out),_group.shapes)) {
+            _out.x=_actor.x;_out.y=_actor.y;_out.fraction_x=0;_out.fraction_y=0;_out.depth_y=_actor.depth_y;
+        }
         _g.enemy=_enemy;_g.player=_player;_g.edited_enemies=_group;return _out;
     }
     var _old=_g.state;_g.state=ln_enemy_copy(_old);ln_enemy_apply(_g,_actor);
@@ -2109,4 +2112,19 @@ function ln_enemy_native_trace(_g,_actor) {
         if(point_distance(_last[0],_last[1],_point[0],_point[1])>=2 && abs(_point[0])<80 && abs(_point[1])<60) array_push(_trace,_point);
     }
     return _trace;
+}
+
+function ln_enemy_boundary_checks() {
+    var _g=new LN1Play(1),_cat=ln_enemy_catalog(1,1);
+    _g.enemy=ln_enemy_copy(_cat.types[0].actor);ln_enemy_place(1,_g.enemy,120,80,3);
+    _g.enemy.speed=0;_g.player.x=220;_g.player.y=140;
+    var _start=ln_enemy_copy(_g.enemy);ln1_enemy_move(_g,8);
+    var _end=ln_enemy_copy(_g.enemy),_dx=_end.x-_start.x;
+    ln_check(_end.x!=_start.x || _end.y!=_start.y,"native enemy movement test advances");
+    var _mid=_dx!=0?(_start.x+_end.x)/2:(_start.y+_end.y)/2-8;
+    var _points=_dx!=0?[[_mid,0],[_mid,144]]:[[0,_mid],[240,_mid]];
+    _g.enemy=ln_enemy_copy(_start);_g.edited_enemies={shapes:[{points:_points,rect:undefined}]};ln1_enemy_move(_g,8);
+    ln_check(_dx!=0?abs(_g.enemy.x-_start.x)<abs(_dx):abs(_g.enemy.y-_start.y)<abs(_end.y-_start.y),"edited LN1 chase stops at room boundary");
+    _g.edited_enemies=undefined;_g.enemy=ln_enemy_copy(_start);ln1_enemy_move(_g,8);
+    ln_check(_g.enemy.x==_end.x && _g.enemy.y==_end.y,"native unmodified enemy movement unchanged");
 }
