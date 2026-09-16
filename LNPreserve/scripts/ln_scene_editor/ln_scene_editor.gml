@@ -296,7 +296,7 @@ function ln_edit_step(_host) {
     var _test_key=(keyboard_check_pressed(ord("T")) || keyboard_check_pressed(vk_f5)) && !keyboard_check(vk_control) && !keyboard_check(vk_alt);
     var _test_return=!_e.open && !_host.workbench && !_host.scene_test.menu && _test_key;
     if(_test_return) _e.toggle_requested=true;
-    if(keyboard_check_pressed(vk_f6) || _e.toggle_requested || (_e.open && ln_edit_hit(1110,62,160,28))) {
+    if(keyboard_check_pressed(vk_f6) || _e.toggle_requested || (_e.open && !_e.map_open && ln_edit_hit(1110,62,160,28))) {
         _e.toggle_requested=false;
         ln_collision_finish_drag();ln_edit_finish_drag();_e.open=!_e.open;ln_paint_free();_e.depth_edit=false;_e.depth_hold_dir=0;ln_edit_music(_host,_e.open);
         if(_e.open) window_set_cursor(cr_default);
@@ -305,7 +305,7 @@ function ln_edit_step(_host) {
         if(!_e.open) {ln_edit_restore_game_music(_host.play);_host.input_state=new LNInput();_e.context=false;if(_e.dirty) ln_edit_save("modified-scenes.autosave.json");return true;}
     }
     if(!_e.open) return false;
-    if(ln_edit_hit(974,62,124,28) && !_e.map_open) {_e.map_open=true;_e.map_room=_e.room_id;}
+    if(ln_edit_hit(974,62,124,28) && !_e.map_open) {_e.map_open=true;_e.map_room=_e.room_id;return true;}
     if(ln_map_step(_host)) return true;
     _e.pulse_time_us=(_e.pulse_time_us+delta_time) mod 1600000;
     if(!mouse_check_button(mb_left)) {ln_collision_finish_drag();ln_edit_finish_drag();}

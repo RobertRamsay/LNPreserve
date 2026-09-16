@@ -113,11 +113,37 @@ function ln_map_nodes(_graph,_map) {
     return _nodes;
 }
 function ln_map_rect(_n,_count) {
-    var _cols=max(1,ceil(sqrt(_count*2.4))),_rows=ceil(_count/_cols),_cw=1200/_cols,_ch=300/_rows;
-    var _h=min(_ch-23,(_cw-16)*0.6),_w=_h/0.6;
-    return [24+(_n mod _cols)*_cw+(_cw-_w)/2,170+(_n div _cols)*_ch,_w,_h];
+    // Rotate the room grid into a wide diamond: top, left/right, bottom.
+    // Adjacent diagonals are staggered; two cells in one column remain clear.
+    var _cols=max(1,ceil(sqrt(_count))),_rows=ceil(_count/_cols);
+    var _span=max(0,_cols+_rows-2),_sx=1200/(_span+1),_sy=300/(_span+2);
+    var _h=max(8,min(_sx*.54,2*_sy-16)),_w=_h/0.6;
+    var _col=_n mod _cols,_row=_n div _cols;
+    return [624+(_col-_row-(_cols-_rows)*.5)*_sx-_w*.5,
+        170+(300-(_span*_sy+_h+14))*.5+(_col+_row)*_sy,_w,_h];
 }
 function ln_map_node_index(_nodes,_id) {for(var _i=0;_i<array_length(_nodes);_i++) if(_nodes[_i].id==_id) return _i;return -1;}
+// Visible lanes and their hit targets use the same clipped endpoints.
+function ln_map_lanes(_graph,_map,_nodes) {
+    var _lanes=[];
+    for(var _j=0;_j<array_length(_graph.edges);_j++) {
+        var _edge=_graph.edges[_j],_route=ln_map_route(_map,_edge.key),_chain=[_edge.source];
+        if(is_struct(_route)) for(var _k=0;_k<array_length(_route.rooms);_k++) array_push(_chain,_route.rooms[_edge.key==_route.edge?_k:array_length(_route.rooms)-1-_k]);
+        array_push(_chain,_edge.destination);
+        for(var _k=1;_k<array_length(_chain);_k++) {
+            var _a=ln_map_node_index(_nodes,_chain[_k-1]),_b=ln_map_node_index(_nodes,_chain[_k]);
+            if(_a<0 || _b<0 || _a==_b) continue;
+            var _ra=ln_map_rect(_a,array_length(_nodes)),_rb=ln_map_rect(_b,array_length(_nodes));
+            var _ax=_ra[0]+_ra[2]*.5,_ay=_ra[1]+_ra[3]*.5,_bx=_rb[0]+_rb[2]*.5,_by=_rb[1]+_rb[3]*.5;
+            var _dx=_bx-_ax,_dy=_by-_ay;
+            var _ta=min((_ra[2]*.5+3)/max(.001,abs(_dx)),(_ra[3]*.5+15)/max(.001,abs(_dy)));
+            var _tb=min((_rb[2]*.5+3)/max(.001,abs(_dx)),(_rb[3]*.5+15)/max(.001,abs(_dy)));
+            if(_ta+_tb>=1) continue;
+            array_push(_lanes,{edge:_j,x1:_ax+_dx*_ta,y1:_ay+_dy*_ta,x2:_bx-_dx*_tb,y2:_by-_dy*_tb});
+        }
+    }
+    return _lanes;
+}
 function ln_map_draw() {
     var _e=global.ln_editor,_graph=ln_map_graph(_e.game,_e.level),_map=ln_map_data(_e.game,_e.level),_nodes=ln_map_nodes(_graph,_map);
     ln_tool_clear(false);draw_set_font(font_jansina);draw_set_halign(fa_left);draw_set_valign(fa_top);draw_set_colour(c_white);
@@ -127,14 +153,23 @@ function ln_map_draw() {
     ln_edit_button(410,66,35,"<");draw_text(462,72,"Level "+string(_e.level));ln_edit_button(585,66,35,">");
     ln_edit_button(665,66,170,"Modified "+(_e.enabled?"ON":"OFF"),_e.enabled);
     ln_edit_button(850,66,130,"Save file");ln_edit_button(990,66,130,"Load file");
-    draw_text(24,120,"4:1 overview | Select a room or a connection below. Matching letters link distant rooms.");
+    draw_text(24,120,"4:1 diamond | Click lane: select | Double click room: edit | Double right-click new room: remove");
+    var _lanes=ln_map_lanes(_graph,_map,_nodes);
+    for(var _pass=0;_pass<2;_pass++) for(var _j=0;_j<array_length(_lanes);_j++) {
+        var _lane=_lanes[_j],_selected=_lane.edge==_e.map_edge;
+        if(_selected!=(_pass==1)) continue;
+        draw_set_colour(_selected?c_yellow:c_aqua);draw_set_alpha(_selected?1:.28);
+        draw_line_width(_lane.x1,_lane.y1,_lane.x2,_lane.y2,_selected?2:1);
+        draw_arrow(_lane.x1,_lane.y1,_lane.x2,_lane.y2,3);
+    }
+    draw_set_alpha(1);
     for(var _i=0;_i<array_length(_nodes);_i++) {
         var _n=_nodes[_i],_r=ln_map_rect(_i,array_length(_nodes));
         draw_set_colour(c_white);
         if(_n.sprite>=0) draw_sprite_stretched(_n.sprite,0,_r[0],_r[1],_r[2],_r[3]);
         else {var _room=ln_map_room(_map,_n.id);draw_set_colour(global.ln_paint_palette[_room.background]);draw_rectangle(_r[0],_r[1],_r[0]+_r[2],_r[1]+_r[3],false);}
         draw_set_colour(_e.map_room==_n.id?c_yellow:c_white);draw_rectangle(_r[0]-1,_r[1]-1,_r[0]+_r[2]+1,_r[1]+_r[3]+1,true);
-        draw_text(_r[0],_r[1]+_r[3]+2,_n.id>=1000?"New "+string(_n.id-999):"Room "+string(_n.id));
+        draw_text_transformed(_r[0],_r[1]+_r[3]+2,_n.id>=1000?"New "+string(_n.id-999):"Room "+string(_n.id),.6,.6,0);
     }
     // Both ends carry the same connection letter. Short adjacent links also
     // get an arrow in the gutter; long links avoid crossing room artwork.
@@ -198,7 +233,39 @@ function ln_map_step(_host) {
     if(mouse_wheel_down()) _e.map_scroll=min(max(0,array_length(_graph.edges)-6),_e.map_scroll+3);
     if(mouse_wheel_up()) _e.map_scroll=max(0,_e.map_scroll-3);
     for(var _i=0;_i<6;_i++) if(ln_edit_hit(24,564+_i*30,1100,28) && _e.map_scroll+_i<array_length(_graph.edges)) {_e.map_edge=_e.map_scroll+_i;_e.map_room=_graph.edges[_e.map_edge].source;}
-    for(var _i=0;_i<array_length(_nodes);_i++) {var _r=ln_map_rect(_i,array_length(_nodes));if(ln_edit_hit(_r[0],_r[1],_r[2],_r[3]+20)) _e.map_room=_nodes[_i].id;}
+    var _over_room=false;
+    for(var _i=0;_i<array_length(_nodes);_i++) {
+        var _r=ln_map_rect(_i,array_length(_nodes));
+        if(ln_edit_hit(_r[0],_r[1],_r[2],_r[3]+14)) {
+            _e.map_room=_nodes[_i].id;_over_room=true;
+            var _click_key=ln_map_key(_e.game,_e.level)+":"+string(_e.map_room);
+            if(variable_struct_exists(_e,"map_left_room") && _e.map_left_room==_click_key && current_time-_e.map_left_time<=400) {
+                _e.map_left_room="";
+                if(_e.map_room>=1000) _e.message="Inserted rooms are blank traversal spaces; room contents come next.";
+                else {_e.map_open=false;ln_edit_select(_e.game,_e.level,_e.map_room);}
+                return true;
+            }
+            _e.map_left_room=_click_key;_e.map_left_time=current_time;
+        }
+        if(mouse_check_button_pressed(mb_right) && point_in_rectangle(ln_tool_mouse_x(),ln_tool_mouse_y(),_r[0],_r[1],_r[0]+_r[2],_r[1]+_r[3]+14)) {
+            var _id=_nodes[_i].id,_right_key=ln_map_key(_e.game,_e.level)+":"+string(_id);
+            if(variable_struct_exists(_e,"map_right_room") && _e.map_right_room==_right_key && current_time-_e.map_right_time<=400) {
+                if(_id>=1000) ln_map_remove(_e.game,_e.level,_id);else _e.message="Original rooms are protected; only inserted rooms can be removed.";
+                _e.map_right_room=-1;
+            } else {_e.map_right_room=_right_key;_e.map_right_time=current_time;}
+            return true;
+        }
+    }
+    if(!_over_room && mouse_check_button_pressed(mb_left)) {
+        var _lanes=ln_map_lanes(_graph,_map,_nodes),_best=7,_chosen=-1;
+        for(var _i=0;_i<array_length(_lanes);_i++) {
+            var _l=_lanes[_i],_dx=_l.x2-_l.x1,_dy=_l.y2-_l.y1;
+            var _t=clamp(((ln_tool_mouse_x()-_l.x1)*_dx+(ln_tool_mouse_y()-_l.y1)*_dy)/max(.001,_dx*_dx+_dy*_dy),0,1);
+            var _dist=point_distance(ln_tool_mouse_x(),ln_tool_mouse_y(),_l.x1+_dx*_t,_l.y1+_dy*_t);
+            if(_dist<_best) {_best=_dist;_chosen=_l.edge;}
+        }
+        if(_chosen>=0) {_e.map_edge=_chosen;_e.map_scroll=min(_chosen,max(0,array_length(_graph.edges)-6));_e.message="Lane "+ln_map_letter(_chosen)+" selected. Use Insert blank on connection.";return true;}
+    }
     if(ln_edit_hit(850,490,110,28) || (keyboard_check(vk_control) && keyboard_check_pressed(ord("Z")))) ln_map_history(false);
     if(ln_edit_hit(972,490,110,28) || (keyboard_check(vk_control) && keyboard_check_pressed(ord("Y")))) ln_map_history(true);
     if(ln_edit_hit(380,490,230,28)) ln_map_insert(_e.game,_e.level,_e.map_edge);
