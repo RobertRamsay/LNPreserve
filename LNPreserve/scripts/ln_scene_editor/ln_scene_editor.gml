@@ -2,7 +2,7 @@
 function LNSceneEditor() constructor {
     maps={};map_undo=[];map_redo=[];map_open=false;map_room=-1;map_edge=0;map_scroll=0;
     nav_job=undefined;nav_last_nodes=0;nav_last_us=0;enemy_edit=false;enemy_index=0;enemy_drag=false;enemy_waypoint=-1;enemy_catalogs={};enemy_catalog_building=false;
-    test_music_restore=undefined;
+    test_music_restore=undefined;test_active=false;
     open=false;toggle_requested=false;enabled=false;scenes={};datasets={};bitmap_baselines={};scene=undefined;preview=undefined;
     game=1;level=1;room_id=1;part=-1;asset=0;scroll=0;asset_scroll=0;
     dirty=false;message="F6 closes the editor";undo=[];redo=[];revision=0;cache=undefined;context=false;
@@ -300,7 +300,7 @@ function ln_edit_step(_host) {
         _e.toggle_requested=false;
         ln_collision_finish_drag();ln_edit_finish_drag();_e.open=!_e.open;ln_paint_free();_e.depth_edit=false;_e.depth_hold_dir=0;ln_edit_music(_host,_e.open);
         if(_e.open) window_set_cursor(cr_default);
-        if(_e.open) ln_edit_follow_game(_host.play);
+        if(_e.open) {ln_edit_finish_test(_host.play);ln_edit_follow_game(_host.play);}
         if(_test_return) return true;
         if(!_e.open) {ln_edit_restore_game_music(_host.play);_host.input_state=new LNInput();_e.context=false;if(_e.dirty) ln_edit_save("modified-scenes.autosave.json");return true;}
     }
@@ -894,6 +894,19 @@ function ln_edit_history(_redo) {
     _e.message=_redo?"Redo applied":"Undo applied";return true;
 }
 
+// Test encounters are temporary; ordinary room travel retains defeated guards.
+function ln_edit_reset_test_enemies(_g) {
+    _g.edited_enemies=undefined;
+    _g.edited_enemy_rooms={};
+    ln_enemy_runtime(_g);
+}
+function ln_edit_finish_test(_g) {
+    var _e=global.ln_editor;
+    if(!_e.test_active) return;
+    _e.test_active=false;
+    ln_edit_reset_test_enemies(_g);
+}
+
 function ln_edit_test_room(_host) {
     var _e=global.ln_editor,_t=_host.scene_test,_level=-1,_scene=-1,_i,_j;
     ln_collision_finish_drag();ln_edit_finish_drag();
@@ -910,12 +923,13 @@ function ln_edit_test_room(_host) {
     ln_edit_music(_host,false);
     if(is_undefined(_e.test_music_restore)) _e.test_music_restore=ln_tool_music_enabled(_host.play);
     if(!ln_scene_test_open(_t,_host.play,_scene)) {ln_edit_music(_host,true);_e.message="Room entry failed; edits kept";return false;}
+    _e.test_active=true;ln_edit_reset_test_enemies(_host.play);
     _e.open=false;_e.context=false;_e.depth_edit=false;_host.workbench=false;_host.input_state=new LNInput();
     // Testing is silent without changing the user's normal gameplay preference.
     ln_tool_music_set(_host.play,false);
     ln_frontend_music(_host.play,false);
     if(global.ln_preferences_enabled) ln_edit_save("modified-scenes.autosave.json");
-    ln_scene_test_message(_t,"Testing edited room - F6 returns to the editor");return true;
+    ln_scene_test_message(_t,"Testing edited room - T/F5 returns to the editor");return true;
 }
 
 function ln_edit_test_room_checks(_host) {
@@ -1753,7 +1767,12 @@ function ln_enemy_catalog(_game,_level) {
             }
             _ordinary=_g.enemy.active>=128 && _g.enemy.active<132 && _g.enemy.display_frame<64 && !(_game==2 && _level==7);
             _special=!_ordinary && (_g.enemy.active>=128 || _g.enemy.action>=256 || (_game==1?_room.enemy_script!=0:_g.enemy.custom));
-            if(_ordinary) _actor=ln_enemy_capture(_g);
+            if(_ordinary) {
+                _actor=ln_enemy_capture(_g);
+                // The editor replaces the entrance animation with an idle pose.
+                // LN1 event 9 normally equips this weapon later in that sequence.
+                if(_game==1) _actor.weapon=_actor.active&3;
+            }
         } else {
             var _record=ln3_room_record(_g.data.rooms,_id);
             if(is_struct(_record) && array_length(_record.enemy)>=6) {
@@ -1962,13 +1981,14 @@ function ln_enemy_runtime(_g) {
             if(_current.down_ticks>=60) {_current.finished=true;_m.active=-1;}
         }
     }
-    var _nearest=-1,_distance=100000;
+    var _nearest=-1,_distance=100000,_best_score=infinity;
     for(var _j=0;_j<array_length(_m.slots);_j++) if(!_m.slots[_j].finished) {
         var _pos=ln_enemy_position(_g.game_number,_m.slots[_j].actor),_d=abs(_player[0]-_pos[0])+abs(_player[1]-_pos[1]);
-        if(_d<_distance) {_nearest=_j;_distance=_d;}
+        var _score=ln_enemy_engagement_score(_pos,_player,_m.shapes);
+        if(_score<_best_score) {_nearest=_j;_distance=_d;_best_score=_score;}
     }
     var _hold=false;
-    if(_m.active>=0) {var _pos=ln_enemy_position(_g.game_number,_m.slots[_m.active].actor);_hold=abs(_player[0]-_pos[0])+abs(_player[1]-_pos[1])<160 || _m.slots[_m.active].down_ticks>0 || (variable_struct_exists(_m.slots[_m.active].actor,"nav_return") && _m.slots[_m.active].actor.nav_return);}
+    if(_m.active>=0) {var _pos=ln_enemy_position(_g.game_number,_m.slots[_m.active].actor);_hold=(_m.engaged && abs(_player[0]-_pos[0])+abs(_player[1]-_pos[1])<160 && (ln_enemy_route_clear(_pos,_player,_m.shapes) || point_distance(_pos[0],_pos[1],_player[0],_player[1])<24)) || _m.slots[_m.active].down_ticks>0 || (variable_struct_exists(_m.slots[_m.active].actor,"nav_return") && _m.slots[_m.active].actor.nav_return);}
     var _chosen=_hold?_m.active:_nearest;
     if(_chosen!=_m.active) {
         if(_g.game_number==1) _g.projectiles[1]=new LN1Projectile();
@@ -1979,7 +1999,16 @@ function ln_enemy_runtime(_g) {
     }
     if(_m.active>=0) {var _ap=ln_enemy_position(_g.game_number,_m.slots[_m.active].actor);_distance=abs(_player[0]-_ap[0])+abs(_player[1]-_ap[1]);}
     _m.engaged=_m.active>=0 && (_hold && _m.engaged || _distance<112 || _m.slots[_m.active].down_ticks>0);
-    if(_m.engaged) for(var _n=0;_n<array_length(_m.slots);_n++) _m.slots[_n].walking=false;
+    for(var _n=0;_n<array_length(_m.slots);_n++) {
+        var _waiting=_m.slots[_n];
+        if(_m.engaged && _n!=_m.active && !_waiting.finished && !ln_enemy_dead(_g,_waiting.actor)) {
+            if(!variable_struct_exists(_waiting,"bystanding") || !_waiting.bystanding) {
+                var _facing=_g.game_number<3?_waiting.actor.facing:_waiting.config.facing;
+                _waiting.actor=ln_enemy_pose(_g,_waiting.actor,_facing,false);
+                _waiting.walking=false;_waiting.bystanding=true;
+            }
+        } else _waiting.bystanding=false;
+    }
     if(!_m.engaged) for(var _n=0;_n<array_length(_m.slots);_n++) if(!_m.slots[_n].finished) {
         if(_n!=_m.active && _m.slots[_n].config.patrol==0) _m.slots[_n].actor=ln_enemy_native_preview_tick(_g,_m.slots[_n].actor);
         else ln_enemy_route_tick(_g,_m.slots[_n],_m.shapes);
@@ -1988,6 +2017,12 @@ function ln_enemy_runtime(_g) {
         if(_g.game_number<3) {_g.enemy.active=0;_g.enemy.action=0;_g.enemy.display_frame=255;_g.enemy.separation_y=0;}
         else {_g.state.enabled&=143;_g.state.enemy_health=0;_g.state.enemy_dead=1;}
     } else if(!_m.engaged && _m.slots[_m.active].config.patrol!=0) ln_enemy_apply(_g,_m.slots[_m.active].actor);
+}
+// Cheap boundary visibility test, not a pathfinding search. A nearby guard
+// with a clear approach gets first refusal over a guard across a road edge.
+function ln_enemy_engagement_score(_pos,_player,_shapes) {
+    var _distance=abs(_player[0]-_pos[0])+abs(_player[1]-_pos[1]);
+    return _distance+(_distance<112 && ln_enemy_route_clear(_pos,_player,_shapes)?0:1024);
 }
 function ln_enemy_native_ai(_g) {
     if(!ln_enemy_custom(_g)) return true;
@@ -2099,12 +2134,22 @@ function ln_enemy_checks() {
         ln_check(ln_rewind_equal(_corpse,_g.edited_enemies.slots[0].actor),"room re-entry preserves corpse position and pose");
         for(var _i=1;_i<2;_i++) {var _slot=_g.edited_enemies.slots[_i],_pos=ln_enemy_position(_game,_slot.actor);
             ln_check(abs(_pos[0]-_slot.config.x)<=1 && abs(_pos[1]-_slot.config.y)<=1 && !ln_enemy_dead(_g,_slot.actor),"room re-entry restores spawn and health");}
+        _e.test_active=true;ln_edit_finish_test(_g);
+        ln_check(!_e.test_active && !_g.edited_enemies.slots[0].finished && !ln_enemy_dead(_g,_g.edited_enemies.slots[0].actor),"leaving editor test resets defeated custom guard");
+        for(var _reset_i=0;_reset_i<2;_reset_i++) {
+            var _reset_slot=_g.edited_enemies.slots[_reset_i],_reset_pos=ln_enemy_position(_game,_reset_slot.actor);
+            ln_check(abs(_reset_pos[0]-_reset_slot.config.x)<=1 && abs(_reset_pos[1]-_reset_slot.config.y)<=1,"test exit restores configured enemy positions");
+        }
+        if(_game==1) for(var _type_i=0;_type_i<array_length(_cat.types);_type_i++)
+            ln_check(_cat.types[_type_i].actor.weapon==(_cat.types[_type_i].actor.active&3),"edited LN1 guards retain native weapon type");
         _e.enabled=false;ln_enemy_runtime(_g);ln_check(!ln_enemy_custom(_g),"Modified OFF leaves native engine in control");_e.enabled=true;
         var _route={config:{x:50,y:70,facing:3,patrol:2,route:[[55,70]]},actor:ln_enemy_copy(_cat.types[0].actor),x:50,y:70,route_index:0,down_ticks:0,walking:false};
         ln_enemy_place(_game,_route.actor,50,70,3);repeat(5) ln_enemy_route_tick(_g,_route,[]);
         ln_check(_route.x>50,"custom patrol advances without an engaged enemy");
     }
     ln_check(!ln_enemy_route_clear([10,10],[20,10],[{points:[[15,0],[15,20]],rect:undefined}]),"patrol cannot cross solid room boundary");
+    var _wall=[{points:[[15,0],[15,30]],rect:undefined}];
+    ln_check(ln_enemy_engagement_score([25,20],[20,10],_wall)<ln_enemy_engagement_score([10,10],[20,10],_wall),"visible guard takes priority over nearer blocked guard");
     ln_enemy_boundary_checks();ln_enemy_return_checks();ln_enemy_combat_spacing_checks();
     var _job=ln_enemy_search_start([10,10],[30,10],[{points:[[20,0],[20,24]],rect:undefined}]),_slices=0;
     while(!_job.done) {ln_check(ln_enemy_search_step(_job,16,1000)<=16,"navigation has a fixed per-frame expansion cap");_slices++;ln_check(_slices<10000,"incremental search finishes");}
