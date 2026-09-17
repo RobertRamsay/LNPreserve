@@ -1904,10 +1904,17 @@ function ln_enemy_flush(_g) {
     if(_m.active>=0) _m.slots[_m.active].actor=ln_enemy_capture(_g);
 }
 function ln_enemy_room_leave(_g) {
-    // A fresh visit starts the edited encounter from its configured spawns.
-    // Save/rewind still captures the live encounter within the current visit.
-    if(variable_struct_exists(_g,"edited_enemy_rooms")) variable_struct_remove(_g,"edited_enemy_rooms");
-    if(ln_enemy_custom(_g)) _g.edited_enemies=undefined;
+    if(!ln_enemy_custom(_g)) return;
+    ln_enemy_flush(_g);
+    var _m=_g.edited_enemies,_dead={};
+    for(var _i=0;_i<array_length(_m.slots);_i++) {
+        var _slot=_m.slots[_i];
+        if(_slot.finished || ln_enemy_dead(_g,_slot.actor))
+            variable_struct_set(_dead,string(_i),ln_enemy_copy(_slot));
+    }
+    if(!variable_struct_exists(_g,"edited_enemy_rooms")) _g.edited_enemy_rooms={};
+    variable_struct_set(_g.edited_enemy_rooms,_m.key,{signature:_m.signature,dead:_dead});
+    _g.edited_enemies=undefined;
 }
 function ln_enemy_dead(_g,_a) {
     if(_g.game_number==1) return _a.wounds>=32;
@@ -1931,6 +1938,17 @@ function ln_enemy_runtime(_g) {
             _a=ln_enemy_pose(_g,_a,_cfg.facing,false);
             if(_g.game_number<3) {_a.action_tick=_g.player.tick;_a.decision_tick=_g.player.tick;_a.mode=1;}
             array_push(_m.slots,{config:ln_enemy_copy(_cfg),actor:_a,finished:false,down_ticks:0,route_index:0,x:_cfg.x,y:_cfg.y,walking:false});
+        }
+        // Living guards restart their patrol; defeated guards retain their pose and position.
+        if(variable_struct_exists(_g,"edited_enemy_rooms") && variable_struct_exists(_g.edited_enemy_rooms,_key)) {
+            var _visit=variable_struct_get(_g.edited_enemy_rooms,_key);
+            if(_visit.signature==_signature) for(var _i=0;_i<array_length(_m.slots);_i++) {
+                if(variable_struct_exists(_visit.dead,string(_i))) {
+                    _m.slots[_i]=ln_enemy_copy(variable_struct_get(_visit.dead,string(_i)));
+                    _m.slots[_i].walking=false;
+                    if(!_m.slots[_i].finished) _m.active=_i;
+                }
+            }
         }
         _g.edited_enemies=_m;
         if(_m.active>=0) ln_enemy_apply(_g,_m.slots[_m.active].actor);
@@ -2072,9 +2090,14 @@ function ln_enemy_checks() {
         if(_game==1) _g.enemy.wounds=32;else if(_game==2) _g.enemy.health=0;else _g.state.enemy_dead=1;
         repeat(60) ln_enemy_runtime(_g);
         ln_check(_g.edited_enemies.active==1 && _g.edited_enemies.slots[0].finished,"next guard engages after defeated guard cooldown");
-        ln_enemy_room_leave(_g);ln_enemy_runtime(_g);
-        ln_check(!_g.edited_enemies.slots[0].finished && _g.edited_enemies.slots[0].down_ticks==0,"room re-entry resets defeated guards");
-        for(var _i=0;_i<2;_i++) {var _slot=_g.edited_enemies.slots[_i],_pos=ln_enemy_position(_game,_slot.actor);
+        var _corpse=ln_enemy_copy(_g.edited_enemies.slots[0].actor);
+        ln_enemy_room_leave(_g);
+        var _return_save=ln_save_restore(json_parse(json_stringify(ln_save_capture(_g))));
+        ln_check(ln_rewind_equal(_g.edited_enemy_rooms,_return_save.edited_enemy_rooms),"defeated room history survives save restore");
+        ln_enemy_runtime(_g);
+        ln_check(_g.edited_enemies.slots[0].finished && ln_enemy_dead(_g,_g.edited_enemies.slots[0].actor),"room re-entry preserves defeated guards");
+        ln_check(ln_rewind_equal(_corpse,_g.edited_enemies.slots[0].actor),"room re-entry preserves corpse position and pose");
+        for(var _i=1;_i<2;_i++) {var _slot=_g.edited_enemies.slots[_i],_pos=ln_enemy_position(_game,_slot.actor);
             ln_check(abs(_pos[0]-_slot.config.x)<=1 && abs(_pos[1]-_slot.config.y)<=1 && !ln_enemy_dead(_g,_slot.actor),"room re-entry restores spawn and health");}
         _e.enabled=false;ln_enemy_runtime(_g);ln_check(!ln_enemy_custom(_g),"Modified OFF leaves native engine in control");_e.enabled=true;
         var _route={config:{x:50,y:70,facing:3,patrol:2,route:[[55,70]]},actor:ln_enemy_copy(_cat.types[0].actor),x:50,y:70,route_index:0,down_ticks:0,walking:false};

@@ -1,4 +1,5 @@
 function LN2Play(_level=1) constructor {
+    edited_enemy_rooms={};
     map_transit=undefined;map_bypass=false;
     loader=undefined;
     molotov={paper:0,lit:false,newspaper_taken:false};

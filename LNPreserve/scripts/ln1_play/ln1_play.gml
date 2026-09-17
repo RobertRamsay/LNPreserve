@@ -1,4 +1,5 @@
 function LN1Play(_level = 1) constructor {
+    edited_enemy_rooms={};
     map_transit=undefined;map_bypass=false;
     one_hit_kills=false;
     loader=undefined;

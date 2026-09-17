@@ -745,7 +745,15 @@ function ln_self_death(_g) {
     }
     return true;
 }
+function ln_escape_restore_ui(_c) {
+    if(ln_tool_ui_visible()) return false;
+    global.ln_tool.ui=true;
+    // Consume this gesture, including its hold and release.
+    _c.down=true;_c.held=0;_c.armed=false;_c.fired=true;_c.can_die=false;
+    return true;
+}
 function ln_escape_step(_host) {
+    if(keyboard_check_pressed(vk_escape) && ln_escape_restore_ui(_host.escape_control)) return true;
     var _event=ln_escape_gesture(_host.escape_control,keyboard_check(vk_escape),min(delta_time/1000000,.1),ln_escape_gameplay(_host));
     if(_event==2) {
         ln_window_preferences_flush(_host,true);ln_crt_preferences_flush(true);
@@ -780,6 +788,13 @@ function ln_escape_checks() {
         }
         ln_check((_game==3?_g.state.lives:_g.lives_left)==_lives-1,"native death deducts one life in LN"+string(_game));
     }
+    var _ui=global.ln_tool.ui;global.ln_tool.ui=false;
+    _c=new LNEscapeControl();
+    ln_check(ln_escape_restore_ui(_c) && global.ln_tool.ui,"Escape restores hidden UI");
+    repeat(20) ln_check(ln_escape_gesture(_c,true,.1,true)==0,"UI restore hold cannot kill");
+    ln_escape_gesture(_c,false,.01,true);
+    ln_check(ln_escape_gesture(_c,true,.05,true)==0,"UI restore does not arm reset");
+    global.ln_tool.ui=_ui;
     show_debug_message("LN_ESCAPE_CONTROLS_PASS");
 }
 

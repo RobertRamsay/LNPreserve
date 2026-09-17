@@ -8,6 +8,7 @@ function ln3_room_record(_rooms,_id) {
 }
 
 function LN3Play(_level=1) constructor {
+    edited_enemy_rooms={};
     map_transit=undefined;map_bypass=false;
     loader=undefined;pickup_assist=undefined;ordinary_death=false;
     one_hit_kills=false;
