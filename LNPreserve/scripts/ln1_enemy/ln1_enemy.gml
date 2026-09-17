@@ -101,7 +101,7 @@ function ln1_enemy_decide(_g) {
         case 5:
             var _ahead = _p.x;
             if (_p.heading < 128) _ahead += _p.heading < 4 ? -8 : 8;
-            if (_ahead < 0 || _ahead > 255) { ln1_enemy_attack_stance(_g); return; }
+            _ahead=clamp(_ahead,0,255);
             var _range = [18,22,28,24,0,0,20][_e.weapon];
             var _target = _ahead < _e.x ? ((_p.x + _range) & 255) : _p.x - _range;
             if (_target < 0) _target = (_p.x + _range) & 255;
@@ -138,6 +138,10 @@ function ln1_enemy_decide(_g) {
             } else _e.heading = _e.facing;
             return;
         case 6:
+            if(_e.active>=128 && _e.active<132 &&
+               (abs(_p.x-_e.x)>ln_enemy_ln1_standoff(_e)+2 || abs(_p.y-_e.y)>=8)) {
+                ln1_enemy_approach(_g);return;
+            }
             if ((_p.combat_state & 252) == 36) { ln1_enemy_react(_g); return; }
             var _attack = ln1_enemy_random(_g) & (_e.weapon == 0 ? 1 : 3);
             ln1_enemy_begin(_e, _g.data, 28 + _attack * 4); ln1_enemy_combat(_e, 20 + _attack * 4);
@@ -207,6 +211,7 @@ function ln1_enemy_move(_g, _ticks) {
 }
 
 function ln1_enemy_action(_g) {
+    if(ln_enemy_custom(_g) && _g.edited_enemies.active>=0 && ln_enemy_weapon_busy(_g.edited_enemies.slots[_g.edited_enemies.active])) return;
     var _e = _g.enemy, _ticks = (_g.player.tick - _e.action_tick) & 255;
     if (_ticks == 0) return;
     _e.action_tick = _g.player.tick;

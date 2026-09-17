@@ -1719,6 +1719,9 @@ function ln_enemy_capture(_g) {
     _out.draw={};
     var _drawkeys=["draw_frames","draw_x","draw_y","draw_colours","draw_mirror"];
     for(var _k=0;_k<array_length(_drawkeys);_k++) {var _v=variable_struct_get(_s,_drawkeys[_k]);variable_struct_set(_out.draw,_drawkeys[_k],is_array(_v)?[_v[4],_v[5],_v[6]]:[-1,-1,-1]);}
+    _out.weapon_part=ln_enemy_copy(_s.parts[7]);_out.weapon_enabled=_s.enabled&128;_out.weapon_mirror=_s.mirror&128;
+    _out.weapon_draw=[];
+    for(var _k=0;_k<array_length(_drawkeys);_k++) {var _v=variable_struct_get(_s,_drawkeys[_k]);array_push(_out.weapon_draw,is_array(_v)?_v[7]:-1);}
     _out.enabled=_s.enabled&112;_out.mirror=_s.mirror&112;
     _out.multicolour=_s.multicolour&112;_out.expand_x=_s.expand_x&112;_out.expand_y=_s.expand_y&112;
     return _out;
@@ -1726,12 +1729,18 @@ function ln_enemy_capture(_g) {
 function ln_enemy_apply(_g,_actor) {
     if(_g.game_number<3) {_g.enemy=ln_enemy_copy(_actor);return;}
     var _s=_g.state,_names=variable_struct_get_names(_actor);
+    _s.enemy_transition_draw=undefined;
     for(var _i=0;_i<array_length(_names);_i++) {
         var _key=_names[_i];
         if(string_pos("enemy_",_key)==1 || string_pos("patrol_",_key)==1) variable_struct_set(_s,_key,ln_enemy_copy(variable_struct_get(_actor,_key)));
     }
     for(var _j=0;_j<3;_j++) _s.parts[4+_j]=ln_enemy_copy(_actor.parts[_j]);
     if(variable_struct_exists(_actor,"draw")) {var _keys=variable_struct_get_names(_actor.draw);for(var _k=0;_k<array_length(_keys);_k++) {var _v=variable_struct_get(_s,_keys[_k]);if(!is_array(_v)) _v=array_create(8,-1);var _a=variable_struct_get(_actor.draw,_keys[_k]);for(var _j=0;_j<3;_j++) _v[4+_j]=_a[_j];variable_struct_set(_s,_keys[_k],_v);}}
+    if(variable_struct_exists(_actor,"weapon_part")) {
+        _s.parts[7]=ln_enemy_copy(_actor.weapon_part);_s.enabled=(_s.enabled&127)|_actor.weapon_enabled;_s.mirror=(_s.mirror&127)|_actor.weapon_mirror;
+        var _weapon_keys=["draw_frames","draw_x","draw_y","draw_colours","draw_mirror"];
+        for(var _k=0;_k<5;_k++) {var _v=variable_struct_get(_s,_weapon_keys[_k]);if(!is_array(_v)) _v=array_create(8,-1);_v[7]=_actor.weapon_draw[_k];variable_struct_set(_s,_weapon_keys[_k],_v);}
+    }
     _s.enabled=(_s.enabled&143)|_actor.enabled;_s.mirror=(_s.mirror&143)|_actor.mirror;
     _s.multicolour=(_s.multicolour&143)|_actor.multicolour;_s.expand_x=(_s.expand_x&143)|_actor.expand_x;_s.expand_y=(_s.expand_y&143)|_actor.expand_y;
 }
@@ -1780,7 +1789,7 @@ function ln_enemy_catalog(_game,_level) {
                 ln3_enemy_enter(_g.state,_g.actions,_g.data,_record);
                 _special=(_g.state.parts[4].animation==138 || _id>=13 || _level==5);
                 _ordinary=!_special;
-                if(_ordinary) {ln3_animation_update(_g.state,_g.animation);_actor=ln_enemy_capture(_g);}
+                if(_ordinary) {ln3_animation_update(_g.state,_g.animation);_actor=ln_enemy_capture(_g);_actor.enemy_pending_weapon=_g.enemies.room_weapons[_id];}
             }
         }
         var _entry={locked:_special,type:-1,defaults:[]};
@@ -1911,7 +1920,7 @@ function ln_enemy_draw_actor(_g,_actor) {
     if(_g.game_number==2) {var _kind=_g.projectiles[1].kind;_g.projectiles[1].kind=0;ln2_play_actor(_g,_actor,true);_g.projectiles[1].kind=_kind;return;}
     var _saved=ln_enemy_capture(_g),_display=_g.display,_masks=_g.draw_masks,_version=_g.render_version,_spill=_g.state.mask_spill,_colours=_g.special_colours;
     ln_enemy_apply(_g,_actor);var _d=ln_enemy_copy(_g.state);ln3_play_prepare_draw(_g,_d);
-    for(var _i=0;_i<8;_i++) {var _part=_g.animation.order[_i];if(_part>=4 && _part<=6) ln3_play_actor_part(_g,_d,_part);}
+    for(var _i=0;_i<8;_i++) {var _part=_g.animation.order[_i];if(_part>=4 && (_part<=6 || (_part==7 && _d.parts[7].animation!=114))) ln3_play_actor_part(_g,_d,_part);}
     ln_enemy_apply(_g,_saved);_g.display=_display;_g.draw_masks=_masks;_g.render_version=_version;_g.state.mask_spill=_spill;_g.special_colours=_colours;
 }
 
@@ -1956,7 +1965,7 @@ function ln_enemy_runtime(_g) {
             var _a=ln_enemy_copy(_cat.types[_cfg.type].actor);ln_enemy_place(_g.game_number,_a,_cfg.x,_cfg.y,_cfg.facing);
             _a=ln_enemy_pose(_g,_a,_cfg.facing,false);
             if(_g.game_number<3) {_a.action_tick=_g.player.tick;_a.decision_tick=_g.player.tick;_a.mode=1;}
-            array_push(_m.slots,{config:ln_enemy_copy(_cfg),actor:_a,finished:false,down_ticks:0,route_index:0,x:_cfg.x,y:_cfg.y,walking:false});
+            array_push(_m.slots,{config:ln_enemy_copy(_cfg),actor:_a,ready_weapon:(_g.game_number<3?_a.weapon:max(_a.enemy_weapon,(_a.enemy_pending_weapon+1)&255)),weapon_target:-1,weapon_frames:[],weapon_frame:0,weapon_wait:0,finished:false,down_ticks:0,route_index:0,x:_cfg.x,y:_cfg.y,walking:false});
         }
         // Living guards restart their patrol; defeated guards retain their pose and position.
         if(variable_struct_exists(_g,"edited_enemy_rooms") && variable_struct_exists(_g.edited_enemy_rooms,_key)) {
@@ -1977,6 +1986,8 @@ function ln_enemy_runtime(_g) {
     if(_m.active>=0) {
         var _current=_m.slots[_m.active];
         if(ln_enemy_dead(_g,_current.actor)) {
+            _current.weapon_frames=[];
+            if(_g.game_number==3) {_current.actor.enemy_transition_draw=undefined;_g.state.enemy_transition_draw=undefined;}
             _current.down_ticks++;
             if(_current.down_ticks>=60) {_current.finished=true;_m.active=-1;}
         }
@@ -1984,7 +1995,7 @@ function ln_enemy_runtime(_g) {
     var _nearest=-1,_distance=100000,_best_score=infinity;
     for(var _j=0;_j<array_length(_m.slots);_j++) if(!_m.slots[_j].finished) {
         var _pos=ln_enemy_position(_g.game_number,_m.slots[_j].actor),_d=abs(_player[0]-_pos[0])+abs(_player[1]-_pos[1]);
-        var _score=ln_enemy_engagement_score(_pos,_player,_m.shapes);
+        var _score=ln_enemy_engagement_score(_pos,_player,_m.shapes,ln_enemy_slot_facing(_g,_m.slots[_j]));
         if(_score<_best_score) {_nearest=_j;_distance=_d;_best_score=_score;}
     }
     var _hold=false;
@@ -1995,38 +2006,123 @@ function ln_enemy_runtime(_g) {
         else if(_g.game_number==2) {_g.projectiles[1].kind=0;_g.projectiles[1].enabled=0;}
         else {_g.state.enabled&=127;_g.state.parts[7].animation=0;_g.state.parts[7].move_mode=0;}
         _m.active=_chosen;
-        if(_chosen>=0) {ln_enemy_apply(_g,_m.slots[_chosen].actor);if(_g.game_number<3) {_g.enemy.action_tick=_g.player.tick;_g.enemy.decision_tick=_g.player.tick;}}
+        if(_chosen>=0) {ln_enemy_resume_clock(_g,_m.slots[_chosen]);ln_enemy_apply(_g,_m.slots[_chosen].actor);}
     }
     if(_m.active>=0) {var _ap=ln_enemy_position(_g.game_number,_m.slots[_m.active].actor);_distance=abs(_player[0]-_ap[0])+abs(_player[1]-_ap[1]);}
-    _m.engaged=_m.active>=0 && (_hold && _m.engaged || _distance<112 || _m.slots[_m.active].down_ticks>0);
+    var _was_engaged=_m.engaged;
+    _m.engaged=_m.active>=0 && (_hold && _m.engaged || (!_hold && _best_score<1024) || _m.slots[_m.active].down_ticks>0);
+    if(_m.engaged && !_was_engaged) ln_enemy_resume_clock(_g,_m.slots[_m.active]);
     for(var _n=0;_n<array_length(_m.slots);_n++) {
         var _waiting=_m.slots[_n];
+        if(_waiting.finished || ln_enemy_dead(_g,_waiting.actor)) continue;
+        var _returning=variable_struct_exists(_waiting.actor,"nav_return") && _waiting.actor.nav_return;
+        var _busy=ln_enemy_weapon_tick(_g,_waiting,_m.engaged && !_returning);
+        if(_n==_m.active) ln_enemy_apply(_g,_waiting.actor);
+        if(_busy) continue;
         if(_m.engaged && _n!=_m.active && !_waiting.finished && !ln_enemy_dead(_g,_waiting.actor)) {
-            if(!variable_struct_exists(_waiting,"bystanding") || !_waiting.bystanding) {
-                var _facing=_g.game_number<3?_waiting.actor.facing:_waiting.config.facing;
-                _waiting.actor=ln_enemy_pose(_g,_waiting.actor,_facing,false);
+            var _wp=ln_enemy_position(_g.game_number,_waiting.actor);
+            var _facing=ln_enemy_stable_facing(ln_enemy_slot_facing(_g,_waiting),_player[0]-_wp[0],_player[1]-_wp[1]);
+            if(!variable_struct_exists(_waiting,"bystanding") || !_waiting.bystanding || _waiting.wait_facing!=_facing) {
+                ln_enemy_place(_g.game_number,_waiting.actor,_wp[0],_wp[1],_facing);
+                _waiting.actor=ln_enemy_pose(_g,_waiting.actor,_facing,false);_waiting.wait_facing=_facing;
                 _waiting.walking=false;_waiting.bystanding=true;
             }
         } else _waiting.bystanding=false;
     }
-    if(!_m.engaged) for(var _n=0;_n<array_length(_m.slots);_n++) if(!_m.slots[_n].finished) {
-        if(_n!=_m.active && _m.slots[_n].config.patrol==0) _m.slots[_n].actor=ln_enemy_native_preview_tick(_g,_m.slots[_n].actor);
+    if(!_m.engaged) for(var _n=0;_n<array_length(_m.slots);_n++) if(!_m.slots[_n].finished && !ln_enemy_weapon_busy(_m.slots[_n])) {
+        if(_m.slots[_n].config.patrol==0) _m.slots[_n].actor=ln_enemy_native_preview_tick(_g,_m.slots[_n].actor);
         else ln_enemy_route_tick(_g,_m.slots[_n],_m.shapes);
     }
     if(_m.active<0) {
         if(_g.game_number<3) {_g.enemy.active=0;_g.enemy.action=0;_g.enemy.display_frame=255;_g.enemy.separation_y=0;}
         else {_g.state.enabled&=143;_g.state.enemy_health=0;_g.state.enemy_dead=1;}
-    } else if(!_m.engaged && _m.slots[_m.active].config.patrol!=0) ln_enemy_apply(_g,_m.slots[_m.active].actor);
+    } else if(!_m.engaged) ln_enemy_apply(_g,_m.slots[_m.active].actor);
 }
 // Cheap boundary visibility test, not a pathfinding search. A nearby guard
 // with a clear approach gets first refusal over a guard across a road edge.
-function ln_enemy_engagement_score(_pos,_player,_shapes) {
+// Rebase the stored actor: runtime can apply this snapshot more than once
+// during handover, so changing only the live enemy loses the fresh clock.
+function ln_enemy_resume_clock(_g,_slot) {
+    if(_g.game_number>=3) return;
+    _slot.actor.action_tick=_g.player.tick;
+    _slot.actor.decision_tick=_g.player.tick;
+    _slot.actor.unconsumed=0;
+}
+function ln_enemy_weapon_busy(_slot) {
+    return variable_struct_exists(_slot,"weapon_frames") && array_length(_slot.weapon_frames)>0;
+}
+function ln_enemy_weapon_tick(_g,_slot,_draw) {
+    var _a=_slot.actor;
+    if(!variable_struct_exists(_slot,"ready_weapon")) _slot.ready_weapon=_g.game_number<3?_a.weapon:_a.enemy_weapon;
+    var _target=_draw?_slot.ready_weapon:0;
+    if(!ln_enemy_weapon_busy(_slot)) {
+        var _current=_g.game_number<3?_a.weapon:_a.enemy_weapon;
+        if(_current==_target) return false;
+        _slot.weapon_target=_target;_slot.weapon_frames=[];_slot.weapon_frame=0;_slot.weapon_wait=0;
+        if(_g.game_number<3) {
+            var _side=(((_a.facing+2)&4)>>1),_address=_g.data.action_entries[(_g.game_number==1?4:2)+(_side>>1)],_duration=4,_seen=[];
+            while(_address>=256 && !array_contains(_seen,_address) && array_length(_seen)<64) {
+                if(!variable_struct_exists(_g.data.actions,string(_address))) break;
+                array_push(_seen,_address);var _r=variable_struct_get(_g.data.actions,string(_address));
+                if(_r.duration>=0) _duration=_r.duration;
+                if(_r.state==1) _current=_target;
+                var _pose=ln_enemy_copy(_a);_pose.action=0;_pose.flags=0;_pose.action_state=0;_pose.speed=0;
+                _pose.display_frame=_r.frame;_pose.frame=_r.frame;_pose.weapon=_current;
+                _pose.mirror=((_r.flags&16)?(_a.facing&2):(_r.flags&64))!=0;
+                array_push(_slot.weapon_frames,{actor:_pose,ticks:max(1,_duration)});_address=_r.next;
+            }
+        } else {
+            var _old=_g.state;_g.state=ln_enemy_copy(_old);ln_enemy_apply(_g,_a);
+            var _s=_g.state;_s.enemy_transition_draw=undefined;ln3_action_set(_s,_g.actions,57,true);
+            var _count=array_length(_g.animation.sequences[_s.parts[5].animation].frames);
+            for(var _f=0;_f<_count;_f++) {
+                _s.enemy_weapon=_target>0?_target:(_f<_g.animation.weapon_change_cursors[0]?_current:0);
+                for(var _k=4;_k<7;_k++) _s.parts[_k].move_mode=0;
+                ln3_animation_update(_s,_g.animation);
+                if(_target==0 && _s.enemy_weapon>0) {
+                    // Native change hides a drawing weapon before the midpoint;
+                    // stowing needs the reverse visibility until that midpoint.
+                    _s.enemy_action=39;ln3_animation_weapon(_s,_g.animation,true);_s.enemy_action=57;
+                    var _wp=_s.parts[7],_wf=_g.animation.sequences[_wp.animation].frames;
+                    _s.draw_frames[7]=_wf[min(_wp.cursor,array_length(_wf)-1)];
+                    _s.draw_x[7]=_wp.x;_s.draw_y[7]=_wp.y;_s.draw_colours[7]=_wp.colour;_s.draw_mirror[7]=(_s.mirror&128)!=0;
+                }
+                var _pose=ln_enemy_capture(_g);_pose.enemy_transition_draw=ln_enemy_copy(_pose.draw);
+                array_push(_slot.weapon_frames,{actor:_pose,ticks:1});
+            }
+            _g.state=_old;
+        }
+        _slot.walking=false;_slot.bystanding=false;
+    }
+    if(_slot.weapon_wait>0) {_slot.weapon_wait--;return true;}
+    if(_slot.weapon_frame<array_length(_slot.weapon_frames)) {
+        var _frame=_slot.weapon_frames[_slot.weapon_frame++];_slot.actor=ln_enemy_copy(_frame.actor);_slot.weapon_wait=_frame.ticks-1;
+        return true;
+    }
+    _a=_slot.actor;
+    if(_g.game_number<3) {_a.weapon=_slot.weapon_target;_a.mode=1;}
+    else {_a.enemy_weapon=_slot.weapon_target;_a.enemy_transition_draw=undefined;}
+    _slot.weapon_frames=[];
+    _slot.actor=ln_enemy_pose(_g,_a,ln_enemy_slot_facing(_g,_slot),false);
+    ln_enemy_resume_clock(_g,_slot);return true;
+}
+function ln_enemy_slot_facing(_g,_slot) {
+    if(_g.game_number<3) return _slot.actor.facing;
+    return variable_struct_exists(_slot,"walk_facing")?_slot.walk_facing:_slot.config.facing;
+}
+function ln_enemy_engagement_score(_pos,_player,_shapes,_facing=undefined) {
     var _distance=abs(_player[0]-_pos[0])+abs(_player[1]-_pos[1]);
-    return _distance+(_distance<112 && ln_enemy_route_clear(_pos,_player,_shapes)?0:1024);
+    var _ahead=true;
+    if(!is_undefined(_facing) && _distance>16) {
+        // Isometric view: compensate for the shorter vertical screen axis.
+        var _dx=_player[0]-_pos[0],_dy=(_player[1]-_pos[1])*2;
+        _ahead=_dx*(_facing&4?-1:1)+_dy*((_facing==1 || _facing==7)?-1:1)>0;
+    }
+    return _distance+(_distance<112 && _ahead && ln_enemy_route_clear(_pos,_player,_shapes)?0:1024);
 }
 function ln_enemy_native_ai(_g) {
     if(!ln_enemy_custom(_g)) return true;
-    var _m=_g.edited_enemies;return _m.active>=0 && (_m.engaged || _m.slots[_m.active].config.patrol==0);
+    var _m=_g.edited_enemies;return _m.active>=0 && _m.engaged && !ln_enemy_weapon_busy(_m.slots[_m.active]);
 }
 function ln_enemy_segment_cross(_a,_b,_c,_d) {
     var _s1=(_b[0]-_a[0])*(_c[1]-_a[1])-(_b[1]-_a[1])*(_c[0]-_a[0]);
@@ -2089,7 +2185,7 @@ function ln_enemy_draw_group(_g) {
         else if(_g.game_number==2) ln2_play_actor(_g,_g.player,false);
         else for(var _k=0;_k<8;_k++) {var _part=_g.animation.order[_k];if(_part<4) ln3_play_actor_part(_g,_g.display,_part);}
     }
-    if(_g.game_number==3) ln3_play_actor_part(_g,_g.display,7);
+    if(_g.game_number==3 && _g.state.parts[7].animation==114) ln3_play_actor_part(_g,_g.display,7);
     return true;
 }
 
@@ -2114,9 +2210,9 @@ function ln_enemy_checks() {
         if(_game<3) {_g.player.x=100;_g.player.y=100;} else {_g.state.player_x=124;_g.state.player_y=114;}
         ln_enemy_runtime(_g);
         ln_check(ln_enemy_custom(_g) && array_length(_g.edited_enemies.slots)==2 && _g.edited_enemies.active==0 && _g.edited_enemies.engaged,"only closest guard receives combat slot");
-        var _waiting=json_stringify(_g.edited_enemies.slots[1].actor);
+        var _waiting=ln_enemy_position(_game,_g.edited_enemies.slots[1].actor);
         repeat(12) {if(_game==1) ln1_play_tick(_g,0);else if(_game==2) ln2_play_tick(_g,0);else ln3_play_tick(_g,0);}
-        ln_check(json_stringify(_g.edited_enemies.slots[1].actor)==_waiting,"other guard stays idle during combat");
+        ln_check(ln_rewind_equal(ln_enemy_position(_game,_g.edited_enemies.slots[1].actor),_waiting),"other guard stays planted while turning or drawing during combat");
         ln_enemy_flush(_g);var _saved=ln_enemy_copy(_g.edited_enemies);
         var _restored=ln_save_restore(json_parse(json_stringify(ln_save_capture(_g))));
         ln_check(ln_rewind_equal(_saved,_restored.edited_enemies),"multi-enemy state survives actual save restore");
@@ -2142,6 +2238,19 @@ function ln_enemy_checks() {
         }
         if(_game==1) for(var _type_i=0;_type_i<array_length(_cat.types);_type_i++)
             ln_check(_cat.types[_type_i].actor.weapon==(_cat.types[_type_i].actor.active&3),"edited LN1 guards retain native weapon type");
+        var _weapon_slot=ln_enemy_copy(_g.edited_enemies.slots[1]);_weapon_slot.ready_weapon=1;_weapon_slot.weapon_frames=[];
+        if(_game<3) _weapon_slot.actor.weapon=1;else _weapon_slot.actor.enemy_weapon=1;
+        var _anchor=ln_enemy_position(_game,_weapon_slot.actor);
+        for(var _draw=0;_draw<=1;_draw++) {
+            var _steps=0;
+            while(ln_enemy_weapon_tick(_g,_weapon_slot,_draw==1) && _steps++<300) {
+                var _fixed=ln_enemy_position(_game,_weapon_slot.actor);
+                ln_check(_fixed[0]==_anchor[0] && _fixed[1]==_anchor[1],"weapon change never moves enemy feet");
+            }
+            ln_check(_steps>1 && _steps<300,"native weapon transition finishes");
+            if(_game<3) ln_check(_weapon_slot.actor.action_tick==_g.player.tick,"weapon completion rebases stored movement clock");
+            ln_check((_game<3?_weapon_slot.actor.weapon:_weapon_slot.actor.enemy_weapon)==_draw,"stow/draw completes with requested weapon");
+        }
         _e.enabled=false;ln_enemy_runtime(_g);ln_check(!ln_enemy_custom(_g),"Modified OFF leaves native engine in control");_e.enabled=true;
         var _route={config:{x:50,y:70,facing:3,patrol:2,route:[[55,70]]},actor:ln_enemy_copy(_cat.types[0].actor),x:50,y:70,route_index:0,down_ticks:0,walking:false};
         ln_enemy_place(_game,_route.actor,50,70,3);repeat(5) ln_enemy_route_tick(_g,_route,[]);
@@ -2150,7 +2259,10 @@ function ln_enemy_checks() {
     ln_check(!ln_enemy_route_clear([10,10],[20,10],[{points:[[15,0],[15,20]],rect:undefined}]),"patrol cannot cross solid room boundary");
     var _wall=[{points:[[15,0],[15,30]],rect:undefined}];
     ln_check(ln_enemy_engagement_score([25,20],[20,10],_wall)<ln_enemy_engagement_score([10,10],[20,10],_wall),"visible guard takes priority over nearer blocked guard");
-    ln_enemy_boundary_checks();ln_enemy_return_checks();ln_enemy_combat_spacing_checks();
+    ln_check(ln_enemy_engagement_score([50,50],[90,70],[],3)<1024,"guard sees ninja ahead");
+    ln_check(ln_enemy_engagement_score([50,50],[90,70],[],7)>=1024,"guard walking away cannot spot ninja behind");
+    ln_check(ln_enemy_engagement_score([50,50],[55,50],[],7)<1024,"very close ninja is noticed from behind");
+    ln_enemy_boundary_checks();ln_enemy_return_checks();ln_enemy_combat_spacing_checks();ln_enemy_screen_edge_checks();ln_enemy_handover_checks();
     var _job=ln_enemy_search_start([10,10],[30,10],[{points:[[20,0],[20,24]],rect:undefined}]),_slices=0;
     while(!_job.done) {ln_check(ln_enemy_search_step(_job,16,1000)<=16,"navigation has a fixed per-frame expansion cap");_slices++;ln_check(_slices<10000,"incremental search finishes");}
     ln_check(_slices>1 && array_length(_job.path)>0,"detour search is spread across frames");
@@ -2195,6 +2307,13 @@ function ln_enemy_native_preview_tick(_g,_actor) {
         var _enemy=_g.enemy,_player=_g.player,_group=ln_enemy_custom(_g)?_g.edited_enemies:undefined;
         _g.edited_enemies=undefined;_g.enemy=ln_enemy_copy(_actor);_g.player=ln_save_copy(_player);
         _g.player.x=10000;_g.player.y=10000;_g.player.tick=(_actor.action_tick+1)&255;
+        // A disengaged patrol must not continue a chase/attack against the
+        // deliberately absent preview player (whose coordinates are off-screen).
+        if(_g.enemy.mode>=5 && _g.enemy.mode<=9 && !ln_enemy_dead(_g,_g.enemy)) {
+            _g.enemy.mode=2;_g.enemy.patrol_x=_g.enemy.x;_g.enemy.speed=0;
+            if(_g.game_number==1) {ln1_enemy_begin(_g.enemy,_g.data,24);ln1_enemy_combat(_g.enemy,8);}
+            else {ln2_enemy_select(_g.enemy,_g.data,24);ln2_enemy_combat(_g.enemy,8);}
+        }
         if(_g.game_number==1) {ln1_enemy_decide(_g);ln1_enemy_action(_g);}else {ln2_enemy_decide(_g);ln2_enemy_action(_g);}
         var _out=ln_enemy_copy(_g.enemy);_out.action_state=0;
         if(is_struct(_group) && !ln_enemy_route_clear(ln_enemy_position(_g.game_number,_actor),ln_enemy_position(_g.game_number,_out),_group.shapes)) {
@@ -2408,4 +2527,48 @@ function ln_enemy_combat_spacing_checks() {
     ln_check(_g.enemy.mode==6,"aligned guard immediately leaves chase for attack stance");
     _g.enemy.weapon=2;_g.enemy.mode=5;_g.enemy.x=82;ln_enemy_ln1_chase(_g);
     ln_check(_g.enemy.mode==6,"armed guard attacks at its weapon spacing");
+}
+
+function ln_enemy_screen_edge_checks() {
+    for(var _game=1;_game<=2;_game++) {
+        var _g=_game==1?new LN1Play(1):new LN2Play(1),_cat=ln_enemy_catalog(_game,1);
+        for(var _side=0;_side<2;_side++) for(var _mode=5;_mode<=6;_mode++) {
+            _g.enemy=ln_enemy_copy(_cat.types[0].actor);
+            var _e=_g.enemy;_e.active=128;_e.weapon=0;_e.x=120;_e.y=88;_e.origin_x=120;_e.mode=_mode;
+            _g.player.x=_side==0?2:253;_g.player.y=88;_g.player.heading=_side==0?1:5;
+            _g.player.tick=(_e.decision_tick+4)&255;
+            if(_game==1) ln1_enemy_decide(_g);else ln2_enemy_decide(_g);
+            ln_check(_e.mode!=6 && _e.mode!=7,"distant screen-edge player cannot trigger melee in LN"+string(_game));
+            _e.mode=6;var _idle=ln_enemy_native_preview_tick(_g,_e);
+            ln_check(_idle.mode==2,"disengaged patrol clears stale attack state");
+        }
+    }
+}
+
+function ln_enemy_handover_checks() {
+    var _editor=global.ln_editor;
+    for(var _game=1;_game<=2;_game++) {
+        ln_edit_select(_game,1,ln_edit_rooms(_game,1)[0]);
+        var _cat=ln_enemy_catalog(_game,1),_g=_editor.preview;
+        _editor.scene.enemies=[{type:0,x:100,y:85,facing:3,patrol:1,route:[]}];
+        variable_struct_set(_editor.scenes,ln_edit_key(_game,1,_editor.room_id),ln_enemy_copy(_editor.scene));
+        _editor.enabled=true;_g.player.x=155;_g.player.y=93;_g.player.tick=240;
+        ln_enemy_runtime(_g);
+        var _m=_g.edited_enemies,_slot=_m.slots[0];_m.shapes=[];
+        _slot.actor.weapon=0;_slot.ready_weapon=0;_slot.weapon_frames=[];
+        _slot.actor=ln_enemy_pose(_g,_slot.actor,3,true);_slot.actor.mode=5;
+        for(var _same=0;_same<2;_same++) {
+            _slot.actor.action_tick=(_g.player.tick-120)&255;
+            _slot.actor.decision_tick=(_g.player.tick-120)&255;
+            _m.active=_same==0?-1:0;_m.engaged=false;
+            if(_same==1) ln_enemy_apply(_g,_slot.actor);
+            var _before=ln_enemy_position(_game,_slot.actor);
+            ln_enemy_runtime(_g);
+            ln_check(_g.enemy.action_tick==_g.player.tick && _slot.actor.action_tick==_g.player.tick,"handover retains fresh clock after actor reapplication LN"+string(_game)+" same="+string(_same)+" engaged="+string(_m.engaged)+" tick="+string(_g.player.tick)+" actor="+string(_g.enemy.action_tick)+" stored="+string(_slot.actor.action_tick));
+            _g.player.tick=(_g.player.tick+1)&255;
+            if(_game==1) ln1_enemy_action(_g);else ln2_enemy_action(_g);
+            var _after=ln_enemy_position(_game,_g.enemy);
+            ln_check(point_distance(_before[0],_before[1],_after[0],_after[1])<4,"long-wait guard resumes with one movement tick, not catch-up burst");
+        }
+    }
 }

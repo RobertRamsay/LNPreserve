@@ -82,6 +82,11 @@ function ln3_animation_update(_s,_data) {
     _s.draw_colours=array_create(8,-1);_s.draw_mirror=array_create(8,-1);
     for (var _order=0;_order<8;_order++) {
         var _i=_data.order[_order],_mask=_data.masks[_i],_p=_s.parts[_i];
+        if(_i>=4 && _i<=6 && variable_struct_exists(_s,"enemy_transition_draw") && is_struct(_s.enemy_transition_draw)) {
+            var _d=_s.enemy_transition_draw,_j=_i-4;
+            _s.draw_frames[_i]=_d.draw_frames[_j];_s.draw_x[_i]=_d.draw_x[_j];_s.draw_y[_i]=_d.draw_y[_j];
+            _s.draw_colours[_i]=_d.draw_colours[_j];_s.draw_mirror[_i]=_d.draw_mirror[_j];continue;
+        }
         _s.drawn_mask&=255^_mask;
         if (!(_s.enabled&_mask)) continue;
         var _seq=_data.sequences[_p.animation],_length=array_length(_seq.frames);

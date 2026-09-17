@@ -147,9 +147,10 @@ function ln2_enemy_decide(_g) {
         case 5:
             var _ahead=_p.x;
             if (_p.heading<128) _ahead+=_p.heading<4?-8:8;
-            if (_ahead<0 || _ahead>255) { ln2_enemy_stance(_g);return; }
+            _ahead=clamp(_ahead,0,255);
             var _range=_g.data.enemy_range[_e.weapon],_target=_ahead<_e.x?_p.x+_range:_p.x-_range;
-            if (_target<0 || _target>255 || min(255,abs(_target-_e.x)+abs(_p.y-_e.y))<6) {
+            _target=clamp(_target,0,255);
+            if (min(255,abs(_target-_e.x)+abs(_p.y-_e.y))<6) {
                 ln2_enemy_stance(_g);return;
             }
             if (_e.x<4) { _e.x=4;ln2_enemy_stance(_g);return; }
@@ -174,7 +175,9 @@ function ln2_enemy_decide(_g) {
             if ((_dx>>2)<_dy || _dy<4) _e.heading=_g.data.enemy_steer[_e.facing-((_dx>>2)>=_dy?0:1)];
             else _e.heading=_e.facing;
             return;
-        case 6:ln2_enemy_attack(_g);return;
+        case 6:
+            if(_e.active>=128 && _e.active<132 && (abs(_p.x-_e.x)>_g.data.enemy_range[_e.weapon]+2 || abs(_p.y-_e.y)>=8)) {ln2_enemy_approach(_g);return;}
+            ln2_enemy_attack(_g);return;
         case 7:if (_e.action<256) ln2_enemy_react(_g);return;
         case 8:
             ln2_enemy_combat(_e,0);
@@ -238,6 +241,7 @@ function ln2_enemy_move(_g,_ticks) {
 }
 
 function ln2_enemy_action(_g) {
+    if(ln_enemy_custom(_g) && _g.edited_enemies.active>=0 && ln_enemy_weapon_busy(_g.edited_enemies.slots[_g.edited_enemies.active])) return;
     var _e=_g.enemy,_ticks=(_g.player.tick-_e.action_tick)&255;
     if (_ticks==0) return;
     _e.action_tick=_g.player.tick;
