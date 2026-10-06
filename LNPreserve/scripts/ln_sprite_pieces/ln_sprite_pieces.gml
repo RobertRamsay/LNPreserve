@@ -1,10 +1,11 @@
-/// LN1 and LN2 characters are built like the originals: each pose is hi-res 24x21 body
-/// pieces plus a weapon piece, mirrored in code. The editor edits those pieces (dynamic
-/// sprites of white masks: "ln1_pieces", "ln2_pieces") and rebuilds every frame that uses
-/// them. Frames the recipes do not rebuild exactly stay whole-frame editable.
-function ln_pieces_sets() {return ["ln1_pieces","ln2_pieces"];}
-function ln_pieces_is_set(_name) {return _name=="ln1_pieces" || _name=="ln2_pieces";}
-function ln_pieces_label(_name) {return _name=="ln1_pieces"?"LN1 piece":(_name=="ln2_pieces"?"LN2 piece":_name);}
+/// All three games build actors from original 24x21 hardware sprites, mirrored in code.
+/// LN1/LN2 frames are composed from body and weapon pieces; LN3 stores each piece as
+/// several masks (hi-res, multicolour, mirrored) in spr_ln3_actor_parts. The editor edits
+/// the pieces (dynamic sprites of white masks) and rebuilds every frame derived from them.
+/// Frames the data does not reproduce exactly stay whole-frame editable.
+function ln_pieces_sets() {return ["ln1_pieces","ln2_pieces","ln3_pieces"];}
+function ln_pieces_is_set(_name) {return _name=="ln1_pieces" || _name=="ln2_pieces" || _name=="ln3_pieces";}
+function ln_pieces_label(_name) {return _name=="ln1_pieces"?"LN1 piece":(_name=="ln2_pieces"?"LN2 piece":(_name=="ln3_pieces"?"LN3 piece":_name));}
 /// Slot: [piece, x, y, flip, expand_x, expand_y, colour], back to front, in 96x96 frame pixels.
 function ln_pieces_data() {
     var _v=global.ln_sprites.art;
@@ -12,6 +13,17 @@ function ln_pieces_data() {
     var _sets={},_targets={},_target_set={},_names=ln_pieces_sets();
     for(var _s=0;_s<array_length(_names);_s++) {
         var _raw=ln3_data_read("actors/"+string_copy(_names[_s],1,3)+"/pieces.json"),_n=array_length(_raw.pieces);
+        if(_names[_s]=="ln3_pieces") {
+            // LN3: stored mask frame -> [piece, role, flip]; role -1 hi-res, 0..2 multicolour codes 1..3.
+            var _uses=array_create(_n,0),_by_piece=array_create(_n,undefined),_fk=variable_struct_get_names(_raw.frames);
+            for(var _i=0;_i<_n;_i++) _by_piece[_i]=[];
+            for(var _i=0;_i<array_length(_fk);_i++) {
+                var _m=variable_struct_get(_raw.frames,_fk[_i]),_key="spr_ln3_actor_parts:"+_fk[_i];
+                variable_struct_set(_targets,_key,_m);variable_struct_set(_target_set,_key,"ln3_pieces");
+                _uses[_m[0]]++;array_push(_by_piece[_m[0]],_key);
+            }
+            variable_struct_set(_sets,"ln3_pieces",{raw:_raw.pieces,uses:_uses,by_piece:_by_piece});continue;
+        }
         var _uses=array_create(_n,0),_by_piece=array_create(_n,undefined),_keys=variable_struct_get_names(_raw.targets);
         for(var _i=0;_i<_n;_i++) _by_piece[_i]=[];
         for(var _i=0;_i<array_length(_keys);_i++) {
@@ -34,6 +46,18 @@ function ln_pieces_sprite(_name) {
     var _e=global.ln_editor;
     if(variable_struct_exists(_e.sprite_backups,_name)) return variable_struct_get(_e.sprite_backups,_name);
     var _list=variable_struct_get(global.ln_sprites.art.pieces.sets,_name).raw,_surface=surface_create(24,21),_b=buffer_create(24*21*4,buffer_fixed,1),_sprite=-1;
+    if(_name=="ln3_pieces") {
+        // Each LN3 piece is its stored unmirrored hi-res mask.
+        for(var _i=0;_i<array_length(_list);_i++) {
+            var _px=ln_sprite_art_read("spr_ln3_actor_parts",_list[_i].base);
+            for(var _j=0;_j<504;_j++) buffer_poke(_b,_j*4,buffer_u32,_px[_j]>=0?$ffffffff:0);
+            buffer_set_surface(_b,_surface,0);
+            if(_sprite==-1) _sprite=sprite_create_from_surface(_surface,0,0,24,21,false,false,0,0);
+            else sprite_add_from_surface(_sprite,_surface,0,0,24,21,false,false);
+        }
+        buffer_delete(_b);surface_free(_surface);
+        variable_struct_set(_e.sprite_backups,_name,_sprite);return _sprite;
+    }
     for(var _i=0;_i<array_length(_list);_i++) {
         var _hex=_list[_i].bits;
         for(var _y=0;_y<21;_y++) for(var _x=0;_x<24;_x++) {
@@ -68,6 +92,11 @@ function ln_pieces_expand(_parts) {
         var _p=_parts[_i],_slots=ln_pieces_target(_p[0],_p[1]);
         if(!is_array(_slots) || ln_pieces_locked(_p[0],_p[1])) {array_push(_out,_p);continue;}
         var _set=ln_pieces_target_set(_p[0],_p[1]);
+        if(_set=="ln3_pieces") {
+            if(_slots[1]!=-1) {array_push(_out,_p);continue;} // rare multicolour masks stay whole frames
+            var _sx=array_length(_p)>5?_p[5]:1;
+            array_push(_out,["ln3_pieces",_slots[0],_p[2]+(_slots[2]?24*_sx:0),_p[3],_p[4],_slots[2]?-_sx:_sx,array_length(_p)>6?_p[6]:1]);continue;
+        }
         for(var _j=0;_j<array_length(_slots);_j++) {
             var _s=_slots[_j],_ex=_s[4],_ey=_s[5];
             array_push(_out,[_set,_s[0],_p[2]+_s[1]-48+(_s[3]?24*_ex:0),_p[3]+_s[2]-64,global.ln_paint_palette[_s[6]],_s[3]?-_ex:_ex,_ey]);
@@ -94,6 +123,18 @@ function ln_pieces_compose(_set,_slots,_cache) {
     }
     return _pixels;
 }
+/// LN3 stored mask from its piece: optional bit reversal (mirror), then hi-res or one multicolour code.
+function ln_pieces_derive(_bits,_role,_flip) {
+    var _out=array_create(504,-1);
+    for(var _y=0;_y<21;_y++) for(var _x=0;_x<24;_x++) {
+        var _sx=_flip?23-_x:_x;
+        if(_role<0) {if(_bits[_y*24+_sx]>=0) _out[_y*24+_x]=c_white;continue;}
+        var _pair=_x div 2,_a=_flip?23-_pair*2:_pair*2,_b=_flip?22-_pair*2:_pair*2+1;
+        var _code=(_bits[_y*24+_a]>=0?2:0)+(_bits[_y*24+_b]>=0?1:0);
+        if(_code==_role+1) _out[_y*24+_x]=c_white;
+    }
+    return _out;
+}
 /// Marks an edited piece ("set:piece") so its frames are rebuilt.
 function ln_pieces_mark(_set,_piece) {
     var _v=global.ln_sprites.art,_key=ln_sprite_art_key(_set,_piece);
@@ -116,10 +157,16 @@ function ln_pieces_rebuild() {
         var _key=_keys[_i],_cut=string_last_pos(":",_key),_name=string_copy(_key,1,_cut-1),_frame=real(string_delete(_key,1,_cut));
         if(ln_pieces_locked(_name,_frame)) continue;
         var _slots=variable_struct_get(_d.targets,_key),_set=variable_struct_get(_d.target_set,_key),_edited=false;
-        for(var _j=0;_j<array_length(_slots);_j++) if(ln_pieces_edited(_set,_slots[_j][0])) {_edited=true;break;}
+        if(_set=="ln3_pieces") _edited=ln_pieces_edited(_set,_slots[0]);
+        else for(var _j=0;_j<array_length(_slots);_j++) if(ln_pieces_edited(_set,_slots[_j][0])) {_edited=true;break;}
         if(variable_struct_exists(_v.drafts,_key)) variable_struct_remove(_v.drafts,_key);
         if(!_edited) {if(variable_struct_exists(_e.sprite_art,_key)) {variable_struct_remove(_e.sprite_art,_key);_count++;} continue;}
         if(!variable_struct_exists(_caches,_set)) variable_struct_set(_caches,_set,{});
+        if(_set=="ln3_pieces") {
+            variable_struct_set(_e.sprite_art,_key,{sprite:_name,frame:_frame,width:24,height:21,mode:1,mc:false,pieces:true,
+                data:ln_sprite_art_encode(ln_pieces_derive(ln_sprite_art_pixels("ln3_pieces",_slots[0]),_slots[1],_slots[2]))});
+            _count++;continue;
+        }
         variable_struct_set(_e.sprite_art,_key,{sprite:_name,frame:_frame,width:96,height:96,mode:1,mc:false,pieces:true,
             data:ln_sprite_art_encode(ln_pieces_compose(_set,_slots,variable_struct_get(_caches,_set)))});
         _count++;

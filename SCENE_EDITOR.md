@@ -228,13 +228,23 @@ Data: `datafiles/actors/ln1/pieces.json`, written by `tools/export_ln1_pieces.py
 <LN1 RAM with the $d000 pose tables>`; `tools/audit_ln1_parts.py` compares every pose with
 the current frames.
 
-LN2 works the same way (the button is **Pieces LN1/2**). Its compositor places three body
+LN2 works the same way (the button is **Original pieces**, for all three games). Its compositor places three body
 pieces and a weapon piece per pose; all are hi-res, and mirrored poses use mirrored copies of
 the same pieces, which the editor folds onto the originals. 446 pieces rebuild 3310 frames
 exactly: 418 ninja and 2892 enemy frames across all seven levels (a typical piece: 72 frames
 in about 0.25 s). `tools/export_ln2_pieces.py` runs the original compositor offline for every
 level (py65 on PYTHONPATH, for example `build/check-deps`, and the LN2 RAM captures in
 `source/local/captures`) and writes `datafiles/actors/ln2/pieces.json`.
+
+LN3 already draws actors from hardware-sprite masks (`spr_ln3_actor_parts`), but stores
+each original sprite several times: the hi-res mask, three multicolour masks and mirrored
+copies (mirroring reverses the data bits, so multicolour colours swap within each pair).
+Levels sometimes number a sprite and its mirror the other way round. With Original pieces ON,
+LN3 layers open as those 522 pieces; editing one regenerates all of its 1152 stored masks
+across facings and readings. Only 3 of 37449 actor part uses read a piece as multicolour,
+so pieces are edited as hi-res; their multicolour masks follow from the same data, and the
+few layers shown as multicolour stay whole-frame edits. `tools/export_ln3_pieces.py` builds
+`datafiles/actors/ln3/pieces.json` from the stored masks and verifies every one.
 
 ### Facings (mirrored frames) and repeated animations
 
