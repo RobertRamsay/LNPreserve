@@ -157,6 +157,16 @@ function ln3_level_load(_g,_level,_ordinary=false) {
     if (_ordinary) ln_frontend_begin(_g);else ln_frontend_music(_g,false);return true;
 }
 
+/// The original's fixed sprite priority always puts the ninja (parts 0-3) in front of the
+/// enemy (4-7). Draw whichever character stands lower on screen last, so it is in front.
+function ln3_draw_order(_g,_d) {
+    var _base=_g.animation.order;
+    if((_d.enabled&240)==0 || _d.enemy_y<=_d.player_y) return _base;
+    var _out=[];
+    for(var _i=0;_i<8;_i++) if(_base[_i]<4) array_push(_out,_base[_i]);
+    for(var _i=0;_i<8;_i++) if(_base[_i]>=4) array_push(_out,_base[_i]);
+    return _out;
+}
 function ln3_play_prepare_draw(_g,_s) {
     if (_g.special_sequence==0) _g.special_colours=array_create(8,-1);
     _g.display=_s==_g.state?json_parse(json_stringify(_s)):_s;
@@ -345,7 +355,7 @@ function ln3_play_draw(_g) {
     if(_modified) ln_modified_delta_start(asset_get_index(_g.scene_record.sprite));
     ln3_mechanism_draw(_g);
     if(_modified) shader_reset();
-    if ((_g.special_sequence<3 || _g.transition_phase<5) && !ln_enemy_draw_group(_g)) for (var _order=0;_order<8;_order++) ln3_play_actor_part(_g,_g.display,_g.animation.order[_order]);
+    if ((_g.special_sequence<3 || _g.transition_phase<5) && !ln_enemy_draw_group(_g)) {var _draw=ln3_draw_order(_g,_g.display);for (var _order=0;_order<8;_order++) ln3_play_actor_part(_g,_g.display,_draw[_order]);}
     ln3_transition_draw(_g);
     if(global.ln_paint.active) {draw_set_colour(c_white);draw_surface(global.ln_paint.surface,0,0);}
     ln_modified_paint_cover();global.ln_editor.context=false;
