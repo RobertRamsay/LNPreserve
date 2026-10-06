@@ -2219,16 +2219,38 @@ function ln_enemy_checks() {
     var _o3=ln3_draw_order(_g3,_d3);ln_check(_o3[7]>=4 && _o3[0]<4,"LN3 enemy lower on screen is drawn in front of the ninja");
     _d3.enemy_y=90;_o3=ln3_draw_order(_g3,_d3);ln_check(_o3[7]<4,"LN3 ninja lower on screen stays in front");
     // LN3 smooth motion: the drawn ninja glides between 10 Hz logic steps and lands exactly.
-    var _gs=new LN3Play(1),_was=ln3_smooth_enabled(),_moved=0,_landed=true,_x0=_gs.state.player_x;global.ln_ln3_smooth=true;
+    var _gs=new LN3Play(1),_was=ln3_smooth_enabled(),_moved=0,_steady=true,_x0=_gs.state.player_x,_prev=0;global.ln_ln3_smooth=true;
     for(var _t=0;_t<80;_t++) {
         ln3_play_tick(_gs,8);if(!is_struct(_gs.display)) continue;
-        var _so=ln3_smooth_offset(_gs,_gs.display,2);if(_so[0]!=0 || _so[1]!=0) _moved++;
-        if(_gs.smooth_frame+1>=_gs.smooth_period && (_so[0]!=0 || _so[1]!=0)) _landed=false;
+        var _left=_gs.display.player_x-_gs.smooth_from[0],_shown=undefined;
+        // Sample several moments inside each tick: the drawn position must only ever advance.
+        for(var _q=0;_q<4;_q++) {
+            _gs.timer.credit=int64(round(_q/4*_gs.timer.cycles_per_frame*1000000));
+            var _so=ln3_smooth_offset(_gs,_gs.display,2),_x=_gs.display.player_x+_so[0];
+            if(_so[0]!=0 || _so[1]!=0) _moved++;
+            if(!is_undefined(_shown) && _left!=0 && sign(_x-_shown)==-sign(_left)) _steady=false;
+            if(abs(_so[0])>abs(_left) || abs(_so[0])>16) _steady=false;
+            _shown=_x;
+        }
+        _gs.timer.credit=int64(0);
     }
-    show_debug_message("LN3 smooth: ninja moved "+string(_gs.state.player_x-_x0)+" px, smoothed frames "+string(_moved));
-    ln_check(_gs.state.player_x!=_x0 && _moved>0 && _landed,"LN3 smooth motion glides between logic steps and lands on the true position");
+    show_debug_message("LN3 smooth: ninja moved "+string(_gs.state.player_x-_x0)+" px, smoothed samples "+string(_moved));
+    ln_check(_gs.state.player_x!=_x0 && _moved>0 && _steady,"LN3 smooth motion glides steadily between logic steps from real time");
     global.ln_ln3_smooth=false;var _so=ln3_smooth_offset(_gs,_gs.display,2);
-    ln_check(_so[0]==0 && _so[1]==0,"LN3 original motion draws the native steps");global.ln_ln3_smooth=_was;
+    ln_check(_so[0]==0 && _so[1]==0,"LN3 original motion draws the native steps");
+    // Even cadence: the previous picture is held for half a frame after each step, then the step shows.
+    var _checked=0,_even=true;_gs=new LN3Play(1);
+    for(var _t=0;_t<40;_t++) {
+        ln3_play_tick(_gs,0);if(_gs.smooth_frame!=0 || !is_struct(_gs.display_prev)) continue;
+        var _cost=_gs.timer.cycles_per_frame*1000000;
+        _gs.timer.credit=int64(round(0.1*_cost));var _early=ln3_original_hold(_gs);
+        _gs.timer.credit=int64(round(0.4*_cost));var _held=ln3_original_hold(_gs);
+        _gs.timer.credit=int64(round(0.5*_cost));var _shown=!ln3_original_hold(_gs);
+        _gs.timer.credit=int64(0);_checked++;if(!(_early && _held && _shown)) _even=false;
+    }
+    ln_check(_checked>0 && _even,"LN3 original motion holds each step for half a frame so steps land evenly");
+    global.ln_ln3_smooth=true;ln_check(!ln3_original_hold(_gs),"Smooth motion never holds the previous picture");
+    global.ln_ln3_smooth=_was;
     var _e=global.ln_editor;_e.scenes={};_e.enabled=true;
     for(var _game=1;_game<=3;_game++) for(var _level=1;_level<=(_game==1?6:(_game==2?7:5));_level++) {var _catalog=ln_enemy_catalog(_game,_level);ln_check(is_struct(_catalog.rooms),"all-level native enemy catalogs load");}
     for(var _game=1;_game<=3;_game++) {

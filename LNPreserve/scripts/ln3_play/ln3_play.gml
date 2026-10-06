@@ -32,7 +32,7 @@ function LN3Play(_level=1) constructor {
     intro=undefined;ending=undefined;ending_surface=-1;
     palette=[];for (var _i=0;_i<16;_i++) palette[_i]=make_colour_rgb(data.palette[_i][0],data.palette[_i][1],data.palette[_i][2]);
     stage_surface=-1;part_surface=-1;timer=new LNClock();controls=undefined;
-    smooth_from=undefined;smooth_frame=0;smooth_period=5;smooth_room=-1;
+    smooth_from=undefined;smooth_frame=0;smooth_period=5;smooth_room=-1;display_prev=undefined;draw_masks_prev=undefined;
     paused=false;music=true;game_over=false;level_complete=false;level_states=array_create(5,undefined);
     room_enemies={};room_age=0;logic_ticks=0;weapon_switch=false;control_previous=[false,false,false,false];
     draw_masks=array_create(8,undefined);render_version=0;
@@ -158,16 +158,34 @@ function ln3_level_load(_g,_level,_ordinary=false) {
     if (_ordinary) ln_frontend_begin(_g);else ln_frontend_music(_g,false);return true;
 }
 
-/// LN3 moves and animates only every fifth frame (about 10 Hz), in steps of several pixels.
+/// LN3 moves and animates only every fifth frame (about 10 Hz), in steps of several pixels; the
+/// original copies those positions to the hardware sprites unchanged. On a 60 Hz display the
+/// 50 Hz ticks bunch, so the steps also land unevenly.
 /// Smooth motion draws each character part of the way from its previous to its new position
 /// on the frames in between. Logic, collisions and timing are untouched; poses are exact
 /// because the whole body shares one offset. Original motion shows the native jumps.
 function ln3_smooth_enabled() {return !variable_global_exists("ln_ln3_smooth") || global.ln_ln3_smooth;}
+/// 50 Hz ticks since the last logic step, from real time (including the current tick's fraction).
+function ln3_smooth_elapsed(_g) {
+    var _sub=0;
+    if(is_struct(_g.timer)) _sub=clamp(real(_g.timer.credit)/(real(_g.timer.cycles_per_frame)*1000000),0,0.999);
+    return _g.smooth_frame+_sub;
+}
+/// Original motion with even cadence: a 100 ms step is exactly six 60 Hz frames, so steps sit on
+/// frame boundaries and timing jitter shows them 5, 6 or 7 frames apart. Holding the previous
+/// picture for half a frame (8.3 ms, 0.42 ticks) puts every step mid-frame, six frames apart.
+function ln3_original_hold(_g) {
+    if(ln3_smooth_enabled() || !is_struct(_g.display_prev) || !is_array(_g.draw_masks_prev)) return false;
+    if(_g.smooth_room!=_g.room_id || _g.special_sequence!=0) return false;
+    return ln3_smooth_elapsed(_g)<0.4167;
+}
 function ln3_smooth_offset(_g,_d,_i) {
     if(!ln3_smooth_enabled() || !is_array(_g.smooth_from) || _g.smooth_room!=_g.room_id || _g.special_sequence!=0) return [0,0];
     if(_d.parts[_i].animation==114) return [0,0]; // thrown weapons fly on their own path
     var _enemy=_i>=4;if(_enemy && ln_enemy_custom(_g)) return [0,0];
-    var _a=(_g.smooth_frame+1)/max(1,_g.smooth_period);if(_a>=1) return [0,0];
+    // Progress since the last logic step comes from real time, including the fraction of the
+    // current 50 Hz tick, so every 60 Hz display frame gets its own position however ticks bunch.
+    var _a=ln3_smooth_elapsed(_g)/max(1,_g.smooth_period);if(_a>=1) return [0,0];
     var _fx=_g.smooth_from[_enemy?2:0],_fy=_g.smooth_from[_enemy?3:1];
     var _dx=(((_enemy?_d.enemy_x:_d.player_x)-_fx+128)&255)-128,_dy=(((_enemy?_d.enemy_y:_d.player_y)-_fy+128)&255)-128;
     if(abs(_dx)>16 || abs(_dy)>16) return [0,0]; // teleports, falls and scene changes snap
@@ -245,7 +263,11 @@ function ln3_play_tick(_g,_joy) {
     ln3_hazard_tick(_s,_g.actions,_g.data);ln3_hazard_contacts(_s,_g.data);
     if(ln_enemy_native_ai(_g)) ln3_enemy_patrol(_s,_g.actions,_g.input,_g.enemies);
     ln3_scenery_tick(_g);
-    ln3_animation_update(_s,_g.animation);ln3_play_prepare_draw(_g,_s);
+    ln3_animation_update(_s,_g.animation);
+    // Original motion holds the previous picture briefly, so keep it for the even-cadence display.
+    _g.display_prev=_g.display;_g.draw_masks_prev=is_array(_g.draw_masks)?array_create(array_length(_g.draw_masks),0):undefined;
+    if(is_array(_g.draw_masks_prev)) array_copy(_g.draw_masks_prev,0,_g.draw_masks,0,array_length(_g.draw_masks));
+    ln3_play_prepare_draw(_g,_s);
     // Shorten only the initial reverse pose; later animation intervals stay native.
     if (variable_struct_exists(_s,"reverse_roll") && is_struct(_s.reverse_roll) && _s.player_action==_s.reverse_roll.action && _s.parts[1].cursor==1)
         _s.logic_wait=ceil(_s.logic_wait/2);
@@ -376,7 +398,10 @@ function ln3_play_draw(_g) {
     if(_modified) ln_modified_delta_start(asset_get_index(_g.scene_record.sprite));
     ln3_mechanism_draw(_g);
     if(_modified) shader_reset();
+    var _hold=ln3_original_hold(_g),_live_display=_g.display,_live_masks=_g.draw_masks;
+    if(_hold) {_g.display=_g.display_prev;_g.draw_masks=_g.draw_masks_prev;}
     if ((_g.special_sequence<3 || _g.transition_phase<5) && !ln_enemy_draw_group(_g)) {var _draw=ln3_draw_order(_g,_g.display);for (var _order=0;_order<8;_order++) ln3_play_actor_part(_g,_g.display,_draw[_order]);}
+    if(_hold) {_g.display=_live_display;_g.draw_masks=_live_masks;}
     ln3_transition_draw(_g);
     if(global.ln_paint.active) {draw_set_colour(c_white);draw_surface(global.ln_paint.surface,0,0);}
     ln_modified_paint_cover();global.ln_editor.context=false;
