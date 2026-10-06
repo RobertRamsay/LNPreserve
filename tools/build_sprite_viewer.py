@@ -104,6 +104,7 @@ for game,levels in [(1,6),(2,7)]:
                     used.add(signature);entries.append(dict(game=1,category=2,name=f'Level {level} / Special actor {start:X}',clips=[clip('Original sequence',frames)]))
 # LN3 already includes source-captured complete, assembled animation traces.
 vectors=read(D/'verification/ln3_animation_vectors.json')['vectors']
+WALK_FIX={42:(120,119),44:(118,121)}
 lookup={(v['level'],v['action'],v['weapon']):v for v in vectors}
 for level in range(1,6):
     world=read(D/f'play/ln3/level{level}/world.json');rt=read(D/f'play/ln3/level{level}/runtime.json');anim=read(D/f'play/ln3/level{level}/animation.json')
@@ -120,6 +121,10 @@ for level in range(1,6):
                 s=f if i!=base+3 or weapon_part is None else weapon_part
                 physical=s['draw_frames'][i]
                 if physical<0:continue
+                if enemy and i==4 and v['action'] in WALK_FIX:
+                    # Same correction as ln3_costume_walk_fix: reversed walks use reversed costumes.
+                    was,now=(anim['sequences'][k]['frames'] for k in WALK_FIX[v['action']])
+                    if physical in was:physical=now[was.index(physical)]
                 if enemy and i==4:physical+=world['costume_offsets'][costume]
                 choices=world['part_mapping'].get(str(physical))
                 if not choices:continue

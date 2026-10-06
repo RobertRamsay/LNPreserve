@@ -1779,6 +1779,11 @@ function ln_enemy_place(_game,_a,_x,_y,_facing) {
         for(var _i=0;_i<3;_i++) {_a.parts[_i].x+=_dx;_a.parts[_i].y+=_dy;}
         _a.mirror=(_facing&4)?112:0;
         if(variable_struct_exists(_a,"draw")) for(var _j=0;_j<3;_j++) {_a.draw.draw_x[_j]+=_dx;_a.draw.draw_y[_j]+=_dy;_a.draw.draw_mirror[_j]=(_facing&4)!=0;}
+        // The weapon is stored apart from the body; move and face it with the guard.
+        if(variable_struct_exists(_a,"weapon_part")) {
+            _a.weapon_part.x+=_dx;_a.weapon_part.y+=_dy;_a.weapon_mirror=(_facing&4)?128:0;
+            if(_a.weapon_draw[0]>=0) {_a.weapon_draw[1]+=_dx;_a.weapon_draw[2]+=_dy;_a.weapon_draw[4]=(_facing&4)!=0;}
+        }
     }
 }
 function ln_enemy_catalog(_game,_level) {
@@ -2218,6 +2223,10 @@ function ln_enemy_checks() {
     var _g3=new LN3Play(1),_d3=ln_enemy_copy(_g3.state);_d3.enabled|=240;_d3.player_y=100;_d3.enemy_y=110;
     var _o3=ln3_draw_order(_g3,_d3);ln_check(_o3[7]>=4 && _o3[0]<4,"LN3 enemy lower on screen is drawn in front of the ninja");
     _d3.enemy_y=90;_o3=ln3_draw_order(_g3,_d3);ln_check(_o3[7]<4,"LN3 ninja lower on screen stays in front");
+    ln_check(_g3.actions.actions[42][0]==119 && _g3.actions.actions[44][0]==121 && _g3.actions.actions[41][0]==118 && _g3.actions.actions[43][0]==120,"LN3 reversed enemy walks use the matching reversed costume");
+    var _w3=ln_enemy_capture(_g3);_w3.weapon_draw[0]=1;_w3.weapon_draw[1]=_w3.enemy_x-10;_w3.weapon_draw[2]=_w3.enemy_y-20;_w3.weapon_part.x=_w3.enemy_x-10;
+    var _wx=_w3.weapon_draw[1]-_w3.enemy_x,_wp=_w3.weapon_part.x-_w3.enemy_x;ln_enemy_place(3,_w3,_w3.enemy_x-24+30,_w3.enemy_y-29+12,4);
+    ln_check(_w3.weapon_draw[1]-_w3.enemy_x==_wx && _w3.weapon_part.x-_w3.enemy_x==_wp && _w3.weapon_draw[2]-_w3.enemy_y==-20 && _w3.weapon_mirror==128,"LN3 edited guard's weapon moves and turns with the guard");
     // LN3 smooth motion: the drawn ninja glides between 10 Hz logic steps and lands exactly.
     var _gs=new LN3Play(1),_was=ln3_smooth_enabled(),_moved=0,_steady=true,_x0=_gs.state.player_x,_prev=0;global.ln_ln3_smooth=true;
     for(var _t=0;_t<80;_t++) {
