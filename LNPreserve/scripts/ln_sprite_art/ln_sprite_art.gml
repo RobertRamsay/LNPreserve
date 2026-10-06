@@ -631,7 +631,7 @@ function ln_sprite_art_draw() {
     ln_tool_clear(false);draw_set_font(font_jansina);draw_set_halign(fa_left);draw_set_valign(fa_top);draw_set_colour(c_white);
     ln_edit_button(24,18,170,"Save project",_e.dirty);ln_edit_button(206,18,170,"Back to viewer");
     ln_edit_button(388,18,110,"Undo (^Z)",array_length(_v.undo)>0);ln_edit_button(510,18,110,"Redo (^Y)",array_length(_v.redo)>0);
-    ln_edit_button(632,18,220,"Pieces LN1/2: "+(_v.pieces_mode?"ON":"OFF"),_v.pieces_mode);
+    ln_edit_button(632,18,220,"Original pieces: "+(_v.pieces_mode?"ON":"OFF"),_v.pieces_mode);
     ln_edit_button(966,18,170,"Modified "+(_e.enabled?"ON":"OFF"),_e.enabled);
     ln_edit_button(760,60,240,"Animation",_v.view==0);ln_edit_button(1010,60,240,"Sprite sheet",_v.view!=0);
     var _same=0;
@@ -844,7 +844,7 @@ function ln_sprite_art_checks() {
     ln_check(array_length(ln_pieces_set("ln2_pieces").raw)==446 && sprite_get_number(ln_sprite_art_source("ln2_pieces"))==446,"LN2 pieces load as a 446-piece sheet");
     for(var _i=0;_i<array_length(_tkeys);_i+=37) {
         var _k=_tkeys[_i],_cut=string_last_pos(":",_k),_tn=string_copy(_k,1,_cut-1),_tf=real(string_delete(_k,1,_cut)),_sl=variable_struct_get(_pd.targets,_k);
-        if(ln_pieces_locked(_tn,_tf)) continue;
+        if(ln_pieces_locked(_tn,_tf) || variable_struct_get(_pd.target_set,_k)=="ln3_pieces") continue;
         for(var _j=0;_j<array_length(_sl);_j++) {if(_sl[_j][3]) _flipped=true;if(_sl[_j][4]>1 || _sl[_j][5]>1) _expanded=true;}
         _tried++;_exact+=array_equals(ln_pieces_compose(variable_struct_get(_pd.target_set,_k),_sl,{}),ln_sprite_art_read(_tn,_tf));
     }
@@ -888,13 +888,43 @@ function ln_sprite_art_checks() {
     ln_check(is_struct(_st2) && variable_struct_exists(_st2,"pieces") && array_equals(ln_sprite_art_read_index(asset_get_index(_ln2[0]),_ln2[1]),ln_sprite_art_decode(_st2)) && !array_equals(ln_sprite_art_decode(_st2),ln_sprite_art_read(_ln2[0],_ln2[1])),"LN2 piece edit rebuilds its frames and reaches the game");
     _d=ln_sprite_art_begin("ln2_pieces",_p2);_d.pixels=ln_sprite_art_read("ln2_pieces",_p2);ln_sprite_art_touch(_d);ln_sprite_art_commit();ln_pieces_rebuild();
     ln_check(!is_struct(ln_sprite_art_get(_ln2[0],_ln2[1])),"reverting the LN2 piece restores its frames");
+    // LN3: each piece regenerates its stored masks (hi-res, multicolour and mirrored).
+    var _l3=ln_pieces_set("ln3_pieces"),_fk=variable_struct_get_names(_pd.targets),_ok3=0,_n3=0,_mc3=false,_fl3=false;
+    ln_check(array_length(_l3.raw)==522 && sprite_get_number(ln_sprite_art_source("ln3_pieces"))==522,"LN3 pieces load as a 522-piece sheet");
+    for(var _i=0;_i<array_length(_fk);_i++) {
+        if(variable_struct_get(_pd.target_set,_fk[_i])!="ln3_pieces") continue;
+        var _m=variable_struct_get(_pd.targets,_fk[_i]),_f3=real(string_delete(_fk[_i],1,string_last_pos(":",_fk[_i])));
+        if(ln_pieces_locked("spr_ln3_actor_parts",_f3)) continue;
+        if(_m[1]>=0) _mc3=true;if(_m[2]) _fl3=true;
+        _n3++;_ok3+=array_equals(ln_pieces_derive(ln_sprite_art_read("ln3_pieces",_m[0]),_m[1],_m[2]),ln_sprite_art_read("spr_ln3_actor_parts",_f3));
+    }
+    show_debug_message("LN3 piece derive parity "+string(_ok3)+"/"+string(_n3));
+    ln_check(_n3>1000 && _ok3==_n3 && _mc3 && _fl3,"LN3 pieces regenerate every stored mask exactly, mirrored and multicolour included");
+    _sv.game=3;_sv.category=0;ln_sprite_filter();_sv.animation=0;_sv.frame=0;ln_sprite_art_open();
+    var _q3=undefined;for(var _j=0;_j<array_length(_v.items[0]);_j++) if(_v.items[0][_j][0]=="ln3_pieces") {_q3=_v.items[0][_j];break;}
+    ln_check(is_array(_q3),"LN3 poses open as their pieces");
+    var _u3=_l3.by_piece[_q3[1]],_mk=ln_sprite_art_read("ln3_pieces",_q3[1]),_h3=-1;
+    for(var _i=0;_i<504;_i++) if(_mk[_i]==-1) {_h3=_i;break;}
+    _d=ln_sprite_art_begin("ln3_pieces",_q3[1]);ln_sprite_art_line(_d,_h3 mod 24,_h3 div 24,_h3 mod 24,_h3 div 24,_P[1]);ln_sprite_art_commit();
+    ln_sprite_art_close();ln_sprite_art_sync();
+    var _rb3=0,_mir3=false;
+    for(var _i=0;_i<array_length(_u3);_i++) {
+        var _f3=real(string_delete(_u3[_i],1,string_last_pos(":",_u3[_i]))),_st3=ln_sprite_art_get("spr_ln3_actor_parts",_f3),_m=variable_struct_get(_pd.targets,_u3[_i]);
+        if(ln_pieces_locked("spr_ln3_actor_parts",_f3)) {_rb3++;continue;}
+        if(is_struct(_st3) && array_equals(ln_sprite_art_read_index(asset_get_index("spr_ln3_actor_parts"),_f3),ln_sprite_art_decode(_st3))) _rb3++;
+        if(_m[2]) _mir3=true;
+    }
+    ln_check(_rb3==array_length(_u3) && _mir3,"LN3 piece edit regenerates all its masks, both facings, and reaches the game");
+    _d=ln_sprite_art_begin("ln3_pieces",_q3[1]);_d.pixels=ln_sprite_art_read("ln3_pieces",_q3[1]);ln_sprite_art_touch(_d);ln_sprite_art_commit();ln_pieces_rebuild();
+    var _gone3=true;for(var _i=0;_i<array_length(_u3);_i++) {var _f3=real(string_delete(_u3[_i],1,string_last_pos(":",_u3[_i])));if(!ln_pieces_locked("spr_ln3_actor_parts",_f3) && is_struct(ln_sprite_art_get("spr_ln3_actor_parts",_f3))) _gone3=false;}
+    ln_check(_gone3,"reverting the LN3 piece restores its masks");
     _v.pieces_mode=false;
     // Screens.
     _sv.game=1;_sv.category=0;ln_sprite_filter();ln_sprite_art_open();_d=ln_sprite_art_begin(ln_sprite_art_active()[0],ln_sprite_art_active()[1]);
     ln_sprite_art_line(_d,30,20,60,20,_P[7]);_v.onion=true;ln_sprite_art_draw();surface_save(application_surface,"sprite-art-animation.png");
     ln_sprite_art_use_sheet("spr_char_ln1_ninja",12);_v.view=1;ln_sprite_art_draw();surface_save(application_surface,"sprite-art-sheet.png");
     _sv.game=3;ln_sprite_filter();ln_sprite_art_open();ln_sprite_art_draw();surface_save(application_surface,"sprite-art-ln3.png");
-    _v.pieces_mode=true;_sv.game=1;ln_sprite_filter();for(var _i=0;_i<array_length(_sv.list[0].clips);_i++) if(_sv.list[0].clips[_i].name=="Weapon 1 / Action 9") _sv.animation=_i;_sv.frame=1;ln_sprite_art_open();_v.part=array_length(_v.items[_v.index])-1;ln_sprite_art_draw();surface_save(application_surface,"sprite-art-pieces.png");_sv.game=2;ln_sprite_filter();for(var _i=0;_i<array_length(_sv.list[0].clips);_i++) if(string_pos("Weapon 1",_sv.list[0].clips[_i].name)==1) {_sv.animation=_i;break;}_sv.frame=0;ln_sprite_art_open();ln_sprite_art_draw();surface_save(application_surface,"sprite-art-pieces-ln2.png");_v.pieces_mode=false;
+    _v.pieces_mode=true;_sv.game=1;ln_sprite_filter();for(var _i=0;_i<array_length(_sv.list[0].clips);_i++) if(_sv.list[0].clips[_i].name=="Weapon 1 / Action 9") _sv.animation=_i;_sv.frame=1;ln_sprite_art_open();_v.part=array_length(_v.items[_v.index])-1;ln_sprite_art_draw();surface_save(application_surface,"sprite-art-pieces.png");_sv.game=2;ln_sprite_filter();for(var _i=0;_i<array_length(_sv.list[0].clips);_i++) if(string_pos("Weapon 1",_sv.list[0].clips[_i].name)==1) {_sv.animation=_i;break;}_sv.frame=0;ln_sprite_art_open();ln_sprite_art_draw();surface_save(application_surface,"sprite-art-pieces-ln2.png");_sv.game=3;ln_sprite_filter();_sv.animation=0;_sv.frame=0;_sv.mirror=false;ln_sprite_art_open();ln_sprite_art_draw();surface_save(application_surface,"sprite-art-pieces-ln3.png");_v.pieces_mode=false;
     ln_sprite_art_close();
     _sv.open=false;_e.sprite_art={};_e.sprite_rev++;ln_sprite_art_reset_session();ln_sprite_art_sync();
     ln_check(variable_struct_names_count(_e.sprite_assigned)==0,"clearing the project restores every sprite");
