@@ -15,6 +15,7 @@ function LN3Play(_level=1) constructor {
     game_number=3;level=_level;var _path="play/ln3/level"+string(level)+"/";
     data=ln3_data_read(_path+"runtime.json");world=ln3_data_read(_path+"world.json");
     actions=ln3_data_read(_path+"actions.json");movement=ln3_data_read(_path+"movement.json");
+    ln3_costume_walk_fix(actions);
     input=ln3_data_read(_path+"input.json");animation=ln3_data_read(_path+"animation.json");
     collision=ln3_data_read(_path+"collision.json");enemies=ln3_data_read(_path+"enemy.json");
     ln3_exposed_wind_edges(collision);
@@ -437,6 +438,15 @@ function ln3_restart_splash(_g) {
 // Wind scenes 1 and 4: front-facing ledges used solid records. Keep their
 // exact slopes/extents, but give them the same fall descriptor as scenes 5-7.
 // Back edges, exits and climbing windows retain their original records.
+/// The original enemy walk table pairs the reversed body walks (actions 42, 44) with the
+/// costume of the other direction (120, 118), so the black costume misses the pink body.
+/// Sequences 119 and 121 are the matching reversed costumes and are otherwise unused.
+function ln3_costume_walk_fix(_actions) {
+    var _a=_actions.actions;
+    if(_a[42][0]==120) _a[42][0]=119;
+    if(_a[44][0]==118) _a[44][0]=121;
+}
+
 function ln3_exposed_wind_edges(_collision) {
     if(_collision.level!=2) return;
     for(var _i=0;_i<array_length(_collision.rooms);_i++) {
