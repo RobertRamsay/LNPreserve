@@ -1,7 +1,7 @@
 /// Scenery-only pixel artwork stored inside the user's scene project.
 function LNSceneryArt() constructor {
     open=false;draft=undefined;asset_id=0;tool=0;colour=c_white;undo=[];redo=[];
-    stroke=undefined;stroke_button=mb_left;last_x=-1;last_y=-1;surface=-1;dirty=true;message="";
+    stroke=undefined;stroke_button=mb_left;pending=false;histories={};last_x=-1;last_y=-1;surface=-1;dirty=true;message="";
 }
 function ln_art_key(_game,_level,_id) {return string(_game)+":"+string(_level)+":"+string(_id);}
 function ln_art_get(_game,_level,_id) {
@@ -142,23 +142,36 @@ function ln_art_open(_id) {
         for(var _i=0;_i<array_length(_raw.codes);_i++) array_push(_pixels,_raw.codes[_i]==0?-1:_raw.colours[_i]);
         _a={game:_e.game,level:_e.level,id:_id,width:_o.width,height:_o.height,mode:1,mc:true,background:global.ln_paint_palette[_e.scene.background],pixels:_pixels};
     }
-    _v.draft=_a;_v.open=true;_v.asset_id=_id;_v.undo=[];_v.redo=[];_v.stroke=undefined;_v.dirty=true;
-    _v.message="Editing a shared asset updates every placement of it. Duplicate for an independent copy.";
+    ln_art_keep_history();
+    var _h=ln_art_key(_a.game,_a.level,_a.id);_h=variable_struct_exists(_v.histories,_h)?variable_struct_get(_v.histories,_h):{undo:[],redo:[]};
+    _v.draft=_a;_v.open=true;_v.asset_id=_id;_v.undo=_h.undo;_v.redo=_h.redo;_v.stroke=undefined;_v.dirty=true;_v.pending=false;
+    _v.message="Edits go straight into the project. Editing a shared asset updates every placement; Duplicate for an independent copy.";
+}
+/// Undo history is kept per asset for the whole session, so it survives play-testing.
+function ln_art_keep_history() {
+    var _v=global.ln_editor.art;if(!is_struct(_v.draft)) return;
+    variable_struct_set(_v.histories,ln_art_key(_v.draft.game,_v.draft.level,_v.draft.id),{undo:_v.undo,redo:_v.redo});
+}
+/// Commits the finished edit to the project, the way room edits already apply immediately.
+function ln_art_flush() {
+    var _v=global.ln_editor.art;
+    if(_v.pending && is_undefined(_v.stroke)) {_v.pending=false;ln_art_apply();}
 }
 function ln_art_checkpoint() {
-    var _v=global.ln_editor.art;array_push(_v.undo,json_stringify(_v.draft));if(array_length(_v.undo)>40) array_delete(_v.undo,0,1);_v.redo=[];_v.dirty=true;
+    var _v=global.ln_editor.art;array_push(_v.undo,json_stringify(_v.draft));if(array_length(_v.undo)>40) array_delete(_v.undo,0,1);_v.redo=[];_v.dirty=true;_v.pending=true;
 }
 function ln_art_history(_redo) {
     var _v=global.ln_editor.art,_from=_redo?_v.redo:_v.undo;if(array_length(_from)==0) return;
     var _text=array_pop(_from);
     if(_redo) {array_push(_v.undo,json_stringify(_v.draft));_v.redo=_from;}else {array_push(_v.redo,json_stringify(_v.draft));_v.undo=_from;}
-    _v.draft=json_parse(_text);_v.dirty=true;
+    _v.draft=json_parse(_text);_v.dirty=true;_v.pending=true;
 }
 function ln_art_new(_duplicate) {
     var _e=global.ln_editor,_v=_e.art;ln_art_checkpoint();
     var _id=10000,_d=ln_edit_data(_e.game,_e.level);while(variable_struct_exists(_d.objects,string(_id)) || is_struct(ln_art_get(_e.game,_e.level,_id))) _id++;
     if(!_duplicate) _v.draft={game:_e.game,level:_e.level,id:_id,width:32,height:32,mode:_v.draft.mode,mc:_v.draft.mc,background:_v.draft.background,pixels:array_create(1024,-1)};
-    variable_struct_set(_v.draft,"id",_id);_v.message=_duplicate?"Independent copy. Apply, then add it from the room asset list.":"New transparent scenery asset.";_v.dirty=true;
+    variable_struct_set(_v.draft,"id",_id);_v.message=_duplicate?"Independent copy, added to the room asset list.":"New transparent scenery asset. It joins the asset list once you paint on it.";_v.dirty=true;
+    _v.pending=_duplicate;
 }
 function ln_art_apply() {
     var _e=global.ln_editor,_v=_e.art,_a=ln_enemy_copy(_v.draft),_pack={};variable_struct_set(_pack,ln_art_key(_a.game,_a.level,_a.id),_a);
@@ -168,7 +181,7 @@ function ln_art_apply() {
     _e.artworks=_trial;ln_art_refresh();_e.enabled=true;_e.dirty=true;_e.reference=false;_e.build=-1;_e.autosave_us=1000000;
     var _ids=variable_struct_get_names(ln_edit_data(_e.game,_e.level).objects);array_sort(_ids,function(a,b){return real(a)-real(b);});
     for(var _i=0;_i<array_length(_ids);_i++) if(real(_ids[_i])==_a.id) {_e.asset=_i;_e.asset_scroll=max(0,_i-17);}
-    _v.message="Applied to project. Save file includes this artwork. Modified ON.";return true;
+    _v.message="Project updated. Modified ON.";return true;
 }
 function ln_art_fill(_a,_x,_y,_colour) {
     var _old=_a.pixels[_y*_a.width+_x];_colour=ln_art_quantize(_colour,_a.mode);if(_old==_colour) return;
@@ -195,8 +208,8 @@ function ln_art_resize(_dw,_dh) {
 }
 function ln_art_step() {
     var _e=global.ln_editor,_v=_e.art,_a=_v.draft;
-    if(ln_edit_hit(24,18,170,28)) ln_art_apply();
-    if(ln_edit_hit(206,18,170,28) || keyboard_check_pressed(vk_escape)) {_v.open=false;if(surface_exists(_v.surface)) surface_free(_v.surface);_v.surface=-1;return true;}
+    if(ln_edit_hit(24,18,170,28)) ln_project_save_as();
+    if(ln_edit_hit(206,18,170,28) || keyboard_check_pressed(vk_escape)) {_v.stroke=undefined;ln_art_flush();ln_art_keep_history();_v.open=false;if(surface_exists(_v.surface)) surface_free(_v.surface);_v.surface=-1;return true;}
     if(ln_edit_hit(388,18,130,28)) ln_art_new(false);
     if(ln_edit_hit(530,18,130,28)) ln_art_new(true);
     if(ln_edit_hit(672,18,130,28) || (keyboard_check(vk_control) && keyboard_check_pressed(ord("Z")))) ln_art_history(false);
@@ -242,7 +255,7 @@ function ln_art_step() {
 }
 function ln_art_draw() {
     var _v=global.ln_editor.art,_a=_v.draft;ln_tool_clear(false);draw_set_font(font_jansina);draw_set_halign(fa_left);draw_set_valign(fa_top);draw_set_colour(c_white);
-    ln_edit_button(24,18,170,"Apply to project");ln_edit_button(206,18,170,"Back to room");ln_edit_button(388,18,130,"New asset");ln_edit_button(530,18,130,"Duplicate");ln_edit_button(672,18,130,"Undo (^Z)");ln_edit_button(814,18,130,"Redo (^Y)");
+    ln_edit_button(24,18,170,"Save project",global.ln_editor.dirty);ln_edit_button(206,18,170,"Back to room");ln_edit_button(388,18,130,"New asset");ln_edit_button(530,18,130,"Duplicate");ln_edit_button(672,18,130,"Undo (^Z)");ln_edit_button(814,18,130,"Redo (^Y)");
     draw_text(24,70,"SCENERY ART / Ninja "+string(_a.game)+" / Level "+string(_a.level)+" / Asset "+string(_a.id));
     var _names=["C64 Strict","C64 Loose","C64 HiRes - any colour","16bit AMIGA - 4096 colours","32bit AMIGA AGA - 24bit colour"];
     for(var _i=0;_i<5;_i++) ln_edit_button(760,82+_i*36,490,_names[_i],_a.mode==_i);
@@ -270,7 +283,7 @@ function ln_art_draw() {
     draw_set_colour(c_white);draw_surface_stretched(_v.surface,_r[0],_r[1],_w,_h);
     if(_r[2]>=6) {draw_set_alpha(.22);draw_set_colour(c_white);for(var _x=0;_x<=_a.width;_x+=(_a.mode<2 && _a.mc?2:1)) draw_line(_r[0]+_x*_r[2],_r[1],_r[0]+_x*_r[2],_r[1]+_h);for(var _y=0;_y<=_a.height;_y++) draw_line(_r[0],_r[1]+_y*_r[2],_r[0]+_w,_r[1]+_y*_r[2]);draw_set_alpha(1);}
     draw_set_colour(c_white);draw_text(24,704,"Right-drag: erase.  Alt-click: pick colour. Transparent pixels show the checkerboard.");
-    draw_text(24,730,"Apply keeps artwork in this project. Back discards unapplied changes. Save file stores applied artwork.");
+    draw_text(24,730,"Edits go straight into the project and stay undoable this session. Save project writes them to a file.");
     draw_set_colour(make_colour_rgb(150,210,220));draw_text(24,764,_v.message);
 }
 function ln_art_level_has(_game,_level) {
@@ -312,7 +325,17 @@ function ln_art_checks() {
         var _bad=ln_enemy_copy(_pack),_keys=variable_struct_get_names(_bad.artworks);variable_struct_get(_bad.artworks,_keys[0]).pixels[0]=16777216;
         ln_check(!ln_edit_validate(_bad),"out-of-range artwork is rejected");
     }
-    _e.art.open=true;_e.open=true;ln_art_draw();surface_save(application_surface,"scenery-art-editor.png");
+    // Edits commit automatically and keep their undo history across reopening.
+    _e.scenes={};_e.artworks={};ln_art_refresh();ln_edit_select(1,1,ln_edit_rooms(1,1)[0]);_e.dirty=false;
+    var _first=_e.scene.parts[0];ln_art_open(_first.asset);ln_art_checkpoint();_e.art.draft.mode=4;_e.art.draft.mc=false;_e.art.draft.pixels[0]=_rgb;ln_art_flush();
+    ln_check(is_struct(ln_art_get(1,1,_first.asset)) && ln_art_get(1,1,_first.asset).pixels[0]==_rgb && _e.dirty,"scenery edit goes straight into the project");
+    ln_art_keep_history();_e.art.open=false;ln_art_open(_first.asset);
+    ln_check(array_length(_e.art.undo)==1,"scenery undo history survives closing the editor");
+    ln_art_history(false);ln_art_flush();ln_check(ln_art_get(1,1,_first.asset).pixels[0]!=_rgb,"scenery undo updates the project");
+    _e.art.open=false;
+    var _rooms=ln_edit_rooms(1,1);ln_edit_select(1,1,_rooms[0]);var _room_before=json_stringify(_e.scene);_e.scene.parts[0].x+=2;ln_edit_changed(_room_before);
+    ln_edit_select(1,1,_rooms[1]);ln_check(array_length(_e.undo)==0,"another room has its own history");
+    ln_edit_select(1,1,_rooms[0]);ln_check(array_length(_e.undo)>=1 && ln_edit_history(false),"room undo history survives leaving the room");    _e.art.open=true;_e.open=true;ln_art_draw();surface_save(application_surface,"scenery-art-editor.png");
     _e.art.open=false;_e.artworks=_saved.artworks;_e.scenes=_saved.scenes;_e.maps=_saved.maps;ln_art_refresh();
     show_debug_message("LN_SCENERY_ART_PASS: palette restrictions, MC pixels, source isolation, new assets, RGB composition, project roundtrip");
 }

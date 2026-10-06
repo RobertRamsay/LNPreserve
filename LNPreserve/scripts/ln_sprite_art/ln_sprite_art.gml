@@ -5,7 +5,7 @@ function LNSpriteArt() constructor {
     entry=undefined;clip_index=0;sheet="";sheet_scroll=0;allowed=undefined;uses={};palette={};strict={};
     tool=0;colour=c_white;mode=1;mc=false;drafts={};undo=[];redo=[];surfaces={};
     stroke=false;stroke_button=mb_left;stroke_key="";last_x=-1;last_y=-1;
-    canvas_surface=-1;playing=false;elapsed=0;dim=true;onion=false;crop=true;figure=undefined;full_rect=[0,0,8,8];clipboard=undefined;discard_armed=false;message="";
+    canvas_surface=-1;dirty_keys=[];autosave_us=0;playing=false;elapsed=0;dim=true;onion=false;crop=true;figure=undefined;full_rect=[0,0,8,8];clipboard=undefined;message="";
 }
 function ln_sprite_art_key(_name,_frame) {return _name+":"+string(_frame);}
 function ln_sprite_art_get(_name,_frame) {
@@ -172,7 +172,10 @@ function ln_sprite_art_settings(_name,_frame) {
     if(!is_struct(_a)) _a=ln_sprite_art_get(_name,_frame);
     return is_struct(_a)?[_a.mode,_a.mc]:[_v.mode,_v.mc];
 }
-function ln_sprite_art_touch(_a) {_a.rev++;_a.changed=true;global.ln_sprites.art.discard_armed=false;}
+function ln_sprite_art_touch(_a) {
+    var _v=global.ln_sprites.art,_key=ln_sprite_art_key(_a.sprite,_a.frame);_a.rev++;_a.changed=true;
+    if(!array_contains(_v.dirty_keys,_key)) array_push(_v.dirty_keys,_key);
+}
 function ln_sprite_art_checkpoint(_a) {
     var _v=global.ln_sprites.art;
     array_push(_v.undo,{key:ln_sprite_art_key(_a.sprite,_a.frame),text:json_stringify(_a)});
@@ -189,8 +192,8 @@ function ln_sprite_art_history(_redo) {
     var _v=global.ln_sprites.art,_from=_redo?_v.redo:_v.undo;if(array_length(_from)==0) return false;
     var _entry=array_pop(_from),_current=variable_struct_get(_v.drafts,_entry.key);
     array_push(_redo?_v.undo:_v.redo,{key:_entry.key,text:json_stringify(_current)});
-    var _a=json_parse(_entry.text);_a.rev=_current.rev+1;_a.changed=true;
-    variable_struct_set(_v.drafts,_entry.key,_a);_v.stroke=false;_v.discard_armed=false;return true;
+    var _a=json_parse(_entry.text);_a.rev=_current.rev;
+    variable_struct_set(_v.drafts,_entry.key,_a);ln_sprite_art_touch(_a);_v.stroke=false;return true;
 }
 function ln_sprite_art_line(_a,_x0,_y0,_x1,_y1,_colour) {
     var _steps=max(1,max(abs(_x1-_x0),abs(_y1-_y0)));
@@ -211,11 +214,6 @@ function ln_sprite_art_fill(_a,_x,_y,_colour) {
     }
     ln_sprite_art_touch(_a);
 }
-function ln_sprite_art_pending() {
-    var _v=global.ln_sprites.art,_keys=variable_struct_get_names(_v.drafts),_n=0;
-    for(var _i=0;_i<array_length(_keys);_i++) if(variable_struct_get(_v.drafts,_keys[_i]).changed) _n++;
-    return _n;
-}
 /// Writes the project pack without capturing an untouched room as a room edit.
 function ln_sprite_art_write(_file) {
     var _b=-1;
@@ -224,31 +222,38 @@ function ln_sprite_art_write(_file) {
         return file_exists(_file);
     } catch(_error) {if(_b!=-1 && buffer_exists(_b)) buffer_delete(_b);return false;}
 }
-function ln_sprite_art_apply() {
-    var _v=global.ln_sprites.art,_e=global.ln_editor,_keys=variable_struct_get_names(_v.drafts),_count=0;
-    var _trial=ln_enemy_copy(_e.sprite_art);
+/// Edits go straight into the project: every changed frame is committed once the stroke ends.
+/// The game's sprite assets are rebuilt when the editor closes, so painting never stalls.
+function ln_sprite_art_commit() {
+    var _v=global.ln_sprites.art,_e=global.ln_editor,_keys=_v.dirty_keys,_count=0;
+    if(array_length(_keys)==0) return false;
+    _v.dirty_keys=[];
     for(var _i=0;_i<array_length(_keys);_i++) {
+        if(!variable_struct_exists(_v.drafts,_keys[_i])) continue;
         var _a=variable_struct_get(_v.drafts,_keys[_i]);if(!_a.changed) continue;
-        if(!ln_sprite_art_pixels_valid(_a,_a.pixels)) {_v.message="Frame "+_keys[_i]+" breaks its colour rules; nothing applied.";return false;}
-        if(array_equals(_a.pixels,ln_sprite_art_read(_a.sprite,_a.frame)) && !_a.mc && _a.mode==1) variable_struct_remove(_trial,_keys[_i]);
-        else variable_struct_set(_trial,_keys[_i],{sprite:_a.sprite,frame:_a.frame,width:_a.width,height:_a.height,mode:_a.mode,mc:_a.mc,data:ln_sprite_art_encode(_a.pixels)});
+        _a.changed=false;
+        if(!ln_sprite_art_pixels_valid(_a,_a.pixels)) ln_sprite_art_conform(_a);
+        if(array_equals(_a.pixels,ln_sprite_art_read(_a.sprite,_a.frame)) && !_a.mc && _a.mode==1) {
+            if(variable_struct_exists(_e.sprite_art,_keys[_i])) {variable_struct_remove(_e.sprite_art,_keys[_i]);_count++;}
+            continue;
+        }
+        if(!variable_struct_exists(_e.sprite_art,_keys[_i])) {
+            var _names=variable_struct_get_names(_e.sprite_art),_total=_a.width*_a.height;
+            for(var _j=0;_j<array_length(_names);_j++) {var _o=variable_struct_get(_e.sprite_art,_names[_j]);_total+=_o.width*_o.height;}
+            if(array_length(_names)>=12000 || _total>40000000) {_v.message="Project sprite artwork limit reached; this frame was not stored.";continue;}
+        }
+        variable_struct_set(_e.sprite_art,_keys[_i],{sprite:_a.sprite,frame:_a.frame,width:_a.width,height:_a.height,mode:_a.mode,mc:_a.mc,data:ln_sprite_art_encode(_a.pixels)});
         _count++;
     }
-    if(_count==0) {_v.message="No unapplied frame edits.";return false;}
-    if(!ln_sprite_art_valid(_trial,false)) {_v.message="Project sprite artwork limit reached; nothing applied.";return false;}
-    _e.sprite_art=_trial;_e.sprite_rev++;_e.enabled=true;_e.dirty=true;
-    for(var _i=0;_i<array_length(_keys);_i++) variable_struct_get(_v.drafts,_keys[_i]).changed=false;
-    ln_sprite_art_write("modified-scenes.autosave.json");
-    _v.message="Applied "+string(_count)+" frame"+(_count==1?"":"s")+" to the project. Modified ON. Save file stores them with your room edits.";
+    if(_count==0) return false;
+    _e.sprite_rev++;_e.enabled=true;_e.dirty=true;_v.autosave_us=2000000;
     return true;
 }
-function ln_sprite_art_discard() {
-    var _v=global.ln_sprites.art,_n=ln_sprite_art_pending();
-    if(_n==0) {_v.message="No unapplied frame edits.";return;}
-    if(!_v.discard_armed) {_v.discard_armed=true;_v.message="Click Discard again to drop "+string(_n)+" unapplied frame"+(_n==1?"":"s")+".";return;}
-    var _keys=variable_struct_get_names(_v.drafts);
-    for(var _i=0;_i<array_length(_keys);_i++) if(variable_struct_get(_v.drafts,_keys[_i]).changed) variable_struct_remove(_v.drafts,_keys[_i]);
-    _v.undo=[];_v.redo=[];_v.discard_armed=false;_v.message="Unapplied frame edits discarded.";
+/// Runs after every editor step: commits finished edits and keeps the autosave current.
+function ln_sprite_art_flush() {
+    var _v=global.ln_sprites.art;
+    if(!_v.stroke) ln_sprite_art_commit();
+    if(_v.autosave_us>0) {_v.autosave_us-=delta_time;if(_v.autosave_us<=0 || !_v.open) {_v.autosave_us=0;ln_sprite_art_write("modified-scenes.autosave.json");}}
 }
 /// Called when a project file replaces the artwork, so stale drafts cannot be applied onto it.
 function ln_sprite_art_reset_session() {
@@ -264,6 +269,8 @@ function ln_sprite_art_free() {
 /// Keeps the game's sprite assets in step with the project and the Modified switch.
 function ln_sprite_art_sync() {
     var _e=global.ln_editor;
+    // The editor previews its own frames; the game assets catch up once it closes.
+    if(global.ln_sprites.art.open) return;
     if(_e.sprite_synced_rev==_e.sprite_rev && _e.sprite_synced_enabled==_e.enabled) return;
     _e.sprite_synced_rev=_e.sprite_rev;_e.sprite_synced_enabled=_e.enabled;
     var _want={},_keys=variable_struct_get_names(_e.sprite_art);
@@ -351,13 +358,13 @@ function ln_sprite_art_use_sheet(_name,_frame) {
 function ln_sprite_art_open() {
     var _sv=global.ln_sprites,_v=_sv.art;ln_sprite_art_catalog();
     _v.entry=_sv.list[_sv.selected];ln_sprite_art_use_clip(_sv.animation);
-    _v.index=clamp(_sv.frame,0,array_length(_v.items)-1);_v.open=true;_v.playing=false;_v.stroke=false;_v.discard_armed=false;
-    _v.message="Shared frames update every animation that uses them. Apply stores edits in the project.";
+    _v.index=clamp(_sv.frame,0,array_length(_v.items)-1);_v.open=true;_v.playing=false;_v.stroke=false;
+    _v.message="Edits go straight into the project. Shared frames update every animation that uses them.";
 }
 function ln_sprite_art_close() {
     var _sv=global.ln_sprites,_v=_sv.art;
     if(_v.view==0 && is_struct(_v.entry) && _v.entry==_sv.list[_sv.selected]) {_sv.animation=_v.clip_index;_sv.frame=_v.index;_sv.elapsed=0;}
-    _v.open=false;_v.stroke=false;_v.playing=false;ln_sprite_art_free();
+    _v.stroke=false;ln_sprite_art_commit();_v.open=false;_v.playing=false;ln_sprite_art_flush();ln_sprite_art_free();
 }
 function ln_sprite_art_active() {
     var _v=global.ln_sprites.art;if(array_length(_v.items)==0) return undefined;
@@ -434,14 +441,9 @@ function ln_sprite_art_step(_host) {
     var _ctrl=keyboard_check(vk_control),_mx=ln_tool_mouse_x(),_my=ln_tool_mouse_y();
     if(keyboard_check_pressed(vk_f9)) ln_fullscreen_toggle(_host);
     if(ln_edit_hit(206,18,170,28) || keyboard_check_pressed(vk_escape)) {ln_sprite_art_close();return true;}
-    if(ln_edit_hit(24,18,170,28)) ln_sprite_art_apply();
+    if(ln_edit_hit(24,18,170,28)) ln_project_save_as();
     if(ln_edit_hit(388,18,110,28) || (_ctrl && keyboard_check_pressed(ord("Z")))) ln_sprite_art_history(false);
     if(ln_edit_hit(510,18,110,28) || (_ctrl && keyboard_check_pressed(ord("Y")))) ln_sprite_art_history(true);
-    if(ln_edit_hit(632,18,190,28)) ln_sprite_art_discard();
-    if(ln_edit_hit(834,18,120,28)) {
-        var _file=get_save_filename("JSON files|*.json","modified-scenes.json");
-        if(_file!="") _v.message=ln_sprite_art_write(_file)?"Saved project file with applied sprite and room edits.":"Could not save; edits remain in memory.";
-    }
     if(ln_edit_hit(966,18,170,28)) _e.enabled=!_e.enabled;
     if(ln_edit_hit(760,60,240,28) && is_struct(_v.entry) && _v.view!=0) ln_sprite_art_use_clip(_v.clip_index);
     if(ln_edit_hit(1010,60,240,28)) {
@@ -549,11 +551,9 @@ function ln_sprite_art_draw() {
     var _sv=global.ln_sprites,_v=_sv.art,_e=global.ln_editor,_n=array_length(_v.items);
     shader_reset();gpu_set_blendmode(bm_normal);gpu_set_texfilter(false);draw_set_alpha(1);
     ln_tool_clear(false);draw_set_font(font_jansina);draw_set_halign(fa_left);draw_set_valign(fa_top);draw_set_colour(c_white);
-    var _pending=ln_sprite_art_pending();
-    ln_edit_button(24,18,170,"Apply to project",_pending>0);ln_edit_button(206,18,170,"Back to viewer");
+    ln_edit_button(24,18,170,"Save project",_e.dirty);ln_edit_button(206,18,170,"Back to viewer");
     ln_edit_button(388,18,110,"Undo (^Z)",array_length(_v.undo)>0);ln_edit_button(510,18,110,"Redo (^Y)",array_length(_v.redo)>0);
-    ln_edit_button(632,18,190,_v.discard_armed?"Confirm discard":"Discard unapplied",_pending>0);
-    ln_edit_button(834,18,120,"Save file");ln_edit_button(966,18,170,"Modified "+(_e.enabled?"ON":"OFF"),_e.enabled);
+    ln_edit_button(966,18,170,"Modified "+(_e.enabled?"ON":"OFF"),_e.enabled);
     ln_edit_button(760,60,240,"Animation",_v.view==0);ln_edit_button(1010,60,240,"Sprite sheet",_v.view!=0);
     draw_text(24,64,"SPRITE ART / LN"+string(_sv.game)+" / "+_v.context);
     var _p=ln_sprite_art_active();
@@ -564,10 +564,10 @@ function ln_sprite_art_draw() {
             ln_sprite_art_thumb(_at,24+(_i mod 10)*70,116+(_i div 10)*70,64,_at==_v.index);
         }
         ln_edit_button(600,612,60,"Up");ln_edit_button(670,612,74,"Down");
-        draw_text(24,612,"Rows "+string(_v.sheet_scroll+1)+"-"+string(min(ceil(_n/10),_v.sheet_scroll+7))+" of "+string(ceil(_n/10))+".  Green: applied edit.  Orange: unapplied edit.");
+        draw_text(24,612,"Rows "+string(_v.sheet_scroll+1)+"-"+string(min(ceil(_n/10),_v.sheet_scroll+7))+" of "+string(ceil(_n/10))+".  Green: edited frame.");
     } else if(is_array(_p)) {
         var _l=ln_sprite_art_local(_p,0,0),_uses=variable_struct_exists(_v.uses,ln_sprite_art_key(_p[0],_p[1]))?variable_struct_get(_v.uses,ln_sprite_art_key(_p[0],_p[1])):0;
-        var _d=ln_sprite_art_draft(_p[0],_p[1],false),_state=is_struct(_d) && _d.changed?"unapplied edit":(is_struct(ln_sprite_art_get(_p[0],_p[1]))?"applied edit":"original");
+        var _d=ln_sprite_art_draft(_p[0],_p[1],false),_state=is_struct(ln_sprite_art_get(_p[0],_p[1])) || (is_struct(_d) && _d.changed)?"edited":"original";
         draw_text(24,90,_p[0]+" #"+string(_p[1])+"  "+string(_l[2])+"x"+string(_l[3])+"  in "+string(_uses)+" animation frames  ("+_state+")");
         // Canvas: checkerboard, onion skin, layers and the selected layer's pixel grid,
         // drawn into a canvas-sized surface so cropped layers cannot spill over the panels.
@@ -646,7 +646,7 @@ function ln_sprite_art_draw() {
         ln_edit_button(760,632,230,"Onion skin",_v.onion);ln_edit_button(1002,632,230,"Crop to figure",_v.crop);
     }
     draw_set_colour(c_white);
-    draw_text(760,672,"Project: "+string(array_length(variable_struct_get_names(_e.sprite_art)))+" edited frames.  Unapplied: "+string(_pending)+".");
+    draw_text(760,672,"Project: "+string(array_length(variable_struct_get_names(_e.sprite_art)))+" edited frames."+(_e.dirty?"  Not saved to a file yet.":""));
     draw_text(24,716,"Right-drag: erase.  Alt-click: pick colour and layer.  Arrows: frame.  Space: play.  Esc: back to the viewer.");
     draw_set_colour(make_colour_rgb(150,210,220));draw_text(24,744,_v.message);draw_set_colour(c_white);
 }
@@ -674,17 +674,20 @@ function ln_sprite_art_checks() {
     _a.mode=3;ln_sprite_art_conform(_a);ln_check(colour_get_blue(_a.pixels[9]) mod 17==0 && ln_sprite_art_pixels_valid(_a,_a.pixels),"Amiga quantizes to 4096 colours");
     _a.mode=4;ln_sprite_art_put(_a,1,1,_rgb);ln_check(_a.pixels[9]==_rgb,"AGA keeps 24bit colour");
     var _m={sprite:"spr_ln3_actor_parts",frame:0,width:4,height:1,mode:4,mc:false,tinted:true,pixels:array_create(4,-1)};
-    ln_sprite_art_put(_m,1,0,_rgb);ln_check(_m.pixels[1]==c_white && !ln_sprite_art_pixels_valid({sprite:"spr_ln3_actor_parts",width:4,mode:4,mc:false,tinted:true},[_rgb,-1,-1,-1]),"LN3 layers stay single-colour masks");    ln_check(ln_rewind_equal(ln_sprite_art_decode({width:8,height:2,data:ln_sprite_art_encode(_a.pixels)}),_a.pixels),"frame encoding roundtrips exactly");
-    // Editor flow from the viewer: paint, undo, redo, apply.
+    ln_sprite_art_put(_m,1,0,_rgb);ln_check(_m.pixels[1]==c_white && !ln_sprite_art_pixels_valid({sprite:"spr_ln3_actor_parts",width:4,mode:4,mc:false,tinted:true},[_rgb,-1,-1,-1]),"LN3 layers stay single-colour masks");
+    ln_check(ln_rewind_equal(ln_sprite_art_decode({width:8,height:2,data:ln_sprite_art_encode(_a.pixels)}),_a.pixels),"frame encoding roundtrips exactly");
+    // Editor flow from the viewer: paint, undo, redo; edits go straight into the project.
     _sv.game=1;_sv.category=0;ln_sprite_filter();_sv.animation=0;_sv.frame=0;ln_sprite_art_open();
     ln_check(_v.open && array_length(_v.items)==array_length(_sv.list[0].clips[0].frames),"editor opens on the viewer animation");
     var _p=ln_sprite_art_active(),_name=_p[0],_frame=_p[1],_key=ln_sprite_art_key(_name,_frame),_w=ln_sprite_art_local(_p,0,0)[2];
     var _before=ln_sprite_art_read(_name,_frame),_spot=2*_w+2;ln_check(_before[_spot]==-1,"test pixel starts transparent");
     _v.mode=1;_v.mc=false;var _d=ln_sprite_art_begin(_name,_frame);ln_sprite_art_line(_d,2,2,2,2,_P[7]);
-    ln_check(_d.pixels[_spot]==_P[7] && ln_sprite_art_pending()==1,"pencil paints the selected frame");
+    ln_check(_d.pixels[_spot]==_P[7] && _d.changed,"pencil paints the selected frame");
     ln_sprite_art_history(false);ln_check(variable_struct_get(_v.drafts,_key).pixels[_spot]==-1,"undo restores the frame");
     ln_sprite_art_history(true);ln_check(variable_struct_get(_v.drafts,_key).pixels[_spot]==_P[7],"redo repeats the stroke");
-    ln_check(ln_sprite_art_apply() && is_struct(ln_sprite_art_get(_name,_frame)) && _e.enabled,"apply stores the frame in the project");
+    ln_check(ln_sprite_art_commit() && is_struct(ln_sprite_art_get(_name,_frame)) && _e.enabled && _e.dirty,"finished edit goes straight into the project");
+    ln_sprite_art_sync();ln_check(ln_sprite_art_read_index(asset_get_index(_name),_frame)[_spot]==-1,"game sprite waits while the editor is open");
+    ln_sprite_art_close();
     var _sync=get_timer();ln_sprite_art_sync();_sync=get_timer()-_sync;
     var _asset=asset_get_index(_name),_backup=variable_struct_get(_e.sprite_backups,_name);
     ln_check(ln_sprite_art_read_index(_asset,_frame)[_spot]==_P[7],"Modified ON draws the edited frame in the game");
@@ -693,6 +696,11 @@ function ln_sprite_art_checks() {
     ln_check(sprite_get_number(_asset)==sprite_get_number(_backup) && sprite_get_xoffset(_asset)==sprite_get_xoffset(_backup) && sprite_get_yoffset(_asset)==sprite_get_yoffset(_backup),"edited sprite keeps frame count and origin");
     _e.enabled=false;ln_sprite_art_sync();ln_check(ln_sprite_art_read_index(_asset,_frame)[_spot]==-1,"Modified OFF restores the original sprite");
     _e.enabled=true;ln_sprite_art_sync();ln_check(ln_sprite_art_read_index(_asset,_frame)[_spot]==_P[7],"Modified ON reapplies the edit");
+    // Undo history survives leaving the editor to play.
+    ln_sprite_art_open();ln_sprite_art_history(false);ln_sprite_art_commit();
+    ln_check(!is_struct(ln_sprite_art_get(_name,_frame)),"undo after reopening the editor updates the project");
+    ln_sprite_art_history(true);ln_sprite_art_commit();ln_sprite_art_close();ln_sprite_art_sync();
+    ln_check(is_struct(ln_sprite_art_get(_name,_frame)) && ln_sprite_art_read_index(_asset,_frame)[_spot]==_P[7],"redo after reopening restores the edit in the game");
     // Project file.
     var _pack=ln_enemy_copy(ln_edit_pack());ln_check(ln_edit_validate(_pack),"sprite artwork validates in the project pack");
     ln_check(ln_sprite_art_write("sprite-art-test.json") && ln_edit_load("sprite-art-test.json"),"project file saves and loads");
@@ -705,18 +713,18 @@ function ln_sprite_art_checks() {
     _bad=ln_enemy_copy(_pack);var _bf=variable_struct_get(_bad.sprites,_key);_bf.mode=0;_bf.data=ln_sprite_art_encode(_five);ln_check(!ln_edit_validate(_bad),"strict frame with colours outside the sprite's set is rejected");
     // Revert removes the project entry.
     _v.view=0;_d=ln_sprite_art_begin(_name,_frame);_d.pixels=ln_sprite_art_read(_name,_frame);_d.mode=1;_d.mc=false;ln_sprite_art_touch(_d);
-    ln_check(ln_sprite_art_apply() && !is_struct(ln_sprite_art_get(_name,_frame)),"reverted frame leaves the project");
+    ln_check(ln_sprite_art_commit() && !is_struct(ln_sprite_art_get(_name,_frame)),"reverted frame leaves the project");
     ln_sprite_art_sync();ln_check(ln_sprite_art_read_index(_asset,_frame)[_spot]==-1 && !variable_struct_exists(_e.sprite_assigned,_name),"reverted sprite is restored in the game");
     // LN3 hardware-sprite layer.
     _sv.game=3;_sv.category=0;ln_sprite_filter();ln_sprite_art_open();
     var _q=ln_sprite_art_active(),_ql=ln_sprite_art_local(_q,0,0),_qpix=ln_sprite_art_read(_q[0],_q[1]),_qspot=-1;
     for(var _i=0;_i<array_length(_qpix);_i++) if(_qpix[_i]==-1) {_qspot=_i;break;}
     _d=ln_sprite_art_begin(_q[0],_q[1]);ln_sprite_art_line(_d,_qspot mod _ql[2],_qspot div _ql[2],_qspot mod _ql[2],_qspot div _ql[2],_P[2]);
-    ln_check(ln_sprite_art_apply(),"LN3 layer applies");ln_sprite_art_sync();
+    ln_check(ln_sprite_art_commit(),"LN3 layer edit is stored");ln_sprite_art_close();ln_sprite_art_sync();
     ln_check(ln_sprite_art_read_index(asset_get_index(_q[0]),_q[1])[_qspot]==c_white,"LN3 layer mask is switched on in the game bank");
     ln_check(ln_sprite_art_pick((_qspot mod _ql[2])+_q[2]+.5-sprite_get_xoffset(ln_sprite_art_source(_q[0])),(_qspot div _ql[2])+_q[3]+.5-sprite_get_yoffset(ln_sprite_art_source(_q[0]))) && _v.colour==_v.items[_v.index][_v.part][4],"picking an LN3 layer pixel selects that layer and its game colour");
     // Largest sheet rebuild cost.
-    _d=ln_sprite_art_begin("spr_ln1_dungeon_uniforms",0);ln_sprite_art_line(_d,1,1,3,1,_P[7]);ln_sprite_art_apply();
+    _d=ln_sprite_art_begin("spr_ln1_dungeon_uniforms",0);ln_sprite_art_line(_d,1,1,3,1,_P[7]);ln_sprite_art_commit();
     var _big=get_timer();ln_sprite_art_sync();_big=get_timer()-_big;
     ln_check(ln_sprite_art_read_index(asset_get_index("spr_ln1_dungeon_uniforms"),0)[1*96+1]==_P[7],"3121-frame sheet edit reaches the game");
     // Screens.

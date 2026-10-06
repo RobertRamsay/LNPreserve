@@ -204,16 +204,30 @@ C64 Loose, which preserves them exactly. LN3 character layers are single-colour 
 coloured by the game palette, so painting switches mask pixels on and off.
 
 Frames are shared: editing one updates every animation and character that uses it (the
-info line shows how many animation frames use it). **Apply to project** stores edited frames
-in the project and turns Modified ON; **Save file** writes them with the room edits.
-Unapplied edits stay in memory until applied or discarded. While Modified is ON, edited
-frames replace the game's sprite assets, so gameplay, the viewer and the room editor
-preview all show them. Modified OFF restores the original sprites. Original sprite assets
-are never rewritten.
+info line shows how many animation frames use it). While Modified is ON, edited frames
+replace the game's sprite assets, so gameplay, the viewer and the room editor preview all
+show them. Modified OFF restores the original sprites. Original sprite assets are never
+rewritten.
 
-Applying rebuilds the affected sprite once: about 0.3 s for a 393-frame character sheet and
-2 to 3 s for the 3121-frame LN1 dungeon uniforms sheet. New animation frames, new actions
-and full-colour LN3 characters are not part of this stage.
+## Automatic project updates, saving and undo
+
+Sprite and scenery artwork edits go straight into the project as you make them, like room
+edits, and turn Modified ON. There is no Apply step. **Save project** (in both artwork
+editors) writes everything to a file: rooms, maps, collisions, enemies, scenery and sprite
+artwork. While edits are unsaved, a prompt in the bottom-left asks *Unsaved edits. Save
+project?* **Yes** opens the save window; **No** hides it until the next edit. **Load edits**
+(beside Sprite viewer) opens a saved project from any screen. The autosave file is also
+kept current.
+
+Undo history is kept for the whole session per room, per scenery asset and across sprite
+frames, so you can play-test and come back to undo. It is lost when the application closes
+or another project is loaded. Revert frame (sprites) and Restore all (rooms) return to the
+original artwork at any time.
+
+The game's copy of an edited sprite is rebuilt when you leave the sprite editor: about
+0.3 s for a 393-frame character sheet and 2 to 3 s for the 3121-frame LN1 dungeon uniforms
+sheet. New animation frames, new actions and full-colour LN3 characters are not part of
+this stage.
 
 `--sprite-art-test` covers the colour rules, exact original reads, undo/redo, apply, in-game
 replacement with Modified ON/OFF, project save/load and validation, revert, LN3 layers and

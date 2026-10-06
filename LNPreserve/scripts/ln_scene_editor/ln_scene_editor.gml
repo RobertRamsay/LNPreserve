@@ -1,7 +1,7 @@
 /// Versioned, opt-in scene overrides. No original assets or room logic are edited.
 function LNSceneEditor() constructor {
     artworks={};art_sprites={};art=new LNSceneryArt();
-    sprite_art={};sprite_rev=0;sprite_synced_rev=-1;sprite_synced_enabled=false;sprite_backups={};sprite_assigned={};sprite_live={};
+    sprite_art={};sprite_rev=0;sprite_synced_rev=-1;sprite_synced_enabled=false;sprite_backups={};sprite_assigned={};sprite_live={};room_histories={};save_prompt_hidden="";
     maps={};map_undo=[];map_redo=[];map_open=false;map_room=-1;map_edge=0;map_scroll=0;
     nav_job=undefined;nav_last_nodes=0;nav_last_us=0;enemy_edit=false;enemy_index=0;enemy_drag=false;enemy_waypoint=-1;enemy_catalogs={};enemy_catalog_building=false;
     test_music_restore=undefined;test_active=false;
@@ -83,13 +83,16 @@ function ln_edit_select(_game,_level,_room) {
     var _e,_source,_key,_epoch,_entry;
      _e=global.ln_editor; _source=ln_edit_source(_game,_level,_room);
     if(!is_struct(_source)) {_e.message="No source part list for that room";return false;}
+    // Room undo history is kept per room for the session, so it survives play-testing.
+    if(is_struct(_e.scene)) variable_struct_set(_e.room_histories,ln_edit_key(_e.game,_e.level,_e.room_id),{undo:_e.undo,redo:_e.redo});
     _e.collision_index=-1;_e.collision_scroll=0;_e.collision_before=undefined;
     _e.enemy_drag=false;_e.enemy_waypoint=-1;_e.enemy_index=0;
     _e.game=_game;_e.level=_level;_e.room_id=_room;_e.source_scene=_source;_e.pending_pick=undefined;
      _key=ln_edit_key(_game,_level,_room);
     _e.scene=variable_struct_exists(_e.scenes,_key)?json_parse(json_stringify(variable_struct_get(_e.scenes,_key))):_source;
     _e.scene.preserve_bitmap=true;
-    _e.part=-1;_e.scroll=0;_e.asset=0;_e.asset_scroll=0;_e.undo=[];_e.redo=[];_e.build=-1;_e.reference=!variable_struct_exists(_e.scenes,_key) && !ln_art_level_has(_game,_level);_e.depth_edit=false;_e.depth_hold_dir=0;
+    var _history=variable_struct_exists(_e.room_histories,_key)?variable_struct_get(_e.room_histories,_key):{undo:[],redo:[]};
+    _e.part=-1;_e.scroll=0;_e.asset=0;_e.asset_scroll=0;_e.undo=_history.undo;_e.redo=_history.redo;_e.build=-1;_e.reference=!variable_struct_exists(_e.scenes,_key) && !ln_art_level_has(_game,_level);_e.depth_edit=false;_e.depth_hold_dir=0;
     ln_edit_free_cache();ln_edit_free_preview();
     // Preview constructors must not reset the running game's rewind epoch.
      _epoch=global.ln_rewind_epoch;
@@ -172,6 +175,8 @@ function ln_edit_load(_file) {
         global.ln_editor.artworks=variable_struct_exists(_pack,"artworks")?_pack.artworks:{};ln_art_refresh();
         global.ln_editor.sprite_art=variable_struct_exists(_pack,"sprites")?_pack.sprites:{};global.ln_editor.sprite_rev++;ln_sprite_art_reset_session();
         global.ln_editor.scenes=_pack.scenes;global.ln_editor.revision++;ln_edit_free_cache();
+        // A loaded project starts fresh histories and counts as saved.
+        global.ln_editor.room_histories={};global.ln_editor.undo=[];global.ln_editor.redo=[];global.ln_editor.art.histories={};global.ln_editor.dirty=false;
         global.ln_editor.enabled=true;
         global.ln_editor.message="Custom file loaded. Modified ON.";return true;
     } catch(_error) {if(_b>=0) buffer_delete(_b);global.ln_editor.message="Could not load custom file; existing edits kept";return false;}
@@ -302,7 +307,7 @@ function ln_edit_button(_x,_y,_w,_label,_on=undefined) {
 function ln_edit_step(_host) {
     var _e,_s,_file,_i,_g,_max,_level,_d,_ids,_index,_assets,_before,_changed,_id,_o,_p,_swap,_step,_dx,_dy,_held,_delta,_next_depth;
      _e=global.ln_editor;
-    if(_e.open && _e.art.open) return ln_art_step();
+    if(_e.open && _e.art.open) {var _art_used=ln_art_step();ln_art_flush();return _art_used;}
     var _test_key=(keyboard_check_pressed(ord("T")) || keyboard_check_pressed(vk_f5)) && !keyboard_check(vk_control) && !keyboard_check(vk_alt);
     var _test_return=!_e.open && !_host.workbench && !_host.scene_test.menu && _test_key;
     if(_test_return) _e.toggle_requested=true;
@@ -1555,8 +1560,8 @@ function ln_collision_edit_checks() {
         var _v=ln_collision_selected();ln_check(is_struct(_v) && !_v.locked,"new collision selected");
         var _saved=json_stringify(_e.scene);
         ln_check(ln_edit_validate({format:"LNPreserve-scenes",version:1,scenes:_e.scenes}),"collision file validates in all three games");
-        ln_check(ln_edit_history(false) && json_stringify(_e.scene)==_original,"collision add undo");
-        ln_check(ln_edit_history(true) && json_stringify(_e.scene)==_saved,"collision add redo");
+        ln_check(ln_edit_history(false) && ln_rewind_equal(_e.scene,json_parse(_original)),"collision add undo");
+        ln_check(ln_edit_history(true) && ln_rewind_equal(_e.scene,json_parse(_saved)),"collision add redo");
         var _r=ln_collision_reshape(_game,_v.record,1,8,4),_before=json_stringify(_e.scene);
         ln_collision_store(_v.index,_r);ln_edit_changed(_before);ln_edit_collision_refresh();
         ln_check(ln_collision_record_valid(_game,_r) && _r[2]>_v.record[2],"endpoint reshaping retains valid solid record: "+json_stringify(_r)+" before "+json_stringify(_v.record)+" valid "+string(ln_collision_record_valid(_game,_r)));

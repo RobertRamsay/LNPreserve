@@ -84,7 +84,7 @@ function ln_sprite_step(_host) {
     if(!_v.open) return false;
     ln_track_poll(global.ln_tracks);
     if(ln_tool_media_hit(1)) {ln_sprite_to_track();return true;}
-    if(_v.art.open) return ln_sprite_art_step(_host);
+    if(_v.art.open) {var _art_used=ln_sprite_art_step(_host);ln_sprite_art_flush();return _art_used;}
     if(ln_edit_hit(990,116,200,28) || keyboard_check_pressed(ord("E"))) {ln_sprite_art_open();return true;}
     if(keyboard_check_pressed(vk_escape) || ln_edit_hit(1030,20,220,28)) {ln_sprite_toggle(_host);return true;}
     if(keyboard_check_pressed(vk_f9)) ln_fullscreen_toggle(_host);

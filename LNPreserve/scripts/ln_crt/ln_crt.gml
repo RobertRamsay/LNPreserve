@@ -508,6 +508,10 @@ function ln_tool_present(_host) {
     ln_edit_button(_media[0]+310,_media[1],120,"Music "+(_music?"ON":"OFF"),_music);
     ln_edit_button(_media[0]-250,_media[1],240,"Load edits");
     if(_t.load_message_us>0) {draw_set_colour(make_colour_rgb(150,210,220));draw_text(_media[0]-250,_media[1]+32,_t.load_message);draw_set_colour(c_white);}
+    if(ln_tool_save_prompt()) {
+        draw_set_colour(make_colour_rgb(255,220,120));draw_text(320,944,"Unsaved edits. Save project?");draw_set_colour(c_white);
+        ln_edit_button(620,940,90,"Yes");ln_edit_button(720,940,90,"No");
+    }
     if(ln_track_message()!="") {
         draw_set_colour(c_white);
         draw_text(_media[0],_media[1]+32,global.ln_tracks.paused?"PAUSED: Track:":"PLAYING: Track:");
@@ -528,6 +532,10 @@ function ln_tool_step(_host) {
     }
     if(_t.load_message_us>0) _t.load_message_us-=delta_time;
     if(ln_tool_media_hit(3)) ln_tool_load_edits();
+    if(ln_tool_save_prompt() && _click && mouse_y>=940 && mouse_y<968) {
+        if(mouse_x>=620 && mouse_x<710) ln_project_save_as();
+        if(mouse_x>=720 && mouse_x<810) global.ln_editor.save_prompt_hidden=ln_tool_edit_stamp();
+    }
     if(ln_tool_ui_visible() && _click && mouse_y>=96 && mouse_y<124) {
         if(!global.ln_editor.open && !global.ln_tracks.open && !global.ln_sprites.open && mouse_x>=748 && mouse_x<928) global.ln_editor.toggle_requested=true;
         if(mouse_x>=1256 && mouse_x<1304) ln_window_preset(1);
@@ -841,5 +849,28 @@ function ln_tool_load_edits() {
     var _ok=ln_edit_load(_file);
     if(_ok && _e.open) ln_edit_select(_e.game,_e.level,_e.room_id);
     _t.load_message=_ok?"Edits loaded. Modified ON.":_e.message;_t.load_message_us=4000000;
+    return _ok;
+}
+
+/// Changes whenever the project changes, so "No" hides the prompt only until the next edit.
+function ln_tool_edit_stamp() {
+    var _e=global.ln_editor;return string(_e.revision)+":"+string(_e.sprite_rev)+":"+string(array_length(_e.undo));
+}
+function ln_tool_save_prompt() {
+    var _e=global.ln_editor;
+    return global.ln_tool.active && ln_tool_ui_visible() && _e.dirty && _e.save_prompt_hidden!=ln_tool_edit_stamp();
+}
+/// Writes every edit (rooms, maps, scenery and sprite artwork) to a project file of the user's choice.
+function ln_project_save_as() {
+    var _e=global.ln_editor,_t=global.ln_tool;
+    if(_e.art.open) {_e.art.stroke=undefined;ln_art_flush();}
+    if(global.ln_sprites.art.open) ln_sprite_art_commit();
+    var _file=get_save_filename("JSON files|*.json","modified-scenes.json");
+    if(_file=="") return false;
+    var _ok=ln_sprite_art_write(_file);
+    if(_ok) {_e.dirty=false;_e.save_prompt_hidden="";}
+    _t.load_message=_ok?"Project saved.":"Could not save; edits remain in memory.";_t.load_message_us=4000000;
+    if(_e.art.open) _e.art.message=_t.load_message;
+    if(global.ln_sprites.art.open) global.ln_sprites.art.message=_t.load_message;
     return _ok;
 }
