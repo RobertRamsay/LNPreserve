@@ -2249,7 +2249,20 @@ function ln_enemy_checks() {
         _last=_x;_last_raw=_gp.display.player_x;
     }
     show_debug_message("LN3 walk per 60 Hz frame: smooth max "+string(_max)+" px, original max "+string(_max_raw)+" px");
-    ln_check(_max<=1 && _max_raw>=3,"LN3 smooth walking moves at most one pixel per display frame");global.ln_ln3_smooth=false;    var _checked=0,_even=true;_gs=new LN3Play(1);
+    ln_check(_max<=1 && _max_raw>=3,"LN3 smooth walking moves at most one pixel per display frame");global.ln_ln3_smooth=false;    // Enhanced: the somersault jump lasts longer but covers the same distance.
+    var _jump=[];
+    for(var _mode=0;_mode<2;_mode++) {
+        global.ln_ln3_smooth=_mode==1;var _gj=new LN3Play(1),_start=-1,_x0=0,_ticks=0,_dist=0;
+        for(var _t=0;_t<200;_t++) {
+            ln3_play_tick(_gj,_t<20?8:(_t<24?24:8));
+            var _in=_gj.state.player_action==28 || _gj.state.player_action==29;
+            if(_in && _start<0) {_start=_t;_x0=_gj.state.player_x;}
+            if(!_in && _start>=0) {_ticks=_t-_start;_dist=_gj.state.player_x-_x0;break;}
+        }
+        array_push(_jump,[_ticks,_dist]);
+    }
+    show_debug_message("LN3 jump: original "+string(_jump[0][0])+" ticks / "+string(_jump[0][1])+" px, enhanced "+string(_jump[1][0])+" ticks / "+string(_jump[1][1])+" px");
+    ln_check(_jump[0][0]>0 && _jump[1][0]>_jump[0][0] && _jump[1][1]==_jump[0][1],"LN3 enhanced jumps play slower over the same distance");global.ln_ln3_smooth=false;    var _checked=0,_even=true;_gs=new LN3Play(1);
     for(var _t=0;_t<40;_t++) {
         ln3_play_tick(_gs,0);if(_gs.smooth_frame!=0 || !is_struct(_gs.display_prev)) continue;
         var _cost=_gs.timer.cycles_per_frame*1000000;
