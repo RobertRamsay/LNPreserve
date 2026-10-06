@@ -228,6 +228,14 @@ Data: `datafiles/actors/ln1/pieces.json`, written by `tools/export_ln1_pieces.py
 <LN1 RAM with the $d000 pose tables>`; `tools/audit_ln1_parts.py` compares every pose with
 the current frames.
 
+LN2 works the same way (the button is **Pieces LN1/2**). Its compositor places three body
+pieces and a weapon piece per pose; all are hi-res, and mirrored poses use mirrored copies of
+the same pieces, which the editor folds onto the originals. 446 pieces rebuild 3310 frames
+exactly: 418 ninja and 2892 enemy frames across all seven levels (a typical piece: 72 frames
+in about 0.25 s). `tools/export_ln2_pieces.py` runs the original compositor offline for every
+level (py65 on PYTHONPATH, for example `build/check-deps`, and the LN2 RAM captures in
+`source/local/captures`) and writes `datafiles/actors/ln2/pieces.json`.
+
 ### Facings (mirrored frames) and repeated animations
 
 The games are not flipped at runtime: each facing is a separate, pre-mirrored frame in the
