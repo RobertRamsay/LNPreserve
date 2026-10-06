@@ -655,6 +655,8 @@ function ln_sprite_art_draw() {
 function ln_sprite_art_checks() {
     var _e=global.ln_editor,_sv=global.ln_sprites,_v=_sv.art,_P=global.ln_paint_palette,_t=get_timer();
     _e.sprite_art={};_e.sprite_rev++;_e.enabled=true;ln_sprite_art_sync();ln_sprite_art_catalog();
+    // Opening the viewer after a project load (catalog read, list not built) must not crash.
+    _sv.list=[];ln_sprite_toggle(obj_ln_preserve);ln_check(_sv.open && array_length(_sv.list)>0,"viewer builds its list after a project load");ln_sprite_toggle(obj_ln_preserve);
     // Original pixels are read exactly, in the C64 palette.
     var _orig=ln_sprite_art_read("spr_char_ln2_enemy_type_2",0),_opaque=0,_inpal=true;
     for(var _i=0;_i<array_length(_orig);_i++) if(_orig[_i]>=0) {_opaque++;if(!array_contains(_P,_orig[_i])) _inpal=false;}

@@ -63,7 +63,8 @@ function ln_sprite_toggle(_host) {
                 audio_pause_sound(_voice);array_push(_v.voices,_voice);
             }
         }
-        if(!is_struct(_v.catalog)) ln_sprite_filter();
+        // Loading a project reads the catalog for validation without building this list.
+        if(!is_struct(_v.catalog) || array_length(_v.list)==0) ln_sprite_filter();
         _v.open=true;
     }
 }
