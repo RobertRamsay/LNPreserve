@@ -522,7 +522,7 @@ function ln_tool_present(_host) {
         ln_edit_button(620,976,90,"Yes");ln_edit_button(720,976,90,"No");
     }
     // LN3 motion toggle beside the media row; it takes effect on the next frame.
-    if(ln_tool_motion_visible(_host)) ln_edit_button(320,940,280,"LN3 motion: "+(ln3_smooth_enabled()?"Smooth":"Original"),ln3_smooth_enabled());
+    if(ln_tool_motion_visible(_host)) ln_edit_button(320,940,280,"LN3 motion: "+(ln3_smooth_enabled()?"Enhanced":"Original"));
     if(ln_track_message()!="") {
         draw_set_colour(c_white);
         draw_text(_media[0],_media[1]+32,global.ln_tracks.paused?"PAUSED: Track:":"PLAYING: Track:");

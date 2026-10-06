@@ -272,6 +272,8 @@ function ln3_play_tick(_g,_joy) {
     // Shorten only the initial reverse pose; later animation intervals stay native.
     if (variable_struct_exists(_s,"reverse_roll") && is_struct(_s.reverse_roll) && _s.player_action==_s.reverse_roll.action && _s.parts[1].cursor==1)
         _s.logic_wait=ceil(_s.logic_wait/2);
+    // Enhanced: somersault jumps (actions 28/29) play 1.5x slower over the same distance.
+    if(ln3_smooth_enabled() && (_s.player_action==28 || _s.player_action==29)) _s.logic_wait=ceil(_s.logic_wait*1.5);
     _g.smooth_period=max(1,_s.logic_wait); // logic runs again on the tick the countdown reaches zero
     ln3_projectile_hits(_s,_g.combat);
     if (_g.level==5) {
