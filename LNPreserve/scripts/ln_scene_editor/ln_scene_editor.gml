@@ -1,5 +1,6 @@
 /// Versioned, opt-in scene overrides. No original assets or room logic are edited.
 function LNSceneEditor() constructor {
+    artworks={};art_sprites={};art=new LNSceneryArt();
     maps={};map_undo=[];map_redo=[];map_open=false;map_room=-1;map_edge=0;map_scroll=0;
     nav_job=undefined;nav_last_nodes=0;nav_last_us=0;enemy_edit=false;enemy_index=0;enemy_drag=false;enemy_waypoint=-1;enemy_catalogs={};enemy_catalog_building=false;
     test_music_restore=undefined;test_active=false;
@@ -87,7 +88,7 @@ function ln_edit_select(_game,_level,_room) {
      _key=ln_edit_key(_game,_level,_room);
     _e.scene=variable_struct_exists(_e.scenes,_key)?json_parse(json_stringify(variable_struct_get(_e.scenes,_key))):_source;
     _e.scene.preserve_bitmap=true;
-    _e.part=-1;_e.scroll=0;_e.asset=0;_e.asset_scroll=0;_e.undo=[];_e.redo=[];_e.build=-1;_e.reference=!variable_struct_exists(_e.scenes,_key);_e.depth_edit=false;_e.depth_hold_dir=0;
+    _e.part=-1;_e.scroll=0;_e.asset=0;_e.asset_scroll=0;_e.undo=[];_e.redo=[];_e.build=-1;_e.reference=!variable_struct_exists(_e.scenes,_key) && !ln_art_level_has(_game,_level);_e.depth_edit=false;_e.depth_hold_dir=0;
     ln_edit_free_cache();ln_edit_free_preview();
     // Preview constructors must not reset the running game's rewind epoch.
      _epoch=global.ln_rewind_epoch;
@@ -110,12 +111,13 @@ function ln_edit_changed(_before) {
     variable_struct_set(_e.scenes,ln_edit_key(_e.game,_e.level,_e.room_id),json_parse(json_stringify(_e.scene)));
     _e.revision++;_e.dirty=true;_e.autosave_us=1000000;_e.build=-1;_e.reference=false;ln_edit_free_cache();
 }
-function ln_edit_pack() {return {format:"LNPreserve-scenes",version:1,scenes:global.ln_editor.scenes,maps:global.ln_editor.maps};}
+function ln_edit_pack() {return {format:"LNPreserve-scenes",version:1,scenes:global.ln_editor.scenes,maps:global.ln_editor.maps,artworks:global.ln_editor.artworks};}
 function ln_edit_validate(_pack) {
     var _keys,_i,_s,_required,_j,_d,_p,_fields,_k;
     if(!is_struct(_pack) || !variable_struct_exists(_pack,"format") || _pack.format!="LNPreserve-scenes" ||
         !variable_struct_exists(_pack,"version") || _pack.version!=1 || !variable_struct_exists(_pack,"scenes") || !is_struct(_pack.scenes)) return false;
     if(variable_struct_exists(_pack,"maps") && !ln_map_validate(_pack.maps)) return false;
+    if(variable_struct_exists(_pack,"artworks") && !ln_art_valid(_pack.artworks)) return false;
      _keys=variable_struct_get_names(_pack.scenes);if(array_length(_keys)>400) return false;
     for( _i=0;_i<array_length(_keys);_i++) {
          _s=variable_struct_get(_pack.scenes,_keys[_i]);
@@ -132,7 +134,7 @@ function ln_edit_validate(_pack) {
              _p=_s.parts[_j];if(!is_struct(_p)) return false;
              _fields=["asset","x","y","flip","recolour","mode","depth"];
             for( _k=0;_k<array_length(_fields);_k++) if(!variable_struct_exists(_p,_fields[_k])) return false;
-            if(!is_real(_p.asset) || !variable_struct_exists(_d.objects,string(_p.asset)) ||
+            if(!is_real(_p.asset) || ((!variable_struct_exists(_d.objects,string(_p.asset)) || _p.asset>=10000) && !(variable_struct_exists(_pack,"artworks") && variable_struct_exists(_pack.artworks,ln_art_key(_s.game,_s.level,_p.asset)))) ||
                 !is_real(_p.x) || !is_real(_p.y) || is_nan(_p.x) || is_nan(_p.y) || abs(_p.x)>512 || abs(_p.y)>512 ||
                 !is_real(_p.depth) || is_nan(_p.depth) || _p.depth<0 || _p.depth>144 ||
                 !array_contains([0,1,2],_p.mode) || (!is_bool(_p.flip) && !array_contains([0,1],_p.flip)) ||
@@ -161,10 +163,11 @@ function ln_edit_load(_file) {
     if(!file_exists(_file)) {global.ln_editor.message="Custom file not found; existing edits kept";return false;}
      _b=-1;
     try {
-        _b=buffer_load(_file);if(buffer_get_size(_b)>8388608) {buffer_delete(_b);return false;}
+        _b=buffer_load(_file);if(buffer_get_size(_b)>33554432) {buffer_delete(_b);return false;}
          _pack=json_parse(buffer_read(_b,buffer_text));buffer_delete(_b);_b=-1;
         if(!ln_edit_validate(_pack)) {global.ln_editor.message="Invalid custom file; existing edits kept";return false;}
         global.ln_editor.maps=variable_struct_exists(_pack,"maps")?_pack.maps:{};global.ln_editor.map_undo=[];global.ln_editor.map_redo=[];
+        global.ln_editor.artworks=variable_struct_exists(_pack,"artworks")?_pack.artworks:{};ln_art_refresh();
         global.ln_editor.scenes=_pack.scenes;global.ln_editor.revision++;ln_edit_free_cache();
         global.ln_editor.enabled=true;
         global.ln_editor.message="Custom file loaded. Modified ON.";return true;
@@ -190,7 +193,8 @@ function ln_edit_build(_scene,_limit=-1,_variant="edit") {
     if(_limit>=0) _n=min(_n,_limit);
     for( _i=0;_i<_n;_i++) {
          _p=_scene.parts[_i]; _o=variable_struct_get(_d.objects,string(_p.asset)); _cw=_o.width div 8;
-        _decoded=ln_edit_decode(_scene,_p,_o);_overlay=variable_struct_exists(_p,"overlay") && _p.overlay;
+        var _custom=_variant!="source" && is_struct(ln_art_get(_scene.game,_scene.level,_p.asset));
+        _decoded=ln_edit_decode(_scene,_p,_o,_variant=="source");_overlay=_custom || variable_struct_exists(_p,"overlay") && _p.overlay;
         _start_x=max(0,_left-round(_p.x));_end_x=min(_o.width,_right-round(_p.x));
         _start_y=max(0,_top-round(_p.y));_end_y=min(_o.height,_bottom-round(_p.y));
         for(_y=_start_y;_y<_end_y;_y++) for(_x=_start_x;_x<_end_x;_x++) {
@@ -203,7 +207,7 @@ function ln_edit_build(_scene,_limit=-1,_variant="edit") {
             _pixel=_dy*240+_dx;_owner=_owners[_pixel];
             // Original background pixels must not punch holes in an edited prop
             // underneath. Keep native attribute merging independent of this alpha rule.
-            _edited_underlay=_code==0 && _owner>=0 && variable_struct_exists(_scene.parts[_owner],"overlay") && _scene.parts[_owner].overlay;
+            _edited_underlay=_code==0 && _owner>=0 && ((variable_struct_exists(_scene.parts[_owner],"overlay") && _scene.parts[_owner].overlay) || is_struct(ln_art_get(_scene.game,_scene.level,_scene.parts[_owner].asset)));
             if((!_blend || _code!=0) && !_edited_underlay) {
                  _owners[_pixel]=_code==0?-1:_i;_colours[_pixel]=_decoded.colours[_at];
                 _overrides[_pixel]=_code!=0 && (_p.mode!=0 || (variable_struct_exists(_p,"depth_override") && _p.depth_override));
@@ -223,7 +227,7 @@ function ln_edit_build(_scene,_limit=-1,_variant="edit") {
             // The diagnostic source palette may differ from the native bitmap.
             // When revealing an unchanged layer, recover its local palette from
             // visible pixels of that same layer, never from the removed prop.
-            else if(_scene.game==3 && _baseline.owners[_i]>=0 && _edits.changed[_baseline.owners[_i]] &&
+            else if((_owner<0 || !is_struct(ln_art_get(_scene.game,_scene.level,_scene.parts[_owner].asset))) && _scene.game==3 && _baseline.owners[_i]>=0 && _edits.changed[_baseline.owners[_i]] &&
                 (_source_owner<0 || !_edits.changed[_source_owner]))
                 _output=ln_edit_revealed_colour(_baseline,_source_owner,_output,_x,_y);
         }
@@ -268,7 +272,9 @@ function ln_modified_room(_g) {
      _e=global.ln_editor; if(!_e.enabled || !is_struct(_g)) return undefined;
     if(!variable_struct_exists(_g,"game_number") || !variable_struct_exists(_g,"level") || !variable_struct_exists(_g,"room_id")) return undefined;
      _key=ln_edit_key(_g.game_number,_g.level,_g.room_id);
-    return _e.enabled && variable_struct_exists(_e.scenes,_key)?variable_struct_get(_e.scenes,_key):undefined;
+    if(variable_struct_exists(_e.scenes,_key)) return variable_struct_get(_e.scenes,_key);
+    if(ln_art_level_has(_g.game_number,_g.level)) return ln_edit_source(_g.game_number,_g.level,_g.room_id);
+    return undefined;
 }
 function ln_modified_begin(_g) {
     var _e,_s,_b;
@@ -293,6 +299,7 @@ function ln_edit_button(_x,_y,_w,_label,_on=undefined) {
 function ln_edit_step(_host) {
     var _e,_s,_file,_i,_g,_max,_level,_d,_ids,_index,_assets,_before,_changed,_id,_o,_p,_swap,_step,_dx,_dy,_held,_delta,_next_depth;
      _e=global.ln_editor;
+    if(_e.open && _e.art.open) return ln_art_step();
     var _test_key=(keyboard_check_pressed(ord("T")) || keyboard_check_pressed(vk_f5)) && !keyboard_check(vk_control) && !keyboard_check(vk_alt);
     var _test_return=!_e.open && !_host.workbench && !_host.scene_test.menu && _test_key;
     if(_test_return) _e.toggle_requested=true;
@@ -349,6 +356,7 @@ function ln_edit_step(_host) {
      _assets=variable_struct_get_names(_d.objects);array_sort(_assets,function(a,b){return real(a)-real(b);});
     if(mouse_wheel_up()) {if(ln_tool_mouse_x()<990) _e.scroll=max(0,_e.scroll-3);else _e.asset_scroll=max(0,_e.asset_scroll-3);}
     if(mouse_wheel_down()) {if(ln_tool_mouse_x()<990) _e.scroll=min(max(0,array_length(_s.parts)-18),_e.scroll+3);else _e.asset_scroll=min(max(0,array_length(_assets)-18),_e.asset_scroll+3);}
+    if(ln_edit_hit(1000,582,245,28) && array_length(_assets)>0) {ln_art_open(real(_assets[_e.asset]));return true;}
     for( _i=0;_i<18;_i++) {
         if(ln_edit_hit(760,140+_i*22,225,22) && _e.scroll+_i<array_length(_s.parts)) _e.part=_e.scroll+_i;
         if(ln_edit_hit(1000,140+_i*22,250,22) && _e.asset_scroll+_i<array_length(_assets)) _e.asset=_e.asset_scroll+_i;
@@ -400,7 +408,7 @@ function ln_edit_step(_host) {
 }
 function ln_edit_draw() {
     var _e,_s,_view,_projection,_cache,_surface,_camera,_g,_d,_dx,_dy,_i,_sprite,_r,_record,_p,_o,_assets,_j,_a;
-     _e=global.ln_editor; if(_e.map_open) {ln_map_draw();return;}
+     _e=global.ln_editor; if(_e.art.open) {ln_art_draw();return;} if(_e.map_open) {ln_map_draw();return;}
      _s=_e.scene;if(!is_struct(_s)) return;
     draw_set_font(font_jansina);draw_set_halign(fa_left);draw_set_valign(fa_top);
     ln_tool_clear(false);draw_set_colour(c_white);
@@ -473,6 +481,7 @@ function ln_edit_draw() {
         ln_edit_thumbnail(_preview_id,_panel_x+(_panel_size-_preview_o.width*_fit)/2,
             _panel_y+(_panel_size-_preview_o.height*_fit)/2,_inner,_inner);
     }
+    ln_edit_button(1000,582,245,"Edit scenery artwork");
     ln_edit_button(760,548,65,"Up");ln_edit_button(832,548,65,"Down");ln_edit_button(904,548,80,"Remove");ln_edit_button(1000,548,245,"Add selected asset");
     if(_e.show_collisions) {
         draw_set_colour(make_colour_rgb(70,220,255));draw_text(24,646,"CYAN: solid boundary / area");
@@ -572,6 +581,7 @@ function ln_edit_checks() {
 
 
 function ln_edit_thumbnail(_id,_x,_y,_w,_h) {
+    if(ln_art_thumbnail(_id,_x,_y,_w,_h)) return;
     var _e,_m,_i,_d,_map,_j,_o,_sprite,_scale;
      _e=global.ln_editor;
     if(!variable_struct_exists(_e,"asset_map")) {
@@ -812,7 +822,13 @@ function ln_edit_control_checks(_host) {
     show_debug_message("LN_EDITOR_CONTROLS_PASS: add/select, depth repeat/entry, music pause/resume");
 }
 
-function ln_edit_decode(_scene,_part,_o) {
+function ln_edit_decode(_scene,_part,_o,_original=false) {
+    var _art=_original?undefined:ln_art_get(_scene.game,_scene.level,_part.asset);
+    if(is_struct(_art)) {
+        var _codes=[],_colours=[];
+        for(var _i=0;_i<array_length(_art.pixels);_i++) {array_push(_codes,_art.pixels[_i]<0?0:1);array_push(_colours,_art.pixels[_i]<0?global.ln_paint_palette[_scene.background]:_art.pixels[_i]);}
+        return {codes:_codes,colours:_colours};
+    }
     var _e=global.ln_editor,_key=string(_scene.game)+":"+string(_scene.level)+":"+string(_part.asset)+":"+string(_scene.background)+":"+json_stringify(_part.recolour),_result,_cell,_palette,_c,_j,_x,_y,_code,_at;
     if(variable_struct_exists(_e.decoded,_key)) return variable_struct_get(_e.decoded,_key);
     _result={codes:array_create(_o.width*_o.height,0),colours:array_create(_o.width*_o.height,0)};
@@ -1221,7 +1237,7 @@ function ln_edit_snag_checks() {
     ln_edit_draw();draw_flush();surface_save(application_surface,"editor-tree-transparency.png");
     var _edited=json_stringify(_e.scene);
     ln_edit_restore_all();ln_check(ln_rewind_equal(_e.scene,ln_edit_source(1,2,1)),"Restore all resets current room");
-    ln_check(ln_edit_history(false) && json_stringify(_e.scene)==_edited,"Restore all can be undone");
+    ln_check(ln_edit_history(false) && ln_rewind_equal(_e.scene,json_parse(_edited)),"Restore all can be undone");
     var _state={held:false,age:0,next:350000};
     ln_check(ln_ui_repeat_count(_state,true,true,0)==1 && ln_ui_repeat_count(_state,true,false,200000)==0 && ln_ui_repeat_count(_state,true,false,150000)==1,"value button uses depth's 350ms hold delay");
     ln_check(ln_ui_repeat_count(_state,false,false,100000)==0,"value repeat stops on release");
@@ -1639,7 +1655,7 @@ function ln_edit_source_changes(_scene) {
         var _p=_scene.parts[_i],_id=variable_struct_exists(_p,"source_index")?_p.source_index:-1,_same=false;
         if(_id>=0 && _id<array_length(_source.parts)) {
             var _old=_source.parts[_id];
-            _same=_p.asset==_old.asset && _p.x==_old.x && _p.y==_old.y && _p.flip==_old.flip && json_stringify(_p.recolour)==json_stringify(_old.recolour);
+            _same=!is_struct(ln_art_get(_scene.game,_scene.level,_p.asset)) && _p.asset==_old.asset && _p.x==_old.x && _p.y==_old.y && _p.flip==_old.flip && json_stringify(_p.recolour)==json_stringify(_old.recolour);
             _changed[_id]=!_same;
         }
     }

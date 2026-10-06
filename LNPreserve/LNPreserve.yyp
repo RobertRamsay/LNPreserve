@@ -2509,6 +2509,7 @@
     {"id":{"name":"ln_rewind","path":"scripts/ln_rewind/ln_rewind.yy",},},
     {"id":{"name":"ln_saves","path":"scripts/ln_saves/ln_saves.yy",},},
     {"id":{"name":"ln_scene_editor","path":"scripts/ln_scene_editor/ln_scene_editor.yy",},},
+    {"id":{"name":"ln_scenery_art","path":"scripts/ln_scenery_art/ln_scenery_art.yy",},},
     {"id":{"name":"ln_scene_test_checks","path":"scripts/ln_scene_test_checks/ln_scene_test_checks.yy",},},
     {"id":{"name":"ln_scene_test","path":"scripts/ln_scene_test/ln_scene_test.yy",},},
     {"id":{"name":"ln_sprite_viewer","path":"scripts/ln_sprite_viewer/ln_sprite_viewer.yy",},},

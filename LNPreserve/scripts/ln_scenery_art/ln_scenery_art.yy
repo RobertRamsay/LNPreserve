@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"ln_scenery_art",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"ln_scenery_art",
+  "parent":{
+    "name":"Scripts",
+    "path":"folders/Native/Scripts.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

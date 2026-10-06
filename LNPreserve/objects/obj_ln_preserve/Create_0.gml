@@ -373,3 +373,6 @@ for(var _escape_arg=1;_escape_arg<=parameter_count();_escape_arg++) if(parameter
 
 collision_edit_test=false;
 for(var _cearg=1;_cearg<=parameter_count();_cearg++) if(parameter_string(_cearg)=="--collision-edit-test") collision_edit_test=true;
+
+scenery_art_test=false;
+for(var _art_arg=1;_art_arg<=parameter_count();_art_arg++) if(parameter_string(_art_arg)=="--scenery-art-test") scenery_art_test=true;

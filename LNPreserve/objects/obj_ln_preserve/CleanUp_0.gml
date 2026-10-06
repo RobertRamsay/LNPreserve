@@ -19,3 +19,13 @@ ln_tool_free();
 if(variable_instance_exists(id,"startup_sound") && startup_sound>=0) audio_stop_sound(startup_sound);
 
 if(variable_global_exists("ln_editor") && variable_struct_exists(global.ln_editor,"map_surface") && surface_exists(global.ln_editor.map_surface)) surface_free(global.ln_editor.map_surface);
+
+if(variable_global_exists("ln_editor")) {
+    var _art=global.ln_editor.art;
+    if(surface_exists(_art.surface)) surface_free(_art.surface);
+    var _keys=variable_struct_get_names(global.ln_editor.art_sprites);
+    for(var _i=0;_i<array_length(_keys);_i++) {
+        var _sprite=variable_struct_get(global.ln_editor.art_sprites,_keys[_i]);
+        if(sprite_exists(_sprite)) sprite_delete(_sprite);
+    }
+}
