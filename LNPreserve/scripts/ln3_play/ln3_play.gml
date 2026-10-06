@@ -32,6 +32,7 @@ function LN3Play(_level=1) constructor {
     intro=undefined;ending=undefined;ending_surface=-1;
     palette=[];for (var _i=0;_i<16;_i++) palette[_i]=make_colour_rgb(data.palette[_i][0],data.palette[_i][1],data.palette[_i][2]);
     stage_surface=-1;part_surface=-1;timer=new LNClock();controls=undefined;
+    smooth_from=undefined;smooth_frame=0;smooth_period=5;smooth_room=-1;
     paused=false;music=true;game_over=false;level_complete=false;level_states=array_create(5,undefined);
     room_enemies={};room_age=0;logic_ticks=0;weapon_switch=false;control_previous=[false,false,false,false];
     draw_masks=array_create(8,undefined);render_version=0;
@@ -157,6 +158,21 @@ function ln3_level_load(_g,_level,_ordinary=false) {
     if (_ordinary) ln_frontend_begin(_g);else ln_frontend_music(_g,false);return true;
 }
 
+/// LN3 moves and animates only every fifth frame (about 10 Hz), in steps of several pixels.
+/// Smooth motion draws each character part of the way from its previous to its new position
+/// on the frames in between. Logic, collisions and timing are untouched; poses are exact
+/// because the whole body shares one offset. Original motion shows the native jumps.
+function ln3_smooth_enabled() {return !variable_global_exists("ln_ln3_smooth") || global.ln_ln3_smooth;}
+function ln3_smooth_offset(_g,_d,_i) {
+    if(!ln3_smooth_enabled() || !is_array(_g.smooth_from) || _g.smooth_room!=_g.room_id || _g.special_sequence!=0) return [0,0];
+    if(_d.parts[_i].animation==114) return [0,0]; // thrown weapons fly on their own path
+    var _enemy=_i>=4;if(_enemy && ln_enemy_custom(_g)) return [0,0];
+    var _a=(_g.smooth_frame+1)/max(1,_g.smooth_period);if(_a>=1) return [0,0];
+    var _fx=_g.smooth_from[_enemy?2:0],_fy=_g.smooth_from[_enemy?3:1];
+    var _dx=(((_enemy?_d.enemy_x:_d.player_x)-_fx+128)&255)-128,_dy=(((_enemy?_d.enemy_y:_d.player_y)-_fy+128)&255)-128;
+    if(abs(_dx)>16 || abs(_dy)>16) return [0,0]; // teleports, falls and scene changes snap
+    return [round(-_dx*(1-_a)),round(-_dy*(1-_a))];
+}
 /// The original's fixed sprite priority always puts the ninja (parts 0-3) in front of the
 /// enemy (4-7). Draw whichever character stands lower on screen last, so it is in front.
 function ln3_draw_order(_g,_d) {
@@ -209,8 +225,10 @@ function ln3_play_tick(_g,_joy) {
         }
         if (_s.enemy_dead!=0 && _s.enemy_health<44) _s.enemy_health++;
     }
-    if (_s.logic_wait!=0) {ln3_play_items(_g);ln3_play_special(_g);return;}
+    if (_s.logic_wait!=0) {_g.smooth_frame++;ln3_play_items(_g);ln3_play_special(_g);return;}
     ln_enemy_runtime(_g);
+    // Smooth motion: remember where both characters stood before this logic step.
+    _g.smooth_from=[_s.player_x,_s.player_y,_s.enemy_x,_s.enemy_y];_g.smooth_room=_g.room_id;_g.smooth_frame=0;
     _s.logic_wait=4;_g.logic_ticks++;
     if (!is_struct(_g.pickup_assist)) ln3_input_update(_s,_g.actions,_g.input,_joy,_g.weapon_switch);
     _g.weapon_switch=false;
@@ -231,6 +249,7 @@ function ln3_play_tick(_g,_joy) {
     // Shorten only the initial reverse pose; later animation intervals stay native.
     if (variable_struct_exists(_s,"reverse_roll") && is_struct(_s.reverse_roll) && _s.player_action==_s.reverse_roll.action && _s.parts[1].cursor==1)
         _s.logic_wait=ceil(_s.logic_wait/2);
+    _g.smooth_period=_s.logic_wait+1;
     ln3_projectile_hits(_s,_g.combat);
     if (_g.level==5) {
         var _event=ln3_void_bolt_move(_s);if (_event!=0) {ln3_special_start(_g,_event);return;}
@@ -308,16 +327,18 @@ function ln3_play_actor_part(_g,_d,_i) {
         for (var _j=0;_j<3;_j++) draw_sprite_ext(_bank,_choice.multicolour[_j],0,0,1,1,0,_colours[_j],1);
     } else draw_sprite_ext(_bank,_choice.hires,0,0,1,1,0,_colour,1);
     gpu_set_blendmode_ext(bm_zero,bm_inv_src_alpha);draw_set_colour(c_white);
-    var _offset=ln3_part_registration(_g,_d,_i);
-    var _draw_x=_d.draw_x[_i]+_offset[0],_draw_y=_d.draw_y[_i]+_offset[1];
-    var _mask=_g.draw_masks[_i];
+    var _offset=ln3_part_registration(_g,_d,_i),_smooth=ln3_smooth_offset(_g,_d,_i);
+    var _draw_x=_d.draw_x[_i]+_offset[0]+_smooth[0],_draw_y=_d.draw_y[_i]+_offset[1]+_smooth[1];
+    var _foot=_d.parts[_i<4?2:6].y+_smooth[1],_mask=_g.draw_masks[_i];
     // Sample depth at the corrected location, so the outline cannot leave a mask behind.
     if(_offset[0]!=0 || _offset[1]!=0)
-        _mask=ln3_mask_bytes(_g.state,_g.mask_shapes,_draw_x,_draw_y,_d.parts[6].y);
+        _mask=ln3_mask_bytes(_g.state,_g.mask_shapes,_draw_x,_draw_y,_d.parts[6].y+_smooth[1]);
+    else if(_smooth[0]!=0 || _smooth[1]!=0)
+        _mask=ln3_mask_bytes(_g.state,_g.mask_shapes,_draw_x,_draw_y,_foot);
     for (var _y=0;_y<21;_y++) {
         var _start=-1;
         for (var _x=0;_x<=24;_x++) {
-            var _hidden=_x<24 && (ln_modified_hidden(_draw_x-24+_x*((_d.expand_x&(1<<_i))?2:1),_draw_y-50+_y*((_d.expand_y&(1<<_i))?2:1),_d.parts[_i<4?2:6].y,(_mask[_y*3+(_x div 8)]&(128>>(_x&7)))==0) || (_i<4 && _d.draw_y[_i]+_y>=_d.waterline+21));
+            var _hidden=_x<24 && (ln_modified_hidden(_draw_x-24+_x*((_d.expand_x&(1<<_i))?2:1),_draw_y-50+_y*((_d.expand_y&(1<<_i))?2:1),_foot,(_mask[_y*3+(_x div 8)]&(128>>(_x&7)))==0) || (_i<4 && _draw_y+_y>=_d.waterline+21));
             if (_hidden && _start<0) _start=_x;
             if (!_hidden && _start>=0) {draw_rectangle(_start,_y,_x,_y+1,false);_start=-1;}
         }

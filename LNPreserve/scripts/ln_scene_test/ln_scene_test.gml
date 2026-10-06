@@ -177,6 +177,11 @@ function ln_scene_test_step(_t, _g) {
                 "Enemy damage disabled for testing." : "Enemy damage restored.");
             return;
         }
+        if (point_in_rectangle(_mx,_my,868,610,1118,658)) {
+            global.ln_ln3_smooth = !ln3_smooth_enabled();
+            ln_scene_test_message(_t,global.ln_ln3_smooth ? "LN3 motion: smooth movement between original steps." : "LN3 motion: original 10 Hz steps.");
+            return;
+        }
         if (point_in_rectangle(_mx,_my,160,674,442,722)) { _t.menu = false; _t.preview = false; }
         return;
     }
@@ -230,6 +235,7 @@ function ln_scene_test_draw(_t) {
         }
         ln_scene_test_button(480,610,374,48,ln_test_enemy_damage_disabled() ?
             "Enemy damage: OFF (test protection)" : "Enemy damage: ON",ln_test_enemy_damage_disabled());
+        ln_scene_test_button(868,610,250,48,"LN3 motion: "+(ln3_smooth_enabled()?"Smooth":"Original"),ln3_smooth_enabled());
         ln_scene_test_button(160,674,282,48,"Return to gameplay",false);
         draw_set_colour(make_colour_rgb(165,173,184));
         draw_text(480,674,"Numpad exits: 7 NW / 9 NE / 1 SW / 3 SE (Num Lock)");

@@ -396,12 +396,13 @@ function ln_crt_preferences_read(_file="LNPreserve.ini") {
     global.ln_paint_speed=(is_nan(_speed) || is_infinity(_speed))?1:clamp(_speed,0.1,5);
     global.ln_tool.ui=ini_read_real("Tool","ui_visible",1)>=0.5;global.ln_tool.background=ini_read_real("Tool","background_visible",1)>=0.5;
     global.ln_editor.crt_enabled=ini_read_real("Editor","crt_enabled",0)>=0.5;
+    global.ln_ln3_smooth=ini_read_real("LN3","smooth_motion",1)>=0.5;
     ini_close();
 }
 function ln_crt_preferences_signature() {
     var _fields=ln_crt_preference_fields(),_values=[];
     for(var _i=0;_i<array_length(_fields);_i++) array_push(_values,variable_global_get(_fields[_i]));
-    array_push(_values,global.ln_paint_speed);array_push(_values,global.ln_editor.crt_enabled);array_push(_values,global.ln_tool.ui);array_push(_values,global.ln_tool.background);
+    array_push(_values,global.ln_paint_speed);array_push(_values,global.ln_editor.crt_enabled);array_push(_values,global.ln_tool.ui);array_push(_values,global.ln_tool.background);array_push(_values,ln3_smooth_enabled());
     return json_stringify(_values);
 }
 function ln_crt_preferences_write(_file="LNPreserve.ini") {
@@ -411,6 +412,7 @@ function ln_crt_preferences_write(_file="LNPreserve.ini") {
     ini_write_real("ScenePainting","speed",global.ln_paint_speed);
     ini_write_real("Editor","crt_enabled",real(global.ln_editor.crt_enabled));
     ini_write_real("Tool","ui_visible",real(global.ln_tool.ui));ini_write_real("Tool","background_visible",real(global.ln_tool.background));
+    ini_write_real("LN3","smooth_motion",real(ln3_smooth_enabled()));
     ini_close();
 }
 function ln_crt_preferences_flush(_force=false) {
