@@ -2214,6 +2214,10 @@ function ln_enemy_draw_group(_g) {
 }
 
 function ln_enemy_checks() {
+    // LN3 draws whichever character stands lower on screen last, so it appears in front.
+    var _g3=new LN3Play(1),_d3=ln_enemy_copy(_g3.state);_d3.enabled|=240;_d3.player_y=100;_d3.enemy_y=110;
+    var _o3=ln3_draw_order(_g3,_d3);ln_check(_o3[7]>=4 && _o3[0]<4,"LN3 enemy lower on screen is drawn in front of the ninja");
+    _d3.enemy_y=90;_o3=ln3_draw_order(_g3,_d3);ln_check(_o3[7]<4,"LN3 ninja lower on screen stays in front");
     var _e=global.ln_editor;_e.scenes={};_e.enabled=true;
     for(var _game=1;_game<=3;_game++) for(var _level=1;_level<=(_game==1?6:(_game==2?7:5));_level++) {var _catalog=ln_enemy_catalog(_game,_level);ln_check(is_struct(_catalog.rooms),"all-level native enemy catalogs load");}
     for(var _game=1;_game<=3;_game++) {
