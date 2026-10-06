@@ -5,7 +5,7 @@ function LNSpriteArt() constructor {
     entry=undefined;clip_index=0;sheet="";sheet_scroll=0;allowed=undefined;uses={};palette={};strict={};
     tool=0;colour=c_white;mode=1;mc=false;drafts={};undo=[];redo=[];surfaces={};
     stroke=false;stroke_button=mb_left;stroke_key="";last_x=-1;last_y=-1;
-    canvas_surface=-1;mirrors={};mirror_edits=true;dirty_keys=[];autosave_us=0;playing=false;elapsed=0;dim=true;onion=false;crop=true;figure=undefined;full_rect=[0,0,8,8];clipboard=undefined;message="";
+    canvas_surface=-1;mirrors={};mirror_edits=true;pieces=undefined;pieces_mode=true;pieces_dirty=[];dirty_keys=[];autosave_us=0;playing=false;elapsed=0;dim=true;onion=false;crop=true;figure=undefined;full_rect=[0,0,8,8];clipboard=undefined;message="";
 }
 function ln_sprite_art_key(_name,_frame) {return _name+":"+string(_frame);}
 function ln_sprite_art_get(_name,_frame) {
@@ -38,7 +38,16 @@ function ln_sprite_art_catalog() {
     for(var _i=0;_i<16;_i++) variable_struct_set(_v.palette,string(global.ln_paint_palette[_i]),true);
     _v.strict=ln3_data_read("sprite_palettes.json").palettes;
     _v.mirrors=ln3_data_read("sprite_mirrors.json").mirrors;
-    _v.allowed=_allowed;_v.uses=_uses;return _allowed;
+    _v.allowed=_allowed;_v.uses=_uses;
+    // LN1 character pieces: single-colour hi-res masks, tinted by the pose that uses them.
+    var _pd=ln_pieces_data(),_sets=ln_pieces_sets();
+    for(var _s=0;_s<array_length(_sets);_s++) {
+        var _set=variable_struct_get(_pd.sets,_sets[_s]);variable_struct_set(_allowed,_sets[_s],{tinted:true,tint:c_white});
+        for(var _i=0;_i<array_length(_set.uses);_i++) variable_struct_set(_uses,ln_sprite_art_key(_sets[_s],_i),_set.uses[_i]);
+    }
+    // Frames the pieces rebuild are valid project entries even when the viewer shows them via another sheet.
+    var _tk=variable_struct_get_names(_pd.targets);for(var _i=0;_i<array_length(_tk);_i++) {var _tn=string_copy(_tk[_i],1,string_last_pos(":",_tk[_i])-1);if(!variable_struct_exists(_allowed,_tn)) variable_struct_set(_allowed,_tn,{tinted:false,tint:c_white});}
+    return _allowed;
 }
 function ln_sprite_art_tinted(_name) {
     var _allowed=ln_sprite_art_catalog();
@@ -269,6 +278,7 @@ function ln_sprite_art_commit() {
         var _a=variable_struct_get(_v.drafts,_keys[_i]);if(!_a.changed) continue;
         _a.changed=false;
         if(ln_sprite_art_store(_a)) _count++;
+        if(ln_pieces_is_set(_a.sprite)) ln_pieces_mark(_a.sprite,_a.frame);
         if(_v.mirror_edits && !_a.tinted && ln_sprite_art_mirror_into_twin(_a)) _count++;
     }
     if(_count==0) return false;
@@ -282,7 +292,7 @@ function ln_sprite_art_flush() {
 }
 /// Called when a project file replaces the artwork, so stale drafts cannot be applied onto it.
 function ln_sprite_art_reset_session() {
-    var _v=global.ln_sprites.art;_v.drafts={};_v.undo=[];_v.redo=[];_v.stroke=false;ln_sprite_art_free();
+    var _v=global.ln_sprites.art;_v.drafts={};_v.undo=[];_v.redo=[];_v.stroke=false;_v.pieces_dirty=[];ln_sprite_art_free();
 }
 function ln_sprite_art_free() {
     var _v=global.ln_sprites.art,_keys=variable_struct_get_names(_v.surfaces);
@@ -301,6 +311,7 @@ function ln_sprite_art_sync() {
     var _want={},_keys=variable_struct_get_names(_e.sprite_art);
     if(_e.enabled) for(var _i=0;_i<array_length(_keys);_i++) {
         var _a=variable_struct_get(_e.sprite_art,_keys[_i]);
+        if(asset_get_index(_a.sprite)<0) continue; // editor-only piece sources (ln1_pieces, ln2_pieces)
         if(!variable_struct_exists(_want,_a.sprite)) variable_struct_set(_want,_a.sprite,[]);
         array_push(variable_struct_get(_want,_a.sprite),_keys[_i]);
     }
@@ -353,7 +364,8 @@ function ln_sprite_art_bounds() {
         var _p=_v.items[_i][_j],_s=ln_sprite_art_source(_p[0]);if(_s<0) continue;
         var _sx=array_length(_p)>5?_p[5]:1,_sy=array_length(_p)>6?_p[6]:1;
         var _x=_p[2]-sprite_get_xoffset(_s)*_sx,_y=_p[3]-sprite_get_yoffset(_s)*_sy;
-        _l=min(_l,_x);_t=min(_t,_y);_r=max(_r,_x+sprite_get_width(_s)*_sx);_b=max(_b,_y+sprite_get_height(_s)*_sy);
+        var _x2=_x+sprite_get_width(_s)*_sx,_y2=_y+sprite_get_height(_s)*_sy;
+        _l=min(_l,_x,_x2);_t=min(_t,_y,_y2);_r=max(_r,_x,_x2);_b=max(_b,_y,_y2);
     }
     _v.full_rect=_r>_l?[floor(_l),floor(_t),ceil(_r)-floor(_l),ceil(_b)-floor(_t)]:[0,0,8,8];_v.rect=_v.full_rect;
     // Crop to the figure plus a margin, so characters get larger pixels; Full frame shows everything.
@@ -383,14 +395,14 @@ function ln_sprite_art_clip_step(_direction) {
 function ln_sprite_art_use_clip(_clip) {
     var _v=global.ln_sprites.art,_frames=_v.entry.clips[_clip].frames;
     _v.clip_index=_clip;_v.items=[];_v.seconds=[];
-    for(var _i=0;_i<array_length(_frames);_i++) {array_push(_v.items,_frames[_i].parts);array_push(_v.seconds,_frames[_i].seconds);}
+    for(var _i=0;_i<array_length(_frames);_i++) {array_push(_v.items,ln_pieces_expand(_frames[_i].parts));array_push(_v.seconds,_frames[_i].seconds);}
     _v.figure=variable_struct_exists(_v.entry.clips[_clip],"visible_bounds")?_v.entry.clips[_clip].visible_bounds:undefined;
     _v.context=_v.entry.name+" / "+_v.entry.clips[_clip].name;_v.index=0;_v.part=0;_v.view=0;_v.elapsed=0;ln_sprite_art_bounds();
 }
 function ln_sprite_art_use_sheet(_name,_frame) {
     var _v=global.ln_sprites.art,_s=ln_sprite_art_source(_name),_n=sprite_get_number(_s);
     _v.items=[];_v.seconds=[];
-    for(var _i=0;_i<_n;_i++) {array_push(_v.items,[[_name,_i,sprite_get_xoffset(_s),sprite_get_yoffset(_s),c_white]]);array_push(_v.seconds,.1);}
+    for(var _i=0;_i<_n;_i++) {array_push(_v.items,ln_pieces_expand([[_name,_i,sprite_get_xoffset(_s),sprite_get_yoffset(_s),c_white]]));array_push(_v.seconds,.1);}
     var _xo=sprite_get_xoffset(_s),_yo=sprite_get_yoffset(_s);
     _v.figure=[sprite_get_bbox_left(_s)-_xo,sprite_get_bbox_top(_s)-_yo,sprite_get_bbox_right(_s)+1-_xo,sprite_get_bbox_bottom(_s)+1-_yo];
     _v.sheet=_name;_v.context=_name+" sprite sheet ("+string(_n)+" frames)";_v.index=clamp(_frame,0,_n-1);_v.part=0;_v.elapsed=0;
@@ -406,7 +418,7 @@ function ln_sprite_art_open() {
 function ln_sprite_art_close() {
     var _sv=global.ln_sprites,_v=_sv.art;
     if(_v.view==0 && is_struct(_v.entry) && _v.entry==_sv.list[_sv.selected]) {_sv.animation=_v.clip_index;_sv.frame=_v.index;_sv.elapsed=0;}
-    _v.stroke=false;ln_sprite_art_commit();_v.open=false;_v.playing=false;ln_sprite_art_flush();ln_sprite_art_free();
+    _v.stroke=false;ln_sprite_art_commit();ln_pieces_rebuild();_v.open=false;_v.playing=false;ln_sprite_art_flush();ln_sprite_art_free();
 }
 function ln_sprite_art_active() {
     var _v=global.ln_sprites.art;if(array_length(_v.items)==0) return undefined;
@@ -421,7 +433,8 @@ function ln_sprite_art_layout() {
 /// Part-local pixel under a frame-space point.
 function ln_sprite_art_local(_p,_fx,_fy) {
     var _s=ln_sprite_art_source(_p[0]),_sx=array_length(_p)>5?_p[5]:1,_sy=array_length(_p)>6?_p[6]:1;
-    return [floor((_fx-(_p[2]-sprite_get_xoffset(_s)*_sx))/_sx),floor((_fy-(_p[3]-sprite_get_yoffset(_s)*_sy))/_sy),sprite_get_width(_s),sprite_get_height(_s)];
+    var _ax=_p[2]-sprite_get_xoffset(_s)*_sx,_lx=_sx<0?floor((_ax-_fx)/-_sx):floor((_fx-_ax)/_sx);
+    return [_lx,floor((_fy-(_p[3]-sprite_get_yoffset(_s)*_sy))/_sy),sprite_get_width(_s),sprite_get_height(_s)];
 }
 function ln_sprite_art_pixels(_name,_frame) {
     var _a=ln_sprite_art_draft(_name,_frame,false);if(is_struct(_a)) return _a.pixels;
@@ -487,6 +500,14 @@ function ln_sprite_art_step(_host) {
     if(ln_edit_hit(388,18,110,28) || (_ctrl && keyboard_check_pressed(ord("Z")))) ln_sprite_art_history(false);
     if(ln_edit_hit(510,18,110,28) || (_ctrl && keyboard_check_pressed(ord("Y")))) ln_sprite_art_history(true);
     if(ln_edit_hit(966,18,170,28)) _e.enabled=!_e.enabled;
+    if(ln_edit_hit(632,18,220,28)) {
+        // Switch LN1 characters between piece editing and whole-frame editing, keeping the frame.
+        _v.pieces_mode=!_v.pieces_mode;var _keep=_v.index;
+        if(_v.view==0 && is_struct(_v.entry)) ln_sprite_art_use_clip(_v.clip_index);
+        else if(!ln_pieces_is_set(_v.sheet)) {ln_sprite_art_use_sheet(_v.sheet,_keep);_v.view=2;}
+        _v.index=clamp(_keep,0,array_length(_v.items)-1);
+        _v.message=_v.pieces_mode?"Pieces: an edit reaches every pose, weapon, facing and enemy using that piece.":"Whole frames: each frame is edited on its own.";
+    }
     if(ln_edit_hit(760,60,240,28) && is_struct(_v.entry) && _v.view!=0) ln_sprite_art_use_clip(_v.clip_index);
     if(ln_edit_hit(1010,60,240,28)) {
         if(_v.view==2) _v.view=1;
@@ -533,7 +554,7 @@ function ln_sprite_art_step(_host) {
         _a=ln_sprite_art_begin(_p[0],_p[1]);_a.mode=_i;if(_i>=2 && !_a.tinted) _a.mc=false;ln_sprite_art_conform(_a);ln_sprite_art_touch(_a);
         _v.message="Colour conversion can be undone with Ctrl+Z.";
     }
-    if((_settings[0]<2 || _tinted) && ln_edit_hit(760,260,230,28)) {
+    if(!ln_pieces_is_set(_p[0]) && (_settings[0]<2 || _tinted) && ln_edit_hit(760,260,230,28)) {
         _v.mc=!_settings[1];_a=ln_sprite_art_begin(_p[0],_p[1]);_a.mc=_v.mc;ln_sprite_art_conform(_a);ln_sprite_art_touch(_a);
     }
     for(var _i=0;_i<4;_i++) if(ln_edit_hit(760+_i*124,296,116,28)) _v.tool=_i;
@@ -610,6 +631,7 @@ function ln_sprite_art_draw() {
     ln_tool_clear(false);draw_set_font(font_jansina);draw_set_halign(fa_left);draw_set_valign(fa_top);draw_set_colour(c_white);
     ln_edit_button(24,18,170,"Save project",_e.dirty);ln_edit_button(206,18,170,"Back to viewer");
     ln_edit_button(388,18,110,"Undo (^Z)",array_length(_v.undo)>0);ln_edit_button(510,18,110,"Redo (^Y)",array_length(_v.redo)>0);
+    ln_edit_button(632,18,220,"Pieces LN1/2: "+(_v.pieces_mode?"ON":"OFF"),_v.pieces_mode);
     ln_edit_button(966,18,170,"Modified "+(_e.enabled?"ON":"OFF"),_e.enabled);
     ln_edit_button(760,60,240,"Animation",_v.view==0);ln_edit_button(1010,60,240,"Sprite sheet",_v.view!=0);
     var _same=0;
@@ -628,7 +650,7 @@ function ln_sprite_art_draw() {
         var _l=ln_sprite_art_local(_p,0,0),_uses=variable_struct_exists(_v.uses,ln_sprite_art_key(_p[0],_p[1]))?variable_struct_get(_v.uses,ln_sprite_art_key(_p[0],_p[1])):0;
         var _d=ln_sprite_art_draft(_p[0],_p[1],false),_state=is_struct(ln_sprite_art_get(_p[0],_p[1])) || (is_struct(_d) && _d.changed)?"edited":"original";
         var _tw=ln_sprite_art_twin(_p[0],_p[1]);
-        draw_text(24,90,_p[0]+" #"+string(_p[1])+"  "+string(_l[2])+"x"+string(_l[3])+"  in "+string(_uses)+" animation frames  ("+_state+")"+(is_array(_tw)?"  twin #"+string(_tw[1]):""));
+        draw_text(24,90,ln_pieces_label(_p[0])+" #"+string(_p[1])+"  "+string(_l[2])+"x"+string(_l[3])+"  in "+string(_uses)+" animation frames  ("+_state+")"+(is_array(_tw)?"  twin #"+string(_tw[1]):""));
         // Canvas: checkerboard, onion skin, layers and the selected layer's pixel grid,
         // drawn into a canvas-sized surface so cropped layers cannot spill over the panels.
         var _L=ln_sprite_art_layout(),_w=_v.rect[2]*_L[2],_h=_v.rect[3]*_L[2];
@@ -646,6 +668,7 @@ function ln_sprite_art_draw() {
         if(!_v.playing) {
             var _s=ln_sprite_art_source(_p[0]),_sx=(array_length(_p)>5?_p[5]:1)*_L[2],_sy=(array_length(_p)>6?_p[6]:1)*_L[2];
             var _px=_ox+_p[2]*_L[2]-sprite_get_xoffset(_s)*_sx,_py=_oy+_p[3]*_L[2]-sprite_get_yoffset(_s)*_sy,_settings=ln_sprite_art_settings(_p[0],_p[1]);
+            if(_sx<0) {_px+=_l[2]*_sx;_sx=-_sx;}
             if(_sx>=6) {
                 draw_set_alpha(.18);draw_set_colour(c_white);
                 var _gx0=max(_px,_cx),_gx1=min(_px+_l[2]*_sx,_cx+_w),_gy0=max(_py,_cy),_gy1=min(_py+_l[3]*_sy,_cy+_h);
@@ -673,7 +696,8 @@ function ln_sprite_art_draw() {
         var _tinted=ln_sprite_art_tinted(_p[0]),_settings=ln_sprite_art_settings(_p[0],_p[1]);
         var _names=["C64 Strict - sprite's own colours","C64 Loose","C64 HiRes - any colour","16bit AMIGA - 4096 colours","32bit AMIGA AGA - 24bit colour"];
         for(var _i=0;_i<5;_i++) ln_edit_button(760,96+_i*32,490,_names[_i],_settings[0]==_i);
-        if(_settings[0]<2 || _tinted) ln_edit_button(760,260,230,_settings[1]?"Multicolour (2x1)":"Hi-res (1x1)");
+        if(ln_pieces_is_set(_p[0])) {draw_set_colour(c_white);draw_text(760,265,"Hi-res sprite (1x1)");}
+        else if(_settings[0]<2 || _tinted) ln_edit_button(760,260,230,_settings[1]?"Multicolour (2x1)":"Hi-res (1x1)");
         else {draw_set_colour(c_white);draw_text(760,265,"1x1 pixels");}
         var _layers=array_length(_v.items[_v.index]);
         ln_edit_button(1002,260,40,"<");ln_edit_button(1210,260,40,">");
@@ -691,7 +715,9 @@ function ln_sprite_art_draw() {
         for(var _i=0;_i<16;_i++) {var _sx=760+(_i mod 8)*58,_sy=332+(_i div 8)*38;ln_art_swatch_frame(_sx,_sy,_sx+52,_sy+32,ln_edit_inside(_sx,_sy,52,32),global.ln_paint_palette[_i]==_shown);}
         draw_set_colour(_tinted?_p[4]:ln_sprite_art_quantize({sprite:_p[0],mode:_settings[0],tinted:false},_v.colour));draw_rectangle(760,412,790,512,false);
         if(_tinted) {
-            draw_set_colour(c_white);draw_text(802,414,"LN3 layer mask: its colour comes from");draw_text(802,440,"the game palette. Paint switches pixels on,");draw_text(802,466,"Eraser switches them off.");
+            draw_set_colour(c_white);
+            if(ln_pieces_is_set(_p[0])) {draw_text(802,414,"Hardware sprite: one colour, set by");draw_text(802,440,"the pose using it. Paint switches pixels on,");draw_text(802,466,"Eraser off. Every pose using it updates.");}
+            else {draw_text(802,414,"LN3 layer mask: its colour comes from");draw_text(802,440,"the game palette. Paint switches pixels on,");draw_text(802,466,"Eraser switches them off.");}
         } else {
             var _rgb=[colour_get_red(_v.colour),colour_get_green(_v.colour),colour_get_blue(_v.colour)],_labels=["R","G","B"];
             for(var _i=0;_i<3;_i++) {
@@ -710,14 +736,14 @@ function ln_sprite_art_draw() {
     }
     draw_set_colour(c_white);
     draw_text(1002,709,"Project: "+string(array_length(variable_struct_get_names(_e.sprite_art)))+" frames");
-    draw_text(24,716,"Right-drag: erase.  Alt-click: pick colour and layer.  Arrows: frame.  Space: play.  Esc: back to the viewer.");
+    draw_text(24,716,"Right-drag: erase.  Alt-click: pick colour/layer.  Arrows: frame.  Space: play.");
     draw_set_colour(make_colour_rgb(150,210,220));draw_text(24,744,_v.message);draw_set_colour(c_white);
 }
 
 // ---------------------------------------------------------------- checks
 function ln_sprite_art_checks() {
     var _e=global.ln_editor,_sv=global.ln_sprites,_v=_sv.art,_P=global.ln_paint_palette,_t=get_timer();
-    _e.sprite_art={};_e.sprite_rev++;_e.enabled=true;ln_sprite_art_sync();ln_sprite_art_catalog();
+    _e.sprite_art={};_e.sprite_rev++;_e.enabled=true;ln_sprite_art_sync();ln_sprite_art_catalog();_v.pieces_mode=false;
     // Opening the viewer after a project load (catalog read, list not built) must not crash.
     _sv.list=[];ln_sprite_toggle(obj_ln_preserve);ln_check(_sv.open && array_length(_sv.list)>0,"viewer builds its list after a project load");ln_sprite_toggle(obj_ln_preserve);
     // Original pixels are read exactly, in the C64 palette.
@@ -812,11 +838,63 @@ function ln_sprite_art_checks() {
     _d=ln_sprite_art_begin("spr_ln1_dungeon_uniforms",0);ln_sprite_art_line(_d,1,1,3,1,_P[7]);ln_sprite_art_commit();
     var _big=get_timer();ln_sprite_art_sync();_big=get_timer()-_big;
     ln_check(ln_sprite_art_read_index(asset_get_index("spr_ln1_dungeon_uniforms"),0)[1*96+1]==_P[7],"3121-frame sheet edit reaches the game");
+    // LN1 pieces: the original hardware sprites; one edit rebuilds every frame that uses it.
+    var _pd=ln_pieces_data(),_tkeys=variable_struct_get_names(_pd.targets),_exact=0,_tried=0,_flipped=false,_expanded=false;
+    ln_check(array_length(ln_pieces_set("ln1_pieces").raw)==141 && sprite_get_number(ln_sprite_art_source("ln1_pieces"))==141,"LN1 pieces load as a 141-piece sheet");
+    ln_check(array_length(ln_pieces_set("ln2_pieces").raw)==446 && sprite_get_number(ln_sprite_art_source("ln2_pieces"))==446,"LN2 pieces load as a 446-piece sheet");
+    for(var _i=0;_i<array_length(_tkeys);_i+=37) {
+        var _k=_tkeys[_i],_cut=string_last_pos(":",_k),_tn=string_copy(_k,1,_cut-1),_tf=real(string_delete(_k,1,_cut)),_sl=variable_struct_get(_pd.targets,_k);
+        if(ln_pieces_locked(_tn,_tf)) continue;
+        for(var _j=0;_j<array_length(_sl);_j++) {if(_sl[_j][3]) _flipped=true;if(_sl[_j][4]>1 || _sl[_j][5]>1) _expanded=true;}
+        _tried++;_exact+=array_equals(ln_pieces_compose(variable_struct_get(_pd.target_set,_k),_sl,{}),ln_sprite_art_read(_tn,_tf));
+    }
+    show_debug_message("LN1 piece rebuild parity "+string(_exact)+"/"+string(_tried));
+    ln_check(_tried>50 && _exact==_tried && _flipped && _expanded,"pieces rebuild original frames exactly, mirrored and double-size included");
+    _v.pieces_mode=true;_sv.game=1;_sv.category=0;ln_sprite_filter();_sv.animation=0;_sv.frame=0;ln_sprite_art_open();
+    var _pp=ln_sprite_art_active();ln_check(_pp[0]=="ln1_pieces" && array_length(_v.items[0])>=2,"LN1 poses open as their pieces");
+    var _slots0=ln_pieces_target(_name,0),_pi=_slots0[array_length(_slots0)-1][0],_mask=ln_sprite_art_read("ln1_pieces",_pi),_hole=-1;
+    for(var _i=0;_i<504;_i++) if(_mask[_i]==-1) {_hole=_i;break;}
+    var _hx=_hole mod 24,_hy=_hole div 24;
+    var _wf=ln_sprite_art_begin(_name,2);ln_sprite_art_line(_wf,1,1,1,1,_P[0]);ln_sprite_art_commit();
+    var _flip=["ln1_pieces",_pi,10,0,c_white,-1,1];ln_check(ln_sprite_art_local(_flip,10-(_hx+.5),_hy+.5)[0]==_hx,"painting a mirrored piece maps to the right piece pixel");
+    _d=ln_sprite_art_begin("ln1_pieces",_pi);ln_sprite_art_line(_d,_hx,_hy,_hx,_hy,_P[2]);ln_sprite_art_commit();
+    ln_check(_d.pixels[_hole]==c_white && ln_pieces_edited("ln1_pieces",_pi),"piece edit stores a one-colour hi-res mask");
+    var _rt=get_timer();ln_sprite_art_close();_rt=get_timer()-_rt;
+    var _users=ln_pieces_set("ln1_pieces").by_piece[_pi],_rebuilt=0,_locked=0,_mirrored_user=false;
+    for(var _i=0;_i<array_length(_users);_i++) {
+        var _k=_users[_i],_cut=string_last_pos(":",_k),_tn=string_copy(_k,1,_cut-1),_tf=real(string_delete(_k,1,_cut)),_st=ln_sprite_art_get(_tn,_tf);
+        if(ln_pieces_locked(_tn,_tf)) {_locked++;continue;}
+        if(is_struct(_st) && variable_struct_exists(_st,"pieces") && array_equals(ln_sprite_art_decode(_st),ln_pieces_compose("ln1_pieces",variable_struct_get(_pd.targets,_k),{}))) _rebuilt++;
+        var _sl=variable_struct_get(_pd.targets,_k);for(var _j=0;_j<array_length(_sl);_j++) if(_sl[_j][0]==_pi && _sl[_j][3]) _mirrored_user=true;
+    }
+    show_debug_message("LN1 piece "+string(_pi)+" rebuilt "+string(_rebuilt)+" frames ("+string(_locked)+" whole-frame edits kept) in "+string(_rt div 1000)+"ms");
+    ln_check(_rebuilt+_locked==array_length(_users) && _rebuilt>0 && _mirrored_user,"one piece edit rebuilds every frame using it, both facings");
+    ln_check(ln_pieces_locked(_name,2) && ln_pieces_expand([[_name,2,0,0,c_white]])[0][0]==_name,"whole-frame edits are kept as whole frames");
+    ln_sprite_art_sync();var _f0=ln_sprite_art_get(_name,0);
+    ln_check(is_struct(_f0) && array_equals(ln_sprite_art_read_index(asset_get_index(_name),0),ln_sprite_art_decode(_f0)),"rebuilt piece frames reach the game");
+    ln_check(ln_sprite_art_write("sprite-pieces-test.json") && ln_edit_load("sprite-pieces-test.json") && array_equals(ln_sprite_art_decode(ln_sprite_art_get(_name,0)),ln_sprite_art_decode(_f0)),"piece edits survive saving and loading");
+    _d=ln_sprite_art_begin("ln1_pieces",_pi);_d.pixels=ln_sprite_art_read("ln1_pieces",_pi);ln_sprite_art_touch(_d);ln_sprite_art_commit();ln_pieces_rebuild();
+    var _left=0,_names=variable_struct_get_names(_e.sprite_art);for(var _i=0;_i<array_length(_names);_i++) if(variable_struct_exists(variable_struct_get(_e.sprite_art,_names[_i]),"pieces")) _left++;
+    ln_check(!ln_pieces_edited("ln1_pieces",_pi) && _left==0,"reverting a piece removes its rebuilt frames");
+    // LN2 the same way: its ninja opens as pieces and a piece edit reaches the game.
+    _sv.game=2;_sv.category=0;ln_sprite_filter();_sv.animation=0;_sv.frame=0;ln_sprite_art_open();
+    var _q2=ln_sprite_art_active(),_ln2=_sv.list[0].clips[0].frames[0].parts[0];ln_check(_q2[0]=="ln2_pieces","LN2 poses open as their pieces");
+    var _s2=ln_pieces_target(_ln2[0],_ln2[1]),_p2=_s2[0][0],_m2=ln_sprite_art_read("ln2_pieces",_p2),_h2=-1;
+    for(var _i=0;_i<504;_i++) if(_m2[_i]==-1) {_h2=_i;break;}
+    _d=ln_sprite_art_begin("ln2_pieces",_p2);ln_sprite_art_line(_d,_h2 mod 24,_h2 div 24,_h2 mod 24,_h2 div 24,_P[1]);ln_sprite_art_commit();
+    var _rt2=get_timer();ln_sprite_art_close();_rt2=get_timer()-_rt2;ln_sprite_art_sync();
+    var _st2=ln_sprite_art_get(_ln2[0],_ln2[1]);
+    show_debug_message("LN2 piece "+string(_p2)+" rebuilt "+string(array_length(ln_pieces_set("ln2_pieces").by_piece[_p2]))+" frames in "+string(_rt2 div 1000)+"ms");
+    ln_check(is_struct(_st2) && variable_struct_exists(_st2,"pieces") && array_equals(ln_sprite_art_read_index(asset_get_index(_ln2[0]),_ln2[1]),ln_sprite_art_decode(_st2)) && !array_equals(ln_sprite_art_decode(_st2),ln_sprite_art_read(_ln2[0],_ln2[1])),"LN2 piece edit rebuilds its frames and reaches the game");
+    _d=ln_sprite_art_begin("ln2_pieces",_p2);_d.pixels=ln_sprite_art_read("ln2_pieces",_p2);ln_sprite_art_touch(_d);ln_sprite_art_commit();ln_pieces_rebuild();
+    ln_check(!is_struct(ln_sprite_art_get(_ln2[0],_ln2[1])),"reverting the LN2 piece restores its frames");
+    _v.pieces_mode=false;
     // Screens.
     _sv.game=1;_sv.category=0;ln_sprite_filter();ln_sprite_art_open();_d=ln_sprite_art_begin(ln_sprite_art_active()[0],ln_sprite_art_active()[1]);
     ln_sprite_art_line(_d,30,20,60,20,_P[7]);_v.onion=true;ln_sprite_art_draw();surface_save(application_surface,"sprite-art-animation.png");
     ln_sprite_art_use_sheet("spr_char_ln1_ninja",12);_v.view=1;ln_sprite_art_draw();surface_save(application_surface,"sprite-art-sheet.png");
     _sv.game=3;ln_sprite_filter();ln_sprite_art_open();ln_sprite_art_draw();surface_save(application_surface,"sprite-art-ln3.png");
+    _v.pieces_mode=true;_sv.game=1;ln_sprite_filter();for(var _i=0;_i<array_length(_sv.list[0].clips);_i++) if(_sv.list[0].clips[_i].name=="Weapon 1 / Action 9") _sv.animation=_i;_sv.frame=1;ln_sprite_art_open();_v.part=array_length(_v.items[_v.index])-1;ln_sprite_art_draw();surface_save(application_surface,"sprite-art-pieces.png");_sv.game=2;ln_sprite_filter();for(var _i=0;_i<array_length(_sv.list[0].clips);_i++) if(string_pos("Weapon 1",_sv.list[0].clips[_i].name)==1) {_sv.animation=_i;break;}_sv.frame=0;ln_sprite_art_open();ln_sprite_art_draw();surface_save(application_surface,"sprite-art-pieces-ln2.png");_v.pieces_mode=false;
     ln_sprite_art_close();
     _sv.open=false;_e.sprite_art={};_e.sprite_rev++;ln_sprite_art_reset_session();ln_sprite_art_sync();
     ln_check(variable_struct_names_count(_e.sprite_assigned)==0,"clearing the project restores every sprite");

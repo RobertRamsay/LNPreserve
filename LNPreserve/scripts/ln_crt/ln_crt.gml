@@ -865,6 +865,7 @@ function ln_project_save_as() {
     var _e=global.ln_editor,_t=global.ln_tool;
     if(_e.art.open) {_e.art.stroke=undefined;ln_art_flush();}
     if(global.ln_sprites.art.open) ln_sprite_art_commit();
+    ln_pieces_rebuild();
     var _file=get_save_filename("JSON files|*.json","modified-scenes.json");
     if(_file=="") return false;
     var _ok=ln_sprite_art_write(_file);
