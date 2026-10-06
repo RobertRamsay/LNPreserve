@@ -270,7 +270,7 @@ function ln_sprite_art_free() {
 function ln_sprite_art_sync() {
     var _e=global.ln_editor;
     // The editor previews its own frames; the game assets catch up once it closes.
-    if(global.ln_sprites.art.open) return;
+    if(global.ln_sprites.open && global.ln_sprites.art.open) return;
     if(_e.sprite_synced_rev==_e.sprite_rev && _e.sprite_synced_enabled==_e.enabled) return;
     _e.sprite_synced_rev=_e.sprite_rev;_e.sprite_synced_enabled=_e.enabled;
     var _want={},_keys=variable_struct_get_names(_e.sprite_art);
@@ -677,7 +677,7 @@ function ln_sprite_art_checks() {
     ln_sprite_art_put(_m,1,0,_rgb);ln_check(_m.pixels[1]==c_white && !ln_sprite_art_pixels_valid({sprite:"spr_ln3_actor_parts",width:4,mode:4,mc:false,tinted:true},[_rgb,-1,-1,-1]),"LN3 layers stay single-colour masks");
     ln_check(ln_rewind_equal(ln_sprite_art_decode({width:8,height:2,data:ln_sprite_art_encode(_a.pixels)}),_a.pixels),"frame encoding roundtrips exactly");
     // Editor flow from the viewer: paint, undo, redo; edits go straight into the project.
-    _sv.game=1;_sv.category=0;ln_sprite_filter();_sv.animation=0;_sv.frame=0;ln_sprite_art_open();
+    _sv.open=true;_sv.game=1;_sv.category=0;ln_sprite_filter();_sv.animation=0;_sv.frame=0;ln_sprite_art_open();
     ln_check(_v.open && array_length(_v.items)==array_length(_sv.list[0].clips[0].frames),"editor opens on the viewer animation");
     var _p=ln_sprite_art_active(),_name=_p[0],_frame=_p[1],_key=ln_sprite_art_key(_name,_frame),_w=ln_sprite_art_local(_p,0,0)[2];
     var _before=ln_sprite_art_read(_name,_frame),_spot=2*_w+2;ln_check(_before[_spot]==-1,"test pixel starts transparent");
@@ -701,6 +701,15 @@ function ln_sprite_art_checks() {
     ln_check(!is_struct(ln_sprite_art_get(_name,_frame)),"undo after reopening the editor updates the project");
     ln_sprite_art_history(true);ln_sprite_art_commit();ln_sprite_art_close();ln_sprite_art_sync();
     ln_check(is_struct(ln_sprite_art_get(_name,_frame)) && ln_sprite_art_read_index(_asset,_frame)[_spot]==_P[7],"redo after reopening restores the edit in the game");
+    var _play=new LN1Play(),_pose=ln_character_pose(_play.sprites[0],0,"ln1_ninja");
+    show_debug_message("LN1 gameplay ninja pose 0 -> "+sprite_get_name(_pose.sprite)+" #"+string(_pose.frame));
+    ln_check(sprite_get_name(_pose.sprite)==_name,"LN1 gameplay draws the ninja from the edited character sprite");
+    // Closing the whole viewer from inside the editor (Close sprites) still reaches the game.
+    var _was_open=_sv.open;_sv.open=true;ln_sprite_art_open();ln_sprite_art_history(false);
+    ln_sprite_toggle(obj_ln_preserve);ln_sprite_art_sync();
+    ln_check(!_v.open && ln_sprite_art_read_index(_asset,_frame)[_spot]==-1,"Close sprites from the editor updates the game");
+    ln_sprite_art_open();ln_sprite_art_history(true);ln_sprite_art_close();ln_sprite_art_sync();_sv.open=_was_open;
+    ln_check(ln_sprite_art_read_index(_asset,_frame)[_spot]==_P[7],"edit restored after the Close sprites check");
     // Project file.
     var _pack=ln_enemy_copy(ln_edit_pack());ln_check(ln_edit_validate(_pack),"sprite artwork validates in the project pack");
     ln_check(ln_sprite_art_write("sprite-art-test.json") && ln_edit_load("sprite-art-test.json"),"project file saves and loads");
@@ -733,7 +742,7 @@ function ln_sprite_art_checks() {
     ln_sprite_art_use_sheet("spr_char_ln1_ninja",12);_v.view=1;ln_sprite_art_draw();surface_save(application_surface,"sprite-art-sheet.png");
     _sv.game=3;ln_sprite_filter();ln_sprite_art_open();ln_sprite_art_draw();surface_save(application_surface,"sprite-art-ln3.png");
     ln_sprite_art_close();
-    _e.sprite_art={};_e.sprite_rev++;ln_sprite_art_reset_session();ln_sprite_art_sync();
+    _sv.open=false;_e.sprite_art={};_e.sprite_rev++;ln_sprite_art_reset_session();ln_sprite_art_sync();
     ln_check(variable_struct_names_count(_e.sprite_assigned)==0,"clearing the project restores every sprite");
     show_debug_message("LN_SPRITE_ART_PASS: sync "+string(_sync div 1000)+"ms, 3121-frame sheet "+string(_big div 1000)+"ms, total "+string((get_timer()-_t) div 1000)+"ms");
 }

@@ -46,6 +46,9 @@ function ln_sprite_next(_direction,_animation=false) {
 function ln_sprite_toggle(_host) {
     var _v=global.ln_sprites;
     if(_v.open) {
+        // Leaving the viewer from inside the sprite editor still finishes the edit,
+        // so the game rebuilds the edited sprites straight away.
+        if(_v.art.open) ln_sprite_art_close();
         _v.open=false;ln_track_stop(global.ln_tracks);
         for(var _i=0;_i<array_length(_v.voices);_i++) if(audio_is_paused(_v.voices[_i])) audio_resume_sound(_v.voices[_i]);
         _v.voices=[];_host.input_state=new LNInput();
