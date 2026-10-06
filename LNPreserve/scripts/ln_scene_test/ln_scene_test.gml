@@ -179,7 +179,7 @@ function ln_scene_test_step(_t, _g) {
         }
         if (point_in_rectangle(_mx,_my,480,736,780,780)) {
             global.ln_ln3_smooth = !ln3_smooth_enabled();
-            ln_scene_test_message(_t,global.ln_ln3_smooth ? "LN3 motion: smooth movement between original steps." : "LN3 motion: original 10 Hz steps, evenly paced.");
+            ln_scene_test_message(_t,global.ln_ln3_smooth ? "LN3 motion: smooth movement between original steps." : "LN3 motion: original 12.5 Hz steps.");
             return;
         }
         if (point_in_rectangle(_mx,_my,160,674,442,722)) { _t.menu = false; _t.preview = false; }

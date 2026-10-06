@@ -158,7 +158,7 @@ function ln3_level_load(_g,_level,_ordinary=false) {
     if (_ordinary) ln_frontend_begin(_g);else ln_frontend_music(_g,false);return true;
 }
 
-/// LN3 moves and animates only every fifth frame (about 10 Hz), in steps of several pixels; the
+/// LN3 moves and animates only every fourth 50 Hz tick (12.5 Hz), 4 pixels per walking step; the
 /// original copies those positions to the hardware sprites unchanged. On a 60 Hz display the
 /// 50 Hz ticks bunch, so the steps also land unevenly.
 /// Smooth motion draws each character part of the way from its previous to its new position
@@ -171,9 +171,10 @@ function ln3_smooth_elapsed(_g) {
     if(is_struct(_g.timer)) _sub=clamp(real(_g.timer.credit)/(real(_g.timer.cycles_per_frame)*1000000),0,0.999);
     return _g.smooth_frame+_sub;
 }
-/// Original motion with even cadence: a 100 ms step is exactly six 60 Hz frames, so steps sit on
-/// frame boundaries and timing jitter shows them 5, 6 or 7 frames apart. Holding the previous
-/// picture for half a frame (8.3 ms, 0.42 ticks) puts every step mid-frame, six frames apart.
+/// Original motion, steadier cadence: an 80 ms step is 4.8 frames at 60 Hz, so steps land
+/// 4 or 5 frames apart; when a step sits on a frame boundary, timing jitter adds extra slips.
+/// Holding the previous picture for half a frame (8.3 ms, 0.42 ticks) keeps steps off the
+/// boundaries, leaving only the unavoidable 5,5,5,5,4 rhythm.
 function ln3_original_hold(_g) {
     if(ln3_smooth_enabled() || !is_struct(_g.display_prev) || !is_array(_g.draw_masks_prev)) return false;
     if(_g.smooth_room!=_g.room_id || _g.special_sequence!=0) return false;
@@ -271,7 +272,7 @@ function ln3_play_tick(_g,_joy) {
     // Shorten only the initial reverse pose; later animation intervals stay native.
     if (variable_struct_exists(_s,"reverse_roll") && is_struct(_s.reverse_roll) && _s.player_action==_s.reverse_roll.action && _s.parts[1].cursor==1)
         _s.logic_wait=ceil(_s.logic_wait/2);
-    _g.smooth_period=_s.logic_wait+1;
+    _g.smooth_period=max(1,_s.logic_wait); // logic runs again on the tick the countdown reaches zero
     ln3_projectile_hits(_s,_g.combat);
     if (_g.level==5) {
         var _event=ln3_void_bolt_move(_s);if (_event!=0) {ln3_special_start(_g,_event);return;}
