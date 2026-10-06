@@ -569,7 +569,7 @@ function ln_map_checks() {
     ln_check(array_length(_near9)==2 && array_contains(_near9,8) && array_contains(_near9,10),"LN1 room 9 excludes padded Room 1 fallback");
     ln_check(!is_struct(ln_map_edge(ln_map_graph(1,1),"9:2")),"fallback absent from map connection list and lanes");
     var _directed={edges:[{key:"a",source:1,destination:2},{key:"b",source:3,destination:1}]};
-    var _near=ln_map_neighbours(_directed,{routes:[]},1);
+    _near=ln_map_neighbours(_directed,{routes:[]},1);
     ln_check(array_length(_near)==1 && _near[0]==2,"incoming one-way connection is not an outgoing neighbour");
     for(var _game=1;_game<=3;_game++) for(var _level=1;_level<=(_game==1?6:(_game==2?7:5));_level++) {
         var _graph=ln_map_graph(_game,_level);ln_check(array_length(_graph.nodes)>0,"map has rooms");_levels++;_connections+=array_length(_graph.edges);
@@ -585,9 +585,9 @@ function ln_map_checks() {
         ln_check(ln_map_insert(_game,1,_chosen) && ln_map_insert(_game,1,_chosen),"insert chain of two blank rooms");
         var _map=ln_map_data(_game,1),_route=ln_map_route(_map,_edge.key),_back=ln_map_edge(_graph,_route.reverse);
         ln_check(ln_map_validate(_e.maps),"valid inserted topology");
-        var _near=ln_map_neighbours(_graph,_map,_edge.source);
+        _near=ln_map_neighbours(_graph,_map,_edge.source);
         ln_check(array_contains(_near,_route.rooms[0]),"highlight immediate inserted neighbour");
-        var _near=ln_map_neighbours(_graph,_map,_route.rooms[0]);
+        _near=ln_map_neighbours(_graph,_map,_route.rooms[0]);
         ln_check(array_contains(_near,_edge.source) && array_contains(_near,_route.rooms[1]),"inserted bidirectional room highlights its two neighbours");
         ln_check(ln_map_intercept(_g,_edge.token),"native exit intercepted");
         ln_check(_g.map_transit.x>=4 && _g.map_transit.x<=236 && _g.map_transit.y>=38 && _g.map_transit.y<=134,"resolved spawn inside room");
@@ -615,7 +615,7 @@ function ln_map_checks() {
     ln_check(ln_edit_save(_file),"map saves with editor file");_e.maps={};ln_check(ln_edit_load(_file),"map loads with editor file");
     ln_check(ln_rewind_equal(json_parse(_saved),_e.maps),"map topology roundtrip");file_delete(_file);
     var _bad=json_parse(_saved),_m=variable_struct_get(_bad,"1:1");array_push(_m.rooms,_m.rooms[0]);ln_check(!ln_map_validate(_bad),"reject duplicate room IDs");
-    var _m=ln_map_data(1,1),_id=_m.rooms[0].id,_graph=ln_map_graph(1,1),_lanes=ln_map_lanes(_graph,_m,ln_map_nodes(_graph,_m)),_removed=false;
+    _m=ln_map_data(1,1);var _id=_m.rooms[0].id,_graph=ln_map_graph(1,1),_lanes=ln_map_lanes(_graph,_m,ln_map_nodes(_graph,_m)),_removed=false;
     for(var _i=0;_i<array_length(_lanes);_i++) if(_lanes[_i].source<1000 && _lanes[_i].destination==_id) {_removed=ln_map_remove_lane(1,1,_lanes[_i],true);break;}
     ln_check(_removed && ln_map_validate(_e.maps),"right-click lane removal reconnects valid chain");
     var _remaining=json_stringify(_e.maps);

@@ -20,6 +20,7 @@ if(track_player_test) {
     if(global.ln_tracks.open) game_end();else ln_track_checks(self);
     exit;
 }
+ln_sprite_art_sync();
 ln_tool_step(self);
 if(!selftest && ln_sprite_step(self)) exit;
 if(!selftest && ln_track_step(self)) exit;

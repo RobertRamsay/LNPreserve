@@ -376,3 +376,5 @@ for(var _cearg=1;_cearg<=parameter_count();_cearg++) if(parameter_string(_cearg)
 
 scenery_art_test=false;
 for(var _art_arg=1;_art_arg<=parameter_count();_art_arg++) if(parameter_string(_art_arg)=="--scenery-art-test") scenery_art_test=true;
+sprite_art_test=false;
+for(var _sprite_art_arg=1;_sprite_art_arg<=parameter_count();_sprite_art_arg++) if(parameter_string(_sprite_art_arg)=="--sprite-art-test") sprite_art_test=true;

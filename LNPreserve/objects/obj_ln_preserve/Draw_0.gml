@@ -1,3 +1,4 @@
+if(sprite_art_test) {try {ln_sprite_art_checks();} catch(_error) {show_debug_message("LN_SPRITE_ART_FAILURE: "+string(_error));} game_end();exit;}
 if(scenery_art_test) {try {ln_art_checks();} catch(_error) {show_debug_message("LN_SCENERY_ART_FAILURE: "+string(_error));} game_end();exit;}
 if(level_map_test) {try {ln_map_checks();} catch(_error) {show_debug_message("LN_LEVEL_MAP_FAILURE: "+string(_error));} game_end();exit;}
 if(enemy_editor_test) {try {ln_enemy_checks();} catch(_error) {show_debug_message("LN_ENEMY_EDITOR_FAILURE: "+string(_error));} game_end();exit;}

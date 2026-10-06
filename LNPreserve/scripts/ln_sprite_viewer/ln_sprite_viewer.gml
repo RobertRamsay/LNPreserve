@@ -3,6 +3,7 @@ function LNSpriteViewer() constructor {
     animation=0;frame=0;elapsed=0;paused=false;cycle=true;mirror=false;
     voices=[];bounds=[0,0,1,1];assets={};
     crt_enabled=false;zoom=3;preview_surface=-1;preview_camera=-1;
+    art=new LNSpriteArt();
 }
 function ln_sprite_asset(_name) {
     var _v=global.ln_sprites;
@@ -83,6 +84,8 @@ function ln_sprite_step(_host) {
     if(!_v.open) return false;
     ln_track_poll(global.ln_tracks);
     if(ln_tool_media_hit(1)) {ln_sprite_to_track();return true;}
+    if(_v.art.open) return ln_sprite_art_step(_host);
+    if(ln_edit_hit(990,116,200,28) || keyboard_check_pressed(ord("E"))) {ln_sprite_art_open();return true;}
     if(keyboard_check_pressed(vk_escape) || ln_edit_hit(1030,20,220,28)) {ln_sprite_toggle(_host);return true;}
     if(keyboard_check_pressed(vk_f9)) ln_fullscreen_toggle(_host);
     if(keyboard_check_pressed(vk_f10) || ln_edit_hit(770,20,240,28)) _v.crt_enabled=!_v.crt_enabled;
@@ -100,7 +103,8 @@ function ln_sprite_step(_host) {
     ln_sprite_advance(min(delta_time/1000000,.1));return true;
 }
 function ln_sprite_draw() {
-    var _v=global.ln_sprites;shader_reset();gpu_set_blendmode(bm_normal);gpu_set_texfilter(false);
+    var _v=global.ln_sprites;if(_v.art.open) {ln_sprite_art_draw();return;}
+    shader_reset();gpu_set_blendmode(bm_normal);gpu_set_texfilter(false);
     draw_set_alpha(1);ln_tool_clear(false);draw_set_font(font_jansina);
     draw_set_halign(fa_left);draw_set_valign(fa_top);draw_set_colour(c_white);
     ln_edit_button(770,20,240,"CRT "+(_v.crt_enabled?"ON":"OFF")+" (F10)",_v.crt_enabled);
@@ -109,7 +113,7 @@ function ln_sprite_draw() {
     var _categories=["NINJA","ENEMIES","MISC"];
     for(var _c=0;_c<3;_c++) ln_edit_button(600+_c*190,76,180,_categories[_c],_v.category==_c);
     var _entry=_v.list[_v.selected],_clip=_entry.clips[_v.animation];
-    ln_edit_button(24,116,50,"<");ln_edit_button(1200,116,50,">");
+    ln_edit_button(24,116,50,"<");ln_edit_button(1200,116,50,">");ln_edit_button(990,116,200,"Edit sprite (E)");
     draw_text(100,121,string(_v.selected+1)+" / "+string(array_length(_v.list))+"   "+_entry.name);
     // Canvas dimensions affect centring only; zoom stays fixed across every
     // game, asset and animation. The surface clips large poses to the viewport.

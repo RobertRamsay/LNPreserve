@@ -1,6 +1,7 @@
 /// Versioned, opt-in scene overrides. No original assets or room logic are edited.
 function LNSceneEditor() constructor {
     artworks={};art_sprites={};art=new LNSceneryArt();
+    sprite_art={};sprite_rev=0;sprite_synced_rev=-1;sprite_synced_enabled=false;sprite_backups={};sprite_assigned={};sprite_live={};
     maps={};map_undo=[];map_redo=[];map_open=false;map_room=-1;map_edge=0;map_scroll=0;
     nav_job=undefined;nav_last_nodes=0;nav_last_us=0;enemy_edit=false;enemy_index=0;enemy_drag=false;enemy_waypoint=-1;enemy_catalogs={};enemy_catalog_building=false;
     test_music_restore=undefined;test_active=false;
@@ -111,13 +112,14 @@ function ln_edit_changed(_before) {
     variable_struct_set(_e.scenes,ln_edit_key(_e.game,_e.level,_e.room_id),json_parse(json_stringify(_e.scene)));
     _e.revision++;_e.dirty=true;_e.autosave_us=1000000;_e.build=-1;_e.reference=false;ln_edit_free_cache();
 }
-function ln_edit_pack() {return {format:"LNPreserve-scenes",version:1,scenes:global.ln_editor.scenes,maps:global.ln_editor.maps,artworks:global.ln_editor.artworks};}
+function ln_edit_pack() {return {format:"LNPreserve-scenes",version:1,scenes:global.ln_editor.scenes,maps:global.ln_editor.maps,artworks:global.ln_editor.artworks,sprites:global.ln_editor.sprite_art};}
 function ln_edit_validate(_pack) {
     var _keys,_i,_s,_required,_j,_d,_p,_fields,_k;
     if(!is_struct(_pack) || !variable_struct_exists(_pack,"format") || _pack.format!="LNPreserve-scenes" ||
         !variable_struct_exists(_pack,"version") || _pack.version!=1 || !variable_struct_exists(_pack,"scenes") || !is_struct(_pack.scenes)) return false;
     if(variable_struct_exists(_pack,"maps") && !ln_map_validate(_pack.maps)) return false;
     if(variable_struct_exists(_pack,"artworks") && !ln_art_valid(_pack.artworks)) return false;
+    if(variable_struct_exists(_pack,"sprites") && !ln_sprite_art_valid(_pack.sprites)) return false;
      _keys=variable_struct_get_names(_pack.scenes);if(array_length(_keys)>400) return false;
     for( _i=0;_i<array_length(_keys);_i++) {
          _s=variable_struct_get(_pack.scenes,_keys[_i]);
@@ -168,6 +170,7 @@ function ln_edit_load(_file) {
         if(!ln_edit_validate(_pack)) {global.ln_editor.message="Invalid custom file; existing edits kept";return false;}
         global.ln_editor.maps=variable_struct_exists(_pack,"maps")?_pack.maps:{};global.ln_editor.map_undo=[];global.ln_editor.map_redo=[];
         global.ln_editor.artworks=variable_struct_exists(_pack,"artworks")?_pack.artworks:{};ln_art_refresh();
+        global.ln_editor.sprite_art=variable_struct_exists(_pack,"sprites")?_pack.sprites:{};global.ln_editor.sprite_rev++;ln_sprite_art_reset_session();
         global.ln_editor.scenes=_pack.scenes;global.ln_editor.revision++;ln_edit_free_cache();
         global.ln_editor.enabled=true;
         global.ln_editor.message="Custom file loaded. Modified ON.";return true;
@@ -2291,7 +2294,7 @@ function ln_enemy_checks() {
     ln_check(_detour,"chase temporarily moves away from ninja to go around bend");
     var _a={x:10,y:20,facing:7,heading:7,action_mirror:0,mirror:false,fraction_x:0,fraction_y:0,depth_y:20,patrol_x:10};
     ln_enemy_place(1,_a,11,12,7);ln_check(!_a.mirror,"position update leaves animation mirror unchanged");
-    var _wall=[{points:[[11,0],[11,30]],rect:undefined}];
+    _wall=[{points:[[11,0],[11,30]],rect:undefined}];
     var _slide=ln_enemy_slide([10,10],[12,12],[20,20],_wall);
     ln_check(_slide[0]<11 && _slide[1]>10,"guard slides along blocked edge toward target");
     ln_check(ln_enemy_route_clear([10,10],_slide,_wall),"sliding never crosses the blocking edge");

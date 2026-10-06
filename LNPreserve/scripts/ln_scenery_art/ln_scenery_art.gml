@@ -1,7 +1,7 @@
 /// Scenery-only pixel artwork stored inside the user's scene project.
 function LNSceneryArt() constructor {
-    open=false;draft=undefined;id=0;tool=0;colour=c_white;undo=[];redo=[];
-    stroke=undefined;last_x=-1;last_y=-1;surface=-1;dirty=true;message="";
+    open=false;draft=undefined;asset_id=0;tool=0;colour=c_white;undo=[];redo=[];
+    stroke=undefined;stroke_button=mb_left;last_x=-1;last_y=-1;surface=-1;dirty=true;message="";
 }
 function ln_art_key(_game,_level,_id) {return string(_game)+":"+string(_level)+":"+string(_id);}
 function ln_art_get(_game,_level,_id) {
@@ -128,7 +128,7 @@ function ln_art_open(_id) {
         for(var _i=0;_i<array_length(_raw.codes);_i++) array_push(_pixels,_raw.codes[_i]==0?-1:_raw.colours[_i]);
         _a={game:_e.game,level:_e.level,id:_id,width:_o.width,height:_o.height,mode:1,mc:true,background:global.ln_paint_palette[_e.scene.background],pixels:_pixels};
     }
-    _v.draft=_a;_v.open=true;_v.id=_id;_v.undo=[];_v.redo=[];_v.stroke=undefined;_v.dirty=true;
+    _v.draft=_a;_v.open=true;_v.asset_id=_id;_v.undo=[];_v.redo=[];_v.stroke=undefined;_v.dirty=true;
     _v.message="Editing a shared asset updates every placement of it. Duplicate for an independent copy.";
 }
 function ln_art_checkpoint() {
@@ -144,7 +144,7 @@ function ln_art_new(_duplicate) {
     var _e=global.ln_editor,_v=_e.art;ln_art_checkpoint();
     var _id=10000,_d=ln_edit_data(_e.game,_e.level);while(variable_struct_exists(_d.objects,string(_id)) || is_struct(ln_art_get(_e.game,_e.level,_id))) _id++;
     if(!_duplicate) _v.draft={game:_e.game,level:_e.level,id:_id,width:32,height:32,mode:_v.draft.mode,mc:_v.draft.mc,background:_v.draft.background,pixels:array_create(1024,-1)};
-    _v.draft.id=_id;_v.message=_duplicate?"Independent copy. Apply, then add it from the room asset list.":"New transparent scenery asset.";_v.dirty=true;
+    variable_struct_set(_v.draft,"id",_id);_v.message=_duplicate?"Independent copy. Apply, then add it from the room asset list.":"New transparent scenery asset.";_v.dirty=true;
 }
 function ln_art_apply() {
     var _e=global.ln_editor,_v=_e.art,_a=ln_enemy_copy(_v.draft),_pack={};variable_struct_set(_pack,ln_art_key(_a.game,_a.level,_a.id),_a);
@@ -212,16 +212,18 @@ function ln_art_step() {
     var _inside=_x>=0 && _y>=0 && _x<_a.width && _y<_a.height;
     if(mouse_check_button_pressed(mb_left) && _inside) {
         if(_v.tool==3 || keyboard_check(vk_alt)) {var _c=_a.pixels[_y*_a.width+_x];if(_c>=0) _v.colour=_c;return true;}
-        ln_art_checkpoint();_v.stroke=true;_v.last_x=_x;_v.last_y=_y;
+        ln_art_checkpoint();_v.stroke=true;_v.stroke_button=mb_left;_v.last_x=_x;_v.last_y=_y;
         if(_v.tool==2) {ln_art_fill(_a,_x,_y,_v.colour);_v.stroke=undefined;}
     }
-    if(mouse_check_button(mb_left) && _inside && !is_undefined(_v.stroke)) {
-        var _steps=max(1,max(abs(_x-_v.last_x),abs(_y-_v.last_y))),_ok=true;
-        for(var _i=0;_i<=_steps;_i++) _ok=ln_art_put(_a,round(lerp(_v.last_x,_x,_i/_steps)),round(lerp(_v.last_y,_y,_i/_steps)),_v.tool==1?-1:_v.colour) && _ok;
+    // Right mouse button erases with any tool.
+    if(mouse_check_button_pressed(mb_right) && _inside && is_undefined(_v.stroke)) {ln_art_checkpoint();_v.stroke=true;_v.stroke_button=mb_right;_v.last_x=_x;_v.last_y=_y;}
+    if(mouse_check_button(_v.stroke_button) && _inside && !is_undefined(_v.stroke)) {
+        var _steps=max(1,max(abs(_x-_v.last_x),abs(_y-_v.last_y))),_ok=true,_erase=_v.stroke_button==mb_right || _v.tool==1;
+        for(var _i=0;_i<=_steps;_i++) _ok=ln_art_put(_a,round(lerp(_v.last_x,_x,_i/_steps)),round(lerp(_v.last_y,_y,_i/_steps)),_erase?-1:_v.colour) && _ok;
         _v.last_x=_x;_v.last_y=_y;_v.dirty=true;
         if(!_ok) _v.message="C64 Strict: this cell already uses its allowed colours.";
     }
-    if(!mouse_check_button(mb_left)) _v.stroke=undefined;
+    if(!mouse_check_button(_v.stroke_button)) _v.stroke=undefined;
     return true;
 }
 function ln_art_draw() {
@@ -251,7 +253,7 @@ function ln_art_draw() {
     if(_v.dirty || !surface_exists(_v.surface)) {if(surface_exists(_v.surface)) surface_free(_v.surface);_v.surface=ln_art_surface(_a);_v.dirty=false;}
     draw_set_colour(c_white);draw_surface_stretched(_v.surface,_r[0],_r[1],_w,_h);
     if(_r[2]>=6) {draw_set_alpha(.22);draw_set_colour(c_white);for(var _x=0;_x<=_a.width;_x+=(_a.mode<2 && _a.mc?2:1)) draw_line(_r[0]+_x*_r[2],_r[1],_r[0]+_x*_r[2],_r[1]+_h);for(var _y=0;_y<=_a.height;_y++) draw_line(_r[0],_r[1]+_y*_r[2],_r[0]+_w,_r[1]+_y*_r[2]);draw_set_alpha(1);}
-    draw_set_colour(c_white);draw_text(24,704,"Alt-click: pick colour. Transparent pixels show the checkerboard.");
+    draw_set_colour(c_white);draw_text(24,704,"Right-drag: erase.  Alt-click: pick colour. Transparent pixels show the checkerboard.");
     draw_text(24,730,"Apply keeps artwork in this project. Back discards unapplied changes. Save file stores applied artwork.");
     draw_set_colour(make_colour_rgb(150,210,220));draw_text(24,764,_v.message);
 }
