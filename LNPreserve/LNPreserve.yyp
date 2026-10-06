@@ -2440,6 +2440,7 @@
     {"$GMIncludedFile":"","%Name":"backgrounds.json","CopyToMask":-1,"filePath":"datafiles/play/ln3/painting","name":"backgrounds.json","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
     {"$GMIncludedFile":"","%Name":"transition.json","CopyToMask":-1,"filePath":"datafiles/play/ln3","name":"transition.json","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
     {"$GMIncludedFile":"","%Name":"sprite_palettes.json","CopyToMask":-1,"filePath":"datafiles","name":"sprite_palettes.json","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
+    {"$GMIncludedFile":"","%Name":"sprite_mirrors.json","CopyToMask":-1,"filePath":"datafiles","name":"sprite_mirrors.json","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
     {"$GMIncludedFile":"","%Name":"sprite_viewer.json","CopyToMask":-1,"filePath":"datafiles","name":"sprite_viewer.json","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
     {"$GMIncludedFile":"","%Name":"ln1_combat_vectors.json","CopyToMask":-1,"filePath":"datafiles/verification","name":"ln1_combat_vectors.json","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
     {"$GMIncludedFile":"","%Name":"ln1_control_vectors.json","CopyToMask":-1,"filePath":"datafiles/verification","name":"ln1_control_vectors.json","resourceType":"GMIncludedFile","resourceVersion":"2.0",},

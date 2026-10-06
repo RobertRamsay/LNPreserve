@@ -5,7 +5,7 @@ function LNSpriteArt() constructor {
     entry=undefined;clip_index=0;sheet="";sheet_scroll=0;allowed=undefined;uses={};palette={};strict={};
     tool=0;colour=c_white;mode=1;mc=false;drafts={};undo=[];redo=[];surfaces={};
     stroke=false;stroke_button=mb_left;stroke_key="";last_x=-1;last_y=-1;
-    canvas_surface=-1;dirty_keys=[];autosave_us=0;playing=false;elapsed=0;dim=true;onion=false;crop=true;figure=undefined;full_rect=[0,0,8,8];clipboard=undefined;message="";
+    canvas_surface=-1;mirrors={};mirror_edits=true;dirty_keys=[];autosave_us=0;playing=false;elapsed=0;dim=true;onion=false;crop=true;figure=undefined;full_rect=[0,0,8,8];clipboard=undefined;message="";
 }
 function ln_sprite_art_key(_name,_frame) {return _name+":"+string(_frame);}
 function ln_sprite_art_get(_name,_frame) {
@@ -37,6 +37,7 @@ function ln_sprite_art_catalog() {
     }
     for(var _i=0;_i<16;_i++) variable_struct_set(_v.palette,string(global.ln_paint_palette[_i]),true);
     _v.strict=ln3_data_read("sprite_palettes.json").palettes;
+    _v.mirrors=ln3_data_read("sprite_mirrors.json").mirrors;
     _v.allowed=_allowed;_v.uses=_uses;return _allowed;
 }
 function ln_sprite_art_tinted(_name) {
@@ -224,6 +225,41 @@ function ln_sprite_art_write(_file) {
 }
 /// Edits go straight into the project: every changed frame is committed once the stroke ends.
 /// The game's sprite assets are rebuilt when the editor closes, so painting never stalls.
+/// Stores one draft in the project (or removes it when it matches the original again).
+function ln_sprite_art_store(_a) {
+    var _v=global.ln_sprites.art,_e=global.ln_editor,_key=ln_sprite_art_key(_a.sprite,_a.frame);
+    if(!ln_sprite_art_pixels_valid(_a,_a.pixels)) ln_sprite_art_conform(_a);
+    if(array_equals(_a.pixels,ln_sprite_art_read(_a.sprite,_a.frame)) && !_a.mc && _a.mode==1) {
+        if(!variable_struct_exists(_e.sprite_art,_key)) return false;
+        variable_struct_remove(_e.sprite_art,_key);return true;
+    }
+    if(!variable_struct_exists(_e.sprite_art,_key)) {
+        var _names=variable_struct_get_names(_e.sprite_art),_total=_a.width*_a.height;
+        for(var _j=0;_j<array_length(_names);_j++) {var _o=variable_struct_get(_e.sprite_art,_names[_j]);_total+=_o.width*_o.height;}
+        if(array_length(_names)>=12000 || _total>40000000) {_v.message="Project sprite artwork limit reached; this frame was not stored.";return false;}
+    }
+    variable_struct_set(_e.sprite_art,_key,{sprite:_a.sprite,frame:_a.frame,width:_a.width,height:_a.height,mode:_a.mode,mc:_a.mc,data:ln_sprite_art_encode(_a.pixels)});
+    return true;
+}
+/// The game stores each facing as a separate, pre-mirrored frame: [sprite, frame, dx]
+/// where the twin is the horizontal flip shifted right by dx pixels.
+function ln_sprite_art_twin(_name,_frame) {
+    var _v=global.ln_sprites.art;ln_sprite_art_catalog();
+    var _key=ln_sprite_art_key(_name,_frame);
+    return variable_struct_exists(_v.mirrors,_key)?variable_struct_get(_v.mirrors,_key):undefined;
+}
+/// Writes the mirrored copy of an edited frame into its twin, so both facings match.
+function ln_sprite_art_mirror_into_twin(_a) {
+    var _t=ln_sprite_art_twin(_a.sprite,_a.frame);if(!is_array(_t)) return false;
+    var _b=ln_sprite_art_draft(_t[0],_t[1],true),_w=_a.width,_h=_a.height,_dx=_t[2];
+    if(_b.width!=_w || _b.height!=_h) return false;
+    var _pixels=array_create(_w*_h,-1);
+    for(var _y=0;_y<_h;_y++) for(var _x=0;_x<_w;_x++) {var _sx=_w-1-(_x-_dx);if(_sx>=0 && _sx<_w) _pixels[_y*_w+_x]=_a.pixels[_y*_w+_sx];}
+    _b.pixels=_pixels;_b.mode=_a.mode;_b.mc=_a.mc;ln_sprite_art_conform(_b);_b.rev++;_b.changed=false;
+    return ln_sprite_art_store(_b);
+}
+/// Edits go straight into the project: every changed frame is committed once the stroke ends.
+/// The game's sprite assets are rebuilt when the editor closes, so painting never stalls.
 function ln_sprite_art_commit() {
     var _v=global.ln_sprites.art,_e=global.ln_editor,_keys=_v.dirty_keys,_count=0;
     if(array_length(_keys)==0) return false;
@@ -232,24 +268,13 @@ function ln_sprite_art_commit() {
         if(!variable_struct_exists(_v.drafts,_keys[_i])) continue;
         var _a=variable_struct_get(_v.drafts,_keys[_i]);if(!_a.changed) continue;
         _a.changed=false;
-        if(!ln_sprite_art_pixels_valid(_a,_a.pixels)) ln_sprite_art_conform(_a);
-        if(array_equals(_a.pixels,ln_sprite_art_read(_a.sprite,_a.frame)) && !_a.mc && _a.mode==1) {
-            if(variable_struct_exists(_e.sprite_art,_keys[_i])) {variable_struct_remove(_e.sprite_art,_keys[_i]);_count++;}
-            continue;
-        }
-        if(!variable_struct_exists(_e.sprite_art,_keys[_i])) {
-            var _names=variable_struct_get_names(_e.sprite_art),_total=_a.width*_a.height;
-            for(var _j=0;_j<array_length(_names);_j++) {var _o=variable_struct_get(_e.sprite_art,_names[_j]);_total+=_o.width*_o.height;}
-            if(array_length(_names)>=12000 || _total>40000000) {_v.message="Project sprite artwork limit reached; this frame was not stored.";continue;}
-        }
-        variable_struct_set(_e.sprite_art,_keys[_i],{sprite:_a.sprite,frame:_a.frame,width:_a.width,height:_a.height,mode:_a.mode,mc:_a.mc,data:ln_sprite_art_encode(_a.pixels)});
-        _count++;
+        if(ln_sprite_art_store(_a)) _count++;
+        if(_v.mirror_edits && !_a.tinted && ln_sprite_art_mirror_into_twin(_a)) _count++;
     }
     if(_count==0) return false;
     _e.sprite_rev++;_e.enabled=true;_e.dirty=true;_v.autosave_us=2000000;
     return true;
-}
-/// Runs after every editor step: commits finished edits and keeps the autosave current.
+}/// Runs after every editor step: commits finished edits and keeps the autosave current.
 function ln_sprite_art_flush() {
     var _v=global.ln_sprites.art;
     if(!_v.stroke) ln_sprite_art_commit();
@@ -337,6 +362,23 @@ function ln_sprite_art_bounds() {
         var _x1=min(_f[0]+_f[2],ceil(_v.figure[2])+8),_y1=min(_f[1]+_f[3],ceil(_v.figure[3])+8);
         if(_x1-_x0>=8 && _y1-_y0>=8) _v.rect=[_x0,_y0,_x1-_x0,_y1-_y0];
     }
+}
+/// Several original actions reuse exactly the same frames, often at another speed (LN1 actions
+/// 21-28 replay the two walk cycles at four speeds). first[i] is the earliest clip with those frames.
+function ln_sprite_art_clip_first(_entry) {
+    if(variable_struct_exists(_entry,"clip_first")) return _entry.clip_first;
+    var _first=array_create(array_length(_entry.clips),0),_seen={};
+    for(var _i=0;_i<array_length(_entry.clips);_i++) {
+        var _sig="",_frames=_entry.clips[_i].frames;for(var _f=0;_f<array_length(_frames);_f++) _sig+=json_stringify(_frames[_f].parts)+";";
+        if(variable_struct_exists(_seen,_sig)) _first[_i]=variable_struct_get(_seen,_sig);
+        else {variable_struct_set(_seen,_sig,_i);_first[_i]=_i;}
+    }
+    _entry.clip_first=_first;return _first;
+}
+function ln_sprite_art_clip_step(_direction) {
+    var _v=global.ln_sprites.art,_first=ln_sprite_art_clip_first(_v.entry),_n=array_length(_first),_c=_v.clip_index;
+    repeat(_n) {_c=(_c+_direction+_n) mod _n;if(_first[_c]==_c) break;}
+    ln_sprite_art_use_clip(_c);
 }
 function ln_sprite_art_use_clip(_clip) {
     var _v=global.ln_sprites.art,_frames=_v.entry.clips[_clip].frames;
@@ -470,9 +512,8 @@ function ln_sprite_art_step(_host) {
     if(_delta) {_v.index=(_v.index+_delta) mod _n;_v.playing=false;}
     if(ln_edit_hit(264,680,110,28) || keyboard_check_pressed(vk_space)) {_v.playing=!_v.playing;_v.elapsed=0;_v.stroke=false;}
     if(_v.view==0 && is_struct(_v.entry)) {
-        var _clips=array_length(_v.entry.clips);
-        if(ln_edit_hit(400,680,40,28)) ln_sprite_art_use_clip((_v.clip_index+_clips-1) mod _clips);
-        if(ln_edit_hit(704,680,40,28)) ln_sprite_art_use_clip((_v.clip_index+1) mod _clips);
+        if(ln_edit_hit(400,680,40,28)) ln_sprite_art_clip_step(-1);
+        if(ln_edit_hit(704,680,40,28)) ln_sprite_art_clip_step(1);
     }
     var _start=ln_sprite_art_strip_start();
     for(var _i=0;_i<10;_i++) if(_start+_i<_n && ln_edit_hit(24+_i*70,606,64,64)) {_v.index=_start+_i;_v.playing=false;}
@@ -522,6 +563,22 @@ function ln_sprite_art_step(_host) {
     }
     if(ln_edit_hit(1002,596,230,28)) _v.dim=!_v.dim;
     if(ln_edit_hit(760,632,230,28)) _v.onion=!_v.onion;
+    if(ln_edit_hit(760,668,230,28)) {_v.mirror_edits=!_v.mirror_edits;_v.message=_v.mirror_edits?"Edits are copied, flipped, into the other facing.":"Each facing is edited separately.";}
+    if(ln_edit_hit(1002,668,230,28)) {
+        var _twin=ln_sprite_art_twin(_p[0],_p[1]);
+        if(is_array(_twin)) {ln_sprite_art_use_sheet(_twin[0],_twin[1]);_v.view=2;_v.message="Mirrored twin of "+_p[0]+" #"+string(_p[1])+".";}
+        else _v.message="This frame has no pre-mirrored twin (it is flipped or shared at runtime).";
+    }
+    if(ln_edit_hit(760,704,230,28)) {
+        var _twin=ln_sprite_art_twin(_p[0],_p[1]);
+        if(!is_array(_twin)) _v.message="This frame has no pre-mirrored twin.";
+        else {
+            // Undoable: the twin is checkpointed, then receives the flipped copy of this frame.
+            var _src=ln_sprite_art_draft(_p[0],_p[1],true),_dst=ln_sprite_art_begin(_twin[0],_twin[1]);
+            ln_sprite_art_mirror_into_twin(_src);ln_sprite_art_touch(_dst);
+            _v.message="Copied this frame, flipped, into twin #"+string(_twin[1])+".";
+        }
+    }
     if(ln_edit_hit(1002,632,230,28)) {_v.crop=!_v.crop;ln_sprite_art_bounds();}
     // Painting on the selected layer.
     var _L=ln_sprite_art_layout(),_fx=(_mx-_L[3])/_L[2],_fy=(_my-_L[4])/_L[2],_loc=ln_sprite_art_local(_p,_fx,_fy);
@@ -555,7 +612,9 @@ function ln_sprite_art_draw() {
     ln_edit_button(388,18,110,"Undo (^Z)",array_length(_v.undo)>0);ln_edit_button(510,18,110,"Redo (^Y)",array_length(_v.redo)>0);
     ln_edit_button(966,18,170,"Modified "+(_e.enabled?"ON":"OFF"),_e.enabled);
     ln_edit_button(760,60,240,"Animation",_v.view==0);ln_edit_button(1010,60,240,"Sprite sheet",_v.view!=0);
-    draw_text(24,64,"SPRITE ART / LN"+string(_sv.game)+" / "+_v.context);
+    var _same=0;
+    if(_v.view==0 && is_struct(_v.entry)) {var _first=ln_sprite_art_clip_first(_v.entry);for(var _i=0;_i<array_length(_first);_i++) if(_i!=_v.clip_index && _first[_i]==_first[_v.clip_index]) _same++;}
+    draw_text(24,64,"SPRITE ART / LN"+string(_sv.game)+" / "+_v.context+(_same>0?"  (same frames as "+string(_same)+" other)":""));
     var _p=ln_sprite_art_active();
     if(_v.view==1) {
         draw_text(24,90,"Click a frame to edit it. Mouse wheel or arrows scroll.");
@@ -568,7 +627,8 @@ function ln_sprite_art_draw() {
     } else if(is_array(_p)) {
         var _l=ln_sprite_art_local(_p,0,0),_uses=variable_struct_exists(_v.uses,ln_sprite_art_key(_p[0],_p[1]))?variable_struct_get(_v.uses,ln_sprite_art_key(_p[0],_p[1])):0;
         var _d=ln_sprite_art_draft(_p[0],_p[1],false),_state=is_struct(ln_sprite_art_get(_p[0],_p[1])) || (is_struct(_d) && _d.changed)?"edited":"original";
-        draw_text(24,90,_p[0]+" #"+string(_p[1])+"  "+string(_l[2])+"x"+string(_l[3])+"  in "+string(_uses)+" animation frames  ("+_state+")");
+        var _tw=ln_sprite_art_twin(_p[0],_p[1]);
+        draw_text(24,90,_p[0]+" #"+string(_p[1])+"  "+string(_l[2])+"x"+string(_l[3])+"  in "+string(_uses)+" animation frames  ("+_state+")"+(is_array(_tw)?"  twin #"+string(_tw[1]):""));
         // Canvas: checkerboard, onion skin, layers and the selected layer's pixel grid,
         // drawn into a canvas-sized surface so cropped layers cannot spill over the panels.
         var _L=ln_sprite_art_layout(),_w=_v.rect[2]*_L[2],_h=_v.rect[3]*_L[2];
@@ -644,9 +704,12 @@ function ln_sprite_art_draw() {
         ln_edit_button(760,560,230,"Copy frame");ln_edit_button(1002,560,230,"Paste frame",is_struct(_v.clipboard));
         ln_edit_button(760,596,230,"Revert frame");ln_edit_button(1002,596,230,"Dim other layers",_v.dim);
         ln_edit_button(760,632,230,"Onion skin",_v.onion);ln_edit_button(1002,632,230,"Crop to figure",_v.crop);
+        var _twin=ln_sprite_art_twin(_p[0],_p[1]);
+        ln_edit_button(760,668,230,"Mirror to twin",_v.mirror_edits && is_array(_twin));ln_edit_button(1002,668,230,"Show twin",is_array(_twin));
+        ln_edit_button(760,704,230,"Copy to twin now",is_array(_twin));
     }
     draw_set_colour(c_white);
-    draw_text(760,672,"Project: "+string(array_length(variable_struct_get_names(_e.sprite_art)))+" edited frames."+(_e.dirty?"  Not saved to a file yet.":""));
+    draw_text(1002,709,"Project: "+string(array_length(variable_struct_get_names(_e.sprite_art)))+" frames");
     draw_text(24,716,"Right-drag: erase.  Alt-click: pick colour and layer.  Arrows: frame.  Space: play.  Esc: back to the viewer.");
     draw_set_colour(make_colour_rgb(150,210,220));draw_text(24,744,_v.message);draw_set_colour(c_white);
 }
@@ -688,7 +751,11 @@ function ln_sprite_art_checks() {
     ln_sprite_art_history(false);ln_check(variable_struct_get(_v.drafts,_key).pixels[_spot]==-1,"undo restores the frame");
     ln_sprite_art_history(true);ln_check(variable_struct_get(_v.drafts,_key).pixels[_spot]==_P[7],"redo repeats the stroke");
     ln_check(ln_sprite_art_commit() && is_struct(ln_sprite_art_get(_name,_frame)) && _e.enabled && _e.dirty,"finished edit goes straight into the project");
-    ln_sprite_art_sync();ln_check(ln_sprite_art_read_index(asset_get_index(_name),_frame)[_spot]==-1,"game sprite waits while the editor is open");
+    var _tw=ln_sprite_art_twin(_name,_frame);
+    ln_check(is_array(_tw) && _tw[0]==_name && _tw[1]==57 && _tw[2]==-8,"LN1 ninja frame 0 has its pre-mirrored twin");
+    ln_check(ln_sprite_art_decode(ln_sprite_art_get(_tw[0],_tw[1]))[2*_w+(_w-1-2+_tw[2])]==_P[7],"edit is mirrored into the other facing");
+    var _cf=ln_sprite_art_clip_first(_sv.list[0]);
+    ln_check(_cf[0]==0 && _cf[21]==20 && _cf[23]==20 && _cf[25]==24 && _cf[27]==24,"actions that replay the same frames are grouped");    ln_sprite_art_sync();ln_check(ln_sprite_art_read_index(asset_get_index(_name),_frame)[_spot]==-1,"game sprite waits while the editor is open");
     ln_sprite_art_close();
     var _sync=get_timer();ln_sprite_art_sync();_sync=get_timer()-_sync;
     var _asset=asset_get_index(_name),_backup=variable_struct_get(_e.sprite_backups,_name);
@@ -734,6 +801,13 @@ function ln_sprite_art_checks() {
     ln_check(ln_sprite_art_commit(),"LN3 layer edit is stored");ln_sprite_art_close();ln_sprite_art_sync();
     ln_check(ln_sprite_art_read_index(asset_get_index(_q[0]),_q[1])[_qspot]==c_white,"LN3 layer mask is switched on in the game bank");
     ln_check(ln_sprite_art_pick((_qspot mod _ql[2])+_q[2]+.5-sprite_get_xoffset(ln_sprite_art_source(_q[0])),(_qspot div _ql[2])+_q[3]+.5-sprite_get_yoffset(ln_sprite_art_source(_q[0]))) && _v.colour==_v.items[_v.index][_v.part][4],"picking an LN3 layer pixel selects that layer and its game colour");
+    // Copy to twin now (for edits made before mirroring was on) is undoable.
+    var _tw1=ln_sprite_art_twin(_name,1),_twk=ln_sprite_art_key(_tw1[0],_tw1[1]);
+    var _old=ln_sprite_art_draft(_tw1[0],_tw1[1],true);_old.pixels[0]=_P[1];
+    var _src=ln_sprite_art_draft(_name,1,true);_src.pixels[_spot]=_P[7];
+    var _dst=ln_sprite_art_begin(_tw1[0],_tw1[1]);ln_sprite_art_mirror_into_twin(_src);ln_sprite_art_touch(_dst);ln_sprite_art_commit();
+    ln_check(variable_struct_get(_v.drafts,_twk).pixels[2*_w+(_w-1-(2-_tw1[2]))]==_P[7],"Copy to twin now writes the flipped frame");
+    ln_sprite_art_history(false);ln_check(variable_struct_get(_v.drafts,_twk).pixels[0]==_P[1],"Copy to twin now can be undone");
     // Largest sheet rebuild cost.
     _d=ln_sprite_art_begin("spr_ln1_dungeon_uniforms",0);ln_sprite_art_line(_d,1,1,3,1,_P[7]);ln_sprite_art_commit();
     var _big=get_timer();ln_sprite_art_sync();_big=get_timer()-_big;

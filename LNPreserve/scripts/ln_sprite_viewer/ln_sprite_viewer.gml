@@ -126,7 +126,12 @@ function ln_sprite_draw() {
     if(_v.preview_camera<0) _v.preview_camera=camera_create_view(0,0,1226,500);
     surface_set_target(_v.preview_surface);camera_apply(_v.preview_camera);draw_clear_alpha(c_black,0);
     var _b=_clip.visible_bounds,_scale=_v.zoom;
-    var _cx=613,_cy=250,_parts=_clip.frames[_v.frame].parts,_flip=_v.mirror?-1:1;
+    var _cx=613,_cy=250,_parts=_clip.frames[_v.frame].parts;
+    // The game stores the other facing as separate pre-mirrored frames; show those
+    // when every part has one, so edits to either facing appear as they do in play.
+    var _twin=_v.mirror;
+    if(_twin) for(var _i=0;_i<array_length(_parts);_i++) if(!is_array(ln_sprite_art_twin(_parts[_i][0],_parts[_i][1]))) {_twin=false;break;}
+    var _flip=_v.mirror && !_twin?-1:1;
     var _origin_x=round(_cx-(_b[0]+_b[2])/2*_scale*_flip),_origin_y=round(_cy-(_b[1]+_b[3])/2*_scale);
     // One standing anchor per character, shared by all its animations.
     if(variable_struct_exists(_entry,"ground_anchor")) {
@@ -134,16 +139,17 @@ function ln_sprite_draw() {
         _origin_y=round(_cy+(_entry.standing_height/2-_entry.ground_anchor[1])*_scale);
     }
     for(var _i=0;_i<array_length(_parts);_i++) {
-        var _p=_parts[_i],_s=ln_sprite_asset(_p[0]);if(_s<0) continue;
+        var _p=_parts[_i];if(_twin) {var _t=ln_sprite_art_twin(_p[0],_p[1]);_p=[_t[0],_t[1],_p[2],_p[3],_p[4]];}
+        var _s=ln_sprite_asset(_p[0]);if(_s<0) continue;
         draw_sprite_ext(_s,_p[1],_origin_x+_p[2]*_scale*_flip,
             _origin_y+_p[3]*_scale,_scale*_flip*(array_length(_p)>5?_p[5]:1),_scale*(array_length(_p)>6?_p[6]:1),0,_p[4],1);
     }
     surface_reset_target();matrix_set(matrix_view,_view);matrix_set(matrix_projection,_projection);
     // Draw only a local grey halo behind the transparent sprite picture.
     var _radius=5*_scale;
-    var _lx=clamp(floor(_origin_x+min(_b[0]*_flip,_b[2]*_flip)*_scale-_radius-1),0,1226);
+    var _hf=_twin?-1:_flip,_lx=clamp(floor(_origin_x+min(_b[0]*_hf,_b[2]*_hf,_b[0],_b[2])*_scale-_radius-1),0,1226);
     var _ly=clamp(floor(_origin_y+_b[1]*_scale-_radius-1),0,500);
-    var _rx=clamp(ceil(_origin_x+max(_b[0]*_flip,_b[2]*_flip)*_scale+_radius+1),0,1226);
+    var _rx=clamp(ceil(_origin_x+max(_b[0]*_hf,_b[2]*_hf,_b[0],_b[2])*_scale+_radius+1),0,1226);
     var _by=clamp(ceil(_origin_y+_b[3]*_scale+_radius+1),0,500);
     draw_set_colour(c_white);
     if(shader_is_compiled(sh_ln_sprite_halo) && _rx>_lx && _by>_ly) {
@@ -156,7 +162,8 @@ function ln_sprite_draw() {
     }
     ln_crt_surface(_v.preview_surface,24,160,1,_v.zoom,undefined,_v.crt_enabled);
     draw_set_colour(c_white);ln_edit_button(24,688,50,"<");ln_edit_button(1200,688,50,">");
-    draw_text(100,693,string(_v.animation+1)+" / "+string(array_length(_entry.clips))+"   "+_clip.name);
+    var _first=ln_sprite_art_clip_first(_entry)[_v.animation];
+    draw_text(100,693,string(_v.animation+1)+" / "+string(array_length(_entry.clips))+"   "+_clip.name+(_first!=_v.animation?"   (same frames as "+_entry.clips[_first].name+")":""));
     ln_edit_button(24,744,160,_v.paused?"Play":"Pause");
     ln_edit_button(204,744,220,"Cycle animations",_v.cycle);ln_edit_button(444,744,180,"Mirror",_v.mirror);
     draw_text(660,749,"Frame "+string(_v.frame+1)+" / "+string(array_length(_clip.frames)));

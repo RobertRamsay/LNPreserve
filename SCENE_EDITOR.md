@@ -209,6 +209,19 @@ replace the game's sprite assets, so gameplay, the viewer and the room editor pr
 show them. Modified OFF restores the original sprites. Original sprite assets are never
 rewritten.
 
+### Facings (mirrored frames) and repeated animations
+
+The games are not flipped at runtime: each facing is a separate, pre-mirrored frame in the
+same sheet (LN1 ninja frame 0 faces one way, frame 57 is its mirror). The viewer's Mirror
+button shows those real frames. **Mirror to twin** (on by default) copies each edit, flipped,
+into the other facing, and undo covers both. **Show twin** opens the other facing;
+**Copy to twin now** mirrors a frame that was edited before. 7388 character frames have a
+twin (`datafiles/sprite_mirrors.json`); LN3 layers and a few edge-clipped poses do not.
+
+Some original actions replay the same frames at another speed (LN1 Weapon 0 actions 21-24
+use walk cycle 2 and 25-28 walk cycle 1 at four speeds). The viewer labels them "same frames
+as ...", and the editor's animation arrows skip the repeats.
+
 ## Automatic project updates, saving and undo
 
 Sprite and scenery artwork edits go straight into the project as you make them, like room
