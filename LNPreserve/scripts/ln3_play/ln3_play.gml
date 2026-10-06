@@ -367,7 +367,7 @@ function ln3_play_draw(_g) {
     draw_text(160,36,"LAST NINJA 3 - "+string_upper(_g.title));draw_text(1000,36,"Scene "+string(_g.room_id+1));
     draw_text(600,36,"F8 One-hit kills: "+(_g.one_hit_kills?"ON":"OFF"));
     draw_text(160,712,"WASD Move    # + direction Action    Space Weapon    F1 F3 F5 F7 Functions");
-    draw_text(160,744,"Numpad 7/9/1/3 Direction    F11 Scenes    Home Restart    1/2/3 Games");
+    draw_text(160,756,"Numpad 7/9/1/3 Direction    F11 Scenes    Home Restart    1/2/3 Games    P Pause");
     if (_g.paused) draw_text(600,60,"PAUSED");
     if (_g.level_complete) draw_text(540,60,"END OF LAST NINJA 3");
 }

@@ -41,6 +41,7 @@ function LNInput() constructor {
         for (var _i = 0; _i < LNKey.Count; _i++) {
             var _down = bindings[_i]>=0 && keyboard_check(bindings[_i]);
             if (_i == LNKey.Down && keyboard_check(vk_control)) _down = false;
+            if (_i == LNKey.F7 && keyboard_check(ord("P"))) _down = true; // P pauses/unpauses every game, like F7
             _values[_i]=_values[_i] || _down;
         }
         sample_values(_cycle,_values);
