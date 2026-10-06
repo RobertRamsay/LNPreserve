@@ -1199,7 +1199,7 @@ function ln_ui_button_background(_x,_y,_w,_h,_selected=undefined) {
     var _dw=[_border,_w-2*_border,_border],_dh=[_border,_h-2*_border,_border];
     for(var _row=0;_row<3;_row++) for(var _col=0;_col<3;_col++) {
         draw_sprite_part_ext(spr_UI_button,0,_sx[_col],_sy[_row],_widths[_col],_heights[_row],
-            _dx[_col],_dy[_row],_dw[_col]/_widths[_col],_dh[_row]/_heights[_row],_tint,1);
+            _dx[_col],_dy[_row],_dw[_col]/_widths[_col],_dh[_row]/_heights[_row],_tint,draw_get_alpha());
     }
 }
 

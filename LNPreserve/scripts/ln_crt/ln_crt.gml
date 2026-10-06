@@ -450,7 +450,7 @@ function ln_crt_preferences_checks() {
 // A 1920x1080 presentation canvas wraps the preserved 1280x800 tool coordinates.
 // Native game pixels keep their existing integer scale; UI artwork is independent.
 function ln_tool_init() {
-    global.ln_tool={active:true,drawing:false,load_message:"",load_message_us:0,surface:-1,camera:-1,output_camera:-1,ui:true,background:true,view:undefined,projection:undefined,layout_test:false,frame:0};
+    global.ln_tool={active:true,drawing:false,load_message:"",load_message_us:0,ui_hint_us:0,surface:-1,camera:-1,output_camera:-1,ui:true,background:true,view:undefined,projection:undefined,layout_test:false,frame:0};
     for(var _arg=1;_arg<=parameter_count();_arg++) {
         if(string_pos("--",parameter_string(_arg))==1) global.ln_tool.active=false;
         if(parameter_string(_arg)=="--tool-layout-test") global.ln_tool.layout_test=true;
@@ -495,7 +495,14 @@ function ln_tool_present(_host) {
     if(ln_tool_ui_visible()) draw_surface(_t.surface,320,140);
     else {_rect=ln_tool_rect(_host);draw_surface_part(_t.surface,_rect[0],_rect[1],_rect[2],_rect[3],(1920-_rect[2])/2,(1080-_rect[3])/2);}
     draw_flush();
-    if(!ln_tool_ui_visible()) return;
+    if(!ln_tool_ui_visible()) {
+        // After hiding the UI the U button lingers, then fades over two seconds, as a reminder.
+        if(_t.ui_hint_us>0) {
+            draw_set_font(font_jansina);draw_set_halign(fa_left);draw_set_valign(fa_top);
+            draw_set_alpha(clamp(_t.ui_hint_us/2000000,0,1));ln_edit_button(320,96,160,"USER INT. (U)",true);draw_set_alpha(1);draw_flush();
+        }
+        return;
+    }
     // F6 always shows the editor; U controls gameplay UI only.
     draw_set_font(font_jansina);draw_set_halign(fa_left);draw_set_valign(fa_top);
     ln_edit_button(320,96,160,global.ln_editor.open?"USER INT. (ON)":"USER INT. (U)",true);
@@ -543,7 +550,10 @@ function ln_tool_step(_host) {
         if(mouse_x>=1368 && mouse_x<1416) ln_window_preset(0);
         if(mouse_x>=1424 && mouse_x<1600) ln_fullscreen_toggle(_host);
     }
-    if(!_typing && !global.ln_editor.open && (keyboard_check_pressed(ord("U")) || (ln_tool_ui_visible() && _click && mouse_x>=320 && mouse_x<480 && mouse_y>=96 && mouse_y<124))) _t.ui=!_t.ui;
+    if(_t.ui_hint_us>0) _t.ui_hint_us-=delta_time;
+    if(!_typing && !global.ln_editor.open && (keyboard_check_pressed(ord("U")) || (ln_tool_ui_visible() && _click && mouse_x>=320 && mouse_x<480 && mouse_y>=96 && mouse_y<124))) {
+        _t.ui=!_t.ui;_t.ui_hint_us=_t.ui?0:2600000;
+    }
     if(!_typing && (keyboard_check_pressed(ord("B")) || (ln_tool_ui_visible() && _click && mouse_x>=492 && mouse_x<732 && mouse_y>=96 && mouse_y<124))) _t.background=!_t.background;
     ln_crt_preferences_flush();
 }
