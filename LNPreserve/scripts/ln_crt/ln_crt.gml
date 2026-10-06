@@ -595,6 +595,10 @@ function ln_startup_step(_host) {
     }
     if(keyboard_check_pressed(vk_f9)) ln_fullscreen_toggle(_host);
     if(_host.startup_time>=1.05 && mouse_check_button_pressed(mb_left) && mouse_x>=750 && mouse_x<1170 && mouse_y>=640 && mouse_y<704) ln_startup_finish(_host);
+    // Enter or the # key (222, the fire key) work like clicking the button.
+    else if(_host.startup_time>=1.05 && (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(222))) {
+        ln_startup_finish(_host);keyboard_clear(vk_enter);keyboard_clear(222);
+    }
     if(_host.startup_test && _host.startup_frame==110) ln_startup_finish(_host);
 }
 function ln_startup_finish(_host) {
