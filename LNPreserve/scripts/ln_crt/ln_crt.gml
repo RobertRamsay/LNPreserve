@@ -450,7 +450,7 @@ function ln_crt_preferences_checks() {
 // A 1920x1080 presentation canvas wraps the preserved 1280x800 tool coordinates.
 // Native game pixels keep their existing integer scale; UI artwork is independent.
 function ln_tool_init() {
-    global.ln_tool={active:true,drawing:false,surface:-1,camera:-1,output_camera:-1,ui:true,background:true,view:undefined,projection:undefined,layout_test:false,frame:0};
+    global.ln_tool={active:true,drawing:false,load_message:"",load_message_us:0,surface:-1,camera:-1,output_camera:-1,ui:true,background:true,view:undefined,projection:undefined,layout_test:false,frame:0};
     for(var _arg=1;_arg<=parameter_count();_arg++) {
         if(string_pos("--",parameter_string(_arg))==1) global.ln_tool.active=false;
         if(parameter_string(_arg)=="--tool-layout-test") global.ln_tool.layout_test=true;
@@ -506,6 +506,8 @@ function ln_tool_present(_host) {
     var _music=ln_tool_music_enabled(_host.play);
     if(global.ln_editor.open && !is_undefined(global.ln_editor.test_music_restore)) _music=global.ln_editor.test_music_restore;
     ln_edit_button(_media[0]+310,_media[1],120,"Music "+(_music?"ON":"OFF"),_music);
+    ln_edit_button(_media[0]-250,_media[1],240,"Load edits");
+    if(_t.load_message_us>0) {draw_set_colour(make_colour_rgb(150,210,220));draw_text(_media[0]-250,_media[1]+32,_t.load_message);draw_set_colour(c_white);}
     if(ln_track_message()!="") {
         draw_set_colour(c_white);
         draw_text(_media[0],_media[1]+32,global.ln_tracks.paused?"PAUSED: Track:":"PLAYING: Track:");
@@ -524,6 +526,8 @@ function ln_tool_step(_host) {
         if(_e.open && !is_undefined(_e.test_music_restore)) _e.test_music_restore=!_e.test_music_restore;
         else ln_tool_music_set(_host.play,!ln_tool_music_enabled(_host.play));
     }
+    if(_t.load_message_us>0) _t.load_message_us-=delta_time;
+    if(ln_tool_media_hit(3)) ln_tool_load_edits();
     if(ln_tool_ui_visible() && _click && mouse_y>=96 && mouse_y<124) {
         if(!global.ln_editor.open && !global.ln_tracks.open && !global.ln_sprites.open && mouse_x>=748 && mouse_x<928) global.ln_editor.toggle_requested=true;
         if(mouse_x>=1256 && mouse_x<1304) ln_window_preset(1);
@@ -799,13 +803,13 @@ function ln_escape_checks() {
 }
 
 // Shared drawing/hit rectangles keep the compact media row together on each screen.
+// The row sits below the tool panel on every screen, so it never covers menu text.
 function ln_tool_media_rect() {
-
-    if(instance_exists(obj_ln_preserve) && obj_ln_preserve.scene_test.menu) return [1080,814];
-    return [1080+40,900+40];
+    return [1120,940];
 }
+// Buttons: 0 sprite viewer, 1 track player, 2 music, 3 load edits.
 function ln_tool_media_hit(_button) {
-    var _r=ln_tool_media_rect(),_offset=[0,160,310],_width=[150,140,120];
+    var _r=ln_tool_media_rect(),_offset=[0,160,310,-250],_width=[150,140,120,240];
     return global.ln_tool.active && ln_tool_ui_visible() && mouse_check_button_pressed(mb_left) &&
         mouse_x>=_r[0]+_offset[_button] && mouse_x<_r[0]+_offset[_button]+_width[_button] && mouse_y>=_r[1] && mouse_y<_r[1]+28;
 }
@@ -828,4 +832,14 @@ function ln_tool_music_resume_list(_voices,_enabled) {
     for(var _i=0;_i<array_length(_voices);_i++) if(_voices[_i]!=global.ln_music_voice) array_push(_result,_voices[_i]);
     if(_enabled) array_push(_result,global.ln_music_voice);
     return _result;
+}
+
+/// Loads a saved editor project (rooms, maps, scenery and sprite artwork) from any screen.
+function ln_tool_load_edits() {
+    var _t=global.ln_tool,_e=global.ln_editor,_file=get_open_filename("JSON files|*.json","");
+    if(_file=="") return false;
+    var _ok=ln_edit_load(_file);
+    if(_ok && _e.open) ln_edit_select(_e.game,_e.level,_e.room_id);
+    _t.load_message=_ok?"Edits loaded. Modified ON.":_e.message;_t.load_message_us=4000000;
+    return _ok;
 }
