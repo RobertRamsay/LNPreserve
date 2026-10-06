@@ -1,0 +1,106 @@
+{
+ "schema": 1,
+ "ram": "C:\\Users\\Robert\\.codex\\.chatgpt-projects\\g-p-6aa1482c0b648191b08f37cc7d026404\\source\\local\\captures\\ln1-level2-ram.bin",
+ "poses": {
+  "spr_ln1_player_weapon_0": {
+   "compared": 112,
+   "identical": 110
+  },
+  "spr_ln1_player_weapon_1": {
+   "compared": 112,
+   "identical": 109
+  },
+  "spr_ln1_player_weapon_2": {
+   "compared": 112,
+   "identical": 110
+  },
+  "spr_ln1_player_weapon_3": {
+   "compared": 112,
+   "identical": 110
+  },
+  "spr_ln1_enemy_weapon_0": {
+   "compared": 112,
+   "identical": 112
+  },
+  "spr_ln1_enemy_weapon_1": {
+   "compared": 112,
+   "identical": 112
+  },
+  "spr_ln1_enemy_weapon_2": {
+   "compared": 112,
+   "identical": 112
+  },
+  "spr_ln1_enemy_weapon_3": {
+   "compared": 112,
+   "identical": 112
+  }
+ },
+ "parts": {
+  "player": {
+   "body_parts": 93,
+   "weapon_parts": 19,
+   "frames_drawn_today": 364
+  },
+  "enemy": {
+   "body_parts": 107,
+   "weapon_parts": 19,
+   "frames_drawn_today": 368
+  }
+ },
+ "mismatches": [
+  {
+   "bank": "spr_ln1_player_weapon_0",
+   "frame": 39,
+   "mirror": 0,
+   "pixels": 24
+  },
+  {
+   "bank": "spr_ln1_player_weapon_0",
+   "frame": 39,
+   "mirror": 1,
+   "pixels": 23
+  },
+  {
+   "bank": "spr_ln1_player_weapon_1",
+   "frame": 39,
+   "mirror": 0,
+   "pixels": 26
+  },
+  {
+   "bank": "spr_ln1_player_weapon_1",
+   "frame": 40,
+   "mirror": 0,
+   "pixels": 3
+  },
+  {
+   "bank": "spr_ln1_player_weapon_1",
+   "frame": 39,
+   "mirror": 1,
+   "pixels": 26
+  },
+  {
+   "bank": "spr_ln1_player_weapon_2",
+   "frame": 39,
+   "mirror": 0,
+   "pixels": 22
+  },
+  {
+   "bank": "spr_ln1_player_weapon_2",
+   "frame": 39,
+   "mirror": 1,
+   "pixels": 14
+  },
+  {
+   "bank": "spr_ln1_player_weapon_3",
+   "frame": 39,
+   "mirror": 0,
+   "pixels": 23
+  },
+  {
+   "bank": "spr_ln1_player_weapon_3",
+   "frame": 39,
+   "mirror": 1,
+   "pixels": 14
+  }
+ ]
+}

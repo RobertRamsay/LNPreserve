@@ -209,6 +209,25 @@ replace the game's sprite assets, so gameplay, the viewer and the room editor pr
 show them. Modified OFF restores the original sprites. Original sprite assets are never
 rewritten.
 
+### LN1 characters as original pieces
+
+The original builds every LN1 pose from 24x21 hi-res hardware sprites: two or three body
+pieces plus one weapon piece, mirrored in code. With **LN1 pieces: ON** (the default) the
+editor opens LN1 ninja and guard frames as those pieces, one layer each. Painting edits the
+piece itself (one colour, set by the pose using it), so a change reaches every pose, weapon,
+facing and guard uniform that uses the piece. Mirrored and double-size pieces are handled.
+The Sprite sheet button shows all 141 pieces. Frames are rebuilt when you leave the editor or
+save (58 frames for a typical piece in about 0.2 s), then reach the game as usual.
+
+141 pieces rebuild 3651 frames exactly (355 ninja, 366 guard and 2930 uniform frames).
+Frames the recipes do not rebuild exactly, and frames already edited as whole frames, stay
+whole-frame edits; Revert frame returns such a frame to its pieces. **LN1 pieces: OFF**
+edits whole frames, for example for full-colour upgrades.
+
+Data: `datafiles/actors/ln1/pieces.json`, written by `tools/export_ln1_pieces.py --ram
+<LN1 RAM with the $d000 pose tables>`; `tools/audit_ln1_parts.py` compares every pose with
+the current frames.
+
 ### Facings (mirrored frames) and repeated animations
 
 The games are not flipped at runtime: each facing is a separate, pre-mirrored frame in the

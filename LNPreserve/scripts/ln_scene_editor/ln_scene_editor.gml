@@ -173,7 +173,7 @@ function ln_edit_load(_file) {
         if(!ln_edit_validate(_pack)) {global.ln_editor.message="Invalid custom file; existing edits kept";return false;}
         global.ln_editor.maps=variable_struct_exists(_pack,"maps")?_pack.maps:{};global.ln_editor.map_undo=[];global.ln_editor.map_redo=[];
         global.ln_editor.artworks=variable_struct_exists(_pack,"artworks")?_pack.artworks:{};ln_art_refresh();
-        global.ln_editor.sprite_art=variable_struct_exists(_pack,"sprites")?_pack.sprites:{};global.ln_editor.sprite_rev++;ln_sprite_art_reset_session();
+        global.ln_editor.sprite_art=variable_struct_exists(_pack,"sprites")?_pack.sprites:{};global.ln_editor.sprite_rev++;ln_sprite_art_reset_session();ln_pieces_rebuild_all();
         global.ln_editor.scenes=_pack.scenes;global.ln_editor.revision++;ln_edit_free_cache();
         // A loaded project starts fresh histories and counts as saved.
         global.ln_editor.room_histories={};global.ln_editor.undo=[];global.ln_editor.redo=[];global.ln_editor.art.histories={};global.ln_editor.dirty=false;
