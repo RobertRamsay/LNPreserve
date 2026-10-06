@@ -627,6 +627,8 @@ function ln_sprite_art_draw() {
             draw_rectangle(760+(_i mod 8)*58,332+(_i div 8)*38,812+(_i mod 8)*58,364+(_i div 8)*38,false);
         }
         draw_set_alpha(1);
+        var _shown=_tinted?-2:ln_sprite_art_quantize({sprite:_p[0],mode:_settings[0],tinted:false},_v.colour);
+        for(var _i=0;_i<16;_i++) {var _sx=760+(_i mod 8)*58,_sy=332+(_i div 8)*38;ln_art_swatch_frame(_sx,_sy,_sx+52,_sy+32,ln_edit_inside(_sx,_sy,52,32),global.ln_paint_palette[_i]==_shown);}
         draw_set_colour(_tinted?_p[4]:ln_sprite_art_quantize({sprite:_p[0],mode:_settings[0],tinted:false},_v.colour));draw_rectangle(760,412,790,512,false);
         if(_tinted) {
             draw_set_colour(c_white);draw_text(802,414,"LN3 layer mask: its colour comes from");draw_text(802,440,"the game palette. Paint switches pixels on,");draw_text(802,466,"Eraser switches them off.");

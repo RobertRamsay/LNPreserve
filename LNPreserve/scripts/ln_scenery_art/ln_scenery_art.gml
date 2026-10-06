@@ -21,6 +21,20 @@ function ln_art_quantize(_colour,_mode) {
     if(_mode==3) return make_colour_rgb(round(colour_get_red(_colour)/17)*17,round(colour_get_green(_colour)/17)*17,round(colour_get_blue(_colour)/17)*17);
     return _colour;
 }
+/// Thick swatch frames: white for the hovered colour, yellow for the selected one,
+/// each with black edges so they read against any palette colour.
+function ln_art_swatch_ring(_x1,_y1,_x2,_y2,_from,_to,_colour) {
+    draw_set_colour(_colour);
+    for(var _k=_from;_k<=_to;_k++) draw_rectangle(_x1-_k,_y1-_k,_x2+_k,_y2+_k,true);
+}
+function ln_art_swatch_frame(_x1,_y1,_x2,_y2,_hover,_selected) {
+    if(!_hover && !_selected) return;
+    ln_art_swatch_ring(_x1,_y1,_x2,_y2,-1,-1,c_black);
+    ln_art_swatch_ring(_x1,_y1,_x2,_y2,0,2,_selected?make_colour_rgb(255,220,40):c_white);
+    ln_art_swatch_ring(_x1,_y1,_x2,_y2,3,3,c_black);
+    if(_hover && _selected) {ln_art_swatch_ring(_x1,_y1,_x2,_y2,4,5,c_white);ln_art_swatch_ring(_x1,_y1,_x2,_y2,6,6,c_black);}
+    draw_set_colour(c_white);
+}
 function ln_art_put(_a,_x,_y,_colour) {
     if(_x<0 || _y<0 || _x>=_a.width || _y>=_a.height) return false;
     var _step=_a.mode<2 && _a.mc?2:1;_x=(_x div _step)*_step;
@@ -237,6 +251,8 @@ function ln_art_draw() {
     var _tools=["Pencil","Eraser","Fill","Pick colour"];
     for(var _i=0;_i<4;_i++) ln_edit_button(760+_i*124,314,116,_tools[_i],_v.tool==_i);
     for(var _i=0;_i<16;_i++) {draw_set_colour(global.ln_paint_palette[_i]);draw_rectangle(760+(_i mod 8)*58,358+(_i div 8)*38,812+(_i mod 8)*58,390+(_i div 8)*38,false);}
+    var _shown=ln_art_quantize(_v.colour,_a.mode);
+    for(var _i=0;_i<16;_i++) {var _sx=760+(_i mod 8)*58,_sy=358+(_i div 8)*38;ln_art_swatch_frame(_sx,_sy,_sx+52,_sy+32,ln_edit_inside(_sx,_sy,52,32),global.ln_paint_palette[_i]==_shown);}
     draw_set_colour(ln_art_quantize(_v.colour,_a.mode));draw_rectangle(760,436,790,562,false);
     var _rgb=[colour_get_red(_v.colour),colour_get_green(_v.colour),colour_get_blue(_v.colour)],_labels=["R","G","B"];
     for(var _i=0;_i<3;_i++) {
