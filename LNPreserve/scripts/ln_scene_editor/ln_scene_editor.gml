@@ -2239,7 +2239,17 @@ function ln_enemy_checks() {
     global.ln_ln3_smooth=false;var _so=ln3_smooth_offset(_gs,_gs.display,2);
     ln_check(_so[0]==0 && _so[1]==0,"LN3 original motion draws the native steps");
     // Even cadence: the previous picture is held for half a frame after each step, then the step shows.
-    var _checked=0,_even=true;_gs=new LN3Play(1);
+    // Real 60 Hz frames on the real clock: smooth walking never jumps more than one C64 pixel per frame.
+    global.ln_ln3_smooth=true;var _gp=new LN3Play(1),_last=undefined,_last_raw=undefined,_max=0,_max_raw=0;
+    var _tick=method({g:_gp},function(_a,_b,_c){ln3_play_tick(g,8);});
+    for(var _f=0;_f<36;_f++) {
+        _gp.timer.advance(16667,_tick);if(!is_struct(_gp.display)) continue;
+        var _o=ln3_smooth_offset(_gp,_gp.display,2),_x=_gp.display.player_x+_o[0];
+        if(!is_undefined(_last)) {_max=max(_max,abs(_x-_last));_max_raw=max(_max_raw,abs(_gp.display.player_x-_last_raw));}
+        _last=_x;_last_raw=_gp.display.player_x;
+    }
+    show_debug_message("LN3 walk per 60 Hz frame: smooth max "+string(_max)+" px, original max "+string(_max_raw)+" px");
+    ln_check(_max<=1 && _max_raw>=3,"LN3 smooth walking moves at most one pixel per display frame");global.ln_ln3_smooth=false;    var _checked=0,_even=true;_gs=new LN3Play(1);
     for(var _t=0;_t<40;_t++) {
         ln3_play_tick(_gs,0);if(_gs.smooth_frame!=0 || !is_struct(_gs.display_prev)) continue;
         var _cost=_gs.timer.cycles_per_frame*1000000;
@@ -2248,7 +2258,7 @@ function ln_enemy_checks() {
         _gs.timer.credit=int64(round(0.5*_cost));var _shown=!ln3_original_hold(_gs);
         _gs.timer.credit=int64(0);_checked++;if(!(_early && _held && _shown)) _even=false;
     }
-    ln_check(_checked>0 && _even,"LN3 original motion holds each step for half a frame so steps land evenly");
+    ln_check(_checked>0 && _even,"LN3 original motion holds each step for half a frame, off the frame boundaries");
     global.ln_ln3_smooth=true;ln_check(!ln3_original_hold(_gs),"Smooth motion never holds the previous picture");
     global.ln_ln3_smooth=_was;
     var _e=global.ln_editor;_e.scenes={};_e.enabled=true;

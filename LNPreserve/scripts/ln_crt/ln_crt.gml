@@ -518,9 +518,11 @@ function ln_tool_present(_host) {
     ln_edit_button(_media[0]-250,_media[1],240,"Load edits");
     if(_t.load_message_us>0) {draw_set_colour(make_colour_rgb(150,210,220));draw_text(_media[0]-250,_media[1]+32,_t.load_message);draw_set_colour(c_white);}
     if(ln_tool_save_prompt()) {
-        draw_set_colour(make_colour_rgb(255,220,120));draw_text(320,944,"Unsaved edits. Save project?");draw_set_colour(c_white);
-        ln_edit_button(620,940,90,"Yes");ln_edit_button(720,940,90,"No");
+        draw_set_colour(make_colour_rgb(255,220,120));draw_text(320,980,"Unsaved edits. Save project?");draw_set_colour(c_white);
+        ln_edit_button(620,976,90,"Yes");ln_edit_button(720,976,90,"No");
     }
+    // LN3 motion toggle beside the media row; it takes effect on the next frame.
+    if(ln_tool_motion_visible(_host)) ln_edit_button(320,940,280,"LN3 motion: "+(ln3_smooth_enabled()?"Smooth":"Original"),ln3_smooth_enabled());
     if(ln_track_message()!="") {
         draw_set_colour(c_white);
         draw_text(_media[0],_media[1]+32,global.ln_tracks.paused?"PAUSED: Track:":"PLAYING: Track:");
@@ -541,7 +543,8 @@ function ln_tool_step(_host) {
     }
     if(_t.load_message_us>0) _t.load_message_us-=delta_time;
     if(ln_tool_media_hit(3)) ln_tool_load_edits();
-    if(ln_tool_save_prompt() && _click && mouse_y>=940 && mouse_y<968) {
+    if(ln_tool_motion_visible(_host) && _click && mouse_x>=320 && mouse_x<600 && mouse_y>=940 && mouse_y<968) global.ln_ln3_smooth=!ln3_smooth_enabled();
+    if(ln_tool_save_prompt() && _click && mouse_y>=976 && mouse_y<1004) {
         if(mouse_x>=620 && mouse_x<710) ln_project_save_as();
         if(mouse_x>=720 && mouse_x<810) global.ln_editor.save_prompt_hidden=ln_tool_edit_stamp();
     }
@@ -886,4 +889,10 @@ function ln_project_save_as() {
     if(_e.art.open) _e.art.message=_t.load_message;
     if(global.ln_sprites.art.open) global.ln_sprites.art.message=_t.load_message;
     return _ok;
+}
+
+/// The LN3 motion toggle shows while LN3 is the current game, outside the editors.
+function ln_tool_motion_visible(_host) {
+    return global.ln_tool.active && ln_tool_ui_visible() && !global.ln_editor.open && !global.ln_sprites.open && !global.ln_tracks.open &&
+        variable_instance_exists(_host,"play") && is_struct(_host.play) && _host.play.game_number==3;
 }
