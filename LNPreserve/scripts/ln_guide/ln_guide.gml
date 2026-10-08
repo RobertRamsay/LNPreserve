@@ -219,6 +219,20 @@ function ln_guide_screen(_host,_screen) {
             break;
         case "tracks": ln_track_toggle(_host);break;
     }
+    ln_guide_keep_music();
+}
+/// The editor, sprite viewer and track player pause the game music when they open.
+/// During the guide it keeps playing like a playlist: resume it and forget the pause,
+/// so closing those screens later leaves the music alone too.
+function ln_guide_keep_music() {
+    var _lists=[global.ln_editor.paused_voices,global.ln_sprites.voices,global.ln_tracks.paused_voices];
+    for(var _i=0;_i<3;_i++) for(var _j=0;_j<array_length(_lists[_i]);_j++) {
+        var _voice=_lists[_i][_j];if(audio_is_paused(_voice)) audio_resume_sound(_voice);
+    }
+    global.ln_editor.paused_voices=[];global.ln_sprites.voices=[];global.ln_tracks.paused_voices=[];
+}
+function ln_guide_music_playing() {
+    return variable_global_exists("ln_music_voice") && global.ln_music_voice>=0 && audio_is_playing(global.ln_music_voice) && !audio_is_paused(global.ln_music_voice);
 }
 
 function ln_guide_go(_host,_index) {
@@ -353,19 +367,24 @@ function ln_guide_test_step(_host) {
     _host.guide_frame++;
     try {
         if(_host.guide_frame==2) {
-            global.ln_crt_enabled=false;ln_guide_open(_host);
+            global.ln_crt_enabled=false;_host.guide_music=ln_guide_music_playing();_host.guide_music_ok=true;ln_guide_open(_host);
             ln_check(!global.ln_editor.open && !global.ln_sprites.open && !global.ln_tracks.open,"guide starts from the game");
             return;
         }
         if(!ln_guide_active() || _host.guide_frame mod 3!=2) return;
         var _g=global.ln_guide;
-        if(_g.index<array_length(_g.steps)-1) {ln_guide_go(_host,_g.index+1);return;}
+        if(_g.index<array_length(_g.steps)-1) {
+            ln_guide_go(_host,_g.index+1);
+            if(_host.guide_music && !ln_guide_music_playing()) _host.guide_music_ok=false;
+            return;
+        }
         var _count=array_length(_g.steps);ln_guide_go(_host,10);ln_guide_go(_host,_count-1);ln_guide_close(_host);
         ln_check(!ln_guide_active(),"guide closes");
+        ln_check(_host.guide_music_ok && (!_host.guide_music || ln_guide_music_playing()),"guide keeps the music playing on every screen and after closing");
         ln_check(!global.ln_editor.open && !global.ln_editor.art.open && !global.ln_editor.map_open && !global.ln_editor.enemy_edit && !global.ln_editor.collision_edit,"guide leaves the editor closed");
         ln_check(!global.ln_sprites.open && !global.ln_sprites.art.open && !global.ln_tracks.open,"guide leaves the viewer and track player closed");
         ln_check(!_host.scene_test.menu && !global.ln_crt_enabled && global.ln_tool.ui,"guide restores the menu, CRT and UI settings");
-        show_debug_message("LN_GUIDE_PASS: "+string(_count)+" steps shown and restored; captures in "+game_save_id);
+        show_debug_message("LN_GUIDE_PASS: "+string(_count)+" steps shown and restored"+(_host.guide_music?", music kept playing":", no music playing to check")+"; captures in "+game_save_id);
         game_end();
     } catch(_failure) {show_debug_message("LN_GUIDE_FAILURE: "+string(_failure));game_end();}
 }
