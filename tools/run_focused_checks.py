@@ -27,7 +27,7 @@ CASES={
  '--ln1-magic-test':['LN1_MAGIC_PASS','LN1_WEAPON_LOCK_PASS'],
  '--pickup-crt-test':['LN_PICKUP_PASS','LN_CRT_PASS'],
  '--jump-assist-test':['LN_JUMP_ASSIST_PASS'],
- '--reverse-roll-test':['LN_REVERSE_ROLL_PASS'],
+ '--reverse-roll-test':['LN_REVERSE_ROLL_PASS','LN_DOUBLE_TAP_PASS'],
  '--crt-live-test':['LN_CRT_LIVE_PASS'],
  '--window-presets-test':['LN_WINDOW_PRESETS_PASS'],
  '--fullscreen-test':['LN_FULLSCREEN_PASS'],

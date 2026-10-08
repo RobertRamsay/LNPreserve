@@ -325,8 +325,8 @@ function ln_edit_step(_host) {
     _e.pulse_time_us=(_e.pulse_time_us+delta_time) mod 1600000;
     if(!mouse_check_button(mb_left)) {ln_collision_finish_drag();ln_edit_finish_drag();}
     ln_crt_preferences_flush();
-    if(keyboard_check_pressed(vk_f10) || ln_edit_hit(1110,18,160,28)) ln_edit_crt_toggle();
-    if(keyboard_check_pressed(vk_f9)) ln_fullscreen_toggle(_host);
+    if(keyboard_check_pressed(vk_f9) || ln_edit_hit(1110,18,160,28)) ln_edit_crt_toggle();
+    if(keyboard_check_pressed(vk_f10)) ln_fullscreen_toggle(_host);
      _s=_e.scene;if(!is_struct(_s)) return true;
     if(_e.depth_edit) {
         if(keyboard_check_pressed(vk_escape)) {_e.depth_edit=false;return true;}
@@ -459,7 +459,7 @@ function ln_edit_draw() {
     }
     ln_edit_button(24,18,180,"Modified: "+(_e.enabled?"ON":"OFF"),_e.enabled);ln_edit_button(216,18,112,"Save file");ln_edit_button(340,18,112,"Load file");ln_edit_button(464,18,112,"Undo (^Z)");ln_edit_button(588,18,152,"Build preview");
     ln_edit_button(752,18,132,"Restore all");ln_edit_button(850,62,112,"Redo (^Y)");
-    ln_edit_button(1110,18,160,"Editor CRT "+(_e.crt_enabled?"ON":"OFF")+" F10",_e.crt_enabled);
+    ln_edit_button(1110,18,160,"Editor CRT "+(_e.crt_enabled?"ON":"OFF")+" F9",_e.crt_enabled);
     ln_edit_button(974,62,124,"Level map");
     ln_edit_button(1110,62,160,"Back to game F6");
     ln_edit_button(900,18,30,"-");draw_set_colour(c_white);draw_text(938,24,string_format(global.ln_paint_speed,1,1)+"x build");ln_edit_button(1060,18,30,"+");

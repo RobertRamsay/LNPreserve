@@ -8,3 +8,6 @@ __pycache__/
 *.resource_order
 dist/
 evidence/*_probe.png
+
+# Local project backups (too large for GitHub)
+BACKUP/

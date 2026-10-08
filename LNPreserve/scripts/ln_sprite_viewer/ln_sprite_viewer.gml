@@ -91,8 +91,8 @@ function ln_sprite_step(_host) {
     if(_v.art.open) {var _art_used=ln_sprite_art_step(_host);ln_sprite_art_flush();return _art_used;}
     if(ln_edit_hit(990,116,200,28) || keyboard_check_pressed(ord("E"))) {ln_sprite_art_open();return true;}
     if(keyboard_check_pressed(vk_escape) || ln_edit_hit(1030,20,220,28)) {ln_sprite_toggle(_host);return true;}
-    if(keyboard_check_pressed(vk_f9)) ln_fullscreen_toggle(_host);
-    if(keyboard_check_pressed(vk_f10) || ln_edit_hit(770,20,240,28)) _v.crt_enabled=!_v.crt_enabled;
+    if(keyboard_check_pressed(vk_f10)) ln_fullscreen_toggle(_host);
+    if(keyboard_check_pressed(vk_f9) || ln_edit_hit(770,20,240,28)) _v.crt_enabled=!_v.crt_enabled;
     for(var _g=1;_g<=3;_g++) if(ln_edit_hit(24+(_g-1)*160,76,150,28)) {_v.game=_g;ln_sprite_filter();}
     for(var _c=0;_c<3;_c++) if(ln_edit_hit(600+_c*190,76,180,28)) {_v.category=_c;ln_sprite_filter();}
     if(ln_edit_hit(24,116,50,28)) ln_sprite_next(-1);
@@ -111,7 +111,7 @@ function ln_sprite_draw() {
     shader_reset();gpu_set_blendmode(bm_normal);gpu_set_texfilter(false);
     draw_set_alpha(1);ln_tool_clear(false);draw_set_font(font_jansina);
     draw_set_halign(fa_left);draw_set_valign(fa_top);draw_set_colour(c_white);
-    ln_edit_button(770,20,240,"CRT "+(_v.crt_enabled?"ON":"OFF")+" (F10)",_v.crt_enabled);
+    ln_edit_button(770,20,240,"CRT "+(_v.crt_enabled?"ON":"OFF")+" (F9)",_v.crt_enabled);
     draw_text(24,24,"SPRITE VIEWER");ln_edit_button(1030,20,220,"Back (Esc)");
     for(var _g=1;_g<=3;_g++) ln_edit_button(24+(_g-1)*160,76,150,"Last Ninja "+string(_g),_v.game==_g);
     var _categories=["NINJA","ENEMIES","MISC"];

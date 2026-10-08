@@ -36,6 +36,23 @@ function ln1_player_fire_move(_s, _d, _heading) {
     }
 }
 
+/// Enhanced double-tap turn: face the tapped direction straight away. A diagonal is a
+/// facing; a straight direction turns to the nearer diagonal beside it.
+function ln_turn_facing(_facing,_heading) {
+    if (_heading>=128) return _facing;
+    if (_heading&1) return _heading;
+    var _rel=(_facing-_heading)&7;
+    if (_rel==1 || _rel==7) return _facing;
+    return _rel<4?(_heading+1)&7:(_heading-1)&7;
+}
+function ln1_player_face(_s,_d,_joy) {
+    if (_s.input_lock!=0 || ln1_weapon_changing(_s,_d)) return;
+    var _target=ln_turn_facing(_s.facing,_d.directions[_joy&15]);
+    if (_target==_s.facing) return;
+    _s.facing=_target;_s.redraw=255;_s.turn_lock=0;
+    _s.frame=(_s.frame&7)|(((_s.facing+2)&4)?8:0);_s.combat_state=_s.facing>>1;
+}
+
 function ln1_player_input(_s, _d, _joy) {
     if (_s.input_lock != 0 || ln1_weapon_changing(_s,_d)) return;
     var _heading = _d.directions[_joy & 15];
@@ -220,6 +237,9 @@ function ln1_player_action(_s, _d, _ticks) {
 
 function ln1_player_update(_s, _d, _joy, _tick) {
     _s.requests = [];
+    if (!variable_struct_exists(_s,"turn_tap")) _s.turn_tap=ln_tap_new();
+    var _tapped=ln_tap_step(_s.turn_tap,_joy);
+    if (_tapped!=0 && _s.action<256 && ln_enhanced_enabled(1)) ln1_player_face(_s,_d,_tapped);
     _s.tick = _tick & 255;
     var _ticks = (_s.tick - _s.last_tick) & 255;
     if (_ticks == 0) return;

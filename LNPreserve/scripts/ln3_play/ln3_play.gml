@@ -33,6 +33,7 @@ function LN3Play(_level=1) constructor {
     intro=undefined;ending=undefined;ending_surface=-1;
     palette=[];for (var _i=0;_i<16;_i++) palette[_i]=make_colour_rgb(data.palette[_i][0],data.palette[_i][1],data.palette[_i][2]);
     stage_surface=-1;part_surface=-1;timer=new LNClock();controls=undefined;
+    turn_tap=ln_tap_new();turn_request=0;
     smooth_from=undefined;smooth_frame=0;smooth_period=5;smooth_room=-1;display_prev=undefined;draw_masks_prev=undefined;
     paused=false;music=true;game_over=false;level_complete=false;level_states=array_create(5,undefined);
     room_enemies={};room_age=0;logic_ticks=0;weapon_switch=false;control_previous=[false,false,false,false];
@@ -235,6 +236,7 @@ function ln3_play_tick(_g,_joy) {
     if (_g.special_sequence!=0) {ln3_special_sequence_tick(_g);return;}
     if (_s.weapon_notice_timer==0) _g.found_item=-1;
     _joy=ln3_item_assist_input(_g,_joy);
+    var _tapped=ln_tap_step(_g.turn_tap,_joy);if(_tapped!=0 && ln3_smooth_enabled()) _g.turn_request=_tapped;
     ln3_play_exit(_g);if(ln_map_active(_g)) return;
     if (_s.regeneration_wait==0) {
         _s.regeneration_wait=50;
@@ -250,6 +252,7 @@ function ln3_play_tick(_g,_joy) {
     // Smooth motion: remember where both characters stood before this logic step.
     _g.smooth_from=[_s.player_x,_s.player_y,_s.enemy_x,_s.enemy_y];_g.smooth_room=_g.room_id;_g.smooth_frame=0;
     _s.logic_wait=4;_g.logic_ticks++;
+    if (_g.turn_request!=0) {if(!is_struct(_g.pickup_assist)) ln3_player_face(_s,_g.actions,_g.input,_g.turn_request);_g.turn_request=0;}
     if (!is_struct(_g.pickup_assist)) ln3_input_update(_s,_g.actions,_g.input,_joy,_g.weapon_switch);
     _g.weapon_switch=false;
     if (_s.weapon_notice_timer==100) _g.found_item=-1;

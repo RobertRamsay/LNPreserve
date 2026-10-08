@@ -97,7 +97,7 @@ function ln_track_step(_host) {
     }
     if(!_p.open) return false;
     if(keyboard_check_pressed(vk_escape) || ln_edit_hit(1020,20,220,28)) {ln_track_toggle(_host);return true;}
-    if(keyboard_check_pressed(vk_f9)) ln_fullscreen_toggle(_host);
+    if(keyboard_check_pressed(vk_f10)) ln_fullscreen_toggle(_host);
     for(var _g=0;_g<4;_g++) if(ln_edit_hit(24+_g*130,76,120,28)) {_p.game=_g;_p.group=0;ln_track_filter(_p);ln_track_stop(_p);}
     var _groups=_p.game==0?1:(_p.game==3?5:3);
     for(var _r=0;_r<_groups;_r++) if(ln_edit_hit(24+_r*185,116,175,28)) {_p.group=_r;ln_track_filter(_p);ln_track_stop(_p);}

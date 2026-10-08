@@ -158,3 +158,84 @@ function ln_function_key_checks() {
     }
     show_debug_message("LN_FUNCTION_KEYS_PASS: matching F1/F3/F5/F7 and three fresh game starts");
 }
+
+/// Enhanced/Original per game. LN3's setting also covers smooth motion and slower jumps.
+function ln_enhanced_enabled(_game) {
+    if(_game==3) return ln3_smooth_enabled();
+    var _name=_game==1?"ln_ln1_enhanced":"ln_ln2_enhanced";
+    return !variable_global_exists(_name) || variable_global_get(_name);
+}
+function ln_enhanced_label(_game) {return "LN"+string(_game)+" mode: "+(ln_enhanced_enabled(_game)?"Enhanced":"Original");}
+function ln_enhanced_toggle(_game) {
+    if(_game==3) global.ln_ln3_smooth=!ln3_smooth_enabled();
+    else variable_global_set(_game==1?"ln_ln1_enhanced":"ln_ln2_enhanced",!ln_enhanced_enabled(_game));
+}
+
+/// Enhanced double-tap turn: tap a direction, then press it again within about a third
+/// of a second. Call once per 50 Hz tick with the joystick bits; returns the direction
+/// (joystick bits) of a completed double tap, otherwise 0. Diagonals pressed one key at a
+/// time count as the diagonal. Fire cancels.
+function ln_tap_new() {return {pressed:0,age:0,gap:99,start_gap:99,last:0};}
+function ln_tap_bits(_d) {return (_d&1)+((_d>>1)&1)+((_d>>2)&1)+((_d>>3)&1);}
+function ln_tap_step(_t,_joy) {
+    var _window=18,_d=_joy&15;
+    if((_joy&16)!=0 || (_d&3)==3 || (_d&12)==12) {_t.pressed=0;_t.last=0;_t.gap=99;return 0;}
+    if(_d!=0) {
+        if(_t.pressed==0) {_t.pressed=_d;_t.age=0;_t.start_gap=_t.gap;}
+        else {_t.age++;if(ln_tap_bits(_d)>=ln_tap_bits(_t.pressed)) _t.pressed=_d;}
+        if(_t.last!=0 && _t.pressed==_t.last && _t.age<=_window && _t.start_gap<=_window) {_t.last=0;return _t.pressed;}
+        return 0;
+    }
+    if(_t.pressed!=0) {_t.last=_t.age<=_window?_t.pressed:0;_t.pressed=0;_t.gap=0;}
+    else if(_t.gap<99) _t.gap++;
+    return 0;
+}
+
+/// Feeds a joystick script, one entry per 50 Hz tick, to a double-tap tracker.
+function ln_tap_script(_joys) {
+    var _t=ln_tap_new(),_hit=0;
+    for(var _i=0;_i<array_length(_joys);_i++) {var _r=ln_tap_step(_t,_joys[_i]);if(_r!=0) _hit=_r;}
+    return _hit;
+}
+function ln_double_tap_checks() {
+    ln_check(ln_tap_script([8,9,9,0,0,0,9,9])==9,"double tap: a diagonal pressed one key at a time counts");
+    ln_check(ln_tap_script([6,6,0,0,6])==6,"double tap: quick second press turns");
+    ln_check(ln_tap_script([6,6,6,6])==0,"double tap: a single hold does not turn");
+    ln_check(ln_tap_script([6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,6])==0,"double tap: a slow second press does not turn");
+    ln_check(ln_tap_script([6,0,22,0,6])==0 && ln_tap_script([6,0,5])==0,"double tap: fire or another direction cancels");
+    var _was1=ln_enhanced_enabled(1),_was2=ln_enhanced_enabled(2),_was3=ln_enhanced_enabled(3),_cases=0;
+    // LN1 and LN2: double-tapping the opposite diagonal faces it; Original keeps walking backwards.
+    for(var _game=1;_game<=2;_game++) for(var _mode=0;_mode<2;_mode++) for(var _facing=1;_facing<8;_facing+=2) {
+        variable_global_set(_game==1?"ln_ln1_enhanced":"ln_ln2_enhanced",_mode==1);
+        var _g=_game==1?new LN1Play():new LN2Play(1),_p=_g.player,_d=_g.data;
+        _d.boundaries=[];_p.x=120;_p.y=110;_p.facing=_facing;_p.heading=_facing;_p.action=0;_p.input_lock=0;
+        _p.stopped=255;_p.fire_previous=0;_p.enemy_active=0;_p.turn_lock=0;
+        if(_game==2) {_p.room_id=1;_p.vehicle=0;_p.depth_y=110;_p.fraction_x=0;_p.fraction_y=0;}
+        var _back=(_facing+4)&7,_joy=0;
+        for(var _j=1;_j<16;_j++) if(_d.directions[_j]==_back) {_joy=_j;break;}
+        if(_game==2) for(var _j=1;_j<16;_j++) if(_d.directions[_j]<128 && ((_d.directions[_j]+_p.control_rotation-1)&7)==_back) {_joy=_j;break;}
+        var _taps=[_joy,_joy,0,0,_joy,_joy,_joy];
+        for(var _i=0;_i<array_length(_taps);_i++) {
+            if(_game==1) ln1_player_update(_p,_d,_taps[_i],(_p.tick+1)&255);else ln2_player_update(_p,_d,_taps[_i],(_p.tick+1)&255);
+        }
+        ln_check(_p.facing==(_mode==1?_back:_facing),"LN"+string(_game)+(_mode==1?" enhanced double tap faces the tapped way":" original double tap keeps facing"));
+        _cases++;
+    }
+    // LN3: from each facing, double-tap each diagonal; enhanced ends facing and walking forward that way.
+    var _diagonals=[10,6,9,5];
+    for(var _mode=0;_mode<2;_mode++) for(var _start=0;_start<4;_start++) for(var _k=0;_k<4;_k++) {
+        global.ln_ln3_smooth=_mode==1;
+        var _g=new LN3Play(1),_s=_g.state;
+        repeat(8) ln3_play_tick(_g,0);
+        _s.mirror=(_s.mirror&249)|((_start&1)?6:0);ln3_action_set(_s,_g.actions,_start>>1);
+        var _dir=_diagonals[_k],_taps=[_dir,_dir,0,0,_dir];
+        for(var _i=0;_i<array_length(_taps);_i++) ln3_play_tick(_g,_taps[_i]);
+        repeat(4) ln3_play_tick(_g,_dir);
+        var _forward=_s.player_action==2 || _s.player_action==4;
+        if(_mode==1) ln_check(_forward && ((_s.mirror&6)!=0)==((_dir&4)!=0),"LN3 enhanced double tap faces and walks the tapped way (start "+string(_start)+" dir "+string(_dir)+" action "+string(_s.player_action)+" mirror "+string(_s.mirror)+" flags "+string(_s.player_action_flags)+")");
+        else if(_k==3-_start) ln_check(!_forward,"LN3 original double tap still walks backwards");
+        _cases++;
+    }
+    global.ln_ln1_enhanced=_was1;global.ln_ln2_enhanced=_was2;global.ln_ln3_smooth=_was3;
+    show_debug_message("LN_DOUBLE_TAP_PASS: "+string(_cases)+" tracker, LN1, LN2 and LN3 turn cases in both modes");
+}

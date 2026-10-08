@@ -152,7 +152,7 @@ for (var _i = 1; _i <= parameter_count(); _i++) {
     }
     if (parameter_string(_i) == "--ln3-edge-probe") {ln3_edge_probe();game_end();exit;}
     if (parameter_string(_i) == "--reverse-roll-test") {
-        try {ln1_reverse_roll_checks();}
+        try {ln1_reverse_roll_checks();ln_double_tap_checks();}
         catch (_failure) {show_debug_message("LN_REVERSE_ROLL_FAILURE: "+string(_failure));}
         game_end();exit;
     }

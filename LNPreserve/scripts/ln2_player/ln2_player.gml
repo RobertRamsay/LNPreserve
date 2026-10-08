@@ -55,6 +55,16 @@ function ln2_player_fire_held(_s,_d,_heading) {
     _s.attack_previous=255;_s.combat_state=_s.facing>>1;
 }
 
+/// Enhanced double-tap turn (see ln1_player_face); LN2 headings follow the control rotation.
+function ln2_player_face(_s,_d,_joy) {
+    if (_s.input_lock!=0) return;
+    var _heading=_d.directions[_joy&15];if (_heading>=128) return;
+    var _target=ln_turn_facing(_s.facing,(_heading+_s.control_rotation-1)&7);
+    if (_target==_s.facing) return;
+    _s.facing=_target;_s.redraw=255;
+    _s.frame=(_s.frame&7)|(((_s.facing+2)&4)?8:0);_s.combat_state=_s.facing>>1;
+}
+
 function ln2_player_input(_s,_d,_joy) {
     if (_s.input_lock!=0) return;
     var _heading=_d.directions[_joy&15];
@@ -190,6 +200,9 @@ function ln2_player_action(_s,_d,_ticks) {
 }
 
 function ln2_player_update(_s,_d,_joy,_tick) {
+    if (!variable_struct_exists(_s,"turn_tap")) _s.turn_tap=ln_tap_new();
+    var _tapped=ln_tap_step(_s.turn_tap,_joy);
+    if (_tapped!=0 && _s.action<256 && !(variable_struct_exists(_s,"vehicle") && _s.vehicle!=0) && ln_enhanced_enabled(2)) ln2_player_face(_s,_d,_tapped);
     _s.tick=_tick&255;var _ticks=(_s.tick-_s.last_tick)&255;
     if (_ticks==0) return;
     _s.last_tick=_s.tick;

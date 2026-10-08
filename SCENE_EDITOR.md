@@ -100,12 +100,12 @@ The preview surface and camera are reused. Preview masks upload directly as text
 they do not create sprite readbacks. Each completed drag produces one undo entry,
 and autosave waits until the drag is finished.
 
-Editor CRT has a separate ON/OFF button and F10 shortcut. It shares CRT tuning with
+Editor CRT has a separate ON/OFF button and F9 shortcut. It shares CRT tuning with
 the game but saves its own state under `[Editor] crt_enabled` in LNPreserve.ini.
 Only the scene preview is filtered: selection outlines, depth guides and editor
 panels remain sharp. The gameplay CRT toggle is unchanged by entering or leaving.
 
-F9 or the Fullscreen button toggles borderless fullscreen in the game or editor.
+F10 or the Fullscreen button toggles borderless fullscreen in the game or editor.
 Toggling back restores the previous window size and position. Fullscreen now
 continues across scene, intro/outro and editor changes until explicitly toggled off.
 
@@ -120,7 +120,7 @@ The project presents a 1920 Ãƒâ€” 1080 canvas using `spr_LNHDbkg` as the 
 background. The preserved tool content is centered without stretching its pixels.
 1x is 1920 Ãƒâ€” 1080; 2x is 3840 Ãƒâ€” 2160. An exact-display preset uses borderless
 fullscreen to avoid clipping by Windows borders. Fit chooses the largest whole
-scale that fits, or reduces below 1x on a smaller desktop. F9 still toggles fullscreen.
+scale that fits, or reduces below 1x on a smaller desktop. F10 still toggles fullscreen.
 
 U / UI toggles outer controls; the game retains its built-in HUD, and the editor
 shows its centered scene preview. B / Background toggles the supplied artwork.
@@ -166,7 +166,7 @@ Buttons use the supplied `spr_UI_button` artwork sliced into nine regions. Borde
 
 The selected asset preview is centred inside `spr_assetPanel` (204 Ãƒâ€” 204 logical pixels), with its aspect ratio preserved inside a padded 112 Ãƒâ€” 112 opening. The part controls occupy the neighbouring column.
 
-Tool startup plays `spr_sword` around its supplied handle origin with `sfx_sword`, then displays LAST NINJA REVISITED, PLAYER - EDITOR and the configured release version (currently 1.0.0.0). Click to Begin enters the tool and resumes its music. F9 remains available on the title screen.
+Tool startup plays `spr_sword` around its supplied handle origin with `sfx_sword`, then displays LAST NINJA REVISITED, PLAYER - EDITOR and the configured release version (currently 1.0.0.0). Click to Begin enters the tool and resumes its music. F10 remains available on the title screen.
 
 The startup title and Begin label use `font_jansina_big` at native size; other text uses the updated `font_jansina`. The sword handle is shifted 200 canvas pixels left. Its exponential velocity rises from 1Ãƒâ€” to 2Ãƒâ€” over the swing, with six historical poses behind it at descending opacity.
 

@@ -179,7 +179,7 @@ function ln_crt_controls_visible(_host) {
 function ln_crt_step(_show_controls=true,_tuning=true) {
     if (!_show_controls) {
         global.ln_crt_drag=-1;
-        if (keyboard_check_pressed(vk_f10)) ln_crt_toggle();
+        if (keyboard_check_pressed(vk_f9)) ln_crt_toggle();
         return;
     }
     if (mouse_check_button_pressed(mb_left) && ln_tool_mouse_y()>=624 && ln_tool_mouse_y()<645) {
@@ -188,7 +188,7 @@ function ln_crt_step(_show_controls=true,_tuning=true) {
             if (ln_tool_mouse_x()>=_x && ln_tool_mouse_x()<_x+42) {ln_window_preset(_i==2?0:_i+1);break;}
         }
     }
-    if (keyboard_check_pressed(vk_f10) || (mouse_check_button_pressed(mb_left) &&
+    if (keyboard_check_pressed(vk_f9) || (mouse_check_button_pressed(mb_left) &&
         ln_tool_mouse_x()>=1128 && ln_tool_mouse_x()<1272 && ln_tool_mouse_y()>=36 && ln_tool_mouse_y()<72)) {
         ln_crt_toggle();
     }
@@ -201,7 +201,7 @@ function ln_crt_button() {
     ln_ui_button_background(1128,36,144,36,global.ln_crt_enabled);
     var _label_colour=_hover?c_white:make_colour_rgb(150,190,215);
     draw_set_colour(global.ln_crt_enabled?_label_colour:merge_colour(_label_colour,c_black,0.5));
-    draw_text(1136,44,_available?("CRT "+(global.ln_crt_enabled?"ON":"OFF")+"  F10"):"CRT unavailable");
+    draw_text(1136,44,_available?("CRT "+(global.ln_crt_enabled?"ON":"OFF")+"  F9"):"CRT unavailable");
     draw_set_colour(c_white);
 }
 
@@ -366,7 +366,7 @@ function ln_fullscreen_toggle(_host) {
 }
 function ln_cinematic_step(_host) {
     if(!variable_instance_exists(_host,"cinematic_window")) _host.cinematic_window=undefined;
-    if(keyboard_check_pressed(vk_f9)) ln_fullscreen_toggle(_host);
+    if(keyboard_check_pressed(vk_f10)) ln_fullscreen_toggle(_host);
     if(is_struct(_host.cinematic_window)) {
         var _movie=_host.play.game_number==3 && (is_struct(_host.play.intro) || is_struct(_host.play.ending));
         window_set_cursor(_movie && !_host.scene_test.menu && !_host.workbench?cr_none:_host.cinematic_window.cursor);
@@ -397,12 +397,13 @@ function ln_crt_preferences_read(_file="LNPreserve.ini") {
     global.ln_tool.ui=ini_read_real("Tool","ui_visible",1)>=0.5;global.ln_tool.background=ini_read_real("Tool","background_visible",1)>=0.5;
     global.ln_editor.crt_enabled=ini_read_real("Editor","crt_enabled",0)>=0.5;
     global.ln_ln3_smooth=ini_read_real("LN3","smooth_motion",1)>=0.5;
+    global.ln_ln1_enhanced=ini_read_real("LN1","enhanced",1)>=0.5;global.ln_ln2_enhanced=ini_read_real("LN2","enhanced",1)>=0.5;
     ini_close();
 }
 function ln_crt_preferences_signature() {
     var _fields=ln_crt_preference_fields(),_values=[];
     for(var _i=0;_i<array_length(_fields);_i++) array_push(_values,variable_global_get(_fields[_i]));
-    array_push(_values,global.ln_paint_speed);array_push(_values,global.ln_editor.crt_enabled);array_push(_values,global.ln_tool.ui);array_push(_values,global.ln_tool.background);array_push(_values,ln3_smooth_enabled());
+    array_push(_values,global.ln_paint_speed);array_push(_values,global.ln_editor.crt_enabled);array_push(_values,global.ln_tool.ui);array_push(_values,global.ln_tool.background);array_push(_values,ln3_smooth_enabled());array_push(_values,ln_enhanced_enabled(1));array_push(_values,ln_enhanced_enabled(2));
     return json_stringify(_values);
 }
 function ln_crt_preferences_write(_file="LNPreserve.ini") {
@@ -413,6 +414,7 @@ function ln_crt_preferences_write(_file="LNPreserve.ini") {
     ini_write_real("Editor","crt_enabled",real(global.ln_editor.crt_enabled));
     ini_write_real("Tool","ui_visible",real(global.ln_tool.ui));ini_write_real("Tool","background_visible",real(global.ln_tool.background));
     ini_write_real("LN3","smooth_motion",real(ln3_smooth_enabled()));
+    ini_write_real("LN1","enhanced",real(ln_enhanced_enabled(1)));ini_write_real("LN2","enhanced",real(ln_enhanced_enabled(2)));
     ini_close();
 }
 function ln_crt_preferences_flush(_force=false) {
@@ -521,8 +523,8 @@ function ln_tool_present(_host) {
         draw_set_colour(make_colour_rgb(255,220,120));draw_text(320,980,"Unsaved edits. Save project?");draw_set_colour(c_white);
         ln_edit_button(620,976,90,"Yes");ln_edit_button(720,976,90,"No");
     }
-    // LN3 motion toggle beside the media row; it takes effect on the next frame.
-    if(ln_tool_motion_visible(_host)) ln_edit_button(320,940,280,"LN3 motion: "+(ln3_smooth_enabled()?"Enhanced":"Original"));
+    // Enhanced/Original toggle for the current game, beside the media row; it takes effect on the next frame.
+    if(ln_tool_motion_visible(_host)) ln_edit_button(320,940,280,ln_enhanced_label(_host.play.game_number));
     if(ln_track_message()!="") {
         draw_set_colour(c_white);
         draw_text(_media[0],_media[1]+32,global.ln_tracks.paused?"PAUSED: Track:":"PLAYING: Track:");
@@ -531,7 +533,7 @@ function ln_tool_present(_host) {
     if(!global.ln_editor.open && !global.ln_tracks.open && !global.ln_sprites.open) ln_edit_button(748,96,180,"EDITOR (F6)");
     if(!global.ln_editor.open && !global.ln_tracks.open && !global.ln_sprites.open) ln_edit_button(940,96,238,_host.scene_test.menu?"Back to game (F11)":"GAME/LEVELS (F11)");
     ln_edit_button(1256,96,48,"1x");ln_edit_button(1312,96,48,"2x");ln_edit_button(1368,96,48,"Fit");
-    ln_edit_button(1424,96,176,"Fullscreen (F9)");draw_flush();
+    ln_edit_button(1424,96,176,"Fullscreen (F10)");draw_flush();
 }
 function ln_tool_step(_host) {
     var _t=global.ln_tool,_click=mouse_check_button_pressed(mb_left),_typing=global.ln_editor.open && global.ln_editor.depth_edit;
@@ -543,7 +545,7 @@ function ln_tool_step(_host) {
     }
     if(_t.load_message_us>0) _t.load_message_us-=delta_time;
     if(ln_tool_media_hit(3)) ln_tool_load_edits();
-    if(ln_tool_motion_visible(_host) && _click && mouse_x>=320 && mouse_x<600 && mouse_y>=940 && mouse_y<968) global.ln_ln3_smooth=!ln3_smooth_enabled();
+    if(ln_tool_motion_visible(_host) && _click && mouse_x>=320 && mouse_x<600 && mouse_y>=940 && mouse_y<968) ln_enhanced_toggle(_host.play.game_number);
     if(ln_tool_save_prompt() && _click && mouse_y>=976 && mouse_y<1004) {
         if(mouse_x>=620 && mouse_x<710) ln_project_save_as();
         if(mouse_x>=720 && mouse_x<810) global.ln_editor.save_prompt_hidden=ln_tool_edit_stamp();
@@ -593,7 +595,7 @@ function ln_startup_step(_host) {
     if(!_host.startup_sound_started && _host.startup_time>=0.15) {
         _host.startup_sound_started=true;_host.startup_sound=audio_play_sound(sfx_sword,10,false);
     }
-    if(keyboard_check_pressed(vk_f9)) ln_fullscreen_toggle(_host);
+    if(keyboard_check_pressed(vk_f10)) ln_fullscreen_toggle(_host);
     if(_host.startup_time>=1.05 && mouse_check_button_pressed(mb_left) && mouse_x>=750 && mouse_x<1170 && mouse_y>=640 && mouse_y<704) ln_startup_finish(_host);
     // Enter or the # key (222, the fire key) work like clicking the button.
     else if(_host.startup_time>=1.05 && (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(222))) {
@@ -720,7 +722,7 @@ function ln_window_preferences_test_step(_host) {
     } else if(_phase==12) {
         ln_check(window_get_fullscreen(),"startup restores fullscreen");ln_fullscreen_toggle(_host);
     } else if(_phase==15) {
-        ln_check(!window_get_fullscreen() && window_get_width()==960 && window_get_height()==540,"F9 restores remembered window after fullscreen restart");
+        ln_check(!window_get_fullscreen() && window_get_width()==960 && window_get_height()==540,"F10 restores remembered window after fullscreen restart");
         file_delete(_host.window_preferences_file);show_debug_message("LN_WINDOW_PREFERENCES_PASS");game_end();
     }
 }
@@ -895,8 +897,8 @@ function ln_project_save_as() {
     return _ok;
 }
 
-/// The LN3 motion toggle shows while LN3 is the current game, outside the editors.
+/// The Enhanced/Original toggle shows during play, outside the editors.
 function ln_tool_motion_visible(_host) {
     return global.ln_tool.active && ln_tool_ui_visible() && !global.ln_editor.open && !global.ln_sprites.open && !global.ln_tracks.open &&
-        variable_instance_exists(_host,"play") && is_struct(_host.play) && _host.play.game_number==3;
+        variable_instance_exists(_host,"play") && is_struct(_host.play);
 }

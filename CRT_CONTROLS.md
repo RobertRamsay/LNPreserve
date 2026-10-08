@@ -1,6 +1,6 @@
 # CRT controls
 
-F10 toggles CRT. With CRT on, the panel beneath the game offers Phosphor and Classic.
+F9 toggles CRT. With CRT on, the panel beneath the game offers Phosphor and Classic.
 Phosphor is the default for preferences without a saved treatment. Existing blur,
 scanline and mask strengths are retained when loading an older INI.
 
@@ -26,7 +26,7 @@ all existing sliders, region exclusion, filled corners, toggle off restoration,
 texture preservation, and INI round trips. Live output and 1920×1080 / 3840×2160
 window checks pass. Visual tuning on the user's monitor is still subjective.
 
-In F6, Editor CRT / F10 independently toggles the scene preview (saved under the Editor INI section). F9 / Fullscreen now works throughout the project, restoring the previous window geometry when switched off.
+In F6, Editor CRT / F9 independently toggles the scene preview (saved under the Editor INI section). F10 / Fullscreen now works throughout the project, restoring the previous window geometry when switched off.
 
 The 16:9 tool background and outer controls remain outside the CRT. U hides the outer controls, B toggles the artwork; all buttons disappear when UI is off; press U to restore them. F6 always shows the editor UI.
 

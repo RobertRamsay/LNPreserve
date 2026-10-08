@@ -75,6 +75,27 @@ function ln3_input_update(_s,_actions,_data,_raw_joy,_weapon_switch=false) {
     if (_s.player_action_flags<128) ln3_action_set(_s,_actions,_choice);
 }
 
+/// Enhanced double-tap turn. The ninja has four facings: standing action 0 or 1, each
+/// mirrored or not. Pick the facing whose forward walk (2 or 4) goes the tapped way,
+/// keeping the current mirror, then the current stance, where the table allows.
+function ln3_player_face(_s,_actions,_input,_joy) {
+    if (_s.player_action>5 || _s.player_action_flags>=128 || (_s.stun|_s.player_dead|_s.input_block|_s.climb_flags)!=0 ||
+        (variable_struct_exists(_s,"reverse_roll") && is_struct(_s.reverse_roll))) return;
+    var _stance=(_s.player_action==1 || _s.player_action==4 || _s.player_action==5)?1:0,_mirror=_s.mirror&6;
+    var _best=-1,_best_stance=0,_best_mirror=0;
+    for (var _a=0;_a<2;_a++) for (var _m=0;_m<=6;_m+=6) {
+        var _relative=_joy&15;if (_m!=0 && (_relative&12)!=0) _relative^=12;
+        var _direction=-1;
+        for (var _i=8;_i>=0;_i--) if (_actions.directions[_i]==_relative) {_direction=_i;break;}
+        if (_direction<=0 || _input.control_choices[_input.control_rows[2*_a]][_direction]!=(_a==0?2:4)) continue;
+        if (_a==_stance && _m==_mirror) return; // already facing that way
+        var _score=(_m==_mirror?2:0)+(_a==_stance?1:0);
+        if (_score>_best) {_best=_score;_best_stance=_a;_best_mirror=_m;}
+    }
+    if (_best<0) return;
+    _s.mirror=(_s.mirror&249)|_best_mirror;ln3_action_set(_s,_actions,_best_stance);
+}
+
 function ln3_reverse_roll_checks() {
     var _tested=0;
     for(var _level=1;_level<=5;_level++) for(var _mirror=0;_mirror<=6;_mirror+=6)
