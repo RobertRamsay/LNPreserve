@@ -138,7 +138,7 @@ Track Player music continues when switching to Sprite Viewer, including playlist
 
 Window size and fullscreen state are remembered in the `[Window]` section of `LNPreserve.ini`, including the last windowed size for F10. Startup centers the window and limits saved dimensions to fit the current display. Changes save after resizing settles and on normal exit; automated test runs do not overwrite these preferences.
 
-Escape: two short presses within 0.35 seconds restart the app at its startup screen; hold for one second during gameplay to trigger normal death and life loss. A hold triggers only once until released. Single Escape still closes panels; holds begun in a panel or startup screen do not kill the player after it closes.
+Escape: two short presses within 0.35 seconds restart the app at its startup screen. During gameplay, hold for one to three seconds and let go to trigger normal death and life loss. Hold for three seconds on any screen, or click **Quit (hold Esc)** in the top bar, to be asked "Are you sure you want to quit?" (Yes / No; No is chosen first, and a pad works too). A bar at the top shows what letting go or holding on will do. Single Escape still closes panels; holds begun in a panel or startup screen do not kill the player after it closes.
 
 Scene editor: **Collision overlay** shows read-only room boundaries in every LN1/LN2/LN3 level. Cyan denotes solid records; amber denotes hazard/conditional records. LN1/2 show stepped lines; LN3 shows effective collision areas and sloped contact lines. A white cross marks the ninja collision position. The overlay uses room-entry state; scripted obstacles, exit triggers and special safe-platform logic are not included. It does not alter Modified mode or saved scenes.
 

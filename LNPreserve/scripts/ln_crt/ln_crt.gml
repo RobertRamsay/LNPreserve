@@ -534,7 +534,7 @@ function ln_tool_present(_host) {
     if(!global.ln_editor.open && !global.ln_tracks.open && !global.ln_sprites.open) ln_edit_button(748,96,180,"EDITOR (F6)");
     if(!global.ln_editor.open && !global.ln_tracks.open && !global.ln_sprites.open) ln_edit_button(940,96,238,_host.scene_test.menu?"Back to game (F11)":"GAME/LEVELS (F11)");
     ln_edit_button(1256,96,48,"1x");ln_edit_button(1312,96,48,"2x");ln_edit_button(1368,96,48,"Fit");
-    ln_edit_button(1424,96,176,"Fullscreen (F10)");draw_flush();
+    ln_edit_button(1424,96,176,"Fullscreen (F10)");ln_edit_button(1612,96,170,"Quit (hold Esc)");draw_flush();
 }
 function ln_tool_step(_host) {
     var _t=global.ln_tool,_click=mouse_check_button_pressed(mb_left),_typing=global.ln_editor.open && global.ln_editor.depth_edit;
@@ -558,6 +558,7 @@ function ln_tool_step(_host) {
         if(mouse_x>=1312 && mouse_x<1360) ln_window_preset(2);
         if(mouse_x>=1368 && mouse_x<1416) ln_window_preset(0);
         if(mouse_x>=1424 && mouse_x<1600) ln_fullscreen_toggle(_host);
+        if(mouse_x>=1612 && mouse_x<1782) ln_quit_open();
     }
     if(_t.ui_hint_us>0) _t.ui_hint_us-=delta_time;
     if(!_typing && !global.ln_editor.open && (keyboard_check_pressed(ord("U")) || (ln_tool_ui_visible() && _click && mouse_x>=320 && mouse_x<480 && mouse_y>=96 && mouse_y<124))) {
@@ -732,13 +733,18 @@ function ln_window_preferences_test_step(_host) {
 function LNEscapeControl() constructor {
     down=false;held=0;gap=1;armed=false;fired=false;can_die=false;
 }
-// Returns 1 for a gameplay hold, 2 for two short presses. Key repeat cannot retrigger it.
+// Returns 1 when a gameplay hold of 1-3 s is let go (lose a life), 2 for two short presses
+// (restart), 3 once a hold reaches 3 s anywhere (quit prompt). Key repeat cannot retrigger it.
 function ln_escape_gesture(_c,_down,_dt,_eligible) {
     if(!_down) {
-        if(_c.down) {_c.armed=!_c.fired && _c.held<.35;_c.gap=0;}
+        var _event=0;
+        if(_c.down) {
+            if(!_c.fired && _c.can_die && _eligible && _c.held>=1) _event=1;
+            _c.armed=!_c.fired && _c.held<.35;_c.gap=0;
+        }
         _c.down=false;_c.held=0;_c.fired=false;_c.gap+=_dt;
         if(_c.gap>.35) _c.armed=false;
-        return 0;
+        return _event;
     }
     if(!_c.down) {
         _c.down=true;_c.held=0;_c.can_die=_eligible;
@@ -746,7 +752,7 @@ function ln_escape_gesture(_c,_down,_dt,_eligible) {
     }
     _c.held+=_dt;
     if(!_eligible) _c.can_die=false;
-    if(!_c.fired && _c.can_die && _c.held>=1) {_c.fired=true;_c.armed=false;return 1;}
+    if(!_c.fired && _c.held>=3) {_c.fired=true;_c.armed=false;return 3;}
     return 0;
 }
 function ln_escape_gameplay(_host) {
@@ -795,7 +801,64 @@ function ln_escape_step(_host) {
         game_restart();return true;
     }
     if(_event==1) ln_self_death(_host.play);
+    if(_event==3) {ln_quit_open();return true;}
     return false;
+}
+/// Quit confirmation. Opened by the Quit button or a 3 s Escape hold; the game pauses
+/// while it is open. Focus starts on No so a stray press cannot quit.
+function ln_quit_active() {return variable_global_exists("ln_quit") && is_struct(global.ln_quit);}
+function ln_quit_open() {global.ln_quit={focus:1};}
+function ln_quit_close(_host) {global.ln_quit=undefined;_host.input_state=new LNInput();}
+function ln_quit_now(_host) {
+    ln_window_preferences_flush(_host,true);ln_crt_preferences_flush(true);global.ln_quit=undefined;game_end();
+}
+/// Pressed on any connected controller.
+function ln_pad_pressed(_button) {
+    for(var _i=0;_i<gamepad_get_device_count();_i++) if(gamepad_is_connected(_i) && gamepad_button_check_pressed(_i,_button)) return true;
+    return false;
+}
+function ln_quit_step(_host) {
+    if(!ln_quit_active()) return false;
+    var _q=global.ln_quit;
+    if(keyboard_check_pressed(vk_left) || keyboard_check_pressed(vk_right) || keyboard_check_pressed(vk_tab) || ln_pad_pressed(gp_padl) || ln_pad_pressed(gp_padr)) _q.focus=1-_q.focus;
+    if(keyboard_check_pressed(ord("Y"))) {ln_quit_now(_host);return true;}
+    if(keyboard_check_pressed(ord("N")) || keyboard_check_pressed(vk_escape) || ln_pad_pressed(gp_face2)) {ln_quit_close(_host);return true;}
+    if(keyboard_check_pressed(vk_enter) || keyboard_check_pressed(vk_space) || ln_pad_pressed(gp_face1)) {
+        if(_q.focus==0) ln_quit_now(_host);else ln_quit_close(_host);
+        return true;
+    }
+    if(mouse_check_button_pressed(mb_left) && mouse_y>=600 && mouse_y<628) {
+        if(mouse_x>=780 && mouse_x<920) {ln_quit_now(_host);return true;}
+        if(mouse_x>=1000 && mouse_x<1140) {ln_quit_close(_host);return true;}
+    }
+    return true;
+}
+function ln_quit_draw() {
+    if(!ln_quit_active()) return;
+    var _q=global.ln_quit;
+    draw_set_font(font_jansina);draw_set_halign(fa_left);draw_set_valign(fa_top);
+    draw_set_colour(c_black);draw_set_alpha(0.7);draw_rectangle(0,0,1920,1080,false);draw_set_alpha(1);
+    draw_set_colour(make_colour_rgb(16,18,26));draw_rectangle(680,440,1240,660,false);
+    draw_set_colour(make_colour_rgb(255,220,40));draw_rectangle(680,440,1240,660,true);draw_rectangle(681,441,1239,659,true);
+    draw_set_halign(fa_center);draw_set_font(font_jansina_big);draw_set_colour(c_white);draw_text(960,476,"QUIT");
+    draw_set_font(font_jansina);draw_text(960,530,"Are you sure you want to quit?");
+    draw_set_colour(make_colour_rgb(150,210,220));draw_text(960,556,"Y: yes   N or Esc: no   Arrows choose, Enter confirms");
+    draw_set_halign(fa_left);
+    ln_edit_button(780,600,140,"Yes");ln_edit_button(1000,600,140,"No");
+    var _x=_q.focus==0?780:1000;draw_set_colour(make_colour_rgb(255,220,40));
+    for(var _k=0;_k<3;_k++) draw_rectangle(_x-3-_k,597-_k,_x+143+_k,631+_k,true);
+    draw_set_colour(c_white);draw_flush();
+}
+/// While Escape is held, say what letting go or holding on will do.
+function ln_escape_hold_draw(_host) {
+    var _c=_host.escape_control;if(!_c.down || _c.fired || _c.held<.4 || ln_quit_active()) return;
+    draw_set_font(font_jansina);draw_set_valign(fa_top);
+    draw_set_colour(c_black);draw_set_alpha(0.8);draw_rectangle(700,20,1220,86,false);draw_set_alpha(1);
+    draw_set_colour(make_colour_rgb(70,60,40));draw_rectangle(720,64,1200,76,false);
+    draw_set_colour(make_colour_rgb(255,220,40));draw_rectangle(720,64,720+480*clamp(_c.held/3,0,1),76,false);
+    draw_set_halign(fa_center);draw_set_colour(c_white);
+    draw_text(960,28,_c.can_die && _c.held>=1?"Let go now to lose a life, or keep holding Esc to quit":"Keep holding Esc to quit");
+    draw_set_halign(fa_left);draw_flush();
 }
 function ln_escape_checks() {
     var _c=new LNEscapeControl();
@@ -804,9 +867,16 @@ function ln_escape_checks() {
     ln_check(ln_escape_gesture(_c,true,.05,true)==2,"fast second press requests app reset");
     repeat(30) ln_check(ln_escape_gesture(_c,true,.1,true)==0,"held second press cannot trigger death or more resets");
     _c=new LNEscapeControl();var _deaths=0;
-    repeat(30) _deaths+=ln_escape_gesture(_c,true,.1,true)==1;
-    ln_check(_deaths==1,"one-second hold requests exactly one death");
-    ln_escape_gesture(_c,false,.01,true);
+    repeat(15) _deaths+=ln_escape_gesture(_c,true,.1,true)!=0;
+    ln_check(_deaths==0,"holding Esc does nothing until it is let go");
+    ln_check(ln_escape_gesture(_c,false,.01,true)==1,"letting go after a 1-3 s gameplay hold requests one death");
+    _c=new LNEscapeControl();var _quits=0,_other=0;
+    repeat(40) {var _r=ln_escape_gesture(_c,true,.1,true);_quits+=_r==3;_other+=_r==1 || _r==2;}
+    ln_check(_quits==1 && _other==0,"a three-second hold asks to quit, once, and costs no life");
+    ln_check(ln_escape_gesture(_c,false,.01,true)==0,"letting go after the quit prompt does not kill");
+    _c=new LNEscapeControl();repeat(15) ln_escape_gesture(_c,true,.1,false);
+    ln_check(ln_escape_gesture(_c,false,.01,false)==0,"a hold outside gameplay never kills");
+    _c=new LNEscapeControl();repeat(15) ln_escape_gesture(_c,true,.1,true);ln_escape_gesture(_c,false,.01,true);
     ln_check(ln_escape_gesture(_c,true,.05,true)==0,"hold then tap is not a reset");
     _c=new LNEscapeControl();ln_escape_gesture(_c,true,.1,false);
     repeat(20) ln_check(ln_escape_gesture(_c,true,.1,true)==0,"hold begun in panel cannot kill after closing it");

@@ -1,4 +1,4 @@
-if(startup_active) {ln_tool_present(self);exit;}
+if(startup_active) {ln_tool_present(self);ln_escape_hold_draw(self);ln_quit_draw();exit;}
 draw_set_font(font_jansina);
 if(!(global.ln_editor.open || editor_test || global.ln_tracks.open || global.ln_sprites.open)) {
 if (!presentation_test) {
@@ -14,6 +14,9 @@ if (!presentation_test) {
 }
 ln_tool_present(self);
 ln_guide_draw(self);
+ln_escape_hold_draw(self);
+ln_quit_draw();
+if(guide_test && ln_quit_active()) surface_save(application_surface,"quit-prompt.png");
 if(guide_test && ln_guide_active() && guide_frame mod 3==1) surface_save(application_surface,"guide-"+string_replace_all(string_format(global.ln_guide.index,3,0)," ","0")+".png");
 if(track_player_test) {surface_save(application_surface,"track-player.png");show_debug_message("LN_TRACK_CAPTURE:"+game_save_id);}
 

@@ -10,7 +10,7 @@ function ln_guide_step_new(_cat,_screen,_title,_text,_rect=undefined) {return {c
 function ln_guide_steps() {
     var _s=[],T=ln_guide_t,S=ln_guide_step_new;
     // Welcome
-    array_push(_s,S("Welcome","play","Help guide","This guide walks through every screen, button, panel and shortcut key, one at a time.\n\nNext (Right arrow, Enter or Space) moves on, Back (Left arrow) goes back and Esc closes the guide. Click the bar along the bottom to jump to any section.\n\nNothing is live while the guide is open: the game is paused and clicks only reach the guide."));
+    array_push(_s,S("Welcome","play","Help guide","This guide walks through every screen, button, panel and shortcut key, one at a time.\n\nNext (Right arrow, Enter or Space) moves on, Back (Left arrow) goes back and Esc closes the guide. Click the bar along the bottom to jump to any section.\n\nYou can also use a control pad, here and in all three games: A or D-pad right for Next, D-pad left for Back, B to close.\n\nNothing is live while the guide is open: the game is paused and clicks only reach the guide."));
     // Main screen
     var C="Main screen";
     array_push(_s,S(C,"play","The game","The game runs here at four times its original size, with its own built-in HUD. Last Ninja 1, 2 and 3 all play in this area.",T(160,84,960,600)));
@@ -20,6 +20,7 @@ function ln_guide_steps() {
     array_push(_s,S(C,"play","GAME/LEVELS (F11)","Opens the game, level and scene picker. The game pauses while it is open.",[940,96,238,28]));
     array_push(_s,S(C,"play","Window size","1x sets a 1920x1080 window, 2x sets 3840x2160 (limited to your desktop) and Fit picks the largest size that fits. The window size is remembered.",[1256,96,160,28]));
     array_push(_s,S(C,"play","Fullscreen (F10)","Switches borderless fullscreen on or off. F10 works on every screen, and switching off returns to your last window size.",[1424,96,176,28]));
+    array_push(_s,S(C,"play","Quit (hold Esc)","Asks \"Are you sure you want to quit?\" with Yes and No. Holding Esc for three seconds on any screen asks the same. No is chosen first, so a stray press never quits.",[1612,96,170,28]));
     array_push(_s,S(C,"play","CRT ON/OFF (F9)","Turns the CRT picture effect on or off. Its settings appear while it is on; they are covered in the next section.",T(1128,36,144,36)));
     array_push(_s,S(C,"play","Saves","Ctrl+S saves the game into the top slot. There are ten slots, newest at the top. Click a filled slot to load it.",T(1128,84,144,536)));
     array_push(_s,S(C,"play","Window panel","Shows the current window size, with small 1x, 2x and Fit buttons that work like the ones at the top.",T(1128,602,144,46)));
@@ -45,11 +46,11 @@ function ln_guide_steps() {
     array_push(_s,S(C,"play","Weapons, items and pause","Space: next weapon.\nF3 / F5: next / previous item.\nF1: music on or off.\nF7 or P: pause.",T(160,84,960,600)));
     array_push(_s,S(C,"play","Saving and rewinding","Ctrl+S saves to a slot.\nHold the Left arrow to rewind, up to about ten seconds within the current scene.",T(160,84,960,600)));
     array_push(_s,S(C,"play","Starting and restarting","1, 2 and 3 start Last Ninja 1, 2 or 3 afresh.\nHome restarts the current game.",T(160,84,960,600)));
-    array_push(_s,S(C,"play","Escape","Once: brings back a hidden UI, or closes the open panel.\nTwice quickly: restarts the app at the title screen.\nHold for a second during play: lose a life the game's own way.",T(160,84,960,600)));
+    array_push(_s,S(C,"play","Escape","Once: brings back a hidden UI, or closes the open panel.\nTwice quickly: restarts the app at the title screen.\nHold for one to three seconds during play, then let go: lose a life the game's own way.\nHold for three seconds: asks whether to quit. A bar at the top shows which will happen.",T(160,84,960,600)));
     array_push(_s,S(C,"play","Testing aids","F8: one-hit kills on or off.\nF12: the developer workbench.\nNumpad 7, 9, 1 and 3 (Num Lock on): jump through the NW, NE, SW and SE exits.",T(160,84,960,600)));
     array_push(_s,S(C,"play","Enhanced controls","Double-tap a direction (tap, release, press again quickly) to face that way at once instead of walking backwards. A single push still walks backwards.\nFire while walking backwards somersaults backwards without turning.",T(160,84,960,600)));
     array_push(_s,S(C,"play","Assists","Fire alone near an item lines the ninja up and picks it up.\nLN1: two quick fire presses at river crossings jump to the next safe platform.\nWith food selected (apples, burger or food), two quick fire presses restore health.\nLN2 final battle: two quick fire presses light a candle.",T(160,84,960,600)));
-    array_push(_s,S(C,"play","Xbox controller","Stick or D-pad: move. A: fire. B or Start: pause. Y: music. X: CRT.\nRB / LB: next / previous item. RT / LT: next / previous weapon.\nClick the right stick to rewind. The game lists these while a pad is connected.",T(160,84,960,600)));
+    array_push(_s,S(C,"play","Xbox controller","Any Xbox-style control pad works in all three games.\nStick or D-pad: move. A: fire. B or Start: pause. Y: music. X: CRT.\nRB / LB: next / previous item. RT / LT: next / previous weapon.\nClick the right stick to rewind. The game lists these while a pad is connected.",T(160,84,960,600)));
     // Game and level picker
     C="Game/Levels (F11)";
     array_push(_s,S(C,"menu","Games","Choose which game's levels to list.",T(160,116,944,44)));
@@ -274,13 +275,13 @@ function ln_guide_sections() {
 function ln_guide_step(_host) {
     if(!ln_guide_active()) return false;
     var _g=global.ln_guide,_n=array_length(_g.steps);_g.shown_us+=delta_time;
-    if(keyboard_check_pressed(vk_escape)) {ln_guide_close(_host);return true;}
+    if(keyboard_check_pressed(vk_escape) || ln_pad_pressed(gp_face2)) {ln_guide_close(_host);return true;}
     if(keyboard_check_pressed(vk_f10)) ln_fullscreen_toggle(_host);
-    if(keyboard_check_pressed(vk_right) || keyboard_check_pressed(vk_enter) || keyboard_check_pressed(vk_space)) {
+    if(keyboard_check_pressed(vk_right) || keyboard_check_pressed(vk_enter) || keyboard_check_pressed(vk_space) || ln_pad_pressed(gp_face1) || ln_pad_pressed(gp_padr)) {
         if(_g.index>=_n-1) {ln_guide_close(_host);return true;}
         ln_guide_go(_host,_g.index+1);
     }
-    if(keyboard_check_pressed(vk_left) || keyboard_check_pressed(vk_backspace)) ln_guide_go(_host,_g.index-1);
+    if(keyboard_check_pressed(vk_left) || keyboard_check_pressed(vk_backspace) || ln_pad_pressed(gp_padl)) ln_guide_go(_host,_g.index-1);
     if(keyboard_check_pressed(vk_home)) ln_guide_go(_host,0);
     if(keyboard_check_pressed(vk_end)) ln_guide_go(_host,_n-1);
     if(mouse_check_button_pressed(mb_left)) {
@@ -366,6 +367,15 @@ function ln_guide_draw(_host) {
 function ln_guide_test_step(_host) {
     _host.guide_frame++;
     try {
+        // After the tour: show the quit prompt for a frame, then close it.
+        if(variable_instance_exists(_host,"guide_quit_frame")) {
+            _host.guide_quit_frame++;
+            if(_host.guide_quit_frame<3) return;
+            ln_check(ln_quit_active() && global.ln_quit.focus==1,"quit prompt opens with No chosen");
+            ln_quit_close(_host);ln_check(!ln_quit_active(),"No closes the quit prompt");
+            show_debug_message("LN_GUIDE_PASS: "+_host.guide_summary+"; captures in "+game_save_id);
+            game_end();return;
+        }
         if(_host.guide_frame==2) {
             global.ln_crt_enabled=false;_host.guide_music=ln_guide_music_playing();_host.guide_music_ok=true;ln_guide_open(_host);
             ln_check(!global.ln_editor.open && !global.ln_sprites.open && !global.ln_tracks.open,"guide starts from the game");
@@ -384,7 +394,7 @@ function ln_guide_test_step(_host) {
         ln_check(!global.ln_editor.open && !global.ln_editor.art.open && !global.ln_editor.map_open && !global.ln_editor.enemy_edit && !global.ln_editor.collision_edit,"guide leaves the editor closed");
         ln_check(!global.ln_sprites.open && !global.ln_sprites.art.open && !global.ln_tracks.open,"guide leaves the viewer and track player closed");
         ln_check(!_host.scene_test.menu && !global.ln_crt_enabled && global.ln_tool.ui,"guide restores the menu, CRT and UI settings");
-        show_debug_message("LN_GUIDE_PASS: "+string(_count)+" steps shown and restored"+(_host.guide_music?", music kept playing":", no music playing to check")+"; captures in "+game_save_id);
-        game_end();
+        _host.guide_summary=string(_count)+" steps shown and restored"+(_host.guide_music?", music kept playing":", no music playing to check")+", quit prompt drawn";
+        _host.guide_quit_frame=0;ln_quit_open();
     } catch(_failure) {show_debug_message("LN_GUIDE_FAILURE: "+string(_failure));game_end();}
 }
