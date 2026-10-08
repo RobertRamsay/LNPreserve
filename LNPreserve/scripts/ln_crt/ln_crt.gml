@@ -525,6 +525,7 @@ function ln_tool_present(_host) {
     }
     // Enhanced/Original toggle for the current game, beside the media row; it takes effect on the next frame.
     if(ln_tool_motion_visible(_host)) ln_edit_button(320,940,280,ln_enhanced_label(_host.play.game_number));
+    if(ln_tool_motion_visible(_host)) ln_edit_button(615,940,240,"Help guide");
     if(ln_track_message()!="") {
         draw_set_colour(c_white);
         draw_text(_media[0],_media[1]+32,global.ln_tracks.paused?"PAUSED: Track:":"PLAYING: Track:");
@@ -546,6 +547,7 @@ function ln_tool_step(_host) {
     if(_t.load_message_us>0) _t.load_message_us-=delta_time;
     if(ln_tool_media_hit(3)) ln_tool_load_edits();
     if(ln_tool_motion_visible(_host) && _click && mouse_x>=320 && mouse_x<600 && mouse_y>=940 && mouse_y<968) ln_enhanced_toggle(_host.play.game_number);
+    if(ln_guide_visible(_host) && _click && mouse_x>=615 && mouse_x<855 && mouse_y>=940 && mouse_y<968) {ln_guide_open(_host);return;}
     if(ln_tool_save_prompt() && _click && mouse_y>=976 && mouse_y<1004) {
         if(mouse_x>=620 && mouse_x<710) ln_project_save_as();
         if(mouse_x>=720 && mouse_x<810) global.ln_editor.save_prompt_hidden=ln_tool_edit_stamp();

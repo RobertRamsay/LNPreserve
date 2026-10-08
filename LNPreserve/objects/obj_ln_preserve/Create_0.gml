@@ -364,6 +364,9 @@ if(startup_active && variable_global_exists("ln_music_voice") && audio_is_playin
 }
 
 if(startup_test) {global.ln_tool.active=true;global.ln_tool.ui=false;ln_window_preset(0);}
+guide_test=false;guide_frame=0;global.ln_guide=undefined;
+for(var _guide_arg=1;_guide_arg<=parameter_count();_guide_arg++) if(parameter_string(_guide_arg)=="--guide-test") guide_test=true;
+if(guide_test) {global.ln_tool.active=true;global.ln_tool.ui=true;}
 
 escape_control=new LNEscapeControl();
 // Restart can happen while Escape is down; require release before another gesture.

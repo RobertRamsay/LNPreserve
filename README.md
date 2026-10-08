@@ -115,6 +115,8 @@ LN1: pressing # alone near a collectible assists positioning and plays the origi
 
 LN1: press fire while walking backwards to somersault backwards without turning. The existing somersault poses play in reverse, with the same movement/collision rules as the forward roll. This is a requested control enhancement.
 
+**Help guide** (bottom row, beside the mode button): an internal, read-only tour of every screen, button, panel and shortcut, from the main screen and CRT settings to the scene editor, sprite tools and track player. Each step highlights one control and explains it; Next/Back or the arrow keys move through it, the section bar along the bottom jumps between sections, and Esc closes it. The game is paused during the tour and every screen it opened is closed again afterwards.
+
 Enhanced/Original mode: each game has its own setting, shown as **LN1/LN2/LN3 mode** beside the media buttons (and in the F11 menu) and saved in `LNPreserve.ini` (`[LN1] enhanced`, `[LN2] enhanced`, `[LN3] smooth_motion`). Enhanced, the default, adds a double-tap turn in all three games: tap a direction, release, and press it again within 18 game ticks (about a third of a second) to face that way at once instead of walking backwards. A straight direction turns to the nearer diagonal beside it. A single push still walks backwards as before, so backward somersaults are unchanged. In LN3, Enhanced also gives smooth movement and slower jumps. Original turns all of this off.
 
 With CRT on, bottom-right sliders adjust Pixel blur, Honeycomb strength and Scanlines (0–100%). Click or drag a track to update the effect immediately. Settings survive toggling CRT off/on for the current session; the panel hides when CRT is off.

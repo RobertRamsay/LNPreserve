@@ -13,6 +13,8 @@ if (!presentation_test) {
 
 }
 ln_tool_present(self);
+ln_guide_draw(self);
+if(guide_test && ln_guide_active() && guide_frame mod 3==1) surface_save(application_surface,"guide-"+string_replace_all(string_format(global.ln_guide.index,3,0)," ","0")+".png");
 if(track_player_test) {surface_save(application_surface,"track-player.png");show_debug_message("LN_TRACK_CAPTURE:"+game_save_id);}
 
 if(sprite_viewer_test) {surface_save(application_surface,"sprite-viewer-"+string(global.ln_sprites.game)+"-"+string(global.ln_sprites.category)+".png");show_debug_message("LN_SPRITE_CAPTURE:"+game_save_id);}

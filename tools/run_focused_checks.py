@@ -33,6 +33,7 @@ CASES={
  '--fullscreen-test':['LN_FULLSCREEN_PASS'],
  '--xbox-test':['LN_XBOX_PASS'],
  '--save-ui-test':['LN_SAVE_UI_PASS'],
+ '--guide-test':['LN_GUIDE_PASS'],
 }
 def main():
  p=argparse.ArgumentParser();p.add_argument('--runner',type=Path,required=True);a=p.parse_args()
