@@ -61,6 +61,10 @@ The numpad shortcuts follow the three games’ recovered ordinary room links and
 
 F11’s scene picker exposes native prototypes in all 18 levels: six LN1, seven LN2 and five LN3. Its test-protection switch disables damage from enemy melee and hostile projectiles while leaving environmental hazards active; it is off by default. The original special entrance makes Void’s final encounter selectable even though it has no ordinary room link. Gameplay pauses while the picker, a preview or the workbench is open. The alternate Mansion room-10 drawing shares that room's state and is not offered as a separate entrance.
 
+### Touch controls (Android)
+
+On a phone or tablet an on-screen overlay appears in the margins beside the game picture: a black C64-style joystick bottom-left (eight directions), and two red buttons bottom-right, **FIRE** (the # fire key) and **SPACE** (next weapon), so moving and attacking work with two thumbs. Along the bottom, **MUSIC**, **ITEM >**, **< ITEM**, **PAUSE**, **< WEAPON**, **CRT** and **SAVE** do the same as F1, F3, F5, F7, the previous-weapon trigger, F9 and Ctrl+S; **KEYS** hides or shows that row while the joystick and buttons stay. **ESC** (top-left, or the Android Back button) closes an open panel, and otherwise asks whether to quit. **TOUCH** opens settings: controls on/off, size, opacity and the key row, saved in the `[Touch]` section of `LNPreserve.ini`. Menus, save slots and the toolbar respond to taps directly. With the UI hidden, double-tap the area above the game picture to bring it back. For testing on Windows or macOS with the mouse, set `desktop=1` in `[Touch]`.
+
 ## Verification
 
 Actual compiled GML passes comparisons against offline execution of original machine code:

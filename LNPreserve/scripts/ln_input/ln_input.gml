@@ -44,6 +44,10 @@ function LNInput() constructor {
             if (_i == LNKey.F7 && keyboard_check(ord("P"))) _down = true; // P pauses/unpauses every game, like F7
             _values[_i]=_values[_i] || _down;
         }
+        // On-screen touch controls hold keys like the keyboard and pad.
+        for (var _k = 0; _k < LNKey.Count; _k++) {
+            if (global.ln_touch.values[_k]) _values[_k] = true;
+        }
         sample_values(_cycle,_values);
     };
     consume = function(_through_cycle) {

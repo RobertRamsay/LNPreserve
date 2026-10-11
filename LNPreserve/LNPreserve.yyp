@@ -2521,6 +2521,7 @@
     {"id":{"name":"ln_sprite_art","path":"scripts/ln_sprite_art/ln_sprite_art.yy",},},
     {"id":{"name":"ln_sprite_pieces","path":"scripts/ln_sprite_pieces/ln_sprite_pieces.yy",},},
     {"id":{"name":"ln_sprite_viewer","path":"scripts/ln_sprite_viewer/ln_sprite_viewer.yy",},},
+    {"id":{"name":"ln_touch","path":"scripts/ln_touch/ln_touch.yy",},},
     {"id":{"name":"ln1_combat","path":"scripts/ln1_combat/ln1_combat.yy",},},
     {"id":{"name":"ln1_controls","path":"scripts/ln1_controls/ln1_controls.yy",},},
     {"id":{"name":"ln1_enemy","path":"scripts/ln1_enemy/ln1_enemy.yy",},},
