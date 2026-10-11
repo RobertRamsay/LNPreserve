@@ -497,7 +497,12 @@ function ln_tool_present(_host) {
     if(_t.background) draw_sprite_stretched(spr_LNHDbkg,0,0,0,1920,1080);
     if(_host.startup_active) {ln_startup_draw(_host);draw_flush();return;}
     if(ln_tool_ui_visible()) draw_surface(_t.surface,320,140);
-    else {_rect=ln_tool_rect(_host);draw_surface_part(_t.surface,_rect[0],_rect[1],_rect[2],_rect[3],(1920-_rect[2])/2,(1080-_rect[3])/2);}
+    else {
+        // Game size (TOUCH settings) enlarges the picture in whole C64 pixels; see ln_game_view.
+        _rect=ln_tool_rect(_host);
+        var _view=ln_game_view(_host,_rect);
+        draw_surface_part_ext(_t.surface,_rect[0],_rect[1],_rect[2],_rect[3],_view[0],_view[1],_view[4],_view[4],c_white,1);
+    }
     draw_flush();
     if(!ln_tool_ui_visible()) {
         // After hiding the UI the U button lingers, then fades over two seconds, as a reminder.
