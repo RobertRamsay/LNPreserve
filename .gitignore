@@ -11,3 +11,4 @@ evidence/*_probe.png
 
 # Local project backups (too large for GitHub)
 BACKUP/
+*.apk
