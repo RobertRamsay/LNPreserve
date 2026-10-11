@@ -244,7 +244,7 @@ function ln_guide_go(_host,_index) {
 /// Layout of the info box and the section bar, shared by drawing and clicks.
 function ln_guide_layout() {
     var _g=global.ln_guide,_st=_g.steps[_g.index],_w=640,_pad=20;
-    draw_set_font(font_jansina);
+    draw_set_font(ln_ui_font());
     var _h=_pad*2+30+string_height_ext(_st.text,-1,_w-_pad*2)+56,_x,_y,_r=_st.rect;
     if(is_undefined(_r)) {_x=(1920-_w)/2;_y=(1020-_h)/2;}
     else {
@@ -308,7 +308,7 @@ function ln_guide_step(_host) {
 function ln_guide_draw(_host) {
     if(!ln_guide_active()) return;
     var _g=global.ln_guide,_st=_g.steps[_g.index],_r=_st.rect,_n=array_length(_g.steps);
-    draw_set_font(font_jansina);draw_set_halign(fa_left);draw_set_valign(fa_top);
+    draw_set_font(ln_ui_font());draw_set_halign(fa_left);draw_set_valign(fa_top);
     // Dim everything except the highlighted rectangle.
     draw_set_colour(c_black);draw_set_alpha(0.62);
     if(is_undefined(_r)) draw_rectangle(0,0,1920,1080,false);

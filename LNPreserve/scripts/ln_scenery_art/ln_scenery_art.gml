@@ -254,7 +254,7 @@ function ln_art_step() {
     return true;
 }
 function ln_art_draw() {
-    var _v=global.ln_editor.art,_a=_v.draft;ln_tool_clear(false);draw_set_font(font_jansina);draw_set_halign(fa_left);draw_set_valign(fa_top);draw_set_colour(c_white);
+    var _v=global.ln_editor.art,_a=_v.draft;ln_tool_clear(false);draw_set_font(ln_ui_font());draw_set_halign(fa_left);draw_set_valign(fa_top);draw_set_colour(c_white);
     ln_edit_button(24,18,170,"Save project",global.ln_editor.dirty);ln_edit_button(206,18,170,"Back to room");ln_edit_button(388,18,130,"New asset");ln_edit_button(530,18,130,"Duplicate");ln_edit_button(672,18,130,"Undo (^Z)");ln_edit_button(814,18,130,"Redo (^Y)");
     draw_text(24,70,"SCENERY ART / Ninja "+string(_a.game)+" / Level "+string(_a.level)+" / Asset "+string(_a.id));
     var _names=["C64 Strict","C64 Loose","C64 HiRes - any colour","16bit AMIGA - 4096 colours","32bit AMIGA AGA - 24bit colour"];

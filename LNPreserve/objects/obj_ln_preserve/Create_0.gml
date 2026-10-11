@@ -44,6 +44,8 @@ ln_crt_tuning_init();
 if(global.ln_preferences_enabled) ln_crt_preferences_read();
 global.ln_preferences_saved=ln_crt_preferences_signature();
 ln_touch_init();
+ln_ui_font_init();
+draw_set_font(ln_ui_font());
 crt_surface=-1;
 global.ln_test_no_enemy_damage=false;
 ln3_only=false;

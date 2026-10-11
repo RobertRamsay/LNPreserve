@@ -1,5 +1,5 @@
 if(startup_active) {ln_tool_present(self);ln_escape_hold_draw(self);ln_touch_draw(self);ln_quit_draw();exit;}
-draw_set_font(font_jansina);
+draw_set_font(ln_ui_font());
 if(!(global.ln_editor.open || editor_test || global.ln_tracks.open || global.ln_sprites.open)) {
 if (!presentation_test) {
     ln_crt_present(self);

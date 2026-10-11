@@ -418,7 +418,7 @@ function ln_edit_draw() {
     var _e,_s,_view,_projection,_cache,_surface,_camera,_g,_d,_dx,_dy,_i,_sprite,_r,_record,_p,_o,_assets,_j,_a;
      _e=global.ln_editor; if(_e.art.open) {ln_art_draw();return;} if(_e.map_open) {ln_map_draw();return;}
      _s=_e.scene;if(!is_struct(_s)) return;
-    draw_set_font(font_jansina);draw_set_halign(fa_left);draw_set_valign(fa_top);
+    draw_set_font(ln_ui_font());draw_set_halign(fa_left);draw_set_valign(fa_top);
     ln_tool_clear(false);draw_set_colour(c_white);
     _view=matrix_get(matrix_view); _projection=matrix_get(matrix_projection);
     if(_e.build>=0 && global.ln_paint.active) ln_paint_prepare();
@@ -1931,7 +1931,7 @@ function ln_enemy_editor_overlay() {
         ln_enemy_draw_actor(_e.preview,_a);
         draw_set_colour(_i==_e.enemy_index?c_yellow:c_white);draw_circle(_c.x,_c.y,4,true);
         draw_line(_c.x,_c.y,_c.x+((_c.facing&4)?-8:8),_c.y+((_c.facing==1 || _c.facing==7)?-4:4));
-        draw_set_font(-1);draw_text(_c.x+5,_c.y-9,string(_i+1));draw_set_font(font_jansina);
+        draw_set_font(-1);draw_text(_c.x+5,_c.y-9,string(_i+1));draw_set_font(ln_ui_font());
         if(_c.patrol==0) {
             var _trace=_cat.types[_c.type].trace;draw_set_colour(make_colour_rgb(100,150,200));
             for(var _t=1;_t<array_length(_trace);_t++) draw_line(_c.x+_trace[_t-1][0],_c.y+_trace[_t-1][1],_c.x+_trace[_t][0],_c.y+_trace[_t][1]);

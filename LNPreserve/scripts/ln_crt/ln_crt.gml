@@ -507,13 +507,13 @@ function ln_tool_present(_host) {
     if(!ln_tool_ui_visible()) {
         // After hiding the UI the U button lingers, then fades over two seconds, as a reminder.
         if(_t.ui_hint_us>0) {
-            draw_set_font(font_jansina);draw_set_halign(fa_left);draw_set_valign(fa_top);
+            draw_set_font(ln_ui_font());draw_set_halign(fa_left);draw_set_valign(fa_top);
             draw_set_alpha(clamp(_t.ui_hint_us/2000000,0,1));ln_edit_button(320,96,160,"USER INT. (U)",true);draw_set_alpha(1);draw_flush();
         }
         return;
     }
     // F6 always shows the editor; U controls gameplay UI only.
-    draw_set_font(font_jansina);draw_set_halign(fa_left);draw_set_valign(fa_top);
+    draw_set_font(ln_ui_font());draw_set_halign(fa_left);draw_set_valign(fa_top);
     ln_edit_button(320,96,160,global.ln_editor.open?"USER INT. (ON)":"USER INT. (U)",true);
     ln_edit_button(492,96,240,"Background "+(_t.background?"ON":"OFF")+" (B)",_t.background);draw_flush();
     var _media=ln_tool_media_rect();
@@ -638,12 +638,12 @@ function ln_startup_draw(_host) {
     }
     if(_t>=1.05) {
         var _alpha=clamp((_t-1.05)/0.25,0,1);
-        draw_set_font(font_jansina);draw_set_halign(fa_center);draw_set_valign(fa_middle);draw_set_colour(c_white);draw_set_alpha(_alpha);
-        draw_set_font(font_jansina_big);draw_text(960,430,"LAST NINJA REVISITED");
-        draw_set_font(font_jansina);draw_text(960,525,"PLAYER  -  EDITOR  -  V "+_host.startup_version);
+        draw_set_font(ln_ui_font());draw_set_halign(fa_center);draw_set_valign(fa_middle);draw_set_colour(c_white);draw_set_alpha(_alpha);
+        draw_set_font(ln_ui_font_big());draw_text(960,430,"LAST NINJA REVISITED");
+        draw_set_font(ln_ui_font());draw_text(960,525,"PLAYER  -  EDITOR  -  V "+_host.startup_version);
         draw_set_alpha(1);ln_ui_button_background(750,640,420,64,true);
-        draw_set_colour(c_white);draw_set_font(font_jansina_big);draw_text(960,672,"CLICK TO BEGIN");
-        draw_set_font(font_jansina);
+        draw_set_colour(c_white);draw_set_font(ln_ui_font_big());draw_text(960,672,"CLICK TO BEGIN");
+        draw_set_font(ln_ui_font());
         draw_set_halign(fa_left);draw_set_valign(fa_top);
     }
     draw_set_alpha(1);draw_set_colour(c_white);
@@ -841,12 +841,12 @@ function ln_quit_step(_host) {
 function ln_quit_draw() {
     if(!ln_quit_active()) return;
     var _q=global.ln_quit;
-    draw_set_font(font_jansina);draw_set_halign(fa_left);draw_set_valign(fa_top);
+    draw_set_font(ln_ui_font());draw_set_halign(fa_left);draw_set_valign(fa_top);
     draw_set_colour(c_black);draw_set_alpha(0.7);draw_rectangle(0,0,1920,1080,false);draw_set_alpha(1);
     draw_set_colour(make_colour_rgb(16,18,26));draw_rectangle(680,440,1240,660,false);
     draw_set_colour(make_colour_rgb(255,220,40));draw_rectangle(680,440,1240,660,true);draw_rectangle(681,441,1239,659,true);
-    draw_set_halign(fa_center);draw_set_font(font_jansina_big);draw_set_colour(c_white);draw_text(960,476,"QUIT");
-    draw_set_font(font_jansina);draw_text(960,530,"Are you sure you want to quit?");
+    draw_set_halign(fa_center);draw_set_font(ln_ui_font_big());draw_set_colour(c_white);draw_text(960,476,"QUIT");
+    draw_set_font(ln_ui_font());draw_text(960,530,"Are you sure you want to quit?");
     draw_set_colour(make_colour_rgb(150,210,220));draw_text(960,556,"Y: yes   N or Esc: no   Arrows choose, Enter confirms");
     draw_set_halign(fa_left);
     ln_edit_button(780,600,140,"Yes");ln_edit_button(1000,600,140,"No");
@@ -857,7 +857,7 @@ function ln_quit_draw() {
 /// While Escape is held, say what letting go or holding on will do.
 function ln_escape_hold_draw(_host) {
     var _c=_host.escape_control;if(!_c.down || _c.fired || _c.held<.4 || ln_quit_active()) return;
-    draw_set_font(font_jansina);draw_set_valign(fa_top);
+    draw_set_font(ln_ui_font());draw_set_valign(fa_top);
     draw_set_colour(c_black);draw_set_alpha(0.8);draw_rectangle(700,20,1220,86,false);draw_set_alpha(1);
     draw_set_colour(make_colour_rgb(70,60,40));draw_rectangle(720,64,1200,76,false);
     draw_set_colour(make_colour_rgb(255,220,40));draw_rectangle(720,64,720+480*clamp(_c.held/3,0,1),76,false);

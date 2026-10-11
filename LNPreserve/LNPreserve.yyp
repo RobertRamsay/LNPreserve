@@ -247,6 +247,8 @@
     {"$GMIncludedFile":"","%Name":"pieces.json","CopyToMask":-1,"filePath":"datafiles/actors/ln2","name":"pieces.json","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
     {"$GMIncludedFile":"","%Name":"pieces.json","CopyToMask":-1,"filePath":"datafiles/actors/ln3","name":"pieces.json","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
     {"$GMIncludedFile":"","%Name":"catalog.json","CopyToMask":-1,"filePath":"datafiles","name":"catalog.json","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
+    {"$GMIncludedFile":"","%Name":"Roboto-LICENSE.txt","CopyToMask":-1,"filePath":"datafiles/fonts","name":"Roboto-LICENSE.txt","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
+    {"$GMIncludedFile":"","%Name":"Roboto-Medium.ttf","CopyToMask":-1,"filePath":"datafiles/fonts","name":"Roboto-Medium.ttf","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
     {"$GMIncludedFile":"","%Name":"characters.json","CopyToMask":-1,"filePath":"datafiles/graphics","name":"characters.json","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
     {"$GMIncludedFile":"","%Name":"ln1_game_level1_location_01.png","CopyToMask":-1,"filePath":"datafiles/graphics/ln1_game_level1","name":"ln1_game_level1_location_01.png","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
     {"$GMIncludedFile":"","%Name":"ln1_game_level1_location_02.png","CopyToMask":-1,"filePath":"datafiles/graphics/ln1_game_level1","name":"ln1_game_level1_location_02.png","resourceType":"GMIncludedFile","resourceVersion":"2.0",},

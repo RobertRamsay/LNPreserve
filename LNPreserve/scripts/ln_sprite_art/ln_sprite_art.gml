@@ -628,7 +628,7 @@ function ln_sprite_art_step(_host) {
 function ln_sprite_art_draw() {
     var _sv=global.ln_sprites,_v=_sv.art,_e=global.ln_editor,_n=array_length(_v.items);
     shader_reset();gpu_set_blendmode(bm_normal);gpu_set_texfilter(false);draw_set_alpha(1);
-    ln_tool_clear(false);draw_set_font(font_jansina);draw_set_halign(fa_left);draw_set_valign(fa_top);draw_set_colour(c_white);
+    ln_tool_clear(false);draw_set_font(ln_ui_font());draw_set_halign(fa_left);draw_set_valign(fa_top);draw_set_colour(c_white);
     ln_edit_button(24,18,170,"Save project",_e.dirty);ln_edit_button(206,18,170,"Back to viewer");
     ln_edit_button(388,18,110,"Undo (^Z)",array_length(_v.undo)>0);ln_edit_button(510,18,110,"Redo (^Y)",array_length(_v.redo)>0);
     ln_edit_button(632,18,220,"Original pieces: "+(_v.pieces_mode?"ON":"OFF"),_v.pieces_mode);

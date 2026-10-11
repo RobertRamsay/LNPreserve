@@ -318,7 +318,7 @@ function ln_map_neighbours(_graph,_map,_room) {
 }
 function ln_map_draw() {
     var _e=global.ln_editor,_graph=ln_map_graph(_e.game,_e.level),_map=ln_map_data(_e.game,_e.level),_nodes=ln_map_nodes(_graph,_map);
-    ln_tool_clear(false);draw_set_font(font_jansina);draw_set_halign(fa_left);draw_set_valign(fa_top);draw_set_colour(c_white);
+    ln_tool_clear(false);draw_set_font(ln_ui_font());draw_set_halign(fa_left);draw_set_valign(fa_top);draw_set_colour(c_white);
     draw_text(24,24,"LEVEL MAP / LAST NINJA "+string(_e.game)+" / LEVEL "+string(_e.level));
     ln_edit_button(1040,18,210,"Room editor");
     for(var _i=0;_i<3;_i++) ln_edit_button(24+_i*120,66,110,"Ninja "+string(_i+1),_e.game==_i+1);
@@ -533,7 +533,7 @@ function ln_map_draw_transit(_g) {
     if(!ln_map_active(_g)) return false;
     var _t=_g.map_transit,_map=ln_map_data(_g.game_number,_g.level),_room=ln_map_room(_map,_t.route.rooms[_t.index]);
     if(!is_struct(_room)) return false;
-    ln_tool_clear();draw_set_colour(c_white);draw_set_font(font_jansina);draw_text(160,38,"LAST NINJA "+string(_g.game_number)+" / "+_room.name);
+    ln_tool_clear();draw_set_colour(c_white);draw_set_font(ln_ui_font());draw_text(160,38,"LAST NINJA "+string(_g.game_number)+" / "+_room.name);
     draw_set_colour(global.ln_paint_palette[_room.background]);draw_rectangle(160,84,1119,659,false);draw_set_colour(c_white);
     var _v=global.ln_sprites;if(!is_struct(_v.catalog)) _v.catalog=ln3_data_read("sprite_viewer.json");
     var _entry=undefined;

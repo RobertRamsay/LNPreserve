@@ -109,7 +109,7 @@ function ln_sprite_step(_host) {
 function ln_sprite_draw() {
     var _v=global.ln_sprites;if(_v.art.open) {ln_sprite_art_draw();return;}
     shader_reset();gpu_set_blendmode(bm_normal);gpu_set_texfilter(false);
-    draw_set_alpha(1);ln_tool_clear(false);draw_set_font(font_jansina);
+    draw_set_alpha(1);ln_tool_clear(false);draw_set_font(ln_ui_font());
     draw_set_halign(fa_left);draw_set_valign(fa_top);draw_set_colour(c_white);
     ln_edit_button(770,20,240,"CRT "+(_v.crt_enabled?"ON":"OFF")+" (F9)",_v.crt_enabled);
     draw_text(24,24,"SPRITE VIEWER");ln_edit_button(1030,20,220,"Back (Esc)");

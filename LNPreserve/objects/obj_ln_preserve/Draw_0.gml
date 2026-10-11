@@ -6,7 +6,7 @@ if(collision_edit_test) {try {ln_collision_edit_checks();} catch(_err) {show_deb
 if(startup_active) exit;
 if(global.ln_sprites.open) {ln_sprite_draw();exit;}
 if(global.ln_tracks.open) {ln_track_draw();exit;}
-draw_set_font(font_jansina);
+draw_set_font(ln_ui_font());
 if(editor_test) {
     try {ln_edit_checks();} catch(_error) {show_debug_message("LN_EDITOR_FAILURE: "+string(_error));}
     game_end();exit;

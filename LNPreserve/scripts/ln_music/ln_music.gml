@@ -130,7 +130,7 @@ function ln_track_poll(_p) {
 }
 function ln_track_draw() {
     var _p=global.ln_tracks;
-    shader_reset();draw_set_alpha(1);draw_set_font(font_jansina);draw_set_halign(fa_left);draw_set_valign(fa_top);
+    shader_reset();draw_set_alpha(1);draw_set_font(ln_ui_font());draw_set_halign(fa_left);draw_set_valign(fa_top);
     ln_tool_clear(false);draw_set_colour(c_white);
     draw_text(24,24,"TRACK PLAYER");ln_edit_button(1020,20,220,"Back (Esc)");
     var _games=["ALL","LN1","LN2","LN3"],_labels=["All","Loaders","InGames","Intro+Outro","IO+Pre"];

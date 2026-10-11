@@ -8,6 +8,28 @@
 /// Touches feed LNInput as held keys, exactly like the keyboard and the Xbox pad.
 
 enum LNTouchAction { Key, Save }
+
+/// UI text font. Android and iOS use Roboto Medium (a plain Android-style font, Apache 2.0,
+/// datafiles/fonts) for every label and button; desktop keeps Jansina. [Touch] clear_font=1
+/// in LNPreserve.ini uses Roboto on desktop too. Sizes 12 and 18 match Jansina's text widths.
+function ln_ui_font_init() {
+    global.ln_ui_font=font_jansina;
+    global.ln_ui_font_big=font_jansina_big;
+    var _clear=false;
+    if(os_type==os_android || os_type==os_ios) _clear=true;
+    if(global.ln_preferences_enabled) {
+        ini_open("LNPreserve.ini");
+        if(ini_read_real("Touch","clear_font",0)>=0.5) _clear=true;
+        ini_close();
+    }
+    if(!_clear) return;
+    var _font=font_add("fonts/Roboto-Medium.ttf",12,false,false,32,255);
+    var _big=font_add("fonts/Roboto-Medium.ttf",18,false,false,32,255);
+    if(font_exists(_font)) global.ln_ui_font=_font;
+    if(font_exists(_big)) global.ln_ui_font_big=_big;
+}
+function ln_ui_font() {return global.ln_ui_font;}
+function ln_ui_font_big() {return global.ln_ui_font_big;}
 enum LNTouchDrag { None, Stick, Fire, Space }
 
 function ln_touch_init() {
@@ -434,7 +456,7 @@ function ln_touch_options_draw() {
     draw_set_alpha(1);draw_set_colour(make_colour_rgb(16,18,26));draw_rectangle(660,240,1260,800,false);
     draw_set_colour(make_colour_rgb(255,220,40));draw_rectangle(660,240,1260,800,true);draw_rectangle(661,241,1259,799,true);
     draw_set_halign(fa_center);draw_set_valign(fa_middle);draw_set_colour(c_white);
-    draw_set_font(font_jansina_big);draw_text(960,274,"TOUCH CONTROLS");draw_set_font(font_jansina);
+    draw_set_font(ln_ui_font_big());draw_text(960,274,"TOUCH CONTROLS");draw_set_font(ln_ui_font());
     draw_set_halign(fa_left);
     draw_text(700,338,"Controls");draw_text(700,408,"Button size");draw_text(700,478,"Opacity");
     draw_text(700,548,"Extra keys");draw_text(700,618,"Game size");
@@ -473,7 +495,7 @@ function ln_touch_draw(_host) {
     var _t=global.ln_touch;
     if(!_t.active || !global.ln_tool.active) return;
     var _alpha=draw_get_alpha(),_colour=draw_get_colour(),_font=draw_get_font();
-    draw_set_font(font_jansina);draw_set_halign(fa_center);draw_set_valign(fa_middle);
+    draw_set_font(ln_ui_font());draw_set_halign(fa_center);draw_set_valign(fa_middle);
     if(ln_touch_corner_visible(_host)) {
         ln_touch_key(_t.escape_x,_t.escape_y,_t.escape_w,_t.escape_h,"ESC",false,max(0.5,_t.opacity));
         ln_touch_key(_t.options_x,_t.options_y,_t.options_w,_t.options_h,"TOUCH",false,max(0.5,_t.opacity));
