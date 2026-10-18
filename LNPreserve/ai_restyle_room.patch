@@ -1,0 +1,7 @@
+diff --git a/LNPreserve/rooms/Room1/RoomCreationCode.gml b/LNPreserve/rooms/Room1/RoomCreationCode.gml
+index e2782fa3..7ccde578 100644
+--- a/LNPreserve/rooms/Room1/RoomCreationCode.gml
++++ b/LNPreserve/rooms/Room1/RoomCreationCode.gml
+@@ -1 +1,2 @@
+ instance_create_depth(0, 0, 0, obj_ln_preserve);
++instance_create_depth(0, 0, 0, obj_ai_restyle);

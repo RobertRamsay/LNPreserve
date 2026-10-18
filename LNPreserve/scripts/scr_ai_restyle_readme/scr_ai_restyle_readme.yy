@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_ai_restyle_readme",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_ai_restyle_readme",
+  "parent":{
+    "name":"LNPreserve",
+    "path":"LNPreserve.yyp",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

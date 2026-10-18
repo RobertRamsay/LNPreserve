@@ -2503,6 +2503,7 @@
   "resources":[
     {"id":{"name":"font_jansina_big","path":"fonts/font_jansina_big/font_jansina_big.yy",},},
     {"id":{"name":"font_jansina","path":"fonts/font_jansina/font_jansina.yy",},},
+    {"id":{"name":"obj_ai_restyle","path":"objects/obj_ai_restyle/obj_ai_restyle.yy",},},
     {"id":{"name":"obj_ln_preserve","path":"objects/obj_ln_preserve/obj_ln_preserve.yy",},},
     {"id":{"name":"Room1","path":"rooms/Room1/Room1.yy",},},
     {"id":{"name":"ln_checks","path":"scripts/ln_checks/ln_checks.yy",},},
@@ -2575,6 +2576,7 @@
     {"id":{"name":"ln3_scenes","path":"scripts/ln3_scenes/ln3_scenes.yy",},},
     {"id":{"name":"ln3_special_checks","path":"scripts/ln3_special_checks/ln3_special_checks.yy",},},
     {"id":{"name":"ln3_special","path":"scripts/ln3_special/ln3_special.yy",},},
+    {"id":{"name":"scr_ai_restyle_readme","path":"scripts/scr_ai_restyle_readme/scr_ai_restyle_readme.yy",},},
     {"id":{"name":"sh_ln_crt","path":"shaders/sh_ln_crt/sh_ln_crt.yy",},},
     {"id":{"name":"sh_ln_modified_delta","path":"shaders/sh_ln_modified_delta/sh_ln_modified_delta.yy",},},
     {"id":{"name":"sh_ln_occlusion","path":"shaders/sh_ln_occlusion/sh_ln_occlusion.yy",},},
