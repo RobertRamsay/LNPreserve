@@ -6,9 +6,18 @@
 host_address = "127.0.0.1";
 host_port = 5577;
 
-// Capture size sent to the helper (small = faster)
+// Capture size sent to the helper. Keep the same shape as the region
+// and use multiples of 64 (640x384 matches LNPreserve's 5:3 playfield).
 cap_w = 640;
-cap_h = 360;
+cap_h = 384;
+
+// Area of application_surface to restyle: returns [x, y, w, h].
+// Return a width of 0 to show the normal game (menus, editors).
+// Override per game, e.g. _ai.region_func = my_region_function;
+region_func = function() {
+    return [0, 0, surface_get_width(application_surface), surface_get_height(application_surface)];
+};
+region = [0, 0, 0, 0];
 
 // Style prompts (TAB cycles, F3 types a custom one)
 prompt_list = [

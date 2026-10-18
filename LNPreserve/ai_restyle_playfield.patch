@@ -1,0 +1,70 @@
+diff --git a/LNPreserve/objects/obj_ai_restyle/Create_0.gml b/LNPreserve/objects/obj_ai_restyle/Create_0.gml
+index cbe89545..fa1b6670 100644
+--- a/LNPreserve/objects/obj_ai_restyle/Create_0.gml
++++ b/LNPreserve/objects/obj_ai_restyle/Create_0.gml
+@@ -7,9 +7,9 @@ host_address = "127.0.0.1";
+ host_port = 5577;
+ 
+ // Capture size sent to the helper. Keep the same shape as the region
+-// and use multiples of 64 (512x320 suits a 16:10 C64 picture).
+-cap_w = 512;
+-cap_h = 320;
++// and use multiples of 64 (640x384 matches LNPreserve's 5:3 playfield).
++cap_w = 640;
++cap_h = 384;
+ 
+ // Area of application_surface to restyle: returns [x, y, w, h].
+ // Return a width of 0 to show the normal game (menus, editors).
+diff --git a/LNPreserve/scripts/ln_ai_region/ln_ai_region.gml b/LNPreserve/scripts/ln_ai_region/ln_ai_region.gml
+index d6775ca2..f70afadb 100644
+--- a/LNPreserve/scripts/ln_ai_region/ln_ai_region.gml
++++ b/LNPreserve/scripts/ln_ai_region/ln_ai_region.gml
+@@ -1,5 +1,6 @@
+-/// Where LNPreserve's game picture sits on the 1920x1080 canvas: [x, y, w, h].
+-/// Used by obj_ai_restyle so only the play area is restyled; HUD panels and text stay crisp.
++/// Where LNPreserve's playfield (the land) sits on the 1920x1080 canvas: [x, y, w, h].
++/// Used by obj_ai_restyle so only the scenery is restyled; the C64 dashboard/HUD,
++/// panels and text stay untouched.
+ /// A width of 0 means "show the normal game" (startup, workbench, menus, editors, viewers).
+ function ln_ai_region() {
+     var _none = [0, 0, 0, 0];
+@@ -22,12 +23,21 @@ function ln_ai_region() {
+     }
+     var _rect = [_region[0], _region[1], _region[2] - _region[0], _region[3] - _region[1]];
+ 
++    // In play, all three games draw the 240x144 stage at 160,84 at 3x (720x432),
++    // with the dashboard around it. Full-screen scenes (intro, ending, victory) keep the whole picture.
++    if (_region[0] == 160 && _region[1] == 84) {
++        _rect = [160, 84, 720, 432];
++    }
++
+     // UI visible: the 1280x800 tool surface is drawn at 320,140
+     if (ln_tool_ui_visible()) {
+         return [320 + _rect[0], 140 + _rect[1], _rect[2], _rect[3]];
+     }
+ 
+-    // UI hidden: the picture is scaled and centred (see ln_game_view)
+-    var _view = ln_game_view(_host, _rect);
+-    return [_view[0], _view[1], _view[2], _view[3]];
++    // UI hidden: the whole game region is scaled and centred (see ln_game_view),
++    // so place the stage inside that view at the same scale
++    var _full = [_region[0], _region[1], _region[2] - _region[0], _region[3] - _region[1]];
++    var _view = ln_game_view(_host, _full);
++    var _scale = _view[4];
++    return [_view[0] + (_rect[0] - _full[0]) * _scale, _view[1] + (_rect[1] - _full[1]) * _scale, _rect[2] * _scale, _rect[3] * _scale];
+ }
+diff --git a/tools/gm_restyle_server.py b/tools/gm_restyle_server.py
+index d48af97d..5754cdcf 100644
+--- a/tools/gm_restyle_server.py
++++ b/tools/gm_restyle_server.py
+@@ -344,8 +344,8 @@ async def main():
+                         help="Switch to BGRA if reds and blues come out swapped")
+     # Local options
+     parser.add_argument("--model", default="stabilityai/sd-turbo")
+-    parser.add_argument("--width", type=int, default=512)
+-    parser.add_argument("--height", type=int, default=320)
++    parser.add_argument("--width", type=int, default=640)
++    parser.add_argument("--height", type=int, default=384)
+     parser.add_argument("--t-index", default="25,45",
+                         help="Lower first number = stronger restyle, higher = closer to the game")
+     parser.add_argument("--lcm", action="store_true",

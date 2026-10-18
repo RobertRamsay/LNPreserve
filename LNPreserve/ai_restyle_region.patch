@@ -1,0 +1,232 @@
+diff --git a/LNPreserve/LNPreserve.yyp b/LNPreserve/LNPreserve.yyp
+index facd21a2..cfc10843 100644
+--- a/LNPreserve/LNPreserve.yyp
++++ b/LNPreserve/LNPreserve.yyp
+@@ -2508,6 +2508,7 @@
+     {"id":{"name":"Room1","path":"rooms/Room1/Room1.yy",},},
+     {"id":{"name":"ln_checks","path":"scripts/ln_checks/ln_checks.yy",},},
+     {"id":{"name":"ln_clock","path":"scripts/ln_clock/ln_clock.yy",},},
++    {"id":{"name":"ln_ai_region","path":"scripts/ln_ai_region/ln_ai_region.yy",},},
+     {"id":{"name":"ln_crt","path":"scripts/ln_crt/ln_crt.yy",},},
+     {"id":{"name":"ln_depth","path":"scripts/ln_depth/ln_depth.yy",},},
+     {"id":{"name":"ln_guide","path":"scripts/ln_guide/ln_guide.yy",},},
+diff --git a/LNPreserve/objects/obj_ai_restyle/Create_0.gml b/LNPreserve/objects/obj_ai_restyle/Create_0.gml
+index 8f070ded..cbe89545 100644
+--- a/LNPreserve/objects/obj_ai_restyle/Create_0.gml
++++ b/LNPreserve/objects/obj_ai_restyle/Create_0.gml
+@@ -6,9 +6,18 @@
+ host_address = "127.0.0.1";
+ host_port = 5577;
+ 
+-// Capture size sent to the helper (small = faster)
+-cap_w = 640;
+-cap_h = 360;
++// Capture size sent to the helper. Keep the same shape as the region
++// and use multiples of 64 (512x320 suits a 16:10 C64 picture).
++cap_w = 512;
++cap_h = 320;
++
++// Area of application_surface to restyle: returns [x, y, w, h].
++// Return a width of 0 to show the normal game (menus, editors).
++// Override per game, e.g. _ai.region_func = my_region_function;
++region_func = function() {
++    return [0, 0, surface_get_width(application_surface), surface_get_height(application_surface)];
++};
++region = [0, 0, 0, 0];
+ 
+ // Style prompts (TAB cycles, F3 types a custom one)
+ prompt_list = [
+diff --git a/LNPreserve/objects/obj_ai_restyle/Draw_77.gml b/LNPreserve/objects/obj_ai_restyle/Draw_77.gml
+index 8213b4c0..1277c824 100644
+--- a/LNPreserve/objects/obj_ai_restyle/Draw_77.gml
++++ b/LNPreserve/objects/obj_ai_restyle/Draw_77.gml
+@@ -8,12 +8,23 @@ if (!surface_exists(result_surf)) {
+     have_result = false;
+ }
+ 
++// Which part of the screen to restyle this frame
++region = region_func();
++var _rx = region[0];
++var _ry = region[1];
++var _rw = region[2];
++var _rh = region[3];
++var _region_ok = false;
++if (_rw > 0 && _rh > 0) {
++    _region_ok = true;
++}
++
+ gpu_set_blendenable(false);
+ 
+-// Grab this frame and send it, one frame in flight at a time
+-if (ai_enabled && connected && !awaiting_reply) {
++// Grab just the region and send it, one frame in flight at a time
++if (ai_enabled && connected && !awaiting_reply && _region_ok) {
+     surface_set_target(cap_surf);
+-    draw_surface_stretched(application_surface, 0, 0, cap_w, cap_h);
++    draw_surface_part_ext(application_surface, _rx, _ry, _rw, _rh, 0, 0, cap_w / _rw, cap_h / _rh, c_white, 1);
+     surface_reset_target();
+ 
+     buffer_seek(send_buf, buffer_seek_start, 0);
+@@ -26,13 +37,17 @@ if (ai_enabled && connected && !awaiting_reply) {
+     awaiting_reply = true;
+ }
+ 
+-// Show the AI frame, or the normal game if there isn't one
++// Normal game first, then the AI picture over the region only
+ var _win_w = window_get_width();
+ var _win_h = window_get_height();
+-if (ai_enabled && have_result) {
+-    draw_surface_stretched(result_surf, 0, 0, _win_w, _win_h);
+-} else {
+-    draw_surface_stretched(application_surface, 0, 0, _win_w, _win_h);
++draw_surface_stretched(application_surface, 0, 0, _win_w, _win_h);
++
++if (ai_enabled && have_result && _region_ok) {
++    var _sx = _win_w / surface_get_width(application_surface);
++    var _sy = _win_h / surface_get_height(application_surface);
++    gpu_set_texfilter(true);
++    draw_surface_stretched(result_surf, _rx * _sx, _ry * _sy, _rw * _sx, _rh * _sy);
++    gpu_set_texfilter(false);
+ }
+ 
+ gpu_set_blendenable(true);
+diff --git a/LNPreserve/rooms/Room1/RoomCreationCode.gml b/LNPreserve/rooms/Room1/RoomCreationCode.gml
+index 7ccde578..84770c6e 100644
+--- a/LNPreserve/rooms/Room1/RoomCreationCode.gml
++++ b/LNPreserve/rooms/Room1/RoomCreationCode.gml
+@@ -1,2 +1,3 @@
+ instance_create_depth(0, 0, 0, obj_ln_preserve);
+-instance_create_depth(0, 0, 0, obj_ai_restyle);
++var _ai = instance_create_depth(0, 0, 0, obj_ai_restyle);
++_ai.region_func = ln_ai_region;
+diff --git a/LNPreserve/scripts/ln_ai_region/ln_ai_region.gml b/LNPreserve/scripts/ln_ai_region/ln_ai_region.gml
+new file mode 100644
+index 00000000..d6775ca2
+--- /dev/null
++++ b/LNPreserve/scripts/ln_ai_region/ln_ai_region.gml
+@@ -0,0 +1,33 @@
++/// Where LNPreserve's game picture sits on the 1920x1080 canvas: [x, y, w, h].
++/// Used by obj_ai_restyle so only the play area is restyled; HUD panels and text stay crisp.
++/// A width of 0 means "show the normal game" (startup, workbench, menus, editors, viewers).
++function ln_ai_region() {
++    var _none = [0, 0, 0, 0];
++    var _host = instance_find(obj_ln_preserve, 0);
++    if (_host == noone) {
++        return _none;
++    }
++    if (!global.ln_tool.active) {
++        return _none;
++    }
++    if (_host.startup_active) {
++        return _none;
++    }
++    if (global.ln_editor.open || global.ln_sprites.open || global.ln_tracks.open) {
++        return _none;
++    }
++    var _region = ln_crt_game_region(_host);
++    if (!is_array(_region)) {
++        return _none;
++    }
++    var _rect = [_region[0], _region[1], _region[2] - _region[0], _region[3] - _region[1]];
++
++    // UI visible: the 1280x800 tool surface is drawn at 320,140
++    if (ln_tool_ui_visible()) {
++        return [320 + _rect[0], 140 + _rect[1], _rect[2], _rect[3]];
++    }
++
++    // UI hidden: the picture is scaled and centred (see ln_game_view)
++    var _view = ln_game_view(_host, _rect);
++    return [_view[0], _view[1], _view[2], _view[3]];
++}
+diff --git a/LNPreserve/scripts/ln_ai_region/ln_ai_region.yy b/LNPreserve/scripts/ln_ai_region/ln_ai_region.yy
+new file mode 100644
+index 00000000..0a15f1ae
+--- /dev/null
++++ b/LNPreserve/scripts/ln_ai_region/ln_ai_region.yy
+@@ -0,0 +1,13 @@
++{
++  "$GMScript":"v1",
++  "%Name":"ln_ai_region",
++  "isCompatibility":false,
++  "isDnD":false,
++  "name":"ln_ai_region",
++  "parent":{
++    "name":"Scripts",
++    "path":"folders/Native/Scripts.yy",
++  },
++  "resourceType":"GMScript",
++  "resourceVersion":"2.0",
++}
+\ No newline at end of file
+diff --git a/tools/gm_restyle_server.py b/tools/gm_restyle_server.py
+index 40fc25e2..d48af97d 100644
+--- a/tools/gm_restyle_server.py
++++ b/tools/gm_restyle_server.py
+@@ -246,7 +246,35 @@ async def send_packet(writer, ptype, payload):
+     await writer.drain()
+ 
+ 
++class FrameStats:
++    def __init__(self):
++        self.reset()
++        self.last_print = time.monotonic()
++
++    def reset(self):
++        self.frames = 0
++        self.ai_ms = 0.0
++        self.total_ms = 0.0
++
++    def add(self, ai_ms, total_ms):
++        self.frames += 1
++        self.ai_ms += ai_ms
++        self.total_ms += total_ms
++        now = time.monotonic()
++        elapsed = now - self.last_print
++        if elapsed >= 2.0:
++            if self.frames > 0:
++                print("AI %.1f fps | model %.0f ms | per frame %.0f ms" % (
++                    self.frames / elapsed, self.ai_ms / self.frames, self.total_ms / self.frames))
++            self.reset()
++            self.last_print = now
++
++
++STATS = FrameStats()
++
++
+ async def handle_frame(writer, payload, backend, args):
++    t_start = time.perf_counter()
+     w, h = struct.unpack("<HH", payload[:4])
+     pixels = payload[4:]
+     if len(pixels) != w * h * 4:
+@@ -260,10 +288,12 @@ async def handle_frame(writer, payload, backend, args):
+     rgb = img.convert("RGB")
+ 
+     out = None
++    t_ai = time.perf_counter()
+     try:
+         out = await backend.process(rgb)
+     except Exception as err:
+         print("Restyle failed:", err)
++    ai_ms = (time.perf_counter() - t_ai) * 1000.0
+ 
+     if out is None:
+         await send_packet(writer, PKT_NOFRAME, b"")
+@@ -273,6 +303,7 @@ async def handle_frame(writer, payload, backend, args):
+     if args.pixel_order == "BGRA":
+         out_rgba = swap_red_blue(out_rgba)
+     await send_packet(writer, PKT_FRAME, struct.pack("<HH", w, h) + out_rgba.tobytes())
++    STATS.add(ai_ms, (time.perf_counter() - t_start) * 1000.0)
+ 
+ 
+ async def handle_client(reader, writer, backend, args):
+@@ -314,8 +345,8 @@ async def main():
+     # Local options
+     parser.add_argument("--model", default="stabilityai/sd-turbo")
+     parser.add_argument("--width", type=int, default=512)
+-    parser.add_argument("--height", type=int, default=512)
+-    parser.add_argument("--t-index", default="35,45",
++    parser.add_argument("--height", type=int, default=320)
++    parser.add_argument("--t-index", default="25,45",
+                         help="Lower first number = stronger restyle, higher = closer to the game")
+     parser.add_argument("--lcm", action="store_true",
+                         help="Use for non-turbo SD1.5 models (loads the LCM LoRA)")
