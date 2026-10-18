@@ -11,7 +11,7 @@ if (ai_enabled) {
 
 var _line1 = "AI: " + _ai_word + "  |  " + status_text + "  |  " + string(fps_display) + " AI fps";
 var _line2 = "Style: " + prompt_current;
-var _line3 = "F2 toggle   TAB next style   F3 custom style   F4 hide";
+var _line3 = "F2 toggle   F4 next style   Shift+F4 custom style   Insert hide";
 
 draw_set_alpha(0.6);
 draw_set_colour(c_black);

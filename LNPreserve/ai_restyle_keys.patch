@@ -1,0 +1,55 @@
+diff --git a/LNPreserve/objects/obj_ai_restyle/Create_0.gml b/LNPreserve/objects/obj_ai_restyle/Create_0.gml
+index 821df257..8f070ded 100644
+--- a/LNPreserve/objects/obj_ai_restyle/Create_0.gml
++++ b/LNPreserve/objects/obj_ai_restyle/Create_0.gml
+@@ -19,11 +19,11 @@ prompt_list = [
+     "watercolour storybook illustration"
+ ];
+ 
+-// Keys
++// Keys (chosen to avoid LNPreserve's own TAB / F1-F12 bindings)
+ key_toggle = vk_f2;
+-key_next_style = vk_tab;
+-key_custom_style = vk_f3;
+-key_hide_overlay = vk_f4;
++key_next_style = vk_f4;          // F4 = next preset style
++key_custom_style = vk_f4;        // Shift + F4 = type a custom style
++key_hide_overlay = vk_insert;
+ 
+ // ---- State ----
+ reconnect_delay = game_get_speed(gamespeed_fps) * 2;
+diff --git a/LNPreserve/objects/obj_ai_restyle/Draw_64.gml b/LNPreserve/objects/obj_ai_restyle/Draw_64.gml
+index 78f26676..b87f397d 100644
+--- a/LNPreserve/objects/obj_ai_restyle/Draw_64.gml
++++ b/LNPreserve/objects/obj_ai_restyle/Draw_64.gml
+@@ -11,7 +11,7 @@ if (ai_enabled) {
+ 
+ var _line1 = "AI: " + _ai_word + "  |  " + status_text + "  |  " + string(fps_display) + " AI fps";
+ var _line2 = "Style: " + prompt_current;
+-var _line3 = "F2 toggle   TAB next style   F3 custom style   F4 hide";
++var _line3 = "F2 toggle   F4 next style   Shift+F4 custom style   Insert hide";
+ 
+ draw_set_alpha(0.6);
+ draw_set_colour(c_black);
+diff --git a/LNPreserve/objects/obj_ai_restyle/Step_0.gml b/LNPreserve/objects/obj_ai_restyle/Step_0.gml
+index ae56a17c..06a896b0 100644
+--- a/LNPreserve/objects/obj_ai_restyle/Step_0.gml
++++ b/LNPreserve/objects/obj_ai_restyle/Step_0.gml
+@@ -11,7 +11,7 @@ if (keyboard_check_pressed(key_hide_overlay)) {
+ }
+ 
+ // Cycle preset styles
+-if (keyboard_check_pressed(key_next_style)) {
++if (keyboard_check_pressed(key_next_style) && !keyboard_check(vk_shift)) {
+     prompt_index += 1;
+     if (prompt_index >= array_length(prompt_list)) {
+         prompt_index = 0;
+@@ -21,7 +21,7 @@ if (keyboard_check_pressed(key_next_style)) {
+ }
+ 
+ // Type a custom style
+-if (keyboard_check_pressed(key_custom_style)) {
++if (keyboard_check_pressed(key_custom_style) && keyboard_check(vk_shift)) {
+     if (prompt_dialog_id == -1) {
+         prompt_dialog_id = get_string_async("Describe the style:", prompt_current);
+     }

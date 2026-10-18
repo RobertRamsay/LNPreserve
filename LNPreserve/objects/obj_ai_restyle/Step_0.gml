@@ -11,7 +11,7 @@ if (keyboard_check_pressed(key_hide_overlay)) {
 }
 
 // Cycle preset styles
-if (keyboard_check_pressed(key_next_style)) {
+if (keyboard_check_pressed(key_next_style) && !keyboard_check(vk_shift)) {
     prompt_index += 1;
     if (prompt_index >= array_length(prompt_list)) {
         prompt_index = 0;
@@ -21,7 +21,7 @@ if (keyboard_check_pressed(key_next_style)) {
 }
 
 // Type a custom style
-if (keyboard_check_pressed(key_custom_style)) {
+if (keyboard_check_pressed(key_custom_style) && keyboard_check(vk_shift)) {
     if (prompt_dialog_id == -1) {
         prompt_dialog_id = get_string_async("Describe the style:", prompt_current);
     }

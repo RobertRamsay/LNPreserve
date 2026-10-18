@@ -28,11 +28,11 @@ prompt_list = [
     "watercolour storybook illustration"
 ];
 
-// Keys
+// Keys (chosen to avoid LNPreserve's own TAB / F1-F12 bindings)
 key_toggle = vk_f2;
-key_next_style = vk_tab;
-key_custom_style = vk_f3;
-key_hide_overlay = vk_f4;
+key_next_style = vk_f4;          // F4 = next preset style
+key_custom_style = vk_f4;        // Shift + F4 = type a custom style
+key_hide_overlay = vk_insert;
 
 // ---- State ----
 reconnect_delay = game_get_speed(gamespeed_fps) * 2;
