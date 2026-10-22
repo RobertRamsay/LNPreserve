@@ -1,19 +1,31 @@
 {
-  "note": "Enhanced LN3 somersault landing pads, in player foot coordinates. Stones are single points; areas are sampled on a 4x2 grid.",
+  "note": "LN3 double-fire jump routes, in player foot coordinates. A node is a point (with a small radius) or an area; each route lands on its own spot.",
   "rooms": [
     {
       "level": 4,
       "room": 3,
-      "stones": [
-        {"name": "stump west", "x": 132, "y": 108},
-        {"name": "stump north", "x": 172, "y": 104},
-        {"name": "stump south", "x": 152, "y": 122},
-        {"name": "stump east", "x": 220, "y": 116}
+      "nodes": [
+        {"name": "upper platform", "x0": 36, "x1": 104, "y0": 84, "y1": 104},
+        {"name": "west board", "x0": 120, "x1": 144, "y0": 104, "y1": 112},
+        {"name": "south board", "x0": 140, "x1": 164, "y0": 118, "y1": 126},
+        {"name": "middle pathway", "x0": 88, "x1": 124, "y0": 118, "y1": 136},
+        {"name": "lower floor", "x0": 136, "x1": 236, "y0": 140, "y1": 182}
       ],
-      "areas": [
-        {"name": "middle pathway", "x0": 92, "x1": 124, "y0": 120, "y1": 134},
-        {"name": "lower floor", "x0": 136, "x1": 236, "y0": 130, "y1": 182},
-        {"name": "upper platform", "x0": 40, "x1": 104, "y0": 84, "y1": 108}
+      "routes": [
+        {"from": "upper platform", "to": "west board", "x": 132, "y": 108},
+        {"from": "upper platform", "to": "middle pathway", "x": 108, "y": 128},
+        {"from": "west board", "to": "upper platform", "x": 76, "y": 100},
+        {"from": "west board", "to": "south board", "x": 152, "y": 122},
+        {"from": "west board", "to": "middle pathway", "x": 108, "y": 128},
+        {"from": "south board", "to": "west board", "x": 132, "y": 108},
+        {"from": "south board", "to": "middle pathway", "x": 108, "y": 128},
+        {"from": "south board", "to": "lower floor", "x": 184, "y": 146},
+        {"from": "middle pathway", "to": "upper platform", "x": 64, "y": 98},
+        {"from": "middle pathway", "to": "west board", "x": 132, "y": 108},
+        {"from": "middle pathway", "to": "south board", "x": 152, "y": 122},
+        {"from": "middle pathway", "to": "lower floor", "x": 160, "y": 146},
+        {"from": "lower floor", "to": "south board", "x": 152, "y": 122},
+        {"from": "lower floor", "to": "middle pathway", "x": 108, "y": 128}
       ]
     }
   ]

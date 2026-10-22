@@ -235,6 +235,7 @@ function ln3_play_tick(_g,_joy) {
     if (_g.level==5) ln3_void_flash_tick(_s);
     if (_g.special_sequence!=0) {ln3_special_sequence_tick(_g);return;}
     if (_s.weapon_notice_timer==0) _g.found_item=-1;
+    _joy=ln3_jump_assist_input(_g,_joy);
     _joy=ln3_item_assist_input(_g,_joy);
     var _tapped=ln_tap_step(_g.turn_tap,_joy);if(_tapped!=0 && ln3_smooth_enabled()) _g.turn_request=_tapped;
     ln3_play_exit(_g);if(ln_map_active(_g)) return;
@@ -262,8 +263,7 @@ function ln3_play_tick(_g,_joy) {
     ln3_combat_update(_s,_g.actions,_g.combat);ln3_fall_tick(_s,_g.actions,_g.data);
     // Wind drops retain the native falling body, without the water splash pair.
     if(_g.level==2 && _s.input_block!=0) {_s.enabled&=252;_s.waterline=173;}
-    ln3_movement_setup(_s,_g.movement);ln3_jump_assist_begin(_g);
-    ln3_movement(_s,_g.movement);ln3_jump_assist_move(_g);
+    ln3_movement_setup(_s,_g.movement);ln3_movement(_s,_g.movement);ln3_jump_assist_move(_g);
     ln3_climb_enter(_s,_g.actions,_g.runtime_scene.climbs,_joy,_g.level);
     ln3_collision_update(_s,_g.actions,_g.collision,_g.bounds);ln3_jump_assist_land(_g);
     ln3_hazard_tick(_s,_g.actions,_g.data);ln3_hazard_contacts(_s,_g.data);
