@@ -94,6 +94,11 @@ if (reported_encounters_test) {
     catch (_failure) {show_debug_message("LN2_REPORTED_ENCOUNTERS_FAILURE: "+string(_failure));}
     game_end();exit;
 }
+if (stereo_test) {
+    try {ln_stereo_checks();}
+    catch (_failure) {show_debug_message("LN_STEREO_FAILURE: "+string(_failure));}
+    game_end();exit;
+}
 try {
 if (presentation_test) {
     try {ln_crt_checks();show_debug_message("LN_CRT_PASS");}

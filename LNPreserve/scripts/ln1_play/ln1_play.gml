@@ -328,7 +328,7 @@ function ln1_play_draw(_game, _paused) {
     if(global.ln_paint.active) ln_paint_prepare();
     var _modified=ln_modified_begin(_game);
     surface_set_target(_game.stage_surface);
-    draw_clear(c_black);
+    draw_clear(c_black);ln_stereo_begin(_game);
     if(_modified) draw_surface(global.ln_editor.cache.surface,0,0);else draw_sprite(_game.scene,0,0,0);
     for (var _i = 0; _i < array_length(_game.world.items); _i++) {
         var _item = _game.world.items[_i];
@@ -373,7 +373,7 @@ function ln1_play_draw(_game, _paused) {
         shader_set(sh_ln1_palette_fade);
         shader_set_uniform_f(shader_get_uniform(sh_ln1_palette_fade,"u_steps"),max(0,(_game.death_transition.tick-40) div 6));
     }
-    draw_surface_ext(_game.stage_surface,_x,_y,_scale,_scale,0,c_white,1);
+    ln_stereo_draw_stage(_game.stage_surface,_x,_y,_scale,_transition || _game.game_over || (_game.lives_left<=1 && _game.death_transition_done));
     if (_transition && !_lives_message) {draw_flush();shader_reset();}
     draw_sprite_ext(spr_ln1_dashboard, 0, _x, _y, _scale, _scale, 0, c_white, 1);
     // Original $65bf: the bottom inventory shows owned weapons 1..5.

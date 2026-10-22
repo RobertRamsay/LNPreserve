@@ -49,7 +49,7 @@ draw_set_font(ln_ui_font());
 crt_surface=-1;
 global.ln_test_no_enemy_damage=false;
 ln3_only=false;
-presentation_test=false;
+presentation_test=false;stereo_test=false;
 crt_live_test=false;
 window_presets_test=false;save_ui_test=false;save_ui_frame=-1;
 crt_live_frame=-1;
@@ -165,6 +165,7 @@ for (var _i = 1; _i <= parameter_count(); _i++) {
         catch (_failure) {show_debug_message("LN_PICKUP_FAILURE: "+string(_failure));game_end();exit;}
     }
     if (parameter_string(_i) == "--ln3-presentation-checks") ln3_presentation_test=true;
+    if (parameter_string(_i) == "--stereo-test") stereo_test=true;
     if (parameter_string(_i) == "--rewind-checks") rewind_test=true;
     if (parameter_string(_i) == "--selftest") selftest = true;
     if (parameter_string(_i) == "--selftest-fail-early") selftest_inject_failure=true;

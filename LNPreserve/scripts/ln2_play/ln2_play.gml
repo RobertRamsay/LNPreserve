@@ -295,7 +295,7 @@ function ln2_play_draw(_g) {
     if(global.ln_paint.active) ln_paint_prepare();
     if (!surface_exists(_g.stage_surface)) _g.stage_surface=surface_create(240,144);
     var _modified=ln_modified_begin(_g);
-    surface_set_target(_g.stage_surface);draw_clear(c_black);
+    surface_set_target(_g.stage_surface);draw_clear(c_black);ln_stereo_begin(_g);
     if(_modified) {
         draw_surface(global.ln_editor.cache.surface,0,0);
         ln_modified_delta_start(asset_get_index(_g.scene_record.sprite));ln2_scene_bitmap_draw(_g);shader_reset();
@@ -316,7 +316,7 @@ function ln2_play_draw(_g) {
     ln_modified_paint_cover();global.ln_editor.context=false;
     surface_reset_target();
     matrix_set(matrix_view,_paint_view);matrix_set(matrix_projection,_paint_projection);
-    draw_surface_ext(_g.stage_surface,160,84,3,3,0,c_white,1);
+    ln_stereo_draw_stage(_g.stage_surface,160,84,3);
     ln2_status_draw(_g,160,84,3);
     draw_text(600,36,"F8 One-hit kills: "+(_g.one_hit_kills?"ON":"OFF"));
     draw_text(160,36,"LAST NINJA 2 - "+string_upper(_g.title));draw_text(1000,36,"Scene "+string(ln2_scene_number(_g)));

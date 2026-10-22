@@ -54,7 +54,17 @@ function ln_draw_masked_actor(_sprite, _frame, _x, _y, _xscale, _yscale,
     shader_set_uniform_f(shader_get_uniform(sh_ln_occlusion, "u_scene"), _scene_x, _scene_y, _scene_width, _scene_height);
     shader_set_uniform_f(shader_get_uniform(sh_ln_occlusion, "u_mask_threshold"), _threshold);
     shader_set_uniform_f(shader_get_uniform(sh_ln_occlusion, "u_clip_bottom"), _clip_bottom);
+    var _depth_fill = shader_get_uniform(sh_ln_occlusion, "u_depth_fill");
+    shader_set_uniform_f(_depth_fill, 0, 0);
     draw_sprite_ext(_sprite, _frame, _x, _y, _xscale, _yscale, 0, c_white, 1);
+    // 3D: the same visible pixels stand upright at the actor's foot depth.
+    if (ln_stereo_capturing()) {
+        surface_set_target(global.ln_stereo.surface);
+        shader_set_uniform_f(_depth_fill, 1, ln_stereo_depth_value(_authored_threshold * 255 + 0.25));
+        draw_sprite_ext(_sprite, _frame, _x, _y, _xscale, _yscale, 0, c_white, 1);
+        surface_reset_target();
+        shader_set_uniform_f(_depth_fill, 0, 0);
+    }
     shader_reset();
 }
 

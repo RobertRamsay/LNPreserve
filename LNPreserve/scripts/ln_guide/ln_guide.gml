@@ -30,6 +30,8 @@ function ln_guide_steps() {
     array_push(_s,S(C,"play","Sprite viewer","Opens the sprite viewer, where every character and object can be played and edited. Covered later in this guide.",[1120,940,150,28]));
     array_push(_s,S(C,"play","Track player","Opens the track player to listen to every loader, in-game, intro and outro tune.",[1280,940,140,28]));
     array_push(_s,S(C,"play","Music ON/OFF","Turns the game music on or off. F1 does the same during play.",[1430,940,120,28]));
+    array_push(_s,S(C,"play","3D (V)","Red/blue glasses 3D for every scene of all three games. Lower parts of the picture come forward, and props and characters stand upright at their feet, using each room's own depth masks. V does the same. The next button picks Red / Cyan (colour) or Red / Blue (grey) glasses.",[870,976,300,28]));
+    array_push(_s,S(C,"play","3D separation","Drag to set the depth strength. Positive values bring the bottom of the scene out of the screen; negative values reverse the depth. Zero is flat.",[1180,976,420,28]));
     array_push(_s,S(C,"play","Unsaved edits prompt","After editing, \"Unsaved edits. Save project?\" appears here. Yes saves the project to a file; No hides the prompt until your next edit.",[320,976,490,28]));
     // CRT settings
     C="CRT settings";

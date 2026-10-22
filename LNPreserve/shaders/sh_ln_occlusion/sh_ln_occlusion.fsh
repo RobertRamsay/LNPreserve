@@ -10,6 +10,7 @@ uniform float u_mask_threshold;
 uniform float u_clip_bottom;
 uniform float u_red_dye;
 uniform vec3 u_magic_colour;
+uniform vec2 u_depth_fill; // enabled, stereo depth written for every visible pixel
 void main() {
     vec4 colour = v_vColour * texture2D(gm_BaseTexture, v_vTexcoord);
     // LN1 $561f: red body/weapon pixels; retain the face colour and alpha.
@@ -28,6 +29,10 @@ void main() {
             if(authored.r>0.5) hidden=step(u_editor_threshold,authored.a);
         }
         colour.a *= 1.0-hidden;
+    }
+    if (u_depth_fill.x > 0.5) {
+        if (colour.a < 0.5) discard;
+        colour = vec4(vec3(u_depth_fill.y), 1.0);
     }
     gl_FragColor = colour;
 }

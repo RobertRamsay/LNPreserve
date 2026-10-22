@@ -398,12 +398,16 @@ function ln_crt_preferences_read(_file="LNPreserve.ini") {
     global.ln_editor.crt_enabled=ini_read_real("Editor","crt_enabled",0)>=0.5;
     global.ln_ln3_smooth=ini_read_real("LN3","smooth_motion",1)>=0.5;
     global.ln_ln1_enhanced=ini_read_real("LN1","enhanced",1)>=0.5;global.ln_ln2_enhanced=ini_read_real("LN2","enhanced",1)>=0.5;
+    var _stereo=ln_stereo_state(),_separation=ini_read_real("Stereo","separation",6);
+    _stereo.enabled=ini_read_real("Stereo","enabled",0)>=0.5;_stereo.mode=ini_read_real("Stereo","mode",0)>=0.5?1:0;
+    _stereo.separation=(is_nan(_separation) || is_infinity(_separation))?6:clamp(_separation,-16,16);
     ini_close();
 }
 function ln_crt_preferences_signature() {
     var _fields=ln_crt_preference_fields(),_values=[];
     for(var _i=0;_i<array_length(_fields);_i++) array_push(_values,variable_global_get(_fields[_i]));
     array_push(_values,global.ln_paint_speed);array_push(_values,global.ln_editor.crt_enabled);array_push(_values,global.ln_tool.ui);array_push(_values,global.ln_tool.background);array_push(_values,ln3_smooth_enabled());array_push(_values,ln_enhanced_enabled(1));array_push(_values,ln_enhanced_enabled(2));
+    var _stereo=ln_stereo_state();array_push(_values,_stereo.enabled);array_push(_values,_stereo.mode);array_push(_values,_stereo.separation);
     return json_stringify(_values);
 }
 function ln_crt_preferences_write(_file="LNPreserve.ini") {
@@ -415,6 +419,8 @@ function ln_crt_preferences_write(_file="LNPreserve.ini") {
     ini_write_real("Tool","ui_visible",real(global.ln_tool.ui));ini_write_real("Tool","background_visible",real(global.ln_tool.background));
     ini_write_real("LN3","smooth_motion",real(ln3_smooth_enabled()));
     ini_write_real("LN1","enhanced",real(ln_enhanced_enabled(1)));ini_write_real("LN2","enhanced",real(ln_enhanced_enabled(2)));
+    var _stereo=ln_stereo_state();
+    ini_write_real("Stereo","enabled",real(_stereo.enabled));ini_write_real("Stereo","mode",_stereo.mode);ini_write_real("Stereo","separation",_stereo.separation);
     ini_close();
 }
 function ln_crt_preferences_flush(_force=false) {
@@ -531,6 +537,7 @@ function ln_tool_present(_host) {
     // Enhanced/Original toggle for the current game, beside the media row; it takes effect on the next frame.
     if(ln_tool_motion_visible(_host)) ln_edit_button(320,940,280,ln_enhanced_label(_host.play.game_number));
     if(ln_tool_motion_visible(_host)) ln_edit_button(615,940,240,"Help guide");
+    if(ln_tool_motion_visible(_host)) ln_stereo_ui_draw();
     if(ln_track_message()!="") {
         draw_set_colour(c_white);
         draw_text(_media[0],_media[1]+32,global.ln_tracks.paused?"PAUSED: Track:":"PLAYING: Track:");
@@ -544,6 +551,7 @@ function ln_tool_present(_host) {
 function ln_tool_step(_host) {
     var _t=global.ln_tool,_click=mouse_check_button_pressed(mb_left),_typing=global.ln_editor.open && global.ln_editor.depth_edit;
     if(!_t.active) return;
+    ln_stereo_step(_host);
     if(ln_tool_media_hit(2)) {
         var _e=global.ln_editor;
         if(_e.open && !is_undefined(_e.test_music_restore)) _e.test_music_restore=!_e.test_music_restore;
