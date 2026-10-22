@@ -133,8 +133,8 @@ function ln_stereo_step(_host) {
     if (_keys && keyboard_check_pressed(ord("V"))) ln_stereo_toggle();
     // Drag: 0 none, 1 separation (first row), 2 glasses blend (second row).
     var _visible=ln_tool_motion_visible(_host);
-    if (!_visible || !mouse_check_button(mb_left)) _st.drag=0;
-    if (!_visible) return;
+    if (!_visible || !mouse_check_button(mb_left) || ln_zoom_covering()) _st.drag=0;
+    if (!_visible || ln_zoom_covering()) return;
     if (mouse_check_button_pressed(mb_left) && mouse_y>=976 && mouse_y<1004) {
         if (mouse_x>=870 && mouse_x<1020) ln_stereo_toggle();
         // The glasses button jumps between the two pure ends; the slider sets anything between.

@@ -2512,6 +2512,7 @@
     {"id":{"name":"ln_crt","path":"scripts/ln_crt/ln_crt.yy",},},
     {"id":{"name":"ln_depth","path":"scripts/ln_depth/ln_depth.yy",},},
     {"id":{"name":"ln_stereo","path":"scripts/ln_stereo/ln_stereo.yy",},},
+    {"id":{"name":"ln_zoom","path":"scripts/ln_zoom/ln_zoom.yy",},},
     {"id":{"name":"ln_guide","path":"scripts/ln_guide/ln_guide.yy",},},
     {"id":{"name":"ln_input","path":"scripts/ln_input/ln_input.yy",},},
     {"id":{"name":"ln_level_map","path":"scripts/ln_level_map/ln_level_map.yy",},},

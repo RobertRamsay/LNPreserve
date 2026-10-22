@@ -508,6 +508,7 @@ function ln_tool_present(_host) {
         _rect=ln_tool_rect(_host);
         var _view=ln_game_view(_host,_rect);
         draw_surface_part_ext(_t.surface,_rect[0],_rect[1],_rect[2],_rect[3],_view[0],_view[1],_view[4],_view[4],c_white,1);
+        draw_flush();ln_zoom_draw(_host,[_view[0],_view[1],_view[2],_view[3]]);
     }
     draw_flush();
     if(!ln_tool_ui_visible()) {
@@ -547,11 +548,14 @@ function ln_tool_present(_host) {
     if(!global.ln_editor.open && !global.ln_tracks.open && !global.ln_sprites.open) ln_edit_button(940,96,238,_host.scene_test.menu?"Back to game (F11)":"GAME/LEVELS (F11)");
     ln_edit_button(1256,96,48,"1x");ln_edit_button(1312,96,48,"2x");ln_edit_button(1368,96,48,"Fit");
     ln_edit_button(1424,96,176,"Fullscreen (F10)");ln_edit_button(1612,96,170,"Quit (hold Esc)");draw_flush();
+    // Zoomed picture sits over the panels; U returns it to normal along with the UI.
+    var _region=ln_crt_game_region(_host);
+    if(is_array(_region)) ln_zoom_draw(_host,[320+_region[0],140+_region[1],_region[2]-_region[0],_region[3]-_region[1]]);
 }
 function ln_tool_step(_host) {
-    var _t=global.ln_tool,_click=mouse_check_button_pressed(mb_left),_typing=global.ln_editor.open && global.ln_editor.depth_edit;
+    var _t=global.ln_tool,_click=mouse_check_button_pressed(mb_left) && !ln_zoom_covering(),_typing=global.ln_editor.open && global.ln_editor.depth_edit;
     if(!_t.active) return;
-    ln_stereo_step(_host);
+    ln_stereo_step(_host);ln_zoom_step(_host);
     if(ln_tool_media_hit(2)) {
         var _e=global.ln_editor;
         if(_e.open && !is_undefined(_e.test_music_restore)) _e.test_music_restore=!_e.test_music_restore;
@@ -575,19 +579,21 @@ function ln_tool_step(_host) {
     }
     if(_t.ui_hint_us>0) _t.ui_hint_us-=delta_time;
     if(!_typing && !global.ln_editor.open && (keyboard_check_pressed(ord("U")) || (ln_tool_ui_visible() && _click && mouse_x>=320 && mouse_x<480 && mouse_y>=96 && mouse_y<124))) {
-        _t.ui=!_t.ui;_t.ui_hint_us=_t.ui?0:2600000;
+        _t.ui=!_t.ui;_t.ui_hint_us=_t.ui?0:2600000;ln_zoom_reset();
     }
     if(!_typing && (keyboard_check_pressed(ord("B")) || (ln_tool_ui_visible() && _click && mouse_x>=492 && mouse_x<732 && mouse_y>=96 && mouse_y<124))) _t.background=!_t.background;
     ln_crt_preferences_flush();
 }
 function ln_tool_mouse_x() {
     if(!global.ln_tool.active) return mouse_x;
+    if(ln_zoom_covering()) return -10000;
     if(ln_tool_ui_visible()) return mouse_x-320;
     if(global.ln_editor.open && mouse_x>=600 && mouse_x<1320 && mouse_y>=324 && mouse_y<756) return mouse_x-576;
     return -10000;
 }
 function ln_tool_mouse_y() {
     if(!global.ln_tool.active) return mouse_y;
+    if(ln_zoom_covering()) return -10000;
     if(ln_tool_ui_visible()) return mouse_y-140;
     if(global.ln_editor.open && mouse_x>=600 && mouse_x<1320 && mouse_y>=324 && mouse_y<756) return mouse_y-184;
     return -10000;
@@ -601,7 +607,7 @@ function ln_tool_free() {
 function ln_tool_ui_visible() {return global.ln_editor.open || global.ln_tool.ui || (variable_global_exists("ln_tracks") && global.ln_tracks.open) || (variable_global_exists("ln_sprites") && global.ln_sprites.open);}
 
 function ln_tool_menu_pressed() {
-    return global.ln_tool.active && ln_tool_ui_visible() && !global.ln_editor.open &&
+    return global.ln_tool.active && ln_tool_ui_visible() && !global.ln_editor.open && !ln_zoom_covering() &&
         mouse_check_button_pressed(mb_left) && mouse_x>=940 && mouse_x<1178 && mouse_y>=96 && mouse_y<124;
 }
 
@@ -924,7 +930,7 @@ function ln_tool_media_rect() {
 // Buttons: 0 sprite viewer, 1 track player, 2 music, 3 load edits.
 function ln_tool_media_hit(_button) {
     var _r=ln_tool_media_rect(),_offset=[0,160,310,-250],_width=[150,140,120,240];
-    return global.ln_tool.active && ln_tool_ui_visible() && mouse_check_button_pressed(mb_left) &&
+    return global.ln_tool.active && ln_tool_ui_visible() && mouse_check_button_pressed(mb_left) && !ln_zoom_covering() &&
         mouse_x>=_r[0]+_offset[_button] && mouse_x<_r[0]+_offset[_button]+_width[_button] && mouse_y>=_r[1] && mouse_y<_r[1]+28;
 }
 function ln_tool_music_enabled(_g) {
