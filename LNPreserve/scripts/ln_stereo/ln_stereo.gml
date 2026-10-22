@@ -7,7 +7,7 @@
 /// shapes, editor depth); characters stand upright at their feet.
 function ln_stereo_state() {
     if (!variable_global_exists("ln_stereo"))
-        global.ln_stereo={enabled:false,separation:6,mode:0,drag:false,capturing:false,offset:8,focus:0.5,surface:-1,raw_surface:-1,raw_ready:false,ln3_shapes:undefined,ln3_surface:-1};
+        global.ln_stereo={enabled:false,separation:6,mode:0,drag:0,capturing:false,offset:8,focus:0.5,surface:-1,raw_surface:-1,raw_ready:false,ln3_shapes:undefined,ln3_surface:-1};
     return global.ln_stereo;
 }
 function ln_stereo_ready() {
@@ -131,26 +131,44 @@ function ln_stereo_step(_host) {
     var _st=ln_stereo_state(),_e=global.ln_editor;
     var _keys=!_e.open && !global.ln_sprites.open && !global.ln_tracks.open && !ln_guide_active() && !ln_quit_active();
     if (_keys && keyboard_check_pressed(ord("V"))) ln_stereo_toggle();
+    // Drag: 0 none, 1 separation (first row), 2 glasses blend (second row).
     var _visible=ln_tool_motion_visible(_host);
-    if (!_visible || !mouse_check_button(mb_left)) _st.drag=false;
+    if (!_visible || !mouse_check_button(mb_left)) _st.drag=0;
     if (!_visible) return;
     if (mouse_check_button_pressed(mb_left) && mouse_y>=976 && mouse_y<1004) {
         if (mouse_x>=870 && mouse_x<1020) ln_stereo_toggle();
-        else if (mouse_x>=1030 && mouse_x<1170) _st.mode=1-_st.mode;
-        else if (mouse_x>=1180 && mouse_x<1482) _st.drag=true;
+        // The glasses button jumps between the two pure ends; the slider sets anything between.
+        else if (mouse_x>=1030 && mouse_x<1170) _st.mode=_st.mode<0.5?1:0;
+        else if (mouse_x>=1180 && mouse_x<1482) _st.drag=1;
     }
-    if (_st.drag) _st.separation=round((-16+32*clamp((mouse_x-1186)/290,0,1))*2)/2;
+    if (mouse_check_button_pressed(mb_left) && mouse_y>=1012 && mouse_y<1040 && mouse_x>=1180 && mouse_x<1482) _st.drag=2;
+    var _t=clamp((mouse_x-1186)/290,0,1);
+    if (_st.drag==1) _st.separation=round((-16+32*_t)*2)/2;
+    if (_st.drag==2) _st.mode=round(_t*20)/20;
+}
+function ln_stereo_glasses_label(_mode) {
+    if (_mode<=0) return "Red / Cyan";
+    if (_mode>=1) return "Red / Blue";
+    return "Mixed "+string(round(_mode*100))+"%";
 }
 function ln_stereo_ui_draw() {
     var _st=ln_stereo_state();
     ln_edit_button(870,976,150,"3D "+(_st.enabled?"ON":"OFF")+" (V)",_st.enabled);
-    ln_edit_button(1030,976,140,_st.mode==0?"Red / Cyan":"Red / Blue",_st.enabled);
+    ln_edit_button(1030,976,140,ln_stereo_glasses_label(_st.mode),_st.enabled);
+    var _text=_st.enabled?c_white:make_colour_rgb(128,128,128);
+    // Separation: centre mark is flat.
     var _knob=1186+290*(_st.separation+16)/32;
     draw_set_colour(make_colour_rgb(65,73,84));draw_rectangle(1186,988,1476,992,false);
     draw_set_colour(make_colour_rgb(120,130,140));draw_rectangle(1330,983,1332,997,false);
-    draw_set_colour(_st.drag?c_white:make_colour_rgb(180,215,236));draw_circle(_knob,990,6,false);
-    draw_set_colour(_st.enabled?c_white:make_colour_rgb(128,128,128));
-    draw_text(1492,981,"Separation "+(_st.separation>0?"+":"")+string_format(_st.separation,1,1));
+    draw_set_colour(_st.drag==1?c_white:make_colour_rgb(180,215,236));draw_circle(_knob,990,6,false);
+    draw_set_colour(_text);draw_text(1492,981,"Separation "+(_st.separation>0?"+":"")+string_format(_st.separation,1,1));
+    // Glasses blend: cyan end on the left, blue end on the right.
+    _knob=1186+290*_st.mode;
+    draw_set_colour(_text);draw_text(1080,1017,"Red/Cyan");
+    draw_set_colour(make_colour_rgb(0,170,190));draw_rectangle(1186,1024,1331,1028,false);
+    draw_set_colour(make_colour_rgb(60,90,220));draw_rectangle(1331,1024,1476,1028,false);
+    draw_set_colour(_st.drag==2?c_white:make_colour_rgb(180,215,236));draw_circle(_knob,1026,6,false);
+    draw_set_colour(_text);draw_text(1492,1017,"Red/Blue  ("+string(round(_st.mode*100))+"% colour loss)");
     draw_set_colour(c_white);
 }
 
@@ -190,6 +208,13 @@ function ln_stereo_checks() {
         for (var _y=90;_y<510;_y+=12) for (var _x=166;_x<874;_x+=12) _green+=colour_get_green(surface_getpixel(_out,_x,_y));
         ln_check(_green==0,_name+"red/blue glasses carry no green");
         surface_save(_out,_file+"-redblue.png");
+        // Halfway keeps some green, less than full colour.
+        var _cyan_green=0;_st.mode=0;ln_stereo_check_draw(_g,_out);
+        for (var _y=90;_y<510;_y+=12) for (var _x=166;_x<874;_x+=12) _cyan_green+=colour_get_green(surface_getpixel(_out,_x,_y));
+        _green=0;_st.mode=0.5;ln_stereo_check_draw(_g,_out);
+        for (var _y=90;_y<510;_y+=12) for (var _x=166;_x<874;_x+=12) _green+=colour_get_green(surface_getpixel(_out,_x,_y));
+        ln_check(_green>0 && _green<_cyan_green,_name+"glasses blend sits between red/cyan and red/blue");
+        surface_save(_out,_file+"-mixed.png");
         _st.separation=-10;_st.mode=0;ln_stereo_check_draw(_g,_out);surface_save(_out,_file+"-reversed.png");
         if (_game==1) {
             // Ninja on open road at the default separation, where sprite holes show most.

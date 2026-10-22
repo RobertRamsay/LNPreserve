@@ -399,7 +399,7 @@ function ln_crt_preferences_read(_file="LNPreserve.ini") {
     global.ln_ln3_smooth=ini_read_real("LN3","smooth_motion",1)>=0.5;
     global.ln_ln1_enhanced=ini_read_real("LN1","enhanced",1)>=0.5;global.ln_ln2_enhanced=ini_read_real("LN2","enhanced",1)>=0.5;
     var _stereo=ln_stereo_state(),_separation=ini_read_real("Stereo","separation",6);
-    _stereo.enabled=ini_read_real("Stereo","enabled",0)>=0.5;_stereo.mode=ini_read_real("Stereo","mode",0)>=0.5?1:0;
+    _stereo.enabled=ini_read_real("Stereo","enabled",0)>=0.5;var _mode=ini_read_real("Stereo","mode",0);_stereo.mode=(is_nan(_mode) || is_infinity(_mode))?0:clamp(_mode,0,1);
     _stereo.separation=(is_nan(_separation) || is_infinity(_separation))?6:clamp(_separation,-16,16);
     ini_close();
 }
