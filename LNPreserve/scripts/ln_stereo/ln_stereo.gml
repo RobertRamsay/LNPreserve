@@ -7,7 +7,7 @@
 /// shapes, editor depth); characters stand upright at their feet.
 function ln_stereo_state() {
     if (!variable_global_exists("ln_stereo"))
-        global.ln_stereo={enabled:false,separation:6,mode:0,drag:0,capturing:false,offset:8,focus:0.5,surface:-1,raw_surface:-1,raw_ready:false,ln3_shapes:undefined,ln3_surface:-1};
+        global.ln_stereo={enabled:false,separation:8,mode:0.2,drag:0,capturing:false,offset:8,focus:0.5,surface:-1,raw_surface:-1,raw_ready:false,ln3_shapes:undefined,ln3_surface:-1};
     return global.ln_stereo;
 }
 function ln_stereo_ready() {
