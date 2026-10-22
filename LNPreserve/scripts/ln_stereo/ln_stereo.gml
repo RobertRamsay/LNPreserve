@@ -7,7 +7,7 @@
 /// shapes, editor depth); characters stand upright at their feet.
 function ln_stereo_state() {
     if (!variable_global_exists("ln_stereo"))
-        global.ln_stereo={enabled:false,separation:6,mode:0,drag:false,capturing:false,offset:8,surface:-1,ln3_shapes:undefined,ln3_surface:-1};
+        global.ln_stereo={enabled:false,separation:6,mode:0,drag:false,capturing:false,offset:8,focus:0.5,surface:-1,raw_surface:-1,raw_ready:false,ln3_shapes:undefined,ln3_surface:-1};
     return global.ln_stereo;
 }
 function ln_stereo_ready() {
@@ -28,6 +28,11 @@ function ln_stereo_begin(_g) {
     if (!ln_stereo_ready()) return;
     if (!surface_exists(_st.surface)) _st.surface=surface_create(240,144);
     _st.offset=_g.game_number==3?29:8;
+    // The player's feet sit on the screen plane, so the character in view carries no
+    // red/blue outline; the camera eases there after room changes and falls.
+    var _feet=_g.game_number==1?_g.player.y:(_g.game_number==2?_g.player.depth_y:_g.state.player_y);
+    var _focus=ln_stereo_depth_value(_feet);
+    _st.focus=abs(_focus-_st.focus)<0.004?_focus:lerp(_st.focus,_focus,0.15);
     var _has_mask=false,_mask=sprite_get_texture(spr_depth_fixture,0),_uv=[0,0,1,1];
     if (_g.game_number==3) {
         var _shapes=ln_stereo_ln3_mask(_g);
@@ -81,11 +86,24 @@ function ln_stereo_ln3_mask(_g) {
     _st.ln3_shapes=_shapes;return _st.ln3_surface;
 }
 
+/// Keep an LN3 part before its mask is applied, so holes in the sprite can be told
+/// apart from pixels that scenery hides.
+function ln_stereo_keep_raw(_surface) {
+    var _st=ln_stereo_state(),_w=surface_get_width(_surface),_h=surface_get_height(_surface);
+    if (surface_exists(_st.raw_surface) && (surface_get_width(_st.raw_surface)!=_w || surface_get_height(_st.raw_surface)!=_h)) surface_free(_st.raw_surface);
+    if (!surface_exists(_st.raw_surface)) _st.raw_surface=surface_create(_w,_h);
+    surface_copy(_st.raw_surface,0,0,_surface);_st.raw_ready=true;
+}
+
 /// Stamp an already-masked sprite surface (LN3 actor parts) at one foot depth.
 function ln_stereo_stamp_surface(_surface,_x,_y,_xscale,_yscale,_units) {
     if (!ln_stereo_capturing()) return;
-    surface_set_target(global.ln_stereo.surface);shader_set(sh_ln_stereo_fill);
+    var _st=global.ln_stereo,_raw=_st.raw_ready && surface_exists(_st.raw_surface);_st.raw_ready=false;
+    surface_set_target(_st.surface);shader_set(sh_ln_stereo_fill);
     shader_set_uniform_f(shader_get_uniform(sh_ln_stereo_fill,"u_value"),ln_stereo_depth_value(_units));
+    texture_set_stage(shader_get_sampler_index(sh_ln_stereo_fill,"u_raw"),surface_get_texture(_raw?_st.raw_surface:_surface));
+    shader_set_uniform_f(shader_get_uniform(sh_ln_stereo_fill,"u_gap"),real(_raw),texture_get_texel_width(surface_get_texture(_surface)),
+        texture_get_texel_width(surface_get_texture(_surface))*surface_get_width(_surface));
     draw_surface_ext(_surface,_x,_y,_xscale,_yscale,0,c_white,1);
     shader_reset();surface_reset_target();
 }
@@ -103,6 +121,7 @@ function ln_stereo_draw_stage(_surface,_x,_y,_scale,_flat=false) {
     shader_set_uniform_f(shader_get_uniform(sh_ln_anaglyph,"u_texel"),_tw);
     shader_set_uniform_f(shader_get_uniform(sh_ln_anaglyph,"u_separation"),_st.separation);
     shader_set_uniform_f(shader_get_uniform(sh_ln_anaglyph,"u_mode"),_st.mode);
+    shader_set_uniform_f(shader_get_uniform(sh_ln_anaglyph,"u_focus"),_st.focus);
     draw_surface_ext(_surface,_x,_y,_scale,_scale,0,c_white,1);
     shader_reset();gpu_set_texfilter(_filter);
 }
@@ -172,6 +191,25 @@ function ln_stereo_checks() {
         ln_check(_green==0,_name+"red/blue glasses carry no green");
         surface_save(_out,_file+"-redblue.png");
         _st.separation=-10;_st.mode=0;ln_stereo_check_draw(_g,_out);surface_save(_out,_file+"-reversed.png");
+        if (_game==1) {
+            // Ninja on open road at the default separation, where sprite holes show most.
+            _st.separation=16;_g.player.x=150;_g.player.y=110;
+            repeat(60) ln_stereo_check_draw(_g,_out);
+            surface_save(_out,_file+"-road.png");surface_save(_st.surface,_file+"-road-depth.png");
+            var _on=[];
+            for (var _y=84+3*62;_y<84+3*102;_y+=2) for (var _x=160+3*126;_x<160+3*150;_x+=2) array_push(_on,surface_getpixel(_out,_x,_y));
+            _st.enabled=false;ln_stereo_check_draw(_g,_out);surface_save(_out,_file+"-road-off.png");_st.enabled=true;
+            // The player's feet are the screen plane: his own pixels carry no red/blue outline.
+            var _ghost=0,_n=0,_player=round(255*ln_stereo_depth_value(110));
+            for (var _y=84+3*62;_y<84+3*102;_y+=2) for (var _x=160+3*126;_x<160+3*150;_x+=2) {
+                var _flat_pixel=surface_getpixel(_out,_x,_y);
+                // Only the player's own pixels, not scenery at other depths.
+                var _depth=colour_get_red(surface_getpixel(_st.surface,(_x-160) div 3,(_y-84) div 3));
+                if (abs(_depth-_player)<=1 && _flat_pixel==c_black && _on[_n]!=c_black) _ghost++;
+                _n++;
+            }
+            ln_check(_ghost==0,"LN1 player on the screen plane has no red/blue outline at +16: "+string(_ghost));
+        }
         if (surface_exists(_g.stage_surface)) surface_free(_g.stage_surface);
     }
     surface_free(_out);ln_stereo_free();
@@ -195,5 +233,6 @@ function ln_stereo_free() {
     var _st=global.ln_stereo;
     if (surface_exists(_st.surface)) surface_free(_st.surface);
     if (surface_exists(_st.ln3_surface)) surface_free(_st.ln3_surface);
-    _st.surface=-1;_st.ln3_surface=-1;_st.ln3_shapes=undefined;
+    if (surface_exists(_st.raw_surface)) surface_free(_st.raw_surface);
+    _st.surface=-1;_st.ln3_surface=-1;_st.raw_surface=-1;_st.raw_ready=false;_st.ln3_shapes=undefined;
 }

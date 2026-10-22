@@ -355,6 +355,7 @@ function ln3_play_actor_part(_g,_d,_i) {
         var _colours=[_g.palette[_d.shared_colour1&15],_colour,_g.palette[_d.shared_colour2&15]];
         for (var _j=0;_j<3;_j++) draw_sprite_ext(_bank,_choice.multicolour[_j],0,0,1,1,0,_colours[_j],1);
     } else draw_sprite_ext(_bank,_choice.hires,0,0,1,1,0,_colour,1);
+    if(ln_stereo_capturing()) {surface_reset_target();ln_stereo_keep_raw(_g.part_surface);surface_set_target(_g.part_surface);}
     gpu_set_blendmode_ext(bm_zero,bm_inv_src_alpha);draw_set_colour(c_white);
     var _offset=ln3_part_registration(_g,_d,_i),_smooth=ln3_smooth_offset(_g,_d,_i);
     var _draw_x=_d.draw_x[_i]+_offset[0]+_smooth[0],_draw_y=_d.draw_y[_i]+_offset[1]+_smooth[1];
