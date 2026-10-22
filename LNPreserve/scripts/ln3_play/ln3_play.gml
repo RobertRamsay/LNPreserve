@@ -24,7 +24,7 @@ function LN3Play(_level=1) constructor {
     scenery=ln3_data_read(_path+"scenery_animation.json");
     special=ln3_data_read(_path+"special.json");mechanisms=ln3_data_read("play/ln3/mechanisms.json");
     state=json_parse(json_stringify(data.initial));title=world.title;room_id=-1;scene_record=undefined;
-    state.reverse_roll_enabled=true;state.reverse_roll=undefined;
+    state.reverse_roll_enabled=true;state.reverse_roll=undefined;state.jump_assist=undefined;
     var _fields=variable_struct_get_names(special.initial);
     for (var _i=0;_i<array_length(_fields);_i++) variable_struct_set(state,_fields[_i],variable_struct_get(special.initial,_fields[_i]));
     special_sequence=0;special_step=0;special_request=0;special_colours=array_create(8,-1);
@@ -262,9 +262,10 @@ function ln3_play_tick(_g,_joy) {
     ln3_combat_update(_s,_g.actions,_g.combat);ln3_fall_tick(_s,_g.actions,_g.data);
     // Wind drops retain the native falling body, without the water splash pair.
     if(_g.level==2 && _s.input_block!=0) {_s.enabled&=252;_s.waterline=173;}
-    ln3_movement_setup(_s,_g.movement);ln3_movement(_s,_g.movement);
+    ln3_movement_setup(_s,_g.movement);ln3_jump_assist_begin(_g);
+    ln3_movement(_s,_g.movement);ln3_jump_assist_move(_g);
     ln3_climb_enter(_s,_g.actions,_g.runtime_scene.climbs,_joy,_g.level);
-    ln3_collision_update(_s,_g.actions,_g.collision,_g.bounds);
+    ln3_collision_update(_s,_g.actions,_g.collision,_g.bounds);ln3_jump_assist_land(_g);
     ln3_hazard_tick(_s,_g.actions,_g.data);ln3_hazard_contacts(_s,_g.data);
     if(ln_enemy_native_ai(_g)) ln3_enemy_patrol(_s,_g.actions,_g.input,_g.enemies);
     ln3_scenery_tick(_g);

@@ -1424,6 +1424,112 @@ function ln2_basement_jump_tick(_g,_tick) {
     }
 }
 
+/// Enhanced: Central Park scene 12's wall tops are crossed by jumping two gaps, and a
+/// native jump survives only from a take-off strip 8-16 pixels long. A forward somersault
+/// or backward roll toward a gap instead flies onto the next wall segment (the crate flight).
+function ln2_park_gap_target(_x,_y,_travel) {
+    // Wall segments from east to west: [west end, east end], with landing spots by each gap.
+    var _segments=[[188,254],[128,160],[0,102]],_spots=[[[198,52]],[[135,68],[149,64]],[[86,80]]];
+    var _segment=_x>=166?0:(_x>=106?1:2),_westward=_travel==5 || _travel==7,_eastward=_travel==1 || _travel==3;
+    if (!_westward && !_eastward) return undefined;
+    // A native somersault covers about 49 pixels; leave jumps that stay on this segment.
+    var _native=_x+(_westward?-49:49);
+    if (_native>=_segments[_segment][0] && _native<=_segments[_segment][1]) return undefined;
+    var _next=_segment+(_westward?1:-1);if (_next<0 || _next>2) return undefined;
+    // Far side when it is in reach, otherwise line up on this segment's edge.
+    var _far=_spots[_next][_westward?array_length(_spots[_next])-1:0];
+    var _near=_spots[_segment][_westward?0:array_length(_spots[_segment])-1];
+    var _target=abs(_far[0]-_x)<=72?_far:_near;
+    if (abs(_target[0]-_x)<8 || abs(_target[1]-_y)>24 || sign(_target[0]-_x)!=(_westward?-1:1)) return undefined;
+    return _target;
+}
+
+function ln2_park_gap_assist(_g,_before) {
+    var _p=_g.player;
+    if (_g.level!=1 || _g.room_id!=12 || _before>=256 || _p.action<256 || _p.vehicle!=0 || !ln_enhanced_enabled(2)) return false;
+    // The first record can finish within the starting tick, so match the whole chain.
+    var _side=((_p.facing+2)&4)>>2,_reverse=false,_jump=false;
+    for (var _chain=0;_chain<2;_chain++) {
+        if (_chain==1 && !variable_struct_exists(_g.data,"reverse_roll_entries")) break;
+        var _address=_chain==0?_g.data.action_entries[_side]:_g.data.reverse_roll_entries[_side],_guard=0;
+        while (_address>=256 && _guard++<64) {
+            if (_address==_p.action) {_jump=true;_reverse=_chain==1;break;}
+            _address=variable_struct_get(_g.data.actions,string(_address)).next;
+        }
+        if (_jump) break;
+    }
+    if (!_jump) return false;
+    var _target=ln2_park_gap_target(_p.x,_p.y,_reverse?_p.facing^4:_p.facing);
+    if (!is_array(_target)) return false;
+    // Never assist through a solid wall; the gap edges are traversable in flight.
+    var _probe=json_parse(json_stringify(_p)),_ox=_p.x,_oy=_p.y;
+    for(var _step=1;_step<=32;_step++) {
+        var _nx=round(lerp(_p.x,_target[0],_step/32)),_ny=round(lerp(_p.y,_target[1],_step/32));
+        if (ln2_player_boundary(_probe,_g.data,_ox,_oy,_nx,_ny)!=0) return false;
+        _ox=_nx;_oy=_ny;
+    }
+    var _address=_g.data.action_entries[_side],_frames=[],_duration=7,_total=0;
+    while(_address>=256) {
+        var _a=variable_struct_get(_g.data.actions,string(_address));
+        if (_a.duration>=0) _duration=_a.duration;
+        array_push(_frames,{frame:_a.frame,duration:_duration,flags:_a.flags});_total+=_duration;_address=_a.next;
+    }
+    _g.crate_jump={x:_p.x,y:_p.y,tx:_target[0],ty:_target[1],elapsed:0,total:_total,frames:_frames,exit_locked:_g.exit_locked};
+    _g.exit_locked=true;_p.stopped=255;_p.action=0;_p.flags=0;_p.boundary_crossings=0;return true;
+}
+
+/// Runs joystick steps [joy,ticks,...] from the scene 12 entry; reports death and landing.
+function ln2_park_gap_run(_steps,_save_in_flight=false) {
+    var _g=new LN2Play(1);_g.music=false;ln2_test_enter(_g,22);_g.loader=undefined;_g.enemy.active=0;
+    var _r={dead:false,assisted:0,x:0,y:0};
+    for (var _i=0;_i<array_length(_steps) && !_r.dead;_i+=2) repeat(_steps[_i+1]) {
+        ln2_play_tick(_g,_steps[_i]);
+        if (variable_struct_exists(_g,"crate_jump") && is_struct(_g.crate_jump) && _g.crate_jump.elapsed==0) {
+            _r.assisted++;
+            if (_save_in_flight) {ln2_play_tick(_g,0);_g=ln_save_restore(json_parse(json_stringify(ln_save_capture(_g))));}
+        }
+        if (is_struct(_g.world_state.drowning) || _g.fall_remaining>=0 || _g.player_health<=0) {_r.dead=true;break;}
+    }
+    _r.x=_g.player.x;_r.y=_g.player.y;return _r;
+}
+
+function ln2_park_gap_checks() {
+    var _enhanced=ln_enhanced_enabled(2),_original_deaths=0,_tested=0;
+    // East gap: walk down-left along the wall for k ticks, then somersault.
+    for (var _mode=1;_mode>=0;_mode--) {
+        global.ln_ln2_enhanced=_mode==1;
+        for (var _k=2;_k<=50;_k+=4) {
+            var _r=ln2_park_gap_run([6,_k,22,3,0,80]);
+            if (_mode==0) {ln_check(_r.assisted==0,"Original LN2 keeps native park jumps");if (_r.dead) _original_deaths++;continue;}
+            ln_check(!_r.dead,"Enhanced east wall gap jump survives after "+string(_k)+" walking ticks: "+string(_r.x)+","+string(_r.y));
+            _tested++;
+        }
+    }
+    ln_check(_original_deaths>=4,"the original east gap is a narrow jump: "+string(_original_deaths)+" deaths");
+    global.ln_ln2_enhanced=true;
+    var _cross=ln2_park_gap_run([6,26,22,3,0,80]);
+    ln_check(!_cross.dead && _cross.assisted==1 && _cross.x==149 && _cross.y==64,"east gap jump lands on the middle wall");
+    var _lineup=ln2_park_gap_run([6,6,22,3,0,80]);
+    ln_check(!_lineup.dead && _lineup.x==198 && _lineup.y==52,"out-of-reach take-off lines up at the east wall's edge");
+    // West gap from the middle wall, then both gaps back east (turn, then jump; or roll backwards).
+    for (var _k=0;_k<=16;_k+=2) {
+        var _r=ln2_park_gap_run([6,26,22,3,0,80,6,max(1,_k),22,3,0,80]);
+        ln_check(!_r.dead && _r.x==86 && _r.y==80,"west wall gap jump lands on the west wall after "+string(_k)+" ticks: "+string(_r.x)+","+string(_r.y));
+        _tested++;
+    }
+    var _back=ln2_park_gap_run([6,26,22,3,0,80,6,4,22,3,0,80,9,1,0,4,9,1,25,3,0,80]);
+    ln_check(!_back.dead && _back.x==135 && _back.y==68,"turned jump returns across the west gap: "+string(_back.x)+","+string(_back.y));
+    var _roll=ln2_park_gap_run([6,26,22,3,0,80,9,2,25,3,0,80]);
+    ln_check(!_roll.dead && _roll.x==198 && _roll.y==52,"backward roll returns across the east gap: "+string(_roll.x)+","+string(_roll.y));
+    var _saved=ln2_park_gap_run([6,26,22,3,0,80],true);
+    ln_check(!_saved.dead && _saved.x==149 && _saved.y==64,"saved park flight resumes and lands");
+    // Jumps that stay on a wall keep the native somersault.
+    var _short=ln2_park_gap_run([6,2,22,3,0,80]);
+    ln_check(_short.assisted==0 && !_short.dead,"jump landing on the same wall stays native");
+    global.ln_ln2_enhanced=_enhanced;
+    show_debug_message("LN2_PARK_GAP_PASS: "+string(_tested)+" Enhanced wall-gap jumps survive, "+string(_original_deaths)+" Original deaths kept, both gaps both ways, saves");
+}
+
 /// Pictured route: upper -> right -> lower-left -> lower-right, and reverse.
 function ln2_basement_jump_target(_x,_y,_facing) {
     var _tops=[[60,94],[84,125],[132,109],[132,133],[168,155],[88,93]];

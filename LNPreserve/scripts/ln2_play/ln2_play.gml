@@ -205,7 +205,9 @@ function ln2_play_tick(_g,_joy) {
     ln_enemy_runtime(_g);
     _p.enemy_active=_g.enemy.active;_p.enemy_x=_g.enemy.x;_p.enemy_y=_g.enemy.y;_p.separation_y=_g.enemy.separation_y;
     _p.gate_open=_g.inventory[18];_p.gate_mode=_g.inventory[20];
-    ln2_player_update(_p,_g.data,_joy,_tick);ln2_enemy_decide(_g);ln2_enemy_action(_g);
+    var _action_before=_p.action;ln2_player_update(_p,_g.data,_joy,_tick);
+    if (ln2_park_gap_assist(_g,_action_before)) return;
+    ln2_enemy_decide(_g);ln2_enemy_action(_g);
     ln2_combat_event(_g,_p.action_state,false);_p.action_state=0;
     ln2_combat_event(_g,_g.enemy.action_state,true);_g.enemy.action_state=0;
     if (_g.fall_remaining>=0) return;

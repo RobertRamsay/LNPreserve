@@ -1,0 +1,20 @@
+{
+  "note": "Enhanced LN3 somersault landing pads, in player foot coordinates. Stones are single points; areas are sampled on a 4x2 grid.",
+  "rooms": [
+    {
+      "level": 4,
+      "room": 3,
+      "stones": [
+        {"name": "stump west", "x": 132, "y": 108},
+        {"name": "stump north", "x": 172, "y": 104},
+        {"name": "stump south", "x": 152, "y": 122},
+        {"name": "stump east", "x": 220, "y": 116}
+      ],
+      "areas": [
+        {"name": "middle pathway", "x0": 92, "x1": 124, "y0": 120, "y1": 134},
+        {"name": "lower floor", "x0": 136, "x1": 236, "y0": 130, "y1": 182},
+        {"name": "upper platform", "x0": 40, "x1": 104, "y0": 84, "y1": 108}
+      ]
+    }
+  ]
+}
