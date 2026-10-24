@@ -265,7 +265,7 @@ function ln3_play_tick(_g,_joy) {
     if(_g.level==2 && _s.input_block!=0) {_s.enabled&=252;_s.waterline=173;}
     ln3_movement_setup(_s,_g.movement);ln3_movement(_s,_g.movement);ln3_jump_assist_move(_g);
     ln3_climb_enter(_s,_g.actions,_g.runtime_scene.climbs,_joy,_g.level);
-    ln3_collision_update(_s,_g.actions,_g.collision,_g.bounds);ln3_jump_assist_land(_g);
+    ln3_collision_update(_s,_g.actions,_g.collision,_g.bounds);ln3_jump_assist_land(_g);ln3_lava_contact(_g);
     ln3_hazard_tick(_s,_g.actions,_g.data);ln3_hazard_contacts(_s,_g.data);
     if(ln_enemy_native_ai(_g)) ln3_enemy_patrol(_s,_g.actions,_g.input,_g.enemies);
     ln3_scenery_tick(_g);

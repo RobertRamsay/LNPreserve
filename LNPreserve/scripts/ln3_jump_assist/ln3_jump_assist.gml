@@ -90,23 +90,45 @@ function ln3_jump_assist_land(_g) {
     if (_a.elapsed>=_a.steps) {_s.trap_contacts=0;_s.last_boundary=255;}
 }
 
+/// True when the ninja's feet are on the pictured molten metal.
+function ln3_lava_at(_g,_x,_y) {
+    var _r=ln3_jump_routes(_g.level,_g.room_id);
+    if (!is_struct(_r) || !variable_struct_exists(_r,"lava")) return false;
+    for (var _i=0;_i<array_length(_r.lava);_i++) {
+        var _run=_r.lava[_i];if (_run[0]==_y && _x>=_run[1] && _x<=_run[2]) return true;
+    }
+    return false;
+}
+
+/// Called after collision: the original records only the pool's edges, so stepping onto
+/// the pictured molten metal (from the pathway, a board or the floor) now kills at once,
+/// with the original lava death. Somersaults pass over it; landing on it kills.
+function ln3_lava_contact(_g) {
+    var _s=_g.state;
+    if (_s.player_action==28 || _s.player_action==29 || (variable_struct_exists(_s,"jump_assist") && is_struct(_s.jump_assist))) return;
+    if ((_s.stun|_s.input_block|_s.player_dead|_s.climb_flags)!=0 || !ln3_lava_at(_g,_s.player_x,_s.player_y)) return;
+    _s.stun=1;_s.trap_flags=192;_s.trap_count=0;
+}
+
 /// Stand the ninja at a point with a facing and stance, feed fire presses, and report the landing.
 function ln3_jump_assist_try(_g,_base,_entry,_x,_y,_mirror,_stance,_presses,_save=false) {
     // A jump toward a scene edge can leave the room; return to it for the next attempt.
     if (_g.room_id!=_entry.destination) ln3_play_enter(_g,_entry);
-    _g.state=json_parse(_base);_g.turn_request=0;_g.turn_tap=ln_tap_new();_g.pickup_previous=16;_g.jump_taps={previous:0,remaining:0};
+    _g.state=json_parse(_base);_g.special_sequence=0;_g.special_step=0;_g.transition_phase=0;_g.ordinary_death=false;_g.game_over=false;_g.turn_request=0;_g.turn_tap=ln_tap_new();_g.pickup_previous=16;_g.jump_taps={previous:0,remaining:0};
     var _s=_g.state;
     for (var _i=0;_i<3;_i++) {_s.parts[_i].x=_x;_s.parts[_i].y=_i==2?_y:(_y-21)&255;}
     _s.player_x=_x;_s.player_y=_y;_s.mirror=_mirror;_s.enabled&=15;_s.player_health=44;_s.joy=0;_s.previous_joy=0;_s.logic_wait=0;
     ln3_action_set(_s,_g.actions,_stance);
-    var _r={assisted:false,alive:true,x:_x,y:_y,target_x:-1,target_y:-1},_landed=-1;
+    var _r={assisted:false,alive:true,x:_x,y:_y,target_x:-1,target_y:-1,why:""},_landed=-1;
     for (var _t=0;_t<160;_t++) {
         ln3_play_tick(_g,_t<array_length(_presses)?_presses[_t]:0);_s=_g.state;
         if (is_struct(_s.jump_assist) && !_r.assisted) {
             _r.assisted=true;_r.target_x=_s.jump_assist.x1;_r.target_y=_s.jump_assist.y1;
             if (_save) {_g=ln_save_restore(json_parse(json_stringify(ln_save_capture(_g))));_s=_g.state;}
         }
-        if (_s.player_dead!=0 || _s.stun!=0 || _s.input_block!=0 || _g.special_sequence!=0) {_r.alive=false;break;}
+        if (_s.player_dead!=0 || _s.stun!=0 || _s.input_block!=0 || _g.special_sequence!=0) {
+            _r.alive=false;_r.why="t="+string(_t)+" stun="+string(_s.stun)+" dead="+string(_s.player_dead)+" block="+string(_s.input_block)+" seq="+string(_g.special_sequence)+" trap="+string(_s.trap_flags)+" contacts="+string(_s.trap_contacts)+" at "+string(_s.player_x)+","+string(_s.player_y);break;
+        }
         if (_landed<0 && _t>=array_length(_presses) && !is_struct(_s.jump_assist) && _s.player_action<6) _landed=_t;
         if (_landed>=0 && _t>=_landed+40) break; // stand on the landing for ten logic steps
     }
@@ -154,10 +176,21 @@ function ln3_jump_assist_checks() {
     ln_check(!ln3_jump_assist_try(_g,_base,_entry,_w[0],_w[1],0,0,[18,0,0,0,18]).assisted,"fire with a direction keeps the original jump");
     var _saved=ln3_jump_assist_try(_g,_base,_entry,_w[0],_w[1],0,0,_double,true);
     ln_check(_saved.assisted && _saved.alive && _saved.x==_saved.target_x && _saved.y==_saved.target_y,"saved double-fire jump resumes and lands");
+    // The pictured molten metal kills on foot; the walkways, platform and floor do not.
+    var _walks=[["middle pathway",8,true],["west board",8,true],["south board",2,true],["lower floor",1,true],
+        ["middle pathway",4,false],["upper platform",4,false],["lower floor",2,false],["west board",0,false]];
+    for (var _i=0;_i<array_length(_walks);_i++) {
+        var _walk=_walks[_i],_start=variable_struct_get(_starts,_walk[0]),_presses=[];
+        repeat(48) array_push(_presses,_walk[1]);
+        var _r=ln3_jump_assist_try(_g,_base,_entry,_start[0],_start[1],0,0,_presses);
+        ln_check(_r.alive!=_walk[2],(_walk[2]?"walking into the molten metal from the ":"walking on the ")+_walk[0]+
+            (_walk[2]?" kills":" is safe")+": "+string(_r.x)+","+string(_r.y)+" "+_r.why);
+    }
+    ln_check(!ln3_lava_at(_g,236,168) && !ln3_lava_at(_g,24,148) && !ln3_lava_at(_g,24,92),"scene entries are not on the molten metal");
     var _other=new LN3Play(4);_other.music=false;
     var _other_entry={destination:0,spawn_x:120,spawn_y:150,facing:0,action:0};ln3_play_enter(_other,_other_entry);
     var _other_base=json_stringify(_other.state);
     ln_check(!ln3_jump_assist_try(_other,_other_base,_other_entry,120,150,0,0,_double).assisted,"other scenes have no double-fire jumps");
     global.ln_ln3_smooth=_smooth;
-    show_debug_message("LN3_JUMP_ASSIST_PASS: "+string(_reached)+" of 14 Fire stepping routes by double fire in both modes, single/held/slow/directional fire unchanged, saves");
+    show_debug_message("LN3_JUMP_ASSIST_PASS: "+string(_reached)+" of 14 Fire stepping routes by double fire in both modes, single/held/slow/directional fire unchanged, saves, molten metal kills on foot");
 }
