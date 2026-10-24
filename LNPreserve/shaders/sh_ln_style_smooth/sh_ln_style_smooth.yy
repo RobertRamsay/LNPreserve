@@ -1,0 +1,12 @@
+{
+  "$GMShader":"",
+  "%Name":"sh_ln_style_smooth",
+  "name":"sh_ln_style_smooth",
+  "parent":{
+    "name":"Shaders",
+    "path":"folders/Native/Shaders.yy",
+  },
+  "resourceType":"GMShader",
+  "resourceVersion":"2.0",
+  "type":1,
+}

@@ -94,6 +94,16 @@ if (reported_encounters_test) {
     catch (_failure) {show_debug_message("LN2_REPORTED_ENCOUNTERS_FAILURE: "+string(_failure));}
     game_end();exit;
 }
+if (ao_test) {
+    try {ln_ao_checks();}
+    catch (_failure) {show_debug_message("LN_AO_FAILURE: "+string(_failure));}
+    game_end();exit;
+}
+if (style_test) {
+    try {ln_style_checks();}
+    catch (_failure) {show_debug_message("LN_STYLE_FAILURE: "+string(_failure));}
+    game_end();exit;
+}
 if (stereo_test) {
     try {ln_stereo_checks();}
     catch (_failure) {show_debug_message("LN_STEREO_FAILURE: "+string(_failure));}

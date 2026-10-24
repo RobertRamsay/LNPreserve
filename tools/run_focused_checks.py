@@ -32,6 +32,8 @@ CASES={
  '--reverse-roll-test':['LN_REVERSE_ROLL_PASS','LN_DOUBLE_TAP_PASS'],
  '--crt-live-test':['LN_CRT_LIVE_PASS'],
  '--stereo-test':['LN_STEREO_PASS'],
+ '--style-test':['LN_STYLE_PASS'],
+ '--ao-test':['LN_AO_PASS'],
  '--window-presets-test':['LN_WINDOW_PRESETS_PASS'],
  '--fullscreen-test':['LN_FULLSCREEN_PASS'],
  '--xbox-test':['LN_XBOX_PASS'],

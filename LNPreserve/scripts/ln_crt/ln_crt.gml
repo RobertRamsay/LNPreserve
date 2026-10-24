@@ -401,6 +401,18 @@ function ln_crt_preferences_read(_file="LNPreserve.ini") {
     var _stereo=ln_stereo_state(),_separation=ini_read_real("Stereo","separation",6);
     _stereo.enabled=ini_read_real("Stereo","enabled",0)>=0.5;var _mode=ini_read_real("Stereo","mode",0);_stereo.mode=(is_nan(_mode) || is_infinity(_mode))?0:clamp(_mode,0,1);
     _stereo.separation=(is_nan(_separation) || is_infinity(_separation))?6:clamp(_separation,-16,16);
+    var _style=ln_style_state(),_style_kind=ini_read_real("Style","style",0),_style_strength=ini_read_real("Style","strength",1);
+    _style.style=(is_nan(_style_kind) || is_infinity(_style_kind))?0:clamp(round(_style_kind),0,array_length(ln_style_names())-1);
+    _style.strength=(is_nan(_style_strength) || is_infinity(_style_strength))?1:clamp(_style_strength,0,1);
+    var _style_line=ini_read_real("Style","line",0.35),_style_saturation=ini_read_real("Style","saturation",1);
+    _style.line=(is_nan(_style_line) || is_infinity(_style_line))?0.35:clamp(_style_line,0,1);
+    _style.saturation=(is_nan(_style_saturation) || is_infinity(_style_saturation))?1:clamp(_style_saturation,0,2);
+    var _style_brush=ini_read_real("Style","brush",0.4),_style_hatch=ini_read_real("Style","hatch",0.5);
+    _style.brush=(is_nan(_style_brush) || is_infinity(_style_brush))?0.4:clamp(_style_brush,0,1);
+    _style.hatch=(is_nan(_style_hatch) || is_infinity(_style_hatch))?0.5:clamp(_style_hatch,0,1);
+    var _ao=ln_ao_state(),_ao_strength=ini_read_real("Shading","strength",0),_ao_radius=ini_read_real("Shading","size",0.4);
+    _ao.strength=(is_nan(_ao_strength) || is_infinity(_ao_strength))?0:clamp(_ao_strength,0,1);
+    _ao.radius=(is_nan(_ao_radius) || is_infinity(_ao_radius))?0.4:clamp(_ao_radius,0,1);
     ini_close();
 }
 function ln_crt_preferences_signature() {
@@ -408,6 +420,8 @@ function ln_crt_preferences_signature() {
     for(var _i=0;_i<array_length(_fields);_i++) array_push(_values,variable_global_get(_fields[_i]));
     array_push(_values,global.ln_paint_speed);array_push(_values,global.ln_editor.crt_enabled);array_push(_values,global.ln_tool.ui);array_push(_values,global.ln_tool.background);array_push(_values,ln3_smooth_enabled());array_push(_values,ln_enhanced_enabled(1));array_push(_values,ln_enhanced_enabled(2));
     var _stereo=ln_stereo_state();array_push(_values,_stereo.enabled);array_push(_values,_stereo.mode);array_push(_values,_stereo.separation);
+    var _style=ln_style_state();array_push(_values,_style.style);array_push(_values,_style.strength);array_push(_values,_style.line);array_push(_values,_style.saturation);array_push(_values,_style.brush);array_push(_values,_style.hatch);
+    var _ao=ln_ao_state();array_push(_values,_ao.strength);array_push(_values,_ao.radius);
     return json_stringify(_values);
 }
 function ln_crt_preferences_write(_file="LNPreserve.ini") {
@@ -421,6 +435,8 @@ function ln_crt_preferences_write(_file="LNPreserve.ini") {
     ini_write_real("LN1","enhanced",real(ln_enhanced_enabled(1)));ini_write_real("LN2","enhanced",real(ln_enhanced_enabled(2)));
     var _stereo=ln_stereo_state();
     ini_write_real("Stereo","enabled",real(_stereo.enabled));ini_write_real("Stereo","mode",_stereo.mode);ini_write_real("Stereo","separation",_stereo.separation);
+    var _style=ln_style_state();ini_write_real("Style","style",_style.style);ini_write_real("Style","strength",_style.strength);ini_write_real("Style","line",_style.line);ini_write_real("Style","saturation",_style.saturation);ini_write_real("Style","brush",_style.brush);ini_write_real("Style","hatch",_style.hatch);
+    var _ao=ln_ao_state();ini_write_real("Shading","strength",_ao.strength);ini_write_real("Shading","size",_ao.radius);
     ini_close();
 }
 function ln_crt_preferences_flush(_force=false) {
@@ -538,7 +554,7 @@ function ln_tool_present(_host) {
     // Enhanced/Original toggle for the current game, beside the media row; it takes effect on the next frame.
     if(ln_tool_motion_visible(_host)) ln_edit_button(320,940,280,ln_enhanced_label(_host.play.game_number));
     if(ln_tool_motion_visible(_host)) ln_edit_button(615,940,240,"Help guide");
-    if(ln_tool_motion_visible(_host)) ln_stereo_ui_draw();
+    if(ln_tool_motion_visible(_host)) {ln_stereo_ui_draw();ln_style_ui_draw();ln_ao_ui_draw();}
     if(ln_track_message()!="") {
         draw_set_colour(c_white);
         draw_text(_media[0],_media[1]+32,global.ln_tracks.paused?"PAUSED: Track:":"PLAYING: Track:");
@@ -555,7 +571,7 @@ function ln_tool_present(_host) {
 function ln_tool_step(_host) {
     var _t=global.ln_tool,_click=mouse_check_button_pressed(mb_left) && !ln_zoom_covering(),_typing=global.ln_editor.open && global.ln_editor.depth_edit;
     if(!_t.active) return;
-    ln_stereo_step(_host);ln_zoom_step(_host);
+    ln_stereo_step(_host);ln_style_step(_host);ln_ao_step(_host);ln_zoom_step(_host);
     if(ln_tool_media_hit(2)) {
         var _e=global.ln_editor;
         if(_e.open && !is_undefined(_e.test_music_restore)) _e.test_music_restore=!_e.test_music_restore;

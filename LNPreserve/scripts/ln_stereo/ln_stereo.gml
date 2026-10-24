@@ -15,6 +15,12 @@ function ln_stereo_ready() {
     return _st.enabled && shader_is_compiled(sh_ln_anaglyph) && shader_is_compiled(sh_ln_stereo_depth) &&
         shader_is_compiled(sh_ln_stereo_fill) && shader_is_compiled(sh_ln_occlusion);
 }
+/// The depth buffer serves both 3D and the drawn styles (their ink outlines follow it).
+function ln_stereo_depth_wanted() {
+    var _st=ln_stereo_state();
+    return (_st.enabled || ln_style_active() || ln_ao_active()) && shader_is_compiled(sh_ln_stereo_depth) &&
+        shader_is_compiled(sh_ln_stereo_fill) && shader_is_compiled(sh_ln_occlusion);
+}
 function ln_stereo_toggle() {var _st=ln_stereo_state();_st.enabled=!_st.enabled;}
 function ln_stereo_capturing() {var _st=ln_stereo_state();return _st.capturing && surface_exists(_st.surface);}
 
@@ -25,7 +31,7 @@ function ln_stereo_depth_value(_units) {var _st=ln_stereo_state();return clamp((
 /// Start this frame's depth buffer: ground by screen height, then the room's occluders.
 function ln_stereo_begin(_g) {
     var _st=ln_stereo_state();_st.capturing=false;
-    if (!ln_stereo_ready()) return;
+    if (!ln_stereo_depth_wanted()) return;
     if (!surface_exists(_st.surface)) _st.surface=surface_create(240,144);
     _st.offset=_g.game_number==3?29:8;
     // The player's feet sit on the screen plane, so the character in view carries no
@@ -108,9 +114,16 @@ function ln_stereo_stamp_surface(_surface,_x,_y,_xscale,_yscale,_units) {
     shader_reset();surface_reset_target();
 }
 
-/// Replaces the stage blit. Flat frames (fades, messages) draw unchanged.
+/// Replaces the stage blit: ambient shading and drawn style first (at screen scale),
+/// then 3D. Flat frames (fades, messages) draw unchanged.
 function ln_stereo_draw_stage(_surface,_x,_y,_scale,_flat=false) {
     var _st=ln_stereo_state();_st.capturing=false;
+    var _native=1;
+    if (!_flat && surface_exists(_st.surface) && (ln_style_active() || ln_ao_active())) {
+        var _ao=ln_ao_active()?ln_ao_render(_st.surface):-1;
+        var _styled=ln_style_active()?ln_style_render(_surface,_st.surface,_scale,_ao):ln_ao_apply(_surface,_ao,_scale);
+        if (surface_exists(_styled)) {_surface=_styled;_native=_scale;_scale=1;}
+    }
     if (_flat || !ln_stereo_ready() || !surface_exists(_st.surface)) {draw_surface_ext(_surface,_x,_y,_scale,_scale,0,c_white,1);return;}
     var _texture=surface_get_texture(_surface),_tw=texture_get_texel_width(_texture),_th=texture_get_texel_height(_texture);
     var _filter=gpu_get_texfilter();gpu_set_texfilter(false);
@@ -118,7 +131,8 @@ function ln_stereo_draw_stage(_surface,_x,_y,_scale,_flat=false) {
     texture_set_stage(shader_get_sampler_index(sh_ln_anaglyph,"u_depth"),surface_get_texture(_st.surface));
     shader_set_uniform_f(shader_get_uniform(sh_ln_anaglyph,"u_bounds"),_tw*0.5,_th*0.5,
         _tw*(surface_get_width(_surface)-0.5),_th*(surface_get_height(_surface)-0.5));
-    shader_set_uniform_f(shader_get_uniform(sh_ln_anaglyph,"u_texel"),_tw);
+    // One native pixel across, whether the source is the stage or the styled picture.
+    shader_set_uniform_f(shader_get_uniform(sh_ln_anaglyph,"u_texel"),_tw*_native);
     shader_set_uniform_f(shader_get_uniform(sh_ln_anaglyph,"u_separation"),_st.separation);
     shader_set_uniform_f(shader_get_uniform(sh_ln_anaglyph,"u_mode"),_st.mode);
     shader_set_uniform_f(shader_get_uniform(sh_ln_anaglyph,"u_focus"),_st.focus);
