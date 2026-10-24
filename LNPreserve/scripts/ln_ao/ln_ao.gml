@@ -3,7 +3,7 @@
 /// computed at native resolution and laid smoothly over the picture before any
 /// drawn style, 3D and CRT. Strength 0 switches it off.
 function ln_ao_state() {
-    if (!variable_global_exists("ln_ao")) global.ln_ao={strength:0,radius:0.4,drag:0,surface:-1,applied:-1};
+    if (!variable_global_exists("ln_ao")) global.ln_ao={strength:0,radius:0.4,reveal:1,drag:0,surface:-1,applied:-1};
     return global.ln_ao;
 }
 function ln_ao_active() {
@@ -12,8 +12,13 @@ function ln_ao_active() {
 }
 
 /// Occlusion at native resolution, one value per stage pixel (1 open .. 0 shaded).
+/// While a scene is still being painted in, its depth already holds the finished
+/// scene, so shade would appear ahead of the picture; it waits for the painting to
+/// finish and then fades in over about half a second.
 function ln_ao_render(_depth) {
     var _a=ln_ao_state(),_w=surface_get_width(_depth),_h=surface_get_height(_depth);
+    var _painting=variable_global_exists("ln_paint") && global.ln_paint.active;
+    _a.reveal=_painting?0:min(1,_a.reveal+delta_time/500000);
     _a.surface=ln_style_surface(_a.surface,_w,_h);
     var _filter=gpu_get_texfilter(),_texture=surface_get_texture(_depth);
     gpu_set_texfilter(false);
@@ -21,7 +26,7 @@ function ln_ao_render(_depth) {
     shader_set(sh_ln_ao);
     shader_set_uniform_f(shader_get_uniform(sh_ln_ao,"u_texel"),texture_get_texel_width(_texture),texture_get_texel_height(_texture));
     shader_set_uniform_f(shader_get_uniform(sh_ln_ao,"u_radius"),lerp(2,12,_a.radius));
-    shader_set_uniform_f(shader_get_uniform(sh_ln_ao,"u_strength"),_a.strength);
+    shader_set_uniform_f(shader_get_uniform(sh_ln_ao,"u_strength"),_a.strength*_a.reveal);
     draw_surface(_depth,0,0);
     shader_reset();surface_reset_target();gpu_set_texfilter(_filter);
     return _a.surface;
@@ -83,7 +88,7 @@ function ln_ao_free() {
 /// picture alone at zero strength, and combines with styles and 3D.
 function ln_ao_checks() {
     var _a=ln_ao_state(),_s=ln_style_state(),_st=ln_stereo_state(),_saved=[_a.strength,_a.radius,_s.style,_st.enabled];
-    var _out=surface_create(1280,800);
+    var _out=surface_create(1280,800);_a.reveal=1;
     ln_check(shader_is_compiled(sh_ln_ao) && shader_is_compiled(sh_ln_ao_apply),"shading shaders compile on the active GPU");
     for (var _game=1;_game<=3;_game++) {
         var _g,_name="LN"+string(_game)+" ",_file="ao-ln"+string(_game);
@@ -109,6 +114,13 @@ function ln_ao_checks() {
             _a.strength=1;
         }
         _a.radius=1;ln_stereo_check_draw(_g,_out);surface_save(_out,_file+"-wide.png");_a.radius=0.4;
+        // While the scene is still painting in, no shade shows.
+        var _paint_saved=global.ln_paint.active;global.ln_paint.active=true;
+        ln_ao_render(_st.surface);
+        var _held=true;
+        for (var _y=0;_y<144;_y+=3) for (var _x=0;_x<240;_x+=3) if (surface_getpixel(_a.surface,_x,_y)!=c_white) _held=false;
+        global.ln_paint.active=_paint_saved;_a.reveal=1;
+        ln_check(_held,_name+"no shading while the scene is still painting");
         _s.style=3;ln_stereo_check_draw(_g,_out);surface_save(_out,_file+"-pencil.png");
         _s.style=1;_st.enabled=true;ln_stereo_check_draw(_g,_out);surface_save(_out,_file+"-ink-3d.png");
         if (surface_exists(_g.stage_surface)) surface_free(_g.stage_surface);

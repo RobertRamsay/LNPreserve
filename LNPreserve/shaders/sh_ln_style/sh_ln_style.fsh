@@ -24,28 +24,57 @@ float noise(vec2 p) {
 float depthAt(vec2 uv) {return texture2D(gm_BaseTexture,uv).a;}
 float lumaAt(vec2 uv) {return dot(texture2D(gm_BaseTexture,uv).rgb,LUMA);}
 
+// Softened fields: four bilinear taps on a rotated square. The native pixel steps
+// of the depth and tone round off into smooth contours, so lines follow the shape
+// rather than tracing squares around single pixels.
+float softDepth(vec2 uv,float b) {
+    vec2 o=u_native*b;
+    return 0.25*(depthAt(uv+vec2(o.x,o.y*0.5))+depthAt(uv+vec2(-o.x*0.5,o.y))+
+                 depthAt(uv+vec2(-o.x,-o.y*0.5))+depthAt(uv+vec2(o.x*0.5,-o.y)));
+}
+float softLuma(vec2 uv,float b) {
+    vec2 o=u_native*b;
+    return 0.25*(lumaAt(uv+vec2(o.x,o.y*0.5))+lumaAt(uv+vec2(-o.x*0.5,o.y))+
+                 lumaAt(uv+vec2(-o.x,-o.y*0.5))+lumaAt(uv+vec2(o.x*0.5,-o.y)));
+}
+
+// Edge slopes of the softened fields, in units per native pixel. The ground rises
+// 1/144 per row down the screen, so that slope is taken away from depth and open
+// ground never reads as an edge.
+vec2 depthSlope(vec2 uv,float b) {
+    vec2 h=u_native*0.5;
+    return vec2(softDepth(uv+vec2(h.x,0.0),b)-softDepth(uv-vec2(h.x,0.0),b),
+                softDepth(uv+vec2(0.0,h.y),b)-softDepth(uv-vec2(0.0,h.y),b))-vec2(0.0,1.0/144.0);
+}
+vec2 lumaSlope(vec2 uv,float b) {
+    vec2 h=u_native*0.5;
+    return vec2(softLuma(uv+vec2(h.x,0.0),b)-softLuma(uv-vec2(h.x,0.0),b),
+                softLuma(uv+vec2(0.0,h.y),b)-softLuma(uv-vec2(0.0,h.y),b));
+}
+// Keeps only the crest of an edge: a pixel inks only if the edge is at least as
+// strong here as a short step either side across it. The step sets the stroke
+// width, so thin settings give a hairline that follows the contour smoothly.
+float crest(float here,float a,float b) {
+    return smoothstep(-0.2*here,0.0,here-max(a,b));
+}
+
 // Outlines. Depth jumps mark real silhouettes (characters, props against ground)
 // and cannot be fooled by dithering; tone edges add lighter interior lines.
-// The jump test compares each pixel with the average of its two neighbours, so
-// the ground's steady slope up the screen never reads as an edge.
+// Thickness sets both how much the fields are softened and the stroke width:
+// a light touch gives a fine pen line, the top of the range a broad brush.
 float inkLines(vec2 uv,vec2 px,float detail) {
-    // Thickness sets how far apart the edge samples sit (a fifth to nine tenths of a
-    // native pixel). Closer samples see less of a smooth edge, so the response is
-    // rescaled to keep lines just as dark when thin.
-    float reach=mix(0.2,0.9,u_line);
-    vec2 o=u_native*reach;
-    float gain=1.0/clamp(reach*1.6,0.32,1.0);
-    float c=depthAt(uv);
-    float jump=max(abs(depthAt(uv-vec2(o.x,0.0))+depthAt(uv+vec2(o.x,0.0))-2.0*c),
-                   abs(depthAt(uv-vec2(0.0,o.y))+depthAt(uv+vec2(0.0,o.y))-2.0*c));
-    float l00=lumaAt(uv+vec2(-o.x,-o.y)),l10=lumaAt(uv+vec2(0.0,-o.y)),l20=lumaAt(uv+vec2(o.x,-o.y));
-    float l01=lumaAt(uv+vec2(-o.x,0.0)),l21=lumaAt(uv+vec2(o.x,0.0));
-    float l02=lumaAt(uv+vec2(-o.x,o.y)),l12=lumaAt(uv+vec2(0.0,o.y)),l22=lumaAt(uv+vec2(o.x,o.y));
-    float lx=(l20+2.0*l21+l22)-(l00+2.0*l01+l02),ly=(l02+2.0*l12+l22)-(l00+2.0*l10+l20);
-    // Slowly varying wobble so line weight swells and thins like a brush pen.
+    float b=mix(0.35,1.0,u_line);
+    float width=mix(0.12,0.9,u_line);
+    vec2 sd=depthSlope(uv,b),sl=lumaSlope(uv,b);
+    float ed=length(sd),el=length(sl);
+    vec2 nd=sd/max(ed,1e-5)*u_native*width,nl=sl/max(el,1e-5)*u_native*width;
+    float bold=smoothstep(0.65,1.0,u_line);
+    float ridgeD=mix(crest(ed,length(depthSlope(uv+nd,b)),length(depthSlope(uv-nd,b))),1.0,bold);
+    float ridgeL=mix(crest(el,length(lumaSlope(uv+nl,b)),length(lumaSlope(uv-nl,b))),1.0,bold);
+    // Slowly varying wobble so line weight swells and thins like a pen nib.
     float wobble=noise(px*0.08)*0.5+0.75;
-    float silhouette=smoothstep(0.02,0.05,jump*wobble*gain);
-    float tone=smoothstep(0.35,0.75,length(vec2(lx,ly))*wobble*gain)*detail;
+    float silhouette=smoothstep(0.014,0.034,ed*wobble)*ridgeD;
+    float tone=smoothstep(0.14,0.32,el*wobble)*ridgeL*detail;
     return clamp(max(silhouette,tone),0.0,1.0)*smoothstep(0.0,0.08,u_line);
 }
 

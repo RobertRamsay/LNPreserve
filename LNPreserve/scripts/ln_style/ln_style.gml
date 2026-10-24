@@ -144,6 +144,15 @@ function ln_style_checks() {
             surface_save(_out,_file+"-"+string_lower(string_replace_all(_names[_style]," ","-"))+".png");
         }
         surface_save(_s.smooth,_file+"-smooth.png");surface_save(_st.surface,_file+"-depth.png");
+        if (_game==1) {
+            // Sprite holes are filled for 3D (red) but not for outlines and shading (green).
+            var _filled=0;
+            for (var _y=40;_y<104;_y++) for (var _x=110;_x<170;_x++) {
+                var _p=surface_getpixel(_st.surface,_x,_y);
+                if (colour_get_red(_p)!=colour_get_green(_p)) _filled++;
+            }
+            ln_check(_filled>0,"LN1 sprite holes filled for 3D only: "+string(_filled));
+        }
         // Line thickness and saturation each change the picture; no lines differs from thin.
         var _saved_look=[_s.line,_s.saturation],_looks=[];
         _s.style=1;

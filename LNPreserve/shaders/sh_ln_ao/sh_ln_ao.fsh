@@ -1,6 +1,7 @@
 varying vec2 v_vTexcoord;
 varying vec4 v_vColour;
-// gm_BaseTexture is the stage depth: 0 far (top) .. 1 near (bottom).
+// gm_BaseTexture is the stage depth: 0 far (top) .. 1 near (bottom). Green holds
+// the true silhouettes (red has sprite holes filled for 3D).
 uniform vec2 u_texel; // one native pixel in texture space
 uniform float u_radius; // reach in native pixels
 uniform float u_strength;
@@ -10,7 +11,7 @@ uniform float u_strength;
 // than the pixel itself (characters, walls, props) occlude. Samples lie on an ellipse squashed to the ground's
 // isometric foreshortening.
 void main() {
-    float d=texture2D(gm_BaseTexture,v_vTexcoord).r;
+    float d=texture2D(gm_BaseTexture,v_vTexcoord).g;
     // Interleaved gradient noise turns the sample spiral per pixel, so the 20 taps
     // read as soft grain rather than rings; it is fixed per pixel, so it never crawls.
     vec2 pixel=floor(v_vTexcoord/u_texel);
@@ -20,7 +21,7 @@ void main() {
         float t=(float(i)+0.5)/20.0;
         float a=float(i)*2.3999632+turn;
         vec2 o=vec2(cos(a),sin(a)*0.55)*u_radius*sqrt(t);
-        float n=texture2D(gm_BaseTexture,v_vTexcoord+o*u_texel).r;
+        float n=texture2D(gm_BaseTexture,v_vTexcoord+o*u_texel).g;
         // An occluder must stand proud of the ground plane and also be nearer than
         // this pixel, so upright surfaces (constant depth) never shade themselves.
         float excess=min(n-(d+o.y/144.0),n-d);

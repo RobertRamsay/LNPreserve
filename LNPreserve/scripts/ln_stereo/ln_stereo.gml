@@ -101,16 +101,23 @@ function ln_stereo_keep_raw(_surface) {
     surface_copy(_st.raw_surface,0,0,_surface);_st.raw_ready=true;
 }
 
-/// Stamp an already-masked sprite surface (LN3 actor parts) at one foot depth.
+/// Stamp an already-masked sprite surface (LN3 actor parts) at one foot depth: the
+/// true silhouette into every channel, then enclosed holes into red only (3D).
 function ln_stereo_stamp_surface(_surface,_x,_y,_xscale,_yscale,_units) {
     if (!ln_stereo_capturing()) return;
     var _st=global.ln_stereo,_raw=_st.raw_ready && surface_exists(_st.raw_surface);_st.raw_ready=false;
     surface_set_target(_st.surface);shader_set(sh_ln_stereo_fill);
     shader_set_uniform_f(shader_get_uniform(sh_ln_stereo_fill,"u_value"),ln_stereo_depth_value(_units));
     texture_set_stage(shader_get_sampler_index(sh_ln_stereo_fill,"u_raw"),surface_get_texture(_raw?_st.raw_surface:_surface));
-    shader_set_uniform_f(shader_get_uniform(sh_ln_stereo_fill,"u_gap"),real(_raw),texture_get_texel_width(surface_get_texture(_surface)),
-        texture_get_texel_width(surface_get_texture(_surface))*surface_get_width(_surface));
+    var _gap=shader_get_uniform(sh_ln_stereo_fill,"u_gap"),_tw=texture_get_texel_width(surface_get_texture(_surface));
+    shader_set_uniform_f(_gap,0,_tw,_tw*surface_get_width(_surface));
     draw_surface_ext(_surface,_x,_y,_xscale,_yscale,0,c_white,1);
+    if (_raw) {
+        shader_set_uniform_f(_gap,1,_tw,_tw*surface_get_width(_surface));
+        gpu_set_colourwriteenable(true,false,false,false);
+        draw_surface_ext(_surface,_x,_y,_xscale,_yscale,0,c_white,1);
+        gpu_set_colourwriteenable(true,true,true,true);
+    }
     shader_reset();surface_reset_target();
 }
 

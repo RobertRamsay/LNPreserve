@@ -10,7 +10,7 @@ uniform float u_mask_threshold;
 uniform float u_clip_bottom;
 uniform float u_red_dye;
 uniform vec3 u_magic_colour;
-uniform vec2 u_depth_fill; // enabled, stereo depth written for every visible pixel
+uniform vec2 u_depth_fill; // 1 visible pixels only, 2 also enclosed sprite holes; stereo depth to write
 uniform vec4 u_frame_uv; // depth fill: this frame's texture rectangle
 uniform vec2 u_gap_step; // depth fill: one texel across in texture space, and in world space
 float hiddenAt(vec2 world) {
@@ -52,7 +52,7 @@ void main() {
     if (u_depth_fill.x > 0.5) {
         // Holes and notches inside the sprite move with it, not with the ground behind.
         float solid = step(0.5, colour.a);
-        if (solid < 0.5 && hidden < 0.5 && opaque < 0.5) solid = enclosedSide(-1.0) * enclosedSide(1.0);
+        if (solid < 0.5 && u_depth_fill.x > 1.5 && hidden < 0.5 && opaque < 0.5) solid = enclosedSide(-1.0) * enclosedSide(1.0);
         if (solid < 0.5) discard;
         colour = vec4(vec3(u_depth_fill.y), 1.0);
     }

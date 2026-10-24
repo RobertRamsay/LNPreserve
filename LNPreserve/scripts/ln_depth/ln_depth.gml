@@ -57,14 +57,21 @@ function ln_draw_masked_actor(_sprite, _frame, _x, _y, _xscale, _yscale,
     var _depth_fill = shader_get_uniform(sh_ln_occlusion, "u_depth_fill");
     shader_set_uniform_f(_depth_fill, 0, 0);
     draw_sprite_ext(_sprite, _frame, _x, _y, _xscale, _yscale, 0, c_white, 1);
-    // 3D: the same visible pixels stand upright at the actor's foot depth.
+    // Depth: the same visible pixels stand upright at the actor's foot depth. All
+    // channels get the true silhouette (styles and shading read green); red alone
+    // also gets enclosed sprite holes, so 3D moves them with the actor.
     if (ln_stereo_capturing()) {
         var _frame_uv = sprite_get_uvs(_sprite, _frame);
         shader_set_uniform_f(shader_get_uniform(sh_ln_occlusion, "u_frame_uv"), _frame_uv[0], _frame_uv[1], _frame_uv[2], _frame_uv[3]);
         shader_set_uniform_f(shader_get_uniform(sh_ln_occlusion, "u_gap_step"), texture_get_texel_width(sprite_get_texture(_sprite, _frame)), _xscale);
+        var _foot_depth = ln_stereo_depth_value(_authored_threshold * 255 + 0.25);
         surface_set_target(global.ln_stereo.surface);
-        shader_set_uniform_f(_depth_fill, 1, ln_stereo_depth_value(_authored_threshold * 255 + 0.25));
+        shader_set_uniform_f(_depth_fill, 1, _foot_depth);
         draw_sprite_ext(_sprite, _frame, _x, _y, _xscale, _yscale, 0, c_white, 1);
+        shader_set_uniform_f(_depth_fill, 2, _foot_depth);
+        gpu_set_colourwriteenable(true, false, false, false);
+        draw_sprite_ext(_sprite, _frame, _x, _y, _xscale, _yscale, 0, c_white, 1);
+        gpu_set_colourwriteenable(true, true, true, true);
         surface_reset_target();
         shader_set_uniform_f(_depth_fill, 0, 0);
     }
